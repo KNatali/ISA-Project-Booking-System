@@ -30,6 +30,8 @@ public class User {
 	private String city;
 	@Column
 	private String mobile;
+	
+	
 	public Long getId() {
 		return id;
 	}

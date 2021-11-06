@@ -11,10 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @Entity
-public class BoatReservation {
+public class CottageReservation {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -26,7 +25,7 @@ public class BoatReservation {
 	private int duration;
 	@Column
 	private int maxPersons;
-	@OneToMany
+	@ElementCollection
 	private List<AdditionalItem> additionalItems;
 	@Column
 	private double price;
@@ -34,7 +33,7 @@ public class BoatReservation {
 	private Client client;
 	
 	@OneToMany
-	private List<BoatComplaint> BoatComplaints;
+	private List<CottageComplaint> cottageComplaints;
 
 	public Long getId() {
 		return id;
@@ -100,16 +99,17 @@ public class BoatReservation {
 		this.client = client;
 	}
 
-	public List<BoatComplaint> getBoatComplaints() {
-		return BoatComplaints;
+	public List<CottageComplaint> getCottageComplaints() {
+		return cottageComplaints;
 	}
 
-	public void setBoatComplaints(List<BoatComplaint> boatComplaints) {
-		BoatComplaints = boatComplaints;
+	public void setCottageComplaints(List<CottageComplaint> cottageComplaints) {
+		this.cottageComplaints = cottageComplaints;
 	}
 
-	public BoatReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
-			List<AdditionalItem> additionalItems, double price, Client client, List<BoatComplaint> boatComplaints) {
+	public CottageReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
+			List<AdditionalItem> additionalItems, double price, Client client,
+			List<CottageComplaint> cottageComplaints) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -119,10 +119,8 @@ public class BoatReservation {
 		this.additionalItems = additionalItems;
 		this.price = price;
 		this.client = client;
-		BoatComplaints = boatComplaints;
+		this.cottageComplaints = cottageComplaints;
 	}
 	
-	public BoatReservation() {}
-	
-	
+	public CottageReservation() {}
 }

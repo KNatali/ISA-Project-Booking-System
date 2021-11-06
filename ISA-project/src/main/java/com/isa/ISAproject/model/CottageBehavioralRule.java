@@ -4,15 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class BehavioralRule {
+public class CottageBehavioralRule {
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	@Column
 	private String rule;
+	
+	@ManyToOne
+	private Cottage cottage;
 
 	public Long getId() {
 		return id;
@@ -30,12 +34,21 @@ public class BehavioralRule {
 		this.rule = rule;
 	}
 
-	public BehavioralRule(Long id, String rule) {
+	public Cottage getCottage() {
+		return cottage;
+	}
+
+	public void setCottage(Cottage cottage) {
+		this.cottage = cottage;
+	}
+
+	public CottageBehavioralRule(Long id, String rule, Cottage cottage) {
 		super();
 		this.id = id;
 		this.rule = rule;
+		this.cottage = cottage;
 	}
-	
-	public BehavioralRule() {}
+
+	public CottageBehavioralRule() {}
 	
 }

@@ -9,6 +9,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class AdventureReservation {
@@ -25,10 +27,14 @@ public class AdventureReservation {
 	private String place;
 	@Column
 	private int maxPersons;
-	@ElementCollection
-	private List<String> benefits;
 	@Column
 	private double price;
+	@OneToMany
+	private List<AdditionalItem> additionalItems;
+	@ManyToOne
+	private Client client;
+	@OneToMany
+	private List<AdventureComplaint> adventureComplaints;
 	public Long getId() {
 		return id;
 	}
@@ -65,20 +71,33 @@ public class AdventureReservation {
 	public void setMaxPersons(int maxPersons) {
 		this.maxPersons = maxPersons;
 	}
-	public List<String> getBenefits() {
-		return benefits;
-	}
-	public void setBenefits(List<String> benefits) {
-		this.benefits = benefits;
-	}
 	public double getPrice() {
 		return price;
 	}
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	public List<AdditionalItem> getAdditionalItems() {
+		return additionalItems;
+	}
+	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	public List<AdventureComplaint> getAdventureComplaints() {
+		return adventureComplaints;
+	}
+	public void setAdventureComplaints(List<AdventureComplaint> adventureComplaints) {
+		this.adventureComplaints = adventureComplaints;
+	}
 	public AdventureReservation(Long id, LocalDate date, LocalTime time, int duration, String place, int maxPersons,
-			List<String> benefits, double price) {
+			double price, List<AdditionalItem> additionalItems, Client client,
+			List<AdventureComplaint> adventureComplaints) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -86,8 +105,10 @@ public class AdventureReservation {
 		this.duration = duration;
 		this.place = place;
 		this.maxPersons = maxPersons;
-		this.benefits = benefits;
 		this.price = price;
+		this.additionalItems = additionalItems;
+		this.client = client;
+		this.adventureComplaints = adventureComplaints;
 	}
 	
 	public AdventureReservation() {}

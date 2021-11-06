@@ -11,10 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @Entity
-public class BoatReservation {
+public class CottageFastReservation {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -26,15 +25,18 @@ public class BoatReservation {
 	private int duration;
 	@Column
 	private int maxPersons;
-	@OneToMany
-	private List<AdditionalItem> additionalItems;
 	@Column
 	private double price;
-	@ManyToOne
-	private Client client;
+	@Column
+	private LocalDate validityStart;
+	@Column
+	private LocalDate validityEnd;
 	
 	@OneToMany
-	private List<BoatComplaint> BoatComplaints;
+	private List<AdditionalItem> additionalItems;
+	
+	@ManyToOne
+	private Cottage cottage;
 
 	public Long getId() {
 		return id;
@@ -76,14 +78,6 @@ public class BoatReservation {
 		this.maxPersons = maxPersons;
 	}
 
-	public List<AdditionalItem> getAdditionalItems() {
-		return additionalItems;
-	}
-
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
-		this.additionalItems = additionalItems;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -92,37 +86,56 @@ public class BoatReservation {
 		this.price = price;
 	}
 
-	public Client getClient() {
-		return client;
+	public LocalDate getValidityStart() {
+		return validityStart;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setValidityStart(LocalDate validityStart) {
+		this.validityStart = validityStart;
 	}
 
-	public List<BoatComplaint> getBoatComplaints() {
-		return BoatComplaints;
+	public LocalDate getValidityEnd() {
+		return validityEnd;
 	}
 
-	public void setBoatComplaints(List<BoatComplaint> boatComplaints) {
-		BoatComplaints = boatComplaints;
+	public void setValidityEnd(LocalDate validityEnd) {
+		this.validityEnd = validityEnd;
 	}
 
-	public BoatReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
-			List<AdditionalItem> additionalItems, double price, Client client, List<BoatComplaint> boatComplaints) {
+	public List<AdditionalItem> getAdditionalItems() {
+		return additionalItems;
+	}
+
+	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
+
+	public Cottage getCottage() {
+		return cottage;
+	}
+
+	public void setCottage(Cottage cottage) {
+		this.cottage = cottage;
+	}
+
+	public CottageFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
+			LocalDate validityStart, LocalDate validityEnd, List<AdditionalItem> additionalItems, Cottage cottage) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.time = time;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
-		this.additionalItems = additionalItems;
 		this.price = price;
-		this.client = client;
-		BoatComplaints = boatComplaints;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+		this.cottage = cottage;
 	}
 	
-	public BoatReservation() {}
+	public CottageFastReservation() {}
 	
+	
+
 	
 }
