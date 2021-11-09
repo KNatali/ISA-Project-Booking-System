@@ -30,6 +30,8 @@ public class Cottage {
 	private String description;
 	@Column
 	private double grade;
+	@Column
+	private String mainPicture;
 	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
 	private CottageOwner owner;
 	@ElementCollection
@@ -123,10 +125,19 @@ public class Cottage {
 	public void setCottageFastReservations(Set<CottageFastReservation> cottageFastReservations) {
 		this.cottageFastReservations = cottageFastReservations;
 	}
+	
+
+	public String getMainPicture() {
+		return mainPicture;
+	}
+
+	public void setMainPicture(String mainPicture) {
+		this.mainPicture = mainPicture;
+	}
 
 	public Cottage(Long id, String name, String address, String description, double grade, Set<String> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
-			Set<CottageFastReservation> cottageFastReservations) {
+			Set<CottageFastReservation> cottageFastReservations, String mainPicture) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -138,6 +149,7 @@ public class Cottage {
 		this.rooms = rooms;
 		this.owner = cottageOwner;
 		this.cottageFastReservations = cottageFastReservations;
+		this.mainPicture=mainPicture;
 	}
 	
 	public Cottage () {}

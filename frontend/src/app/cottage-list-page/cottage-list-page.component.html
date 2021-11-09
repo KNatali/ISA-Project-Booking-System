@@ -1,1 +1,16 @@
-<p>cottage-list-page works!</p>
+
+
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Name</th><th>Address</th><th>Grade</th><th>Picture</th>
+            </tr>
+        </thead>
+        <tbody >
+			<tr app-cottage-list-item *ngFor="let cottage of cottages" [cottage]="cottage">   
+            </tr>
+		</tbody>
+    </table>
+</div>
+
