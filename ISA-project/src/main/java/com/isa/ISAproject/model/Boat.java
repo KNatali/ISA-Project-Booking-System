@@ -40,6 +40,10 @@ public class Boat {
 	private String description;
 	@ElementCollection
 	private Set<String> pictures=new HashSet<>();
+	
+	@Column
+	private String mainPicture;//slika koje ce da bude prikazana kada se izlistaju svi brodovi
+	
 	@Column
 	private int capacity;
 	@Column
@@ -156,11 +160,16 @@ public class Boat {
 	public void setBoatFastReservations(Set<BoatFastReservation> boatFastReservations) {
 		this.boatFastReservations = boatFastReservations;
 	}
-	
+	public String getMainPicture() {
+		return mainPicture;
+	}
+	public void setMainPicture(String mainPicture) {
+		this.mainPicture = mainPicture;
+	}
 	public Boat(Long id, String name, String address, BoatType type, double length, int motorNumber,
 			double motorPower, int maxSpeed, String description, Set<String> pictures, int capacity, double grade,
 			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,
-			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations) {
+			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations, String mainPicture) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -178,6 +187,7 @@ public class Boat {
 		this.rules = boatBehavioralRules;
 		this.navigationEquipment = navigationEquipment;
 		this.boatFastReservations = boatFastReservations;
+		this.mainPicture=mainPicture;
 		
 	}
 	

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +12,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { CottageListPageComponent } from './cottage-list-page/cottage-list-page.component';
 import { BoatListPageComponent } from './boat-list-page/boat-list-page.component';
 import { AdventureListPageComponent } from './adventure-list-page/adventure-list-page.component';
+import { BoatListItemComponent } from './boat-list-item/boat-list-item.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +22,16 @@ import { AdventureListPageComponent } from './adventure-list-page/adventure-list
     RegisterPageComponent,
     CottageListPageComponent,
     BoatListPageComponent,
-    AdventureListPageComponent
+    AdventureListPageComponent,
+    BoatListItemComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    CommonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

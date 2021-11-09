@@ -12,6 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,//ovo je dodato kako objekti ne bi morali da se inicijaliziju u kontruktoru
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
