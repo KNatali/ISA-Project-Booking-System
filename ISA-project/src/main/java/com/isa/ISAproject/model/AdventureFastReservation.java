@@ -2,7 +2,9 @@ package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -30,7 +32,8 @@ public class AdventureFastReservation {
 	@Column
 	private LocalDate validityEnd;
 	@OneToMany
-	private List<AdditionalItem> additionalItems;
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,14 +82,14 @@ public class AdventureFastReservation {
 	public void setValidityEnd(LocalDate validityEnd) {
 		this.validityEnd = validityEnd;
 	}
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
 	public AdventureFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
-			LocalDate validityStart, LocalDate validityEnd, List<AdditionalItem> additionalItems) {
+			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.date = date;

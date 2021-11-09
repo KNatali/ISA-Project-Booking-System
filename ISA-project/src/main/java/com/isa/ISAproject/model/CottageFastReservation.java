@@ -2,11 +2,15 @@ package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -33,7 +37,7 @@ public class CottageFastReservation {
 	private LocalDate validityEnd;
 	
 	@OneToMany
-	private List<AdditionalItem> additionalItems;
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	
 	@ManyToOne
 	private Cottage cottage;
@@ -102,11 +106,11 @@ public class CottageFastReservation {
 		this.validityEnd = validityEnd;
 	}
 
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
 
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
 
@@ -119,7 +123,7 @@ public class CottageFastReservation {
 	}
 
 	public CottageFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
-			LocalDate validityStart, LocalDate validityEnd, List<AdditionalItem> additionalItems, Cottage cottage) {
+			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems, Cottage cottage) {
 		super();
 		this.id = id;
 		this.date = date;

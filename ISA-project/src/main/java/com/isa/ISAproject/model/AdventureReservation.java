@@ -2,7 +2,9 @@ package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -30,7 +32,7 @@ public class AdventureReservation {
 	@Column
 	private double price;
 	@OneToMany
-	private List<AdditionalItem> additionalItems;
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@ManyToOne
 	private Client client;
 	@OneToMany
@@ -77,10 +79,10 @@ public class AdventureReservation {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
 	public Client getClient() {
@@ -96,7 +98,7 @@ public class AdventureReservation {
 		this.adventureComplaints = adventureComplaints;
 	}
 	public AdventureReservation(Long id, LocalDate date, LocalTime time, int duration, String place, int maxPersons,
-			double price, List<AdditionalItem> additionalItems, Client client,
+			double price, Set<AdditionalItem> additionalItems, Client client,
 			List<AdventureComplaint> adventureComplaints) {
 		super();
 		this.id = id;

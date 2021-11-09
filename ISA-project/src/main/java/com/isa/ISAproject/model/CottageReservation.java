@@ -2,7 +2,9 @@ package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -25,15 +27,15 @@ public class CottageReservation {
 	private int duration;
 	@Column
 	private int maxPersons;
-	@ElementCollection
-	private List<AdditionalItem> additionalItems;
+	@OneToMany
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@Column
 	private double price;
 	@ManyToOne
 	private Client client;
 	
 	@OneToMany
-	private List<CottageComplaint> cottageComplaints;
+	private Set<CottageComplaint> cottageComplaints=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -75,11 +77,11 @@ public class CottageReservation {
 		this.maxPersons = maxPersons;
 	}
 
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
 
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
 
@@ -99,17 +101,17 @@ public class CottageReservation {
 		this.client = client;
 	}
 
-	public List<CottageComplaint> getCottageComplaints() {
+	public Set<CottageComplaint> getCottageComplaints() {
 		return cottageComplaints;
 	}
 
-	public void setCottageComplaints(List<CottageComplaint> cottageComplaints) {
+	public void setCottageComplaints(Set<CottageComplaint> cottageComplaints) {
 		this.cottageComplaints = cottageComplaints;
 	}
 
 	public CottageReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
-			List<AdditionalItem> additionalItems, double price, Client client,
-			List<CottageComplaint> cottageComplaints) {
+			Set<AdditionalItem> additionalItems, double price, Client client,
+			Set<CottageComplaint> cottageComplaints) {
 		super();
 		this.id = id;
 		this.date = date;

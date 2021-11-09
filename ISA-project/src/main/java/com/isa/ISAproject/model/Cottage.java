@@ -1,12 +1,19 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -23,17 +30,19 @@ public class Cottage {
 	private String description;
 	@Column
 	private double grade;
+	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
+	private CottageOwner owner;
 	@ElementCollection
-	private List<String> pictures;
-	@OneToMany
-	private List<CottageBehavioralRule> behavioralRules;
-	@OneToMany
-	private List<Room> rooms;
-	@ManyToOne
-	private CottageOwner cottageOwner;
+	private Set<String> pictures=new HashSet<>();
 	
-	@OneToMany
-	private List<CottageFastReservation> cottageFastReservations;
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
+	private Set<CottageBehavioralRule> rules=new HashSet<>();
+	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private Set<Room> rooms=new HashSet<>();
+	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private Set<CottageFastReservation> cottageFastReservations;
 
 	public Long getId() {
 		return id;
@@ -75,49 +84,49 @@ public class Cottage {
 		this.grade = grade;
 	}
 
-	public List<String> getPictures() {
+	public Set<String> getPictures() {
 		return pictures;
 	}
 
-	public void setPictures(List<String> pictures) {
+	public void setPictures(Set<String> pictures) {
 		this.pictures = pictures;
 	}
 
-	public List<CottageBehavioralRule> getBehavioralRules() {
-		return behavioralRules;
+	public Set<CottageBehavioralRule> getBehavioralRules() {
+		return rules;
 	}
 
-	public void setBehavioralRules(List<CottageBehavioralRule> behavioralRules) {
-		this.behavioralRules = behavioralRules;
+	public void setBehavioralRules(Set<CottageBehavioralRule> behavioralRules) {
+		this.rules = behavioralRules;
 	}
 
-	public List<Room> getRooms() {
+	public Set<Room> getRooms() {
 		return rooms;
 	}
 
-	public void setRooms(List<Room> rooms) {
+	public void setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 	}
 
 	public CottageOwner getCottageOwner() {
-		return cottageOwner;
+		return owner;
 	}
 
 	public void setCottageOwner(CottageOwner cottageOwner) {
-		this.cottageOwner = cottageOwner;
+		this.owner = cottageOwner;
 	}
 
-	public List<CottageFastReservation> getCottageFastReservations() {
+	public Set<CottageFastReservation> getCottageFastReservations() {
 		return cottageFastReservations;
 	}
 
-	public void setCottageFastReservations(List<CottageFastReservation> cottageFastReservations) {
+	public void setCottageFastReservations(Set<CottageFastReservation> cottageFastReservations) {
 		this.cottageFastReservations = cottageFastReservations;
 	}
 
-	public Cottage(Long id, String name, String address, String description, double grade, List<String> pictures,
-			List<CottageBehavioralRule> behavioralRules, List<Room> rooms, CottageOwner cottageOwner,
-			List<CottageFastReservation> cottageFastReservations) {
+	public Cottage(Long id, String name, String address, String description, double grade, Set<String> pictures,
+			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
+			Set<CottageFastReservation> cottageFastReservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -125,9 +134,9 @@ public class Cottage {
 		this.description = description;
 		this.grade = grade;
 		this.pictures = pictures;
-		this.behavioralRules = behavioralRules;
+		this.rules = behavioralRules;
 		this.rooms = rooms;
-		this.cottageOwner = cottageOwner;
+		this.owner = cottageOwner;
 		this.cottageFastReservations = cottageFastReservations;
 	}
 	

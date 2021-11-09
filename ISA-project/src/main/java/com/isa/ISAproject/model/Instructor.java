@@ -2,12 +2,15 @@ package com.isa.ISAproject.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Instructor extends User{
-	@OneToMany
+	
+	@OneToMany(mappedBy="instructor",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Adventure> adventures;
 
 	public List<Adventure> getAdventures() {
