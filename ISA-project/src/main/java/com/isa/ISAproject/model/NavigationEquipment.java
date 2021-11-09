@@ -1,9 +1,13 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -14,8 +18,8 @@ public class NavigationEquipment {
 	@Column
 	private String name;
 	
-	@ManyToOne
-	private Boat boat;
+	@ManyToMany(mappedBy="navigationEquipment")
+	private Set<Boat> boats=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -33,19 +37,19 @@ public class NavigationEquipment {
 		this.name = name;
 	}
 
-	public Boat getBoat() {
-		return boat;
+	public Set<Boat> getBoat() {
+		return boats;
 	}
 
-	public void setBoat(Boat boat) {
-		this.boat = boat;
+	public void setBoat(Set<Boat> boats) {
+		this.boats = boats;
 	}
 
-	public NavigationEquipment(Long id, String name, Boat boat) {
+	public NavigationEquipment(Long id, String name, Set<Boat> boats) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.boat = boat;
+		this.boats = boats;
 	}
 	
 	public NavigationEquipment() {}

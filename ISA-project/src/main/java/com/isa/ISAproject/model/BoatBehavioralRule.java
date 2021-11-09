@@ -1,9 +1,13 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,8 +19,8 @@ public class BoatBehavioralRule {
 	@Column
 	private String rule;
 	
-	@ManyToOne
-	private Boat boat;
+	@ManyToMany
+	private Set<Boat> boats=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -34,19 +38,19 @@ public class BoatBehavioralRule {
 		this.rule = rule;
 	}
 
-	public Boat getBoat() {
-		return boat;
+	public Set<Boat> getBoat() {
+		return boats;
 	}
 
-	public void setBoat(Boat boat) {
-		this.boat = boat;
+	public void setBoat(Set<Boat> boats) {
+		this.boats = boats;
 	}
 
-	public BoatBehavioralRule(Long id, String rule, Boat boat) {
+	public BoatBehavioralRule(Long id, String rule, Set<Boat> boats) {
 		super();
 		this.id = id;
 		this.rule = rule;
-		this.boat = boat;
+		this.boats = boats;
 	}
 	
 	public BoatBehavioralRule () {}

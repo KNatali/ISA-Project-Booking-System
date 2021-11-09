@@ -2,7 +2,9 @@ package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -27,14 +29,14 @@ public class BoatReservation {
 	@Column
 	private int maxPersons;
 	@OneToMany
-	private List<AdditionalItem> additionalItems;
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@Column
 	private double price;
 	@ManyToOne
 	private Client client;
 	
 	@OneToMany
-	private List<BoatComplaint> BoatComplaints;
+	private Set<BoatComplaint> BoatComplaints=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -76,11 +78,11 @@ public class BoatReservation {
 		this.maxPersons = maxPersons;
 	}
 
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
 
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
 
@@ -100,16 +102,16 @@ public class BoatReservation {
 		this.client = client;
 	}
 
-	public List<BoatComplaint> getBoatComplaints() {
+	public Set<BoatComplaint> getBoatComplaints() {
 		return BoatComplaints;
 	}
 
-	public void setBoatComplaints(List<BoatComplaint> boatComplaints) {
+	public void setBoatComplaints(Set<BoatComplaint> boatComplaints) {
 		BoatComplaints = boatComplaints;
 	}
 
 	public BoatReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
-			List<AdditionalItem> additionalItems, double price, Client client, List<BoatComplaint> boatComplaints) {
+			Set<AdditionalItem> additionalItems, double price, Client client, Set<BoatComplaint> boatComplaints) {
 		super();
 		this.id = id;
 		this.date = date;

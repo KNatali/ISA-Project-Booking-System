@@ -1,6 +1,8 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,20 +15,20 @@ public class AdventurePriceList {
 	@GeneratedValue
 	private Long id;
 	@OneToMany
-	private List<AdditionalItem> additionalItems;
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public AdventurePriceList(Long id, List<AdditionalItem> additionalItems) {
+	public AdventurePriceList(Long id, Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.additionalItems = additionalItems;

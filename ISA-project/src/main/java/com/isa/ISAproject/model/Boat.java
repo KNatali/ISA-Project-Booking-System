@@ -1,12 +1,19 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -24,7 +31,7 @@ public class Boat {
 	@Column
 	private double length;
 	@Column
-	private String motorNumber;
+	private int motorNumber;
 	@Column
 	private double motorPower;
 	@Column
@@ -32,21 +39,27 @@ public class Boat {
 	@Column
 	private String description;
 	@ElementCollection
-	private List<String> pictures;
+	private Set<String> pictures=new HashSet<>();
 	@Column
 	private int capacity;
 	@Column
 	private double grade;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private BoatOwner owner;
-	@OneToMany
-	private List<BoatBehavioralRule> boatBehavioralRules;
-	@OneToMany
-	private List<NavigationEquipment> navigationEquipments;
-	@OneToMany
-	private List<BoatFastReservation> boatFastReservations;
-	@OneToMany
-	private List<FishingEquipment> fishingEquipments;
+	
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
+	private Set<BoatBehavioralRule> rules=new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
+	private Set<NavigationEquipment> navigationEquipment=new HashSet<>();
+	
+	@OneToMany(mappedBy="boat",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private Set<BoatFastReservation> boatFastReservations=new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -77,10 +90,10 @@ public class Boat {
 	public void setLength(double length) {
 		this.length = length;
 	}
-	public String getMotorNumber() {
+	public int getMotorNumber() {
 		return motorNumber;
 	}
-	public void setMotorNumber(String motorNumber) {
+	public void setMotorNumber(int motorNumber) {
 		this.motorNumber = motorNumber;
 	}
 	public double getMotorPower() {
@@ -101,10 +114,10 @@ public class Boat {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<String> getPictures() {
+	public Set<String> getPictures() {
 		return pictures;
 	}
-	public void setPictures(List<String> pictures) {
+	public void setPictures(Set<String> pictures) {
 		this.pictures = pictures;
 	}
 	public int getCapacity() {
@@ -125,35 +138,29 @@ public class Boat {
 	public void setOwner(BoatOwner owner) {
 		this.owner = owner;
 	}
-	public List<BoatBehavioralRule> getBoatBehavioralRules() {
-		return boatBehavioralRules;
+	public Set<BoatBehavioralRule> getBoatBehavioralRules() {
+		return rules;
 	}
-	public void setBoatBehavioralRules(List<BoatBehavioralRule> boatBehavioralRules) {
-		this.boatBehavioralRules = boatBehavioralRules;
+	public void setBoatBehavioralRules(Set<BoatBehavioralRule> boatBehavioralRules) {
+		this.rules = boatBehavioralRules;
 	}
-	public List<NavigationEquipment> getNavigationEquipments() {
-		return navigationEquipments;
+	public Set<NavigationEquipment> getNavigationEquipments() {
+		return navigationEquipment;
 	}
-	public void setNavigationEquipments(List<NavigationEquipment> navigationEquipments) {
-		this.navigationEquipments = navigationEquipments;
+	public void setNavigationEquipments(Set<NavigationEquipment> navigationEquipments) {
+		this.navigationEquipment = navigationEquipment;
 	}
-	public List<BoatFastReservation> getBoatFastReservations() {
+	public Set<BoatFastReservation> getBoatFastReservations() {
 		return boatFastReservations;
 	}
-	public void setBoatFastReservations(List<BoatFastReservation> boatFastReservations) {
+	public void setBoatFastReservations(Set<BoatFastReservation> boatFastReservations) {
 		this.boatFastReservations = boatFastReservations;
 	}
-	public List<FishingEquipment> getFishingEquipments() {
-		return fishingEquipments;
-	}
-	public void setFishingEquipments(List<FishingEquipment> fishingEquipments) {
-		this.fishingEquipments = fishingEquipments;
-	}
-	public Boat(Long id, String name, String address, BoatType type, double length, String motorNumber,
-			double motorPower, int maxSpeed, String description, List<String> pictures, int capacity, double grade,
-			BoatOwner owner, List<BoatBehavioralRule> boatBehavioralRules,
-			List<NavigationEquipment> navigationEquipments, List<BoatFastReservation> boatFastReservations,
-			List<FishingEquipment> fishingEquipments) {
+	
+	public Boat(Long id, String name, String address, BoatType type, double length, int motorNumber,
+			double motorPower, int maxSpeed, String description, Set<String> pictures, int capacity, double grade,
+			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,
+			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -168,10 +175,10 @@ public class Boat {
 		this.capacity = capacity;
 		this.grade = grade;
 		this.owner = owner;
-		this.boatBehavioralRules = boatBehavioralRules;
-		this.navigationEquipments = navigationEquipments;
+		this.rules = boatBehavioralRules;
+		this.navigationEquipment = navigationEquipment;
 		this.boatFastReservations = boatFastReservations;
-		this.fishingEquipments = fishingEquipments;
+		
 	}
 	
 	public Boat () {}

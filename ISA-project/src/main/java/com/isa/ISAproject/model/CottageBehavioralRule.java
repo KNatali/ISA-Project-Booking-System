@@ -1,9 +1,13 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,8 +19,8 @@ public class CottageBehavioralRule {
 	@Column
 	private String rule;
 	
-	@ManyToOne
-	private Cottage cottage;
+	@ManyToMany(mappedBy="rules")
+	private Set<Cottage> cottages=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -34,19 +38,19 @@ public class CottageBehavioralRule {
 		this.rule = rule;
 	}
 
-	public Cottage getCottage() {
-		return cottage;
+	public Set<Cottage> getCottage() {
+		return cottages;
 	}
 
-	public void setCottage(Cottage cottage) {
-		this.cottage = cottage;
+	public void setCottage(Set<Cottage> cottages) {
+		this.cottages = cottages;
 	}
 
-	public CottageBehavioralRule(Long id, String rule, Cottage cottage) {
+	public CottageBehavioralRule(Long id, String rule, Set<Cottage> cottages) {
 		super();
 		this.id = id;
 		this.rule = rule;
-		this.cottage = cottage;
+		this.cottages = cottages;
 	}
 
 	public CottageBehavioralRule() {}

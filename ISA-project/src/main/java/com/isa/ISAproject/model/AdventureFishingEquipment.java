@@ -1,16 +1,23 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class FishingEquipment {
+public class AdventureFishingEquipment {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
+	@ManyToMany(mappedBy = "equipment")
+	private Set<Adventure> adventures=new HashSet<>();
 	@Column
 	private String name;
 
@@ -30,10 +37,10 @@ public class FishingEquipment {
 		this.name = name;
 	}
 
-	public FishingEquipment(Long id, String name) {
+	public AdventureFishingEquipment(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-	public FishingEquipment() {}
+	public AdventureFishingEquipment() {}
 }

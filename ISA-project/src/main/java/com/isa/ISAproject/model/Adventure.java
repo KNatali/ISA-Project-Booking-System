@@ -1,12 +1,17 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,19 +28,22 @@ public class Adventure {
 	private String description;
 	@Column
 	private double averageGrade;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Instructor instructor;
-	@OneToMany
-	private List<AdventureBehavioralRule> adventureBehavioralRules;
+
 	@ElementCollection//(targetClass=String.class)
-	private List<String> pictures; 
+	private Set<String> pictures=new HashSet<>(); 
 	@Column
 	private int maxPersons;
 	@ManyToMany
-	private List<FishingEquipment> equipment;
+	@JoinTable(joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
+	private Set<AdventureFishingEquipment> equipment=new HashSet<>();
 	@ManyToMany
-	private List<CottageBehavioralRule> rules;
-	
+	@JoinTable(joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
+	private Set<AdventureBehavioralRule> rules=new HashSet<>();
+	@Column
 	private CancellationPolicy cancellation;
 
 	public Long getId() {
@@ -86,19 +94,12 @@ public class Adventure {
 		this.instructor = instructor;
 	}
 
-	public List<AdventureBehavioralRule> getAdventureBehavioralRules() {
-		return adventureBehavioralRules;
-	}
 
-	public void setAdventureBehavioralRules(List<AdventureBehavioralRule> adventureBehavioralRules) {
-		this.adventureBehavioralRules = adventureBehavioralRules;
-	}
-
-	public List<String> getPictures() {
+	public Set<String> getPictures() {
 		return pictures;
 	}
 
-	public void setPictures(List<String> pictures) {
+	public void setPictures(Set<String> pictures) {
 		this.pictures = pictures;
 	}
 
@@ -110,19 +111,19 @@ public class Adventure {
 		this.maxPersons = maxPersons;
 	}
 
-	public List<FishingEquipment> getEquipment() {
+	public Set<AdventureFishingEquipment> getEquipment() {
 		return equipment;
 	}
 
-	public void setEquipment(List<FishingEquipment> equipment) {
+	public void setEquipment(Set<AdventureFishingEquipment> equipment) {
 		this.equipment = equipment;
 	}
 
-	public List<CottageBehavioralRule> getRules() {
+	public Set<AdventureBehavioralRule> getRules() {
 		return rules;
 	}
 
-	public void setRules(List<CottageBehavioralRule> rules) {
+	public void setRules(Set<AdventureBehavioralRule> rules) {
 		this.rules = rules;
 	}
 
@@ -135,8 +136,8 @@ public class Adventure {
 	}
 
 	public Adventure(Long id, String name, String address, String description, double averageGrade,
-			Instructor instructor, List<AdventureBehavioralRule> adventureBehavioralRules, List<String> pictures,
-			int maxPersons, List<FishingEquipment> equipment, List<CottageBehavioralRule> rules,
+			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules, Set<String> pictures,
+			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
 			CancellationPolicy cancellation) {
 		super();
 		this.id = id;
@@ -145,7 +146,7 @@ public class Adventure {
 		this.description = description;
 		this.averageGrade = averageGrade;
 		this.instructor = instructor;
-		this.adventureBehavioralRules = adventureBehavioralRules;
+
 		this.pictures = pictures;
 		this.maxPersons = maxPersons;
 		this.equipment = equipment;

@@ -1,31 +1,37 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 @Entity
 public class CottagePriceList {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ElementCollection
-	private List<AdditionalItem> additionalItems;
+	@OneToMany
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<AdditionalItem> getAdditionalItems() {
+	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
-	public void setAdditionalItems(List<AdditionalItem> additionalItems) {
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public CottagePriceList(Long id, List<AdditionalItem> additionalItems) {
+	public CottagePriceList(Long id, Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.additionalItems = additionalItems;
