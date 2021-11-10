@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,7 +21,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Boat {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
 	private String name;
@@ -52,12 +53,12 @@ public class Boat {
 	private BoatOwner owner;
 	
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+	@JoinTable(name="boat_and_rules",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<BoatBehavioralRule> rules=new HashSet<>();
 	
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+	@JoinTable(name="boat_and_equipment",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
 	private Set<NavigationEquipment> navigationEquipment=new HashSet<>();
 	

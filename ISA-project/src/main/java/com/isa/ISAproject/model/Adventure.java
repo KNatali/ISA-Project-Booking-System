@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Adventure {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
 	private String name;
@@ -36,11 +37,11 @@ public class Adventure {
 	@Column
 	private int maxPersons;
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+	@JoinTable(name="adventure_and_equipment",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
 	private Set<AdventureFishingEquipment> equipment=new HashSet<>();
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+	@JoinTable(name="adventure_and_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
 	@Column

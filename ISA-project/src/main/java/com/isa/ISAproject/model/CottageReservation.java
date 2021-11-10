@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -17,19 +18,19 @@ import javax.persistence.OneToMany;
 @Entity
 public class CottageReservation {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
+	@Column(nullable=false)
 	private LocalDate date;
-	@Column
+	@Column(nullable=false)
 	private LocalTime time;
-	@Column
+	@Column(nullable=false)
 	private int duration;
-	@Column
+	@Column(nullable=false)
 	private int maxPersons;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
-	@Column
+	@Column(nullable=false)
 	private double price;
 	@ManyToOne
 	private Client client;

@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,15 +21,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cottage {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
+	@Column(nullable=false)
 	private String name;
-	@Column
+	@Column(nullable=false)
 	private String address;
-	@Column
+	@Column(nullable=false)
 	private String description;
-	@Column
+	@Column(nullable=false)
 	private double grade;
 	@Column
 	private String mainPicture;
