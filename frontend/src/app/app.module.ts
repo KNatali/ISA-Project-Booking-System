@@ -13,6 +13,7 @@ import { CottageListPageComponent } from './cottage-list-page/cottage-list-page.
 import { BoatListPageComponent } from './boat-list-page/boat-list-page.component';
 import { AdventureListPageComponent } from './adventure-list-page/adventure-list-page.component';
 import { BoatListItemComponent } from './boat-list-item/boat-list-item.component';
+import { CottageListItemComponent } from './cottage-list-item/cottage-list-item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BoatListItemComponent } from './boat-list-item/boat-list-item.component
     CottageListPageComponent,
     BoatListPageComponent,
     AdventureListPageComponent,
-    BoatListItemComponent
+    BoatListItemComponent,
+    CottageListItemComponent
   ],
   imports: [
     BrowserModule,
