@@ -7,7 +7,7 @@ import { Cottage } from '../model/cottage';
   providedIn: 'root'
 })
 export class CottageService {
-  urlCottage="http://localhost:8080/api/cottages";
+  urlCottage="http://localhost:8090/api/cottages";
 
   constructor(private http:HttpClient) { }
 
