@@ -7,7 +7,7 @@ import { Boat } from '../model/boat';
   providedIn: 'root'
 })
 export class BoatService {
-  urlBoats = "http://localhost:8080/api/boats";
+  urlBoats = "http://localhost:8090/api/boats";
 
   constructor(private http: HttpClient) { }
 

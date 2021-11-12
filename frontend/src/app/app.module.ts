@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
-
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -14,6 +16,10 @@ import { BoatListPageComponent } from './boat-list-page/boat-list-page.component
 import { AdventureListPageComponent } from './adventure-list-page/adventure-list-page.component';
 import { BoatListItemComponent } from './boat-list-item/boat-list-item.component';
 import { CottageListItemComponent } from './cottage-list-item/cottage-list-item.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AdventureListItemComponent } from './adventure-list-item/adventure-list-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdventureCardComponent } from './adventure-card/adventure-card.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +31,21 @@ import { CottageListItemComponent } from './cottage-list-item/cottage-list-item.
     BoatListPageComponent,
     AdventureListPageComponent,
     BoatListItemComponent,
-    CottageListItemComponent
+    CottageListItemComponent,
+    AdventureListItemComponent,
+    AdventureCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
 
   ],
   providers: [],

@@ -1,12 +1,20 @@
-.nav-item{
-    color: cornsilk;
+.nav-item {
+  color: cornsilk;
 }
-.navbar-brand{
-    color: darkblue;
+
+.navbar-brand {
+  color: white;
 }
-.navbar{
-    margin: 10px;
+
+.navbar-brand:hover {
+  color: #8DA9C4;
 }
-#a{
-    margin-left: 540px;
+
+.navbar {
+  margin: 0px;
+  background-color: #134074;
+}
+
+#a {
+  margin-left: 540px;
 }
