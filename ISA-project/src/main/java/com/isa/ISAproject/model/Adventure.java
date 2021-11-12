@@ -32,6 +32,8 @@ public class Adventure {
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Instructor instructor;
 
+	@Column
+	private String mainPicture;
 	@ElementCollection//(targetClass=String.class)
 	private Set<String> pictures=new HashSet<>(); 
 	@Column
@@ -70,9 +72,16 @@ public class Adventure {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public void setMainPicture(String picture) {
+		this.mainPicture = picture;
+	}
 
 	public String getDescription() {
 		return description;
+	}
+	
+	public String getMainPicture() {
+		return mainPicture;
 	}
 
 	public void setDescription(String description) {
@@ -137,7 +146,7 @@ public class Adventure {
 	}
 
 	public Adventure(Long id, String name, String address, String description, double averageGrade,
-			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules, Set<String> pictures,
+			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<String> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
 			CancellationPolicy cancellation) {
 		super();
@@ -147,7 +156,7 @@ public class Adventure {
 		this.description = description;
 		this.averageGrade = averageGrade;
 		this.instructor = instructor;
-
+		this.mainPicture=mainPicture;
 		this.pictures = pictures;
 		this.maxPersons = maxPersons;
 		this.equipment = equipment;

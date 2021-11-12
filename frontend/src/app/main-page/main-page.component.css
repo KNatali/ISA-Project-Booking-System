@@ -1,13 +1,21 @@
-.jumbotron-image {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 1100px;
-    height: 600px;
-    margin-left: 5px;
-    margin-right: 5px;
-    text-align: center;
-    border-radius: 6% ;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
-  
+.jumbotron {
+  background-image: url(https://images.pexels.com/photos/1115847/pexels-photo-1115847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-weight: 400;
+
+}
