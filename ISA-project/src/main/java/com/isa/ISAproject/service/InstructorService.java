@@ -12,6 +12,7 @@ import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.InstructorRepository;
 
 
+
 @Service
 public class InstructorService {
 	@Autowired
@@ -25,5 +26,9 @@ public class InstructorService {
 	}
 	public Optional<Instructor> findById(Long id) {
 		return this.instructorRepository.findById(id);
+	}
+	
+	public Instructor save(Instructor newInstructor) {
+		return this.instructorRepository.save(newInstructor);
 	}
 }
