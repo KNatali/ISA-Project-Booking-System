@@ -18,11 +18,12 @@ import com.isa.ISAproject.service.AdventureService;
 
 @CrossOrigin("*")
 @RestController
+@RequestMapping(value="/api/adventures")
 public class AdventureController {
 	@Autowired
 	private AdventureService adventureService;
 	
-	@RequestMapping(value="api/adventures",method = RequestMethod.GET,produces = {
+	@RequestMapping(method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Adventure>> findAll(){
 		List<Adventure> adventures=adventureService.findAll();

@@ -1,38 +1,24 @@
-package com.isa.ISAproject.model;
+package com.isa.ISAproject.dto;
 
-import javax.persistence.*;
 
-@MappedSuperclass
-public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column
+
+import com.isa.ISAproject.model.Instructor;
+
+public class InstructorProfileDTO {
+	
+	
 	private String username;
-	@Column
 	private String password;
-	@Column
 	private String email;
-	@Column
 	private String firstName;
-	@Column
 	private String lastName;
-	@Column
 	private String address;
-	@Column
 	private String state;
-	@Column
 	private String city;
-	@Column
 	private String mobile;
 	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -88,11 +74,11 @@ public class User {
 		this.mobile = mobile;
 	}
 	
-	public User() {}
-	public User(Long id, String username, String password, String email, String firstName, String lastName,
+	public InstructorProfileDTO() {}
+	public InstructorProfileDTO(String username, String password, String email, String firstName, String lastName,
 			String address, String state, String city, String mobile) {
 		super();
-		this.id = id;
+	
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -103,6 +89,18 @@ public class User {
 		this.city = city;
 		this.mobile = mobile;
 	}
+	public InstructorProfileDTO(Instructor instructor) {
+		super();
 	
-
+		this.username = instructor.getUsername();
+		this.password = instructor.getPassword();
+		this.email = instructor.getEmail();
+		this.firstName = instructor.getFirstName();
+		this.lastName = instructor.getLastName();
+		this.address = instructor.getAddress();
+		this.state = instructor.getState();
+		this.city = instructor.getCity();
+		this.mobile = instructor.getMobile();
+	}
+	
 }

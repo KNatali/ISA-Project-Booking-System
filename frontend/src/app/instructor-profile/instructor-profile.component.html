@@ -1,0 +1,110 @@
+<div class="container rounded bg-white mt-5 mb-5" *ngIf="profileShow">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+          width="150px"
+          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+          class="font-weight-bold">{{instructor.username}}</span><span
+          class="text-black-50">{{instructor.email}}</span><span> </span>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile information:</h4>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6"><label class="labels">Name</label>
+            <p>{{instructor.firstName}}</p>
+          </div>
+          <div class="col-md-6"><label class="labels">Surname</label>
+            <p>{{instructor.lastName}}</p>
+          </div>
+        </div>
+        <div class="row mt-3">
+
+          <div class="col-md-12"><label class="labels">Adress</label>
+            <p>{{instructor.address}}</p>
+          </div>
+          <div class="col-md-12"><label class="labels">City</label>
+            <p>{{instructor.city}}</p>
+          </div>
+
+          <div class="col-md-12"><label class="labels">State</label>
+            <p>{{instructor.state}}</p>
+          </div>
+          <div class="col-md-12"><label class="labels">Mobile</label>
+            <p>{{instructor.mobile}}</p>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-3 py-5">
+        <div class="col-md-12"><button mat-button (click)="edit()">Edit Profile</button></div> <br>
+        <div class="col-md-12"><button mat-button>Change Password</button></div><br>
+        <div class="col-md-12"><button mat-button id="delete">Delete Profile</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="container1 rounded bg-white mt-5 mb-5" *ngIf="profileEdit">
+  <div class="row">
+
+    <div class="col">
+      <div class="">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Edit profile information:</h4>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6"><label class="labels">Name</label>
+            <input type="text" class="form-control" value="{{instructor.firstName}}">
+          </div>
+          <div class="col-md-6"><label class="labels">Surname</label>
+            <input type="text" class="form-control" value="{{instructor.lastName}}">
+          </div>
+        </div>
+        <div class="row mt-3">
+
+          <div class="col-md-12"><label class="labels">Adress</label>
+            <input type="text" class="form-control" value="{{instructor.address}}">
+          </div>
+          <div class="col-md-12"><label class="labels">City</label>
+            <input type="text" class="form-control" value="{{instructor.city}}">
+          </div>
+
+          <div class="col-md-12"><label class="labels">State</label>
+            <input type="text" class="form-control" value="{{instructor.state}}">
+          </div>
+          <div class="col-md-12"><label class="labels">Mobile</label>
+            <input type="text" class="form-control" value="{{instructor.mobile}}">
+          </div>
+          <br>
+          <div class="row mt-4">
+
+            <div class="col-md-6">
+              <button class="col-md-12 " mat-button>Submit</button>
+            </div>
+            <div class="col-md-6">
+              <button class="col-md-12" mat-button id="delete">Cancel</button>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>

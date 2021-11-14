@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
@@ -20,6 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AdventureListItemComponent } from './adventure-list-item/adventure-list-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdventureCardComponent } from './adventure-card/adventure-card.component';
+import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
+import { InstructorPageComponent } from './instructor-page/instructor-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { AdventureCardComponent } from './adventure-card/adventure-card.componen
     BoatListItemComponent,
     CottageListItemComponent,
     AdventureListItemComponent,
-    AdventureCardComponent
+    AdventureCardComponent,
+    InstructorProfileComponent,
+    InstructorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,7 @@ import { AdventureCardComponent } from './adventure-card/adventure-card.componen
     MatToolbarModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MatTabsModule
 
   ],
   providers: [],

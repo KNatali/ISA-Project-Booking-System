@@ -2,7 +2,7 @@
   <a class="navbar-brand nav-link" href="">
     Booking site
   </a>
-  <a class="navbar-brand nav-link" href="cottages">
+  <!-- <a class="navbar-brand nav-link" href="cottages">
     Cottages
   </a>
   <a class="navbar-brand nav-link" href="adventures">
@@ -11,6 +11,40 @@
   <a class="navbar-brand nav-link" href="boats">
     Boats
   </a>
+  <a class="navbar-brand nav-link dropdown" href="boats">
+    Boats
+  </a>
+
+-->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link" href="cottages">Cottages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="boats">Boats</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="adventures">Adventures</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Instrctor
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="instructors/1">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Reservations</a></li>
+
+          <li><a class="dropdown-item" href="#">My Adventures</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+
   <a id="a" class="nav-item nav-link" href="sign-in">
     Sign in
   </a>
@@ -18,4 +52,5 @@
     Register
   </a>
 </nav>
+
 <router-outlet></router-outlet>
