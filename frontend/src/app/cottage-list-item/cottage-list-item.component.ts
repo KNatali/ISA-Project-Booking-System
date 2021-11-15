@@ -8,16 +8,11 @@ import { CottageService } from '../service/cottage.service';
   styleUrls: ['./cottage-list-item.component.css']
 })
 export class CottageListItemComponent implements OnInit {
-  
+  @Input()
   cottages:Cottage[];
   
-  constructor(private cottageService:CottageService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getCottages();
-  }
-  getCottages(){
-    this.cottageService.getCottages()
-    .subscribe(res=>this.cottages=res)
   }
 }

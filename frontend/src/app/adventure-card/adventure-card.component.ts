@@ -10,20 +10,15 @@ import { AdventureService } from '../service/adventure.service';
   styleUrls: ['./adventure-card.component.css']
 })
 export class AdventureCardComponent implements OnInit {
+  @Input()
   adventures: Adventure[];
 
 
-  constructor(private adventureService: AdventureService) {
+  constructor() {
 
   }
-
   ngOnInit(): void {
     this.adventures = [];
-    this.getAdventures();
-  }
-  getAdventures() {
-    this.adventureService.getAdventures()
-      .subscribe(res => this.adventures = res)
   }
 
 
