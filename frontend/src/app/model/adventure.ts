@@ -1,3 +1,5 @@
+import { Instructor } from "./instructor";
+
 export interface AdventureInterface {
     id?: number;
     name: string;
@@ -6,6 +8,7 @@ export interface AdventureInterface {
     maxPersons: number;
     description: string;
     mainPicture: string;
+    instructor: Instructor;
 
 }
 export class Adventure implements AdventureInterface {
@@ -16,6 +19,7 @@ export class Adventure implements AdventureInterface {
     maxPersons: number;
     description: string;
     mainPicture: string;
+    instructor: Instructor;
     constructor(obj: AdventureInterface) {
         this.id = obj.id;
         this.name = obj.name;
@@ -24,6 +28,7 @@ export class Adventure implements AdventureInterface {
         this.description = obj.description;
         this.averageGrade = obj.averageGrade;
         this.mainPicture = obj.mainPicture;
+        this.instructor = obj.instructor;
 
     }
 
