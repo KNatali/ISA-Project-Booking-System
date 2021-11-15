@@ -1,0 +1,11 @@
+
+<div class="forma">
+    <form class="form-search" (ngSubmit)="findByInstructorFirstAndLastName()">
+        <h3>Find by instructor</h3>
+        <label for="firstName">First name: </label>
+        <input name="firstName" id="firstName" type="text" [(ngModel)]="firstName"><br>
+        <label for="lastName">Last name: </label>
+        <input name="lastName" id="lastName" type="text" [(ngModel)]="lastName"><br>
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+</div>

@@ -28,6 +28,7 @@ import { AdventureDatailsPageComponent } from './adventure-datails-page/adventur
 import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
 import { SearchBoatComponent } from './search-boat/search-boat.component';
+import { SearchAdventureComponent } from './search-adventure/search-adventure.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SearchBoatComponent } from './search-boat/search-boat.component';
     AdventureDatailsPageComponent,
     BoatDetailsPageComponent,
     SearchCottageComponent,
-    SearchBoatComponent
+    SearchBoatComponent,
+    SearchAdventureComponent
   ],
   imports: [
     BrowserModule,

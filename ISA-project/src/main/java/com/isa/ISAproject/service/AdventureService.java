@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdventureRepository;
 
 @Service
@@ -19,5 +20,8 @@ public class AdventureService {
 	}
 	public Optional<Adventure> getOne(Long id) {
 		return this.adventureRepository.findById(id);
+	}
+	public List<Adventure> findByInstructor(Instructor instructor){
+		return this.adventureRepository.findByInstructor(instructor);
 	}
 }
