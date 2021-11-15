@@ -12,7 +12,7 @@ export interface AdventureInterface {
 
 }
 export class Adventure implements AdventureInterface {
-    id?: number | undefined;
+    id?: number ;
     name: string;
     address: string;
     averageGrade: number;

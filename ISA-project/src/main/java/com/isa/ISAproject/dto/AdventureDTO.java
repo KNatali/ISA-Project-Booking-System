@@ -19,6 +19,7 @@ import com.isa.ISAproject.model.Instructor;
 
 public class AdventureDTO {
 
+	private Long id;
 	
 	private String name;
 	
@@ -35,8 +36,16 @@ public class AdventureDTO {
 	
 
 
-
 	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -99,7 +108,7 @@ public class AdventureDTO {
 		this.averageGrade = averageGrade;
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
-		
+		this.id=id;
 	}
 	
 	public AdventureDTO() {}
