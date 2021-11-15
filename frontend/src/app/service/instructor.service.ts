@@ -15,4 +15,8 @@ export class InstructorService {
     return this.http.get<Instructor>(`${this.urlInstructor}/${id}`);
   }
 
+  updateInstructor(id: number, editedInstructor: Instructor): Observable<Instructor> {
+    return this.http.put<Instructor>(`${this.urlInstructor}/${id}`, editedInstructor);
+  }
+
 }

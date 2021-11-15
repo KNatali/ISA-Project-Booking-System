@@ -2,7 +2,7 @@ import { InstructorService } from './../service/instructor.service';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { Instructor } from '../model/instructor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-profile',
@@ -25,17 +25,37 @@ export class InstructorProfileComponent implements OnInit {
     mobile: ''
 
   });
+  @Input() id: number;
 
-  constructor() {
+  constructor(private instructorService: InstructorService, private route: ActivatedRoute
+    , private router: Router) {
   }
 
   ngOnInit(): void {
-
   }
   edit() {
     this.profileShow = !this.profileShow;
     this.profileEdit = !this.profileEdit;
 
   }
+
+  submit() {
+    this.instructorService.updateInstructor(this.id, this.instructor).subscribe(res => {
+      this.goToProfilePage();
+    })
+  }
+  goToProfilePage() {
+    this.profileShow = true;
+    this.profileEdit = false;
+
+    this.router.navigate(['/instructor/:id']);
+  }
+  close() {
+    window.location.reload();
+
+  }
+
+
+
 
 }
