@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
 import { AdventureListPageComponent } from './adventure-list-page/adventure-list-page.component';
+import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { BoatListPageComponent } from './boat-list-page/boat-list-page.component';
 import { CottageDetailsPageComponent } from './cottage-details-page/cottage-details-page.component';
 import { CottageListPageComponent } from './cottage-list-page/cottage-list-page.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'adventures/:id', component:AdventureDatailsPageComponent},
-  { path: 'cottages/:id',component:CottageDetailsPageComponent}
+  { path: 'cottages/:id',component:CottageDetailsPageComponent},
+  { path: 'boats/:id',component:BoatDetailsPageComponent}
 ];
 
 @NgModule({
