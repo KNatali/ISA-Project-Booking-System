@@ -1,19 +1,10 @@
-
-      <div class="list" fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="50%" >
-        <mat-card class="mat-elevation-z4">
-          <mat-card-header>
-            <mat-card-title>{{adventure.name}}</mat-card-title>
-            <mat-card-subtitle>Address: {{adventure.address}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="{{adventure.mainPicture}}">
-          <mat-card-content>
-            <p>
-              Description: {{adventure.description}}
-            </p>
-            <br>
-            <p id="grade">Grade: {{adventure.averageGrade}}</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+<div class="center" >
+  <h1>{{adventure.name}}</h1>
+  <img src="{{adventure.mainPicture}}">
+  <h2>Description: {{adventure.description}}</h2>
+  <h2>Average grade: {{adventure.averageGrade}}</h2>
+  <h2>Max person: {{adventure.maxPersons}}</h2>
+  <h2>Address: {{adventure.address}}</h2>
+</div>
  
   

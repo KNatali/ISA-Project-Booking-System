@@ -25,6 +25,7 @@ import { InstructorProfileComponent } from './instructor-profile/instructor-prof
 import { InstructorPageComponent } from './instructor-page/instructor-page.component';
 import { CottageDetailsPageComponent } from './cottage-details-page/cottage-details-page.component';
 import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
+import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AdventureDatailsPageComponent } from './adventure-datails-page/adventur
     InstructorProfileComponent,
     InstructorPageComponent,
     CottageDetailsPageComponent,
-    AdventureDatailsPageComponent
+    AdventureDatailsPageComponent,
+    BoatDetailsPageComponent
   ],
   imports: [
     BrowserModule,
