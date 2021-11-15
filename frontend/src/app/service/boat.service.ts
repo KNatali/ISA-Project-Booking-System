@@ -14,5 +14,8 @@ export class BoatService {
   getBoats(): Observable<Boat[]> {
     return this.http.get<Boat[]>(this.urlBoats);
   }
+  getBoat(id:number):Observable<Boat>{
+    return this.http.get<Boat>(`${this.urlBoats}/${id}`);
+  }
 
 }
