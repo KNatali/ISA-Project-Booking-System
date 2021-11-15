@@ -8,17 +8,24 @@ import { Component, OnInit, Output ,EventEmitter} from '@angular/core';
 export class SearchCottageComponent implements OnInit {
 
   name:string;
+  address:string;
 
   @Output()
   NameAdded : EventEmitter<string> =new EventEmitter();
+  @Output()
+  AddressAdded : EventEmitter<string> =new EventEmitter();
   constructor() { 
     this.name='';
+    this.address='';
   }
 
   ngOnInit(): void {
   }
   findCottageByName(){
     this.NameAdded.next(this.name);
+  }
+  findCottageByAddress(){
+    this.AddressAdded.next(this.address);
   }
 
 }

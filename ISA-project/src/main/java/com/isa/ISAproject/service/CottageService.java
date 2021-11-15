@@ -24,4 +24,7 @@ public class CottageService {
 	public List<Cottage> findByName(String name) {
 		return this.cottageRepository.findByName(name);
 	}
+	public List<Cottage> findByAddress(String address){
+		return this.cottageRepository.findByAddress(address);
+	}
 }

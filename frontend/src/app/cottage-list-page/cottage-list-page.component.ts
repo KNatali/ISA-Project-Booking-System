@@ -23,4 +23,9 @@ export class CottageListPageComponent implements OnInit {
     this.cottageService.findCottageByName(name)
     .subscribe(res=>this.cottages=res);
   }
+  findCottageByAddress(address:string){
+    this.cottageService.findCottageByAddress(address)
+    .subscribe(res=>this.cottages=res);
+  }
+
 }
