@@ -1,4 +1,7 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Boat } from '../model/boat';
+import { BoatService } from '../service/boat.service';
 
 @Component({
   selector: 'app-search-boat',
@@ -12,7 +15,9 @@ export class SearchBoatComponent implements OnInit {
   MotorNumberAdded:EventEmitter<number>=new EventEmitter();
   @Output()
   MotorPowerAdded:EventEmitter<number>=new EventEmitter();
-  constructor() { }
+  @Output()
+  MotorPowerAndMotorNumberAdded:EventEmitter<{motorPower:number,motorNumber:number}>=new EventEmitter();
+  constructor(private boatService:BoatService) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +27,10 @@ export class SearchBoatComponent implements OnInit {
   findBoatByMotorPower(){
     this.MotorPowerAdded.next(this.motorPower);
   }
-  findBoatByMotorPowerAndMotorNumber(){
+  findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number){
+    //this.MotorPowerAndMotorNumberAdded.next({motorPower:this.motorPower,motorNumber:this.motorNumber});
+    //this.boatService.findBoatByMotorPowerAndMotorNumber(motorPower,motorNumber)
+    //.subscribe(res=this.)
   }
+
 }

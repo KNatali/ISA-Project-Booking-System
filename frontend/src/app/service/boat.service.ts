@@ -25,5 +25,12 @@ export class BoatService {
     const params:HttpParams=new HttpParams().append('motorPower',motorPower);
     return this.http.get<Boat[]>(this.urlBoats,{params});
   }
+  findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number):Observable<Boat[]>{
+    
+    const params=new HttpParams()
+      .set('motorPower',motorPower)
+      .set('motorNumber',motorNumber);
+      return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
 
 }
