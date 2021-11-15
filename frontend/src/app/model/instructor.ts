@@ -13,7 +13,7 @@ export interface InstructorInterface {
 
 }
 export class Instructor implements InstructorInterface {
-    id?: number;
+    id?: number | undefined;
     firstName: string;
     lastName: string;
     username: string;

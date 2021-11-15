@@ -57,7 +57,7 @@
 
 
 
-<div class="container1 rounded bg-white mt-5 mb-5" *ngIf="profileEdit">
+<form class="container1 rounded bg-white mt-5 mb-5" *ngIf="profileEdit">
   <div class="row">
 
     <div class="col">
@@ -67,35 +67,35 @@
         </div>
         <div class="row mt-2">
           <div class="col-md-6"><label class="labels">Name</label>
-            <input type="text" class="form-control" value="{{instructor.firstName}}">
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="instructor.firstName">
           </div>
           <div class="col-md-6"><label class="labels">Surname</label>
-            <input type="text" class="form-control" value="{{instructor.lastName}}">
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="instructor.lastName">
           </div>
         </div>
         <div class="row mt-3">
 
           <div class="col-md-12"><label class="labels">Adress</label>
-            <input type="text" class="form-control" value="{{instructor.address}}">
+            <input type="text" class="form-control" name="address" [(ngModel)]="instructor.address">
           </div>
           <div class="col-md-12"><label class="labels">City</label>
-            <input type="text" class="form-control" value="{{instructor.city}}">
+            <input type="text" class="form-control" name="city" [(ngModel)]="instructor.city">
           </div>
 
           <div class="col-md-12"><label class="labels">State</label>
-            <input type="text" class="form-control" value="{{instructor.state}}">
+            <input type="text" class="form-control" name="state" [(ngModel)]="instructor.state">
           </div>
           <div class="col-md-12"><label class="labels">Mobile</label>
-            <input type="text" class="form-control" value="{{instructor.mobile}}">
+            <input type="text" class="form-control" name="mobile" [(ngModel)]="instructor.mobile">
           </div>
           <br>
           <div class="row mt-4">
 
             <div class="col-md-6">
-              <button class="col-md-12 " mat-button>Submit</button>
+              <button class="col-md-12 " (click)="submit()" mat-button>Submit</button>
             </div>
             <div class="col-md-6">
-              <button class="col-md-12" mat-button id="delete">Cancel</button>
+              <button class="col-md-12" (click)="close()" mat-button id="delete">Cancel</button>
             </div>
           </div>
 
@@ -107,4 +107,4 @@
     </div>
 
   </div>
-</div>
+</form>
