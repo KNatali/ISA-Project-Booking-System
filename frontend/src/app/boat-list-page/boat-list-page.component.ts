@@ -31,5 +31,8 @@ export class BoatListPageComponent implements OnInit {
     this.boatService.findBoatByMotorPower(motorPower)
     .subscribe(res=>this.boats=res);
   }
+  findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number){
+    
+  }
 
 }
