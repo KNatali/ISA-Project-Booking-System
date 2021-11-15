@@ -19,4 +19,8 @@ export class CottageListPageComponent implements OnInit {
     this.cottageService.getCottages()
     .subscribe(res=>this.cottages=res)
   }
+  findCottageByName(name:string){
+    this.cottageService.findCottageByName(name)
+    .subscribe(res=>this.cottages=res);
+  }
 }

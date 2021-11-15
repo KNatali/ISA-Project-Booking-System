@@ -17,4 +17,9 @@ export class CottageService {
   getCottage(id:number):Observable<Cottage>{
     return this.http.get<Cottage>(`${this.urlCottage}/${id}`);
   }
+  findCottageByName(name:string):Observable<Cottage[]>{
+    const params:HttpParams=new HttpParams().append('name',name);
+    return this.http.get<Cottage[]>(this.urlCottage,{params});
+  }
+
 }
