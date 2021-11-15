@@ -41,12 +41,24 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 			adventuresDTO.add(filmDTO);
 		}
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
-	}
+	}/*
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Adventure>  findOne(@PathVariable Long id){
 		Optional<Adventure> adventure=this.adventureService.getOne(id);
 		if (adventure.isPresent()) {
 			return new ResponseEntity<>(adventure.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}*/
+	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	public ResponseEntity<AdventureDTO>  findOne(@PathVariable Long id){
+		Optional<Adventure> adventure=this.adventureService.getOne(id);
+		if (adventure.isPresent()) {
+			Adventure a=adventure.get();
+			InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
+			AdventureDTO adventureDto=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
+			return new ResponseEntity<>(adventureDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

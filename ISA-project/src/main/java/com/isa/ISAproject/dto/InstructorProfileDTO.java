@@ -6,7 +6,7 @@ import com.isa.ISAproject.model.Instructor;
 
 public class InstructorProfileDTO {
 	
-	
+	private Long id;
 	private String username;
 	private String password;
 	private String email;
@@ -19,6 +19,12 @@ public class InstructorProfileDTO {
 	
 	
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -76,7 +82,7 @@ public class InstructorProfileDTO {
 	
 	public InstructorProfileDTO() {}
 	public InstructorProfileDTO(String username, String password, String email, String firstName, String lastName,
-			String address, String state, String city, String mobile) {
+			String address, String state, String city, String mobile,Long id) {
 		super();
 	
 		this.username = username;
@@ -88,6 +94,7 @@ public class InstructorProfileDTO {
 		this.state = state;
 		this.city = city;
 		this.mobile = mobile;
+		this.id=id;
 	}
 	public InstructorProfileDTO(Instructor instructor) {
 		super();
@@ -101,6 +108,8 @@ public class InstructorProfileDTO {
 		this.state = instructor.getState();
 		this.city = instructor.getCity();
 		this.mobile = instructor.getMobile();
+		this.id=instructor.getId();
+		
 	}
 	
 }
