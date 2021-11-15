@@ -21,4 +21,7 @@ public class CottageService {
 	public Optional<Cottage> getOne(Long id) {
 		return this.cottageRepository.findById(id);
 	}
+	public List<Cottage> findByName(String name) {
+		return this.cottageRepository.findByName(name);
+	}
 }

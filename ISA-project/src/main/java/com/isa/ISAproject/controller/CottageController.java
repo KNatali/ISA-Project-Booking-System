@@ -1,5 +1,6 @@
 package com.isa.ISAproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.model.Adventure;
@@ -38,5 +40,12 @@ public class CottageController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	@RequestMapping(value="api/cottages", method = RequestMethod.GET,
+			params = "name",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Cottage>> findByName(@RequestParam String name){
+		List<Cottage> cottages=this.cottageService.findByName(name);
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
 	}
 }
