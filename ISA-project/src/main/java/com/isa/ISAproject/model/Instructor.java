@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Instructor extends User{
 	
-	@OneToMany(mappedBy="instructor",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Adventure> adventures;
 
 	public List<Adventure> getAdventures() {

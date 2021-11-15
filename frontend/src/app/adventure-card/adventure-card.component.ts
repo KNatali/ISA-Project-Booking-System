@@ -1,3 +1,5 @@
+import { InstructorService } from './../service/instructor.service';
+import { Instructor } from './../model/instructor';
 import { Component, Input, OnInit } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { AdventureService } from '../service/adventure.service';
@@ -10,17 +12,24 @@ import { AdventureService } from '../service/adventure.service';
 export class AdventureCardComponent implements OnInit {
   adventures: Adventure[];
 
+
   constructor(private adventureService: AdventureService) {
-    this.adventures = [];
+
   }
 
   ngOnInit(): void {
+    this.adventures = [];
     this.getAdventures();
   }
-
   getAdventures() {
     this.adventureService.getAdventures()
       .subscribe(res => this.adventures = res)
   }
+
+
+
+
+
+
 
 }

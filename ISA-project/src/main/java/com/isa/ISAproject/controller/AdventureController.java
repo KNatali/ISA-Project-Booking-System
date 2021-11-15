@@ -1,5 +1,6 @@
 package com.isa.ISAproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.model.Adventure;
 
 import com.isa.ISAproject.service.AdventureService;
@@ -27,9 +30,17 @@ public class AdventureController {
 	
 	@RequestMapping(method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Adventure>> findAll(){
+	public ResponseEntity<List<AdventureDTO>> findAll(){
 		List<Adventure> adventures=adventureService.findAll();
-		return new ResponseEntity<>(adventures,HttpStatus.OK);
+		
+List<AdventureDTO> adventuresDTO=new ArrayList<>();
+		
+		for(Adventure a:adventures) {
+			InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
+			AdventureDTO filmDTO=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
+			adventuresDTO.add(filmDTO);
+		}
+		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Adventure>  findOne(@PathVariable Long id){
