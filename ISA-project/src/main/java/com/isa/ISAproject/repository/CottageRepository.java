@@ -9,4 +9,5 @@ import com.isa.ISAproject.model.Cottage;
 @Repository
 public interface CottageRepository extends JpaRepository<Cottage, Long>{
 	List<Cottage> findByName(String name);
+	List<Cottage> findByAddress(String address);
 }
