@@ -1,7 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
 import { AdventureListPageComponent } from './adventure-list-page/adventure-list-page.component';
 import { BoatListPageComponent } from './boat-list-page/boat-list-page.component';
+import { CottageDetailsPageComponent } from './cottage-details-page/cottage-details-page.component';
 import { CottageListPageComponent } from './cottage-list-page/cottage-list-page.component';
 import { InstructorPageComponent } from './instructor-page/instructor-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -15,8 +17,9 @@ const routes: Routes = [
   { path: 'cottages', component: CottageListPageComponent },
   { path: 'boats', component: BoatListPageComponent },
   { path: 'adventures', component: AdventureListPageComponent },
-  { path: 'instructors/:id', component: InstructorPageComponent }
-
+  { path: 'instructors/:id', component: InstructorPageComponent },
+  { path: 'adventures/:id', component:AdventureDatailsPageComponent},
+  { path: 'cottages/:id',component:CottageDetailsPageComponent}
 ];
 
 @NgModule({

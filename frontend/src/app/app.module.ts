@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdventureCardComponent } from './adventure-card/adventure-card.component';
 import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
 import { InstructorPageComponent } from './instructor-page/instructor-page.component';
+import { CottageDetailsPageComponent } from './cottage-details-page/cottage-details-page.component';
+import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { InstructorPageComponent } from './instructor-page/instructor-page.compo
     AdventureListItemComponent,
     AdventureCardComponent,
     InstructorProfileComponent,
-    InstructorPageComponent
+    InstructorPageComponent,
+    CottageDetailsPageComponent,
+    AdventureDatailsPageComponent
   ],
   imports: [
     BrowserModule,

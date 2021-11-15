@@ -15,7 +15,7 @@
           <p id="grade">Grade: {{adventure.averageGrade}}</p>
         </mat-card-content>
         <mat-card-actions fxFlexAlign="end">
-          <button mat-button>View More...</button>
+          <button mat-button><a [routerLink]="['/adventures',adventure.id]">More info ...</a></button>
         </mat-card-actions>
       </mat-card>
     </div>
