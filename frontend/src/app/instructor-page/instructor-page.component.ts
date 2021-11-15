@@ -1,3 +1,4 @@
+import { MatTabsModule } from '@angular/material/tabs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Instructor } from '../model/instructor';
