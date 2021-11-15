@@ -1,17 +1,2 @@
-<!--<div>
-  <table class="table table-striped w-75 p-3 ">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Grade</th>
-        <th>Picture</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr app-boat-list-item *ngFor="let boat of boats" [boat]="boat">
-      </tr>
-    </tbody>
-  </table>
-</div>-->
+<app-search-boat (MotorNumberAdded)="findBoatByMotorMuber($event)" (MotorPowerAdded)="findBoatByMotorPower($event)"></app-search-boat>
 <app-boat-list-item *ngFor="let boat of boats" [boat]="boat"></app-boat-list-item>
