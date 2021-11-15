@@ -31,4 +31,7 @@ public class InstructorService {
 	public Instructor save(Instructor newInstructor) {
 		return this.instructorRepository.save(newInstructor);
 	}
+	public Instructor findByFirstNameAndLastName(String firstName, String lastName) {
+		return this.instructorRepository.findByFirstNameAndLastName(firstName, lastName);
+	}
 }
