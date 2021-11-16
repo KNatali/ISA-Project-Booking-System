@@ -1,6 +1,8 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,17 +13,17 @@ import javax.persistence.OneToMany;
 public class Instructor extends User{
 	
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	private List<Adventure> adventures;
+	private Set<Adventure> adventures=new HashSet<>();
 
-	public List<Adventure> getAdventures() {
+	public Set<Adventure> getAdventures() {
 		return adventures;
 	}
 
-	public void setAdventures(List<Adventure> adventures) {
+	public void setAdventures(Set<Adventure> adventures) {
 		this.adventures = adventures;
 	}
 
-	public Instructor(List<Adventure> adventures) {
+	public Instructor(Set<Adventure> adventures) {
 		super();
 		this.adventures = adventures;
 	}

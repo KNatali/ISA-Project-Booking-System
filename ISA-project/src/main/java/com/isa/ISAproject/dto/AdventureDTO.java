@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.CancellationPolicy;
@@ -103,4 +104,9 @@ public class AdventureDTO {
 	}
 	
 	public AdventureDTO() {}
+
+	public AdventureDTO(Adventure adventure) {
+		this.name = adventure.getName();
+		
+	}
 }

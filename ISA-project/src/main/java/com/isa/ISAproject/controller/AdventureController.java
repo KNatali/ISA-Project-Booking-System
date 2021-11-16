@@ -44,7 +44,7 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 	}
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Adventure>  findOne(@PathVariable Long id){
-		Optional<Adventure> adventure=this.adventureService.getOne(id);
+		Optional<Adventure> adventure=this.adventureService.findById(id);
 		if (adventure.isPresent()) {
 			return new ResponseEntity<>(adventure.get(), HttpStatus.OK);
 		} else {

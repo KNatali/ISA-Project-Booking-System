@@ -1,21 +1,30 @@
 package com.isa.ISAproject.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;
+
 
 
 
@@ -25,6 +34,8 @@ import com.isa.ISAproject.service.InstructorService;
 public class InstructorController {
 	@Autowired
 	private InstructorService instructorService;
+	@Autowired
+	private AdventureService adventureService;
 	
 	@RequestMapping(value="api/instructors/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
@@ -61,6 +72,42 @@ public class InstructorController {
 		
 		
 		return new ResponseEntity<>(new InstructorProfileDTO(savedInstructor),HttpStatus.OK);
+	}
+	
+	//adventures from this instructor
+	@RequestMapping(
+			value="api/instructors/adventures/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AdventureDTO>> adventures(@PathVariable(name="id") Long id){
+		
+Optional<Instructor> itemOptionals=this.instructorService.findById(id);
+		
+		if(!itemOptionals.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Instructor instructor=itemOptionals.get();
+			Set<Adventure> adventures=instructor.getAdventures();
+			List<AdventureDTO> adventuresDTO=new ArrayList<>();
+			
+			for(Adventure a:adventures) {
+				InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
+				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
+				adventuresDTO.add(adventure);
+			}
+			
+			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "api/instructors/adventure/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity<AdventureDTO> delete(@PathVariable Long id){
+		Optional<Adventure> a=this.adventureService.findById(id);
+		if(!a.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		AdventureDTO adventure=new AdventureDTO(a.get());
+		
+		this.adventureService.delete(id);
+		return new ResponseEntity<>(adventure,HttpStatus.OK);
 	}
 	
 }
