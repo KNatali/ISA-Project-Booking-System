@@ -77,6 +77,9 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 		Instructor instructor=this.instructorService.findByFirstNameAndLastName(firstName, lastName);
 		InstructorProfileDTO insDTO=new InstructorProfileDTO(instructor);
 		List<Adventure> adventures=this.adventureService.findByInstructor(instructor);
+		if(adventures==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		List<AdventureDTO> res=new ArrayList<>();
 		for (Adventure a : adventures) {
 			res.add(new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture()));
