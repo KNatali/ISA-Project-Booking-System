@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdventureRepository;
 
 @Service
@@ -21,9 +22,15 @@ public class AdventureService {
 	public Optional<Adventure> findById(Long id) {
 		return this.adventureRepository.findById(id);
 	}
+
 	
 	public void delete(Long id) {
 		this.adventureRepository.deleteById(id);
 	}
 	
+
+	public List<Adventure> findByInstructor(Instructor instructor){
+		return this.adventureRepository.findByInstructor(instructor);
+	}
+
 }

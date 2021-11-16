@@ -17,5 +17,20 @@ export class BoatService {
   getBoat(id:number):Observable<Boat>{
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
   }
+  findBoatByMotorNumber(motorNumber:number):Observable<Boat[]>{
+    const params:HttpParams=new HttpParams().append('motorNumber',motorNumber);
+    return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
+  findBoatByMotorPower(motorPower:number):Observable<Boat[]>{
+    const params:HttpParams=new HttpParams().append('motorPower',motorPower);
+    return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
+  findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number):Observable<Boat[]>{
+    
+    const params=new HttpParams()
+      .set('motorPower',motorPower)
+      .set('motorNumber',motorNumber);
+      return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
 
 }

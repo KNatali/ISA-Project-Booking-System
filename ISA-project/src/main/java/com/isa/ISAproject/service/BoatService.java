@@ -21,4 +21,13 @@ public class BoatService {
 	public Optional<Boat> getOne(Long id) {
 		return this.boatRepository.findById(id);
 	}
+	public List<Boat> findByMotorNumber(int motorNumber){
+		return this.boatRepository.findByMotorNumber(motorNumber);
+	}
+	public List<Boat> findByMotorPower(double motorPower){
+		return this.boatRepository.findByMotorPower(motorPower);
+	}
+	public List<Boat> findByMotorPowerAndMotorNumber(double motorPower, int motorNumber){
+		return this.boatRepository.findByMotorPowerAndMotorNumber(motorPower,motorNumber);
+	}
 }

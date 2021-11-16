@@ -1,6 +1,9 @@
 package com.isa.ISAproject.controller;
 
 import java.util.ArrayList;
+
+import java.util.Iterator;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,7 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+
 import com.isa.ISAproject.model.Adventure;
+
+import com.isa.ISAproject.model.Boat;
+
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;
@@ -72,6 +79,20 @@ public class InstructorController {
 		
 		
 		return new ResponseEntity<>(new InstructorProfileDTO(savedInstructor),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors",method = RequestMethod.GET,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<List<InstructorProfileDTO>> findAll(){
+		List<Instructor> instructors=this.instructorService.findAll();
+		List<InstructorProfileDTO> dtos=this.convertIntoDTO(instructors);
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
+	private List<InstructorProfileDTO> convertIntoDTO(List<Instructor> instructors){
+		List<InstructorProfileDTO> dtos=new ArrayList<>();
+		for (Instructor i : instructors) {
+			dtos.add(new InstructorProfileDTO(i));
+		}
+		return dtos;
 	}
 	
 	//adventures from this instructor

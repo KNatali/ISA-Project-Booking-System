@@ -1,20 +1,2 @@
-<!--
-<div>
-  <table class="table table-striped w-75 p-3 ">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Description</th>
-        <th>Average grade</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr app-adventure-list-item *ngFor="let adventure of adventures" [adventure]="adventure">
-      </tr>
-    </tbody>
-  </table>
-  -->
-
-<app-adventure-card>
-</app-adventure-card>
+<app-search-adventure [instructors]=instructors (AddedInstructor)="findByInstructor($event)"></app-search-adventure>
+<app-adventure-card [adventures]=adventures></app-adventure-card>

@@ -1,0 +1,12 @@
+<div class="forma">
+    <form class="form-search" (ngSubmit)="findBoatByMotorNumber()">
+        <label for="motorNumber">Motor number: </label>
+        <input name="motorNumber" id="motorNumber" type="text" [(ngModel)]="motorNumber">
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+    <form class="form-search" (ngSubmit)="findBoatByMotorPower()">
+        <label for="motorPower">Motor power: </label>
+        <input name="motorPower" id="motorPower" type="text" [(ngModel)]="motorPower">
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+</div>

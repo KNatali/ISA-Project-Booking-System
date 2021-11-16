@@ -13,6 +13,9 @@ export class InstructorService {
 
 
   constructor(private http: HttpClient) { }
+  getInstructors():Observable<Instructor[]>{
+    return this.http.get<Instructor[]>(this.urlInstructor);
+  }
 
   getById(id: number): Observable<Instructor> {
     return this.http.get<Instructor>(`${this.urlInstructor}/${id}`);

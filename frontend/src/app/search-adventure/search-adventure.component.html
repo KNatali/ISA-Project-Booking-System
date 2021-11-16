@@ -1,0 +1,11 @@
+
+<div class="forma">
+    <form (ngSubmit)="findByInstructor()">
+        <h3>Find by instructor</h3>
+        <label for="firstAndLastName">First and last name: </label>
+        <select class="form-control" [(ngModel)]="selectedInstructor.id" name="instructor" id="instructor">
+            <option *ngFor="let i of instructors" [value]="i.id">{{i.firstName}} {{i.lastName}}</option>
+        </select><br/>
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+</div>

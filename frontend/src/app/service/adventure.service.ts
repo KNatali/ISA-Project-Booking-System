@@ -17,4 +17,15 @@ export class AdventureService {
   getAdventure(id:number):Observable<Adventure>{
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);
   }
+  findByInstructorFirstAndLastName(firstName:string,lastName:string):Observable<Adventure[]>{
+    const params=new HttpParams()
+      .set('firstName',firstName)
+      .set('lastName',lastName);
+      return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  }
+  findByInstructor(instructorId:number):Observable<Adventure[]>{
+    const params:HttpParams=new HttpParams().append('instructorId',instructorId);
+    return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  }
+
 }

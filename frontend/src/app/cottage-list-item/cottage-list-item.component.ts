@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Cottage } from '../model/cottage';
+import { CottageService } from '../service/cottage.service';
 
 @Component({
   selector: 'app-cottage-list-item',
@@ -8,11 +9,10 @@ import { Cottage } from '../model/cottage';
 })
 export class CottageListItemComponent implements OnInit {
   @Input()
-  cottage:Cottage;
+  cottages:Cottage[];
   
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

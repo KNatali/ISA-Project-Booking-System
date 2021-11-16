@@ -1,5 +1,5 @@
 export interface InstructorInterface {
-    id?: number;
+    id: number;
     firstName: string;
     lastName: string;
     username: string;
@@ -13,7 +13,7 @@ export interface InstructorInterface {
 
 }
 export class Instructor implements InstructorInterface {
-    id?: number | undefined;
+    id: number ;
     firstName: string;
     lastName: string;
     username: string;

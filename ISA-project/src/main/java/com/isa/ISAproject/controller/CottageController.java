@@ -48,4 +48,11 @@ public class CottageController {
 		List<Cottage> cottages=this.cottageService.findByName(name);
 		return new ResponseEntity<>(cottages,HttpStatus.OK);
 	}
+	@RequestMapping(value="api/cottages", method = RequestMethod.GET,
+			params = "address",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Cottage>> findByAddress(@RequestParam String address){
+		List<Cottage> cottages=this.cottageService.findByAddress(address);
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
 }

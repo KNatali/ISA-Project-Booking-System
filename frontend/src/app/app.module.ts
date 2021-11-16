@@ -27,7 +27,14 @@ import { CottageDetailsPageComponent } from './cottage-details-page/cottage-deta
 import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
 import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
+
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
+
+import { SearchBoatComponent } from './search-boat/search-boat.component';
+import { SearchAdventureComponent } from './search-adventure/search-adventure.component';
+import { ClientPageComponent } from './client-page/client-page.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +55,14 @@ import { InstructorAdventuresComponent } from './instructor-adventures/instructo
     AdventureDatailsPageComponent,
     BoatDetailsPageComponent,
     SearchCottageComponent,
+
     InstructorAdventuresComponent
+
+    SearchBoatComponent,
+    SearchAdventureComponent,
+    ClientPageComponent,
+    ClientProfileComponent
+
   ],
   imports: [
     BrowserModule,
