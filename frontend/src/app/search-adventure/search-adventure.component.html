@@ -1,12 +1,6 @@
 
-<div class="forma"><!--
-    <form class="form-search" >
-        <h3>Find by instructor</h3>
-        <label for="firstAndLastName">First and last name: </label>
-        <input name="firstAndLastName" id="firstAndLastName" type="text" [(ngModel)]="firstAndLastName"><br>
-        <input type="submit" value="filter" class="btn btn-primary">
-    </form>-->
-    <form (ngSubmit)="findByInstructorFirstAndLastName()">
+<div class="forma">
+    <form (ngSubmit)="findByInstructor()">
         <h3>Find by instructor</h3>
         <label for="firstAndLastName">First and last name: </label>
         <select class="form-control" [(ngModel)]="selectedInstructor.id" name="instructor" id="instructor">

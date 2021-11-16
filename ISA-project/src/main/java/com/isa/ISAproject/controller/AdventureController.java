@@ -73,8 +73,28 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 	@RequestMapping( method = RequestMethod.GET,
 			params = {"firstName","lastName"},
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<AdventureDTO>> findAdventureByInstructor(@RequestParam String firstName,@RequestParam String lastName){
+	public ResponseEntity<List<AdventureDTO>> findAdventureByInstructorName(@RequestParam String firstName,@RequestParam String lastName){
 		Instructor instructor=this.instructorService.findByFirstNameAndLastName(firstName, lastName);
+		InstructorProfileDTO insDTO=new InstructorProfileDTO(instructor);
+		List<Adventure> adventures=this.adventureService.findByInstructor(instructor);
+		if(adventures==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<AdventureDTO> res=new ArrayList<>();
+		for (Adventure a : adventures) {
+			res.add(new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture()));
+		}
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping( method = RequestMethod.GET,
+			params = "instructorId",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdventureDTO>> findAdventureByInstructor(@RequestParam Long instructorId){
+		Optional<Instructor> instructorOPT=this.instructorService.findById(instructorId);
+		if(!instructorOPT.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Instructor instructor=instructorOPT.get();
 		InstructorProfileDTO insDTO=new InstructorProfileDTO(instructor);
 		List<Adventure> adventures=this.adventureService.findByInstructor(instructor);
 		if(adventures==null) {

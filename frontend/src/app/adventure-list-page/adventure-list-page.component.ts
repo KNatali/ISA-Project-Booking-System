@@ -32,17 +32,13 @@ export class AdventureListPageComponent implements OnInit {
   getInstructors(){
     this.instructorService.getInstructors()
     .subscribe(res=>this.instructors=res);
-  }/*
-  findByInstructorFirstAndLastName(firstAndLastName:string){
-    var splitted = firstAndLastName.split(" ");
-    const firstName = splitted[0];
-    const lastName=splitted[1];
-    console.log(firstName+lastName);
-    this.adventureService.findByInstructorFirstAndLastName(firstName,lastName)
-    .subscribe(res=>this.adventures=res);
-  }*/
+  }
   findByInstructorFirstAndLastName(instructor:Instructor){
     this.adventureService.findByInstructorFirstAndLastName(instructor.firstName,instructor.lastName)
+    .subscribe(res=>this.adventures=res);
+  }
+  findByInstructor(instructorId:number){
+    this.adventureService.findByInstructor(instructorId)
     .subscribe(res=>this.adventures=res);
   }
 }
