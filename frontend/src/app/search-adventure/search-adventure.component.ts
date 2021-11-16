@@ -14,9 +14,7 @@ export class SearchAdventureComponent implements OnInit {
   selectedInstructor:Instructor;
   idd:number;
   @Output()
-  //AddedInstructor: EventEmitter<({firstName:string,lastName:string})>=new EventEmitter();
-  //AddedInstructor: EventEmitter<string>=new EventEmitter();
-  AddedInstructor: EventEmitter<Instructor>=new EventEmitter();
+  AddedInstructor: EventEmitter<number>=new EventEmitter();
   constructor(private instructorService :InstructorService) {
     this.instructors=[];
     this.selectedInstructor=new Instructor({
@@ -34,14 +32,8 @@ export class SearchAdventureComponent implements OnInit {
    }
 
   ngOnInit(): void {
-  }/*
-  findByInstructorFirstAndLastName(){
-    this.AddedInstructor.next(this.firstAndLastName);
-    console.log(this.selectedInstructor.id+"ispis");
-  }*/
-  findByInstructorFirstAndLastName(){
-    this.instructorService.getById(this.selectedInstructor.id)
-    .subscribe(res=>this.selectedInstructor=res);
-    this.AddedInstructor.next(this.selectedInstructor);
+  }
+  findByInstructor(){
+    this.AddedInstructor.next(this.selectedInstructor.id)
   }
 }
