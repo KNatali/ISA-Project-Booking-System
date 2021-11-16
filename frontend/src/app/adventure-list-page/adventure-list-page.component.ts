@@ -1,6 +1,8 @@
 import { Adventure } from './../model/adventure';
 import { Component, Input, OnInit } from '@angular/core';
 import { AdventureService } from '../service/adventure.service';
+import { Instructor } from '../model/instructor';
+import { InstructorService } from '../service/instructor.service';
 
 @Component({
   selector: 'app-adventure-list-page',
@@ -10,25 +12,37 @@ import { AdventureService } from '../service/adventure.service';
 export class AdventureListPageComponent implements OnInit {
 
   adventures: Adventure[];
+  instructors:Instructor[];
 
-  constructor(private adventureService: AdventureService) {
+  constructor(private adventureService: AdventureService,
+              private instructorService:InstructorService) {
     this.adventures = [];
+    this.instructors=[];
   }
 
   ngOnInit(): void {
     this.getAdventures();
+    this.getInstructors();
   }
 
   getAdventures() {
     this.adventureService.getAdventures()
       .subscribe(res => this.adventures = res)
   }
+  getInstructors(){
+    this.instructorService.getInstructors()
+    .subscribe(res=>this.instructors=res);
+  }/*
   findByInstructorFirstAndLastName(firstAndLastName:string){
     var splitted = firstAndLastName.split(" ");
     const firstName = splitted[0];
     const lastName=splitted[1];
     console.log(firstName+lastName);
     this.adventureService.findByInstructorFirstAndLastName(firstName,lastName)
+    .subscribe(res=>this.adventures=res);
+  }*/
+  findByInstructorFirstAndLastName(instructor:Instructor){
+    this.adventureService.findByInstructorFirstAndLastName(instructor.firstName,instructor.lastName)
     .subscribe(res=>this.adventures=res);
   }
 }
