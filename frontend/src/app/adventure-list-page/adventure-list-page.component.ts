@@ -23,4 +23,12 @@ export class AdventureListPageComponent implements OnInit {
     this.adventureService.getAdventures()
       .subscribe(res => this.adventures = res)
   }
+  findByInstructorFirstAndLastName(firstAndLastName:string){
+    var splitted = firstAndLastName.split(" ");
+    const firstName = splitted[0];
+    const lastName=splitted[1];
+    console.log(firstName+lastName);
+    this.adventureService.findByInstructorFirstAndLastName(firstName,lastName)
+    .subscribe(res=>this.adventures=res);
+  }
 }

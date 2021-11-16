@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-search-adventure',
@@ -6,12 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-adventure.component.css']
 })
 export class SearchAdventureComponent implements OnInit {
-  firstName:string;
-  lastName:string;
-
+  firstAndLastName:string;
+  @Output()
+  //AddedInstructor: EventEmitter<({firstName:string,lastName:string})>=new EventEmitter();
+  AddedInstructor: EventEmitter<string>=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
-  findByInstructorFirstAndLastName(){}
+  findByInstructorFirstAndLastName(){
+    this.AddedInstructor.next(this.firstAndLastName);
+  }
 }
