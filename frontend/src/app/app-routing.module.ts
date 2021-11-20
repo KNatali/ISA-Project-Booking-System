@@ -7,6 +7,7 @@ import { BoatListPageComponent } from './boat-list-page/boat-list-page.component
 import { ClientPageComponent } from './client-page/client-page.component';
 import { CottageDetailsPageComponent } from './cottage-details-page/cottage-details-page.component';
 import { CottageListPageComponent } from './cottage-list-page/cottage-list-page.component';
+import { CottageOwnerPageComponent } from './cottage-owner-page/cottage-owner-page.component';
 import { InstructorPageComponent } from './instructor-page/instructor-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'boats', component: BoatListPageComponent },
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
+  { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component:AdventureDatailsPageComponent},
   { path: 'cottages/:id',component:CottageDetailsPageComponent},
   { path: 'boats/:id',component:BoatDetailsPageComponent},

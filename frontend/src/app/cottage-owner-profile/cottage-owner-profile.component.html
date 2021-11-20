@@ -1,0 +1,111 @@
+<div class="container rounded bg-white mt-5 mb-5" *ngIf="profileShow">
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+            width="150px"
+            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+            class="font-weight-bold">{{cottageOwner.username}}</span><span
+            class="text-black-50">{{cottageOwner.email}}</span><span> </span>
+        </div>
+      </div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Profile information:</h4>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Name</label>
+              <p>{{cottageOwner.firstName}}</p>
+            </div>
+            <div class="col-md-6"><label class="labels">Surname</label>
+              <p>{{cottageOwner.lastName}}</p>
+            </div>
+          </div>
+          <div class="row mt-3">
+  
+            <div class="col-md-12"><label class="labels">Adress</label>
+              <p>{{cottageOwner.address}}</p>
+            </div>
+            <div class="col-md-12"><label class="labels">City</label>
+              <p>{{cottageOwner.city}}</p>
+            </div>
+  
+            <div class="col-md-12"><label class="labels">State</label>
+              <p>{{cottageOwner.state}}</p>
+            </div>
+            <div class="col-md-12"><label class="labels">Mobile</label>
+              <p>{{cottageOwner.mobile}}</p>
+            </div>
+  
+  
+          </div>
+  
+  
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 py-5">
+          <div class="col-md-12"><button mat-button (click)="edit()">Edit Profile</button></div> <br>
+          <div class="col-md-12"><button mat-button>Change Password</button></div><br>
+          <div class="col-md-12"><button mat-button id="delete">Delete Profile</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <form class="container1 rounded bg-white mt-5 mb-5" *ngIf="profileEdit">
+    <div class="row">
+  
+      <div class="col">
+        <div class="">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Edit profile information:</h4>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Name</label>
+              <input type="text" class="form-control" name="firstName" [(ngModel)]="cottageOwner.firstName">
+            </div>
+            <div class="col-md-6"><label class="labels">Surname</label>
+              <input type="text" class="form-control" name="lastName" [(ngModel)]="cottageOwner.lastName">
+            </div>
+          </div>
+          <div class="row mt-3">
+  
+            <div class="col-md-12"><label class="labels">Adress</label>
+              <input type="text" class="form-control" name="address" [(ngModel)]="cottageOwner.address">
+            </div>
+            <div class="col-md-12"><label class="labels">City</label>
+              <input type="text" class="form-control" name="city" [(ngModel)]="cottageOwner.city">
+            </div>
+  
+            <div class="col-md-12"><label class="labels">State</label>
+              <input type="text" class="form-control" name="state" [(ngModel)]="cottageOwner.state">
+            </div>
+            <div class="col-md-12"><label class="labels">Mobile</label>
+              <input type="text" class="form-control" name="mobile" [(ngModel)]="cottageOwner.mobile">
+            </div>
+            <br>
+            <div class="row mt-4">
+  
+              <div class="col-md-6">
+                <button class="col-md-12 " (click)="submit()" mat-button>Submit</button>
+              </div>
+              <div class="col-md-6">
+                <button class="col-md-12" (click)="close()" mat-button id="delete">Cancel</button>
+              </div>
+            </div>
+  
+  
+          </div>
+  
+  
+        </div>
+      </div>
+  
+    </div>
+  </form>
+  
