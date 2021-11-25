@@ -9,7 +9,7 @@ public class CottageOwnerProfileDTO {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private String address;
+	private String street;
 	private String state;
 	private String city;
 	private String mobile;
@@ -50,11 +50,11 @@ public class CottageOwnerProfileDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(String street) {
+		this.street = street;
 	}
 	public String getState() {
 		return state;
@@ -76,7 +76,7 @@ public class CottageOwnerProfileDTO {
 	}
 	public CottageOwnerProfileDTO() {}
 	public CottageOwnerProfileDTO(String username, String password, String email, String firstName, String lastName,
-			String address, String state, String city, String mobile,Long id) 
+			String street, String state, String city, String mobile,Long id) 
 	{
 		super();
 		
@@ -85,7 +85,7 @@ public class CottageOwnerProfileDTO {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
+		this.street = street;
 		this.state = state;
 		this.city = city;
 		this.mobile = mobile;
@@ -100,9 +100,9 @@ public class CottageOwnerProfileDTO {
 		this.email = cottageOwner.getEmail();
 		this.firstName = cottageOwner.getFirstName();
 		this.lastName = cottageOwner.getLastName();
-		this.address = cottageOwner.getAddress();
-		this.state = cottageOwner.getState();
-		this.city = cottageOwner.getCity();
+		this.street = cottageOwner.getAddress().getStreet();
+		this.state = cottageOwner.getAddress().getState();
+		this.city = cottageOwner.getAddress().getCity();
 		this.mobile = cottageOwner.getMobile();
 		this.id=cottageOwner.getId();
 		

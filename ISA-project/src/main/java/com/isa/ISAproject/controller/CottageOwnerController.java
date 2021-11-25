@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
+import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.CottageOwner;
+import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.CottageOwnerService;
 
 @CrossOrigin("*")
@@ -25,6 +28,8 @@ import com.isa.ISAproject.service.CottageOwnerService;
 public class CottageOwnerController {
 	@Autowired
 	private CottageOwnerService cottageOwnerService;
+	@Autowired
+	private AddressService addressService;
 	@RequestMapping(value="api/cottageOwner/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CottageOwnerProfileDTO> getById(@PathVariable Long id){
@@ -50,11 +55,18 @@ public class CottageOwnerController {
 		cottageOwner.setId(id);
 		cottageOwner.setFirstName(editedCottageOwnerDTO.getFirstName());
 		cottageOwner.setLastName(editedCottageOwnerDTO.getLastName());
-		cottageOwner.setAddress(editedCottageOwnerDTO.getAddress());
-		cottageOwner.setCity(editedCottageOwnerDTO.getCity());
-		cottageOwner.setState(editedCottageOwnerDTO.getState());
-		cottageOwner.setEmail(editedCottageOwnerDTO.getEmail());
-		cottageOwner.setMobile(editedCottageOwnerDTO.getMobile());
+		Optional<Address> a=this.addressService.findById(cottageOwner.getAddress().getId());
+			Address address=a.get();
+				address.setId(cottageOwner.getAddress().getId());
+				address.setStreet(editedCottageOwnerDTO.getStreet());
+				address.setCity(editedCottageOwnerDTO.getCity());
+				address.setState(editedCottageOwnerDTO.getState());
+				this.addressService.save(address);
+				
+				cottageOwner.setAddress(address);
+				cottageOwner.setEmail(editedCottageOwnerDTO.getEmail());
+				cottageOwner.setMobile(editedCottageOwnerDTO.getMobile());
+		
 		
 		final CottageOwner savedCottageOwner=this.cottageOwnerService.save(cottageOwner);
 		
