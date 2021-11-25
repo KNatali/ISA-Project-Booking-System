@@ -34,6 +34,8 @@ import { SearchBoatComponent } from './search-boat/search-boat.component';
 import { SearchAdventureComponent } from './search-adventure/search-adventure.component';
 import { ClientPageComponent } from './client-page/client-page.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { CottageOwnerPageComponent } from './cottage-owner-page/cottage-owner-page.component';
+import { CottageOwnerProfileComponent } from './cottage-owner-profile/cottage-owner-profile.component';
 
 
 @NgModule({
@@ -61,7 +63,10 @@ import { ClientProfileComponent } from './client-profile/client-profile.componen
     SearchBoatComponent,
     SearchAdventureComponent,
     ClientPageComponent,
-    ClientProfileComponent
+
+    ClientProfileComponent,
+    CottageOwnerPageComponent,
+    CottageOwnerProfileComponent
 
   ],
   imports: [
