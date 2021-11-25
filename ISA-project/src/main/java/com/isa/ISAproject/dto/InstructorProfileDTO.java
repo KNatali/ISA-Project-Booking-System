@@ -12,7 +12,7 @@ public class InstructorProfileDTO {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private String address;
+	private String street;
 	private String state;
 	private String city;
 	private String mobile;
@@ -55,11 +55,11 @@ public class InstructorProfileDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String address) {
+		this.street = address;
 	}
 	public String getState() {
 		return state;
@@ -82,7 +82,7 @@ public class InstructorProfileDTO {
 	
 	public InstructorProfileDTO() {}
 	public InstructorProfileDTO(String username, String password, String email, String firstName, String lastName,
-			String address, String state, String city, String mobile,Long id) {
+			String street, String state, String city, String mobile,Long id) {
 		super();
 	
 		this.username = username;
@@ -90,7 +90,7 @@ public class InstructorProfileDTO {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
+		this.street = street;
 		this.state = state;
 		this.city = city;
 		this.mobile = mobile;
@@ -104,9 +104,9 @@ public class InstructorProfileDTO {
 		this.email = instructor.getEmail();
 		this.firstName = instructor.getFirstName();
 		this.lastName = instructor.getLastName();
-		this.address = instructor.getAddress();
-		this.state = instructor.getState();
-		this.city = instructor.getCity();
+		this.street = instructor.getAddress().getStreet();
+		this.state = instructor.getAddress().getState();
+		this.city = instructor.getAddress().getCity();
 		this.mobile = instructor.getMobile();
 		this.id=instructor.getId();
 		

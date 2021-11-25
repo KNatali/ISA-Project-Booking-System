@@ -1,8 +1,19 @@
 package com.isa.ISAproject.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +28,8 @@ public class User {
 	private String firstName;
 	@Column
 	private String lastName;
-	@Column
-	private String address;
-	@Column
-	private String state;
-	@Column
-	private String city;
+	@ManyToOne(fetch=FetchType.EAGER)
+    private Address address;
 	@Column
 	private String mobile;
 	
@@ -63,23 +70,13 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAddress() {
+	
+	
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
 	}
 	public String getMobile() {
 		return mobile;
@@ -89,20 +86,7 @@ public class User {
 	}
 	
 	public User() {}
-	public User(Long id, String username, String password, String email, String firstName, String lastName,
-			String address, String state, String city, String mobile) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.state = state;
-		this.city = city;
-		this.mobile = mobile;
-	}
+	
 	
 
 }

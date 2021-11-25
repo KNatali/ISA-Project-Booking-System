@@ -1,4 +1,4 @@
-package com.isa.ISAproject.controller;
+ package com.isa.ISAproject.controller;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.mapper.AdventureMapper;
+import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Instructor;
@@ -38,34 +41,18 @@ public class AdventureController {
 	@RequestMapping(method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<AdventureDTO>> findAll(){
-		List<Adventure> adventures=adventureService.findAll();
+		List<AdventureDTO> adventuresDTO=adventureService.findAll();
 		
-List<AdventureDTO> adventuresDTO=new ArrayList<>();
-		
-		for(Adventure a:adventures) {
-			InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
-			AdventureDTO filmDTO=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
-			adventuresDTO.add(filmDTO);
-		}
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
-	}/*
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Adventure>  findOne(@PathVariable Long id){
-		Optional<Adventure> adventure=this.adventureService.getOne(id);
-		if (adventure.isPresent()) {
-			return new ResponseEntity<>(adventure.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}*/
+	}
+	
+	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<AdventureDTO>  findOne(@PathVariable Long id){
-		Optional<Adventure> adventure=this.adventureService.getOne(id);
-		if (adventure.isPresent()) {
-			Adventure a=adventure.get();
-			InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
-			AdventureDTO adventureDto=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
-			return new ResponseEntity<>(adventureDto, HttpStatus.OK);
+		AdventureDTO adventureDTO=this.adventureService.findById(id);
+		if (adventureDTO!=null) {
+			
+			return new ResponseEntity<>(adventureDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -80,12 +67,11 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 		if(adventures==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		List<AdventureDTO> res=new ArrayList<>();
-		for (Adventure a : adventures) {
-			res.add(new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture()));
-		}
+		List<AdventureDTO> res=AdventureMapper.convertoToDTOs(adventures);
+		
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	
 	@RequestMapping( method = RequestMethod.GET,
 			params = "instructorId",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -95,15 +81,13 @@ List<AdventureDTO> adventuresDTO=new ArrayList<>();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		Instructor instructor=instructorOPT.get();
-		InstructorProfileDTO insDTO=new InstructorProfileDTO(instructor);
+		InstructorProfileDTO insDTO=InstructorMapper.convertToDTO(instructor);
 		List<Adventure> adventures=this.adventureService.findByInstructor(instructor);
 		if(adventures==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		List<AdventureDTO> res=new ArrayList<>();
-		for (Adventure a : adventures) {
-			res.add(new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture()));
-		}
+		List<AdventureDTO> res=AdventureMapper.convertoToDTOs(adventures);
+		
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 

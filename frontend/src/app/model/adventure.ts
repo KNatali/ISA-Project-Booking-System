@@ -1,9 +1,10 @@
+import { Address } from "./address";
 import { Instructor } from "./instructor";
 
 export interface AdventureInterface {
     id?: number;
     name: string;
-    address: string;
+    address: Address;
     averageGrade: number;
     maxPersons: number;
     description: string;
@@ -12,9 +13,9 @@ export interface AdventureInterface {
 
 }
 export class Adventure implements AdventureInterface {
-    id?: number ;
+    id?: number;
     name: string;
-    address: string;
+    address: Address;
     averageGrade: number;
     maxPersons: number;
     description: string;

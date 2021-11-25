@@ -18,7 +18,7 @@ export class InstructorPageComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    address: '',
+    street: '',
     city: '',
     state: '',
     mobile: ''

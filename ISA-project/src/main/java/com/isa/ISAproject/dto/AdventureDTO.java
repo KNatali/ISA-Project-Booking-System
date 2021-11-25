@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.CancellationPolicy;
@@ -23,7 +24,7 @@ public class AdventureDTO {
 	
 	private String name;
 	
-	private String address;
+	private AddressDTO address;
 	
 	private String description;
 	
@@ -55,11 +56,11 @@ public class AdventureDTO {
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public AddressDTO getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
 	public void setMainPicture(String picture) {
@@ -98,7 +99,7 @@ public class AdventureDTO {
 	
 
 
-	public AdventureDTO(Long id, String name, String address, String description, double averageGrade,
+	public AdventureDTO(Long id, String name, AddressDTO address, String description, double averageGrade,
 			InstructorProfileDTO instructor,String mainPicture) {
 		super();
 		
@@ -112,4 +113,9 @@ public class AdventureDTO {
 	}
 	
 	public AdventureDTO() {}
+
+	public AdventureDTO(Adventure adventure) {
+		this.name = adventure.getName();
+		
+	}
 }
