@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, ContentChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ContentChild, Input } from '@angular/core';
 import { Instructor } from '../model/instructor';
 import { InstructorService } from '../service/instructor.service';
 
@@ -8,32 +8,32 @@ import { InstructorService } from '../service/instructor.service';
   styleUrls: ['./search-adventure.component.css']
 })
 export class SearchAdventureComponent implements OnInit {
-  firstAndLastName:string;
+  firstAndLastName: string;
   @Input()
-  instructors:Instructor[];
-  selectedInstructor:Instructor;
-  idd:number;
+  instructors: Instructor[];
+  selectedInstructor: Instructor;
+  id: number;
   @Output()
-  AddedInstructor: EventEmitter<number>=new EventEmitter();
-  constructor(private instructorService :InstructorService) {
-    this.instructors=[];
-    this.selectedInstructor=new Instructor({
+  AddedInstructor: EventEmitter<number> = new EventEmitter();
+  constructor(private instructorService: InstructorService) {
+    this.instructors = [];
+    this.selectedInstructor = new Instructor({
       id: 0,
       username: '',
       password: '',
       firstName: '',
       lastName: '',
       email: '',
-      address: '',
+      street: '',
       city: '',
       state: '',
       mobile: ''
     });
-   }
+  }
 
   ngOnInit(): void {
   }
-  findByInstructor(){
+  findByInstructor() {
     this.AddedInstructor.next(this.selectedInstructor.id)
   }
 }

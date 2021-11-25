@@ -20,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
-
+import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 
 import com.isa.ISAproject.model.Boat;
 
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;
 
@@ -43,6 +44,8 @@ public class InstructorController {
 	private InstructorService instructorService;
 	@Autowired
 	private AdventureService adventureService;
+	@Autowired
+	private AddressService addressService;
 	
 	@RequestMapping(value="api/instructors/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
@@ -62,6 +65,7 @@ public class InstructorController {
 	public ResponseEntity<InstructorProfileDTO> update(@RequestBody InstructorProfileDTO editedInstructorDTO,@PathVariable Long id){
 		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		
+		
 		if(!itemOptionals.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -69,9 +73,15 @@ public class InstructorController {
 		instructor.setId(id);
 		instructor.setFirstName(editedInstructorDTO.getFirstName());
 		instructor.setLastName(editedInstructorDTO.getLastName());
-		instructor.setAddress(editedInstructorDTO.getAddress());
-		instructor.setCity(editedInstructorDTO.getCity());
-		instructor.setState(editedInstructorDTO.getState());
+		Optional<Address> a=this.addressService.findById(instructor.getAddress().getId());
+			Address address=a.get();
+				address.setId(instructor.getAddress().getId());
+				address.setStreet(editedInstructorDTO.getStreet());
+				address.setCity(editedInstructorDTO.getCity());
+				address.setState(editedInstructorDTO.getState());
+				this.addressService.save(address);
+				
+		instructor.setAddress(address);
 		instructor.setEmail(editedInstructorDTO.getEmail());
 		instructor.setMobile(editedInstructorDTO.getMobile());
 		
@@ -112,7 +122,8 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			
 			for(Adventure a:adventures) {
 				InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
-				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),a.getAddress(),a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
+				AddressDTO addressDTO=new AddressDTO(a.getAddress().getId(),a.getAddress().getStreet(),a.getAddress().getState(),a.getAddress().getCity());
+				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),addressDTO,a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
 				adventuresDTO.add(adventure);
 			}
 			
@@ -121,14 +132,14 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 	
 	@RequestMapping(value = "api/instructors/adventure/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<AdventureDTO> delete(@PathVariable Long id){
-		Optional<Adventure> a=this.adventureService.findById(id);
-		if(!a.isPresent()) {
+		AdventureDTO aDTO=this.adventureService.findById(id);
+		if(aDTO==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		AdventureDTO adventure=new AdventureDTO(a.get());
+		
 		
 		this.adventureService.delete(id);
-		return new ResponseEntity<>(adventure,HttpStatus.OK);
+		return new ResponseEntity<>(aDTO,HttpStatus.OK);
 	}
 	
 }

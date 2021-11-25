@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,14 +26,15 @@ public class Adventure {
 	private Long id;
 	@Column
 	private String name;
-	@Column
-	private String address;
-	@Column
+	@ManyToOne
+	private Address address;
+	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	@Column
 	private double averageGrade;
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Instructor instructor;
+	
 
 	@Column
 	private String mainPicture;
@@ -48,6 +51,7 @@ public class Adventure {
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
 	@Column
+	@Enumerated(EnumType.STRING)
 	private CancellationPolicy cancellation;
 
 	public Long getId() {
@@ -66,11 +70,11 @@ public class Adventure {
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public void setMainPicture(String picture) {
@@ -146,7 +150,7 @@ public class Adventure {
 		this.cancellation = cancellation;
 	}
 
-	public Adventure(Long id, String name, String address, String description, double averageGrade,
+	public Adventure(Long id, String name, Address address, String description, double averageGrade,
 			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<String> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
 			CancellationPolicy cancellation) {

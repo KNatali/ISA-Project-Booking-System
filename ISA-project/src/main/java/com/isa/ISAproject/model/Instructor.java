@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Instructor extends User{
 	
+	
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Adventure> adventures=new HashSet<>();
 

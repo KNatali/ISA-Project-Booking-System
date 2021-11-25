@@ -56,7 +56,7 @@ import { ClientProfileComponent } from './client-profile/client-profile.componen
     BoatDetailsPageComponent,
     SearchCottageComponent,
 
-    InstructorAdventuresComponent
+    InstructorAdventuresComponent,
 
     SearchBoatComponent,
     SearchAdventureComponent,

@@ -19,7 +19,7 @@ export class InstructorProfileComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    address: '',
+    street: '',
     city: '',
     state: '',
     mobile: ''
