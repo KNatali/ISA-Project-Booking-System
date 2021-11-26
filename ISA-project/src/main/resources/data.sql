@@ -1,3 +1,9 @@
+insert into role (name) values ('ROLE_USER');
+insert into role (name) values ('ROLE_ADMIN');
+insert into role (name) values ('ROLE_INSTRUCTOR');
+insert into role (name) values ('ROLE_COTTAGEOWNER');
+insert into role (name) values ('ROLE_BOATOWNER');
+
 
 insert into address (state, city,street) values ('United States','Panama City','3151 West 10th Street');
 insert into address (state, city,street) values ('United States','Key West',' 201 Margaret Street');
@@ -13,10 +19,11 @@ insert into address (state, city,street) values ('United States','San Diego',' 9
 insert into address (state, city,street) values ('United States','San Diego','Emerson Street 2803');
 
 
-insert into user ( username, password, first_name, last_name, email, mobile,address_id) values ('truman', '123', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1);
-insert into user ( username, password, first_name, last_name, email, mobile,address_id) values ('raymond', '111', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2);
-insert into user ( username, password, first_name, last_name, email, mobile,address_id) values ('stewart', '222', 'Stewart', 'Lindsey', 'isa.booking.project+stewart@gmail.com', '305-555-0000',3);
-insert into user ( username, password, first_name, last_name, email, mobile,address_id) values ('bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4);
+
+insert into user ( role_id,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values (3,'truman', '123', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
+insert into user ( role_id,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values (3,'raymond', '111', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
+insert into user ( role_id,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values (3,'stewart', '222', 'Stewart', 'Lindsey', 'isa.booking.project+stewart@gmail.com', '305-555-0000',3,true,'1983-07-12 21:30:55.888');
+insert into user ( role_id,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values (3,'bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 
 insert into instructor (id) values (1);
 insert into instructor (id) values (2);
