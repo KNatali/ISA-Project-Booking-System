@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,7 @@ public class InstructorController {
 	
 	@RequestMapping(value="api/instructors/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<InstructorProfileDTO> getById(@PathVariable Long id){
 		Optional<Instructor> item=instructorService.findById(id);
 		
@@ -62,6 +64,7 @@ public class InstructorController {
 	
 	@RequestMapping(value="api/instructors/{id}",method = RequestMethod.PUT,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<InstructorProfileDTO> update(@RequestBody InstructorProfileDTO editedInstructorDTO,@PathVariable Long id){
 		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		
@@ -109,6 +112,7 @@ public class InstructorController {
 	@RequestMapping(
 			value="api/instructors/adventures/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<List<AdventureDTO>> adventures(@PathVariable(name="id") Long id){
 		
 Optional<Instructor> itemOptionals=this.instructorService.findById(id);
@@ -131,6 +135,7 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 	}
 	
 	@RequestMapping(value = "api/instructors/adventure/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<AdventureDTO> delete(@PathVariable Long id){
 		AdventureDTO aDTO=this.adventureService.findById(id);
 		if(aDTO==null) {

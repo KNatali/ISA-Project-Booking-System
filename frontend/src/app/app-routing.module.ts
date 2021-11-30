@@ -22,10 +22,10 @@ const routes: Routes = [
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
-  { path: 'adventures/:id', component:AdventureDatailsPageComponent},
-  { path: 'cottages/:id',component:CottageDetailsPageComponent},
-  { path: 'boats/:id',component:BoatDetailsPageComponent},
-  { path: 'client-profil',component:ClientPageComponent}
+  { path: 'adventures/:id', component: AdventureDatailsPageComponent },
+  { path: 'cottages/:id', component: CottageDetailsPageComponent },
+  { path: 'boats/:id', component: BoatDetailsPageComponent },
+  { path: 'client-profil', component: ClientPageComponent }
 ];
 
 @NgModule({

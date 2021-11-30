@@ -1,26 +1,31 @@
-.modal-content{
-	background-color: lightgrey;
-	margin-top: 10px;
-	margin-bottom:20px;
+.modal-content {
+  background-color: lightgrey;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
-.form-group input{
-	margin-top: 10px;
-	height: 40px;
-	border-radius: 6px;
-	font-size: 19px;
-    width: 300px;
+
+.form-group input {
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 6px;
+  font-size: 19px;
+  width: 300px;
 }
-label{
-	font-size: 20px;
+
+label {
+  font-size: 20px;
 }
-h1{
-	text-align: center;
-} 
-.btn{
-	margin-top: 10px;
-	margin-bottom: 10px;
-    width: 300px;
+
+h1 {
+  text-align: center;
 }
-h5{
-	margin-bottom: 0px;
+
+.btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+h5 {
+  margin-bottom: 0px;
 }

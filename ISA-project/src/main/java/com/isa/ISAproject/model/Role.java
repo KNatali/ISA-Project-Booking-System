@@ -1,49 +1,22 @@
 package com.isa.ISAproject.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
-public class Role implements GrantedAuthority{
+public enum Role{
 	
-	private static final long serialVersionUID = 1L;
+	SysAdmin(Values.SysAdmin),Admin(Values.Admin), Instructor(Values.Instructor), CottageOwner(Values.CottageOwner), BoatOwner(Values.BoatOwner),Client(Values.Client);
 
-	@Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
-    @Column(name="name")
-    String name;
-
-    @JsonIgnore
-    @Override
-    public String getAuthority() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
+    Role(String value) {
+        if (!this.name().equals(value))
+            throw new IllegalArgumentException("Incorrect use of Role!");
     }
 
-    public String getName() {
-        return name;
-    }
-
-    @JsonIgnore
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public static class Values {
+        public static final String Instructor = "Instructor";
+        public static final String CottageOwner = "CottageOwner";
+        public static final String BoatOwner = "BoatOwner";
+        public static final String SysAdmin = "SysAdmin";
+        public static final String Admin = "Admin";
+        public static final String Client = "Client";
     }
 
 }

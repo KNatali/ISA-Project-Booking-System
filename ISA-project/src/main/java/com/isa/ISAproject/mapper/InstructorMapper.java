@@ -18,7 +18,8 @@ public class InstructorMapper {
 				i.getAddress().getState(),
 				i.getAddress().getCity(),
 				i.getMobile(),
-				i.getId()
+				i.getId(),
+				i.getRole()
 				);
 		return instructorDTO;
 	}

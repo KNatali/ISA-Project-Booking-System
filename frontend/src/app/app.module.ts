@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,6 +36,10 @@ import { ClientPageComponent } from './client-page/client-page.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { CottageOwnerPageComponent } from './cottage-owner-page/cottage-owner-page.component';
 import { CottageOwnerProfileComponent } from './cottage-owner-profile/cottage-owner-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
+import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 
 
 @NgModule({
@@ -66,7 +70,10 @@ import { CottageOwnerProfileComponent } from './cottage-owner-profile/cottage-ow
 
     ClientProfileComponent,
     CottageOwnerPageComponent,
-    CottageOwnerProfileComponent
+    CottageOwnerProfileComponent,
+    NavbarComponent,
+    NavbarLoginComponent,
+    NavbarProfileComponent
 
   ],
   imports: [
@@ -80,10 +87,16 @@ import { CottageOwnerProfileComponent } from './cottage-owner-profile/cottage-ow
     MatToolbarModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+
 
   ],
-  providers: [],
+  providers: [
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -55,9 +53,14 @@ public class User implements UserDetails {
 	@Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 	
+	@Column
+	private String role;
 	
-	@ManyToOne
-  private Role role;
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private List<Authority> authorities;
 
 	
 	
@@ -115,18 +118,22 @@ public class User implements UserDetails {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public void setRole(Role role) {
-        this.role = role;
-    }
-    
-    public Role getRole() {
-       return role;
-    }
+	
+	 public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	 @JsonIgnore
 	    @Override
 	    public Collection<? extends GrantedAuthority> getAuthorities() {
-	        return (Collection<? extends GrantedAuthority>) this.role;
+	        return this.authorities;
 	    }
+	    public void setAuthorities(List<Authority> authorities) {
+	        this.authorities = authorities;
+	    }
+	
 	
 	@Override
     public boolean isEnabled() {
@@ -146,7 +153,25 @@ public class User implements UserDetails {
     }
 	
 	public User() {}
-	 @JsonIgnore
+	
+	
+	
+	 public User(Long id, String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.mobile = mobile;
+		this.enabled = enabled;
+		this.role = role;
+		this.authorities = authorities;
+	}
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		 return true;

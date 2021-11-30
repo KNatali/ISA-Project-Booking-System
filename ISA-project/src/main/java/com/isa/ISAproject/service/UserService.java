@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.UserRequest;
+import com.isa.ISAproject.model.Authority;
 import com.isa.ISAproject.model.Role;
 import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.UserRepository;
@@ -19,13 +20,14 @@ import com.isa.ISAproject.repository.UserRepository;
 public class UserService {
 
 	@Autowired
+	private AuthorityService authorityService;
+	
+	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private RoleService roleService;
 
 	
 	public User findByUsername(String username) throws UsernameNotFoundException {
@@ -55,8 +57,8 @@ public class UserService {
 		u.setEmail(userRequest.getEmail());
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
-		Role role = roleService.findByName("ROLE_USER");
-		u.setRole(role);
+		List<Authority> authorities = authorityService.findByName("ROLE_USER");
+		u.setAuthorities(authorities);
 		
 		return this.userRepository.save(u);
 	}

@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +14,8 @@ import com.isa.ISAproject.repository.UserRepository;
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
 	
+	protected final Log LOGGER = LogFactory.getLog(getClass());
+
 	@Autowired
 	private UserRepository userRepository;
 

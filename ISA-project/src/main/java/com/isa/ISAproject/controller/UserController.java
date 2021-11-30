@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.service.UserService;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
@@ -27,7 +28,7 @@ public class UserController {
 		// Ukoliko nema, server ce vratiti gresku 403 Forbidden
 		// Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
 		@GetMapping("/user/{userId}")
-		@PreAuthorize("hasRole('ADMIN')")
+		
 		public User loadById(@PathVariable Long userId) {
 			return this.userService.findById(userId);
 		}
