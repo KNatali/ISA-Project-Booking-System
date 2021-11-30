@@ -1,7 +1,7 @@
+import { AuthenticationService } from './../service/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActiveUser, User } from '../model/user';
-import { LoginService } from '../service/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -9,34 +9,51 @@ import { LoginService } from '../service/login.service';
   styleUrls: ['./navbar-profile.component.css']
 })
 export class NavbarProfileComponent implements OnInit {
-  url = "http://localhost:8090/api/user";
-  id: any;
-  user: User;
-  constructor(private _http: HttpClient, private loginService: LoginService) { }
+  username: any;
+  dash_url = '/';
+
+  constructor(private _http: HttpClient, private loginService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-    this.viewDashboard().subscribe((data) => {
-      this.user = data;
-    });
-    this.id = this.user.id;
+    this.username = sessionStorage.getItem('username');
+
+    /* if (currentUser.role != 'LOGGED_OUT' && currentUser != null) {
+       this.dash_url = "adventures";
+       this.user = currentUser;
+       switch (this.user.role) {
+         case 'Client':
+           this.dash_url = "adventures";
+           break;
+         case 'Instructor':
+           this.dash_url = "adventures";
+           break;
+         case 'CottageOwner':
+           this.dash_url = "adventures";
+           break;
+         case 'BoatOwner':
+           this.dash_url = "adventures";
+           break;
+         case 'Admin':
+           this.dash_url = "adventures";
+           break;
+       }
+     }*/
   }
 
   logOut() {
-    this.loginService.logout();
+    this.loginService.logOut();
+    this.router.navigate(['']);
   }
 
-  userName() {
-    const user = this.loginService.getCurrentUser();
-    return user.firstName;
+  showDashboard() {
+    this.router.navigate(['instructors/1']);
   }
 
 
 
-  viewDashboard() {
-    const id = this.loginService.getCurrentUser().id;
-    const url = this.url + '/' + id;
-    const headers = this.loginService.getHeaders();
-    return this._http.get<User>(url, { headers: headers });
-  }
+
+
+
+
 
 }

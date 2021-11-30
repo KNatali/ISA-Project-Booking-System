@@ -40,6 +40,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
+import { UserService } from './service/user.service';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
 
 
 @NgModule({
@@ -93,9 +95,11 @@ import { NavbarProfileComponent } from './navbar-profile/navbar-profile.componen
 
 
   ],
-  providers: [
-
-
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

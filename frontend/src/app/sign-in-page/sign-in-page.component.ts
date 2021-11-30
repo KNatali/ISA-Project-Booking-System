@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActiveUser, AuthRequest } from '../model/user';
-import { LoginService } from '../service/login.service';
+import { AuthenticationService } from '../service/authentication.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -9,33 +9,37 @@ import { LoginService } from '../service/login.service';
   styleUrls: ['./sign-in-page.component.css']
 })
 export class SignInPageComponent implements OnInit {
-  request = new AuthRequest();
-  errorMessage: string = '';
+  username: any
+  password = ''
+  invalidLogin = false
 
+  @Input() error: string | null;
 
+  constructor(private router: Router, private userService: UserService,
+    private loginservice: AuthenticationService) { }
 
-  constructor(private loginService: LoginService, private route: Router) { }
-
-  ngOnInit(): void {
-
+  ngOnInit() {
   }
 
   login() {
-    if (this.request.username == '' || this.request.password == '') {
-      this.errorMessage = 'Username or password missing.';
-    } else {
-      this.loginService.login(this.request).subscribe(
-        (data) => this.successfulLogin(data),
-        (res) => (this.errorMessage = 'Invalid username or password.')
-      );
+    if (this.username == '' || this.password == '')
+      this.error = "Username and password must be filled out";
+    else {
+      this.loginservice.authenticate(this.username, this.password).subscribe(
+        (data: any) => {
+          this.router.navigate([''])
+
+          this.invalidLogin = false
+        },
+        (error: { message: string | null; }) => {
+          this.invalidLogin = true
+          this.error = "Invalid username od password";
+
+        })
     }
-  }
 
-  successfulLogin(data: ActiveUser) {
-    this.errorMessage = '';
-    console.log(data);
-    this.loginService.loginSetUser(data);
-  }
 
+
+  }
 
 }

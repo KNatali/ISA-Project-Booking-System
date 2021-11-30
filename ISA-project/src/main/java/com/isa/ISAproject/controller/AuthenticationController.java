@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.isa.ISAproject.dto.AuthenticatedUserDTO;
 import com.isa.ISAproject.dto.UserRequest;
 import com.isa.ISAproject.dto.UserTokenState;
 import com.isa.ISAproject.exception.ResourceConflictException;
@@ -42,25 +44,29 @@ public class AuthenticationController {
 	// Prvi endpoint koji pogadja korisnik kada se loguje.
 	// Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
 	@PostMapping("/login")
-	public ResponseEntity<UserTokenState> createAuthenticationToken(
+	public ResponseEntity<?> createAuthenticationToken(
 			@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
 
-		// Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
-		// AuthenticationException
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-				authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+		 AuthenticatedUserDTO authenticatedUserDTO = new AuthenticatedUserDTO();
+	        User u = userService.findByUsername(authenticationRequest.getUsername());
+	      
+	        if(u!=null){
+	           
+	                Authentication authentication = authenticationManager
+	                        .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+	                                authenticationRequest.getPassword()));
 
-		// Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
-		// kontekst
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+	                SecurityContext ctx = SecurityContextHolder.createEmptyContext();
+	                SecurityContextHolder.setContext(ctx);
+	                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		// Kreiraj token za tog korisnika
-		User user = (User) authentication.getPrincipal();
-		String jwt = tokenUtils.generateToken(user.getUsername());
-		int expiresIn = tokenUtils.getExpiredIn();
-
-		// Vrati token kao odgovor na uspesnu autentifikaciju
-		return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+	                User user = (User) authentication.getPrincipal();
+	                String jwt = tokenUtils.generateToken(user.getUsername());
+	                int expiresIn = tokenUtils.getExpiredIn();
+	                authenticatedUserDTO = new AuthenticatedUserDTO(user.getId(), user.getRole(), user.getUsername(), new UserTokenState(jwt, expiresIn));
+	                return new ResponseEntity<>(authenticatedUserDTO, HttpStatus.OK);}
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			
 	}
 
 	// Endpoint za registraciju novog korisnika

@@ -2,7 +2,7 @@ export class User {
     constructor(
         public id: number,
         public username: string = '',
-        public fisrtName: string = '',
+        public firstName: string = '',
         public lastName: string = '',
         public email: string = '',
         public password: string = '',
@@ -14,19 +14,6 @@ export class User {
     ) { }
 }
 
-export class AuthRequest {
-    constructor(public username: string = '', public password: string = '') { }
-}
 
-export class ActiveUser {
-    asObservable() {
-        throw new Error('Method not implemented.');
-    }
-    constructor(
-        public id: number = -1,
-        public firstName: string = '',
-        public jwt: string = '',
-        public role: string = '',
-        public username: string = 'sdf'
-    ) { }
-}
+
+
