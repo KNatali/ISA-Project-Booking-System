@@ -4,7 +4,6 @@
         <mat-card class="mat-elevation-z4">
           <mat-card-header>
             <mat-card-title>{{cottage.name}}</mat-card-title>
-            <mat-card-subtitle>{{cottage.address}}</mat-card-subtitle>
           </mat-card-header>
           <img mat-card-image src="{{cottage.mainPicture}}">
           <mat-card-content>
@@ -12,7 +11,7 @@
               {{cottage.description}}
             </p>
             <br>
-            <p id="grade">Grade: {{cottage.name}}</p>
+            <p id="grade">Grade: {{cottage.grade}}</p>
           </mat-card-content>
           <mat-card-actions fxFlexAlign="end">
             <button mat-button><a [routerLink]="['/cottages',cottage.id]">More info ...</a></button>

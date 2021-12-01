@@ -48,6 +48,23 @@ values('The Long Run Sportfishing','No matter what kind of fishing trip you’re
 insert into adventure(name,description,average_grade,max_persons,main_picture,address_id,instructor_id,cancellation) 
 values ('Reel Floridian Fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,5,'/assets/adventure/Adventure3.jpg',10,1,'FREE');
 
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
+values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,1,100,'/assets/boats/slika1.jpeg',1);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
+values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,1,10,'/assets/boats/slika2.jpeg',2);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
+values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
+values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,1,'/assets/boats/slika4.jpeg',4);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
+values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5);
+
+insert into cottage(description,  grade, main_picture, name,address_id) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 10, 'assets/cottages/vikendica1.jpg','Sun cottage',1);
+insert into cottage(description,  grade, main_picture, name,address_id) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 8, 'assets/cottages/vikendica5.jpg','Star cottage',5);
+insert into cottage(description, grade, main_picture, name,address_id) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 8, 'assets/cottages/vikendica3.jpg','Moon cottage',4);
+insert into cottage(description,  grade, main_picture, name,address_id) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 9, 'assets/cottages/vikendica4.jpg','shooting star cottage',3);
+insert into cottage(description, grade, main_picture, name,address_id) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 7, 'assets/cottages/vikendica5.jpg','Sky cottage',6);
+
 
 
 

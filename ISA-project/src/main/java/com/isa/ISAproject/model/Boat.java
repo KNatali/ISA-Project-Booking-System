@@ -25,8 +25,8 @@ public class Boat {
 	private Long id;
 	@Column
 	private String name;
-	@Column
-	private String address;
+	@ManyToOne
+	private Address address;
 	@Column
 	private BoatType type;
 	@Column
@@ -77,10 +77,11 @@ public class Boat {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public BoatType getType() {
@@ -167,7 +168,7 @@ public class Boat {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
-	public Boat(Long id, String name, String address, BoatType type, double length, int motorNumber,
+	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber,
 			double motorPower, int maxSpeed, String description, Set<String> pictures, int capacity, double grade,
 			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,
 			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations, String mainPicture) {
