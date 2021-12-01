@@ -20,6 +20,8 @@ insert into authority(id, name) values (2, 'ROLE_ADMIN');
 
 insert into authority(id, name) values (3, 'ROLE_INSTRUCTOR');
 
+insert into authority(id, name) values (4, 'ROLE_CLIENT');
+
 
 
 
@@ -27,17 +29,24 @@ insert into user (role, username, password, first_name, last_name, email, mobile
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','raymond', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','stewart', '222', 'Stewart', 'Lindsey', 'isa.booking.project+stewart@gmail.com', '305-555-0000',3,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','ana', '$2a$10$qELfQNNCVvxVYgDYv4XUue6QIJ2ca09BFPPC3/M9Ke6q8PqRLkvdy', 'Ana', 'Anic', 'ana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','lana', '$2a$10$PTOW/.r9dgjokBc60GGnIO6csC4ReF7ql/F21IE/spO4fhCQLP9XK', 'Lana', 'Laic', 'lana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 
 
 insert into user_authority (user_id,authority_id) values (1,3);
 insert into user_authority (user_id,authority_id) values (2,3);
 insert into user_authority (user_id,authority_id) values (3,3);
 insert into user_authority (user_id,authority_id) values (4,3);
+insert into user_authority (user_id,authority_id) values (5,4);
+insert into user_authority (user_id,authority_id) values (6,3);
 
 insert into instructor (id) values (1);
 insert into instructor (id) values (2);
 insert into instructor (id) values (3);
 insert into instructor (id) values (4);
+insert into instructor (id) values (6);
+
+insert into client (id) values (5);
 
 
 
