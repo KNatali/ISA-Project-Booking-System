@@ -1,7 +1,9 @@
+import { Address } from "./address";
+
 export interface CottageInterface{
     id?:number;
     name:string;
-    address:string;
+    address:Address;
     description:string;
     grade:number;
     mainPicture:string;
@@ -9,7 +11,7 @@ export interface CottageInterface{
 export class Cottage implements CottageInterface{
     id?: number | undefined;
     name: string;
-    address: string;
+    address: Address;
     description: string;
     grade: number;
     mainPicture:string;

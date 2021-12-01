@@ -25,8 +25,8 @@ public class Cottage {
 	private Long id;
 	@Column(nullable=false)
 	private String name;
-	@Column(nullable=false)
-	private String address;
+	@ManyToOne
+	private Address address;
 	@Column(nullable=false)
 	private String description;
 	@Column(nullable=false)
@@ -63,11 +63,11 @@ public class Cottage {
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -136,7 +136,7 @@ public class Cottage {
 		this.mainPicture = mainPicture;
 	}
 
-	public Cottage(Long id, String name, String address, String description, double grade, Set<String> pictures,
+	public Cottage(Long id, String name, Address address, String description, double grade, Set<String> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
 			Set<CottageFastReservation> cottageFastReservations, String mainPicture) {
 		super();
