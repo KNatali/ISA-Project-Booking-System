@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark ">
+  <a class="navbar-brand nav-link" href="">
+    Booking site
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link" href="cottages">Cottages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="boats">Boats</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="adventures">Adventures</a>
+      </li>
+      <!--<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Instructor
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="instructors/1">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Reservations</a></li>
+
+          <li><a class="dropdown-item" href="#">My Adventures</a></li>
+        </ul>
+      </li>-->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Cottage owner
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="cottageOwner/1">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Reservations</a></li>
+
+          <li><a class="dropdown-item" href="#">My cottages</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Client
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="client-profil">Profile</a></li>
+          <li><a class="dropdown-item" href="#">History cottage reservations</a></li>
+          <li><a class="dropdown-item" href="#">History boat reservations</a></li>
+          <li><a class="dropdown-item" href="#">History adventure reservations</a></li>
+          <li><a class="dropdown-item" href="#">Instructors</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+  <div class="right login" *ngIf="!loginService.isUserLoggedIn(); else activeUser">
+    <a id="a" class="nav-item nav-link" href="sign-in">
+      Sign in
+    </a>
+    <a class="nav-item nav-link" href="register">
+      Register
+    </a>
+  </div>
+  <ng-template #activeUser>
+    <app-navbar-profile></app-navbar-profile>
+  </ng-template>
+
+
+</nav>

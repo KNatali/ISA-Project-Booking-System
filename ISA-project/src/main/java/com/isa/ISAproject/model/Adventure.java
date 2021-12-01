@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Adventure {
 	@Id
@@ -38,8 +39,12 @@ public class Adventure {
 
 	@Column
 	private String mainPicture;
-	@ElementCollection//(targetClass=String.class)
-	private Set<String> pictures=new HashSet<>(); 
+	@ManyToMany
+	 @JoinTable(
+	            name = "adventure_pictures",
+	            joinColumns = @JoinColumn(name = "adventure_id"),
+	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+	private Set<Picture> pictures=new HashSet<>(); 
 	@Column
 	private int maxPersons;
 	@ManyToMany
@@ -53,6 +58,18 @@ public class Adventure {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private CancellationPolicy cancellation;
+
+	 @OneToMany(mappedBy = "adventure")
+	    private Set<AdventureFastReservation> adventureFastReservations;
+
+	
+	public Set<AdventureFastReservation> getAdventureFastReservations() {
+		return adventureFastReservations;
+	}
+
+	public void setAdventureFastReservations(Set<AdventureFastReservation> adventureFastReservations) {
+		this.adventureFastReservations = adventureFastReservations;
+	}
 
 	public Long getId() {
 		return id;
@@ -110,11 +127,11 @@ public class Adventure {
 	}
 
 
-	public Set<String> getPictures() {
+	public Set<Picture> getPictures() {
 		return pictures;
 	}
 
-	public void setPictures(Set<String> pictures) {
+	public void setPictures(Set<Picture> pictures) {
 		this.pictures = pictures;
 	}
 
@@ -151,9 +168,9 @@ public class Adventure {
 	}
 
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,
-			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<String> pictures,
+			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			CancellationPolicy cancellation) {
+			CancellationPolicy cancellation,Set<AdventureFastReservation> fastReservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -167,6 +184,7 @@ public class Adventure {
 		this.equipment = equipment;
 		this.rules = rules;
 		this.cancellation = cancellation;
+		this.adventureFastReservations=fastReservations;
 	}
 	
 	public Adventure() {}

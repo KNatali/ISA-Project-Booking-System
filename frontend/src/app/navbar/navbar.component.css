@@ -1,0 +1,29 @@
+ ::ng-deep .nav-item {
+   color: cornsilk;
+   font-size: 16px;
+ }
+
+
+
+ ::ng-deep .navbar-brand {
+   color: white;
+ }
+
+ ::ng-deep .navbar-brand:hover {
+   color: #8DA9C4;
+ }
+
+ ::ng-deep .navbar {
+   margin: 0px;
+   background-color: #134074;
+ }
+
+ ::ng-deep .right {
+   display: flex;
+   flex-direction: row;
+ }
+
+ ::ng-deep .right:hover {
+   cursor: pointer;
+
+ }

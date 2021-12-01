@@ -24,6 +24,8 @@ public class AdventureDTO {
 	
 	private String name;
 	
+	private int maxPersons;
+	
 	private AddressDTO address;
 	
 	private String description;
@@ -94,13 +96,23 @@ public class AdventureDTO {
 	public void setInstructor(InstructorProfileDTO instructor) {
 		this.instructor = instructor;
 	}
+	
+	
 
 
 	
 
 
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+
 	public AdventureDTO(Long id, String name, AddressDTO address, String description, double averageGrade,
-			InstructorProfileDTO instructor,String mainPicture) {
+			InstructorProfileDTO instructor,String mainPicture,int maxPersons) {
 		super();
 		
 		this.name = name;
@@ -109,6 +121,7 @@ public class AdventureDTO {
 		this.averageGrade = averageGrade;
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
+		this.maxPersons=maxPersons;
 		this.id=id;
 	}
 	

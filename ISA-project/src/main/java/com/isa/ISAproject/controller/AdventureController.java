@@ -1,7 +1,6 @@
  package com.isa.ISAproject.controller;
 
-import java.io.Console;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
-import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;

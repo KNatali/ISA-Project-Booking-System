@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../service/authentication.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -6,10 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in-page.component.css']
 })
 export class SignInPageComponent implements OnInit {
+  username: any
+  password = ''
+  invalidLogin = false
 
-  constructor() { }
+  @Input() error: string | null;
 
-  ngOnInit(): void {
+  constructor(private router: Router, private userService: UserService,
+    private loginservice: AuthenticationService) { }
+
+  ngOnInit() {
+  }
+
+  login() {
+    if (this.username == '' || this.password == '')
+      this.error = "Username and password must be filled out";
+    else {
+      this.loginservice.authenticate(this.username, this.password).subscribe(
+        (data: any) => {
+          this.router.navigate([''])
+
+          this.invalidLogin = false
+        },
+        (error: { message: string | null; }) => {
+          this.invalidLogin = true
+          this.error = "Invalid username od password";
+
+        })
+    }
+
+
+
   }
 
 }
