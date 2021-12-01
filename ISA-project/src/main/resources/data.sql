@@ -24,15 +24,15 @@ insert into authority(id, name) values (3, 'ROLE_INSTRUCTOR');
 
 
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','truman', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','raymond', '111', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','raymond', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','stewart', '222', 'Stewart', 'Lindsey', 'isa.booking.project+stewart@gmail.com', '305-555-0000',3,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 
 
 insert into user_authority (user_id,authority_id) values (1,3);
-insert into user_authority (user_id,authority_id) values (1,3);
-insert into user_authority (user_id,authority_id) values (1,3);
-insert into user_authority (user_id,authority_id) values (1,3);
+insert into user_authority (user_id,authority_id) values (2,3);
+insert into user_authority (user_id,authority_id) values (3,3);
+insert into user_authority (user_id,authority_id) values (4,3);
 
 insert into instructor (id) values (1);
 insert into instructor (id) values (2);

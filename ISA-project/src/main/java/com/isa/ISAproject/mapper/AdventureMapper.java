@@ -24,7 +24,8 @@ public class AdventureMapper {
 				a.getDescription(),
 				a.getAverageGrade(),
 				instructorDTO,
-				a.getMainPicture()
+				a.getMainPicture(),
+				a.getMaxPersons()
 				);
 		return adventureDTO;
 				

@@ -23,8 +23,8 @@ export class AuthenticationService {
           let tokenStr = "Bearer " + userData.token.accessToken;
           this.access_token = userData.token.accessToken;
           sessionStorage.setItem("token", tokenStr);
-          // sessionStorage.setItem("id", userData.id);
-          // sessionStorage.setItem("role", userData.role);
+          sessionStorage.setItem("id", userData.id);
+          sessionStorage.setItem("role", userData.role);
           return userData;
         })
       );
@@ -49,5 +49,8 @@ export class AuthenticationService {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("role");
+
   }
 }

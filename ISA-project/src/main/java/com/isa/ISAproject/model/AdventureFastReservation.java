@@ -12,18 +12,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
 public class AdventureFastReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
-	private LocalDate date;
-	@Column(nullable=false)
-	private LocalTime time;
-	@Column(nullable=false)
-	private int duration;
+	
+	@ManyToOne
+    @JoinColumn(name = "adventure_id")
+    private Adventure adventure;
+	
+	 @Column(name = "reservationStart", nullable = false)
+	    private LocalDate reservationStart;
+
+	    @Column(name = "reservationEnd", nullable = false)
+	    private LocalDate reservationEnd;
+ 
 	@Column(nullable=false)
 	private int maxPersons;
 	@Column(nullable=false)
@@ -34,74 +42,148 @@ public class AdventureFastReservation {
 	private LocalDate validityEnd;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	@ManyToOne
+	private Client client;
 	
+	
+	
+	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDate reservationStart,
+			LocalDate reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems, Client client) {
+		super();
+		this.id = id;
+		this.adventure = adventure;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+		this.client = client;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
+
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDate getDate() {
-		return date;
+
+
+
+	public Adventure getAdventure() {
+		return adventure;
 	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+
+
+
+	public void setAdventure(Adventure adventure) {
+		this.adventure = adventure;
 	}
-	public LocalTime getTime() {
-		return time;
+
+
+
+	public LocalDate getReservationStart() {
+		return reservationStart;
 	}
-	public void setTime(LocalTime time) {
-		this.time = time;
+
+
+
+	public void setReservationStart(LocalDate reservationStart) {
+		this.reservationStart = reservationStart;
 	}
-	public int getDuration() {
-		return duration;
+
+
+
+	public LocalDate getReservationEnd() {
+		return reservationEnd;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+
+
+
+	public void setReservationEnd(LocalDate reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
+
+
+
 	public int getMaxPersons() {
 		return maxPersons;
 	}
+
+
+
 	public void setMaxPersons(int maxPersons) {
 		this.maxPersons = maxPersons;
 	}
+
+
+
 	public double getPrice() {
 		return price;
 	}
+
+
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+
+
 	public LocalDate getValidityStart() {
 		return validityStart;
 	}
+
+
+
 	public void setValidityStart(LocalDate validityStart) {
 		this.validityStart = validityStart;
 	}
+
+
+
 	public LocalDate getValidityEnd() {
 		return validityEnd;
 	}
+
+
+
 	public void setValidityEnd(LocalDate validityEnd) {
 		this.validityEnd = validityEnd;
 	}
+
+
+
 	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
+
+
+
 	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public AdventureFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
-			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.time = time;
-		this.duration = duration;
-		this.maxPersons = maxPersons;
-		this.price = price;
-		this.validityStart = validityStart;
-		this.validityEnd = validityEnd;
-		this.additionalItems = additionalItems;
+
+
+
+	public Client getClient() {
+		return client;
 	}
-	
+
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
+
 	public AdventureFastReservation () {}
 }

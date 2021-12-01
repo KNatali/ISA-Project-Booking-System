@@ -38,6 +38,8 @@ import { CottageOwnerPageComponent } from './cottage-owner-page/cottage-owner-pa
 import { CottageOwnerProfileComponent } from './cottage-owner-profile/cottage-owner-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLabel } from '@angular/material/form-field';
+import { MatFormField } from '@angular/material/form-field';
 import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { UserService } from './service/user.service';

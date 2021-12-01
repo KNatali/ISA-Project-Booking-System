@@ -1,4 +1,4 @@
-/*.modal-content {
+.modal-content {
   background-color: lightgrey;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -28,33 +28,4 @@ h1 {
 
 h5 {
   margin-bottom: 0px;
-}*/
-
-:host {
-  display: flex;
-  justify-content: center;
-  margin: 100px 0px;
-}
-
-.mat-form-field {
-  width: 100%;
-  min-width: 300px;
-}
-
-mat-card-title,
-mat-card-content {
-  display: flex;
-  justify-content: center;
-}
-
-.error {
-  padding: 16px;
-  width: 300px;
-  color: white;
-  background-color: red;
-}
-
-.button {
-  display: flex;
-  justify-content: flex-end;
 }

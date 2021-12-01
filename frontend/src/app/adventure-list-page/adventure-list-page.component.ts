@@ -4,7 +4,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AdventureService } from '../service/adventure.service';
 import { Instructor } from '../model/instructor';
 import { InstructorService } from '../service/instructor.service';
-import { User } from '../model/user';
 
 @Component({
   selector: 'app-adventure-list-page',

@@ -127,7 +127,7 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			for(Adventure a:adventures) {
 				InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
 				AddressDTO addressDTO=new AddressDTO(a.getAddress().getId(),a.getAddress().getStreet(),a.getAddress().getState(),a.getAddress().getCity());
-				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),addressDTO,a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture());
+				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),addressDTO,a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture(),a.getMaxPersons());
 				adventuresDTO.add(adventure);
 			}
 			

@@ -12,24 +12,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class AdventureReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	 @Column(name = "reservationStart", nullable = false)
+	    private LocalDate reservationStart;
+
+	    @Column(name = "reservationEnd", nullable = false)
+	    private LocalDate reservationEnd;
+
+	    @ManyToOne
+	    @JoinColumn(name = "adventure_id")
+	    private Adventure adventure;
+	
 	@Column(nullable=false)
-	private LocalDate date;
-	@Column(nullable=false)
-	private LocalTime time;
-	@Column(nullable=false)
-	private int duration;
-	@Column(nullable=false)
-	private String place;
-	@Column(nullable=false)
-	private int maxPersons;
+	private int numberOfPersons;
 	@Column(nullable=false)
 	private double price;
 	@OneToMany
@@ -38,81 +42,133 @@ public class AdventureReservation {
 	private Client client;
 	@OneToMany
 	private List<AdventureComplaint> adventureComplaints;
+	
+	
+	
+	public AdventureReservation(Long id, LocalDate reservationStart, LocalDate reservationEnd,
+			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,
+			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints) {
+		super();
+		this.id = id;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.adventure = adventure;
+		this.numberOfPersons = numberOfPersons;
+		this.price = price;
+		this.additionalItems = additionalItems;
+		this.client = client;
+		this.adventureComplaints = adventureComplaints;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
+
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDate getDate() {
-		return date;
+
+
+
+	public LocalDate getReservationStart() {
+		return reservationStart;
 	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+
+
+
+	public void setReservationStart(LocalDate reservationStart) {
+		this.reservationStart = reservationStart;
 	}
-	public LocalTime getTime() {
-		return time;
+
+
+
+	public LocalDate getReservationEnd() {
+		return reservationEnd;
 	}
-	public void setTime(LocalTime time) {
-		this.time = time;
+
+
+
+	public void setReservationEnd(LocalDate reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
-	public int getDuration() {
-		return duration;
+
+
+
+	public Adventure getAdventure() {
+		return adventure;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+
+
+
+	public void setAdventure(Adventure adventure) {
+		this.adventure = adventure;
 	}
-	public String getPlace() {
-		return place;
+
+
+
+	public int getNumberOfPersons() {
+		return numberOfPersons;
 	}
-	public void setPlace(String place) {
-		this.place = place;
+
+
+
+	public void setNumberOfPersons(int numberOfPersons) {
+		this.numberOfPersons = numberOfPersons;
 	}
-	public int getMaxPersons() {
-		return maxPersons;
-	}
-	public void setMaxPersons(int maxPersons) {
-		this.maxPersons = maxPersons;
-	}
+
+
+
 	public double getPrice() {
 		return price;
 	}
+
+
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+
+
 	public Set<AdditionalItem> getAdditionalItems() {
 		return additionalItems;
 	}
+
+
+
 	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
+
+
+
 	public Client getClient() {
 		return client;
 	}
+
+
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+
+
 	public List<AdventureComplaint> getAdventureComplaints() {
 		return adventureComplaints;
 	}
+
+
+
 	public void setAdventureComplaints(List<AdventureComplaint> adventureComplaints) {
 		this.adventureComplaints = adventureComplaints;
 	}
-	public AdventureReservation(Long id, LocalDate date, LocalTime time, int duration, String place, int maxPersons,
-			double price, Set<AdditionalItem> additionalItems, Client client,
-			List<AdventureComplaint> adventureComplaints) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.time = time;
-		this.duration = duration;
-		this.place = place;
-		this.maxPersons = maxPersons;
-		this.price = price;
-		this.additionalItems = additionalItems;
-		this.client = client;
-		this.adventureComplaints = adventureComplaints;
-	}
-	
+
+
+
 	public AdventureReservation() {}
 }

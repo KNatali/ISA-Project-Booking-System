@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class NavbarProfileComponent implements OnInit {
   username: any;
   dash_url = '/';
+  id: any;
 
   constructor(private _http: HttpClient, private loginService: AuthenticationService, private router: Router) { }
 
@@ -46,7 +47,9 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   showDashboard() {
-    this.router.navigate(['instructors/1']);
+
+    this.id = sessionStorage.getItem('id')
+    this.router.navigate(['instructors', this.id]);
   }
 
 

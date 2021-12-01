@@ -10,6 +10,10 @@ import { AdventureService } from '../service/adventure.service';
   styleUrls: ['./adventure-card.component.css']
 })
 export class AdventureCardComponent implements OnInit {
+  @Input('rating') rating: number;
+  @Input('starCount') starCount: number;
+  @Input('color') color: string;
+
   @Input()
   adventures: Adventure[];
 
