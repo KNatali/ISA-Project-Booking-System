@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'boats', component: BoatListPageComponent },
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
+  { path: 'clients/:id', component: ClientPageComponent},
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
