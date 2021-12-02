@@ -24,3 +24,6 @@ h1{
 h5{
 	margin-bottom: 0px;
 }
+.error{
+	color: red;
+}

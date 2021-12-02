@@ -17,6 +17,9 @@ public class ClientService {
 	public Optional<Client> findById(Long id) {
 		return this.clientRepository.findById(id);
 	}
+	public Client save(Client newClient) {
+		return this.clientRepository.save(newClient);
+	}
 	
 	
 }

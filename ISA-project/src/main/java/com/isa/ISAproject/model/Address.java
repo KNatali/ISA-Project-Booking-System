@@ -61,6 +61,12 @@ public class Address {
 		this.state = state;
 		this.city = city;
 	}
+	public Address(String street, String state, String city) {
+		super();
+		this.street = street;
+		this.state = state;
+		this.city = city;
+	}
 	
 	
 }
