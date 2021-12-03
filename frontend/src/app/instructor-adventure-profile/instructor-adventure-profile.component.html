@@ -38,9 +38,9 @@
         </a>
       </div>
     </div>
-
+    <br>
     <div>
-      Price per day: cijena po danu
+      <strong>Price (per day):</strong> <span id="price"> {{adventure.price}} $</span>
     </div>
 
 
@@ -62,8 +62,7 @@
           <h3>{{adventure.instructor.firstName}} {{adventure.instructor.lastName}} </h3>
           <h4>{{adventure.instructor.street}}</h4>
           <p>
-            biografija..
-          </p>
+            {{adventure.instructor.biography}} </p>
         </div>
       </div>
     </div>
@@ -96,6 +95,11 @@
           </span>
         </div>
       </div>
+    </div>
+    <hr>
+    <div>
+      <h3>Cancellation Policy:</h3>
+      <span style="color:darkred">{{adventure.cancellationPercentage}} % keeps instructor</span>
     </div>
 
 

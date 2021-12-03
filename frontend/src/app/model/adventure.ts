@@ -9,9 +9,11 @@ export interface AdventureInterface {
     name: string;
     address: Address;
     averageGrade: number;
+    price: number;
     maxPersons: number;
     description: string;
     mainPicture: string;
+    cancellationPercentage: number;
     instructor: Instructor;
     equipment: AdventureFishingEquipment[];
     rules: AdventureBehavioralRules[];
@@ -23,9 +25,11 @@ export class Adventure implements AdventureInterface {
     name: string;
     address: Address;
     averageGrade: number;
+    price: number;
     maxPersons: number;
     description: string;
     mainPicture: string;
+    cancellationPercentage: number;
     instructor: Instructor;
     equipment: AdventureFishingEquipment[];
     rules: AdventureBehavioralRules[];
@@ -37,11 +41,14 @@ export class Adventure implements AdventureInterface {
         this.maxPersons = obj.maxPersons
         this.description = obj.description;
         this.averageGrade = obj.averageGrade;
+        this.price = obj.price;
         this.mainPicture = obj.mainPicture;
         this.instructor = obj.instructor;
         this.equipment = obj.equipment;
         this.rules = obj.rules;
         this.additionalItems = obj.additionalItems;
+        this.cancellationPercentage = obj.cancellationPercentage;
+
 
     }
 

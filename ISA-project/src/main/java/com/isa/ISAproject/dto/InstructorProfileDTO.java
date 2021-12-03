@@ -17,6 +17,7 @@ public class InstructorProfileDTO {
 	private String city;
 	private String mobile;
 	private String role;
+	private String biography;
 	
 	
 	
@@ -88,9 +89,17 @@ public class InstructorProfileDTO {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
+	public String getBiography() {
+		return biography;
+	}
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 	public InstructorProfileDTO() {}
 	public InstructorProfileDTO(String username, String password, String email, String firstName, String lastName,
-			String street, String state, String city, String mobile,Long id,String role) {
+			String street, String state, String city, String mobile,Long id,String role,String biography) {
 		super();
 	
 		this.username = username;
@@ -104,6 +113,7 @@ public class InstructorProfileDTO {
 		this.mobile = mobile;
 		this.id=id;
 		this.role=role;
+		this.biography=biography;
 	}
 	public InstructorProfileDTO(Instructor instructor) {
 		super();
@@ -119,6 +129,7 @@ public class InstructorProfileDTO {
 		this.mobile = instructor.getMobile();
 		this.id=instructor.getId();
 		this.role=instructor.getRole();
+		this.biography=instructor.getBiography();
 		
 	}
 	

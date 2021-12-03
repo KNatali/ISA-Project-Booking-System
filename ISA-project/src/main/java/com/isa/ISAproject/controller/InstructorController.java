@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 
@@ -125,9 +126,7 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			List<AdventureDTO> adventuresDTO=new ArrayList<>();
 			
 			for(Adventure a:adventures) {
-				InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
-				AddressDTO addressDTO=new AddressDTO(a.getAddress().getId(),a.getAddress().getStreet(),a.getAddress().getState(),a.getAddress().getCity());
-				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),addressDTO,a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture(),a.getMaxPersons());
+				AdventureDTO adventure=AdventureMapper.convertToDTO(a);
 				adventuresDTO.add(adventure);
 			}
 			
