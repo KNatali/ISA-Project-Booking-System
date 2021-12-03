@@ -33,7 +33,7 @@ export class SignInPageComponent implements OnInit {
         },
         (error: { message: string | null; }) => {
           this.invalidLogin = true
-          this.error = "Invalid username od password";
+          this.error = "Invalid username od password or your account not activate";
 
         })
     }

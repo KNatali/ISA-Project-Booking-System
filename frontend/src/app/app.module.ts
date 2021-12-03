@@ -28,6 +28,7 @@ import { AdventureDatailsPageComponent } from './adventure-datails-page/adventur
 import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
 
+
 import { LightgalleryModule } from 'lightgallery/angular';
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
@@ -46,6 +47,7 @@ import { NavbarProfileComponent } from './navbar-profile/navbar-profile.componen
 import { UserService } from './service/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
+import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { InstructorAdventureProfileComponent } from './instructor-adventure-prof
     NavbarComponent,
     NavbarLoginComponent,
     NavbarProfileComponent,
-    InstructorAdventureProfileComponent
+    InstructorAdventureProfileComponent,
+    ConfirmRegistrationClientComponent
 
   ],
   imports: [

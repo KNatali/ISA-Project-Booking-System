@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent implements OnInit {
   confirmedPassword:string;
+  registrated:boolean;
   error:string;
   newUser: User=new User({
     id: 0,
@@ -26,20 +27,23 @@ export class RegisterPageComponent implements OnInit {
     mobile: '',
     role:'Client'
   });
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { 
+    this.registrated=false;
+  }
 
   ngOnInit(): void {
   }
   addNewClient(){
     if(this.newUser.password==this.confirmedPassword){
+      //this.userService.signUp(this.newUser)
+      //.subscribe(res=>this.newUser=res);
+      //console.log(this.newUser.id);
       this.userService.sendEmail(this.newUser)
       .subscribe();
-      this.userService.signUp(this.newUser)
-      .subscribe();
-      this.router.navigate(['sign-in']);
+      this.registrated=true;
     }else{
       this.error="passwords are not equal";
     }
-  }
 
+  }
 }
