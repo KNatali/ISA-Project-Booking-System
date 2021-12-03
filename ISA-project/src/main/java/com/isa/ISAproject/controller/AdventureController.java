@@ -72,7 +72,7 @@ public class AdventureController {
 	@RequestMapping( method = RequestMethod.GET,
 			params = "instructorId",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<AdventureDTO>> findAdventureByInstructor(@RequestParam Long instructorId){
+	public ResponseEntity<List<AdventureDTO>> findAdventuresByInstructor(@RequestParam Long instructorId){
 		Optional<Instructor> instructorOPT=this.instructorService.findById(instructorId);
 		if(!instructorOPT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -87,5 +87,7 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	
+	
 
 }

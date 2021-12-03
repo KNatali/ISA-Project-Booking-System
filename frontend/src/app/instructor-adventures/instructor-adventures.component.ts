@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Adventure } from '../model/adventure';
 import { Instructor } from '../model/instructor';
 import { InstructorService } from '../service/instructor.service';
@@ -10,6 +11,8 @@ import { InstructorService } from '../service/instructor.service';
 })
 export class InstructorAdventuresComponent implements OnInit {
   adventures: Adventure[];
+  adventureId: any;
+  adventureProfile: boolean = false;
   @Input() instructor: Instructor = new Instructor({
     id: 0,
     username: '',
@@ -25,7 +28,7 @@ export class InstructorAdventuresComponent implements OnInit {
   });
   @Input() id: number;
 
-  constructor(private instructorService: InstructorService) { }
+  constructor(private instructorService: InstructorService, private router: Router) { }
 
   ngOnInit(): void {
     this.adventures = [];
@@ -36,5 +39,6 @@ export class InstructorAdventuresComponent implements OnInit {
     this.instructorService.getInstructorAdventures(this.id)
       .subscribe(res => this.adventures = res)
   }
+
 
 }

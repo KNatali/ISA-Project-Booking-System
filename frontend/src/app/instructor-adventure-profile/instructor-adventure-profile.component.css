@@ -1,0 +1,82 @@
+* {
+  line-height: 30px;
+  font-size: 16px;
+
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.fl {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.mat-button {
+  color: white;
+  background-color: #13315C
+}
+
+.gallery {
+  display: flex;
+
+
+}
+
+#lightgallery {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.columns {
+  display: flex;
+
+
+}
+
+.column {
+  flex-grow: 1;
+}
+
+
+#mainImage {
+  height: 420px;
+}
+
+img {
+  height: 140px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  margin: auto;
+  width: 80% !important;
+  padding: 30px;
+  color: #0B2545;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.fa-star {
+  color: rgb(252, 175, 76);
+}
