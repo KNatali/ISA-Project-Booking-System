@@ -28,6 +28,7 @@ import { AdventureDatailsPageComponent } from './adventure-datails-page/adventur
 import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
 
+import { LightgalleryModule } from 'lightgallery/angular';
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
 import { SearchBoatComponent } from './search-boat/search-boat.component';
@@ -44,7 +45,7 @@ import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { UserService } from './service/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
-
+import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     CottageOwnerProfileComponent,
     NavbarComponent,
     NavbarLoginComponent,
-    NavbarProfileComponent
+    NavbarProfileComponent,
+    InstructorAdventureProfileComponent
 
   ],
   imports: [
@@ -94,7 +96,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     MatTabsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-
+    LightgalleryModule
 
   ],
   providers: [{

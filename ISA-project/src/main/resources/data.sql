@@ -49,6 +49,19 @@ insert into instructor (id) values (6);
 insert into client (id) values (5);
 
 
+insert into adventure_fishing_equipment(name) values ('cumberland');
+insert into adventure_fishing_equipment(name) values ('soft baits');
+insert into adventure_fishing_equipment(name) values ('frogs');
+insert into adventure_fishing_equipment(name) values ('fishing rods');
+
+insert into adventure_behavioral_rule(rule) values ('Child Friendly');
+insert into adventure_behavioral_rule(rule) values ('Forbidden for childer under 5 yo');
+insert into adventure_behavioral_rule(rule) values ('Just bring good energy');
+insert into adventure_behavioral_rule(rule) values ('You Keep Catch');
+insert into adventure_behavioral_rule(rule) values ('Catch and Release Allowed');
+
+
+
 
 insert into adventure(name,description,average_grade,max_persons,main_picture,address_id,instructor_id,cancellation) 
 values ('Lucky B Sportfishing','Lucky B Sportfishing welcomes you to one of the most beautiful fisheries in the world. This charter service is operated by a professional crew that always strives to exceed their guests’ expectations. No matter what time of year you join, you can always count on a great water experience.The adventure starts on a 36’ Yellowfin boat . The boat features all necessary safety gear, modern navigational electronics, a live bait tank, and a cooler.You can fish the inshore waters of Coronado Islands or visit offshore spots for big game fish. Some of the species you’ll target on your trip are Calico Bass, Halibut, Lingcod, Tuna, Swordfish, Mahi Mahi, and many more. With such a variety of fish species and fishing techniques, it never gets boring or repetitive on board.The only thing you need to prepare in advance is your fishing license. The crew takes care of everything else - your fishing equipment, catch cleaning, snacks, and drinks.The main goal for the Lucky B Sportfishing’s crew is for you to have a memorable and enjoyable experience. They look forward to seeing you on their boat!',5.0,10,'/assets/adventure/Adventure1.jpg',1,1,'FREE');
@@ -76,5 +89,28 @@ insert into cottage(description, grade, main_picture, name,address_id) values ('
 
 
 
+insert into additional_item(name,price,adventure_id) values ('Fishing License',20,1);
+insert into additional_item(name,price,adventure_id) values ('Live Bait',5,1);
+insert into additional_item(name,price,adventure_id) values ('Fridge',5,1);
+insert into additional_item(name,price,adventure_id) values ('Kitchen',10,2);
+insert into additional_item(name,price,adventure_id) values ('fishfinder',15,2);
+
+insert into adventure_equipment(adventure_id,equipment_id) values (1,1);
+insert into adventure_equipment(adventure_id,equipment_id) values (1,2);
+insert into adventure_equipment(adventure_id,equipment_id) values (1,4);
+insert into adventure_equipment(adventure_id,equipment_id) values (2,1);
+
+insert into adventure_rules(adventure_id,rule_id) values (1,1);
+insert into adventure_rules(adventure_id,rule_id) values (1,2);
+insert into adventure_rules(adventure_id,rule_id) values (1,4);
+insert into adventure_rules(adventure_id,rule_id) values (2,1);
+insert into adventure_rules(adventure_id,rule_id) values (2,3);
+insert into adventure_rules(adventure_id,rule_id) values (3,2);
+insert into adventure_rules(adventure_id,rule_id) values (3,4);
+insert into adventure_rules(adventure_id,rule_id) values (3,5);
+ 
+
+
 
  
+

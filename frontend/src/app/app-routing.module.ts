@@ -1,3 +1,4 @@
+import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdventureDatailsPageComponent } from './adventure-datails-page/adventure-datails-page.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
   { path: 'boats/:id', component: BoatDetailsPageComponent },
-  { path: 'client-profil', component: ClientPageComponent }
+  { path: 'client-profil', component: ClientPageComponent },
+  { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent }
 ];
 
 @NgModule({

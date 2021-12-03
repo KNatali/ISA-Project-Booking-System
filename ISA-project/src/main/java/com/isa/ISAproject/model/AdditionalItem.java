@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,6 +17,10 @@ public class AdditionalItem {
 	private String name;
 	@Column(nullable = false)
 	private double price;
+	
+	@ManyToOne
+    @JoinColumn(name = "adventure_id")
+    private Adventure adventure;
 	
 	public Long getId() {
 		return id;
@@ -35,11 +40,19 @@ public class AdditionalItem {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public AdditionalItem(Long id, String name, double price) {
+	
+	public Adventure getAdventure() {
+		return adventure;
+	}
+	public void setAdventure(Adventure adventure) {
+		this.adventure = adventure;
+	}
+	public AdditionalItem(Long id, String name, double price,Adventure adventure) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.adventure=adventure;
 	}
 	public AdditionalItem() {}
 }
