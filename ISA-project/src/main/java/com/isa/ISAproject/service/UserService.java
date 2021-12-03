@@ -64,7 +64,7 @@ public class UserService {
 		u.setFirstName(userRequest.getFirstName());
 		u.setLastName(userRequest.getLastName());
 		
-		u.setEnabled(true);
+		u.setEnabled(false);
 		u.setEmail(userRequest.getEmail());
 		
 		Address address=new Address(userRequest.getStreet(),userRequest.getState(),userRequest.getCity());
@@ -76,16 +76,17 @@ public class UserService {
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
 		List<Authority> authorities=new ArrayList<>();
-		User newUser=new User();
+		//User newUser=new User();
 		Client newClient=new Client();
 		if(u.getRole().equalsIgnoreCase("Client")) {
 			authorities = authorityService.findByName("ROLE_CLIENT");
 			u.setAuthorities(authorities);
 			Client client=new Client(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),u.isEnabled(),u.getRole(),authorities);
 			newClient=this.clientService.save(client);
+			u.setId(newClient.getId());
 		}
-		
-		return newUser;
+		System.out.println("id iz userService"+ u.getId());
+		return u;
 	}
 
 }

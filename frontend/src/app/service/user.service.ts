@@ -13,6 +13,7 @@ export class UserService {
     currentUser: any;
     whoami_url = "http://localhost:8090/api/getLoggedIn";
     async_url="http://localhost:8090/api/signup/async";
+    sync_url="http://localhost:8090/api/signup/sync";
     sign_up_url="http://localhost:8090/auth/signup";
     constructor(
         private http: HttpClient

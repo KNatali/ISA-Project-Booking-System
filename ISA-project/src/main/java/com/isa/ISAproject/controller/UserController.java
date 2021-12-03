@@ -86,7 +86,7 @@ public class UserController {
 		}
 
 		@PostMapping("/signup/async")
-		public String signUpAsync(@RequestBody User user){
+		public String signUpAsync(@RequestBody UserDTO user){
 
 			//slanje emaila
 			try {
@@ -111,4 +111,5 @@ public class UserController {
 
 			return "success";
 		}
+		
 }
