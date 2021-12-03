@@ -1,7 +1,9 @@
+import { Address } from "./address";
+
 export interface BoatInterface{
     id?:number;
     name:string;
-    address:string;
+    address:Address;
     length:number;
     motorNumber:number;
     motorPower:number;
@@ -14,7 +16,7 @@ export interface BoatInterface{
 export class Boat implements BoatInterface{
     id?: number | undefined;
     name: string;
-    address: string;
+    address: Address;
     length: number;
     motorNumber: number;
     motorPower: number;

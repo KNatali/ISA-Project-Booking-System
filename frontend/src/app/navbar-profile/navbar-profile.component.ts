@@ -12,6 +12,7 @@ export class NavbarProfileComponent implements OnInit {
   username: any;
   dash_url = '/';
   id: any;
+  role:any;
 
   constructor(private _http: HttpClient, private loginService: AuthenticationService, private router: Router) { }
 
@@ -47,9 +48,13 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   showDashboard() {
-
-    this.id = sessionStorage.getItem('id')
+    this.id = sessionStorage.getItem('id');
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.router.navigate(['clients', this.id]);
+    }else{
     this.router.navigate(['instructors', this.id]);
+    }
   }
 
 

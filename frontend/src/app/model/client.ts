@@ -1,19 +1,4 @@
-/*export class User {
-    constructor(
-        public id: number,
-        public username: string = '',
-        public firstName: string = '',
-        public lastName: string = '',
-        public email: string = '',
-        public password: string = '',
-        public mobile: string = '',
-        public role: string = '',
-        public street: string = '',
-        public state: string = '',
-        public city: string = ''
-    ) { }
-}*/
-export interface UserInterface {
+export interface ClientInterface {
     id: number;
     firstName: string;
     lastName: string;
@@ -24,10 +9,10 @@ export interface UserInterface {
     city: string;
     email: string;
     mobile: string;
-    role:string;
+
 
 }
-export class User implements UserInterface {
+export class Client implements ClientInterface {
     id: number;
     firstName: string;
     lastName: string;
@@ -38,8 +23,7 @@ export class User implements UserInterface {
     city: string;
     email: string;
     mobile: string;
-    role:string;
-    constructor(obj: UserInterface) {
+    constructor(obj: ClientInterface) {
         this.id = obj.id;
         this.firstName = obj.firstName;
         this.lastName = obj.lastName;
@@ -50,13 +34,8 @@ export class User implements UserInterface {
         this.state = obj.state;
         this.email = obj.email;
         this.mobile = obj.mobile;
-        this.role=obj.role;
+
     }
 
 
 }
-
-
-
-
-

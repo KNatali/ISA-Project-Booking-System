@@ -171,6 +171,20 @@ public class User implements UserDetails {
 		this.role = role;
 		this.authorities = authorities;
 	}
+	 public User(String username, String password, String email, String firstName, String lastName,
+				Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
+			super();
+			this.username = username;
+			this.password = password;
+			this.email = email;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.address = address;
+			this.mobile = mobile;
+			this.enabled = enabled;
+			this.role = role;
+			this.authorities = authorities;
+		}
 	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {

@@ -33,4 +33,18 @@ public class Client extends User{
 	}	
 	
 	public Client() {}
+	public Client(String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
+		super();
+		setUsername(username);
+		setPassword(password);
+		setEmail(email);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setAddress(address);
+		setMobile(mobile);
+		setEnabled(enabled);
+		setRole(role);
+		setAuthorities(authorities);
+	}
 }
