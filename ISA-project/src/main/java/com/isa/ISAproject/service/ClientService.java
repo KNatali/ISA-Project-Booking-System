@@ -55,6 +55,9 @@ public class ClientService {
 		client.setEnabled(true);
 		return client;
 	}
+	public void changePassword(String newPassword) {
+		
+	}
 	
 	
 }
