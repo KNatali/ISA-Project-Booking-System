@@ -48,6 +48,7 @@ import { UserService } from './service/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
+import { SortBoatsComponent } from './sort-boats/sort-boats.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ConfirmRegistrationClientComponent } from './confirm-registration-clien
     NavbarLoginComponent,
     NavbarProfileComponent,
     InstructorAdventureProfileComponent,
-    ConfirmRegistrationClientComponent
+    ConfirmRegistrationClientComponent,
+    SortBoatsComponent
 
   ],
   imports: [
