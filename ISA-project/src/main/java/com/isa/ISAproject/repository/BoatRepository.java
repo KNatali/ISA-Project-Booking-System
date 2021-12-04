@@ -13,4 +13,5 @@ public interface BoatRepository extends JpaRepository<Boat, Long> {
 	List<Boat> findByMotorPower(double motorPower);
 	List<Boat> findByMotorPowerAndMotorNumber(double motorPower, int motorNumber);
 	List<Boat> findByOrderByName();
+	List<Boat> findByOrderByGradeDesc();
 }

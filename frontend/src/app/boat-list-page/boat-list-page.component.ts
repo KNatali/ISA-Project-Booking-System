@@ -35,6 +35,10 @@ export class BoatListPageComponent implements OnInit {
     this.boatService.sortByName()
     .subscribe(res=>this.boats=res)
   }
+  sortByGrade(){
+    this.boatService.sortByGrade()
+    .subscribe(res=>this.boats=res)
+  }
   findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number){
     
   }
