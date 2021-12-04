@@ -79,6 +79,24 @@ public class ClientController {
 		
 		return new ResponseEntity<>(new ClientProfileDTO(updatedClient),HttpStatus.OK);
 	}
+	@RequestMapping(value="api/clients/change-password/{id}",method = RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<ClientProfileDTO> changePassword(@RequestBody ClientProfileDTO clientDTO,@PathVariable Long id){
+		
+		Client client = this.clientService.changePassword(clientDTO);
+		
+		return new ResponseEntity<>(new ClientProfileDTO(client),HttpStatus.OK);
+	}
+	/*
+	@RequestMapping(value="api/clients/change-password",method = RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Client> changePassword(@RequestBody ClientProfileDTO clientDTO){
+		Client client=new Client();
+		client = this.clientService.changePassword(clientDTO.getPassword(), clientDTO.getId());
+		return new ResponseEntity<>(client,HttpStatus.OK);
+	}*/
 
 
 

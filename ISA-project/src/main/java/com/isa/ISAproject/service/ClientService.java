@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.ClientProfileDTO;
@@ -18,6 +19,8 @@ import com.isa.ISAproject.repository.ClientRepository;
 public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private AddressService addressService;
 	
@@ -55,8 +58,15 @@ public class ClientService {
 		client.setEnabled(true);
 		return client;
 	}
-	public void changePassword(String newPassword) {
-		
+	public Client changePassword(ClientProfileDTO clientDTO) {
+		Optional<Client> clientOpt=this.findById(clientDTO.getId());
+		if(!clientOpt.isPresent()) {
+			return null;
+		}
+		Client client=clientOpt.get();
+		client.setPassword(passwordEncoder.encode(clientDTO.getPassword()));
+		Client newClient=this.clientRepository.save(client);
+		return newClient;
 	}
 	
 	
