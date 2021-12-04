@@ -24,4 +24,8 @@ export class ClientService {
   changePassword(client:Client):Observable<Client>{
     return this.http.put<Client>(this.url_changePassword+'/'+client.id,client);
   }
+  deleteById(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
+
 }

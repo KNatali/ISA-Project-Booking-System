@@ -88,15 +88,16 @@ public class ClientController {
 		
 		return new ResponseEntity<>(new ClientProfileDTO(client),HttpStatus.OK);
 	}
-	/*
-	@RequestMapping(value="api/clients/change-password",method = RequestMethod.PUT,
-			consumes=MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('CLIENT')")
-	public ResponseEntity<Client> changePassword(@RequestBody ClientProfileDTO clientDTO){
-		Client client=new Client();
-		client = this.clientService.changePassword(clientDTO.getPassword(), clientDTO.getId());
-		return new ResponseEntity<>(client,HttpStatus.OK);
-	}*/
+	@RequestMapping(value = "api/clients/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity delete(@PathVariable Long id){
+		Optional<Client> clientOpt=this.clientService.findById(id);
+		if(!clientOpt.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		this.clientService.delete(clientOpt.get());
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 
 
 

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Client } from '../model/client';
+import { AuthenticationService } from '../service/authentication.service';
 import { ClientService } from '../service/client.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-profile',
@@ -29,7 +31,7 @@ export class ClientProfileComponent implements OnInit {
   profil_info_available:boolean;
   change_password_available:boolean;
   sta:string;
-  constructor(private clientService:ClientService) { 
+  constructor(private clientService:ClientService,private loginService: AuthenticationService, private router: Router) { 
     this.edit_form_available=false;
     this.profil_info_available=true;
     this.change_password_available=false;
@@ -68,6 +70,14 @@ export class ClientProfileComponent implements OnInit {
       this.clientService.changePassword(this.client)
       .subscribe();
     }
-
+  }
+  deleteClient(){
+    this.clientService.deleteById(this.client.id)
+    .subscribe();
+    this.logOut();
+  }
+  logOut() {
+    this.loginService.logOut();
+    this.router.navigate(['']);
   }
 }
