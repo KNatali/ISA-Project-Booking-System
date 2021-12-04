@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.isa.ISAproject.model.Boat;
@@ -29,5 +30,8 @@ public class BoatService {
 	}
 	public List<Boat> findByMotorPowerAndMotorNumber(double motorPower, int motorNumber){
 		return this.boatRepository.findByMotorPowerAndMotorNumber(motorPower,motorNumber);
+	}
+	public List<Boat> sortByName(){
+		return this.boatRepository.findByOrderByName();
 	}
 }
