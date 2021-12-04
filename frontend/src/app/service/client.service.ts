@@ -17,4 +17,7 @@ export class ClientService {
   activateById(id:number) :Observable<Client>{
     return this.http.get<Client>(`${this.url_confirm}/${id}`);
   }
+  updateClient(client:Client):Observable<Client>{
+    return this.http.put<Client>(this.url+'/'+client.id,client)
+  }
 }

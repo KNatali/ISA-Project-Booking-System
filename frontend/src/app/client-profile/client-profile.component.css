@@ -43,4 +43,10 @@
   #delete {
     background-color: rgb(233, 101, 101);
   }
+  input{
+    margin-right: 10px;
+  }
+  .btn{
+    margin: 10px;
+  }
   

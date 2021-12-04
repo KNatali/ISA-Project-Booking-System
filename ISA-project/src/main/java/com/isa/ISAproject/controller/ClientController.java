@@ -70,6 +70,16 @@ public class ClientController {
 		User newUser=this.
 		return new ResponseEntity<>(new ItemDTO(savedItem),HttpStatus.CREATED);
 	}*/
+	@RequestMapping(value="api/clients/{id}",method = RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<ClientProfileDTO> update(@RequestBody ClientProfileDTO clientDTO,@PathVariable Long id){
+		
+		Client updatedClient=this.clientService.update(clientDTO);
+		
+		return new ResponseEntity<>(new ClientProfileDTO(updatedClient),HttpStatus.OK);
+	}
+
 
 
 }
