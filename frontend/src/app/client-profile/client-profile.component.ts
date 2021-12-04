@@ -64,6 +64,9 @@ export class ClientProfileComponent implements OnInit {
     }else{
       this.profil_info_available=true;
       this.change_password_available=false;
+      this.client.password=this.newPassword1;
+      this.clientService.changePassword(this.client)
+      .subscribe();
     }
 
   }

@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 export class ClientService {
   url = "http://localhost:8090/api/clients";
   url_confirm="http://localhost:8090/confirm-registration-client";
+  url_changePassword="http://localhost:8090/api/clients/change-password";
 
   constructor(private http: HttpClient) { }
   getById(id: number): Observable<Client> {
@@ -19,5 +20,8 @@ export class ClientService {
   }
   updateClient(client:Client):Observable<Client>{
     return this.http.put<Client>(this.url+'/'+client.id,client)
+  }
+  changePassword(client:Client):Observable<Client>{
+    return this.http.put<Client>(this.url_changePassword+'/'+client.id,client);
   }
 }
