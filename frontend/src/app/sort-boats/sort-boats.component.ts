@@ -11,6 +11,8 @@ export class SortBoatsComponent implements OnInit {
   constructor(private boatService: BoatService) { }
   @Output()
   SortedByName:EventEmitter<void>=new EventEmitter();
+  @Output()
+  SortedByGrade:EventEmitter<void>=new EventEmitter();
 
   ngOnInit(): void {
   }
@@ -18,6 +20,8 @@ export class SortBoatsComponent implements OnInit {
     this.SortedByName.next();
   }
   sortByStreet(){}
-  sortByGrade(){}
+  sortByGrade(){
+    this.SortedByGrade.next();
+  }
 
 }

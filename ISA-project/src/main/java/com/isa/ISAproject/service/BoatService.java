@@ -34,4 +34,7 @@ public class BoatService {
 	public List<Boat> sortByName(){
 		return this.boatRepository.findByOrderByName();
 	}
+	public List<Boat> sortByGrade(){
+		return this.boatRepository.findByOrderByGradeDesc();
+	}
 }
