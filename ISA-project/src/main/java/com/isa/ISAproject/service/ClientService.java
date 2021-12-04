@@ -68,6 +68,9 @@ public class ClientService {
 		Client newClient=this.clientRepository.save(client);
 		return newClient;
 	}
-	
+	public void delete(Client client) {
+		this.clientRepository.delete(client);
+	}
+
 	
 }
