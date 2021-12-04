@@ -49,4 +49,8 @@
   .btn{
     margin: 10px;
   }
+  .error{
+    color: red;
+    border: seashell;
+  }
   
