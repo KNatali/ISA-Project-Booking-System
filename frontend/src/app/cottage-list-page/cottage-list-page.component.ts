@@ -27,5 +27,17 @@ export class CottageListPageComponent implements OnInit {
     this.cottageService.findCottageByAddress(address)
     .subscribe(res=>this.cottages=res);
   }
+  sortByName(){
+    this.cottageService.sortByName()
+    .subscribe(res=>this.cottages=res)
+  }
+  sortByCity(){
+    this.cottageService.sortByCity()
+    .subscribe(res=>this.cottages=res)
+  }
+  sortByGrade(){
+    this.cottageService.sortByGrade()
+    .subscribe(res=>this.cottages=res)
+  }
 
 }
