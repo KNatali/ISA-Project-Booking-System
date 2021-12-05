@@ -38,4 +38,7 @@ export class BoatService {
   sortByGrade():Observable<Boat[]>{
     return this.http.get<Boat[]>(this.urlBoats+"/sort-by-grade");
   }
+  sortByCity():Observable<Boat[]>{
+    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-city");
+  }
 }
