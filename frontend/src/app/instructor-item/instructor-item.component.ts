@@ -26,5 +26,7 @@ export class InstructorItemComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.instructor)
   }
-  seeAdvetures(){}
+  seeAdvetures(){
+    
+  }
 }

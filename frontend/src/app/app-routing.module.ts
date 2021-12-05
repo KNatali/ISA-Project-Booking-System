@@ -15,6 +15,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
+import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
+import { InstructorsAdventureListComponent } from './instructors-adventure-list/instructors-adventure-list.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -32,7 +34,8 @@ const routes: Routes = [
   { path: 'boats/:id', component: BoatDetailsPageComponent },
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
-  { path: 'confirm-registration/:id',component:ConfirmRegistrationClientComponent}
+  { path: 'confirm-registration/:id',component:ConfirmRegistrationClientComponent},
+  { path: 'instructors/adventures/client/:id',component:InstructorsAdventureListComponent}
 ];
 
 @NgModule({

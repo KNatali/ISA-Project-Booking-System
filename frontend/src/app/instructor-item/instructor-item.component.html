@@ -4,7 +4,7 @@
 <td>{{instructor.city}}</td>
 <td>{{instructor.grade}}</td>
 <td>
-    <button class="btn btn-info" (click)="seeAdvetures()">more</button>
+    <button class="btn btn-info" (click)="seeAdvetures()"><a [routerLink]="['/instructors/adventures/client',instructor.id]">More</a></button>
 </td>
 
 
