@@ -21,7 +21,7 @@ public class InstructorMapper {
 				i.getId(),
 				i.getRole(),
 
-				i.getBiography()
+				i.getBiography(),
 
 				i.getGrade()
 

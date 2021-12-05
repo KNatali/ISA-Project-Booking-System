@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'cottages', component: CottageListPageComponent },
   { path: 'boats', component: BoatListPageComponent },
-  { path: 'intructors',component:InstructorListComponent},
+  { path: 'intructors', component: InstructorListComponent },
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent },
@@ -37,9 +37,9 @@ const routes: Routes = [
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
 
-  { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent }
+  { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
 
-  { path: 'confirm-registration/:id',component:ConfirmRegistrationClientComponent}
+  { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent }
 
 ];
 

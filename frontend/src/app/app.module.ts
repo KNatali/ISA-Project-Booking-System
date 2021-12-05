@@ -102,7 +102,7 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
     AdventureEquipmentEditComponent,
     AdventureAdditionalItemsEditComponent,
     AdventureRulesEditComponent,
-    InstructorAddAdventureComponent
+    InstructorAddAdventureComponent,
 
     ConfirmRegistrationClientComponent,
     SortBoatsComponent,

@@ -127,6 +127,7 @@ public class InstructorProfileDTO {
 		this.mobile = mobile;
 		this.id=id;
 		this.role=role;
+		this.biography=biography;
 	this.grade=grade;
 
 	}
