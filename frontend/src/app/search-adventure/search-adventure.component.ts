@@ -28,7 +28,10 @@ export class SearchAdventureComponent implements OnInit {
       city: '',
       state: '',
       mobile: '',
+      biography: '',
+
       grade:0
+
     });
   }
 

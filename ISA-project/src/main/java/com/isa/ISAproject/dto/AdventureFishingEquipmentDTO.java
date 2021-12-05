@@ -21,5 +21,9 @@ public class AdventureFishingEquipmentDTO {
 		this.name = name;
 	}
 	
+	public AdventureFishingEquipmentDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

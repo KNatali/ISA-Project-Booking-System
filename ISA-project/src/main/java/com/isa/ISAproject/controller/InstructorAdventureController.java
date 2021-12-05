@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,16 @@ public class InstructorAdventureController {
 	private AddressService addressService;
 	
 	
+	@RequestMapping(value="/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<?> editAdventure(@RequestBody AdventureDTO dto,@PathVariable Long id){
+		this.adventureService.editAdventure(id, dto);
+		
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value="equipment/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
@@ -56,30 +67,36 @@ public class InstructorAdventureController {
 		return new ResponseEntity<>(item,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="rules/{id}",method = RequestMethod.GET,produces=
-			MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="equipment/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<List<AdventureBehavioralRuleDTO>> getAdventureRules(@PathVariable Long id){
-		List<AdventureBehavioralRuleDTO> item=adventureService.getAdventureRules(id);
+	public ResponseEntity<?> saveNewEquipment(@RequestBody AdventureFishingEquipmentDTO dto,@PathVariable Long id){
+		this.adventureService.saveNewEquipment(id, dto);
 		
-		if(item==null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
 		
-		return new ResponseEntity<>(item,HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="additionalItems/{id}",method = RequestMethod.GET,produces=
-			MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="equipmentEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<List<AdditionalItemDTO>> getAdventureAdditionalItems(@PathVariable Long id){
-		List<AdditionalItemDTO> item=adventureService.getAdventureAdditionalItems(id);
+	public ResponseEntity<?> editEquipment(@RequestBody AdventureFishingEquipmentDTO dto,@PathVariable Long id){
+		this.adventureService.editEquipment(id, dto);
 		
-		if(item==null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="equipment/{adventureId}/{equipmentId}",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<?> deleteEquipment(@PathVariable(name="adventureId") Long adventureId,@PathVariable(name="equipmentId") Long equipmentId){
+		if(this.adventureService.deleteEquipment(adventureId,equipmentId)) {
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>(item,HttpStatus.OK);
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	
 	
 }

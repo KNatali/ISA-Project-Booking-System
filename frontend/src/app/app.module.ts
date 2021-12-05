@@ -29,7 +29,9 @@ import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
 
 
+
 import { LightgalleryModule } from 'lightgallery/angular';
+
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
 import { SearchBoatComponent } from './search-boat/search-boat.component';
@@ -47,11 +49,19 @@ import { NavbarProfileComponent } from './navbar-profile/navbar-profile.componen
 import { UserService } from './service/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
+
+import { InstructorAdventureEditComponent } from './instructor-adventure-edit/instructor-adventure-edit.component';
+import { AdventureEquipmentEditComponent } from './adventure-equipment-edit/adventure-equipment-edit.component';
+import { AdventureAdditionalItemsEditComponent } from './adventure-additional-items-edit/adventure-additional-items-edit.component';
+import { AdventureRulesEditComponent } from './adventure-rules-edit/adventure-rules-edit.component';
+import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
+
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { SortBoatsComponent } from './sort-boats/sort-boats.component';
 import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorItemComponent } from './instructor-item/instructor-item.component';
+
 
 @NgModule({
   declarations: [
@@ -86,11 +96,19 @@ import { InstructorItemComponent } from './instructor-item/instructor-item.compo
     NavbarLoginComponent,
     NavbarProfileComponent,
     InstructorAdventureProfileComponent,
+
+    InstructorAdventureEditComponent,
+    AdventureEquipmentEditComponent,
+    AdventureAdditionalItemsEditComponent,
+    AdventureRulesEditComponent,
+    InstructorAddAdventureComponent
+
     ConfirmRegistrationClientComponent,
     SortBoatsComponent,
     SortCottagesComponent,
     InstructorListComponent,
     InstructorItemComponent
+
 
   ],
   imports: [
@@ -106,8 +124,7 @@ import { InstructorItemComponent } from './instructor-item/instructor-item.compo
     FlexLayoutModule,
     MatTabsModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
-    LightgalleryModule
+    ReactiveFormsModule
 
   ],
   providers: [{

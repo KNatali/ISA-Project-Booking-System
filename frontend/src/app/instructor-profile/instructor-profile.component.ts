@@ -22,7 +22,10 @@ export class InstructorProfileComponent implements OnInit {
     street: '',
     city: '',
     state: '',
-    mobile: ''
+    mobile: '',
+    biography: ''
+
+
   });
   @Input() id: number;
 

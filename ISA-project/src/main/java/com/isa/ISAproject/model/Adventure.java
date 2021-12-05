@@ -31,9 +31,12 @@ public class Adventure {
 	private String description;
 	@Column
 	private double averageGrade;
+	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Instructor instructor;
 	
+	@Column
+	private double price;
 
 	@Column
 	private String mainPicture;
@@ -53,9 +56,9 @@ public class Adventure {
 	@JoinTable(name="adventure_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
+	
 	@Column
-	@Enumerated(EnumType.STRING)
-	private CancellationPolicy cancellation;
+	private int cancellationPercentage;
 
 	@OneToMany(mappedBy="adventure")
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
@@ -119,6 +122,14 @@ public class Adventure {
 		this.averageGrade = averageGrade;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	public Instructor getInstructor() {
 		return instructor;
 	}
@@ -160,12 +171,14 @@ public class Adventure {
 		this.rules = rules;
 	}
 
-	public CancellationPolicy getCancellation() {
-		return cancellation;
+	
+
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
 	}
 
-	public void setCancellation(CancellationPolicy cancellation) {
-		this.cancellation = cancellation;
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
 	}
 
 	public Set<AdditionalItem> getAdditionalItems() {
@@ -176,23 +189,24 @@ public class Adventure {
 		this.additionalItems = additionalItems;
 	}
 
-	public Adventure(Long id, String name, Address address, String description, double averageGrade,
+	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
 			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			CancellationPolicy cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
+			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
 		this.averageGrade = averageGrade;
+		this.price=price;
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
 		this.pictures = pictures;
 		this.maxPersons = maxPersons;
 		this.equipment = equipment;
 		this.rules = rules;
-		this.cancellation = cancellation;
+		this.cancellationPercentage = cancellation;
 		this.adventureFastReservations=fastReservations;
 		this.additionalItems=additionalItems;
 	}

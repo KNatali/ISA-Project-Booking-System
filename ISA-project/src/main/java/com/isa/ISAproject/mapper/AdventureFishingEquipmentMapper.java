@@ -31,4 +31,9 @@ public class AdventureFishingEquipmentMapper {
 		return equipmentDTO;
 	}
 	
+	public static AdventureFishingEquipment convertFromDTO(AdventureFishingEquipmentDTO dto) {
+		AdventureFishingEquipment equipment=new AdventureFishingEquipment(dto.getId(),dto.getName());
+		return equipment;
+		
+	}
 }

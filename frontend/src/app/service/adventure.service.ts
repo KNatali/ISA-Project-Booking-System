@@ -11,9 +11,7 @@ import { Adventure } from '../model/adventure';
 })
 export class AdventureService {
   urlAdventures = "http://localhost:8090/api/adventures";
-  urlEquipment = "http://localhost:8090/api/instructor/adventure/equipment";
-  urlRules = "http://localhost:8090/api/instructor/adventure/rules";
-  urlItems = "http://localhost:8090/api/instructor/adventure/additionalItems";
+  urlAdventure = "http://localhost:8090/api/instructor/adventure";
 
   constructor(private http: HttpClient) { }
 
@@ -24,16 +22,30 @@ export class AdventureService {
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);
   }
   getAdventureEquipment(id: number): Observable<AdventureFishingEquipment[]> {
-    return this.http.get<AdventureFishingEquipment[]>(`${this.urlEquipment}/${id}`);
+    return this.http.get<AdventureFishingEquipment[]>(`${this.urlAdventure}/` + `equipment` + `/${id}`);
   }
 
   getAdventureBehavioralRules(id: number): Observable<AdventureBehavioralRules[]> {
-    return this.http.get<AdventureBehavioralRules[]>(`${this.urlRules}/${id}`);
+    return this.http.get<AdventureBehavioralRules[]>(`${this.urlAdventure}/` + `rules` + `/${id}`);
+  }
+  getAdventureAdditionalItems(id: number): Observable<AdditionalItem[]> {
+    return this.http.get<AdditionalItem[]>(`${this.urlAdventure}/` + `additionalItems` + `/${id}`);
   }
 
-  getAdventureAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlItems}/${id}`);
+  updateAdvenuture(id: number, data: Adventure): Observable<Adventure> {
+    return this.http.post<Adventure>(`${this.urlAdventure}/${id}`, data);
   }
+
+  saveAdventureEquipment(id: number, data: AdventureFishingEquipment): Observable<AdventureFishingEquipment> {
+    return this.http.post<AdventureFishingEquipment>(`${this.urlAdventure}/` + `equipment` + `/${id}`, data);
+  }
+  updateAdvenutureEquipment(id: number, data: AdventureFishingEquipment): Observable<AdventureFishingEquipment> {
+    return this.http.post<AdventureFishingEquipment>(`${this.urlAdventure}/` + `equipmentEdit` + `/${id}`, data);
+  }
+  deleteAdventureEquipment(adventureId: number, equipmentId: number): Observable<AdventureFishingEquipment> {
+    return this.http.post<AdventureFishingEquipment>(`${this.urlAdventure}/${adventureId}/${equipmentId}`, null);
+  }
+
   findByInstructorFirstAndLastName(firstName: string, lastName: string): Observable<Adventure[]> {
     const params = new HttpParams()
       .set('firstName', firstName)

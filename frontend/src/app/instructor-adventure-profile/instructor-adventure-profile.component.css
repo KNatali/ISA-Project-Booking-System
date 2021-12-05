@@ -49,6 +49,12 @@
   height: 420px;
 }
 
+#price {
+  color: green;
+  font-weight: bolder;
+  font-size: 22px;
+}
+
 img {
   height: 140px;
 }

@@ -9,7 +9,11 @@ export interface InstructorInterface {
     city: string;
     email: string;
     mobile: string;
+
+    biography: string;
+
     grade?:number;
+
 
 }
 export class Instructor implements InstructorInterface {
@@ -23,7 +27,10 @@ export class Instructor implements InstructorInterface {
     city: string;
     email: string;
     mobile: string;
+    biography: string;
+
     grade?:number| undefined;
+
     constructor(obj: InstructorInterface) {
         this.id = obj.id;
         this.firstName = obj.firstName;
@@ -35,7 +42,12 @@ export class Instructor implements InstructorInterface {
         this.state = obj.state;
         this.email = obj.email;
         this.mobile = obj.mobile;
+
+        this.biography = obj.biography;
+
+
         this.grade=obj.grade;
+
     }
 
 

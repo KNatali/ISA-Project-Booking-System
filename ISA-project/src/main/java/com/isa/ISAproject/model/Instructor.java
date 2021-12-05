@@ -17,19 +17,37 @@ public class Instructor extends User{
 	
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Adventure> adventures=new HashSet<>();
-
+	
+	@Column(columnDefinition="LONGTEXT")
+	private String biography;
+	
 	public Set<Adventure> getAdventures() {
 		return adventures;
 	}
+	
+
+	public String getBiography() {
+		return biography;
+	}
+
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
+
 
 	public void setAdventures(Set<Adventure> adventures) {
 		this.adventures = adventures;
 	}
 
-	public Instructor(Set<Adventure> adventures,double grade) {
+
+	public Instructor(Set<Adventure> adventures,String biography,double grade) {
 		super();
 		this.adventures = adventures;
-		this.grade=grade;
+		this.biography=biography;
+    this.grade=grade;
+
+
 	}
 	
 	
