@@ -40,11 +40,11 @@ insert into user_authority (user_id,authority_id) values (4,3);
 insert into user_authority (user_id,authority_id) values (5,4);
 insert into user_authority (user_id,authority_id) values (6,3);
 
-insert into instructor (id) values (1);
-insert into instructor (id) values (2);
-insert into instructor (id) values (3);
-insert into instructor (id) values (4);
-insert into instructor (id) values (6);
+insert into instructor (id,grade) values (1,3);
+insert into instructor (id,grade) values (2,4);
+insert into instructor (id,grade) values (3,3);
+insert into instructor (id,grade) values (4,5);
+insert into instructor (id,grade) values (6,2);
 
 insert into client (id) values (5);
 
@@ -69,6 +69,8 @@ insert into adventure(name,description,average_grade,max_persons,main_picture,ad
 values('The Long Run Sportfishing','No matter what kind of fishing trip you’re looking for, The Long Run is at your disposal. She’s a 40’ Hershine boat that’s got plenty of room for up to 6 anglers to be fishing in comfort. This is a spacious vessel with a pair of private heads, an outfitted kitchen, an air-conditioned cabin, and more.On shorter trips, you can expect to target Barracuda, Dorado, Yellowtail or bottom fish such as Lingcod, Sand Bass, Rockfish, and Halibut. Overnight trips will take you out for Yellowfin, Bluefin and Albacore Tuna, Dorado, Yellowtail, Marlin, and more. During shorter trips, you can also leave some lobster hoops in pristine locations when the season is open.All the fishing equipment, including bait, is provided for your convenience – all you need to do is get that daily license and some food and beverages and start bagging fish! For maximum comfort, bring a pair of polarized sunglasses and get ready to have some fun.',0,7,'/assets/adventure/Adventure2.jpg',2,1,'FREE'); 
 insert into adventure(name,description,average_grade,max_persons,main_picture,address_id,instructor_id,cancellation) 
 values ('Reel Floridian Fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,5,'/assets/adventure/Adventure3.jpg',10,1,'FREE');
+insert into adventure(name,description,average_grade,max_persons,main_picture,address_id,instructor_id,cancellation) 
+values ('Fishing river','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,5,'/assets/adventure/Adventure6.jpg',1,2,'FREE');
 
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
 values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,1,100,'/assets/boats/slika1.jpeg',1);

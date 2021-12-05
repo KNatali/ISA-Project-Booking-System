@@ -22,7 +22,6 @@ export class InstructorPageComponent implements OnInit {
     city: '',
     state: '',
     mobile: ''
-
   });
 
   constructor(private instructorService: InstructorService, private route: ActivatedRoute) {

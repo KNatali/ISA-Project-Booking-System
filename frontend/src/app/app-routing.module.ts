@@ -14,6 +14,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
+import { InstructorListComponent } from './instructor-list/instructor-list.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'cottages', component: CottageListPageComponent },
   { path: 'boats', component: BoatListPageComponent },
+  { path: 'intructors',component:InstructorListComponent},
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent},

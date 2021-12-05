@@ -1,5 +1,5 @@
 export interface InstructorInterface {
-    id: number;
+    id?: number;
     firstName: string;
     lastName: string;
     username: string;
@@ -9,11 +9,11 @@ export interface InstructorInterface {
     city: string;
     email: string;
     mobile: string;
-
+    grade?:number;
 
 }
 export class Instructor implements InstructorInterface {
-    id: number;
+    id?: number;
     firstName: string;
     lastName: string;
     username: string;
@@ -23,6 +23,7 @@ export class Instructor implements InstructorInterface {
     city: string;
     email: string;
     mobile: string;
+    grade?:number| undefined;
     constructor(obj: InstructorInterface) {
         this.id = obj.id;
         this.firstName = obj.firstName;
@@ -34,7 +35,7 @@ export class Instructor implements InstructorInterface {
         this.state = obj.state;
         this.email = obj.email;
         this.mobile = obj.mobile;
-
+        this.grade=obj.grade;
     }
 
 
