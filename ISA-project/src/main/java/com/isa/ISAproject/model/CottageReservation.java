@@ -34,6 +34,8 @@ public class CottageReservation {
 	private double price;
 	@ManyToOne
 	private Client client;
+	@ManyToOne
+	private Cottage cottage;
 	
 	@OneToMany
 	private Set<CottageComplaint> cottageComplaints=new HashSet<>();
@@ -109,10 +111,19 @@ public class CottageReservation {
 	public void setCottageComplaints(Set<CottageComplaint> cottageComplaints) {
 		this.cottageComplaints = cottageComplaints;
 	}
+	
+
+	public Cottage getCottage() {
+		return cottage;
+	}
+
+	public void setCottage(Cottage cottage) {
+		this.cottage = cottage;
+	}
 
 	public CottageReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
 			Set<AdditionalItem> additionalItems, double price, Client client,
-			Set<CottageComplaint> cottageComplaints) {
+			Set<CottageComplaint> cottageComplaints,Cottage cottage) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -123,7 +134,9 @@ public class CottageReservation {
 		this.price = price;
 		this.client = client;
 		this.cottageComplaints = cottageComplaints;
+		this.cottage=cottage;
 	}
+	
 	
 	public CottageReservation() {}
 }

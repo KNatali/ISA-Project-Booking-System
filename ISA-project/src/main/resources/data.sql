@@ -31,6 +31,9 @@ insert into user (role, username, password, first_name, last_name, email, mobile
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','ana', '$2a$10$qELfQNNCVvxVYgDYv4XUue6QIJ2ca09BFPPC3/M9Ke6q8PqRLkvdy', 'Ana', 'Anic', 'ana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','lana', '$2a$10$PTOW/.r9dgjokBc60GGnIO6csC4ReF7ql/F21IE/spO4fhCQLP9XK', 'Lana', 'Laic', 'lana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','laza', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Laza', 'Anic', 'lazaa@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','dusko', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Dusko', 'Dusic', 'dusko@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','daca', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Danica', 'Danicic', 'dana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 
 
 insert into user_authority (user_id,authority_id) values (1,3);
@@ -39,6 +42,9 @@ insert into user_authority (user_id,authority_id) values (3,3);
 insert into user_authority (user_id,authority_id) values (4,3);
 insert into user_authority (user_id,authority_id) values (5,4);
 insert into user_authority (user_id,authority_id) values (6,3);
+insert into user_authority (user_id,authority_id) values (7,4);
+insert into user_authority (user_id,authority_id) values (8,4);
+insert into user_authority (user_id,authority_id) values (9,4);
 
 
 insert into instructor (id,biography,grade) values (1,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',3);
@@ -50,6 +56,9 @@ insert into instructor (id,biography,grade) values (6,'I was born and raised in 
 
 
 insert into client (id) values (5);
+insert into client (id) values (7);
+insert into client (id) values (8);
+insert into client (id) values (9);
 
 
 insert into adventure_fishing_equipment(name) values ('cumberland');
@@ -115,6 +124,20 @@ insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
  
+insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2015-02-20","06:30",1,10,5000,5,1);
+insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20","06:30",1,2,5000,8,2);
+insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20","06:30",1,3,5000,8,3);
+insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20","06:30",1,5,5000,9,2);
+
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,2);
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (3,3);
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,4);
+
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(5,1);
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,2);
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,3);
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,4);
 
 
 

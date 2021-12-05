@@ -46,6 +46,8 @@ public class Cottage {
 	private Set<Room> rooms=new HashSet<>();
 	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<CottageFastReservation> cottageFastReservations;
+	@OneToMany
+	private Set<CottageReservation> cottageReservations=new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -135,6 +137,29 @@ public class Cottage {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
+	public CottageOwner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(CottageOwner owner) {
+		this.owner = owner;
+	}
+
+	public Set<CottageBehavioralRule> getRules() {
+		return rules;
+	}
+
+	public void setRules(Set<CottageBehavioralRule> rules) {
+		this.rules = rules;
+	}
+
+	public Set<CottageReservation> getCottageReservations() {
+		return cottageReservations;
+	}
+
+	public void setCottageReservations(Set<CottageReservation> cottageReservations) {
+		this.cottageReservations = cottageReservations;
+	}
 
 	public Cottage(Long id, String name, Address address, String description, double grade, Set<String> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
@@ -153,5 +178,24 @@ public class Cottage {
 		this.mainPicture=mainPicture;
 	}
 	
+	
+	public Cottage(Long id, String name, Address address, String description, double grade, String mainPicture,
+			CottageOwner owner, Set<String> pictures, Set<CottageBehavioralRule> rules, Set<Room> rooms,
+			Set<CottageFastReservation> cottageFastReservations, Set<CottageReservation> cottageReservations) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.grade = grade;
+		this.mainPicture = mainPicture;
+		this.owner = owner;
+		this.pictures = pictures;
+		this.rules = rules;
+		this.rooms = rooms;
+		this.cottageFastReservations = cottageFastReservations;
+		this.cottageReservations = cottageReservations;
+	}
+
 	public Cottage () {}
 }
