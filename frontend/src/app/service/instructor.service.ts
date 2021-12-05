@@ -27,5 +27,14 @@ export class InstructorService {
   getInstructorAdventures(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor1}/${id}`);
   }
+  sortByName():Observable<Instructor[]>{
+    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-name");
+  }
+  sortByGrade():Observable<Instructor[]>{
+    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-grade");
+  }
+  sortByCity():Observable<Instructor[]>{
+    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-city");
+  }
 
 }

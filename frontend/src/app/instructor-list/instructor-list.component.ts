@@ -19,5 +19,16 @@ export class InstructorListComponent implements OnInit {
     this.instructorService.getInstructors()
     .subscribe(res=>this.instructors=res)
   }
-
+  sortBaName(){
+    this.instructorService.sortByName()
+    .subscribe(res=>this.instructors=res)
+  }
+  sortByGrade(){
+    this.instructorService.sortByGrade()
+    .subscribe(res=>this.instructors=res)
+  }
+  sortByCity(){
+    this.instructorService.sortByCity()
+    .subscribe(res=>this.instructors=res)
+  }
 }

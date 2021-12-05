@@ -28,7 +28,7 @@ import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 
 import com.isa.ISAproject.model.Boat;
-
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdventureService;
@@ -145,6 +145,24 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		
 		this.adventureService.delete(id);
 		return new ResponseEntity<>(aDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-name", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByFirstNameAndLastName(){
+		List<Instructor> instructors=this.instructorService.sortByFirstName();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-grade", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByGrade(){
+		List<Instructor> instructors=this.instructorService.sortByGrade();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-city", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByCity(){
+		List<Instructor> instructors=this.instructorService.sortByCity();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
 	}
 	
 }
