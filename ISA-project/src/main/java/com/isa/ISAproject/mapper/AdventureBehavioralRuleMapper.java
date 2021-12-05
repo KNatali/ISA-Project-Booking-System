@@ -11,4 +11,11 @@ public class AdventureBehavioralRuleMapper {
 		AdventureBehavioralRuleDTO aDTO=new AdventureBehavioralRuleDTO(a.getId(),a.getRule());
 		return aDTO;
 	}
+	
+	public static AdventureBehavioralRule convertFromDTO(AdventureBehavioralRuleDTO dto ) {
+		AdventureBehavioralRule rule=new AdventureBehavioralRule();
+		rule.setId(dto.getId());
+		rule.setRule(dto.getRule());
+		return rule;
+	}
 }

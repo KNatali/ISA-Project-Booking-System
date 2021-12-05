@@ -3,11 +3,8 @@ import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './.
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
 import { Component, OnInit } from '@angular/core';
 import { Adventure } from '../model/adventure';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
-import { VERSION } from '@angular/forms';
-import { BeforeSlideDetail } from 'lightgallery/lg-events';
-import lgZoom from 'lightgallery/plugins/zoom';
 
 @Component({
   selector: 'app-instructor-adventure-profile',
@@ -15,17 +12,14 @@ import lgZoom from 'lightgallery/plugins/zoom';
   styleUrls: ['./instructor-adventure-profile.component.css']
 })
 export class InstructorAdventureProfileComponent implements OnInit {
-  name = "Angular " + VERSION.major;
-  settings = {
-    counter: false,
-    plugin: [lgZoom]
-  };
+
+
   cancellation: any;
   id: number;
   adventure: Adventure;
   currentRate = 8;
 
-  constructor(private route: ActivatedRoute, private adventureService: AdventureService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -70,6 +64,10 @@ export class InstructorAdventureProfileComponent implements OnInit {
       this.adventureService.getAdventureAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => this.adventure.additionalItems = items);
     });
+  }
+
+  edit() {
+    this.router.navigate(['instructor/adventures/edit/:id'])
   }
 
 

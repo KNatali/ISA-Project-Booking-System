@@ -29,7 +29,7 @@
 
         <td>{{ adventure.averageGrade}}</td>
         <td><button mat-button [routerLink]="['/instructor/adventures',adventure.id]"><a>View</a></button></td>
-        <td><button mat-button><a>Edit</a></button></td>
+        <td><button mat-button [routerLink]="['/instructor/adventures/edit',adventure.id]"><a>Edit</a></button></td>
         <td><button mat-button id="delete"><a>Delete</a></button></td>
       </tr>
     </tbody>

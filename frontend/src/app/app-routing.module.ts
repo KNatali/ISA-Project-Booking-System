@@ -13,6 +13,7 @@ import { InstructorPageComponent } from './instructor-page/instructor-page.compo
 import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { InstructorAdventureEditComponent } from './instructor-adventure-edit/instructor-adventure-edit.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -22,13 +23,14 @@ const routes: Routes = [
   { path: 'boats', component: BoatListPageComponent },
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
-  { path: 'clients/:id', component: ClientPageComponent},
+  { path: 'clients/:id', component: ClientPageComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
   { path: 'boats/:id', component: BoatDetailsPageComponent },
   { path: 'client-profil', component: ClientPageComponent },
-  { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent }
+  { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
+  { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent }
 ];
 
 @NgModule({

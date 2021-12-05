@@ -8,4 +8,13 @@ public class AdditionalItemMapper {
 		AdditionalItemDTO aDTO=new AdditionalItemDTO(a.getId(),a.getName(),a.getPrice());
 		return aDTO;
 	}
+	
+	public static AdditionalItem convertFromDTO(AdditionalItemDTO aDTO) {
+		AdditionalItem a=new AdditionalItem();
+		a.setId(aDTO.getId());
+		a.setName(aDTO.getName());
+		a.setPrice(aDTO.getPrice());
+		return a;
+	}
 }
+
