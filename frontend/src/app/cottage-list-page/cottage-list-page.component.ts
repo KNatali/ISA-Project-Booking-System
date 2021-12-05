@@ -9,11 +9,19 @@ import { CottageService } from '../service/cottage.service';
 })
 export class CottageListPageComponent implements OnInit {
   cottages:Cottage[];
+  role:any;
+  visiable_sort_button:boolean;
 
   constructor(private cottageService : CottageService) { }
 
   ngOnInit(): void {
     this.getCottages();
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
   getCottages(){
     this.cottageService.getCottages()
@@ -39,5 +47,4 @@ export class CottageListPageComponent implements OnInit {
     this.cottageService.sortByGrade()
     .subscribe(res=>this.cottages=res)
   }
-
 }

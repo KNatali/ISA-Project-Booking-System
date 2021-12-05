@@ -10,6 +10,8 @@ import { Boat } from '../model/boat';
 export class BoatListPageComponent implements OnInit {
 
   boats:Boat[];
+  role:any;
+  visiable_sort_button:boolean;
 
   constructor(private boatService:BoatService) {
     this.boats=[];
@@ -17,6 +19,12 @@ export class BoatListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBoats();
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
 
   getBoats(){

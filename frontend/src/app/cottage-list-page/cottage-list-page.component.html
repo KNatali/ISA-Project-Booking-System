@@ -1,5 +1,5 @@
 <app-search-cottage (NameAdded)="findCottageByName($event)" (AddressAdded)="findCottageByAddress($event)"></app-search-cottage>
-<app-sort-cottages (SortedByName)="sortByName()"
+<app-sort-cottages *ngIf="visiable_sort_button" (SortedByName)="sortByName()"
                     (SortedByGrade)="sortByGrade()"
                     (SortedByCity)="sortByCity()"></app-sort-cottages>
 <app-cottage-list-item [cottages]="cottages" ></app-cottage-list-item>
