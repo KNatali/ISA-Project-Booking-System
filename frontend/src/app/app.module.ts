@@ -61,6 +61,7 @@ import { SortBoatsComponent } from './sort-boats/sort-boats.component';
 import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorItemComponent } from './instructor-item/instructor-item.component';
+import { SortInstructorsComponent } from './sort-instructors/sort-instructors.component';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { InstructorItemComponent } from './instructor-item/instructor-item.compo
     SortBoatsComponent,
     SortCottagesComponent,
     InstructorListComponent,
-    InstructorItemComponent
+    InstructorItemComponent,
+    SortInstructorsComponent
 
 
   ],
