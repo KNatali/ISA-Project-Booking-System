@@ -49,6 +49,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { SortBoatsComponent } from './sort-boats/sort-boats.component';
+import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { SortBoatsComponent } from './sort-boats/sort-boats.component';
     NavbarProfileComponent,
     InstructorAdventureProfileComponent,
     ConfirmRegistrationClientComponent,
-    SortBoatsComponent
+    SortBoatsComponent,
+    SortCottagesComponent
 
   ],
   imports: [

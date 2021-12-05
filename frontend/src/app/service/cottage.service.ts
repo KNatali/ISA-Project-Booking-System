@@ -25,6 +25,14 @@ export class CottageService {
     const params:HttpParams=new HttpParams().append('address',address);
     return this.http.get<Cottage[]>(this.urlCottage,{params});
   }
-
+  sortByName():Observable<Cottage[]>{
+    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-name");
+  }
+  sortByGrade():Observable<Cottage[]>{
+    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-grade");
+  }
+  sortByCity():Observable<Cottage[]>{
+    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-city");
+  }
 
 }
