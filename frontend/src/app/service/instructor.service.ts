@@ -12,6 +12,7 @@ export class InstructorService {
   urlInstructor1 = "http://localhost:8090/api/instructors/adventures";
 
 
+  urlInstructor_advetures = "http://localhost:8090/api/instructors/adventures/client";
   constructor(private http: HttpClient) { }
   getInstructors():Observable<Instructor[]>{
     return this.http.get<Instructor[]>(this.urlInstructor);
@@ -26,6 +27,9 @@ export class InstructorService {
   }
   getInstructorAdventures(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor1}/${id}`);
+  }
+  getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
+    return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
   }
   sortByName():Observable<Instructor[]>{
     return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-name");

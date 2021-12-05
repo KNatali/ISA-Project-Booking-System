@@ -163,5 +163,27 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		List<Instructor> instructors=this.instructorService.sortByCity();
 		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
 	}
+	@RequestMapping(
+			value="api/instructors/adventures/client/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> adventuresForInstrucotr(@PathVariable(name="id") Long id){
+		
+		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
+		
+		if(!itemOptionals.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Instructor instructor=itemOptionals.get();
+			Set<Adventure> adventures=instructor.getAdventures();
+			List<AdventureDTO> adventuresDTO=new ArrayList<>();
+			
+			for(Adventure a:adventures) {
+				AdventureDTO adventure=AdventureMapper.convertToDTO(a);
+				adventuresDTO.add(adventure);
+			}
+			
+			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
+	}
 	
 }
