@@ -50,6 +50,8 @@ import { InstructorAdventureProfileComponent } from './instructor-adventure-prof
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { SortBoatsComponent } from './sort-boats/sort-boats.component';
 import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
+import { InstructorListComponent } from './instructor-list/instructor-list.component';
+import { InstructorItemComponent } from './instructor-item/instructor-item.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,9 @@ import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
     InstructorAdventureProfileComponent,
     ConfirmRegistrationClientComponent,
     SortBoatsComponent,
-    SortCottagesComponent
+    SortCottagesComponent,
+    InstructorListComponent,
+    InstructorItemComponent
 
   ],
   imports: [

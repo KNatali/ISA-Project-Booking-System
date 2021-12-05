@@ -1,6 +1,6 @@
 import { AuthenticationService } from './../service/authentication.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output ,EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,9 @@ export class NavbarProfileComponent implements OnInit {
   dash_url = '/';
   id: any;
   role:any;
+
+  @Output()
+  LogOut:EventEmitter<void> = new EventEmitter();
 
   constructor(private _http: HttpClient, private loginService: AuthenticationService, private router: Router) { }
 
@@ -44,6 +47,7 @@ export class NavbarProfileComponent implements OnInit {
 
   logOut() {
     this.loginService.logOut();
+    this.LogOut.next();
     this.router.navigate(['']);
   }
 

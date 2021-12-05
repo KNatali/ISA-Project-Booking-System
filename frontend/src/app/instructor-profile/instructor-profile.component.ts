@@ -23,7 +23,6 @@ export class InstructorProfileComponent implements OnInit {
     city: '',
     state: '',
     mobile: ''
-
   });
   @Input() id: number;
 
