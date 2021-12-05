@@ -1,5 +1,6 @@
 <app-search-boat (MotorNumberAdded)="findBoatByMotorMuber($event)"
  (MotorPowerAdded)="findBoatByMotorPower($event)"></app-search-boat>
 <app-sort-boats (SortedByName)="sortByName()"
-                (SortedByGrade)="sortByGrade()"></app-sort-boats>
+                (SortedByGrade)="sortByGrade()"
+                (SortedByCity)="sortByCity()"></app-sort-boats>
 <app-boat-list-item [boats]=boats ></app-boat-list-item>

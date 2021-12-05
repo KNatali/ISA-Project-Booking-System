@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.BoatRepository;
 
 @Component
 public class BoatService {
 	@Autowired
 	private BoatRepository boatRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	public List<Boat> findAll(){
 		return this.boatRepository.findAll();
@@ -36,5 +42,18 @@ public class BoatService {
 	}
 	public List<Boat> sortByGrade(){
 		return this.boatRepository.findByOrderByGradeDesc();
+	}
+	public List<Boat> sortByCity(){
+		List<Boat> allBoats=this.boatRepository.findAll();
+		List<Address> allAddressesSortByCities=this.addressRepository.findByOrderByCity();
+		List<Boat> res=new ArrayList<>();
+		for (Address address : allAddressesSortByCities) {
+			for (Boat boat : allBoats) {
+				if(boat.getAddress().getId().equals(address.getId())  ) {
+					res.add(boat);
+				}
+			}
+		}
+		return res;
 	}
 }

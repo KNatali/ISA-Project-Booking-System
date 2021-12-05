@@ -13,13 +13,17 @@ export class SortBoatsComponent implements OnInit {
   SortedByName:EventEmitter<void>=new EventEmitter();
   @Output()
   SortedByGrade:EventEmitter<void>=new EventEmitter();
+  @Output()
+  SortedByCity:EventEmitter<void>=new EventEmitter();
 
   ngOnInit(): void {
   }
   sortByName(){
     this.SortedByName.next();
   }
-  sortByStreet(){}
+  sortByCity(){
+    this.SortedByCity.next();
+  }
   sortByGrade(){
     this.SortedByGrade.next();
   }
