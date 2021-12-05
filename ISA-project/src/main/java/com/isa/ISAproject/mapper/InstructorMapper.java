@@ -20,7 +20,11 @@ public class InstructorMapper {
 				i.getMobile(),
 				i.getId(),
 				i.getRole(),
+
 				i.getBiography()
+
+				i.getGrade()
+
 				);
 		return instructorDTO;
 	}

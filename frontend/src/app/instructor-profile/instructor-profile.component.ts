@@ -25,6 +25,7 @@ export class InstructorProfileComponent implements OnInit {
     mobile: '',
     biography: ''
 
+
   });
   @Input() id: number;
 

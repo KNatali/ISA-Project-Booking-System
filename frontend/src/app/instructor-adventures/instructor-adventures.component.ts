@@ -24,7 +24,11 @@ export class InstructorAdventuresComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
-    biography: ''
+
+    biography: '',
+
+
+    grade:0
 
   });
   @Input() id: number;

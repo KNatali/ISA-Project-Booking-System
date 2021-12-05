@@ -12,7 +12,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Instructor extends User{
-	
+	@Column
+	private double grade;
 	
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Adventure> adventures=new HashSet<>();
@@ -39,11 +40,24 @@ public class Instructor extends User{
 		this.adventures = adventures;
 	}
 
-	public Instructor(Set<Adventure> adventures,String biography) {
+
+	public Instructor(Set<Adventure> adventures,String biography,double grade) {
 		super();
 		this.adventures = adventures;
 		this.biography=biography;
+    this.grade=grade;
+
+
 	}
 	
+	
+	public double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
+
 	public Instructor() {}
 }

@@ -55,4 +55,22 @@ public class CottageController {
 		List<Cottage> cottages=this.cottageService.findByAddress(address);
 		return new ResponseEntity<>(cottages,HttpStatus.OK);
 	}
+	@RequestMapping(value="api/cottages/sort-by-name", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Cottage>> sortByName(){
+		List<Cottage> cottages=this.cottageService.sortByName();
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/sort-by-grade", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Cottage>> sortByGrade(){
+		List<Cottage> cottages=this.cottageService.sortByGrade();
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/sort-by-city", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Cottage>> sortByCity(){
+		List<Cottage> cottages=this.cottageService.sortByCity();
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
 }

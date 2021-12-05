@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,14 @@ public class ClientController {
 		
 		ClientProfileDTO itemDto=new ClientProfileDTO(item.get());
 		return new ResponseEntity<>(itemDto,HttpStatus.OK);
-	}/*
+	}
+	@RequestMapping(value="/confirm-registration-client/{id}",method = RequestMethod.GET,produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	public void confirmRegistrationForClient(@PathVariable Long id) {
+		//this.clientService.activateById(id);
+		this.clientService.save(this.clientService.activateById(id));
+	}
+	/*
 	@RequestMapping(value="api/clients",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientProfileDTO> save(@RequestBody ClientProfileDTO newClientProfileDTO){
@@ -62,6 +70,35 @@ public class ClientController {
 		User newUser=this.
 		return new ResponseEntity<>(new ItemDTO(savedItem),HttpStatus.CREATED);
 	}*/
+	@RequestMapping(value="api/clients/{id}",method = RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<ClientProfileDTO> update(@RequestBody ClientProfileDTO clientDTO,@PathVariable Long id){
+		
+		Client updatedClient=this.clientService.update(clientDTO);
+		
+		return new ResponseEntity<>(new ClientProfileDTO(updatedClient),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/clients/change-password/{id}",method = RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<ClientProfileDTO> changePassword(@RequestBody ClientProfileDTO clientDTO,@PathVariable Long id){
+		
+		Client client = this.clientService.changePassword(clientDTO);
+		
+		return new ResponseEntity<>(new ClientProfileDTO(client),HttpStatus.OK);
+	}
+	@RequestMapping(value = "api/clients/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity delete(@PathVariable Long id){
+		Optional<Client> clientOpt=this.clientService.findById(id);
+		if(!clientOpt.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		this.clientService.delete(clientOpt.get());
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+
 
 
 }

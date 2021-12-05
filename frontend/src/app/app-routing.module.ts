@@ -13,7 +13,12 @@ import { InstructorPageComponent } from './instructor-page/instructor-page.compo
 import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+
 import { InstructorAdventureEditComponent } from './instructor-adventure-edit/instructor-adventure-edit.component';
+
+import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
+import { InstructorListComponent } from './instructor-list/instructor-list.component';
+
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -21,6 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'cottages', component: CottageListPageComponent },
   { path: 'boats', component: BoatListPageComponent },
+  { path: 'intructors',component:InstructorListComponent},
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent },
@@ -30,7 +36,11 @@ const routes: Routes = [
   { path: 'boats/:id', component: BoatDetailsPageComponent },
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
+
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent }
+
+  { path: 'confirm-registration/:id',component:ConfirmRegistrationClientComponent}
+
 ];
 
 @NgModule({

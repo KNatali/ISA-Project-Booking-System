@@ -62,5 +62,23 @@ public class BoatController {
 		List<Boat> boats=this.boatService.findByMotorPowerAndMotorNumber(motorPower, motorNumber);
 		return new ResponseEntity<>(boats,HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boats/sort-by-name", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Boat>> sortByName(){
+		List<Boat> boats=this.boatService.sortByName();
+		return new ResponseEntity<>(boats,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/sort-by-grade", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Boat>> sortByGrade(){
+		List<Boat> boats=this.boatService.sortByGrade();
+		return new ResponseEntity<>(boats,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/sort-by-city", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Boat>> sortByCity(){
+		List<Boat> boats=this.boatService.sortByCity();
+		return new ResponseEntity<>(boats,HttpStatus.OK);
+	}
 
 }

@@ -21,8 +21,10 @@ export class InstructorPageComponent implements OnInit {
     street: '',
     city: '',
     state: '',
+
     mobile: '',
-    biography: '',
+    biography: ''
+
 
   });
 

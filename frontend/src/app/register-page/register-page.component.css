@@ -13,7 +13,7 @@
 label{
 	font-size: 20px;
 }
-h1{
+h1,h2,p{
 	text-align: center;
 } 
 .btn{
@@ -26,4 +26,7 @@ h5{
 }
 .error{
 	color: red;
+}
+.alert alert-success{
+	width: 50px;
 }

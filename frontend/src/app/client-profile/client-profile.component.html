@@ -1,4 +1,4 @@
-<div class="container rounded bg-white mt-5 mb-5" >
+<div class="container rounded bg-white mt-5 mb-5" *ngIf="profil_info_available">
     <div class="row">
       <div class="col-md-3 border-right">
         <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
@@ -38,8 +38,8 @@
             <div class="col-md-12"><label class="labels">State</label>
               <p>{{client.state}}</p>
             </div>
-            <div class="col-md-12"><label class="labels">Mobile</label>
-              <p>{{client.city}}</p>
+            <div class="col-md-12"><label class="labels">Street</label>
+              <p>{{client.street}}</p>
             </div>
   
   
@@ -50,16 +50,103 @@
       </div>
       <div class="col-md-4">
         <div class="p-3 py-5">
-          <div class="col-md-12"><button mat-button >Edit Profile</button></div> <br>
-          <div class="col-md-12"><button mat-button>Change Password</button></div><br>
-          <div class="col-md-12"><button mat-button id="delete">Delete Profile</button></div>
+          <div class="col-md-12"><button mat-button (click)="EditProfil()" >Edit Profile</button></div> <br>
+          <div class="col-md-12"><button mat-button (click)="ChangePassword()">Change Password</button></div><br>
+          <div class="col-md-12"><button mat-button id="delete" (click)="deleteClient()">Delete Profile</button></div>
         </div>
       </div>
     </div>
   </div>
   
-  
-  
-  
-  
+  <form>
+    <div class="container rounded bg-white mt-5 mb-5" *ngIf="edit_form_available">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+              width="150px"
+              src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"><span
+              class="font-weight-bold"></span><span
+              class="text-black-50"></span><span> </span>
+          </div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profile information:</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6"><label for="firstName"  class="labels">Name</label>
+                <input name="firstName" id="firstName" [(ngModel)]="editedClient.firstName">
+              </div>
+              <div class="col-md-6"><label for="lastName" class="labels">Surname</label>
+                <input name="lastName" id="lastName" [(ngModel)]="editedClient.lastName">
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12"><label for="username" class="labels">Username</label><br>
+                <input name="username" id="username" [(ngModel)]="editedClient.username">
+              </div>
+              <div class="col-md-12"><label for="mobile" class="labels" >Mobile</label><br>
+                <input name="mobile" id="mobile" [(ngModel)]="editedClient.mobile">
+              </div>
+              <div class="col-md-12"><label for="city" class="labels">City</label><br>
+                <input name="city" id="city" [(ngModel)]="editedClient.city">
+              </div>
+              <div class="col-md-12"><label for="state" class="labels">State</label><br>
+                <input name="state" id="state" [(ngModel)]="editedClient.state">
+              </div>
+              <div class="col-md-12"><label for="street" class="labels">Street</label><br>
+                <input name="street" id="street" [(ngModel)]="editedClient.street">
+              </div>
+              <button class="btn btn-primary" (click)="ChangeInfo()">Submit</button>
+    
+            </div>
+    
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </form>
+  <form>
+    <div class="container rounded bg-white mt-5 mb-5" *ngIf="change_password_available">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+              width="150px"
+              src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"><span
+              class="font-weight-bold"></span><span
+              class="text-black-50"></span><span> </span>
+          </div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profile information:</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6"><label class="labels">Name</label>
+                <p>{{client.firstName}}</p>
+              </div>
+              <div class="col-md-6"><label class="labels">Surname</label>
+                <p>{{client.lastName}}</p>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12"><label for="newPassword1" class="labels">New password</label><br>
+                <input name="newPassword1" id="newPassword1"  type="password" [(ngModel)]="newPassword1">
+              </div>
+              <div class="col-md-12"><label for="newPassword2" class="labels">Confirm new password</label><br>
+                <input name="newPassword2" id="newPassword2" type="password" [(ngModel)]="newPassword2">
+              </div>
+              <p class="error">{{error}}</p>
+              <button class="btn btn-primary" (click)="SubmitChangePassword()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
   
