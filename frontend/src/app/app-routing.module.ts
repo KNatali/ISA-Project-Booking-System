@@ -1,3 +1,4 @@
+import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -37,11 +38,15 @@ const routes: Routes = [
   { path: 'boats/:id', component: BoatDetailsPageComponent },
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
-
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
+
+  { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
+  { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
+
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent}
+
 
 ];
 

@@ -28,7 +28,7 @@ export class InstructorAdventuresComponent implements OnInit {
     biography: '',
 
 
-    grade:0
+    grade: 0
 
   });
   @Input() id: number;
@@ -43,6 +43,10 @@ export class InstructorAdventuresComponent implements OnInit {
   getAdventures() {
     this.instructorService.getInstructorAdventures(this.id)
       .subscribe(res => this.adventures = res)
+  }
+
+  addAdventure() {
+    this.router.navigate(['new']);
   }
 
 

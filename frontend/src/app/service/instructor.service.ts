@@ -1,3 +1,4 @@
+import { AdventureReservation } from './../model/AdventureReservation';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,12 +10,12 @@ import { Instructor } from '../model/instructor';
 })
 export class InstructorService {
   urlInstructor = "http://localhost:8090/api/instructors";
-  urlInstructor1 = "http://localhost:8090/api/instructors/adventures";
+  urlInstructor1 = "http://localhost:8090/api/instructors";
 
 
   urlInstructor_advetures = "http://localhost:8090/api/instructors/adventures/client";
   constructor(private http: HttpClient) { }
-  getInstructors():Observable<Instructor[]>{
+  getInstructors(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.urlInstructor);
   }
 
@@ -26,19 +27,30 @@ export class InstructorService {
     return this.http.put<Instructor>(`${this.urlInstructor}/${id}`, editedInstructor);
   }
   getInstructorAdventures(id: number): Observable<Adventure[]> {
-    return this.http.get<Adventure[]>(`${this.urlInstructor1}/${id}`);
+    return this.http.get<Adventure[]>(`${this.urlInstructor1}/` + `adventures` + `/${id}`);
   }
+
+  getInstructorReservations(id: number): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
+
   getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
   }
   sortByName():Observable<Instructor[]>{
     return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-name");
+
   }
-  sortByGrade():Observable<Instructor[]>{
-    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-grade");
+  getCompletedInstructorReservations(id: number): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `completedReservations` + `/${id}`);
   }
-  sortByCity():Observable<Instructor[]>{
-    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-city");
+  sortByName(): Observable<Instructor[]> {
+    return this.http.get<Instructor[]>(this.urlInstructor + "/sort-by-name");
+  }
+  sortByGrade(): Observable<Instructor[]> {
+    return this.http.get<Instructor[]>(this.urlInstructor + "/sort-by-grade");
+  }
+  sortByCity(): Observable<Instructor[]> {
+    return this.http.get<Instructor[]>(this.urlInstructor + "/sort-by-city");
   }
 
 }

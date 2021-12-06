@@ -35,6 +35,9 @@ export class AdventureService {
   updateAdvenuture(id: number, data: Adventure): Observable<Adventure> {
     return this.http.post<Adventure>(`${this.urlAdventure}/${id}`, data);
   }
+  addAdventure(id: number, newAdventure: Adventure): Observable<Adventure> {
+    return this.http.put<Adventure>(`${this.urlAdventures}/` + `add` + `/${id}`, newAdventure);
+  }
 
   saveAdventureEquipment(id: number, data: AdventureFishingEquipment): Observable<AdventureFishingEquipment> {
     return this.http.post<AdventureFishingEquipment>(`${this.urlAdventure}/` + `equipment` + `/${id}`, data);

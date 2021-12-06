@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -23,10 +25,10 @@ public class AdventureReservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	 @Column(name = "reservationStart", nullable = false)
-	    private LocalDate reservationStart;
+	    private LocalDateTime reservationStart;
 
 	    @Column(name = "reservationEnd", nullable = false)
-	    private LocalDate reservationEnd;
+	    private LocalDateTime reservationEnd;
 
 	    @ManyToOne
 	    @JoinColumn(name = "adventure_id")
@@ -42,11 +44,11 @@ public class AdventureReservation {
 	private Client client;
 	@OneToMany
 	private List<AdventureComplaint> adventureComplaints;
+	@OneToOne 
+	private InstructorReport report;
 	
-	
-	
-	public AdventureReservation(Long id, LocalDate reservationStart, LocalDate reservationEnd,
-			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,
+	public AdventureReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
+			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,InstructorReport report,
 			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints) {
 		super();
 		this.id = id;
@@ -55,9 +57,22 @@ public class AdventureReservation {
 		this.adventure = adventure;
 		this.numberOfPersons = numberOfPersons;
 		this.price = price;
+		this.report=report;
 		this.additionalItems = additionalItems;
 		this.client = client;
 		this.adventureComplaints = adventureComplaints;
+	}
+
+
+
+	public InstructorReport getReport() {
+		return report;
+	}
+
+
+
+	public void setReport(InstructorReport report) {
+		this.report = report;
 	}
 
 
@@ -74,25 +89,25 @@ public class AdventureReservation {
 
 
 
-	public LocalDate getReservationStart() {
+	public LocalDateTime getReservationStart() {
 		return reservationStart;
 	}
 
 
 
-	public void setReservationStart(LocalDate reservationStart) {
+	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
 
 
 
-	public LocalDate getReservationEnd() {
+	public LocalDateTime getReservationEnd() {
 		return reservationEnd;
 	}
 
 
 
-	public void setReservationEnd(LocalDate reservationEnd) {
+	public void setReservationEnd(LocalDateTime reservationEnd) {
 		this.reservationEnd = reservationEnd;
 	}
 

@@ -124,6 +124,11 @@ insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
  
+
+ insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
+ 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
+
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2015-02-20T06:30:00",1,3,3000,8,3);
@@ -144,6 +149,7 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,4);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,5);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
+
 
 
 
