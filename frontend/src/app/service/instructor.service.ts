@@ -13,6 +13,7 @@ export class InstructorService {
   urlInstructor1 = "http://localhost:8090/api/instructors";
 
 
+  urlInstructor_advetures = "http://localhost:8090/api/instructors/adventures/client";
   constructor(private http: HttpClient) { }
   getInstructors(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.urlInstructor);
@@ -28,8 +29,16 @@ export class InstructorService {
   getInstructorAdventures(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor1}/` + `adventures` + `/${id}`);
   }
+
   getInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
+
+  getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
+    return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
+  }
+  sortByName():Observable<Instructor[]>{
+    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-name");
+
   }
   getCompletedInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `completedReservations` + `/${id}`);

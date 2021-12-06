@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
@@ -28,9 +29,16 @@ public class CottageController {
 	
 	@RequestMapping(value="api/cottages",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Cottage>> findAll(){
+	public ResponseEntity<List<CottageDTO>> findAll(){
 		List<Cottage> cottages=cottageService.findAll();
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	public List<CottageDTO> convert(List<Cottage> cottages){
+		List<CottageDTO> res=new ArrayList<>();
+		for (Cottage cottage : cottages) {
+			res.add(new CottageDTO(cottage));
+		}
+		return res;
 	}
 	@RequestMapping(value="api/cottages/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cottage>  findOne(@PathVariable Long id){
