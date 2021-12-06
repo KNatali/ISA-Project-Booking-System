@@ -28,4 +28,43 @@ public class BoatReservationService {
 		}
 		return res;
 	}
+	public List<BoatReservation> sortByDate(Long id) {
+		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> res=new ArrayList<>();
+		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDateDesc();
+		for (BoatReservation boatReservation : sorted) {
+			for (BoatReservation Reservation2 : reservations) {
+				if(boatReservation.getId().equals(Reservation2.getId())) {
+					res.add(boatReservation);
+				}
+			}
+		}
+		return res;
+	}
+	public List<BoatReservation> sortByDuration(Long id) {
+		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> res=new ArrayList<>();
+		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDurationDesc();
+		for (BoatReservation boatReservation : sorted) {
+			for (BoatReservation boatReservation2 : reservations) {
+				if(boatReservation.getId().equals(boatReservation2.getId())) {
+					res.add(boatReservation);
+				}
+			}
+		}
+		return res;
+	}
+	public List<BoatReservation> sortByPrice(Long id) {
+		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> res=new ArrayList<>();
+		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByPriceDesc();
+		for (BoatReservation boatRes : sorted) {
+			for (BoatReservation boatReservation2 : reservations) {
+				if(boatRes.getId().equals(boatReservation2.getId())) {
+					res.add(boatRes);
+				}
+			}
+		}
+		return res;
+	}
 }
