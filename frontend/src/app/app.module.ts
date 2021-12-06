@@ -65,6 +65,7 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
+import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
 
 
 @NgModule({
@@ -115,7 +116,8 @@ import { CottageReservationItemComponent } from './cottage-reservation-item/cott
     SortInstructorsComponent,
     InstructorAdventureListComponent,
     CottageReservationListComponent,
-    CottageReservationItemComponent
+    CottageReservationItemComponent,
+    SortCottageReservationsComponent
 
 
   ],
