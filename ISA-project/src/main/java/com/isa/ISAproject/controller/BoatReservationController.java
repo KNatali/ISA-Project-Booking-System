@@ -39,4 +39,22 @@ public class BoatReservationController {
 		}
 		return res;
 	}
+	@RequestMapping(value="api/boat-reservations/sort-by-price/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatReservationDTO>> sortByPrice(@PathVariable Long id){
+		List<BoatReservation> res=this.boatReservationService.sortByPrice(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boat-reservations/sort-by-duration/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatReservationDTO>> sortByDuration(@PathVariable Long id){
+		List<BoatReservation> res=this.boatReservationService.sortByDuration(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boat-reservations/sort-by-date/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatReservationDTO>> sortByDate(@PathVariable Long id){
+		List<BoatReservation> res=this.boatReservationService.sortByDate(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
 }
