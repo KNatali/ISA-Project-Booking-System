@@ -28,6 +28,10 @@ import { AdventureDatailsPageComponent } from './adventure-datails-page/adventur
 import { BoatDetailsPageComponent } from './boat-details-page/boat-details-page.component';
 import { SearchCottageComponent } from './search-cottage/search-cottage.component';
 
+
+
+import { LightgalleryModule } from 'lightgallery/angular';
+
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
 import { SearchBoatComponent } from './search-boat/search-boat.component';
@@ -44,6 +48,31 @@ import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { UserService } from './service/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
+
+import { InstructorAdventureEditComponent } from './instructor-adventure-edit/instructor-adventure-edit.component';
+import { AdventureEquipmentEditComponent } from './adventure-equipment-edit/adventure-equipment-edit.component';
+import { AdventureAdditionalItemsEditComponent } from './adventure-additional-items-edit/adventure-additional-items-edit.component';
+import { AdventureRulesEditComponent } from './adventure-rules-edit/adventure-rules-edit.component';
+import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
+
+import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
+import { SortBoatsComponent } from './sort-boats/sort-boats.component';
+import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
+import { InstructorListComponent } from './instructor-list/instructor-list.component';
+import { InstructorItemComponent } from './instructor-item/instructor-item.component';
+import { SortInstructorsComponent } from './sort-instructors/sort-instructors.component';
+
+import { InstructorReservationsComponent } from './instructor-reservations/instructor-reservations.component';
+import { InstructorChangePasswordComponent } from './instructor-change-password/instructor-change-password.component';
+
+import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
+import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
+import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
+import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
+import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
+
 
 
 @NgModule({
@@ -77,7 +106,33 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     CottageOwnerProfileComponent,
     NavbarComponent,
     NavbarLoginComponent,
-    NavbarProfileComponent
+    NavbarProfileComponent,
+    InstructorAdventureProfileComponent,
+
+    InstructorAdventureEditComponent,
+    AdventureEquipmentEditComponent,
+    AdventureAdditionalItemsEditComponent,
+    AdventureRulesEditComponent,
+    InstructorAddAdventureComponent,
+
+    ConfirmRegistrationClientComponent,
+    SortBoatsComponent,
+    SortCottagesComponent,
+    InstructorListComponent,
+    InstructorItemComponent,
+    SortInstructorsComponent,
+
+    InstructorReservationsComponent,
+    InstructorChangePasswordComponent,
+
+    InstructorAdventureListComponent,
+    CottageReservationListComponent,
+    CottageReservationItemComponent,
+    SortCottageReservationsComponent,
+    BoatReservationItemComponent,
+    BoatReservationListComponent
+
+
 
   ],
   imports: [
@@ -93,8 +148,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     FlexLayoutModule,
     MatTabsModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
-
+    ReactiveFormsModule
 
   ],
   providers: [{

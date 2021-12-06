@@ -112,6 +112,7 @@ public class UserDTO {
 		this.role=user.getRole();
 		
 	}
+	public UserDTO() {}
 	
 	
 }

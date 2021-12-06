@@ -1,0 +1,227 @@
+<div class="body-wrapper">
+  <div class="container content">
+
+
+
+
+    <div class="container">
+      <h1>New Adventure:</h1>
+
+
+
+      <!-- Modal -->
+
+      <form [formGroup]="formValue">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" [(ngModel)]="adventure.name" formControlName="name" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="street" class="form-label">Street:</label>
+          <input type="text" [(ngModel)]="adventure.address.street" formControlName="street" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">City:</label>
+          <input type="text" [(ngModel)]="adventure.address.city" formControlName="city" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="state" class="form-label">State:</label>
+          <input type="text" [(ngModel)]="adventure.address.state" formControlName="state" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="maxPersons" class="form-label">Max number of guests:</label>
+          <input type="number" [(ngModel)]="adventure.maxPersons" formControlName="maxPersons" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price:</label>
+          <input type="number" [(ngModel)]="adventure.price" formControlName="price" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="cancellationPercentage" class="form-label">Cancellation Policy(%):</label>
+          <input type="number" [(ngModel)]="adventure.cancellationPercentage" formControlName="cancellationPercentage"
+            class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description:</label>
+          <textarea type="textarea" [(ngModel)]="adventure.description" formControlName="description"
+            class="form-control"></textarea>
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+
+
+
+
+    <div class="columns">
+      <div class="column">
+        <h3>Fishing equipment:</h3>
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add equipment
+        </button>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let field of equipment; let i = index">
+              <td>{{field.name}}
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="deleteFieldValue(i)" type="button">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Equipment details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formValue1">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name:</label>
+                  <input [(ngModel)]="newEquipment.name" type="text" formControlName="name" class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="addEquipment()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <hr>
+      <div class="column">
+        <h3>Additional items:</h3>
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          Add additional item
+        </button>
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of additionalItems;let i = index">
+              <td>{{item.name}}</td>
+              <td>{{item.price}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel1">Additional Item details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formValue2">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input [(ngModel)]="newAdditionalItem.name" type="text" formControlName="name" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input [(ngModel)]="newAdditionalItem.price" type="number" formControlName="price" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addAdditionalItem()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="columns">
+      <div class="column">
+        <h3>Boat Rules:</h3>
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          Add Behavioral Rule
+        </button>
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th>Rule</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rules; let i=index">
+              <td>{{item.rule}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="deleteRule(i)" type="button">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Additional Item details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formValue3">
+              <div class="mb-3">
+                <label for="rule" class="form-label">Name:</label>
+                <input [(ngModel)]="newRule.rule" type="text" formControlName="rule" class="form-control">
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addRule()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <button class="col-md-12 " (click)="submit()" mat-button id="submit">Submit</button>
+
+  </div>
+
+</div>

@@ -31,11 +31,15 @@ public class AdventureDTO {
 	private String description;
 	
 	private double averageGrade;
+	
+	private double price;
 
 	private InstructorProfileDTO instructor;
 
 
 	private String mainPicture;
+	
+	private int cancellationPercentage;
 	
 
 
@@ -99,9 +103,21 @@ public class AdventureDTO {
 	
 	
 
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
+	}
 
-	
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
+	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public int getMaxPersons() {
 		return maxPersons;
@@ -111,18 +127,20 @@ public class AdventureDTO {
 		this.maxPersons = maxPersons;
 	}
 
-	public AdventureDTO(Long id, String name, AddressDTO address, String description, double averageGrade,
-			InstructorProfileDTO instructor,String mainPicture,int maxPersons) {
+	public AdventureDTO(Long id, String name, AddressDTO address, String description, double averageGrade,double price,
+			InstructorProfileDTO instructor,String mainPicture,int maxPersons,int cancellation) {
 		super();
 		
 		this.name = name;
 		this.address = address;
 		this.description = description;
 		this.averageGrade = averageGrade;
+		this.price=price;
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
 		this.maxPersons=maxPersons;
 		this.id=id;
+		this.cancellationPercentage=cancellation;
 	}
 	
 	public AdventureDTO() {}

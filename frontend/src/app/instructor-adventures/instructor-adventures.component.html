@@ -1,12 +1,14 @@
 <div class="container">
-  <button mat-button id="add"><i class="fa fa-plus-circle"></i><a> Add new adventure</a></button><br>
+  <button mat-button [routerLink]="['adventure-add']" id="add"><i class="fa fa-plus-circle"></i><a> Add new
+      adventure</a></button><br>
   <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Name</th>
         <th scope="col">Address</th>
-        <th scope="col">Description</th>
+
         <th scope="col">Average Grade</th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -16,15 +18,19 @@
     <tbody>
       <tr *ngFor="let adventure of adventures; index as i">
         <th scope="row">{{ i + 1 }}</th>
+
+        <td>
+          <img src="{{adventure.mainPicture}}" style="height: 170px;width: 240px;">
+        </td>
         <td>
 
           {{ adventure.name }}
         </td>
-        <td>{{ adventure.address.street }}</td>
-        <td>{{ adventure.description }}</td>
+        <td>{{ adventure.address.street }},{{adventure.address.city}}</td>
+
         <td>{{ adventure.averageGrade}}</td>
-        <td><button mat-button><a>View</a></button></td>
-        <td><button mat-button><a>Edit</a></button></td>
+        <td><button mat-button [routerLink]="['/instructor/adventures',adventure.id]"><a>View</a></button></td>
+        <td><button mat-button [routerLink]="['/instructor/adventures/edit',adventure.id]"><a>Edit</a></button></td>
         <td><button mat-button id="delete"><a>Delete</a></button></td>
       </tr>
     </tbody>

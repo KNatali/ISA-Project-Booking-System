@@ -43,4 +43,17 @@
   #delete {
     background-color: rgb(233, 101, 101);
   }
+  input{
+    margin-right: 10px;
+  }
+  .btn{
+    margin: 10px;
+  }
+  .error{
+    color: red;
+    border: seashell;
+  }
+  #history{
+    width: 300px;
+  }
   

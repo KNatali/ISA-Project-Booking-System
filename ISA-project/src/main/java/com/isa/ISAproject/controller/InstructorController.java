@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 
 import com.isa.ISAproject.model.Boat;
-
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdventureService;
@@ -125,13 +127,31 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			List<AdventureDTO> adventuresDTO=new ArrayList<>();
 			
 			for(Adventure a:adventures) {
-				InstructorProfileDTO insDTO=new InstructorProfileDTO(a.getInstructor());
-				AddressDTO addressDTO=new AddressDTO(a.getAddress().getId(),a.getAddress().getStreet(),a.getAddress().getState(),a.getAddress().getCity());
-				AdventureDTO adventure=new AdventureDTO(a.getId(),a.getName(),addressDTO,a.getDescription(),a.getAverageGrade(),insDTO,a.getMainPicture(),a.getMaxPersons());
+				AdventureDTO adventure=AdventureMapper.convertToDTO(a);
 				adventuresDTO.add(adventure);
 			}
 			
 			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/instructors/reservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureReservationDTO>> getReservations(@PathVariable(name="id") Long id){
+		List<AdventureReservationDTO> list=new ArrayList<>();
+		list=this.instructorService.getReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/instructors/completedReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureReservationDTO>> getCompletedReservations(@PathVariable(name="id") Long id){
+		List<AdventureReservationDTO> list=new ArrayList<>();
+		list=this.instructorService.getCompletedReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "api/instructors/adventure/{id}",method = RequestMethod.DELETE)
@@ -145,6 +165,46 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		
 		this.adventureService.delete(id);
 		return new ResponseEntity<>(aDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-name", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByFirstNameAndLastName(){
+		List<Instructor> instructors=this.instructorService.sortByFirstName();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-grade", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByGrade(){
+		List<Instructor> instructors=this.instructorService.sortByGrade();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/sort-by-city", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<InstructorProfileDTO>> sortByCity(){
+		List<Instructor> instructors=this.instructorService.sortByCity();
+		return new ResponseEntity<>(this.convertIntoDTO(instructors),HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/instructors/adventures/client/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> adventuresForInstrucotr(@PathVariable(name="id") Long id){
+		
+		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
+		
+		if(!itemOptionals.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Instructor instructor=itemOptionals.get();
+			Set<Adventure> adventures=instructor.getAdventures();
+			List<AdventureDTO> adventuresDTO=new ArrayList<>();
+			
+			for(Adventure a:adventures) {
+				AdventureDTO adventure=AdventureMapper.convertToDTO(a);
+				adventuresDTO.add(adventure);
+			}
+			
+			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
 	
 }

@@ -1,12 +1,10 @@
 package com.isa.ISAproject.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,9 +31,12 @@ public class Adventure {
 	private String description;
 	@Column
 	private double averageGrade;
+	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Instructor instructor;
 	
+	@Column
+	private double price;
 
 	@Column
 	private String mainPicture;
@@ -48,18 +49,21 @@ public class Adventure {
 	@Column
 	private int maxPersons;
 	@ManyToMany
-	@JoinTable(name="adventure_and_equipment",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+	@JoinTable(name="adventure_equipment",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
 	private Set<AdventureFishingEquipment> equipment=new HashSet<>();
 	@ManyToMany
-	@JoinTable(name="adventure_and_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+	@JoinTable(name="adventure_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
+	
 	@Column
-	@Enumerated(EnumType.STRING)
-	private CancellationPolicy cancellation;
+	private int cancellationPercentage;
 
-	 @OneToMany(mappedBy = "adventure")
+	@OneToMany(mappedBy="adventure",cascade=CascadeType.PERSIST)
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	 
+	@OneToMany(mappedBy = "adventure")
 	    private Set<AdventureFastReservation> adventureFastReservations;
 
 	
@@ -118,6 +122,14 @@ public class Adventure {
 		this.averageGrade = averageGrade;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	public Instructor getInstructor() {
 		return instructor;
 	}
@@ -159,32 +171,44 @@ public class Adventure {
 		this.rules = rules;
 	}
 
-	public CancellationPolicy getCancellation() {
-		return cancellation;
+	
+
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
 	}
 
-	public void setCancellation(CancellationPolicy cancellation) {
-		this.cancellation = cancellation;
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
 	}
 
-	public Adventure(Long id, String name, Address address, String description, double averageGrade,
-			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<Picture> pictures,
+	public Set<AdditionalItem> getAdditionalItems() {
+		return additionalItems;
+	}
+
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
+
+	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
+			Instructor instructor,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			CancellationPolicy cancellation,Set<AdventureFastReservation> fastReservations) {
+			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
 		this.averageGrade = averageGrade;
+		this.price=price;
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
 		this.pictures = pictures;
 		this.maxPersons = maxPersons;
 		this.equipment = equipment;
 		this.rules = rules;
-		this.cancellation = cancellation;
+		this.cancellationPercentage = cancellation;
 		this.adventureFastReservations=fastReservations;
+		this.additionalItems=additionalItems;
 	}
 	
 	public Adventure() {}

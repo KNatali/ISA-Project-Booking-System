@@ -10,7 +10,7 @@ import { InstructorService } from '../service/instructor.service';
   styleUrls: ['./instructor-page.component.css']
 })
 export class InstructorPageComponent implements OnInit {
-
+  id: any;
   instructor: Instructor = new Instructor({
     id: 0,
     username: '',
@@ -21,15 +21,18 @@ export class InstructorPageComponent implements OnInit {
     street: '',
     city: '',
     state: '',
-    mobile: ''
+
+    mobile: '',
+    biography: ''
+
 
   });
-  id: number;
+
   constructor(private instructorService: InstructorService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.id = sessionStorage.getItem("id");
     this.getById();
   }
 

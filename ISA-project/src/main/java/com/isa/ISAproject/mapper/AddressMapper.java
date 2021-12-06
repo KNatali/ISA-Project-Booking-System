@@ -17,6 +17,12 @@ public class AddressMapper {
 		return addressDTO;
 	}
 	
+	public static Address convertFromDTO(AddressDTO dto) {
+		Address address=new Address(
+				dto.getId(),dto.getStreet(),dto.getCity(),dto.getState());
+		return address;
+	}
+	
 
 
 }

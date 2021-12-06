@@ -32,5 +32,13 @@ export class BoatService {
       .set('motorNumber',motorNumber);
       return this.http.get<Boat[]>(this.urlBoats,{params});
   }
-
+  sortByName():Observable<Boat[]>{
+    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-name");
+  }
+  sortByGrade():Observable<Boat[]>{
+    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-grade");
+  }
+  sortByCity():Observable<Boat[]>{
+    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-city");
+  }
 }

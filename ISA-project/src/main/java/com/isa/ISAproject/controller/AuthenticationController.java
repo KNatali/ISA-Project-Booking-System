@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.isa.ISAproject.dto.AuthenticatedUserDTO;
+import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.dto.UserRequest;
 import com.isa.ISAproject.dto.UserTokenState;
 import com.isa.ISAproject.exception.ResourceConflictException;
@@ -71,7 +72,7 @@ public class AuthenticationController {
 
 	// Endpoint za registraciju novog korisnika
 	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<User> addUser(@RequestBody UserDTO userRequest, UriComponentsBuilder ucBuilder) {
 
 		User existUser = this.userService.findByUsername(userRequest.getUsername());
 
@@ -82,5 +83,19 @@ public class AuthenticationController {
 		User user = this.userService.save(userRequest);
 
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
-	}
+	}/*
+	// Endpoint za registraciju novog korisnika
+	@PostMapping("/signup")
+	public ResponseEntity<User> addUser1(@RequestBody User userRequest, UriComponentsBuilder ucBuilder) {
+
+		User existUser = this.userService.findByUsername(userRequest.getUsername());
+
+		if (existUser != null) {
+			throw new ResourceConflictException(userRequest.getId(), "Username already exists");
+		}
+
+		User user = this.userService.save(userRequest);
+
+		return new ResponseEntity<>(user, HttpStatus.CREATED);
+	}*/
 }

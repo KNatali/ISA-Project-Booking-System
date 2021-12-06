@@ -54,7 +54,9 @@ public class Cottage {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private CancellationPolicy cancellation;
-	
+	@OneToMany
+	private Set<CottageReservation> cottageReservations=new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -143,6 +145,7 @@ public class Cottage {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
+  
 	public CancellationPolicy getCancellation() {
 		return cancellation;
 	}
@@ -170,5 +173,24 @@ public class Cottage {
 		this.cancellation = cancellation;
 	}
 	
+	
+	public Cottage(Long id, String name, Address address, String description, double grade, String mainPicture,
+			CottageOwner owner, Set<String> pictures, Set<CottageBehavioralRule> rules, Set<Room> rooms,
+			Set<CottageFastReservation> cottageFastReservations, Set<CottageReservation> cottageReservations) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.grade = grade;
+		this.mainPicture = mainPicture;
+		this.owner = owner;
+		this.pictures = pictures;
+		this.rules = rules;
+		this.rooms = rooms;
+		this.cottageFastReservations = cottageFastReservations;
+		this.cottageReservations = cottageReservations;
+	}
+
 	public Cottage () {}
 }
