@@ -44,5 +44,23 @@ public class CottageReservationController {
 		}
 		return res;
 	}
+	@RequestMapping(value="api/cottages-reservations/sort-by-price", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageReservationDTO>> sortByPrice(){
+		List<CottageReservation> res=this.cottageReservationService.sortByPrice();
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages-reservations/sort-by-duration", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageReservationDTO>> sortByDuration(){
+		List<CottageReservation> res=this.cottageReservationService.sortByDuration();
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages-reservations/sort-by-date", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageReservationDTO>> sortByDate(){
+		List<CottageReservation> res=this.cottageReservationService.sortByDate();
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
 	
 }
