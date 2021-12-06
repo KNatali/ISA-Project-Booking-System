@@ -16,4 +16,13 @@ public class CottageReservationService {
 	public List<CottageReservation> findAll() {
 		return this.cottageReservationRepository.findAll();
 	}
+	public List<CottageReservation> sortByPrice() {
+		return this.cottageReservationRepository.findByOrderByPriceDesc();
+	}
+	public List<CottageReservation> sortByDate() {
+		return this.cottageReservationRepository.findByOrderByDateDesc();
+	}
+	public List<CottageReservation> sortByDuration() {
+		return this.cottageReservationRepository.findByOrderByDurationDesc();
+	}
 }
