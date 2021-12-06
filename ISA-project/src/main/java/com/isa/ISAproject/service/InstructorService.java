@@ -8,17 +8,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Boat;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 
 
@@ -31,6 +39,10 @@ public class InstructorService {
 	private AddressRepository addressRepository;
 	@Autowired
 	private AdventureReservationRepository reservationRepository;
+	@Autowired
+	private ClientRepository clientRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<Instructor> findAll() {
 		return this.instructorRepository.findAll();
@@ -40,6 +52,16 @@ public class InstructorService {
 	}
 	public Optional<Instructor> findById(Long id) {
 		return this.instructorRepository.findById(id);
+	}
+	
+	public InstructorProfileDTO changePassword(Long id,PasswordChangeDTO dto) {
+		Instructor instructor=instructorRepository.getById(id);
+		
+		String newPasswordHash=passwordEncoder.encode(dto.getNewPassword());
+		instructor.setPassword(newPasswordHash);
+		instructorRepository.save(instructor);
+		InstructorProfileDTO instructorDTO=new InstructorProfileDTO(instructor);
+		return instructorDTO;
 	}
 	
 	public Instructor save(Instructor newInstructor) {
@@ -69,12 +91,37 @@ public class InstructorService {
 		return res;
 		
 	}
+	
+	public ClientProfileDTO getReservationClilent(Long id) {
+		Optional<Client> item=this.clientRepository.findById(id);
+		
+		if(!item.isPresent()) {
+			return null;
+		}
+		
+		ClientProfileDTO itemDto=new ClientProfileDTO(item.get());
+		return itemDto;
+	}
 	public List<AdventureReservationDTO> getCompletedReservations(Long id){
 		List<AdventureReservationDTO> res=new ArrayList<>();
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
 			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isBefore(LocalDateTime.now()))
+				temp.add(a);
+		}
+		for (AdventureReservation a : temp) {
+			res.add(AdventureReservationMapper.convertToDTO(a));
+		}
+		return res;
+		
+	}
+	public List<AdventureReservationDTO> getActiveReservations(Long id){
+		List<AdventureReservationDTO> res=new ArrayList<>();
+		List<AdventureReservation> temp=new ArrayList<>();
+		List<AdventureReservation> reservations=reservationRepository.findAll();
+		for (AdventureReservation a : reservations) {
+			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isAfter(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {

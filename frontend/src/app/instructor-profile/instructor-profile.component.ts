@@ -3,6 +3,7 @@ import { InstructorService } from './../service/instructor.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Instructor } from '../model/instructor';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-instructor-profile',
@@ -13,9 +14,10 @@ export class InstructorProfileComponent implements OnInit {
   profileShow: boolean = true;
   profileEdit: boolean = false;
   changePassword: boolean = false;
-  oldPassword: any;
+
   newPassword: any;
   passwordConfirm: any;
+  formV: FormGroup;
   @Input() instructor: Instructor = new Instructor({
     id: 0,
     username: '',
@@ -34,10 +36,21 @@ export class InstructorProfileComponent implements OnInit {
   @Input() id: number;
 
   constructor(private instructorService: InstructorService, private route: ActivatedRoute
-    , private router: Router) {
+    , private router: Router, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.formV = this.fb.group({
+
+      newPassword: ['', Validators.required],
+      passwordConfirm: ['', Validators.required]
+
+    }
+
+    );
+  }
+  get registerFormControl() {
+    return this.formV.controls;
   }
   edit() {
     this.profileShow = !this.profileShow;
@@ -58,9 +71,21 @@ export class InstructorProfileComponent implements OnInit {
   }
 
   submitPassword() {
-    if (this.newPassword != this.passwordConfirm) {
-      alert("New and confirmed password don't match!");
+    if (this.formV.valid) {
+
+      if ((this.newPassword != this.passwordConfirm))
+        alert("New and confirmed password don't match!");
+      else
+        this.instructorService.changePassword(this.id, this.newPassword).
+          subscribe(res => {
+            alert("password successfully changed!")
+            this.goToProfilePage();
+          })
+
     }
+    else
+      alert("Fill the required fields!");
+
   }
   goToProfilePage() {
     this.profileShow = true;

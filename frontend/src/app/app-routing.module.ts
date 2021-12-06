@@ -20,6 +20,8 @@ import { InstructorAdventureEditComponent } from './instructor-adventure-edit/in
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
+import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
+import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
 
 
 const routes: Routes = [
@@ -39,13 +41,14 @@ const routes: Routes = [
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
-
+  { path: 'instructor/reservations/:id', component: InstructorReservationClientComponent },
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
+  { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
 
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
-  { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent}
+  { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent }
 
 
 ];

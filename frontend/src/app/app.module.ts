@@ -70,6 +70,11 @@ import { InstructorAdventureListComponent } from './instructor-adventure-list/in
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
 import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
+import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 
 
@@ -92,6 +97,7 @@ import { SortCottageReservationsComponent } from './sort-cottage-reservations/so
     AdventureDatailsPageComponent,
     BoatDetailsPageComponent,
     SearchCottageComponent,
+
 
     InstructorAdventuresComponent,
 
@@ -126,7 +132,10 @@ import { SortCottageReservationsComponent } from './sort-cottage-reservations/so
     InstructorAdventureListComponent,
     CottageReservationListComponent,
     CottageReservationItemComponent,
-    SortCottageReservationsComponent
+    SortCottageReservationsComponent,
+    InstructorReservationClientComponent,
+    InstructorAddReservationComponent,
+    InstructorOverviewComponent
 
 
 
@@ -144,7 +153,11 @@ import { SortCottageReservationsComponent } from './sort-cottage-reservations/so
     FlexLayoutModule,
     MatTabsModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
 
   ],
   providers: [{
