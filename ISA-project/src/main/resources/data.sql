@@ -127,7 +127,26 @@ insert into adventure_rules(adventure_id,rule_id) values (3,5);
 
  insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
  
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-10-10-07-00-00','2021-10-12-13-00-00',3,2500,3,8,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-7-10-07-00-00','2021-7-12-13-00-00',3,5400,1,8,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5,1); 
+
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,1);
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (2,2);
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (3,3);
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (4,4);
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,5);
+insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,6);
+
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(5,1);
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,2);
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,3);
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,4);
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,5);
+insert into client_adventure_reservations(client_id,adventure_reservations_id) values(5,6);
 
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
