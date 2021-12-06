@@ -1,6 +1,7 @@
 package com.isa.ISAproject.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,8 +21,8 @@ import com.isa.ISAproject.model.CottageReservation;
 
 public class CottageReservationDTO {
 	private Long id;
-	private LocalDate date;
-	private LocalTime time;
+	private LocalDateTime date;
+	//private LocalTime time;
 	private int duration;
 	private int maxPersons;
 	private double price;
@@ -33,18 +34,18 @@ public class CottageReservationDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
+	}/*
 	public LocalTime getTime() {
 		return time;
 	}
 	public void setTime(LocalTime time) {
 		this.time = time;
-	}
+	}*/
 	public int getDuration() {
 		return duration;
 	}
@@ -75,12 +76,12 @@ public class CottageReservationDTO {
 	public void setCottage(CottageDTO cottage) {
 		this.cottage = cottage;
 	}
-	public CottageReservationDTO(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
+	public CottageReservationDTO(Long id, LocalDateTime date, int duration, int maxPersons, double price,
 			ClientProfileDTO client, CottageDTO cottage) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.time = time;
+		//this.time = time;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.price = price;
@@ -92,7 +93,7 @@ public class CottageReservationDTO {
 		this.client=new ClientProfileDTO(res.getClient());
 		this.cottage=new CottageDTO(res.getCottage());
 		this.date=res.getDate();
-		this.time=res.getTime();
+		//this.time=res.getTime();
 		this.duration=res.getDuration();
 		this.maxPersons=res.getMaxPersons();
 		this.price=res.getPrice();
