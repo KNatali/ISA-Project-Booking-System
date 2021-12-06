@@ -124,10 +124,10 @@ insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
  
-insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2015-02-20","06:30",1,10,5000,5,1);
-insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20","06:30",1,2,5000,8,2);
-insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20","06:30",1,3,5000,8,3);
-insert into cottage_reservation(date,time,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20","06:30",1,5,5000,9,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",1,10,5000,5,1);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2015-02-20T06:30:00",1,3,5000,8,3);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",1,5,5000,9,2);
 
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,2);

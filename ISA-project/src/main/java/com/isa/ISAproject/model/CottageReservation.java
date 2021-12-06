@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -21,9 +22,9 @@ public class CottageReservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable=false)
-	private LocalDate date;
-	@Column(nullable=false)
-	private LocalTime time;
+	private LocalDateTime date;
+	//@Column(nullable=false)
+	//private LocalTime time;
 	@Column(nullable=false)
 	private int duration;
 	@Column(nullable=false)
@@ -48,21 +49,21 @@ public class CottageReservation {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
+/*
 	public LocalTime getTime() {
 		return time;
 	}
 
 	public void setTime(LocalTime time) {
 		this.time = time;
-	}
+	}*/
 
 	public int getDuration() {
 		return duration;
@@ -121,13 +122,12 @@ public class CottageReservation {
 		this.cottage = cottage;
 	}
 
-	public CottageReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
+	public CottageReservation(Long id, LocalDateTime date, int duration, int maxPersons,
 			Set<AdditionalItem> additionalItems, double price, Client client,
 			Set<CottageComplaint> cottageComplaints,Cottage cottage) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.time = time;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.additionalItems = additionalItems;
