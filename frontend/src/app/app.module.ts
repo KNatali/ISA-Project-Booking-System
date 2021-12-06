@@ -75,6 +75,7 @@ import { BoatReservationListComponent } from './boat-reservation-list/boat-reser
 import { SortBoatReservationsComponent } from './sort-boat-reservations/sort-boat-reservations.component';
 import { AdventureReservationListComponent } from './adventure-reservation-list/adventure-reservation-list.component';
 import { AdvetureReservationItemComponent } from './adveture-reservation-item/adveture-reservation-item.component';
+import { SortAdventureReservationComponent } from './sort-adventure-reservation/sort-adventure-reservation.component';
 
 
 
@@ -136,7 +137,8 @@ import { AdvetureReservationItemComponent } from './adveture-reservation-item/ad
     BoatReservationListComponent,
     SortBoatReservationsComponent,
     AdventureReservationListComponent,
-    AdvetureReservationItemComponent
+    AdvetureReservationItemComponent,
+    SortAdventureReservationComponent
 
 
 
