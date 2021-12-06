@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.isa.ISAproject.model.AdventureReservation;
-
 public class AdventureReservationDTO {
 	private Long id;
 	private LocalDateTime reservationStart;
@@ -84,16 +82,6 @@ public class AdventureReservationDTO {
 		this.client = client;
 		this.report = report;
 		this.additionalItems = additionalItems;
-	}
-	public AdventureReservationDTO(AdventureReservation boatReservation) {
-		super();
-		this.id = boatReservation.getId();
-		this.reservationStart = boatReservation.getReservationStart();
-		this.reservationEnd = boatReservation.getReservationEnd();
-		this.adventure = new AdventureDTO(boatReservation.getAdventure());
-		this.price = boatReservation.getPrice();
-		this.numberOfPersons=boatReservation.getNumberOfPersons();
-		this.client = new ClientProfileDTO(boatReservation.getClient());
 	}
 	public AdventureReservationDTO() {
 		super();

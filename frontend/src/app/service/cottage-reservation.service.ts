@@ -18,7 +18,4 @@ export class CottageReservationService {
   sortByDuration(id:number):Observable<CottageReservation[]>{
     return this.http.get<CottageReservation[]>(this.url+"/sort-by-duration/"+id);
   }
-  activeReservations(id:number):Observable<CottageReservation[]>{
-    return this.http.get<CottageReservation[]>(this.url+"/active/"+id);
-  }
 }

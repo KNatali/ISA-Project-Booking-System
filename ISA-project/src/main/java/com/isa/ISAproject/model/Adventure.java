@@ -56,8 +56,6 @@ public class Adventure {
 	@JoinTable(name="adventure_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
-	@OneToMany
-	private Set<AdventureReservation> adventureReservations=new HashSet<>();
 	
 	@Column
 	private int cancellationPercentage;
@@ -67,16 +65,8 @@ public class Adventure {
 	 
 	@OneToMany(mappedBy = "adventure")
 	    private Set<AdventureFastReservation> adventureFastReservations;
-	
-	
-	public Set<AdventureReservation> getAdventureReservations() {
-		return adventureReservations;
-	}
 
-	public void setAdventureReservations(Set<AdventureReservation> adventureReservations) {
-		this.adventureReservations = adventureReservations;
-	}
-
+	
 	public Set<AdventureFastReservation> getAdventureFastReservations() {
 		return adventureFastReservations;
 	}
@@ -221,31 +211,6 @@ public class Adventure {
 		this.additionalItems=additionalItems;
 	}
 	
-	
-	public Adventure(Long id, String name, Address address, String description, double averageGrade,
-			Instructor instructor, double price, String mainPicture, Set<Picture> pictures, int maxPersons,
-			Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			Set<AdventureReservation> adventureReservations, int cancellationPercentage,
-			Set<AdditionalItem> additionalItems, Set<AdventureFastReservation> adventureFastReservations) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.description = description;
-		this.averageGrade = averageGrade;
-		this.instructor = instructor;
-		this.price = price;
-		this.mainPicture = mainPicture;
-		this.pictures = pictures;
-		this.maxPersons = maxPersons;
-		this.equipment = equipment;
-		this.rules = rules;
-		this.adventureReservations = adventureReservations;
-		this.cancellationPercentage = cancellationPercentage;
-		this.additionalItems = additionalItems;
-		this.adventureFastReservations = adventureFastReservations;
-	}
-
 	public Adventure() {}
 	
 	
