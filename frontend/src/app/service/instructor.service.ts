@@ -32,14 +32,12 @@ export class InstructorService {
 
   getInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
+  }
 
   getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
   }
-  sortByName():Observable<Instructor[]>{
-    return this.http.get<Instructor[]>(this.urlInstructor+"/sort-by-name");
 
-  }
   getCompletedInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `completedReservations` + `/${id}`);
   }
