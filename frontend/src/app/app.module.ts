@@ -62,6 +62,8 @@ import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorItemComponent } from './instructor-item/instructor-item.component';
 import { SortInstructorsComponent } from './sort-instructors/sort-instructors.component';
+import { InstructorReservationsComponent } from './instructor-reservations/instructor-reservations.component';
+import { InstructorChangePasswordComponent } from './instructor-change-password/instructor-change-password.component';
 
 
 @NgModule({
@@ -109,7 +111,9 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
     SortCottagesComponent,
     InstructorListComponent,
     InstructorItemComponent,
-    SortInstructorsComponent
+    SortInstructorsComponent,
+    InstructorReservationsComponent,
+    InstructorChangePasswordComponent
 
 
   ],

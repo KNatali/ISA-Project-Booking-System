@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -27,10 +28,10 @@ public class AdventureFastReservation {
     private Adventure adventure;
 	
 	 @Column(name = "reservationStart", nullable = false)
-	    private LocalDate reservationStart;
+	    private LocalDateTime reservationStart;
 
 	    @Column(name = "reservationEnd", nullable = false)
-	    private LocalDate reservationEnd;
+	    private LocalDateTime reservationEnd;
  
 	@Column(nullable=false)
 	private int maxPersons;
@@ -47,8 +48,8 @@ public class AdventureFastReservation {
 	
 	
 	
-	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDate reservationStart,
-			LocalDate reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
 			Set<AdditionalItem> additionalItems, Client client) {
 		super();
 		this.id = id;
@@ -89,25 +90,25 @@ public class AdventureFastReservation {
 
 
 
-	public LocalDate getReservationStart() {
+	public LocalDateTime getReservationStart() {
 		return reservationStart;
 	}
 
 
 
-	public void setReservationStart(LocalDate reservationStart) {
+	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
 
 
 
-	public LocalDate getReservationEnd() {
+	public LocalDateTime getReservationEnd() {
 		return reservationEnd;
 	}
 
 
 
-	public void setReservationEnd(LocalDate reservationEnd) {
+	public void setReservationEnd(LocalDateTime reservationEnd) {
 		this.reservationEnd = reservationEnd;
 	}
 

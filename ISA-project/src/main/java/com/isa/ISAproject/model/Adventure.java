@@ -60,7 +60,7 @@ public class Adventure {
 	@Column
 	private int cancellationPercentage;
 
-	@OneToMany(mappedBy="adventure")
+	@OneToMany(mappedBy="adventure",cascade=CascadeType.PERSIST)
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	 
 	@OneToMany(mappedBy = "adventure")
@@ -190,7 +190,7 @@ public class Adventure {
 	}
 
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
-			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<Picture> pictures,
+			Instructor instructor,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
 			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
 		super();

@@ -113,7 +113,9 @@ insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
  
-
+ insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
+ 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
 
 
  
