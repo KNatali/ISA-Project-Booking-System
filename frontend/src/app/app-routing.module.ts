@@ -22,6 +22,7 @@ import { InstructorListComponent } from './instructor-list/instructor-list.compo
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
+import { AdventureReservationListComponent } from './adventure-reservation-list/adventure-reservation-list.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
   { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent},
 
   { path: 'history-cottage-reservations/:id', component:CottageReservationListComponent},
-  { path: 'history-boat-reservations/:id',component:BoatReservationListComponent}
+  { path: 'history-boat-reservations/:id',component:BoatReservationListComponent},
+  { path: 'history-adventure-reservations/:id', component:AdventureReservationListComponent}
 
 
 ];
