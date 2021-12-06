@@ -14,12 +14,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class CottageFastReservation {
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable=false)
@@ -138,9 +139,176 @@ public class CottageFastReservation {
 		this.cottage = cottage;
 	}
 	
-	public CottageFastReservation() {}
+	public CottageFastReservation() {} */
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@ManyToOne
+    @JoinColumn(name = "cottage_id")
+    private Cottage cottage;
+	
+	 @Column(name = "reservationStart", nullable = false)
+	 private LocalDate reservationStart;
+
+	 @Column(name = "reservationEnd", nullable = false)
+	 private LocalDate reservationEnd;
+ 
+	@Column(nullable=false)
+	private int maxPersons;
+	@Column(nullable=false)
+	private double price;
+	@Column
+	private LocalDate validityStart;
+	@Column
+	private LocalDate validityEnd;
+	@OneToMany
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	@ManyToOne
+	private Client client;
 	
 	
+	
+	public CottageFastReservation(Long id, com.isa.ISAproject.model.Cottage cottage, LocalDate reservationStart,
+			LocalDate reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems, Client client) {
+		super();
+		this.id = id;
+		this.cottage = cottage;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+		this.client = client;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public Cottage getCottage() {
+		return cottage;
+	}
+
+
+
+	public void setCottage(Cottage cottage) {
+		this.cottage = cottage;
+	}
+
+
+
+	public LocalDate getReservationStart() {
+		return reservationStart;
+	}
+
+
+
+	public void setReservationStart(LocalDate reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+
+
+	public LocalDate getReservationEnd() {
+		return reservationEnd;
+	}
+
+
+
+	public void setReservationEnd(LocalDate reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+
+
+
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+
+
+	public LocalDate getValidityStart() {
+		return validityStart;
+	}
+
+
+
+	public void setValidityStart(LocalDate validityStart) {
+		this.validityStart = validityStart;
+	}
+
+
+
+	public LocalDate getValidityEnd() {
+		return validityEnd;
+	}
+
+
+
+	public void setValidityEnd(LocalDate validityEnd) {
+		this.validityEnd = validityEnd;
+	}
+
+
+
+	public Set<AdditionalItem> getAdditionalItems() {
+		return additionalItems;
+	}
+
+
+
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
+
+
+
+	public Client getClient() {
+		return client;
+	}
+
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
+
+	public CottageFastReservation () {}
 
 	
 }
