@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.service.CottageReservationService;
@@ -60,6 +62,12 @@ public class CottageReservationController {
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<CottageReservationDTO>> sortByDate(@PathVariable Long id){
 		List<CottageReservation> res=this.cottageReservationService.sortByDate(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages-reservations/active/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageReservationDTO>> activeReservations(@PathVariable Long id){
+		List<CottageReservation> res=this.cottageReservationService.activeReservation(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
 	

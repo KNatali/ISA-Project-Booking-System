@@ -19,4 +19,7 @@ export class BoatReservationService {
   sortByDuration(id:number):Observable<BoatReservation[]>{
     return this.http.get<BoatReservation[]>(this.url+"/sort-by-duration/"+id);
   }
+  activeReservation(id:number):Observable<BoatReservation[]>{
+    return this.http.get<BoatReservation[]>(this.url+"/active/"+id); 
+  }
 }
