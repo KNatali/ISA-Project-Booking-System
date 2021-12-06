@@ -70,11 +70,27 @@ import { InstructorAdventureListComponent } from './instructor-adventure-list/in
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
 import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+
 import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
 import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+
+import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
+import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
+import { SortBoatReservationsComponent } from './sort-boat-reservations/sort-boat-reservations.component';
+import { AdventureReservationListComponent } from './adventure-reservation-list/adventure-reservation-list.component';
+import { AdvetureReservationItemComponent } from './adveture-reservation-item/adveture-reservation-item.component';
+import { SortAdventureReservationComponent } from './sort-adventure-reservation/sort-adventure-reservation.component';
+import { ActiveReservationsComponent } from './active-reservations/active-reservations.component';
+import { ActiveBoatReservationComponent } from './active-boat-reservation/active-boat-reservation.component';
+import { ActiveCottageReservationComponent } from './active-cottage-reservation/active-cottage-reservation.component';
+import { ActiveAdventureReservationComponent } from './active-adventure-reservation/active-adventure-reservation.component';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { SubscribeItemsListComponent } from './subscribe-items-list/subscribe-items-list.component';
+import { SubscribeItemComponent } from './subscribe-item/subscribe-item.component';
+
 
 
 
@@ -133,9 +149,25 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
     CottageReservationListComponent,
     CottageReservationItemComponent,
     SortCottageReservationsComponent,
+
     InstructorReservationClientComponent,
     InstructorAddReservationComponent,
-    InstructorOverviewComponent
+    InstructorOverviewComponent,
+
+    BoatReservationItemComponent,
+    BoatReservationListComponent,
+    SortBoatReservationsComponent,
+    AdventureReservationListComponent,
+    AdvetureReservationItemComponent,
+    SortAdventureReservationComponent,
+    ActiveReservationsComponent,
+    ActiveBoatReservationComponent,
+    ActiveCottageReservationComponent,
+    ActiveAdventureReservationComponent,
+    ComplaintFormComponent,
+    SubscribeItemsListComponent,
+    SubscribeItemComponent
+
 
 
 
