@@ -111,7 +111,8 @@
 </form>
 
 
-<form class="container1 rounded bg-white mt-5 mb-5" *ngIf="changePassword">
+<form [formGroup]="formV" class="container1 rounded bg-white mt-5 mb-5" (ngSubmit)="submitPassword()"
+  *ngIf="changePassword">
   <div class="row">
 
     <div class="col">
@@ -119,31 +120,37 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h1 class="text-right">Change passowrd:</h1>
         </div>
-        <div class="row mt-3">
-          <div class="col-md-12"><label class="labels">Old Password</label>
-            <input type="password" class="form-control" name="oldPassword" [(ngModel)]="oldPassword">
-          </div><br>
-          <div class="col-md-12"><label class="labels">New Password</label>
-            <input type="password" class="form-control" name="NewPassword" [(ngModel)]="newPassword">
-          </div>
-          <div class="col-md-12"><label class="labels">Confirm New Password</label>
-            <input type="password" class="form-control" name="ConfirmPassord" [(ngModel)]="passwordConfirm">
-          </div>
+
+        <div class="col-md-12"><label class="labels">New Password</label>
+          <input type="password" class="form-control" formControlName="newPassword" [(ngModel)]="newPassword" required>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.newPassword.touched ) && registerFormControl.newPassword.errors?.required">
+            New password is required
+          </span>
         </div>
-        <div class="row mt-4">
-
-          <div class="col-md-6">
-            <button class="col-md-12 " (click)="submitPassword()" mat-button>Submit</button>
-          </div>
-          <div class="col-md-6">
-            <button class="col-md-12" (click)="close()" mat-button id="delete">Cancel</button>
-          </div>
+        <div class="col-md-12"><label class="labels">Confirm New Password</label>
+          <input type="password" class="form-control" formControlName="passwordConfirm" [(ngModel)]="passwordConfirm"
+            required>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.passwordConfirm.touched ) && registerFormControl.passwordConfirm.errors?.required">
+            Confirmed password is required
+          </span>
         </div>
-
-
       </div>
-    </div>
+      <div class="row mt-4">
 
+        <div class="col-md-6">
+          <button class="col-md-12 " type="submit" mat-button>Submit</button>
+        </div>
+        <div class="col-md-6">
+          <button class="col-md-12" (click)="close()" mat-button id="delete">Cancel</button>
+        </div>
+      </div>
+
+
+    </div>
   </div>
+
+
 </form>
 3
