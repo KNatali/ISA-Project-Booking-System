@@ -81,6 +81,8 @@ import { ActiveBoatReservationComponent } from './active-boat-reservation/active
 import { ActiveCottageReservationComponent } from './active-cottage-reservation/active-cottage-reservation.component';
 import { ActiveAdventureReservationComponent } from './active-adventure-reservation/active-adventure-reservation.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { SubscribeItemsListComponent } from './subscribe-items-list/subscribe-items-list.component';
+import { SubscribeItemComponent } from './subscribe-item/subscribe-item.component';
 
 
 
@@ -148,7 +150,9 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
     ActiveBoatReservationComponent,
     ActiveCottageReservationComponent,
     ActiveAdventureReservationComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    SubscribeItemsListComponent,
+    SubscribeItemComponent
 
 
 
