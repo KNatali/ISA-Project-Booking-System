@@ -70,6 +70,8 @@ import { InstructorAdventureListComponent } from './instructor-adventure-list/in
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
 import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
+import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
 
 
 
@@ -126,7 +128,9 @@ import { SortCottageReservationsComponent } from './sort-cottage-reservations/so
     InstructorAdventureListComponent,
     CottageReservationListComponent,
     CottageReservationItemComponent,
-    SortCottageReservationsComponent
+    SortCottageReservationsComponent,
+    BoatReservationItemComponent,
+    BoatReservationListComponent
 
 
 
