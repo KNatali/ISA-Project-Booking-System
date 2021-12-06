@@ -44,22 +44,22 @@ public class CottageReservationController {
 		}
 		return res;
 	}
-	@RequestMapping(value="api/cottages-reservations/sort-by-price", method = RequestMethod.GET,
+	@RequestMapping(value="api/cottages-reservations/sort-by-price/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<CottageReservationDTO>> sortByPrice(){
-		List<CottageReservation> res=this.cottageReservationService.sortByPrice();
+	public ResponseEntity<List<CottageReservationDTO>> sortByPrice(@PathVariable Long id){
+		List<CottageReservation> res=this.cottageReservationService.sortByPrice(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
-	@RequestMapping(value="api/cottages-reservations/sort-by-duration", method = RequestMethod.GET,
+	@RequestMapping(value="api/cottages-reservations/sort-by-duration/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<CottageReservationDTO>> sortByDuration(){
-		List<CottageReservation> res=this.cottageReservationService.sortByDuration();
+	public ResponseEntity<List<CottageReservationDTO>> sortByDuration(@PathVariable Long id){
+		List<CottageReservation> res=this.cottageReservationService.sortByDuration(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
-	@RequestMapping(value="api/cottages-reservations/sort-by-date", method = RequestMethod.GET,
+	@RequestMapping(value="api/cottages-reservations/sort-by-date/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<CottageReservationDTO>> sortByDate(){
-		List<CottageReservation> res=this.cottageReservationService.sortByDate();
+	public ResponseEntity<List<CottageReservationDTO>> sortByDate(@PathVariable Long id){
+		List<CottageReservation> res=this.cottageReservationService.sortByDate(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
 	
