@@ -80,4 +80,7 @@ export class ClientProfileComponent implements OnInit {
     this.loginService.logOut();
     this.router.navigate(['']);
   }
+  historyCottageRes(){
+    this.router.navigate(['']);
+  }
 }
