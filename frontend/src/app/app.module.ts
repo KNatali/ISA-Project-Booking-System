@@ -80,6 +80,7 @@ import { ActiveReservationsComponent } from './active-reservations/active-reserv
 import { ActiveBoatReservationComponent } from './active-boat-reservation/active-boat-reservation.component';
 import { ActiveCottageReservationComponent } from './active-cottage-reservation/active-cottage-reservation.component';
 import { ActiveAdventureReservationComponent } from './active-adventure-reservation/active-adventure-reservation.component';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 
 
 
@@ -146,7 +147,8 @@ import { ActiveAdventureReservationComponent } from './active-adventure-reservat
     ActiveReservationsComponent,
     ActiveBoatReservationComponent,
     ActiveCottageReservationComponent,
-    ActiveAdventureReservationComponent
+    ActiveAdventureReservationComponent,
+    ComplaintFormComponent
 
 
 
