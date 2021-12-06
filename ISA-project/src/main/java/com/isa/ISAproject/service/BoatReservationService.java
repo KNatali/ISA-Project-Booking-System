@@ -1,11 +1,13 @@
 package com.isa.ISAproject.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.repository.BoatReservationRepository;
@@ -63,6 +65,17 @@ public class BoatReservationService {
 				if(boatRes.getId().equals(boatReservation2.getId())) {
 					res.add(boatRes);
 				}
+			}
+		}
+		return res;
+	}
+	public List<BoatReservation> activeReservation(Long id){
+		List<BoatReservation> allRes=this.findAllResByIdClient(id);
+		List<BoatReservation> res=new ArrayList<>();
+		LocalDateTime lt= LocalDateTime.now();
+		for (BoatReservation boatReservation : allRes) {
+			if(boatReservation.getDate().isAfter(lt)) {
+				res.add(boatReservation);
 			}
 		}
 		return res;

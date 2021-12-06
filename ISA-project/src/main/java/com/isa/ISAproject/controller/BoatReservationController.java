@@ -57,4 +57,10 @@ public class BoatReservationController {
 		List<BoatReservation> res=this.boatReservationService.sortByDate(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boat-reservations/active/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatReservationDTO>> activeReservations(@PathVariable Long id){
+		List<BoatReservation> res=this.boatReservationService.activeReservation(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
 }
