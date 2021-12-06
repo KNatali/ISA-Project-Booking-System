@@ -21,6 +21,7 @@ import { ConfirmRegistrationClientComponent } from './confirm-registration-clien
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
+import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
 
 
 const routes: Routes = [
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent},
 
-  { path: 'history-cottage-reservations/:id', component:CottageReservationListComponent}
+  { path: 'history-cottage-reservations/:id', component:CottageReservationListComponent},
+  { path: 'history-boat-reservations/:id',component:BoatReservationListComponent}
 
 
 ];
