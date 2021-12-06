@@ -55,7 +55,7 @@
           <div class="col-md-12"><button mat-button id="delete" (click)="deleteClient()">Delete Profile</button></div><br>
           <div class="col-md-12"><button mat-button id="history" [routerLink]="['/history-cottage-reservations',client.id]">History cottage reservations</button></div><br>
           <div class="col-md-12"><button mat-button id="history" [routerLink]="['/history-boat-reservations',client.id]">History boat reservations</button></div><br>
-          <div class="col-md-12"><button mat-button id="history" >History adventure reservations</button></div>
+          <div class="col-md-12"><button mat-button id="history" [routerLink]="['/history-adventure-reservations',client.id]">History adventure reservations</button></div>
         </div>
       </div>
     </div>
