@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,30 +25,36 @@ public class Cottage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
+	@Column
 	private String name;
 	@ManyToOne
 	private Address address;
-	@Column(nullable=false)
+	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	@Column(nullable=false)
-	private double grade;
+	private double averageGrade;
 	@Column
 	private String mainPicture;
-	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private CottageOwner owner;
-	@ElementCollection
-	private Set<String> pictures=new HashSet<>();
-	
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
+	 @JoinTable(
+	            name = "cottage_pictures",
+	            joinColumns = @JoinColumn(name = "cottage_id"),
+	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+	private Set<Picture> pictures=new HashSet<>();	
+	@ManyToMany
+	@JoinTable(name="cottage_and_rules",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<CottageBehavioralRule> rules=new HashSet<>();
 	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Room> rooms=new HashSet<>();
-	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cottage")
 	private Set<CottageFastReservation> cottageFastReservations;
-
+	@Column
+	@Enumerated(EnumType.STRING)
+	private CancellationPolicy cancellation;
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,19 +87,19 @@ public class Cottage {
 		this.description = description;
 	}
 
-	public double getGrade() {
-		return grade;
+	public double getAverageGrade() {
+		return averageGrade;
 	}
 
-	public void setGrade(double grade) {
-		this.grade = grade;
+	public void setAverageGrade(double averageGrade) {
+		this.averageGrade = averageGrade;
 	}
 
-	public Set<String> getPictures() {
+	public Set<Picture> getPictures() {
 		return pictures;
 	}
 
-	public void setPictures(Set<String> pictures) {
+	public void setPictures(Set<Picture> pictures) {
 		this.pictures = pictures;
 	}
 
@@ -135,22 +143,31 @@ public class Cottage {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
+	public CancellationPolicy getCancellation() {
+		return cancellation;
+	}
 
-	public Cottage(Long id, String name, Address address, String description, double grade, Set<String> pictures,
+	public void setCancellation(CancellationPolicy cancellation) {
+		this.cancellation = cancellation;
+	}
+	
+	public Cottage(Long id, String name, Address address, String description, double averageGrade, Set<Picture> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
-			Set<CottageFastReservation> cottageFastReservations, String mainPicture) {
+			Set<CottageFastReservation> cottageFastReservations, String mainPicture,Set<CottageFastReservation> fastReservations,CancellationPolicy cancellation) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
-		this.grade = grade;
+		this.averageGrade = averageGrade;
 		this.pictures = pictures;
 		this.rules = behavioralRules;
 		this.rooms = rooms;
 		this.owner = cottageOwner;
 		this.cottageFastReservations = cottageFastReservations;
 		this.mainPicture=mainPicture;
+		this.cottageFastReservations=fastReservations;
+		this.cancellation = cancellation;
 	}
 	
 	public Cottage () {}
