@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -22,9 +23,7 @@ public class BoatReservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private LocalDate date;
-	@Column
-	private LocalTime time;
+	private LocalDateTime date;
 	@Column
 	private int duration;
 	@Column
@@ -35,6 +34,8 @@ public class BoatReservation {
 	private double price;
 	@ManyToOne
 	private Client client;
+	@ManyToOne
+	private Boat boat;
 	
 	@OneToMany
 	private Set<BoatComplaint> BoatComplaints=new HashSet<>();
@@ -47,20 +48,12 @@ public class BoatReservation {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
-
-	public LocalTime getTime() {
-		return time;
-	}
-
-	public void setTime(LocalTime time) {
-		this.time = time;
 	}
 
 	public int getDuration() {
@@ -110,13 +103,20 @@ public class BoatReservation {
 	public void setBoatComplaints(Set<BoatComplaint> boatComplaints) {
 		BoatComplaints = boatComplaints;
 	}
+	
+	public Boat getBoat() {
+		return boat;
+	}
 
-	public BoatReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
+	public void setBoat(Boat boat) {
+		this.boat = boat;
+	}
+
+	public BoatReservation(Long id, LocalDateTime date, LocalTime time, int duration, int maxPersons,
 			Set<AdditionalItem> additionalItems, double price, Client client, Set<BoatComplaint> boatComplaints) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.time = time;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.additionalItems = additionalItems;
@@ -125,6 +125,22 @@ public class BoatReservation {
 		BoatComplaints = boatComplaints;
 	}
 	
+	
+	public BoatReservation(Long id, LocalDateTime date, int duration, int maxPersons,
+			Set<AdditionalItem> additionalItems, double price, Client client, Boat boat,
+			Set<BoatComplaint> boatComplaints) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.duration = duration;
+		this.maxPersons = maxPersons;
+		this.additionalItems = additionalItems;
+		this.price = price;
+		this.client = client;
+		this.boat = boat;
+		BoatComplaints = boatComplaints;
+	}
+
 	public BoatReservation() {}
 	
 	
