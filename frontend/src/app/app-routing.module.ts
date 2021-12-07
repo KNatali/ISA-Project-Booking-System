@@ -22,6 +22,8 @@ import { InstructorListComponent } from './instructor-list/instructor-list.compo
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
 import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
 import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
+import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent },
+  { path: 'admin/:id', component: AdminPageComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
@@ -43,6 +46,7 @@ const routes: Routes = [
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
   { path: 'instructor/reservations/:id', component: InstructorReservationClientComponent },
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
+  { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
 

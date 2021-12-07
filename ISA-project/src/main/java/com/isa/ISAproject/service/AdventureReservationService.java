@@ -30,7 +30,7 @@ public class AdventureReservationService {
 		}
 		return res;
 	}
-	public List<AdventureReservation> sortByDateStart(Long id) {
+	/*public List<AdventureReservation> sortByDateStart(Long id) {
 		List<AdventureReservation> reservations=this.findAllResByIdClient(id);
 		List<AdventureReservation> res=new ArrayList<>();
 		List<AdventureReservation> sorted=this.adventureReservationRepository.findByOrderByReservationStartDesc();
@@ -55,7 +55,7 @@ public class AdventureReservationService {
 			}
 		}
 		return res;
-	}
+	}*/
 	public List<AdventureReservation> activeReservation(Long id){
 		List<AdventureReservation> allRes=this.findAllResByIdClient(id);
 		List<AdventureReservation> res=new ArrayList<>();

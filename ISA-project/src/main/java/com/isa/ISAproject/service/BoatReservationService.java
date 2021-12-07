@@ -69,7 +69,7 @@ public class BoatReservationService {
 		}
 		return res;
 	}
-	public List<BoatReservation> activeReservation(Long id){
+	/*public List<BoatReservation> activeReservation(Long id){
 		List<BoatReservation> allRes=this.findAllResByIdClient(id);
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
@@ -79,5 +79,5 @@ public class BoatReservationService {
 			}
 		}
 		return res;
-	}
+	}*/
 }

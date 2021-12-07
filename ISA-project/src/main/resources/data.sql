@@ -34,6 +34,7 @@ insert into user ( role,username, password, first_name, last_name, email, mobile
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','laza', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Laza', 'Anic', 'lazaa@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','dusko', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Dusko', 'Dusic', 'dusko@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','daca', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Danica', 'Danicic', 'dana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('SysAdmin','taylor', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Taylor', 'Smith', 'isa.booking.project+truman@gmail.com', '305-666-0163',3,true,'1983-07-12 21:30:55.888');
 
 
 insert into user_authority (user_id,authority_id) values (1,3);
@@ -60,6 +61,7 @@ insert into client (id) values (7);
 insert into client (id) values (8);
 insert into client (id) values (9);
 
+insert into admin(id,major) values(10,true);
 
 insert into adventure_fishing_equipment(name) values ('cumberland');
 insert into adventure_fishing_equipment(name) values ('soft baits');
@@ -129,6 +131,9 @@ insert into adventure_rules(adventure_id,rule_id) values (3,5);
  
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5,null); 
+
+insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00',3,'2021-12-10','2021-12-14',4,460,1);
+insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00',2,'2021-12-12','2021-12-24',2,100,1);
 
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.PasswordChangeDTO;
@@ -154,6 +155,17 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 	public ResponseEntity<List<AdventureReservationDTO>> getReservations(@PathVariable(name="id") Long id){
 		List<AdventureReservationDTO> list=new ArrayList<>();
 		list=this.instructorService.getReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/instructors/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservations(@PathVariable(name="id") Long id){
+		List<AdventureFastReservationDTO> list=new ArrayList<>();
+		list=this.instructorService.getFastReservations(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}

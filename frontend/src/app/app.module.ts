@@ -75,6 +75,10 @@ import { InstructorAddReservationComponent } from './instructor-add-reservation/
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { InstructorActionsComponent } from './instructor-actions/instructor-actions.component';
+import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 
 
@@ -135,7 +139,11 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
     SortCottageReservationsComponent,
     InstructorReservationClientComponent,
     InstructorAddReservationComponent,
-    InstructorOverviewComponent
+    InstructorOverviewComponent,
+    InstructorActionsComponent,
+    InstructorActionAddComponent,
+    AdminPageComponent,
+    AdminProfileComponent
 
 
 
