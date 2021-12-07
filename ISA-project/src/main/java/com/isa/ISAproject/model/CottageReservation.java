@@ -64,7 +64,7 @@ public class CottageReservation {
 
 	public void setTime(LocalTime time) {
 		this.time = time;
-	}*/
+	}
 
 	public int getDuration() {
 		return duration;
@@ -159,6 +159,8 @@ public class CottageReservation {
 	private int numberOfPersons;
 	@Column(nullable=false)
 	private double price;
+	@Column(nullable=false)
+	private int duration;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@ManyToOne
@@ -291,7 +293,13 @@ public class CottageReservation {
 		this.cottageComplaints = cottageComplaints;
 	}
 
+	public int getDuration() {
+		return duration;
+	}
 
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 
 	public CottageReservation() {}
 }

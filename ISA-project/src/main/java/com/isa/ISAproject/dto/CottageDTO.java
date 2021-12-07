@@ -12,12 +12,14 @@ import com.isa.ISAproject.model.Cottage;
 public class CottageDTO {
 	private Long id;
 	private String name;
-	private String street;
-	private String state;
-	private String city;
+	private AddressDTO address;
 	private String description;
 	private double grade;
 	private String mainPicture;
+	private double price;
+	private int maxPersons;
+	private CottageOwnerProfileDTO cottageOwner;
+	private int cancellation;
 	public Long getId() {
 		return id;
 	}
@@ -30,23 +32,12 @@ public class CottageDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getStreet() {
-		return street;
+	public AddressDTO getAddress() {
+		return address;
 	}
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
+
+	public void setAddress(AddressDTO address) {
+		this.address = address;
 	}
 	public String getDescription() {
 		return description;
@@ -66,28 +57,51 @@ public class CottageDTO {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
-	public CottageDTO(Long id, String name, String street, String state, String city, String description, double grade,
-			String mainPicture) {
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+	public CottageOwnerProfileDTO getCottageOwner() {
+		return cottageOwner;
+	}
+
+	public void setCottageOwner(CottageOwnerProfileDTO cottageOwner) {
+		this.cottageOwner = cottageOwner;
+	}
+	public int getCancellation() {
+		return cancellation;
+	}
+
+	public void setCancellation(int cancellation) {
+		this.cancellation = cancellation;
+	}
+	public CottageDTO(Long id, String name, AddressDTO address, String description, double grade,
+			double price, CottageOwnerProfileDTO cottageOwner, String mainPicture, int maxPersons,int cancellation) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.street = street;
-		this.state = state;
-		this.city = city;
 		this.description = description;
 		this.grade = grade;
 		this.mainPicture = mainPicture;
+		this.address = address;
+		this.price=price;
+		this.cottageOwner = cottageOwner;
+		this.maxPersons=maxPersons;
+		this.cancellation=cancellation;
 	}
 	public CottageDTO(Cottage cottage) {
-		super();
-		this.id = cottage.getId();
 		this.name =cottage.getName();
-		this.street = cottage.getAddress().getStreet();
-		this.state = cottage.getAddress().getState();
-		this.city = cottage.getAddress().getCity();
-		this.description = cottage.getDescription();
-		this.grade = cottage.getGrade();
-		this.mainPicture = cottage.getMainPicture();
 	}
 	public CottageDTO() {}
 }

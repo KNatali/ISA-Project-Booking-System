@@ -13,6 +13,7 @@ public class CottageOwnerProfileDTO {
 	private String state;
 	private String city;
 	private String mobile;
+	private String role;
 	
 	public Long getId() {
 		return id;
@@ -74,9 +75,15 @@ public class CottageOwnerProfileDTO {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public CottageOwnerProfileDTO() {}
 	public CottageOwnerProfileDTO(String username, String password, String email, String firstName, String lastName,
-			String street, String state, String city, String mobile,Long id) 
+			String street, String state, String city, String mobile,Long id,String role) 
 	{
 		super();
 		
@@ -90,6 +97,7 @@ public class CottageOwnerProfileDTO {
 		this.city = city;
 		this.mobile = mobile;
 		this.id=id;
+		this.role=role;
 	}
 	public CottageOwnerProfileDTO(CottageOwner cottageOwner)
 	{
@@ -105,6 +113,7 @@ public class CottageOwnerProfileDTO {
 		this.city = cottageOwner.getAddress().getCity();
 		this.mobile = cottageOwner.getMobile();
 		this.id=cottageOwner.getId();
+		this.role=cottageOwner.getRole();
 		
 	}
 }

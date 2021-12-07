@@ -32,9 +32,13 @@ public class Cottage {
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	@Column(nullable=false)
-	private double averageGrade;
+	private double grade;
 	@Column
 	private String mainPicture;
+	@Column
+	private double price;
+	@Column
+	private int maxPersons;
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private CottageOwner owner;
 	@ManyToMany
@@ -52,8 +56,7 @@ public class Cottage {
 	@OneToMany(mappedBy="cottage")
 	private Set<CottageFastReservation> cottageFastReservations;
 	@Column
-	@Enumerated(EnumType.STRING)
-	private CancellationPolicy cancellation;
+	private int cancellation;
 	@OneToMany
 	private Set<CottageReservation> cottageReservations=new HashSet<>();
 
@@ -89,12 +92,12 @@ public class Cottage {
 		this.description = description;
 	}
 
-	public double getAverageGrade() {
-		return averageGrade;
+	public double getGrade() {
+		return grade;
 	}
 
-	public void setAverageGrade(double averageGrade) {
-		this.averageGrade = averageGrade;
+	public void setGrade(double grade) {
+		this.grade = grade;
 	}
 
 	public Set<Picture> getPictures() {
@@ -146,23 +149,37 @@ public class Cottage {
 		this.mainPicture = mainPicture;
 	}
   
-	public CancellationPolicy getCancellation() {
+	public int getCancellation() {
 		return cancellation;
 	}
 
-	public void setCancellation(CancellationPolicy cancellation) {
+	public void setCancellation(int cancellation) {
 		this.cancellation = cancellation;
 	}
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
 	
-	public Cottage(Long id, String name, Address address, String description, double averageGrade, Set<Picture> pictures,
-			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
-			Set<CottageFastReservation> cottageFastReservations, String mainPicture,Set<CottageFastReservation> fastReservations,CancellationPolicy cancellation) {
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public Cottage(Long id, String name, Address address, String description, double grade, Set<Picture> pictures,
+			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner, double price, int maxPersons,
+			Set<CottageFastReservation> cottageFastReservations, String mainPicture,Set<CottageFastReservation> fastReservations,int cancellation) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
-		this.averageGrade = averageGrade;
+		this.grade = grade;
 		this.pictures = pictures;
 		this.rules = behavioralRules;
 		this.rooms = rooms;
@@ -171,25 +188,8 @@ public class Cottage {
 		this.mainPicture=mainPicture;
 		this.cottageFastReservations=fastReservations;
 		this.cancellation = cancellation;
-	}
-	
-	
-	public Cottage(Long id, String name, Address address, String description, double grade, String mainPicture,
-			CottageOwner owner, Set<String> pictures, Set<CottageBehavioralRule> rules, Set<Room> rooms,
-			Set<CottageFastReservation> cottageFastReservations, Set<CottageReservation> cottageReservations) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.description = description;
-		this.grade = grade;
-		this.mainPicture = mainPicture;
-		this.owner = owner;
-		this.pictures = pictures;
-		this.rules = rules;
-		this.rooms = rooms;
-		this.cottageFastReservations = cottageFastReservations;
-		this.cottageReservations = cottageReservations;
+		this.price=price;
+		this.maxPersons = maxPersons;
 	}
 
 	public Cottage () {}

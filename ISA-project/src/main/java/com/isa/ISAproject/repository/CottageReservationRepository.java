@@ -9,7 +9,7 @@ import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.CottageReservation;
 @Repository
 public interface CottageReservationRepository extends JpaRepository<CottageReservation, Long>{
-	List<CottageReservation> findByOrderByDateDesc();
+	/*List<CottageReservation> findByOrderByDateDesc();
 	List<CottageReservation> findByOrderByPriceDesc();
-	List<CottageReservation> findByOrderByDurationDesc();
+	List<CottageReservation> findByOrderByDurationDesc();*/
 }
