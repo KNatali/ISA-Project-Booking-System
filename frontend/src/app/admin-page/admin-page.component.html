@@ -1,19 +1,19 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Overview">
-    Owerview
+    <app-admin-overview></app-admin-overview>
 
   </mat-tab>
   <mat-tab label="Profile">
     <app-admin-profile [admin]="admin" [id]="id"></app-admin-profile>
   </mat-tab>
   <mat-tab label="Registration requests">
-    Requests
+    <app-admin-reservation-requests></app-admin-reservation-requests>
   </mat-tab>
   <mat-tab label="Users">
     <app-admin-users></app-admin-users>
   </mat-tab>
   <mat-tab label="Entities">
-    Entities
+    <app-admin-entities></app-admin-entities>
 
   </mat-tab>
 </mat-tab-group>

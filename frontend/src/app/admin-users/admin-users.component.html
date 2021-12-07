@@ -11,8 +11,7 @@
         <th scope="col">Username</th>
         <th scope="col">Email</th>
 
-        <th scope="col">Address</th>
-        <th scope="col">Mobile</th>
+
         <th scope="col">Role</th>
         <th scope="col"></th>
       </tr>
@@ -30,11 +29,9 @@
         </td>
         <td>{{u.email}}</td>
 
-        <td>{{ u.street }},{{u.city}}</td>
 
-        <td>{{ u.mobile}}</td>
         <td>{{ u.role}}</td>
-        <td><button mat-button (click)="deleteUser(u.id)"><a>Delete</a></button></td>
+        <td><button mat-button (click)="deleteUser(u.id)" id="delete"><a>Delete</a></button></td>
       </tr>
     </tbody>
   </table>

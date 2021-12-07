@@ -30,6 +30,7 @@ export class AdminUsersComponent implements OnInit {
   deleteUser(id: number) {
     this.adminService.deleteUser(id)
       .subscribe();
+    window.location.reload();
   }
 
 

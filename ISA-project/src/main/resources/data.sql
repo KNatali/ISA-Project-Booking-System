@@ -107,11 +107,11 @@ insert into cottage(description, grade, main_picture, name,address_id) values ('
 
 
 
-insert into additional_item(name,price,adventure_id) values ('Fishing License',20,1);
-insert into additional_item(name,price,adventure_id) values ('Live Bait',5,1);
-insert into additional_item(name,price,adventure_id) values ('Fridge',5,1);
-insert into additional_item(name,price,adventure_id) values ('Kitchen',10,2);
-insert into additional_item(name,price,adventure_id) values ('fishfinder',15,2);
+insert into additional_item(name,price) values ('Fishing License',20);
+insert into additional_item(name,price) values ('Live Bait',5);
+insert into additional_item(name,price) values ('Fridge',5);
+insert into additional_item(name,price) values ('Kitchen',10);
+insert into additional_item(name,price) values ('fishfinder',15);
 
 insert into adventure_equipment(adventure_id,equipment_id) values (1,1);
 insert into adventure_equipment(adventure_id,equipment_id) values (1,2);
@@ -126,7 +126,14 @@ insert into adventure_rules(adventure_id,rule_id) values (2,3);
 insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
- 
+
+insert into adventure_additional_items(adventure_id,additional_item_id) values(1,1);
+insert into adventure_additional_items(adventure_id,additional_item_id) values(1,2);
+insert into adventure_additional_items(adventure_id,additional_item_id) values(1,3);
+insert into adventure_additional_items(adventure_id,additional_item_id) values(2,2);
+insert into adventure_additional_items(adventure_id,additional_item_id) values(2,4);
+insert into adventure_additional_items(adventure_id,additional_item_id) values(3,1);
+
 
  insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
  

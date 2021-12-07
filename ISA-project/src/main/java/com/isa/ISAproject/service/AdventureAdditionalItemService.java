@@ -42,7 +42,7 @@ public class AdventureAdditionalItemService {
 		AdditionalItem e=AdditionalItemMapper.convertFromDTO(eDTO);
 
 		Adventure a=adventureRepository.getById(id);
-		e.setAdventure(a);
+		
 		this.additionalItemRepository.save(e);
 		Set<AdditionalItem> list=a.getAdditionalItems();
 		list.add(e);
@@ -54,12 +54,13 @@ public class AdventureAdditionalItemService {
 	
 	public boolean editAdditionalItem(Long id,AdditionalItemDTO eDTO) {
 		AdditionalItem e=additionalItemRepository.getById(eDTO.getId());
-		Adventure a=adventureRepository.getById(id);
 		AdditionalItem edited=new AdditionalItem();
 		edited.setId(e.getId());
 		edited.setName(eDTO.getName());
 		edited.setPrice(eDTO.getPrice());
-		edited.setAdventure(a);
+		
+		Adventure a=adventureRepository.getById(id);
+		
 		this.additionalItemRepository.save(edited);
 		
 		

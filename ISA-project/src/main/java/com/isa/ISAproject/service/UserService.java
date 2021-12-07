@@ -56,7 +56,7 @@ public class UserService {
 		List<User> users=userRepository.findAll();
 		List<UserDTO> usersDTO=new ArrayList<>();
 	 for (User u : users) {
-		 if(u.getRole()!="Admin") {
+		 if(u.getRole()!="Admin" && u.getRole()!="SysAdmin") {
 			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole());
 			usersDTO.add(dto);
 		 }

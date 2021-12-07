@@ -81,7 +81,10 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
-import { EntitiesComponent } from './entities/entities.component';
+
+import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
+import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 
 
 
@@ -149,7 +152,9 @@ import { EntitiesComponent } from './entities/entities.component';
     AdminProfileComponent,
     AdminUsersComponent,
     AdminAddAdminComponent,
-    EntitiesComponent
+    AdminEntitiesComponent,
+    AdminReservationRequestsComponent,
+    AdminOverviewComponent
 
 
 

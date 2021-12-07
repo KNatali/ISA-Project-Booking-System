@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +45,12 @@ public class AdventureController {
 		List<AdventureDTO> adventuresDTO=adventureService.findAll();
 		
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="delete/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
+	public ResponseEntity<?> delete(@PathVariable Long id){
+		this.adventureService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	

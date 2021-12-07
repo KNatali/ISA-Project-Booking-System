@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="buttons">
+    <button mat-button (click)="showCottages()"> Cottages</button>
+    <button mat-button (click)="showBoats()">Boats</button>
+    <button mat-button (click)="showAdventures()">Adventures </button>
+  </div>
+  <br>
+  <table class="table table-striped" *ngIf="cottageShow">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Grade</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of cottages; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+
+        <td>
+          <img src="{{c.mainPicture}}" style="width: 100px;">
+        </td>
+        <td>
+          {{c.name}}
+        </td>
+        <td>
+
+          {{c.street }},{{c.city}}
+        </td>
+        <td>{{c.grade}}</td>
+
+
+        <td><button mat-button (click)="deleteCottage(c.id)" id="delete"><a>Delete</a></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <table class="table table-striped" *ngIf="boatShow">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Grade</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of boats; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+
+        <td>
+          <img src="{{c.mainPicture}}" style="width: 100px;">
+        </td>
+        <td>
+          {{c.name}}
+        </td>
+        <td>
+
+          {{c.address.street }},{{c.address.city}}
+        </td>
+        <td>{{c.grade}}</td>
+
+
+        <td><button mat-button (click)="deleteCottage(c.id)" id="delete"><a>Delete</a></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <table class="table table-striped" *ngIf="adventureShow">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Grade</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of adventures; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+
+        <td>
+          <img src="{{c.mainPicture}}" style="width: 100px;">
+        </td>
+        <td>
+          {{c.name}}
+        </td>
+        <td>
+
+          {{c.address.street }},{{c.address.city}}
+        </td>
+        <td>{{c.averageGrade}}</td>
+
+
+        <td><button mat-button (click)="deleteAdventure(c.id)" id="delete"><a>Delete</a></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

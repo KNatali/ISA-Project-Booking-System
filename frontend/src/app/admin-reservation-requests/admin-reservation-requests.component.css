@@ -1,0 +1,29 @@
+.container {
+  margin: auto;
+  width: 80% !important;
+  padding: 30px;
+  color: #0B2545;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-button {
+  background-color: #AEC2D5;
+
+
+}
+
+#add {
+  align-self: flex-end;
+  color: white;
+  background-color: #13315C
+}
+
+#reject {
+  background-color: rgb(233, 101, 101);
+}
+
+#accept {
+  background-color: rgb(133, 235, 164);
+}
