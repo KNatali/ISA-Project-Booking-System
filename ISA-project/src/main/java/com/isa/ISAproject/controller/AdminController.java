@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.PasswordChangeDTO;
+import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdminService;
+import com.isa.ISAproject.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -32,12 +34,14 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	@Autowired
+	private UserService userService;
+	@Autowired
 	private AddressService addressService;
 	
 
 	@RequestMapping(value="api/admin/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
 	public ResponseEntity<AdminProfileDTO> getById(@PathVariable Long id){
 		Optional<Admin> item=adminService.findById(id);
 		
@@ -49,8 +53,31 @@ public class AdminController {
 		return new ResponseEntity<>(itemDto,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="api/admin/allUsers",method = RequestMethod.GET,produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<List<UserDTO>> getAllUsers(){
+		List<UserDTO> dtos=userService.findAll();
+		
+	
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/admin/addAdmin",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize(" hasRole('SYSADMIN')")
+	public ResponseEntity<?> addNewAdmin(@RequestBody UserDTO dto){
+		if(!this.adminService.addNewAdmin(dto))
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@RequestMapping(value="api/admin/deleteUser/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<?> deleteUser(@PathVariable Long id){
+		this.adminService.deleteUser(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="api/admin/changePassword/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
 	public ResponseEntity<AdminProfileDTO> changePassword(@RequestBody PasswordChangeDTO dto,@PathVariable Long id){
 		AdminProfileDTO adminDTO=adminService.changePassword(id, dto);
 		if(adminDTO==null) {

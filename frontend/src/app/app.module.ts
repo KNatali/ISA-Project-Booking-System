@@ -79,6 +79,9 @@ import { InstructorActionsComponent } from './instructor-actions/instructor-acti
 import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
+import { EntitiesComponent } from './entities/entities.component';
 
 
 
@@ -143,7 +146,10 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     InstructorActionsComponent,
     InstructorActionAddComponent,
     AdminPageComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    AdminUsersComponent,
+    AdminAddAdminComponent,
+    EntitiesComponent
 
 
 

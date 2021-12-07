@@ -12,9 +12,13 @@ import org.springframework.stereotype.Service;
 import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.PasswordChangeDTO;
+import com.isa.ISAproject.dto.UserDTO;
+import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdminRepository;
+import com.isa.ISAproject.repository.UserRepository;
 
 @Service
 public class AdminService {
@@ -22,7 +26,11 @@ public class AdminService {
 	@Autowired
 	private AdminRepository adminRepository;
 	@Autowired
+	private UserRepository userRepository;
+	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired 
+	private UserService userService;
 	
 	
 	public List<Admin> findAll() {
@@ -47,6 +55,23 @@ public class AdminService {
 	
 	public Admin save(Admin newAdmin) {
 		return this.adminRepository.save(newAdmin);
+	}
+	
+	public void deleteUser(Long id) {
+		User user=this.userRepository.getById(id);
+		this.userRepository.delete(user);
+	}
+	
+	public boolean addNewAdmin(UserDTO dto) {
+		User existUser = this.userService.findByUsername(dto.getUsername());
+
+		if (existUser != null) {
+			throw new ResourceConflictException(dto.getId(), "Username already exists");
+			
+		}
+
+		User user = this.userService.save(dto);
+		return true;
 	}
 
 }

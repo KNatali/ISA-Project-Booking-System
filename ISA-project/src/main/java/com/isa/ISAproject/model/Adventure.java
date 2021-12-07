@@ -60,7 +60,7 @@ public class Adventure {
 	@Column
 	private int cancellationPercentage;
 
-	@OneToMany(mappedBy="adventure",cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="adventure",cascade=CascadeType.ALL)
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	 
 	@OneToMany(mappedBy = "adventure")

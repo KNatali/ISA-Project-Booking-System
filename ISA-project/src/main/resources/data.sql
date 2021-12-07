@@ -14,7 +14,7 @@ insert into address (state, city,street) values ('United States','San Diego',' 9
 insert into address (state, city,street) values ('United States','San Diego','Emerson Street 2803');
 
 
-insert into authority(id, name) values (1, 'ROLE_SYS_ADMIN');
+insert into authority(id, name) values (1, 'ROLE_SYSADMIN');
 
 insert into authority(id, name) values (2, 'ROLE_ADMIN');
 
@@ -46,6 +46,7 @@ insert into user_authority (user_id,authority_id) values (6,3);
 insert into user_authority (user_id,authority_id) values (7,4);
 insert into user_authority (user_id,authority_id) values (8,4);
 insert into user_authority (user_id,authority_id) values (9,4);
+insert into user_authority (user_id,authority_id) values (10,1);
 
 
 insert into instructor (id,biography,grade) values (1,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',3);
@@ -61,7 +62,7 @@ insert into client (id) values (7);
 insert into client (id) values (8);
 insert into client (id) values (9);
 
-insert into admin(id,major) values(10,true);
+insert into admin(id) values(10);
 
 insert into adventure_fishing_equipment(name) values ('cumberland');
 insert into adventure_fishing_equipment(name) values ('soft baits');

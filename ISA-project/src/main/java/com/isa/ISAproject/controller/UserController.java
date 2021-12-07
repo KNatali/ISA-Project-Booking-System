@@ -4,9 +4,12 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,13 +21,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.mapper.UserMapper;
+import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.service.EmailService;
 import com.isa.ISAproject.service.UserService;
@@ -61,11 +67,16 @@ public class UserController {
 
 	    }
 
-		@GetMapping("/user/all")
-		@PreAuthorize("hasRole('ADMIN')")
-		public List<User> loadAll() {
-			return this.userService.findAll();
+		/*@RequestMapping(value="/user/all",method = RequestMethod.GET,produces=
+				MediaType.APPLICATION_JSON_VALUE)
+		@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+		public ResponseEntity<List<UserDTO>> getAll(){
+			
+			List<UserDTO> dto=this.userService.findAll();
+			
+			return new ResponseEntity<>(dto,HttpStatus.OK);
 		}
+		*/
 
 		@GetMapping("/whoami")
 		

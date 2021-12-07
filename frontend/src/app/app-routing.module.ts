@@ -24,6 +24,7 @@ import { InstructorReservationClientComponent } from './instructor-reservation-c
 import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
 import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent },
   { path: 'admin/:id', component: AdminPageComponent },
+  { path: 'admin/:id/admin-add', component: AdminAddAdminComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },

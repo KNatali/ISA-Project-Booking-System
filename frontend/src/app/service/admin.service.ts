@@ -7,6 +7,7 @@ import { Instructor } from '../model/instructor';
 import { Client } from '../model/client';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { Admin } from '../model/admin';
+import { User } from '../model/user';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,18 @@ export class AdminService {
     constructor(private http: HttpClient) { }
     getAdmins(): Observable<Admin[]> {
         return this.http.get<Admin[]>(this.urlAdmin);
+    }
+    getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${this.urlAdmin}/allUsers`);
+    }
+
+    deleteUser(id: number) {
+        return this.http.delete(`${this.urlAdmin}/` + `deleteUser` + `/${id}`);
+
+    }
+
+    addNewAdmin(newAdmin: User): Observable<User> {
+        return this.http.post<User>(`${this.urlAdmin}/addAdmin`, newAdmin);
     }
 
     getById(id: number): Observable<Admin> {

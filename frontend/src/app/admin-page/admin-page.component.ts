@@ -26,14 +26,14 @@ export class AdminPageComponent implements OnInit {
 
 
   });
-  constructor(private route: ActivatedRoute, private adminsSrvice: AdminService) { }
+  constructor(private route: ActivatedRoute, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.id = sessionStorage.getItem("id");
     this.getById();
   }
   getById() {
-    this.adminsSrvice.getById(this.id)
+    this.adminService.getById(this.id)
       .subscribe(res => this.admin = res)
   }
 
