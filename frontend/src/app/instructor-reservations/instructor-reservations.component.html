@@ -1,45 +1,4 @@
 <div class="container">
-  <br>
-
-  <h1>Active reservations:</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Adventure name</th>
-
-        <th scope="col">Client</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-
-        <td>
-          2021-12-6 14:00:00
-        </td>
-        <td>
-
-          2021-12-20 13:0:00
-        </td>
-        <td>The Long Run Sportfishing</td>
-
-        <td>Ana Anic</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',1]"><a>View Client</a></button>
-        </td>
-        <td> <button mat-button [routerLink]="['reservation-add']"><a> Add new
-              reservation</a></button></td>
-
-      </tr>
-    </tbody>
-  </table>
-  <hr>
-
   <h1>Coming reservations..</h1>
   <table class="table table-striped">
     <thead>
@@ -68,8 +27,7 @@
         <td>{{ item.adventure.name }}</td>
 
         <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View Client</a></button>
-        </td>
+        <td><button mat-button><a>View Client</a></button></td>
 
       </tr>
     </tbody>
@@ -105,10 +63,8 @@
         <td>{{ item.adventure.name }}</td>
 
         <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View
-              Client</a></button></td>
-        <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport"><a>Add report</a></button>
-        </td>
+        <td><button mat-button><a>View Client</a></button></td>
+        <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport"><a>Add report</a></button></td>
 
       </tr>
     </tbody>

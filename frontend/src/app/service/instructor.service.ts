@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
 import { Instructor } from '../model/instructor';
-import { Client } from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +26,6 @@ export class InstructorService {
   updateInstructor(id: number, editedInstructor: Instructor): Observable<Instructor> {
     return this.http.put<Instructor>(`${this.urlInstructor}/${id}`, editedInstructor);
   }
-
-  changePassword(id: number, newPassword: string): Observable<Instructor> {
-    return this.http.post<Instructor>(`${this.urlInstructor}/` + `changePassword` + `/${id}`, { newPassword });
-  }
   getInstructorAdventures(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor1}/` + `adventures` + `/${id}`);
   }
@@ -39,18 +34,12 @@ export class InstructorService {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
   }
 
-  getReservationClient(clientId: number): Observable<Client> {
-    return this.http.get<Client>(`${this.urlInstructor1}/` + `reservationClient` + `/${clientId}`);
-  }
   getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
   }
 
   getCompletedInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `completedReservations` + `/${id}`);
-  }
-  getActiveInstructorReservations(id: number): Observable<AdventureReservation[]> {
-    return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `activeReservations` + `/${id}`);
   }
   sortByName(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.urlInstructor + "/sort-by-name");

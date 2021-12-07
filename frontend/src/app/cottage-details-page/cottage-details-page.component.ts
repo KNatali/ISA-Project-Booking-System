@@ -10,7 +10,16 @@ import { CottageService } from '../service/cottage.service';
 })
 export class CottageDetailsPageComponent implements OnInit {
   id: number;
-  cottage:Cottage;
+  cottage:Cottage=new Cottage({
+    id:0,
+    name:'',
+    state:'',
+    street:'',
+    city:'',
+    description:'',
+    grade:0,
+    mainPicture:''
+  });
 
   constructor(private route: ActivatedRoute,private cottageService:CottageService) { }
 

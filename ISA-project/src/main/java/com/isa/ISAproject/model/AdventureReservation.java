@@ -24,10 +24,10 @@ public class AdventureReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	 @Column( nullable = false)
+	 @Column(name = "reservationStart", nullable = false)
 	    private LocalDateTime reservationStart;
 
-	    @Column( nullable = false)
+	    @Column(name = "reservationEnd", nullable = false)
 	    private LocalDateTime reservationEnd;
 
 	    @ManyToOne

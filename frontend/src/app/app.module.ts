@@ -70,13 +70,6 @@ import { InstructorAdventureListComponent } from './instructor-adventure-list/in
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
 import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
-
-import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
-import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-
 import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
 import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
 import { SortBoatReservationsComponent } from './sort-boat-reservations/sort-boat-reservations.component';
@@ -90,7 +83,6 @@ import { ActiveAdventureReservationComponent } from './active-adventure-reservat
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { SubscribeItemsListComponent } from './subscribe-items-list/subscribe-items-list.component';
 import { SubscribeItemComponent } from './subscribe-item/subscribe-item.component';
-
 
 
 
@@ -113,7 +105,6 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     AdventureDatailsPageComponent,
     BoatDetailsPageComponent,
     SearchCottageComponent,
-
 
     InstructorAdventuresComponent,
 
@@ -149,11 +140,6 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     CottageReservationListComponent,
     CottageReservationItemComponent,
     SortCottageReservationsComponent,
-
-    InstructorReservationClientComponent,
-    InstructorAddReservationComponent,
-    InstructorOverviewComponent,
-
     BoatReservationItemComponent,
     BoatReservationListComponent,
     SortBoatReservationsComponent,
@@ -167,7 +153,6 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     ComplaintFormComponent,
     SubscribeItemsListComponent,
     SubscribeItemComponent
-
 
 
 
@@ -185,11 +170,7 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     FlexLayoutModule,
     MatTabsModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
+    ReactiveFormsModule
 
   ],
   providers: [{
