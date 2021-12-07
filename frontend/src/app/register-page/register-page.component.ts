@@ -11,10 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit {
-  confirmedPassword:string;
-  registrated:boolean;
-  error:string;
-  newUser: User=new User({
+  choices = ["Client", "Instructor", "Cottage owner", "Boat owner"];
+  reason: "";
+  value: string;
+  showReason: boolean = false;
+  @Output() valueChosen: EventEmitter<any> = new EventEmitter();
+  confirmedPassword: string;
+  registrated: boolean;
+  error: string;
+  newUser: User = new User({
     id: 0,
     username: '',
     password: '',
@@ -25,24 +30,42 @@ export class RegisterPageComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
-    role:'Client'
+    role: 'Client'
   });
-  constructor(private userService: UserService, private router: Router) { 
-    this.registrated=false;
+  constructor(private userService: UserService, private router: Router) {
+    this.registrated = false;
   }
 
+
   ngOnInit(): void {
+
   }
-  addNewClient(){
-    if(this.newUser.password==this.confirmedPassword){
+  choose(value: string) {
+    this.valueChosen.emit(value);
+    if (this.value != "Client")
+      this.showReason = true;
+    else
+      this.showReason = false;
+
+  }
+  addNewClient() {
+    if (this.value == "Client") {
+
+    }
+    if (this.newUser.password == this.confirmedPassword) {
       //this.userService.signUp(this.newUser)
       //.subscribe(res=>this.newUser=res);
       //console.log(this.newUser.id);
-      this.userService.sendEmail(this.newUser)
-      .subscribe();
-      this.registrated=true;
-    }else{
-      this.error="passwords are not equal";
+      if (this.value == "Client") {
+        this.userService.sendEmail(this.newUser)
+          .subscribe();
+        this.registrated = true;
+      }
+      else {
+
+      }
+    } else {
+      this.error = "passwords are not equal";
     }
 
   }

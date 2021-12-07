@@ -3,10 +3,12 @@
     <h2 class="text-center">Become our member !</h2>
     <form id="loginform" name="loginform">
       <div class="form-group">
-        <input id="fistName" name="fistName" type="text" class="from-control" placeholder="firts name" [(ngModel)]="newUser.firstName">
+        <input id="fistName" name="fistName" type="text" class="from-control" placeholder="firts name"
+          [(ngModel)]="newUser.firstName">
       </div>
       <div class="form-group">
-        <input id="lastName" name="lastName" type="text" class="from-control" placeholder="last name" [(ngModel)]="newUser.lastName">
+        <input id="lastName" name="lastName" type="text" class="from-control" placeholder="last name"
+          [(ngModel)]="newUser.lastName">
       </div>
       <div class="form-group">
         <input id="email" name="email" type="text" class="from-control" placeholder="email" [(ngModel)]="newUser.email">
@@ -18,22 +20,42 @@
         <input id="city" name="city" type="text" class="from-control" placeholder="city" [(ngModel)]="newUser.city">
       </div>
       <div class="form-group">
-        <input id="street" name="street" type="text" class="from-control" placeholder="street" [(ngModel)]="newUser.street">
+        <input id="street" name="street" type="text" class="from-control" placeholder="street"
+          [(ngModel)]="newUser.street">
       </div>
       <div class="form-group">
-        <input id="mobile" name="mobile" type="text" class="from-control" placeholder="mobile" [(ngModel)]="newUser.mobile">
+        <input id="mobile" name="mobile" type="text" class="from-control" placeholder="mobile"
+          [(ngModel)]="newUser.mobile">
       </div>
       <div class="form-group">
-        <input id="username" name="username" type="text" class="from-control" placeholder="username" [(ngModel)]="newUser.username">
+        <input id="username" name="username" type="text" class="from-control" placeholder="username"
+          [(ngModel)]="newUser.username">
       </div>
       <div class="form-group">
-        <input id="password" name="password" type="password" class="from-control" placeholder="password" [(ngModel)]="newUser.password">
+        <input id="password" name="password" type="password" class="from-control" placeholder="password"
+          [(ngModel)]="newUser.password">
       </div>
       <div class="form-group">
-        <input id="confirmPassword" name="confirmPassword" type="password" class="from-control" placeholder=" confirm password" [(ngModel)]="confirmedPassword">
+        <input id="confirmPassword" name="confirmPassword" type="password" class="from-control"
+          placeholder=" confirm password" [(ngModel)]="confirmedPassword">
       </div>
       <p class="error">{{ error }}</p>
-      <button type="submit" class="btn btn-primary" (click)="addNewClient()">Register</button><br>
+      <div class="role">
+        <h2>Choose role:</h2>
+        <div class="toggle-group">
+          <div *ngFor="let choice of choices">
+            <input type="radio" id="role" name="role" value="{{ choice }}" [(ngModel)]="value"
+              (ngModelChange)="choose($event)" />
+            <label class="toggle-button" for="{{choice}}">{{ choice }}</label>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="showReason">
+          <textarea id="reason" name="reason" type="text" class="from-control" placeholder="Reason for registration"
+            [(ngModel)]="reason"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="addNewClient()">Register</button><br>
+      </div>
+
     </form>
   </div>
 </div>
