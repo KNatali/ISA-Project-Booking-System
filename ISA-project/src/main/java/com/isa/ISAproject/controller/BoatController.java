@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageDTO;
+import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.service.BoatService;
@@ -89,6 +91,19 @@ public class BoatController {
 	public ResponseEntity<List<BoatDTO>> sortByCity(){
 		List<Boat> boats=this.boatService.sortByCity();
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/additional-items",method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdditionalItemDTO>> findAllAdditionalItems(){
+		List<AdditionalItem> items=this.boatService.findAllAdditionalItems();
+		return new ResponseEntity<>(this.convertAdditionalItemsToDtoList(items),HttpStatus.OK);
+	}
+	public List<AdditionalItemDTO> convertAdditionalItemsToDtoList(List<AdditionalItem> items){
+		List<AdditionalItemDTO> res=new ArrayList<>();
+		for (AdditionalItem item: items) {
+			res.add(new AdditionalItemDTO(item));
+		}
+		return res;
 	}
 
 }

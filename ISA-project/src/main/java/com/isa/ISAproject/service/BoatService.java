@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.BoatRepository;
 
@@ -21,6 +23,8 @@ public class BoatService {
 	private BoatRepository boatRepository;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private AdditionalItemRepository additionalItemRepository;
 	
 	public List<Boat> findAll(){
 		return this.boatRepository.findAll();
@@ -55,5 +59,8 @@ public class BoatService {
 			}
 		}
 		return res;
+	}
+	public List<AdditionalItem> findAllAdditionalItems(){
+		return this.additionalItemRepository.findAll();
 	}
 }
