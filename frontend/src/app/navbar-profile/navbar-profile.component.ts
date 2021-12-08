@@ -1,6 +1,6 @@
 import { AuthenticationService } from './../service/authentication.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Output ,EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,10 +12,10 @@ export class NavbarProfileComponent implements OnInit {
   username: any;
   dash_url = '/';
   id: any;
-  role:any;
+  role: any;
 
   @Output()
-  LogOut:EventEmitter<void> = new EventEmitter();
+  LogOut: EventEmitter<void> = new EventEmitter();
 
   constructor(private _http: HttpClient, private loginService: AuthenticationService, private router: Router) { }
 
@@ -53,13 +53,18 @@ export class NavbarProfileComponent implements OnInit {
 
   showDashboard() {
     this.id = sessionStorage.getItem('id');
-    this.role=sessionStorage.getItem('role');
-    if(this.role=='Client'){
+    this.role = sessionStorage.getItem('role');
+    if (this.role == 'Client') {
       this.router.navigate(['clients', this.id]);
+
     }else if (this.role=='Instructor'){
     this.router.navigate(['instructors', this.id]);
     }else if (this.role=='CottageOwner'){
       this.router.navigate(['cottageOwner', this.id]);
+
+    }else if (this.role == 'Admin' || this.role == 'SysAdmin') {
+      this.router.navigate(['admin', this.id]);
+
     }
   }
 

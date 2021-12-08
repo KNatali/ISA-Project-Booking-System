@@ -32,7 +32,7 @@ public class Adventure {
 	@Column
 	private double averageGrade;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.DETACH)
 	private Instructor instructor;
 	
 	@Column
@@ -56,27 +56,23 @@ public class Adventure {
 	@JoinTable(name="adventure_rules",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
-	@OneToMany
-	private Set<AdventureReservation> adventureReservations=new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(name="adventure_additional_items",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	
 	@Column
 	private int cancellationPercentage;
 
-	@OneToMany(mappedBy="adventure",cascade=CascadeType.PERSIST)
-	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	 
-	@OneToMany(mappedBy = "adventure")
+	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL)
 	    private Set<AdventureFastReservation> adventureFastReservations;
 	
+	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL )
+    private Set<AdventureReservation> adventureReservations;
+
 	
-	public Set<AdventureReservation> getAdventureReservations() {
-		return adventureReservations;
-	}
-
-	public void setAdventureReservations(Set<AdventureReservation> adventureReservations) {
-		this.adventureReservations = adventureReservations;
-	}
-
 	public Set<AdventureFastReservation> getAdventureFastReservations() {
 		return adventureFastReservations;
 	}
@@ -87,6 +83,14 @@ public class Adventure {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Set<AdventureReservation> getAdventureReservations() {
+		return adventureReservations;
+	}
+
+	public void setAdventureReservations(Set<AdventureReservation> adventureReservations) {
+		this.adventureReservations = adventureReservations;
 	}
 
 	public void setId(Long id) {
@@ -202,7 +206,7 @@ public class Adventure {
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
 			Instructor instructor,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
+			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems,Set<AdventureReservation> reservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -219,33 +223,9 @@ public class Adventure {
 		this.cancellationPercentage = cancellation;
 		this.adventureFastReservations=fastReservations;
 		this.additionalItems=additionalItems;
+		this.adventureReservations=reservations;
 	}
 	
-	
-	public Adventure(Long id, String name, Address address, String description, double averageGrade,
-			Instructor instructor, double price, String mainPicture, Set<Picture> pictures, int maxPersons,
-			Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			Set<AdventureReservation> adventureReservations, int cancellationPercentage,
-			Set<AdditionalItem> additionalItems, Set<AdventureFastReservation> adventureFastReservations) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.description = description;
-		this.averageGrade = averageGrade;
-		this.instructor = instructor;
-		this.price = price;
-		this.mainPicture = mainPicture;
-		this.pictures = pictures;
-		this.maxPersons = maxPersons;
-		this.equipment = equipment;
-		this.rules = rules;
-		this.adventureReservations = adventureReservations;
-		this.cancellationPercentage = cancellationPercentage;
-		this.additionalItems = additionalItems;
-		this.adventureFastReservations = adventureFastReservations;
-	}
-
 	public Adventure() {}
 	
 	

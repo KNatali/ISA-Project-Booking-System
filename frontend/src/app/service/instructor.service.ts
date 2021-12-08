@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
 import { Instructor } from '../model/instructor';
+import { Client } from '../model/client';
+import { AdventureFastReservation } from '../model/adventureFastReservation';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +35,14 @@ export class InstructorService {
 
   getInstructorReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
+  }
+
+  getInstructorFastReservations(id: number): Observable<AdventureFastReservation[]> {
+    return this.http.get<AdventureFastReservation[]>(`${this.urlInstructor1}/` + `fastReservations` + `/${id}`);
+  }
+
+  getReservationClient(clientId: number): Observable<Client> {
+    return this.http.get<Client>(`${this.urlInstructor1}/` + `reservationClient` + `/${clientId}`);
   }
 
   getInstructorAdventuresClient(id: number): Observable<Adventure[]> {

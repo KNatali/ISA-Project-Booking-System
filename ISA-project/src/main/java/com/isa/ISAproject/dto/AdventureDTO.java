@@ -142,20 +142,11 @@ public class AdventureDTO {
 		this.id=id;
 		this.cancellationPercentage=cancellation;
 	}
-	public AdventureDTO(Adventure adventure) {
-		super();
-		
-		this.name = adventure.getName();
-		this.address = new AddressDTO(adventure.getAddress());
-		this.description = adventure.getDescription();
-		this.averageGrade = adventure.getAverageGrade();
-		this.price=adventure.getPrice();
-		this.mainPicture=adventure.getMainPicture();
-		this.maxPersons=adventure.getMaxPersons();
-		this.id=adventure.getId();
-		this.cancellationPercentage=adventure.getCancellationPercentage();
-	}
 	
 	public AdventureDTO() {}
 
+	public AdventureDTO(Adventure adventure) {
+		this.name = adventure.getName();
+		
+	}
 }

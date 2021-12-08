@@ -28,4 +28,18 @@ public class BoatOwner extends User {
 		this.boats = boats;
 	}
 	public BoatOwner () {}
+
+	public BoatOwner(Long id, String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,Set<Boat> boats) {
+		super(id, username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
+		this.boats=boats;
+	}
+
+	public BoatOwner(String username, String password, String email, String firstName, String lastName, Address address,
+			String mobile, boolean enabled, String role, List<Authority> authorities,Set<Boat> boats) {
+		super(username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
+		this.boats=boats;
+	}
+	
+	
 }

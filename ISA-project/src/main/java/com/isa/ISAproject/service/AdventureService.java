@@ -61,7 +61,8 @@ public class AdventureService {
 
 	
 	public void delete(Long id) {
-		this.adventureRepository.deleteById(id);
+		Adventure a=adventureRepository.getById(id);
+		this.adventureRepository.delete(a);
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
 		Instructor instructor=instructorRepository.getById(instructorId);
@@ -90,7 +91,7 @@ public class AdventureService {
 		}
 		this.ruleRepository.saveAll(rules);
 	
-		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,"",null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items);
+		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,"",null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
 	this.adventureRepository.save(a);
 	}
 	

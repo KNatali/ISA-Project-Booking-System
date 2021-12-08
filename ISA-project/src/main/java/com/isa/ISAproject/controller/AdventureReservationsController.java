@@ -25,7 +25,7 @@ public class AdventureReservationsController {
 	@Autowired
 	private AdventureReservationService adventureReservationService;
 	
-	@RequestMapping(value="api/adventure-reservations/{id}",method = RequestMethod.GET,produces = {
+	/*@RequestMapping(value="api/adventure-reservations/{id}",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<AdventureReservationDTO>> findAllResrvationsByClient(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.findAllResByIdClient(id);
@@ -44,5 +44,5 @@ public class AdventureReservationsController {
 	public ResponseEntity<List<AdventureReservationDTO>> activeReservations(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.activeReservation(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
-	}
+	}*/
 }

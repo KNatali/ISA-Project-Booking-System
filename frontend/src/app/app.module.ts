@@ -30,8 +30,11 @@ import { SearchCottageComponent } from './search-cottage/search-cottage.componen
 
 
 
+<<<<<<< HEAD
 //import { LightgalleryModule } from 'lightgallery/angular';
 
+=======
+>>>>>>> student3-fun3.10
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
 import { SearchBoatComponent } from './search-boat/search-boat.component';
@@ -70,6 +73,7 @@ import { InstructorAdventureListComponent } from './instructor-adventure-list/in
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
 import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+<<<<<<< HEAD
 import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
 import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
 import { SortBoatReservationsComponent } from './sort-boat-reservations/sort-boat-reservations.component';
@@ -84,6 +88,23 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
 import { SubscribeItemsListComponent } from './subscribe-items-list/subscribe-items-list.component';
 import { SubscribeItemComponent } from './subscribe-item/subscribe-item.component';
 
+=======
+import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
+import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { InstructorActionsComponent } from './instructor-actions/instructor-actions.component';
+import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
+
+import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
+import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
+>>>>>>> student3-fun3.10
 
 
 @NgModule({
@@ -140,6 +161,7 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     CottageReservationListComponent,
     CottageReservationItemComponent,
     SortCottageReservationsComponent,
+<<<<<<< HEAD
     BoatReservationItemComponent,
     BoatReservationListComponent,
     SortBoatReservationsComponent,
@@ -154,6 +176,20 @@ import { SubscribeItemComponent } from './subscribe-item/subscribe-item.componen
     SubscribeItemsListComponent,
     SubscribeItemComponent
 
+=======
+    InstructorReservationClientComponent,
+    InstructorAddReservationComponent,
+    InstructorOverviewComponent,
+    InstructorActionsComponent,
+    InstructorActionAddComponent,
+    AdminPageComponent,
+    AdminProfileComponent,
+    AdminUsersComponent,
+    AdminAddAdminComponent,
+    AdminEntitiesComponent,
+    AdminReservationRequestsComponent,
+    AdminOverviewComponent
+>>>>>>> student3-fun3.10
 
 
   ],

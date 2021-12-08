@@ -2,8 +2,6 @@ package com.isa.ISAproject.dto;
 
 import javax.persistence.Column;
 
-import com.isa.ISAproject.model.Address;
-
 public class AddressDTO {
 	
 	private Long id;
@@ -55,13 +53,6 @@ public class AddressDTO {
 		this.street = street;
 		this.state = state;
 		this.city = city;
-	}
-	public AddressDTO(Address address) {
-		super();
-		this.id=address.getId();
-		this.street = address.getStreet();
-		this.state = address.getState();
-		this.city = address.getCity();
 	}
 	
 }

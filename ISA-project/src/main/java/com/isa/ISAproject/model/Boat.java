@@ -65,9 +65,6 @@ public class Boat {
 	@OneToMany(mappedBy="boat",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<BoatFastReservation> boatFastReservations=new HashSet<>();
 	
-	@OneToMany
-	private Set<BoatReservation> boatReservations=new HashSet<>();
-	
 	public Long getId() {
 		return id;
 	}

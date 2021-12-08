@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.model.Address;
@@ -143,6 +145,30 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
+
+	
+	@RequestMapping(
+			value="api/instructors/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservations(@PathVariable(name="id") Long id){
+		List<AdventureFastReservationDTO> list=new ArrayList<>();
+		list=this.instructorService.getFastReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/instructors/reservationClient/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<ClientProfileDTO> getReservationClient(@PathVariable(name="id") Long id){
+		ClientProfileDTO dto=instructorService.getReservationClilent(id);
+		if(dto==null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(dto,HttpStatus.OK);
+	}
+	
 	@RequestMapping(
 			value="api/instructors/completedReservations/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)

@@ -20,9 +20,17 @@ import { InstructorAdventureEditComponent } from './instructor-adventure-edit/in
 import { ConfirmRegistrationClientComponent } from './confirm-registration-client/confirm-registration-client.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
+
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
 import { AdventureReservationListComponent } from './adventure-reservation-list/adventure-reservation-list.component';
+
+
+import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
+import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
+import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
 
 
 const routes: Routes = [
@@ -35,6 +43,8 @@ const routes: Routes = [
   { path: 'adventures', component: AdventureListPageComponent },
   { path: 'instructors/:id', component: InstructorPageComponent },
   { path: 'clients/:id', component: ClientPageComponent },
+  { path: 'admin/:id', component: AdminPageComponent },
+  { path: 'admin/:id/admin-add', component: AdminAddAdminComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
@@ -44,15 +54,20 @@ const routes: Routes = [
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
 
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
+  { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
 
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
+
   { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent},
 
   { path: 'history-cottage-reservations/:id', component:CottageReservationListComponent},
   { path: 'history-boat-reservations/:id',component:BoatReservationListComponent},
-  { path: 'history-adventure-reservations/:id', component:AdventureReservationListComponent}
+  { path: 'history-adventure-reservations/:id', component:AdventureReservationListComponent},
+
+
+  { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent }
 
 
 ];

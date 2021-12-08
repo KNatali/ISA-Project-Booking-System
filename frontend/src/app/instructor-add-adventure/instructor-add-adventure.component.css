@@ -23,14 +23,26 @@ label {
   font-weight: bolder;
 }
 
+select {
+  font-size: 16px;
+}
+
 .container {
   margin: auto;
   width: 70% !important;
-  padding: 30px;
+
   color: #0B2545;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+
+  border-radius: 5%;
+}
+
+.columns {
+  margin: auto;
+  width: 70% !important;
+
 }
 
 .mat-button {
@@ -44,5 +56,5 @@ label {
   color: #13315C;
   background-color: #AEC2D5;
   margin-bottom: 30px;
-  ;
+
 }

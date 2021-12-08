@@ -30,8 +30,8 @@ public class AdventureFastReservation {
 	 @Column(name = "reservationStart", nullable = false)
 	    private LocalDateTime reservationStart;
 
-	    @Column(name = "reservationEnd", nullable = false)
-	    private LocalDateTime reservationEnd;
+	 @Column
+	 private int duration;
  
 	@Column(nullable=false)
 	private int maxPersons;
@@ -43,25 +43,23 @@ public class AdventureFastReservation {
 	private LocalDate validityEnd;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
-	@ManyToOne
-	private Client client;
 	
 	
 	
 	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDateTime reservationStart,
-			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
-			Set<AdditionalItem> additionalItems, Client client) {
+			int duration, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.adventure = adventure;
 		this.reservationStart = reservationStart;
-		this.reservationEnd = reservationEnd;
+		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.price = price;
 		this.validityStart = validityStart;
 		this.validityEnd = validityEnd;
 		this.additionalItems = additionalItems;
-		this.client = client;
+		
 	}
 
 
@@ -102,14 +100,17 @@ public class AdventureFastReservation {
 
 
 
-	public LocalDateTime getReservationEnd() {
-		return reservationEnd;
+	
+
+
+	public int getDuration() {
+		return duration;
 	}
 
 
 
-	public void setReservationEnd(LocalDateTime reservationEnd) {
-		this.reservationEnd = reservationEnd;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 
@@ -174,15 +175,7 @@ public class AdventureFastReservation {
 
 
 
-	public Client getClient() {
-		return client;
-	}
-
-
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
+	
 
 
 
