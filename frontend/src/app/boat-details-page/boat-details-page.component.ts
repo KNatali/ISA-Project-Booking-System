@@ -11,7 +11,21 @@ import { BoatService } from '../service/boat.service';
 })
 export class BoatDetailsPageComponent implements OnInit {
   id: number;
-  boat:Boat;
+  boat:Boat=new Boat({
+    id: 0,
+    name: '',
+    length: 0,
+    motorNumber: 0,
+    motorPower: 0,
+    maxSpeed: 0,
+    description: '',
+    capacity: 0,
+    grade: 0,
+    mainPicture:'',
+    state:'',
+    street:'',
+    city:''
+  });
 
   constructor(private route: ActivatedRoute,private boatService: BoatService) { }
 

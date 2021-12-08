@@ -3,6 +3,8 @@
     width: 50%;
     padding: 10px;
     background-color: cadetblue;
+    margin-bottom: 40px;
+    margin-top: 20px;
   }
   img{
     padding: 25px;
@@ -11,4 +13,7 @@
 }
 h1,h2,h3{
     text-align: center;
+}
+#ins{
+  text-align: left;
 }
