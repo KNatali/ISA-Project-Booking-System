@@ -56,8 +56,10 @@ export class NavbarProfileComponent implements OnInit {
     this.role=sessionStorage.getItem('role');
     if(this.role=='Client'){
       this.router.navigate(['clients', this.id]);
-    }else{
+    }else if (this.role=='Instructor'){
     this.router.navigate(['instructors', this.id]);
+    }else if (this.role=='CottageOwner'){
+      this.router.navigate(['cottageOwner', this.id]);
     }
   }
 

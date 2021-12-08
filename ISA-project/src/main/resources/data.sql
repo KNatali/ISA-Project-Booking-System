@@ -22,7 +22,7 @@ insert into authority(id, name) values (3, 'ROLE_INSTRUCTOR');
 
 insert into authority(id, name) values (4, 'ROLE_CLIENT');
 
-
+insert into authority(id, name) values (5, 'ROLE_COTTAGE_OWNER');
 
 
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','truman', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
@@ -34,7 +34,7 @@ insert into user ( role,username, password, first_name, last_name, email, mobile
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','laza', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Laza', 'Anic', 'lazaa@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','dusko', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Dusko', 'Dusic', 'dusko@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
 insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','daca', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Danica', 'Danicic', 'dana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('CottageOwner','anna', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
 
 insert into user_authority (user_id,authority_id) values (1,3);
 insert into user_authority (user_id,authority_id) values (2,3);
@@ -45,6 +45,7 @@ insert into user_authority (user_id,authority_id) values (6,3);
 insert into user_authority (user_id,authority_id) values (7,4);
 insert into user_authority (user_id,authority_id) values (8,4);
 insert into user_authority (user_id,authority_id) values (9,4);
+insert into user_authority (user_id,authority_id) values (10,5);
 
 
 insert into instructor (id,biography,grade) values (1,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',3);
@@ -53,7 +54,7 @@ insert into instructor (id,biography,grade) values (3,'I was born and raised in 
 insert into instructor (id,biography,grade) values (4,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',5);
 insert into instructor (id,biography,grade) values (6,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',2);
 
-
+insert into cottage_owner (id) values (10);
 
 insert into client (id) values (5);
 insert into client (id) values (7);
@@ -189,7 +190,6 @@ insert into client_boat_reservations(client_id,boat_reservations_id) values(8,3)
 insert into client_boat_reservations(client_id,boat_reservations_id) values(8,4);
 insert into client_boat_reservations(client_id,boat_reservations_id) values(8,5);
 insert into client_boat_reservations(client_id,boat_reservations_id) values(9,6);
-
 
 
  

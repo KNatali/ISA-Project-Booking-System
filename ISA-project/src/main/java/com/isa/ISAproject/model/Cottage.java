@@ -35,8 +35,12 @@ public class Cottage {
 	private String mainPicture;
 	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
 	private CottageOwner owner;
-	@ElementCollection
-	private Set<String> pictures=new HashSet<>();
+	@ManyToMany
+	 @JoinTable(
+	            name = "cottage_pictures",
+	            joinColumns = @JoinColumn(name = "cottage_id"),
+	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+	private Set<Picture> pictures=new HashSet<>();
 	
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
@@ -89,11 +93,11 @@ public class Cottage {
 		this.grade = grade;
 	}
 
-	public Set<String> getPictures() {
+	public Set<Picture> getPictures() {
 		return pictures;
 	}
 
-	public void setPictures(Set<String> pictures) {
+	public void setPictures(Set<Picture> pictures) {
 		this.pictures = pictures;
 	}
 
@@ -161,7 +165,7 @@ public class Cottage {
 		this.cottageReservations = cottageReservations;
 	}
 
-	public Cottage(Long id, String name, Address address, String description, double grade, Set<String> pictures,
+	public Cottage(Long id, String name, Address address, String description, double grade, Set<Picture> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
 			Set<CottageFastReservation> cottageFastReservations, String mainPicture) {
 		super();
@@ -180,7 +184,7 @@ public class Cottage {
 	
 	
 	public Cottage(Long id, String name, Address address, String description, double grade, String mainPicture,
-			CottageOwner owner, Set<String> pictures, Set<CottageBehavioralRule> rules, Set<Room> rooms,
+			CottageOwner owner, Set<Picture> pictures, Set<CottageBehavioralRule> rules, Set<Room> rooms,
 			Set<CottageFastReservation> cottageFastReservations, Set<CottageReservation> cottageReservations) {
 		super();
 		this.id = id;

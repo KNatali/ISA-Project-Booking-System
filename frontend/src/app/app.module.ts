@@ -30,7 +30,7 @@ import { SearchCottageComponent } from './search-cottage/search-cottage.componen
 
 
 
-import { LightgalleryModule } from 'lightgallery/angular';
+//import { LightgalleryModule } from 'lightgallery/angular';
 
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
