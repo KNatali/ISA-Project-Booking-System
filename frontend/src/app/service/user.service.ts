@@ -1,3 +1,4 @@
+import { RegistrationRequest } from './../model/registrationRequest';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,11 +11,11 @@ import { User } from '../model/user';
 })
 export class UserService {
 
-    currentUser: any;
+    url = "http://localhost:8090/api/user/all"
     whoami_url = "http://localhost:8090/api/getLoggedIn";
-    async_url="http://localhost:8090/api/signup/async";
-    sync_url="http://localhost:8090/api/signup/sync";
-    sign_up_url="http://localhost:8090/auth/signup";
+    async_url = "http://localhost:8090/api/signup/async";
+    sync_url = "http://localhost:8090/api/signup/sync";
+    registrationUrl = "http://localhost:8090/api/register";
     constructor(
         private http: HttpClient
     ) {
@@ -22,16 +23,19 @@ export class UserService {
 
     getLoggedInUser() {
         return this.http.get<User>(this.whoami_url);
-    }/*
- 
-     getAll() {
-         return this.apiService.get(this.config.users_url);
-     }
- */
-     sendEmail(newUser:User):Observable<User>{
-        return this.http.post<User>(this.async_url,newUser);
-     }
-     signUp(newUser:User):Observable<User>{
-        return this.http.post<User>(this.sign_up_url,newUser);
-     }
+    }
+    getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${this.url}`);
+    }
+
+
+
+    sendEmail(newUser: User): Observable<User> {
+        return this.http.post<User>(this.async_url, newUser);
+    }
+
+    registerUser(newUser: RegistrationRequest): Observable<RegistrationRequest> {
+        return this.http.post<RegistrationRequest>(this.registrationUrl, newUser);
+    }
+
 }

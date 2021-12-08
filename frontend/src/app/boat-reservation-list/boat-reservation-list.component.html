@@ -1,0 +1,17 @@
+<app-sort-boat-reservations
+                (SortedByDate)="SortedByDate()"
+                (SortedByDuration)="SortedByDuration()"     
+                (SortedByPrice)="SortedByPrice()"
+    ></app-sort-boat-reservations>
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Date [yyyy,mm,dd,hh,mm]</th><th>Duration [h]</th><th>Boat name</th><th>Max persons</th><th>Price [din]</th>
+            </tr>
+        </thead>
+        <tbody >   
+            <tr app-boat-reservation-item *ngFor="let res of reservations" [res]="res"></tr>
+		</tbody>
+    </table>
+</div>

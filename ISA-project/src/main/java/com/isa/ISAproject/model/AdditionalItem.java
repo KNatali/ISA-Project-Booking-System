@@ -1,11 +1,15 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -18,9 +22,8 @@ public class AdditionalItem {
 	@Column(nullable = false)
 	private double price;
 	
-	@ManyToOne
-    @JoinColumn(name = "adventure_id")
-    private Adventure adventure;
+	@ManyToMany(mappedBy = "additionalItems")
+	private Set<Adventure> adventures=new HashSet<>();
 	
 	public Long getId() {
 		return id;
@@ -41,18 +44,18 @@ public class AdditionalItem {
 		this.price = price;
 	}
 	
-	public Adventure getAdventure() {
-		return adventure;
+	public Set<Adventure> getAdventures() {
+		return adventures;
 	}
-	public void setAdventure(Adventure adventure) {
-		this.adventure = adventure;
+	public void SetAdventures(Set<Adventure> adventure) {
+		this.adventures = adventure;
 	}
-	public AdditionalItem(Long id, String name, double price,Adventure adventure) {
+	public AdditionalItem(Long id, String name, double price,Set<Adventure> adventure) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.adventure=adventure;
+		this.adventures=adventure;
 	}
 	public AdditionalItem() {}
 }

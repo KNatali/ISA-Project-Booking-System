@@ -12,6 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class InstructorProfileComponent implements OnInit {
   profileShow: boolean = true;
   profileEdit: boolean = false;
+  changePassword: boolean = false;
+  oldPassword: any;
+  newPassword: any;
+  passwordConfirm: any;
   @Input() instructor: Instructor = new Instructor({
     id: 0,
     username: '',
@@ -38,7 +42,13 @@ export class InstructorProfileComponent implements OnInit {
   edit() {
     this.profileShow = !this.profileShow;
     this.profileEdit = !this.profileEdit;
+    this.changePassword = false;
 
+  }
+  change() {
+    this.profileShow = false;
+    this.profileEdit = false;
+    this.changePassword = true;
   }
 
   submit() {
@@ -46,14 +56,20 @@ export class InstructorProfileComponent implements OnInit {
       this.goToProfilePage();
     })
   }
+
+  submitPassword() {
+    if (this.newPassword != this.passwordConfirm) {
+      alert("New and confirmed password don't match!");
+    }
+  }
   goToProfilePage() {
     this.profileShow = true;
     this.profileEdit = false;
-
+    this.changePassword = false;
     this.router.navigate(['/instructor/:id']);
   }
   close() {
-    window.location.reload();
+    this.goToProfilePage();
 
   }
 

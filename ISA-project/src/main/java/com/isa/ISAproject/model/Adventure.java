@@ -32,7 +32,7 @@ public class Adventure {
 	@Column
 	private double averageGrade;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.DETACH)
 	private Instructor instructor;
 	
 	@Column
@@ -57,14 +57,20 @@ public class Adventure {
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<AdventureBehavioralRule> rules=new HashSet<>();
 	
+	@ManyToMany
+	@JoinTable(name="adventure_additional_items",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	
 	@Column
 	private int cancellationPercentage;
 
-	@OneToMany(mappedBy="adventure")
-	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	 
-	@OneToMany(mappedBy = "adventure")
+	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL)
 	    private Set<AdventureFastReservation> adventureFastReservations;
+	
+	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL )
+    private Set<AdventureReservation> adventureReservations;
 
 	
 	public Set<AdventureFastReservation> getAdventureFastReservations() {
@@ -77,6 +83,14 @@ public class Adventure {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Set<AdventureReservation> getAdventureReservations() {
+		return adventureReservations;
+	}
+
+	public void setAdventureReservations(Set<AdventureReservation> adventureReservations) {
+		this.adventureReservations = adventureReservations;
 	}
 
 	public void setId(Long id) {
@@ -190,9 +204,9 @@ public class Adventure {
 	}
 
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
-			Instructor instructor, Set<AdventureBehavioralRule> adventureBehavioralRules,String mainPicture, Set<Picture> pictures,
+			Instructor instructor,String mainPicture, Set<Picture> pictures,
 			int maxPersons,Set<AdventureFishingEquipment> equipment, Set<AdventureBehavioralRule> rules,
-			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems) {
+			int cancellation,Set<AdventureFastReservation> fastReservations,Set<AdditionalItem> additionalItems,Set<AdventureReservation> reservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -209,6 +223,7 @@ public class Adventure {
 		this.cancellationPercentage = cancellation;
 		this.adventureFastReservations=fastReservations;
 		this.additionalItems=additionalItems;
+		this.adventureReservations=reservations;
 	}
 	
 	public Adventure() {}

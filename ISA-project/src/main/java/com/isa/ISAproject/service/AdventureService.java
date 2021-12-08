@@ -1,6 +1,7 @@
 package com.isa.ISAproject.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -12,9 +13,11 @@ import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AddressDTO;
 import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AddressMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.AdventureFishingEquipmentMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
@@ -24,16 +27,27 @@ import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.repository.AdditionalItemRepository;
+import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureFishingEquipmentRepository;
 import com.isa.ISAproject.repository.AdventureRepository;
-
+import com.isa.ISAproject.repository.InstructorRepository;
+import com.isa.ISAproject.repository.BehavioralRuleRepository;
 @Service
 public class AdventureService {
 	@Autowired
 	private AdventureRepository adventureRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private AdventureFishingEquipmentRepository equipmentRepository;
+	@Autowired
+	private AdditionalItemRepository addtitionalItemRepository;
+	@Autowired
+	private BehavioralRuleRepository ruleRepository;
+	@Autowired
+	private InstructorRepository instructorRepository;
 	
 	public List<AdventureDTO> findAll(){
 		List<Adventure> adventures= this.adventureRepository.findAll();
@@ -47,7 +61,38 @@ public class AdventureService {
 
 	
 	public void delete(Long id) {
-		this.adventureRepository.deleteById(id);
+		Adventure a=adventureRepository.getById(id);
+		this.adventureRepository.delete(a);
+	}
+	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
+		Instructor instructor=instructorRepository.getById(instructorId);
+		//Address address=AddressMapper.convertFromDTO(dto.getAddress());
+		Address address=new Address();
+		address.setStreet(dto.getAddress().getStreet());
+		address.setCity(dto.getAddress().getCity());
+		address.setState(dto.getAddress().getState());
+		this.addressRepository.save(address);
+		Set<Adventure> adventures=instructor.getAdventures();
+		Set<AdventureFishingEquipment> equipment=AdventureFishingEquipmentMapper.converFromDTOs(dto.getEquipment());
+		this.equipmentRepository.saveAll(equipment);
+		
+		Set<AdditionalItem> items=new HashSet<>();
+		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
+			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
+			items.add(a);
+			
+		}
+		this.addtitionalItemRepository.saveAll(items);
+		Set<AdventureBehavioralRule> rules=new HashSet<>();
+		for (AdventureBehavioralRuleDTO rdto : dto.getRules()) {
+			AdventureBehavioralRule a=AdventureBehavioralRuleMapper.convertFromDTO(rdto);
+			rules.add(a);
+			
+		}
+		this.ruleRepository.saveAll(rules);
+	
+		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,"",null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
+	this.adventureRepository.save(a);
 	}
 	
 	

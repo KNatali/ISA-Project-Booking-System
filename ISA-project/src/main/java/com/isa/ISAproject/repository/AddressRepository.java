@@ -11,4 +11,5 @@ import com.isa.ISAproject.model.Boat;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long>{
 	List<Address> findByOrderByCity();
+	List<Address> findByCity(String city);
 }

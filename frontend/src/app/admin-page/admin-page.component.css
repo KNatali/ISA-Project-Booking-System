@@ -1,0 +1,49 @@
+* {
+  font-size: 16px;
+  color: #0B2545;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels {
+  color: #0B2545;
+  background-color: #AEC2D5;
+
+
+}
+
+::ng-deep .mat-tab-label {
+  color: #0B2545;
+  font-size: 16px;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: var(--primary-color, #14447B) !important;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.labels {
+  font-size: 16px;
+  color: #0B2545;
+  font-weight: bolder;
+}
+
+p {
+  margin-top: 5px;
+  font-size: 16px;
+  padding: 7px;
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+}
+
+.mat-button {
+  background-color: #AEC2D5;
+  width: 200px;
+
+}
+
+#delete {
+  background-color: rgb(233, 101, 101);
+}

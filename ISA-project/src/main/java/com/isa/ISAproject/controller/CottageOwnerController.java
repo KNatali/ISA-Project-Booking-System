@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,7 @@ public class CottageOwnerController {
 	private AddressService addressService;
 	@RequestMapping(value="api/cottageOwner/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
 	public ResponseEntity<CottageOwnerProfileDTO> getById(@PathVariable Long id){
 		Optional<CottageOwner> item=cottageOwnerService.findById(id);
 		
@@ -75,6 +77,7 @@ public class CottageOwnerController {
 	}
 	@RequestMapping(value="api/cottage-owners",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
 	public ResponseEntity<List<CottageOwnerProfileDTO>> findAll(){
 		List<CottageOwner> cottageOwners=this.cottageOwnerService.findAll();
 		List<CottageOwnerProfileDTO> dtos=this.convertIntoDTO(cottageOwners);

@@ -30,8 +30,6 @@ import { SearchCottageComponent } from './search-cottage/search-cottage.componen
 
 
 
-import { LightgalleryModule } from 'lightgallery/angular';
-
 import { InstructorAdventuresComponent } from './instructor-adventures/instructor-adventures.component';
 
 import { SearchBoatComponent } from './search-boat/search-boat.component';
@@ -62,6 +60,43 @@ import { SortCottagesComponent } from './sort-cottages/sort-cottages.component';
 import { InstructorListComponent } from './instructor-list/instructor-list.component';
 import { InstructorItemComponent } from './instructor-item/instructor-item.component';
 import { SortInstructorsComponent } from './sort-instructors/sort-instructors.component';
+
+import { InstructorReservationsComponent } from './instructor-reservations/instructor-reservations.component';
+import { InstructorChangePasswordComponent } from './instructor-change-password/instructor-change-password.component';
+
+import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
+import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
+import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
+import { SortCottageReservationsComponent } from './sort-cottage-reservations/sort-cottage-reservations.component';
+import { BoatReservationItemComponent } from './boat-reservation-item/boat-reservation-item.component';
+import { BoatReservationListComponent } from './boat-reservation-list/boat-reservation-list.component';
+import { SortBoatReservationsComponent } from './sort-boat-reservations/sort-boat-reservations.component';
+import { AdventureReservationListComponent } from './adventure-reservation-list/adventure-reservation-list.component';
+import { AdvetureReservationItemComponent } from './adveture-reservation-item/adveture-reservation-item.component';
+import { SortAdventureReservationComponent } from './sort-adventure-reservation/sort-adventure-reservation.component';
+import { ActiveReservationsComponent } from './active-reservations/active-reservations.component';
+import { ActiveBoatReservationComponent } from './active-boat-reservation/active-boat-reservation.component';
+import { ActiveCottageReservationComponent } from './active-cottage-reservation/active-cottage-reservation.component';
+import { ActiveAdventureReservationComponent } from './active-adventure-reservation/active-adventure-reservation.component';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { SubscribeItemsListComponent } from './subscribe-items-list/subscribe-items-list.component';
+import { SubscribeItemComponent } from './subscribe-item/subscribe-item.component';
+
+import { InstructorReservationClientComponent } from './instructor-reservation-client/instructor-reservation-client.component';
+import { InstructorAddReservationComponent } from './instructor-add-reservation/instructor-add-reservation.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorOverviewComponent } from './instructor-overview/instructor-overview.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { InstructorActionsComponent } from './instructor-actions/instructor-actions.component';
+import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
+
+import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
+import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 
 
 @NgModule({
@@ -109,7 +144,41 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
     SortCottagesComponent,
     InstructorListComponent,
     InstructorItemComponent,
-    SortInstructorsComponent
+    SortInstructorsComponent,
+
+    InstructorReservationsComponent,
+    InstructorChangePasswordComponent,
+
+    InstructorAdventureListComponent,
+    CottageReservationListComponent,
+    CottageReservationItemComponent,
+    SortCottageReservationsComponent,
+    BoatReservationItemComponent,
+    BoatReservationListComponent,
+    SortBoatReservationsComponent,
+    AdventureReservationListComponent,
+    AdvetureReservationItemComponent,
+    SortAdventureReservationComponent,
+    ActiveReservationsComponent,
+    ActiveBoatReservationComponent,
+    ActiveCottageReservationComponent,
+    ActiveAdventureReservationComponent,
+    ComplaintFormComponent,
+    SubscribeItemsListComponent,
+    SubscribeItemComponent,
+
+    InstructorReservationClientComponent,
+    InstructorAddReservationComponent,
+    InstructorOverviewComponent,
+    InstructorActionsComponent,
+    InstructorActionAddComponent,
+    AdminPageComponent,
+    AdminProfileComponent,
+    AdminUsersComponent,
+    AdminAddAdminComponent,
+    AdminEntitiesComponent,
+    AdminReservationRequestsComponent,
+    AdminOverviewComponent
 
 
   ],
@@ -126,7 +195,11 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
     FlexLayoutModule,
     MatTabsModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
 
   ],
   providers: [{

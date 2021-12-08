@@ -1,0 +1,91 @@
+<div class="container">
+  <h2>Define the percentage of earnings from the reservation:</h2>
+  <form [formGroup]="formValue">
+    <div class="mb-3">
+      <label for="percentage" class="form-label">Percentage(%):</label>
+      <input type="number" formControlName="percentage" class="form-control">
+
+    </div>
+    <button mat-button (click)="submit()">Submit</button>
+    <br>
+
+  </form>
+  <br>
+  <div class="mb-3">
+    <h1>Last defined percentage: {{percentage}} %</h1>
+  </div>
+  <hr>
+</div>
+<div class="content">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+
+        <th scope="col">Service</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Client</th>
+
+
+        <th scope="col">Price</th>
+        <th scope="col">Earnings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+
+        <td>
+          Fun sportfishing
+        </td>
+        <td>
+          Truman Wills
+        </td>
+        <td>Anna Jackson</td>
+
+
+        <td>250 $</td>
+        <td>25 $</td>
+
+
+      </tr>
+
+      <tr>
+
+
+        <td>
+          Maria boat
+        </td>
+        <td>
+          Jeniffer Swift
+        </td>
+        <td>Jack Corins</td>
+
+
+
+        <td>500 $</td>
+        <td>50 $</td>
+
+      </tr>
+      <tr>
+
+
+        <td>
+          Moonlight
+        </td>
+        <td>
+          Alex Vikander
+        </td>
+        <td>Arthur Swap</td>
+
+
+        <td>120 $</td>
+        <td>12 $</td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+  <hr>
+  <h1>Total amount of earnings: 250$</h1>
+</div>

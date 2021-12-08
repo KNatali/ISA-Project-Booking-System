@@ -1,7 +1,9 @@
 package com.isa.ISAproject.mapper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
@@ -35,5 +37,16 @@ public class AdventureFishingEquipmentMapper {
 		AdventureFishingEquipment equipment=new AdventureFishingEquipment(dto.getId(),dto.getName());
 		return equipment;
 		
+	}
+	
+	public static Set<AdventureFishingEquipment> converFromDTOs(Set<AdventureFishingEquipmentDTO> equipmentDTO){
+		Set<AdventureFishingEquipment> equipment=new HashSet<>();
+		for (AdventureFishingEquipmentDTO dto : equipmentDTO) {
+			AdventureFishingEquipment a=convertFromDTO(dto);
+			equipment.add(a);
+			
+		}
+		
+		return equipment;
 	}
 }

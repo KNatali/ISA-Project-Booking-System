@@ -1,0 +1,13 @@
+<app-sort-adventure-reservation></app-sort-adventure-reservation>
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Date [yyyy,mm,dd,hh,mm]</th><th>Adventure name</th><th>Max persons</th><th>Price [din]</th>
+            </tr>
+        </thead>
+        <tbody >   
+            <tr app-adveture-reservation-item *ngFor="let res of reservations" [res]="res"></tr>
+		</tbody>
+    </table>
+</div>

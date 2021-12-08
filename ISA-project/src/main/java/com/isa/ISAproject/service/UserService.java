@@ -12,10 +12,18 @@ import org.springframework.stereotype.Service;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.dto.UserRequest;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.Authority;
+import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.CottageOwner;
+import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.Role;
 import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.repository.AdminRepository;
+import com.isa.ISAproject.repository.BoatOwnerRepository;
+import com.isa.ISAproject.repository.CottageOwnerRepository;
+import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.UserRepository;
 
 
@@ -37,6 +45,14 @@ public class UserService {
 	
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private AdminRepository adminRepository;
+	@Autowired
+	private InstructorRepository instructorRepository;
+	@Autowired
+	private CottageOwnerRepository cottageOwnerRepository;
+	@Autowired
+	private BoatOwnerRepository boatOwnerRepository;
 
 
 	
@@ -48,8 +64,18 @@ public class UserService {
 		return userRepository.findById(id).orElseGet(null);
 	}
 
-	public List<User> findAll() throws AccessDeniedException {
-		return userRepository.findAll();
+	public List<UserDTO> findAll() throws AccessDeniedException {
+		List<User> users=userRepository.findAll();
+		List<UserDTO> usersDTO=new ArrayList<>();
+	 for (User u : users) {
+		 if(u.getRole()!="Admin" && u.getRole()!="SysAdmin") {
+			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole());
+			usersDTO.add(dto);
+		 }
+			
+		
+	 }
+	 return usersDTO;
 	}
 
 	
@@ -84,6 +110,35 @@ public class UserService {
 			Client client=new Client(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),u.isEnabled(),u.getRole(),authorities);
 			newClient=this.clientService.save(client);
 			u.setId(newClient.getId());
+		}
+		else if(u.getRole().equalsIgnoreCase("Admin")) {
+			authorities = authorityService.findByName("ROLE_ADMIN");
+			u.setAuthorities(authorities);
+			Admin admin=new Admin(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),true,u.getRole(),authorities);
+			Admin newAdmin=this.adminRepository.save(admin);
+			u.setId(newAdmin.getId());
+		}
+		
+		else if(u.getRole().equalsIgnoreCase("Instructor")) {
+			authorities = authorityService.findByName("ROLE_INSTRUCTOR");
+			u.setAuthorities(authorities);
+			Instructor instructor=new Instructor(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),false,u.getRole(),authorities,0,null,"");
+			Instructor newInstructor=this.instructorRepository.save(instructor);
+			u.setId(newInstructor.getId());
+		}
+		else if(u.getRole().equalsIgnoreCase("CottageOwner")) {
+			authorities = authorityService.findByName("ROLE_COTTAGE_OWNER");
+			u.setAuthorities(authorities);
+			CottageOwner owner=new CottageOwner(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),false,u.getRole(),authorities,null);
+			CottageOwner newOwner=this.cottageOwnerRepository.save(owner);
+			u.setId(newOwner.getId());
+		}
+		else if(u.getRole().equalsIgnoreCase("BoatOwner")) {
+			authorities = authorityService.findByName("ROLE_BOAT_OWNER");
+			u.setAuthorities(authorities);
+			BoatOwner owner=new BoatOwner(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),false,u.getRole(),authorities,null);
+			BoatOwner newOwner=this.boatOwnerRepository.save(owner);
+			u.setId(newOwner.getId());
 		}
 		System.out.println("id iz userService"+ u.getId());
 		return u;

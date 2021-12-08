@@ -85,8 +85,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 									.antMatchers("/api/instructors/**").permitAll()
 									.antMatchers("/api/cottages/**").permitAll()
 									.antMatchers("/api/signup/async").permitAll()
+									.antMatchers("/api/register").permitAll()
 									.antMatchers("/auth/signup").permitAll()
 									.antMatchers("/confirm-registration-client/**").permitAll()
+									.antMatchers("/api/cottages-reservations/**").permitAll()//izbrisati kasnije
 									
 				// ukoliko ne zelimo da koristimo @PreAuthorize anotacije nad metodama kontrolera, moze se iskoristiti hasRole() metoda da se ogranici
 				// koji tip korisnika moze da pristupi odgovarajucoj ruti. Npr. ukoliko zelimo da definisemo da ruti 'admin' moze da pristupi

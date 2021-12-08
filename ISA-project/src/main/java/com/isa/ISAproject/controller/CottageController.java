@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
@@ -28,10 +29,17 @@ public class CottageController {
 	
 	@RequestMapping(value="api/cottages",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Cottage>> findAll(){
+	public ResponseEntity<List<CottageDTO>> findAll(){
 		List<Cottage> cottages=cottageService.findAll();
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
+	public List<CottageDTO> convert(List<Cottage> cottages){
+		List<CottageDTO> res=new ArrayList<>();
+		for (Cottage cottage : cottages) {
+			res.add(new CottageDTO(cottage));
+		}
+		return res;
+	}/*
 	@RequestMapping(value="api/cottages/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cottage>  findOne(@PathVariable Long id){
 		Optional<Cottage> cottage=this.cottageService.getOne(id);
@@ -40,37 +48,46 @@ public class CottageController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}*/
+	@RequestMapping(value="api/cottages/{id}",method = RequestMethod.GET)
+	public ResponseEntity<CottageDTO>  findOne(@PathVariable Long id){
+		Optional<Cottage> cottage=this.cottageService.getOne(id);
+		if (cottage.isPresent()) {
+			return new ResponseEntity<>(new CottageDTO(cottage.get()), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	@RequestMapping(value="api/cottages", method = RequestMethod.GET,
 			params = "name",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Cottage>> findByName(@RequestParam String name){
+	public ResponseEntity<List<CottageDTO>> findByName(@RequestParam String name){
 		List<Cottage> cottages=this.cottageService.findByName(name);
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages", method = RequestMethod.GET,
-			params = "address",
+			params = "city",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Cottage>> findByAddress(@RequestParam String address){
-		List<Cottage> cottages=this.cottageService.findByAddress(address);
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	public ResponseEntity<List<CottageDTO>> findByCity(@RequestParam String city){
+		List<Cottage> cottages=this.cottageService.findByCity(city);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/sort-by-name", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Cottage>> sortByName(){
+	public ResponseEntity<List<CottageDTO>> sortByName(){
 		List<Cottage> cottages=this.cottageService.sortByName();
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/sort-by-grade", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Cottage>> sortByGrade(){
+	public ResponseEntity<List<CottageDTO>> sortByGrade(){
 		List<Cottage> cottages=this.cottageService.sortByGrade();
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/sort-by-city", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Cottage>> sortByCity(){
+	public ResponseEntity<List<CottageDTO>> sortByCity(){
 		List<Cottage> cottages=this.cottageService.sortByCity();
-		return new ResponseEntity<>(cottages,HttpStatus.OK);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 }

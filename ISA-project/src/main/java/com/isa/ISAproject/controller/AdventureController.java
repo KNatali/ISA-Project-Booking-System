@@ -8,19 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;
 
@@ -42,6 +46,12 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
+	@RequestMapping(value="delete/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
+	public ResponseEntity<?> delete(@PathVariable Long id){
+		this.adventureService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
@@ -53,6 +63,13 @@ public class AdventureController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@RequestMapping(value="/add/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<?>  addAdventure(@RequestBody AdventureAddDTO dto,@PathVariable Long id){
+		this.adventureService.addAdventure(id, dto);
+			return new ResponseEntity<>(HttpStatus.OK);
+		
 	}
 	@RequestMapping( method = RequestMethod.GET,
 			params = {"firstName","lastName"},

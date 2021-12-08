@@ -1,0 +1,12 @@
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Type</th><th>Name</th><th>Description</th>
+            </tr>
+        </thead>
+        <tbody >   
+            <tr app-subscribe-item *ngFor="let item of items" [item]=item></tr>
+		</tbody>
+    </table>
+</div>

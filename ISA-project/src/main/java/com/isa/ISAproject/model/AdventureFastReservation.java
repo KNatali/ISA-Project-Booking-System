@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -27,10 +28,10 @@ public class AdventureFastReservation {
     private Adventure adventure;
 	
 	 @Column(name = "reservationStart", nullable = false)
-	    private LocalDate reservationStart;
+	    private LocalDateTime reservationStart;
 
-	    @Column(name = "reservationEnd", nullable = false)
-	    private LocalDate reservationEnd;
+	 @Column
+	 private int duration;
  
 	@Column(nullable=false)
 	private int maxPersons;
@@ -42,25 +43,23 @@ public class AdventureFastReservation {
 	private LocalDate validityEnd;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
-	@ManyToOne
-	private Client client;
 	
 	
 	
-	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDate reservationStart,
-			LocalDate reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
-			Set<AdditionalItem> additionalItems, Client client) {
+	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDateTime reservationStart,
+			int duration, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
 		super();
 		this.id = id;
 		this.adventure = adventure;
 		this.reservationStart = reservationStart;
-		this.reservationEnd = reservationEnd;
+		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.price = price;
 		this.validityStart = validityStart;
 		this.validityEnd = validityEnd;
 		this.additionalItems = additionalItems;
-		this.client = client;
+		
 	}
 
 
@@ -89,26 +88,29 @@ public class AdventureFastReservation {
 
 
 
-	public LocalDate getReservationStart() {
+	public LocalDateTime getReservationStart() {
 		return reservationStart;
 	}
 
 
 
-	public void setReservationStart(LocalDate reservationStart) {
+	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
 
 
 
-	public LocalDate getReservationEnd() {
-		return reservationEnd;
+	
+
+
+	public int getDuration() {
+		return duration;
 	}
 
 
 
-	public void setReservationEnd(LocalDate reservationEnd) {
-		this.reservationEnd = reservationEnd;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 
@@ -173,15 +175,7 @@ public class AdventureFastReservation {
 
 
 
-	public Client getClient() {
-		return client;
-	}
-
-
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
+	
 
 
 

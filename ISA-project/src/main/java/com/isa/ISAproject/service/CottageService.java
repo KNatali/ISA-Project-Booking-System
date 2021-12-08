@@ -52,4 +52,14 @@ public class CottageService {
 		}
 		return res;
 	}
+	public List<Cottage> findByCity(String city){
+		List<Cottage> allCottages=this.cottageRepository.findAll();
+		List<Cottage> res=new ArrayList<>();
+		for (Cottage cottage : allCottages) {
+			if(cottage.getAddress().getCity().equals(city)) {
+				res.add(cottage);
+			}
+		}
+		return res;
+	}
 }

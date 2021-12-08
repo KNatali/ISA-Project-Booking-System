@@ -1,0 +1,38 @@
+<div class="container">
+  <div *ngIf="isSysAdmin" id="add">
+    <button mat-button [routerLink]="['admin-add']" id="add"><i class="fa fa-plus-circle"></i><a> Add
+        new
+        admin</a></button><br></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+
+
+        <th scope="col">Role</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+
+        <td>
+          {{u.firstName}}.{{u.lastName}}
+        </td>
+        <td>
+
+          {{u.username }}
+        </td>
+        <td>{{u.email}}</td>
+
+
+        <td>{{ u.role}}</td>
+        <td><button mat-button (click)="deleteUser(u.id)" id="delete"><a>Delete</a></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
