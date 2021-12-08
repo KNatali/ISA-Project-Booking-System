@@ -56,18 +56,20 @@ const routes: Routes = [
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
   { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
+  { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
 
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
+  { path: 'instructor/reservations/:id', component: InstructorReservationClientComponent },
 
-  { path: 'instructors/adventures/client/:id',component:InstructorAdventureListComponent},
+  { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent },
+  { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
 
-  { path: 'history-cottage-reservations/:id', component:CottageReservationListComponent},
-  { path: 'history-boat-reservations/:id',component:BoatReservationListComponent},
-  { path: 'history-adventure-reservations/:id', component:AdventureReservationListComponent},
+  { path: 'history-cottage-reservations/:id', component: CottageReservationListComponent },
+  { path: 'history-boat-reservations/:id', component: BoatReservationListComponent },
+  { path: 'history-adventure-reservations/:id', component: AdventureReservationListComponent },
 
 
-  { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent }
 
 
 ];
