@@ -97,6 +97,10 @@ import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.compon
 import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
 import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
+import { AvailableBoatTermsListComponent } from './available-boat-terms-list/available-boat-terms-list.component';
+import { AvailableBoatTermsItemComponent } from './available-boat-terms-item/available-boat-terms-item.component';
+import { AdditionalItemBoatListComponent } from './additional-item-boat-list/additional-item-boat-list.component';
+import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
 
 
 @NgModule({
@@ -178,7 +182,11 @@ import { AdminOverviewComponent } from './admin-overview/admin-overview.componen
     AdminAddAdminComponent,
     AdminEntitiesComponent,
     AdminReservationRequestsComponent,
-    AdminOverviewComponent
+    AdminOverviewComponent,
+    AvailableBoatTermsListComponent,
+    AvailableBoatTermsItemComponent,
+    AdditionalItemBoatListComponent,
+    AdditionalItemBoatItemComponent
 
 
   ],

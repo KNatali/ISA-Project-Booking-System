@@ -1,0 +1,12 @@
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Name</th><th>Price</th>
+            </tr>
+        </thead>
+        <tbody >   
+            <tr app-additional-item-boat-item *ngFor="let item of items" [addItem]="item"></tr>
+		</tbody>
+    </table>
+</div>

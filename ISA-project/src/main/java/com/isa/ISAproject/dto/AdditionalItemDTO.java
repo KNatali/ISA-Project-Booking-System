@@ -1,5 +1,7 @@
 package com.isa.ISAproject.dto;
 
+import com.isa.ISAproject.model.AdditionalItem;
+
 public class AdditionalItemDTO {
 	
 	private Long id;
@@ -37,6 +39,12 @@ public AdditionalItemDTO(Long id, String name, double price) {
 	this.id = id;
 	this.name = name;
 	this.price = price;
+}
+public AdditionalItemDTO(AdditionalItem item) {
+	super();
+	this.id = item.getId();
+	this.name = item.getName();
+	this.price = item.getPrice();
 }
 
 

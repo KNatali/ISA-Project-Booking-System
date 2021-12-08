@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { Boat } from '../model/boat';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { Boat } from '../model/boat';
 })
 export class BoatService {
   urlBoats = "http://localhost:8090/api/boats";
+  urlAdditionalItem = "http://localhost:8090/api/additional-items";
 
   constructor(private http: HttpClient) { }
 
@@ -40,5 +42,8 @@ export class BoatService {
   }
   sortByCity():Observable<Boat[]>{
     return this.http.get<Boat[]>(this.urlBoats+"/sort-by-city");
+  }
+  findAllAdditionalItems():Observable<AdditionalItem[]>{
+    return this.http.get<AdditionalItem[]>(this.urlAdditionalItem);
   }
 }

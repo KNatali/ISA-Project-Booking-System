@@ -1,0 +1,12 @@
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Start date [yyyy,mm,dd]</th><th>End date [yyyy,mm,dd]</th>
+            </tr>
+        </thead>
+        <tbody >   
+            <tr app-available-boat-terms-item *ngFor="let term of terms" [term]="term"></tr>
+		</tbody>
+    </table>
+</div>
