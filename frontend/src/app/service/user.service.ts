@@ -1,3 +1,4 @@
+import { RegistrationRequest } from './../model/registrationRequest';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,7 +15,7 @@ export class UserService {
     whoami_url = "http://localhost:8090/api/getLoggedIn";
     async_url = "http://localhost:8090/api/signup/async";
     sync_url = "http://localhost:8090/api/signup/sync";
-    sign_up_url = "http://localhost:8090/auth/signup";
+    registrationUrl = "http://localhost:8090/api/register";
     constructor(
         private http: HttpClient
     ) {
@@ -32,7 +33,9 @@ export class UserService {
     sendEmail(newUser: User): Observable<User> {
         return this.http.post<User>(this.async_url, newUser);
     }
-    signUp(newUser: User): Observable<User> {
-        return this.http.post<User>(this.sign_up_url, newUser);
+
+    registerUser(newUser: RegistrationRequest): Observable<RegistrationRequest> {
+        return this.http.post<RegistrationRequest>(this.registrationUrl, newUser);
     }
+
 }

@@ -21,6 +21,7 @@ insert into authority(id, name) values (2, 'ROLE_ADMIN');
 insert into authority(id, name) values (3, 'ROLE_INSTRUCTOR');
 
 insert into authority(id, name) values (4, 'ROLE_CLIENT');
+insert into authority(id, name) values (6, 'ROLE_BOAT_OWNER');
 
 
 

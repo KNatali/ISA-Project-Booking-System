@@ -8,9 +8,9 @@ describe('InstructorAddReservationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InstructorAddReservationComponent ]
+      declarations: [InstructorAddReservationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

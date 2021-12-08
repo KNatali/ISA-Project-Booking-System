@@ -28,10 +28,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.isa.ISAproject.dto.AdminProfileDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
+import com.isa.ISAproject.dto.RegistrationRequestDTO;
 import com.isa.ISAproject.dto.UserDTO;
+import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.Admin;
+import com.isa.ISAproject.model.RegistrationRequest;
 import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.repository.RegistrationRequestRepository;
 import com.isa.ISAproject.service.EmailService;
 import com.isa.ISAproject.service.UserService;
 
@@ -48,6 +54,8 @@ public class UserController {
 
 	@Autowired
 	private EmailService emailService;
+@Autowired
+private RegistrationRequestRepository reservationRequestRepository;
 	// Za pristup ovoj metodi neophodno je da ulogovani korisnik ima ADMIN ulogu
 		// Ukoliko nema, server ce vratiti gresku 403 Forbidden
 		// Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
@@ -78,11 +86,6 @@ public class UserController {
 		}
 		*/
 
-		@GetMapping("/whoami")
-		
-		public User user(Principal user) {
-			return this.userService.findByUsername(user.getName());
-		}
 		
 		@GetMapping("/foo")
 	    public Map<String, String> getFoo() {
@@ -96,6 +99,25 @@ public class UserController {
 			return "registration";
 		}
 
+		
+		@RequestMapping(value="/register",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<?> register(@RequestBody RegistrationRequestDTO dto){
+		
+		User existUser = this.userService.findByUsername(dto.getUserDTO().getUsername());
+
+		if (existUser != null) {
+			throw new ResourceConflictException(dto.getUserDTO().getId(), "Username already exists");
+		}
+
+		User user = this.userService.save(dto.getUserDTO());
+		RegistrationRequest request=new RegistrationRequest(dto.getId(),user,dto.getReason());
+	this.reservationRequestRepository.save(request);
+		RegistrationRequestDTO req=new RegistrationRequestDTO(request.getId(),dto.getUserDTO(),request.getReason());
+		return new ResponseEntity<>(HttpStatus.OK);
+		
+		
+		}
+		
 		@PostMapping("/signup/async")
 		public String signUpAsync(@RequestBody UserDTO user){
 

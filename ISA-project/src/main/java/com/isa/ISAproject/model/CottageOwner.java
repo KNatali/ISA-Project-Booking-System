@@ -29,4 +29,18 @@ public class CottageOwner extends User{
 	}
 	
 	public CottageOwner() {}
+
+	public CottageOwner(Long id, String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,Set<Cottage> cottages) {
+		super(id, username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
+		this.cottages=cottages;
+	}
+
+	public CottageOwner(String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,Set<Cottage> cottages) {
+		super(username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
+		this.cottages=cottages;
+	}
+	
+	
 }
