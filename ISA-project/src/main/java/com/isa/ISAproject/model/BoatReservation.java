@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -22,9 +23,9 @@ public class BoatReservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private LocalDate date;
-	@Column
-	private LocalTime time;
+	private LocalDateTime date;
+	//@Column
+	//private LocalTime time;
 	@Column
 	private int duration;
 	@Column
@@ -36,6 +37,18 @@ public class BoatReservation {
 	@ManyToOne
 	private Client client;
 	
+	@ManyToOne
+	private Boat boat;
+	
+	
+	public Boat getBoat() {
+		return boat;
+	}
+
+	public void setBoat(Boat boat) {
+		this.boat = boat;
+	}
+
 	@OneToMany
 	private Set<BoatComplaint> BoatComplaints=new HashSet<>();
 
@@ -47,14 +60,14 @@ public class BoatReservation {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
+/*
 	public LocalTime getTime() {
 		return time;
 	}
@@ -62,7 +75,7 @@ public class BoatReservation {
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
-
+*/
 	public int getDuration() {
 		return duration;
 	}
@@ -111,18 +124,19 @@ public class BoatReservation {
 		BoatComplaints = boatComplaints;
 	}
 
-	public BoatReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons,
-			Set<AdditionalItem> additionalItems, double price, Client client, Set<BoatComplaint> boatComplaints) {
+	public BoatReservation(Long id, LocalDateTime date, int duration, int maxPersons,
+			Set<AdditionalItem> additionalItems, double price, Client client, Set<BoatComplaint> boatComplaints,Boat boat) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.time = time;
+		//this.time = time;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.additionalItems = additionalItems;
 		this.price = price;
 		this.client = client;
 		BoatComplaints = boatComplaints;
+		this.boat=boat;
 	}
 	
 	public BoatReservation() {}
