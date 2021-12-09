@@ -1,6 +1,7 @@
  package com.isa.ISAproject.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.service.AdventureService;
@@ -105,6 +108,20 @@ public class AdventureController {
 		List<AdventureDTO> res=AdventureMapper.convertoToDTOs(adventures);
 		
 		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping( method = RequestMethod.GET,
+			params = "name",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdventureDTO>> findByName(@RequestParam String name){
+		List<Adventure> adventures=this.adventureService.findByName(name);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	public List<AdventureDTO> convert(List<Adventure> adventures){
+		List<AdventureDTO> res=new ArrayList<>();
+		for (Adventure adv: adventures) {
+			res.add(new AdventureDTO(adv));
+		}
+		return res;
 	}
 	
 	

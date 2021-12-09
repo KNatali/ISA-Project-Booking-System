@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,18 +77,21 @@ public class BoatController {
 	}
 	@RequestMapping(value="api/boats/sort-by-name", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<BoatDTO>> sortByName(){
 		List<Boat> boats=this.boatService.sortByName();
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/boats/sort-by-grade", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<BoatDTO>> sortByGrade(){
 		List<Boat> boats=this.boatService.sortByGrade();
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/boats/sort-by-city", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<BoatDTO>> sortByCity(){
 		List<Boat> boats=this.boatService.sortByCity();
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);

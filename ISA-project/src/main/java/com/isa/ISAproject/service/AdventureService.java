@@ -197,6 +197,9 @@ public class AdventureService {
 		}
 		return listDTO;
 	}
+	public List<Adventure> findByName(String name){
+		return this.adventureRepository.findByName(name);
+	}
 	
 
 }

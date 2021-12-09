@@ -147,6 +147,15 @@ public class AdventureDTO {
 
 	public AdventureDTO(Adventure adventure) {
 		this.name = adventure.getName();
+		this.address = new AddressDTO(adventure.getAddress());
+		this.description = adventure.getDescription();
+		this.averageGrade = adventure.getAverageGrade();
+		this.price=adventure.getPrice();
+		this.instructor = new InstructorProfileDTO(adventure.getInstructor());
+		this.mainPicture=adventure.getMainPicture();
+		this.maxPersons=adventure.getMaxPersons();
+		this.id=adventure.getId();
+		this.cancellationPercentage=adventure.getCancellationPercentage();
 		
 	}
 }
