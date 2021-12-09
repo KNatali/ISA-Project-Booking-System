@@ -1,39 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Admin } from '../model/admin';
 import { AdminService } from '../service/admin.service';
 
 @Component({
-  selector: 'app-admin-profile',
-  templateUrl: './admin-profile.component.html',
-  styleUrls: ['./admin-profile.component.css']
+  selector: 'app-admin-first-login',
+  templateUrl: './admin-first-login.component.html',
+  styleUrls: ['./admin-first-login.component.css']
 })
-export class AdminProfileComponent implements OnInit {
-  profileShow: boolean = true;
-  profileEdit: boolean = false;
+export class AdminFirstLoginComponent implements OnInit {
   changePassword: boolean = false;
-
+  id: any;
   newPassword: any;
   passwordConfirm: any;
   formV: FormGroup;
-  @Input() admin: Admin = new Admin({
-    id: 0,
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    street: '',
-    city: '',
-    state: '',
-    mobile: '',
-    biography: '',
-    firstLogin: false
-
-
-  });
-  @Input() id: number;
   constructor(private adminService: AdminService, private route: ActivatedRoute
     , private router: Router, private fb: FormBuilder) { }
 
@@ -50,24 +30,8 @@ export class AdminProfileComponent implements OnInit {
   get registerFormControl() {
     return this.formV.controls;
   }
-  edit() {
-    this.profileShow = !this.profileShow;
-    this.profileEdit = !this.profileEdit;
-    this.changePassword = false;
-
-  }
-  change() {
-    this.profileShow = false;
-    this.profileEdit = false;
-    this.changePassword = true;
-  }
-  submit() {
-    this.adminService.updateAdmin(this.id, this.admin).subscribe(res => {
-      this.goToProfilePage();
-    })
-  }
-
   submitPassword() {
+    this.id = sessionStorage.getItem('id');
     if (this.formV.valid) {
 
       if ((this.newPassword != this.passwordConfirm))
@@ -85,14 +49,9 @@ export class AdminProfileComponent implements OnInit {
 
   }
   goToProfilePage() {
-    this.profileShow = true;
-    this.profileEdit = false;
+
     this.changePassword = false;
     this.router.navigate(['/admin/:id']);
-  }
-  close() {
-    this.goToProfilePage();
-
   }
 
 }

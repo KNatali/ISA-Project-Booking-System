@@ -25,6 +25,7 @@ export class AuthenticationService {
           sessionStorage.setItem("token", tokenStr);
           sessionStorage.setItem("id", userData.id);
           sessionStorage.setItem("role", userData.role);
+          sessionStorage.setItem("firstLogin", 'true');
           return userData;
         })
       );

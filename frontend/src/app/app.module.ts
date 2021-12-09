@@ -97,6 +97,8 @@ import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.compon
 import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
 import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AdminFirstLoginComponent } from './admin-first-login/admin-first-login.component';
 
 
 @NgModule({
@@ -178,7 +180,9 @@ import { AdminOverviewComponent } from './admin-overview/admin-overview.componen
     AdminAddAdminComponent,
     AdminEntitiesComponent,
     AdminReservationRequestsComponent,
-    AdminOverviewComponent
+    AdminOverviewComponent,
+    FileUploadComponent,
+    AdminFirstLoginComponent
 
 
   ],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Admin } from '../model/admin';
 import { AdminService } from '../service/admin.service';
 
@@ -22,19 +22,28 @@ export class AdminPageComponent implements OnInit {
     state: '',
 
     mobile: '',
-    biography: ''
-
+    biography: '',
+    firstLogin: false
 
   });
-  constructor(private route: ActivatedRoute, private adminService: AdminService) { }
+  constructor(private route: ActivatedRoute, private adminService: AdminService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = sessionStorage.getItem("id");
     this.getById();
+
   }
   getById() {
     this.adminService.getById(this.id)
-      .subscribe(res => this.admin = res)
+      .subscribe(res => {
+        this.admin = res;
+
+        if (this.admin.firstLogin == true) {
+          this.router.navigate(['first-login']);
+        }
+
+
+      })
   }
 
 }

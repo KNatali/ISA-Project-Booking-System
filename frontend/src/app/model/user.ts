@@ -24,7 +24,8 @@ export interface UserInterface {
     city: string;
     email: string;
     mobile: string;
-    role:string;
+    role: string;
+    firstLogin: boolean;
 
 }
 export class User implements UserInterface {
@@ -38,7 +39,10 @@ export class User implements UserInterface {
     city: string;
     email: string;
     mobile: string;
-    role:string;
+    role: string;
+    firstLogin: boolean;
+
+
     constructor(obj: UserInterface) {
         this.id = obj.id;
         this.firstName = obj.firstName;
@@ -50,7 +54,8 @@ export class User implements UserInterface {
         this.state = obj.state;
         this.email = obj.email;
         this.mobile = obj.mobile;
-        this.role=obj.role;
+        this.role = obj.role;
+        this.firstLogin = obj.firstLogin;
     }
 
 

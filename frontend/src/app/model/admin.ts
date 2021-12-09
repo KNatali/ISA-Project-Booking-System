@@ -13,6 +13,7 @@ export interface AdminInterface {
     biography: string;
 
     grade?: number;
+    firstLogin: boolean;
 
 
 }
@@ -28,6 +29,8 @@ export class Admin implements AdminInterface {
     email: string;
     mobile: string;
     biography: string;
+    firstLogin: boolean;
+
 
     grade?: number | undefined;
 
@@ -44,7 +47,7 @@ export class Admin implements AdminInterface {
         this.mobile = obj.mobile;
 
         this.biography = obj.biography;
-
+        this.firstLogin = obj.firstLogin;
 
         this.grade = obj.grade;
 
