@@ -9,3 +9,15 @@
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
 </div>
+<div class="forma">
+    <form class="form-search" (ngSubmit)="findByName()">
+        <label for="name">Name: </label>
+        <input name="name" id="name" type="text" [(ngModel)]="name">
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+    <form class="form-search" (ngSubmit)="findByAddress()">
+        <label for="name">City: </label>
+        <input name="name" id="name" type="text" [(ngModel)]="address">
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+</div>

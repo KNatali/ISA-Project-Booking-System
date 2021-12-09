@@ -13,6 +13,13 @@ export class SearchAdventureComponent implements OnInit {
   instructors: Instructor[];
   selectedInstructor: Instructor;
   id: number;
+  name:string;
+  address:string;
+
+  @Output()
+  NameAdded : EventEmitter<string> =new EventEmitter();
+  @Output()
+  AddressAdded : EventEmitter<string> =new EventEmitter();
   @Output()
   AddedInstructor: EventEmitter<number> = new EventEmitter();
   constructor(private instructorService: InstructorService) {
@@ -39,5 +46,11 @@ export class SearchAdventureComponent implements OnInit {
   }
   findByInstructor() {
     this.AddedInstructor.next(this.selectedInstructor.id)
+  }
+  findByName(){
+    this.NameAdded.next(this.name)
+  }
+  findByAddress(){
+    this.AddressAdded.next(this.address);
   }
 }

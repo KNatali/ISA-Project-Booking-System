@@ -62,5 +62,12 @@ export class AdventureService {
     const params: HttpParams = new HttpParams().append('instructorId', instructorId);
     return this.http.get<Adventure[]>(this.urlAdventures, { params });
   }
-
+  findByName(name:string):Observable<Adventure[]>{
+    const params:HttpParams=new HttpParams().append('name',name);
+    return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  }
+  findByCity(city:string):Observable<Adventure[]>{
+    const params:HttpParams=new HttpParams().append('city',city);
+    return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  }
 }

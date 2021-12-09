@@ -123,7 +123,13 @@ public class AdventureController {
 		}
 		return res;
 	}
-	
+	@RequestMapping( method = RequestMethod.GET,
+			params = "city",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdventureDTO>> findByCity(@RequestParam String city){
+		List<Adventure> adventures=this.adventureService.findByCity(city);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
 	
 
 }
