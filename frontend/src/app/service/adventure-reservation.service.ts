@@ -13,4 +13,10 @@ export class AdventureReservationService {
   activeReservations(id:number):Observable<AdventureReservation[]>{
     return this.http.get<AdventureReservation[]>(this.url+"/active/"+id);
   }
+  sortByPrice(id:number):Observable<AdventureReservation[]>{
+    return this.http.get<AdventureReservation[]>(this.url+"/sort-by-price/"+id);
+  }
+  sortByDate(id:number):Observable<AdventureReservation[]>{
+    return this.http.get<AdventureReservation[]>(this.url+"/sort-by-date/"+id);
+  }
 }

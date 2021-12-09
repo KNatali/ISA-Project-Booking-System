@@ -51,7 +51,29 @@ public class Boat {
 	private double grade;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private BoatOwner owner;
+	@OneToMany
+	private Set<BoatReservation> boatReservations;
 	
+	
+	public Set<BoatReservation> getBoatReservations() {
+		return boatReservations;
+	}
+	public void setBoatReservations(Set<BoatReservation> boatReservations) {
+		this.boatReservations = boatReservations;
+	}
+	public Set<BoatBehavioralRule> getRules() {
+		return rules;
+	}
+	public void setRules(Set<BoatBehavioralRule> rules) {
+		this.rules = rules;
+	}
+	public Set<NavigationEquipment> getNavigationEquipment() {
+		return navigationEquipment;
+	}
+	public void setNavigationEquipment(Set<NavigationEquipment> navigationEquipment) {
+		this.navigationEquipment = navigationEquipment;
+	}
+
 	@ManyToMany
 	@JoinTable(name="boat_and_rules",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
@@ -193,5 +215,30 @@ public class Boat {
 		
 	}
 	
+	
+	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber, double motorPower,
+			int maxSpeed, String description, Set<String> pictures, String mainPicture, int capacity, double grade,
+			BoatOwner owner, Set<BoatReservation> boatReservations, Set<BoatBehavioralRule> rules,
+			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.type = type;
+		this.length = length;
+		this.motorNumber = motorNumber;
+		this.motorPower = motorPower;
+		this.maxSpeed = maxSpeed;
+		this.description = description;
+		this.pictures = pictures;
+		this.mainPicture = mainPicture;
+		this.capacity = capacity;
+		this.grade = grade;
+		this.owner = owner;
+		this.boatReservations = boatReservations;
+		this.rules = rules;
+		this.navigationEquipment = navigationEquipment;
+		this.boatFastReservations = boatFastReservations;
+	}
 	public Boat () {}
 }

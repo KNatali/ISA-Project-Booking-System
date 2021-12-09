@@ -65,7 +65,7 @@ public class BoatReservationDTO {
 		this.client = client;
 		this.boat = boat;
 	}
-	/*public BoatReservationDTO(BoatReservation res) {
+	public BoatReservationDTO(BoatReservation res) {
 		super();
 		this.id = res.getId();
 		this.date = res.getDate();
@@ -74,6 +74,6 @@ public class BoatReservationDTO {
 		this.price = res.getPrice();
 		this.client = new ClientProfileDTO(res.getClient());
 		this.boat = new BoatDTO(res.getBoat());
-	}*/
+	}
 	public BoatReservationDTO() {}
 }

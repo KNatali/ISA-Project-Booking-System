@@ -28,13 +28,7 @@ public class CottageReservationController {
 	@RequestMapping(value="api/cottages-reservations/{id}",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<CottageReservationDTO>> findAllResrvationsByClient(@PathVariable Long id){
-		List<CottageReservation> all=this.cottageReservationService.findAll();
-		List<CottageReservation> res=new ArrayList<>();
-		for (CottageReservation cottageReservation : all) {
-			if(cottageReservation.getClient().getId().equals(id)) {
-				res.add(cottageReservation);
-			}
-		}
+		List<CottageReservation> res=this.cottageReservationService.oldReservation(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
 	public List<CottageReservationDTO> convertToDTOList(List<CottageReservation> input){
@@ -62,5 +56,12 @@ public class CottageReservationController {
 		List<CottageReservation> res=this.cottageReservationService.sortByDate(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
+	@RequestMapping(value="api/cottages-reservations/active/{id}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageReservationDTO>> activeReservations(@PathVariable Long id){
+		List<CottageReservation> res=this.cottageReservationService.activeReservation(id);
+		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
+	}
+	
 	
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdventureReservation } from '../model/AdventureReservation';
+import { AdventureReservationService } from '../service/adventure-reservation.service';
 import { ClientService } from '../service/client.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AdventureReservationListComponent implements OnInit {
 
   reservations: AdventureReservation[];
   id:any;
-  constructor(private clientService:ClientService) { }
+  constructor(private clientService:ClientService, private adventureReservationService: AdventureReservationService) { }
 
   ngOnInit(): void {
     this.id = sessionStorage.getItem('id');
@@ -19,6 +20,14 @@ export class AdventureReservationListComponent implements OnInit {
   }
   loadData(){
     this.clientService.findAllAdventureRes(this.id)
+    .subscribe(res=>this.reservations=res)
+  }
+  SortedByDate(){
+    this.adventureReservationService.sortByDate(this.id)
+    .subscribe(res=>this.reservations=res)
+  }
+  SortedByPrice(){
+    this.adventureReservationService.sortByPrice(this.id)
     .subscribe(res=>this.reservations=res)
   }
 

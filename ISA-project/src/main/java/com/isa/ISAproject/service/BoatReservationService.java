@@ -30,8 +30,19 @@ public class BoatReservationService {
 		}
 		return res;
 	}
+	public List<BoatReservation> oldReservationForClinet(Long id){
+		List<BoatReservation> allRes=this.findAllResByIdClient(id);
+		List<BoatReservation> res=new ArrayList<>();
+		LocalDateTime lt= LocalDateTime.now();
+		for (BoatReservation boatReservation : allRes) {
+			if(boatReservation.getDate().isBefore(lt)) {
+				res.add(boatReservation);
+			}
+		}
+		return res;
+	}
 	public List<BoatReservation> sortByDate(Long id) {
-		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> reservations=this.oldReservationForClinet(id);
 		List<BoatReservation> res=new ArrayList<>();
 		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDateDesc();
 		for (BoatReservation boatReservation : sorted) {
@@ -44,7 +55,7 @@ public class BoatReservationService {
 		return res;
 	}
 	public List<BoatReservation> sortByDuration(Long id) {
-		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> reservations=this.oldReservationForClinet(id);
 		List<BoatReservation> res=new ArrayList<>();
 		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDurationDesc();
 		for (BoatReservation boatReservation : sorted) {
@@ -57,7 +68,7 @@ public class BoatReservationService {
 		return res;
 	}
 	public List<BoatReservation> sortByPrice(Long id) {
-		List<BoatReservation> reservations=this.findAllResByIdClient(id);
+		List<BoatReservation> reservations=this.oldReservationForClinet(id);
 		List<BoatReservation> res=new ArrayList<>();
 		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByPriceDesc();
 		for (BoatReservation boatRes : sorted) {
@@ -69,7 +80,7 @@ public class BoatReservationService {
 		}
 		return res;
 	}
-	/*public List<BoatReservation> activeReservation(Long id){
+	public List<BoatReservation> activeReservation(Long id){
 		List<BoatReservation> allRes=this.findAllResByIdClient(id);
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
@@ -79,5 +90,5 @@ public class BoatReservationService {
 			}
 		}
 		return res;
-	}*/
+	}
 }
