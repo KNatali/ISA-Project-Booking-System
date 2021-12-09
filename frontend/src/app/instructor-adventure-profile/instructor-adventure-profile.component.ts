@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-instructor-adventure-profile',
@@ -13,13 +14,15 @@ import { AdventureService } from '../service/adventure.service';
 })
 export class InstructorAdventureProfileComponent implements OnInit {
 
-
+  retrievedImage: string;
+  base64Data: any;
+  retrieveResonse: any;
   cancellation: any;
   id: number;
   adventure: Adventure;
   currentRate = 8;
 
-  constructor(private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -36,12 +39,26 @@ export class InstructorAdventureProfileComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.adventureService.getAdventure(this.id)
-        .subscribe((adventure: Adventure) => this.adventure = adventure);
+        .subscribe((adventure: Adventure) => {
+          this.adventure = adventure;
+
+          if (this.adventure.mainPicture.substring(0, 7) != "/assets") {
+            this.http.get('http://localhost:8090/api/get/' + this.adventure.mainPicture)
+              .subscribe(
+                res => {
+                  this.retrieveResonse = res;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.adventure.mainPicture = 'data:image/jpeg;base64,' + this.base64Data;
+                }
+              );
+          }
+
+        });
 
     });
 
-  }
 
+  }
   loadEquipment() {
     this.route.params.subscribe(param => {
       this.id = param.id;

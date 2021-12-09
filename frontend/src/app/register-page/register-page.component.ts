@@ -79,7 +79,6 @@ export class RegisterPageComponent implements OnInit {
         this.registrated = true;
       }
       else {
-        alert(this.registrationRequest.userDTO.username + this.registrationRequest.reason);
         this.userService.registerUser(this.registrationRequest)
           .subscribe();
         this.showForm = false;
