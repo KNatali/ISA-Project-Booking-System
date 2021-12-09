@@ -1,5 +1,7 @@
 <app-search-boat (MotorNumberAdded)="findBoatByMotorMuber($event)"
- (MotorPowerAdded)="findBoatByMotorPower($event)"></app-search-boat>
+ (MotorPowerAdded)="findBoatByMotorPower($event)"
+ (AddressAdded)="findByCity($event)"
+ (NameAdded)="findByName($event)"></app-search-boat>
 <app-sort-boats *ngIf="visiable_sort_button" (SortedByName)="sortByName()"
                 (SortedByGrade)="sortByGrade()"
                 (SortedByCity)="sortByCity()"></app-sort-boats>

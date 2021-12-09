@@ -109,5 +109,19 @@ public class BoatController {
 		}
 		return res;
 	}
+	@RequestMapping(value="api/boats", method = RequestMethod.GET,
+			params = "name",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatDTO>> findByName(@RequestParam String name){
+		List<Boat> cottages=this.boatService.findByName(name);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats", method = RequestMethod.GET,
+			params = "city",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<BoatDTO>> findByCity(@RequestParam String city){
+		List<Boat> boats=this.boatService.findByCity(city);
+		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
+	}
 
 }

@@ -63,4 +63,17 @@ public class BoatService {
 	public List<AdditionalItem> findAllAdditionalItems(){
 		return this.additionalItemRepository.findAll();
 	}
+	public List<Boat> findByName(String name){
+		return this.boatRepository.findByName(name);
+	}
+	public List<Boat> findByCity(String city){
+		List<Boat> all=this.boatRepository.findAll();
+		List<Boat> res=new ArrayList<>();
+		for (Boat boat : all) {
+			if(boat.getAddress().getCity().equals(city)) {
+				res.add(boat);
+			}
+		}
+		return res;
+	}
 }
