@@ -1,13 +1,14 @@
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './../model/adventureBehavioralRules';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { ActivatedRoute } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 
 
@@ -17,6 +18,12 @@ import { Instructor } from '../model/instructor';
   styleUrls: ['./instructor-adventure-edit.component.css']
 })
 export class InstructorAdventureEditComponent implements OnInit {
+  selectedFile: File;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  message: string;
+  imageName: any;
   showAdd: boolean;
   showUpdate: boolean;
   cancellation: any;
@@ -61,7 +68,7 @@ export class InstructorAdventureEditComponent implements OnInit {
   });
   currentRate = 8;
   formValue0!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.formValue0 = this.formBuilder.group({
@@ -73,7 +80,9 @@ export class InstructorAdventureEditComponent implements OnInit {
       price: [''],
       cancellationPercentage: [''],
       description: [''],
-      biography: ['']
+      biography: [''],
+      image: ['']
+
 
 
     })
@@ -83,7 +92,11 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.loadAdditionalItems();
 
   }
-
+  //Gets called when the user selects an image
+  public onFileChanged(event: any) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+  }
   editInformation() {
     this.formValue0.controls['name'].setValue(this.adventure.name);
     this.formValue0.controls['street'].setValue(this.adventure.address.street);
@@ -95,6 +108,25 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.formValue0.controls['description'].setValue(this.adventure.description);
     this.formValue0.controls['biography'].setValue(this.adventure.instructor.biography);
 
+  }
+  //Gets called when the user clicks on submit to upload the image
+  onUpload() {
+    console.log(this.selectedFile);
+
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
+    alert(this.selectedFile.name);
+    //Make a call to the Spring Boot Application to save the image
+    this.http.post('http://localhost:8090/api/upload', uploadImageData)
+      .subscribe((response) => {
+        /*  if (response.status === 200) {
+            this.message = 'Image uploaded successfully';
+          } else {
+            this.message = 'Image not uploaded successfully';
+          }*/
+      }
+      );
   }
 
   update() {
@@ -120,6 +152,19 @@ export class InstructorAdventureEditComponent implements OnInit {
           alert(error)
         });
     });
+  }
+  //Gets called when the user clicks on retieve image button to get the image from back end
+  getImage() {
+    //Make a call to Sprinf Boot to get the Image Bytes.
+    alert(this.imageName)
+    this.http.get('http://localhost:8090/api/get/' + this.imageName)
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
   }
   onAdd() {
     this.showAdd = true;

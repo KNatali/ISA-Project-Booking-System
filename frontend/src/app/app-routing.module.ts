@@ -1,3 +1,5 @@
+import { AdminFirstLoginComponent } from './admin-first-login/admin-first-login.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
 import { InstructorAdventureProfileComponent } from './instructor-adventure-profile/instructor-adventure-profile.component';
 import { Component, NgModule } from '@angular/core';
@@ -45,6 +47,7 @@ const routes: Routes = [
   { path: 'clients/:id', component: ClientPageComponent },
   { path: 'admin/:id', component: AdminPageComponent },
   { path: 'admin/:id/admin-add', component: AdminAddAdminComponent },
+  { path: 'first-login', component: AdminFirstLoginComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
@@ -52,7 +55,7 @@ const routes: Routes = [
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
-
+  { path: 'files', component: FileUploadComponent },
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
   { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },

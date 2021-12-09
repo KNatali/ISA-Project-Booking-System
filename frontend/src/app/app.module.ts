@@ -97,10 +97,15 @@ import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.compon
 import { AdminEntitiesComponent } from './admin-entities/admin-entities.component';
 import { AdminReservationRequestsComponent } from './admin-reservation-requests/admin-reservation-requests.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
+
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AdminFirstLoginComponent } from './admin-first-login/admin-first-login.component';
+
 import { AvailableBoatTermsListComponent } from './available-boat-terms-list/available-boat-terms-list.component';
 import { AvailableBoatTermsItemComponent } from './available-boat-terms-item/available-boat-terms-item.component';
 import { AdditionalItemBoatListComponent } from './additional-item-boat-list/additional-item-boat-list.component';
 import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
+
 
 
 @NgModule({
@@ -183,10 +188,15 @@ import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/add
     AdminEntitiesComponent,
     AdminReservationRequestsComponent,
     AdminOverviewComponent,
+
+    FileUploadComponent,
+    AdminFirstLoginComponent,
+
     AvailableBoatTermsListComponent,
     AvailableBoatTermsItemComponent,
     AdditionalItemBoatListComponent,
     AdditionalItemBoatItemComponent
+
 
 
   ],

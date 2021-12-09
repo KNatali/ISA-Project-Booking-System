@@ -25,7 +25,8 @@ export class AdminAddAdminComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
-    role: 'Admin'
+    role: 'Admin',
+    firstLogin: true
   });
 
   constructor(private adminService: AdminService, private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute) { }

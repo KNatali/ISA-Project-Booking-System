@@ -39,6 +39,7 @@ export class InstructorPageComponent implements OnInit {
   getById() {
     this.instructorService.getById(this.id)
       .subscribe(res => this.instructor = res)
+
   }
 
 }

@@ -42,7 +42,7 @@ export class AdminService {
     }
 
     changePassword(id: number, newPassword: string): Observable<Admin> {
-        return this.http.post<Instructor>(`${this.urlAdmin}/` + `changePassword` + `/${id}`, { newPassword });
+        return this.http.post<Admin>(`${this.urlAdmin}/` + `changePassword` + `/${id}`, { newPassword });
     }
 
 }

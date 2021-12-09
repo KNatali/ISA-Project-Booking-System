@@ -57,13 +57,15 @@ export class NavbarProfileComponent implements OnInit {
     if (this.role == 'Client') {
       this.router.navigate(['clients', this.id]);
 
-    }else if (this.role=='Instructor'){
-    this.router.navigate(['instructors', this.id]);
-    }else if (this.role=='CottageOwner'){
+    } else if (this.role == 'Instructor') {
+      this.router.navigate(['instructors', this.id]);
+    } else if (this.role == 'CottageOwner') {
       this.router.navigate(['cottageOwner', this.id]);
 
-    }else if (this.role == 'Admin' || this.role == 'SysAdmin') {
+    } else if (this.role == 'Admin' || this.role == 'SysAdmin') {
+
       this.router.navigate(['admin', this.id]);
+
 
     }
   }
