@@ -48,6 +48,7 @@ public class AdminService {
 		
 		String newPasswordHash=passwordEncoder.encode(dto.getNewPassword());
 		admin.setPassword(newPasswordHash);
+		admin.setFirstLogin(false);
 		adminRepository.save(admin);
 		AdminProfileDTO adminDTO=new AdminProfileDTO(admin);
 		return adminDTO;

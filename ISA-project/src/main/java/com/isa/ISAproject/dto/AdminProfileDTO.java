@@ -15,6 +15,10 @@ public class AdminProfileDTO {
 	private String city;
 	private String mobile;
 	private String role;
+	private boolean firstLogin;
+	
+	
+	
 
 
 
@@ -22,6 +26,12 @@ public class AdminProfileDTO {
 	
 	
 	
+	public boolean isFirstLogin() {
+		return firstLogin;
+	}
+	public void setFirstLogin(boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -97,7 +107,7 @@ public class AdminProfileDTO {
 	public AdminProfileDTO() {}
 	public AdminProfileDTO(String username, String password, String email, String firstName, String lastName,
 
-			String street, String state, String city, String mobile,Long id,String role) {
+			String street, String state, String city, String mobile,Long id,String role,boolean firstLogin) {
 
 			
 
@@ -114,6 +124,7 @@ public class AdminProfileDTO {
 		this.mobile = mobile;
 		this.id=id;
 		this.role=role;
+		this.firstLogin=firstLogin;
 		
 	}
 	public AdminProfileDTO(Admin admin) {
@@ -130,6 +141,7 @@ public class AdminProfileDTO {
 		this.mobile = admin.getMobile();
 		this.id=admin.getId();
 		this.role=admin.getRole();
+		this.firstLogin=admin.isFirstLogin();
 
 		
 		

@@ -15,6 +15,11 @@
 	<name>ISA-project</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+	
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
@@ -29,6 +34,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.6.0</version>
 		</dependency>
+		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
