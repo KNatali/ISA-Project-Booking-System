@@ -10,6 +10,7 @@ import { Instructor } from '../model/instructor';
 import { Address } from '../model/address';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-instructor-add-adventure',
@@ -17,6 +18,10 @@ import { AdventureService } from '../service/adventure.service';
   styleUrls: ['./instructor-add-adventure.component.css']
 })
 export class InstructorAddAdventureComponent implements OnInit {
+  selectedFile: File;
+  retrievedImage: string;
+  base64Data: any;
+  retrieveResonse: any;
   id: any;
   formValue!: FormGroup;
   formValue1!: FormGroup;
@@ -73,7 +78,7 @@ export class InstructorAddAdventureComponent implements OnInit {
   newRule: AdventureBehavioralRules = new AdventureBehavioralRules({
     rule: ""
   })
-  constructor(private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
+  constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
@@ -100,6 +105,23 @@ export class InstructorAddAdventureComponent implements OnInit {
       rule: [''],
 
     })
+  }
+
+  public onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+  onUpload() {
+    console.log(this.selectedFile);
+
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
+
+    this.http.post('http://localhost:8090/api/upload', uploadImageData)
+      .subscribe((response) => {
+
+      }
+      );
   }
 
 
@@ -138,6 +160,8 @@ export class InstructorAddAdventureComponent implements OnInit {
   }
 
   submit() {
+    alert(this.selectedFile.name);
+    this.adventure.mainPicture = this.selectedFile.name;
     this.adventure.equipment = this.equipment;
     this.adventure.additionalItems = this.additionalItems;
     this.adventure.rules = this.rules;

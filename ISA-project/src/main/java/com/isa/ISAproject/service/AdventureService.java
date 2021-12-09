@@ -91,7 +91,7 @@ public class AdventureService {
 		}
 		this.ruleRepository.saveAll(rules);
 	
-		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,"",null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
+		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,dto.getMainPicture(),null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
 	this.adventureRepository.save(a);
 	}
 	
@@ -107,6 +107,7 @@ public class AdventureService {
 		a.getAddress().setCity(dto.getAddress().getCity());
 		a.getAddress().setState(dto.getAddress().getState());
 		a.setMaxPersons(dto.getMaxPersons());
+		a.setMainPicture(dto.getMainPicture());
 		a.setCancellationPercentage(dto.getCancellationPercentage());
 		a.setPrice(dto.getPrice());
 		a.setDescription(dto.getDescription());

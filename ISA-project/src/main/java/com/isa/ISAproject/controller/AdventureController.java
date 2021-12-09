@@ -66,6 +66,7 @@ public class AdventureController {
 	}
 	
 	@RequestMapping(value="/add/{id}",method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<?>  addAdventure(@RequestBody AdventureAddDTO dto,@PathVariable Long id){
 		this.adventureService.addAdventure(id, dto);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -89,6 +90,7 @@ public class AdventureController {
 	@RequestMapping( method = RequestMethod.GET,
 			params = "instructorId",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	
 	public ResponseEntity<List<AdventureDTO>> findAdventuresByInstructor(@RequestParam Long instructorId){
 		Optional<Instructor> instructorOPT=this.instructorService.findById(instructorId);
 		if(!instructorOPT.isPresent()) {
