@@ -1,8 +1,20 @@
-
 .forma{
     margin-top: 10px;
     margin-left: 10px;
+    background-color:lightblue;
+    width: 300px;
+    
 }
 .form-search{
-    margin:5px ;
+    margin: 5px;
+}
+.btn{
+    margin-top: 10px;
+    
+}
+input{
+    margin-bottom: 10px;
+}
+h2{
+    text-align: center;
 }
