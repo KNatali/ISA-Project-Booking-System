@@ -68,7 +68,7 @@ public class UserService {
 		List<User> users=userRepository.findAll();
 		List<UserDTO> usersDTO=new ArrayList<>();
 	 for (User u : users) {
-		 if(u.getRole()!="Admin" && u.getRole()!="SysAdmin") {
+		 if(!(u.getRole().equalsIgnoreCase("SysAdmin") || u.getRole().equalsIgnoreCase("Admin"))) {
 			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole());
 			usersDTO.add(dto);
 		 }
@@ -114,7 +114,7 @@ public class UserService {
 		else if(u.getRole().equalsIgnoreCase("Admin")) {
 			authorities = authorityService.findByName("ROLE_ADMIN");
 			u.setAuthorities(authorities);
-			Admin admin=new Admin(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),true,u.getRole(),authorities);
+			Admin admin=new Admin(u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress(),u.getMobile(),true,u.getRole(),authorities,true);
 			Admin newAdmin=this.adminRepository.save(admin);
 			u.setId(newAdmin.getId());
 		}

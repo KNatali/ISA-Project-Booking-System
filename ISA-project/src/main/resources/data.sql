@@ -69,7 +69,7 @@ insert into client (id) values (7);
 insert into client (id) values (8);
 insert into client (id) values (9);
 
-insert into admin(id) values(10);
+insert into admin(id,first_login) values(10,false);
 
 insert into adventure_fishing_equipment(name) values ('cumberland');
 insert into adventure_fishing_equipment(name) values ('soft baits');
