@@ -1,11 +1,12 @@
 <div class="forma">
+    <h2>Search</h2>
     <form class="form-search" (ngSubmit)="findCottageByName()">
-        <label for="name">Name: </label>
+        <label for="name">Name: </label><br>
         <input name="name" id="name" type="text" [(ngModel)]="name">
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
     <form class="form-search" (ngSubmit)="findCottageByAddress()">
-        <label for="name">City: </label>
+        <label for="name">City: </label><br>
         <input name="name" id="name" type="text" [(ngModel)]="address">
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
