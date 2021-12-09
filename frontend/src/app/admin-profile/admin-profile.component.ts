@@ -28,7 +28,8 @@ export class AdminProfileComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
-    biography: ''
+    biography: '',
+    firstLogin: false
 
 
   });

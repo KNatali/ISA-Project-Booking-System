@@ -33,7 +33,8 @@ export class RegisterPageComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
-    role: ''
+    role: '',
+    firstLogin: false
   });
   registrationRequest: RegistrationRequest = new RegistrationRequest({
     id: 0,
