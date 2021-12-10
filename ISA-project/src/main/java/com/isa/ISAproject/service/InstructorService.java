@@ -11,15 +11,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Boat;
@@ -67,6 +70,17 @@ public class InstructorService {
 	}
 	public Instructor findByFirstNameAndLastName(String firstName, String lastName) {
 		return this.instructorRepository.findByFirstNameAndLastName(firstName, lastName);
+	}
+	
+
+	public InstructorProfileDTO changePassword(Long id,PasswordChangeDTO dto) {
+		Instructor instructor=instructorRepository.getById(id);
+		
+		String newPasswordHash=passwordEncoder.encode(dto.getNewPassword());
+		instructor.setPassword(newPasswordHash);
+		instructorRepository.save(instructor);
+		InstructorProfileDTO instructorDTO=new InstructorProfileDTO(instructor);
+		return instructorDTO;
 	}
 	public List<Instructor> sortByFirstName(){
 		return this.instructorRepository.findByOrderByFirstName();

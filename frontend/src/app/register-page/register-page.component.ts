@@ -79,6 +79,7 @@ export class RegisterPageComponent implements OnInit {
         this.registrated = true;
       }
       else {
+
         this.userService.registerUser(this.registrationRequest)
           .subscribe();
         this.showForm = false;

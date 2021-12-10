@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AddressDTO;
+import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
@@ -64,6 +66,17 @@ public class InstructorController {
 		
 		InstructorProfileDTO itemDto=new InstructorProfileDTO(item.get());
 		return new ResponseEntity<>(itemDto,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/instructors/changePassword/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<InstructorProfileDTO> changePassword(@RequestBody PasswordChangeDTO dto,@PathVariable Long id){
+		InstructorProfileDTO instructorDTO=instructorService.changePassword(id, dto);
+		if(instructorDTO==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		
+		return new ResponseEntity<>(instructorDTO,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="api/instructors/{id}",method = RequestMethod.PUT,
