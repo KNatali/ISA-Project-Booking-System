@@ -107,7 +107,6 @@ import { AdditionalItemBoatListComponent } from './additional-item-boat-list/add
 import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

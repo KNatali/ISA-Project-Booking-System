@@ -6,6 +6,7 @@ import { Adventure } from '../model/adventure';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
 import { HttpClient } from '@angular/common/http';
+import { Loader } from '@googlemaps/js-api-loader';
 
 @Component({
   selector: 'app-instructor-adventure-profile',
@@ -13,7 +14,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./instructor-adventure-profile.component.css']
 })
 export class InstructorAdventureProfileComponent implements OnInit {
-
+  map: any;
+  loader: any;
   retrievedImage: string;
   base64Data: any;
   retrieveResonse: any;
@@ -25,10 +27,14 @@ export class InstructorAdventureProfileComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
+    this.loader = new Loader({
+      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+    })
     this.loadData();
     this.loadEquipment();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
+
 
 
 
@@ -52,6 +58,12 @@ export class InstructorAdventureProfileComponent implements OnInit {
                 }
               );
           }
+          this.loader.load().then(() => {
+            this.map = new google.maps.Map(document.getElementById("map")!, {
+              center: { lat: this.adventure.address.latitude, lng: this.adventure.address.longitude },
+              zoom: 11.5
+            })
+          })
 
         });
 

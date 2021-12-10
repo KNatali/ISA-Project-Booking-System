@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Loader } from '@googlemaps/js-api-loader';
 
 
 
@@ -18,6 +19,8 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./instructor-adventure-edit.component.css']
 })
 export class InstructorAdventureEditComponent implements OnInit {
+  map: any;
+  loader: any;
   selectedFile: File;
   retrievedImage: string;
   base64Data: any;
@@ -32,7 +35,9 @@ export class InstructorAdventureEditComponent implements OnInit {
     id: 0,
     street: '',
     city: '',
-    state: ''
+    state: '',
+    latitude: 0,
+    longitude: 0
   })
   instructor: Instructor = new Instructor({
     id: 0,
@@ -71,6 +76,9 @@ export class InstructorAdventureEditComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
+    this.loader = new Loader({
+      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+    })
     this.formValue0 = this.formBuilder.group({
       name: [''],
       street: [''],
@@ -191,6 +199,13 @@ export class InstructorAdventureEditComponent implements OnInit {
                 }
               );
           }
+          this.loader.load().then(() => {
+            this.map = new google.maps.Map(document.getElementById("map")!, {
+              center: { lat: this.adventure.address.latitude, lng: this.adventure.address.longitude },
+              zoom: 11.5
+            })
+          })
+
 
         });
 

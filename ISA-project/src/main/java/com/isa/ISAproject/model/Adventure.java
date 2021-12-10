@@ -27,13 +27,16 @@ public class Adventure {
 	private String name;
 	@ManyToOne
 	private Address address;
+	
+	
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	@Column
 	private double averageGrade;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.DETACH)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Instructor instructor;
+	
 	
 	@Column
 	private double price;
@@ -66,10 +69,10 @@ public class Adventure {
 	private int cancellationPercentage;
 
 	 
-	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL)
+	@OneToMany(mappedBy = "adventure", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private Set<AdventureFastReservation> adventureFastReservations;
 	
-	@OneToMany(mappedBy = "adventure",cascade =CascadeType.ALL )
+	@OneToMany(mappedBy = "adventure", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AdventureReservation> adventureReservations;
 
 	

@@ -30,6 +30,11 @@ div.block label {
   justify-content: flex-end;
 }
 
+.full {
+  width: 300px;
+  height: 200px;
+}
+
 .mat-button {
   color: white;
   background-color: #13315C

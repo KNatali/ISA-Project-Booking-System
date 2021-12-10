@@ -26,20 +26,27 @@ import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
+import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureFishingEquipmentRepository;
 import com.isa.ISAproject.repository.AdventureRepository;
+import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.BehavioralRuleRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 @Service
 public class AdventureService {
 	@Autowired
 	private AdventureRepository adventureRepository;
 	@Autowired
+	private AdventureReservationRepository adventureReservationRepository;
+	@Autowired
 	private AddressRepository addressRepository;
-	
+	@Autowired
+	private ClientRepository clientRepository;
 	@Autowired
 	private AdventureFishingEquipmentRepository equipmentRepository;
 	@Autowired
@@ -62,6 +69,15 @@ public class AdventureService {
 	
 	public void delete(Long id) {
 		Adventure a=adventureRepository.getById(id);
+		Set<AdventureReservation> list=a.getAdventureReservations();
+		for (AdventureReservation ar : list) {
+			Client client=ar.getClient();
+			List<AdventureReservation> l=client.getAdventureReservations();
+			l.clear();
+			//clientRepository.save(client);
+			adventureReservationRepository.delete(ar);
+		}
+		
 		this.adventureRepository.delete(a);
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
@@ -71,6 +87,8 @@ public class AdventureService {
 		address.setStreet(dto.getAddress().getStreet());
 		address.setCity(dto.getAddress().getCity());
 		address.setState(dto.getAddress().getState());
+			address.setLatitude(dto.getAddress().getLatitude());
+			address.setLongitude(dto.getAddress().getLongitude());
 		this.addressRepository.save(address);
 		Set<Adventure> adventures=instructor.getAdventures();
 		Set<AdventureFishingEquipment> equipment=AdventureFishingEquipmentMapper.converFromDTOs(dto.getEquipment());

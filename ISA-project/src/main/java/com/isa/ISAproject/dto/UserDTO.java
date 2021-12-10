@@ -12,10 +12,12 @@ public class UserDTO {
 	private String street;
 	private String state;
 	private String city;
+	private double latitude;
+	private double longitude;
 	private String mobile;
 	private String role;
 	public UserDTO(Long id, String username, String password, String email, String firstName, String lastName,
-			String street, String state, String city, String mobile, String role) {
+			String street, String state, String city, String mobile, String role,double latitude,double longitude) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -28,7 +30,31 @@ public class UserDTO {
 		this.city = city;
 		this.mobile = mobile;
 		this.role = role;
+		this.latitude=latitude;
+		this.longitude=longitude;
 	}
+	
+	
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

@@ -19,7 +19,9 @@ public class UserMapper {
 				u.getAddress().getCity(),
 				u.getMobile(),
 				u.getUsername(),
-				u.getRole()
+				u.getRole(),
+				u.getAddress().getLatitude(),
+				u.getAddress().getLongitude()
 				);
 		return userDTO;
 	}

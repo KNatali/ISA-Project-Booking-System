@@ -68,6 +68,11 @@ export class AdminEntitiesComponent implements OnInit {
   deleteAdventure(id: any) {
     this.adventureService.deleteAdventure(id)
       .subscribe();
+
+    this.adventures.forEach((adventure, index) => {
+      if (adventure.id == id) this.adventures.splice(index, 1);
+    });
+
   }
 
   showCottages() {

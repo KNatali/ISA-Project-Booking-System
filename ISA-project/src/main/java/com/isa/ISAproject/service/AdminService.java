@@ -15,9 +15,11 @@ import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.model.Admin;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdminRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.UserRepository;
 
 @Service
@@ -25,6 +27,8 @@ public class AdminService {
 	
 	@Autowired
 	private AdminRepository adminRepository;
+	@Autowired
+	private ClientRepository clientRepository;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -60,7 +64,12 @@ public class AdminService {
 	
 	public void deleteUser(Long id) {
 		User user=this.userRepository.getById(id);
-		this.userRepository.delete(user);
+		if(user.getRole()=="Client") {
+			Client c=this.clientRepository.getById(id);
+			this.clientRepository.delete(c);
+		}
+		else		
+			this.userRepository.delete(user);
 	}
 	
 	public boolean addNewAdmin(UserDTO dto) {

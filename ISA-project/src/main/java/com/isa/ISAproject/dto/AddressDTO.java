@@ -11,9 +11,38 @@ public class AddressDTO {
 	
 	private String city;
 	
+	private double latitude;
+	private double longitude;
+	
 	public AddressDTO() {
 		
 	}
+	
+	
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -47,12 +76,14 @@ public class AddressDTO {
 		this.city = city;
 	}
 
-	public AddressDTO(Long id,String street, String state, String city) {
+	public AddressDTO(Long id,String street, String state, String city,double latitude,double longitude) {
 		super();
 		this.id=id;
 		this.street = street;
 		this.state = state;
 		this.city = city;
+		this.latitude=latitude;
+		this.longitude=longitude;
 	}
 	
 }

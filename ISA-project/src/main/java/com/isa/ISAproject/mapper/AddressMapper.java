@@ -12,14 +12,16 @@ public class AddressMapper {
 				a.getId(),
 				a.getStreet(),
 				a.getState(),
-				a.getCity()
+				a.getCity(),
+				a.getLatitude(),
+				a.getLongitude()
 				);
 		return addressDTO;
 	}
 	
 	public static Address convertFromDTO(AddressDTO dto) {
 		Address address=new Address(
-				dto.getId(),dto.getStreet(),dto.getCity(),dto.getState());
+				dto.getId(),dto.getStreet(),dto.getCity(),dto.getState(),dto.getLatitude(),dto.getLongitude());
 		return address;
 	}
 	

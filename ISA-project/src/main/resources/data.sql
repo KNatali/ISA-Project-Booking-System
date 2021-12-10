@@ -1,17 +1,17 @@
 
 
-insert into address (state, city,street) values ('United States','Panama City','3151 West 10th Street');
-insert into address (state, city,street) values ('United States','Key West',' 201 Margaret Street');
-insert into address (state, city,street) values ('United States','Key West',' 5950 Peninsular Avenue');
-insert into address (state, city,street) values ('United States','Key West','  North Roosevelt Boulevard');
-insert into address (state, city,street) values ('United States','Destin',' 210 Harbor Boulevard');
-insert into address (state, city,street) values ('United States','Destin',' 214 Harbor Boulevard');
-insert into address (state, city,street) values ('United States','St. Petersburg',' 3600 Poplar Street Northeast');
-insert into address (state, city,street) values ('United States','St. Petersburg',' 9600 Bay Pines Boulevard');
-insert into address (state, city,street) values ('United States','Miami',' 3400 Pan American Dr,');
-insert into address (state, city,street) values ('United States','Miami','Northwest 7th Street Road 945');
-insert into address (state, city,street) values ('United States','San Diego',' 955 Harbor Island Drive');
-insert into address (state, city,street) values ('United States','San Diego','Emerson Street 2803');
+insert into address (state, city,street,latitude,longitude) values ('United States','Panama City','3151 West 10th Street',30.167530,-85.703880);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West',' 201 Margaret Street',24.561550,-81.800150);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West',' 5950 Peninsular Avenue',24.563920,-81.728150);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West','  North Roosevelt Boulevard',24.565670,-81.772880);
+insert into address (state, city,street,latitude,longitude) values ('United States','Destin',' 210 Harbor Boulevard',30.3934711,-86.5068368);
+insert into address (state, city,street,latitude,longitude) values ('United States','Destin',' 214 Harbor Boulevard',30.392942,-86.5063408);
+insert into address (state, city,street,latitude,longitude) values ('United States','St. Petersburg',' 3600 Poplar Street Northeast',27.805171,-82.6278321);
+insert into address (state, city,street,latitude,longitude) values ('United States','St. Petersburg',' 9600 Bay Pines Boulevard',27.8141447,-82.7718856);
+insert into address (state, city,street,latitude,longitude) values ('United States','Miami',' 3400 Pan American Dr,',25.7269537,-80.2354768);
+insert into address (state, city,street,latitude,longitude) values ('United States','Miami','Northwest 7th Street Road 945',25.7269537,-80.2354768);
+insert into address (state, city,street,latitude,longitude) values ('United States','San Diego',' 955 Harbor Island Drive',32.7251557,-117.1917584);
+insert into address (state, city,street,latitude,longitude) values ('United States','San Diego','Emerson Street 2803',32.7234718,-117.227589);
 
 
 insert into authority(id, name) values (1, 'ROLE_SYSADMIN');

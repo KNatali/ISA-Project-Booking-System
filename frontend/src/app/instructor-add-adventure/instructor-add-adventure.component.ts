@@ -31,7 +31,9 @@ export class InstructorAddAdventureComponent implements OnInit {
     id: 0,
     street: '',
     city: '',
-    state: ''
+    state: '',
+    latitude: 0,
+    longitude: 0
   })
   instructor: Instructor = new Instructor({
     id: 0,
@@ -160,22 +162,26 @@ export class InstructorAddAdventureComponent implements OnInit {
   }
 
   submit() {
-    alert(this.selectedFile.name);
-    this.adventure.mainPicture = this.selectedFile.name;
-    this.adventure.equipment = this.equipment;
-    this.adventure.additionalItems = this.additionalItems;
-    this.adventure.rules = this.rules;
-    this.route.params.subscribe(param => {
-      this.id = param.id;
-      this.adventureService.addAdventure(this.id, this.adventure)
-        .subscribe(data => {
+    if (this.selectedFile == null)
+      alert("Please upload image!")
+    else {
+      this.adventure.mainPicture = this.selectedFile.name;
+      this.adventure.equipment = this.equipment;
+      this.adventure.additionalItems = this.additionalItems;
+      this.adventure.rules = this.rules;
+      this.route.params.subscribe(param => {
+        this.id = param.id;
+        this.adventureService.addAdventure(this.id, this.adventure)
+          .subscribe(data => {
 
-          alert("Successfully added adventure");
-          this.router.navigate(['']);
-        }, error => {
-          alert(error)
-        });
-    });
+            alert("Successfully added adventure");
+            this.router.navigate(['']);
+          }, error => {
+            alert(error)
+          });
+      });
+    }
+
   }
 
 
