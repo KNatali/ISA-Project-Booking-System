@@ -1,11 +1,24 @@
 
 <div class="forma">
     <form (ngSubmit)="findByInstructor()">
-        <h3>Find by instructor</h3>
+        <h2>Find by instructor</h2>
         <label for="firstAndLastName">First and last name: </label>
         <select class="form-control" [(ngModel)]="selectedInstructor.id" name="instructor" id="instructor">
             <option *ngFor="let i of instructors" [value]="i.id">{{i.firstName}} {{i.lastName}}</option>
         </select><br/>
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+</div>
+<div class="forma">
+    <h2>Search</h2>
+    <form class="form-search" (ngSubmit)="findByName()">
+        <label for="name">Name: </label><br>
+        <input name="name" id="name" type="text" [(ngModel)]="name">
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+    <form class="form-search" (ngSubmit)="findByAddress()">
+        <label for="name">City: </label><br>
+        <input name="name" id="name" type="text" [(ngModel)]="address">
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
 </div>

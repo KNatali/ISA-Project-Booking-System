@@ -60,4 +60,12 @@ export class AdventureListPageComponent implements OnInit {
     this.adventureService.findByInstructor(instructorId)
       .subscribe(res => this.adventures = res);
   }
+  findByName(name:string){
+    this.adventureService.findByName(name)
+    .subscribe(res=>this.adventures=res)
+  }
+  findByCity(city:string){
+    this.adventureService.findByCity(city)
+    .subscribe(res=>this.adventures=res)
+  }
 }

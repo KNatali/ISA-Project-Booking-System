@@ -11,6 +11,7 @@ import com.isa.ISAproject.model.Boat;
 public interface BoatRepository extends JpaRepository<Boat, Long> {
 	List<Boat> findByMotorNumber(int motorNumber);
 	List<Boat> findByMotorPower(double motorPower);
+	List<Boat> findByName(String name);
 	List<Boat> findByMotorPowerAndMotorNumber(double motorPower, int motorNumber);
 	List<Boat> findByOrderByName();
 	List<Boat> findByOrderByGradeDesc();

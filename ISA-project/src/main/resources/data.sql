@@ -96,13 +96,13 @@ values ('Fishing river','Head out to some of the richest waters of the mighty At
 
 
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,1,100,'/assets/boats/slika1.jpeg',1);
+values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,1,10,'/assets/boats/slika2.jpeg',2);
+values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
 values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,1,'/assets/boats/slika4.jpeg',4);
+values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
 values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5);
 
@@ -179,6 +179,7 @@ insert into cottage_reservation(date,duration,max_persons,price,client_id,cottag
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2017-02-20T06:30:00",3,1,6000,8,1);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2022-02-20T06:30:00",4,5,9000,8,4);
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",2,5,3400,9,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2020-02-20T06:30:00",5,6,1200,8,4);
 
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,2);
@@ -186,6 +187,7 @@ insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)valu
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,4);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,5);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,6);
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,7);
 
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(5,1);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,2);
@@ -193,6 +195,7 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,4);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,5);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);

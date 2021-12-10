@@ -26,8 +26,12 @@ import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
+
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Client;
+
+import com.isa.ISAproject.model.Cottage;
+
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
@@ -214,6 +218,19 @@ public class AdventureService {
 			listDTO.add(aDTO);
 		}
 		return listDTO;
+	}
+	public List<Adventure> findByName(String name){
+		return this.adventureRepository.findByName(name);
+	}
+	public List<Adventure> findByCity(String city){
+		List<Adventure> all=this.adventureRepository.findAll();
+		List<Adventure> res=new ArrayList<>();
+		for (Adventure adv : all) {
+			if(adv.getAddress().getCity().equals(city)) {
+				res.add(adv);
+			}
+		}
+		return res;
 	}
 	
 

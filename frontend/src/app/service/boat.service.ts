@@ -46,4 +46,12 @@ export class BoatService {
   findAllAdditionalItems():Observable<AdditionalItem[]>{
     return this.http.get<AdditionalItem[]>(this.urlAdditionalItem);
   }
+  findByName(name:string):Observable<Boat[]>{
+    const params:HttpParams=new HttpParams().append('name',name);
+    return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
+  findByCity(city:string):Observable<Boat[]>{
+    const params:HttpParams=new HttpParams().append('city',city);
+    return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
 }
