@@ -1,0 +1,26 @@
+.content {
+    padding: 30px;
+  
+  }
+  
+  .list {
+  
+    display: flex;
+    align-items: stretch;
+  
+  }
+  
+  mat-card {
+    background-color: #AEC2D5;
+    color: #0B2545;
+  }
+  
+  mat-card-title {
+    font-weight: bold;
+    font-size: 14pt;
+  }
+  
+  button {
+    background-color: white;
+  }
+  

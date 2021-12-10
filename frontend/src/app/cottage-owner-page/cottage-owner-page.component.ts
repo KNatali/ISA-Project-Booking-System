@@ -9,6 +9,7 @@ import { CottageOwnerService } from '../service/cottageOwner.service';
   styleUrls: ['./cottage-owner-page.component.css']
 })
 export class CottageOwnerPageComponent implements OnInit {
+  id: any;
   cottageOwner: CottageOwner = new CottageOwner({
     id: 0,
     username: '',
@@ -17,16 +18,16 @@ export class CottageOwnerPageComponent implements OnInit {
     lastName: '',
     email: '',
     address: '',
+    street: '',
     city: '',
     state: '',
     mobile: ''
 
   });
-  id: number;
   constructor(private cottageOwnerService: CottageOwnerService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.id = sessionStorage.getItem("id");
     this.getById();
   }
   getById() {

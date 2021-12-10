@@ -105,6 +105,12 @@ import { AvailableBoatTermsListComponent } from './available-boat-terms-list/ava
 import { AvailableBoatTermsItemComponent } from './available-boat-terms-item/available-boat-terms-item.component';
 import { AdditionalItemBoatListComponent } from './additional-item-boat-list/additional-item-boat-list.component';
 import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
+import { CottageOwnerAddCottageComponent } from './cottage-owner-add-cottage/cottage-owner-add-cottage.component';
+import { CottageAdditionItemsEditComponent } from './cottage-addition-items-edit/cottage-addition-items-edit.component';
+import { CottageCardComponent } from './cottage-card/cottage-card.component';
+import { CottageRulesEditComponent } from './cottage-rules-edit/cottage-rules-edit.component';
+import { CottageOwnerReservationClientComponent } from './cottage-owner-reservation-client/cottage-owner-reservation-client.component';
+import { CottageOwnerReservationsComponent } from './cottage-owner-reservations/cottage-owner-reservations.component';
 
 
 
@@ -195,7 +201,13 @@ import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/add
     AvailableBoatTermsListComponent,
     AvailableBoatTermsItemComponent,
     AdditionalItemBoatListComponent,
-    AdditionalItemBoatItemComponent
+    AdditionalItemBoatItemComponent,
+    CottageOwnerAddCottageComponent,
+    CottageAdditionItemsEditComponent,
+    CottageCardComponent,
+    CottageRulesEditComponent,
+    CottageOwnerReservationClientComponent,
+    CottageOwnerReservationsComponent
 
 
 

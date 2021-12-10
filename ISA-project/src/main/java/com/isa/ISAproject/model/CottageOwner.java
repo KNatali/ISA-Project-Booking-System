@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -12,7 +13,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class CottageOwner extends User{
 	
-	@OneToMany(mappedBy="owner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@Column
+	private double grade;
+	@OneToMany(mappedBy="cottageOwner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Cottage> cottages=new HashSet<>();
 
 	public Set<Cottage> getCottages() {
@@ -42,5 +45,10 @@ public class CottageOwner extends User{
 		this.cottages=cottages;
 	}
 	
-	
+	public CottageOwner(Long id, String username, String password, String email, String firstName, String lastName,
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,double grade,Set<Cottage> cottages) {
+		super(id, username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
+		this.grade=grade;
+		this.cottages=cottages;
+	}
 }

@@ -50,10 +50,9 @@ insert into user_authority (user_id,authority_id) values (7,4);
 insert into user_authority (user_id,authority_id) values (8,4);
 insert into user_authority (user_id,authority_id) values (9,4);
 
-insert into user_authority (user_id,authority_id) values (10,5);
+insert into user_authority (user_id,authority_id) values (11,5);
 
 insert into user_authority (user_id,authority_id) values (10,1);
-
 
 
 insert into instructor (id,biography,grade) values (1,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',3);
@@ -62,7 +61,7 @@ insert into instructor (id,biography,grade) values (3,'I was born and raised in 
 insert into instructor (id,biography,grade) values (4,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',5);
 insert into instructor (id,biography,grade) values (6,'I was born and raised in Key West, Fl. Fishing and diving have been a part of my life since I was 6 years old. Being on the water has always been my favorite thing to do and love taking people out on the beautiful water of Key West where they can make memories.',2);
 
-insert into cottage_owner (id) values (10);
+insert into cottage_owner (id,grade) values (11,3);
 
 insert into client (id) values (5);
 insert into client (id) values (7);
@@ -173,12 +172,12 @@ insert into adventure_fast_reservation(reservation_start,duration,validity_start
 insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00',2,'2021-12-12','2021-12-24',2,100,1);
 
 
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2023-02-20T06:30:00",1,3,3000,8,3);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2017-02-20T06:30:00",3,1,6000,8,1);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2022-02-20T06:30:00",4,5,9000,8,4);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",2,5,3400,9,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2023-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2021-12-4-07-00-00','2021-12-20-14-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2021-11-10-07-00-00','2021-11-12-13-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
 
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,2);

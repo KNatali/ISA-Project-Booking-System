@@ -8,17 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
-import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
+import com.isa.ISAproject.mapper.CottageMapper;
+import com.isa.ISAproject.mapper.CottageOwnerMapper;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.model.CottageOwner;
+import com.isa.ISAproject.service.CottageOwnerService;
 import com.isa.ISAproject.service.CottageService;
 
 @CrossOrigin("*")
@@ -26,6 +34,8 @@ import com.isa.ISAproject.service.CottageService;
 public class CottageController {
 	@Autowired
 	private CottageService cottageService;
+	@Autowired
+	private CottageOwnerService cottageOwnerService;
 	
 	@RequestMapping(value="api/cottages",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -89,5 +99,48 @@ public class CottageController {
 	public ResponseEntity<List<CottageDTO>> sortByCity(){
 		List<Cottage> cottages=this.cottageService.sortByCity();
 		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/delete/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
+	public ResponseEntity<?> delete(@PathVariable Long id){
+		this.cottageService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/add/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<?>  addCottage(@RequestBody CottageAddDTO dto,@PathVariable Long id){
+		this.cottageService.addCottage(id, dto);
+			return new ResponseEntity<>(HttpStatus.OK);
+	}	
+	@RequestMapping( method = RequestMethod.GET,
+			params = {"firstName","lastName"},
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageDTO>> findCottageByCottageOwnerName(@RequestParam String firstName,@RequestParam String lastName){
+		CottageOwner cottageOwner=this.cottageOwnerService.findByFirstNameAndLastName(firstName, lastName);
+		CottageOwnerProfileDTO coDTO=new CottageOwnerProfileDTO(cottageOwner);
+		List<Cottage> cottages=this.cottageService.findByCottageOwner(cottageOwner);
+		if(cottages==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<CottageDTO> res=CottageMapper.convertoToDTOs(cottages);
+		
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping( method = RequestMethod.GET,
+			params = "cottageOwnerId",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<CottageDTO>> findCottagesByCottageOwner(@RequestParam Long cottageOwnerId){
+		Optional<CottageOwner> cottageOwnerOPT=this.cottageOwnerService.findById(cottageOwnerId);
+		if(!cottageOwnerOPT.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		CottageOwner cottageOwner=cottageOwnerOPT.get();
+		CottageOwnerProfileDTO coDTO=CottageOwnerMapper.convertToDTO(cottageOwner);
+		List<Cottage> cottages=this.cottageService.findByCottageOwner(cottageOwner);
+		if(cottages==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<CottageDTO> res=CottageMapper.convertoToDTOs(cottages);
+		
+		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 }

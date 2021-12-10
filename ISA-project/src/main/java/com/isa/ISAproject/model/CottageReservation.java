@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CottageReservation {
@@ -35,12 +37,33 @@ public class CottageReservation {
 	private double price;
 	@ManyToOne
 	private Client client;
-	@ManyToOne
-	private Cottage cottage;
+	@Column(name = "reservationStart", nullable = false)
+    private LocalDateTime reservationStart;
+
+    @Column(name = "reservationEnd", nullable = false)
+    private LocalDateTime reservationEnd;
 	
 	@OneToMany
 	private Set<CottageComplaint> cottageComplaints=new HashSet<>();
+	
+	//
+	
+	//@Column(name = "reservationStart", nullable = false)
+    //private LocalDateTime reservationStart;
 
+    //@Column(name = "reservationEnd", nullable = false)
+    //private LocalDateTime reservationEnd;
+
+    @ManyToOne
+    @JoinColumn(name = "cottage_id")
+    private Cottage cottage;
+    
+    @OneToOne 
+	private CottageReport report;
+    
+    @OneToOne 
+	private CottageOwnerReport ownerReport;
+    
 	public Long getId() {
 		return id;
 	}
@@ -121,7 +144,39 @@ public class CottageReservation {
 	public void setCottage(Cottage cottage) {
 		this.cottage = cottage;
 	}
+	
+	public LocalDateTime getReservationStart() {
+		return reservationStart;
+	}
 
+	public void setReservationStart(LocalDateTime reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
+	}
+
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+
+	public CottageReport getReport() {
+		return report;
+	}
+
+	public void setReport(CottageReport report) {
+		this.report = report;
+	}
+	
+	public CottageOwnerReport getOwnerReport() {
+		return ownerReport;
+	}
+
+	public void setOwnerReport(CottageOwnerReport ownerReport) {
+		this.ownerReport = ownerReport;
+	}
+	
 	public CottageReservation(Long id, LocalDateTime date, int duration, int maxPersons,
 			Set<AdditionalItem> additionalItems, double price, Client client,
 			Set<CottageComplaint> cottageComplaints,Cottage cottage) {
@@ -137,6 +192,21 @@ public class CottageReservation {
 		this.cottage=cottage;
 	}
 	
+	/*public CottageReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
+			Cottage cottage, int maxPersons, double price, CottageReport report,
+			Set<AdditionalItem> additionalItems, Client client, Set<CottageComplaint> cottageComplaints) {
+		super();
+		this.id = id;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.cottage = cottage;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.report=report;
+		this.additionalItems = additionalItems;
+		this.client = client;
+		this.cottageComplaints = cottageComplaints;
+	}*/
 	
 	public CottageReservation() {}
 }

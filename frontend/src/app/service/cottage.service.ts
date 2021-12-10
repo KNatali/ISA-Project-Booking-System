@@ -1,38 +1,66 @@
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage';
+import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CottageService {
-  urlCottage="http://localhost:8090/api/cottages";
+  urlCottages="http://localhost:8090/api/cottages";
+  urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
 
   constructor(private http:HttpClient) { }
 
   getCottages():Observable<Cottage[]>{
-    return this.http.get<Cottage[]>(this.urlCottage);
+    return this.http.get<Cottage[]>(this.urlCottages);
   }
   getCottage(id:number):Observable<Cottage>{
-    return this.http.get<Cottage>(`${this.urlCottage}/${id}`);
+    return this.http.get<Cottage>(`${this.urlCottages}/${id}`);
   }
   findCottageByName(name:string):Observable<Cottage[]>{
     const params:HttpParams=new HttpParams().append('name',name);
-    return this.http.get<Cottage[]>(this.urlCottage,{params});
+    return this.http.get<Cottage[]>(this.urlCottages,{params});
   }
   findCottageByAddress(city:string):Observable<Cottage[]>{
     const params:HttpParams=new HttpParams().append('city',city);
-    return this.http.get<Cottage[]>(this.urlCottage,{params});
+    return this.http.get<Cottage[]>(this.urlCottages,{params});
   }
   sortByName():Observable<Cottage[]>{
-    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-name");
+    return this.http.get<Cottage[]>(this.urlCottages+"/sort-by-name");
   }
   sortByGrade():Observable<Cottage[]>{
-    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-grade");
+    return this.http.get<Cottage[]>(this.urlCottages+"/sort-by-grade");
   }
   sortByCity():Observable<Cottage[]>{
-    return this.http.get<Cottage[]>(this.urlCottage+"/sort-by-city");
+    return this.http.get<Cottage[]>(this.urlCottages+"/sort-by-city");
   }
-
+  deleteCottage(id: number) {
+    return this.http.delete(`${this.urlCottages}/` + `delete` + `/${id}`);
+  }
+  getCottageBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `rules` + `/${id}`);
+  }
+  getCottageAdditionalItems(id: number): Observable<AdditionalItem[]> {
+    return this.http.get<AdditionalItem[]>(`${this.urlCottage}/` + `additionalItems` + `/${id}`);
+  }
+  updateCottage(id: number, data: Cottage): Observable<Cottage> {
+    return this.http.post<Cottage>(`${this.urlCottage}/${id}`, data);
+  }
+  /*addCottage(id: number, newCottage: Cottage): Observable<Cottage> {
+    return this.http.put<Cottage>(`${this.urlCottages}/` + `add` + `/${id}`, newCottage);
+  }*/
+  findByCottageOwnerFirstAndLastName(firstName: string, lastName: string): Observable<Cottage[]> {
+    const params = new HttpParams()
+      .set('firstName', firstName)
+      .set('lastName', lastName);
+    return this.http.get<Cottage[]>(this.urlCottages, { params });
+  }
+  findByCottageOwner(cottageOwnerId: number): Observable<Cottage[]> {
+    const params: HttpParams = new HttpParams().append('cottageOwnerId', cottageOwnerId);
+    return this.http.get<Cottage[]>(this.urlCottages, { params });
+  }
+  
 }

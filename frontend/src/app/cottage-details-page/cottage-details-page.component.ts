@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cottage } from '../model/cottage';
 import { ActivatedRoute } from '@angular/router';
 import { CottageService } from '../service/cottage.service';
+import { CottageOwner } from '../model/cottageOwner';
 
 @Component({
   selector: 'app-cottage-details-page',

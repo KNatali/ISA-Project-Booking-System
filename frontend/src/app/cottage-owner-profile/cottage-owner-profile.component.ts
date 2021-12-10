@@ -11,6 +11,10 @@ import { CottageOwnerService } from '../service/cottageOwner.service';
 export class CottageOwnerProfileComponent implements OnInit {
   profileShow: boolean = true;
   profileEdit: boolean = false;
+  changePassword: boolean = false;
+  oldPassword: any;
+  newPassword: any;
+  passwordConfirm: any;
   @Input() cottageOwner: CottageOwner = new CottageOwner({
     id: 0,
     username: '',
@@ -19,6 +23,7 @@ export class CottageOwnerProfileComponent implements OnInit {
     lastName: '',
     email: '',
     address: '',
+    street: '',
     city: '',
     state: '',
     mobile: ''
@@ -34,22 +39,35 @@ export class CottageOwnerProfileComponent implements OnInit {
   edit() {
     this.profileShow = !this.profileShow;
     this.profileEdit = !this.profileEdit;
-
+    this.changePassword = false;
+  }
+  change()
+  {
+    this.profileShow = false;
+    this.profileEdit = false;
+    this.changePassword = true;
   }
   submit() {
     this.cottageOwnerService.updateCottageOwner(this.id, this.cottageOwner).subscribe(res => {
       this.goToProfilePage();
     })
   }
+  submitPassword()
+  {
+    if(this.newPassword !=this.passwordConfirm) 
+    {
+      alert("New and confirmed password don't match!");
+    }
+  }
   goToProfilePage() {
     this.profileShow = true;
     this.profileEdit = false;
-
+    this.changePassword = false;
     this.router.navigate(['/cottageOwner/:id']);
   }
   close() {
-    window.location.reload();
-
+    //window.location.reload();
+    this.goToProfilePage();
   }
 
 }
