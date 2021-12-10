@@ -73,14 +73,30 @@ public class AdventureService {
 	
 	public void delete(Long id) {
 		Adventure a=adventureRepository.getById(id);
-		Set<AdventureReservation> list=a.getAdventureReservations();
-		for (AdventureReservation ar : list) {
-			Client client=ar.getClient();
-			List<AdventureReservation> l=client.getAdventureReservations();
-			l.clear();
-			//clientRepository.save(client);
-			adventureReservationRepository.delete(ar);
+		//Set<AdventureReservation> list=a.getAdventureReservations();
+		List<AdventureReservation> list=adventureReservationRepository.findByAdventure(a);
+		if(list==null) {
+			for (AdventureReservation adventureReservation : list) {
+				a.getAdventureReservations().remove(adventureReservation);
+				Client c=adventureReservation.getClient();
+				List<AdventureReservation> set=c.getAdventureReservations();
+				set.remove(adventureReservation);
+				clientRepository.save(c);
+				
+			}
+			//a.setAdventureReservations(null);
+			this.adventureRepository.save(a);
 		}
+		/*for (AdventureReservation ar : list) {
+			//Client c=ar.getClient();
+		//	c.setAdventureReservations(null);
+			//clientRepository.save(c);
+			
+			ar.setClient(null);
+			this.adventureReservationRepository.save(ar);
+			this.adventureReservationRepository.delete(ar);
+		}*/
+	//	list.clear();
 		
 		this.adventureRepository.delete(a);
 	}

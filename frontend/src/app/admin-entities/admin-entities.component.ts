@@ -60,10 +60,14 @@ export class AdminEntitiesComponent implements OnInit {
       })
   }
   deleteCottage(id: any) {
-
+    this.cottages.forEach((cottage, index) => {
+      if (cottage.id == id) this.cottages.splice(index, 1);
+    });
   }
   deleteBoat(id: any) {
-
+    this.boats.forEach((boat, index) => {
+      if (boat.id == id) this.boats.splice(index, 1);
+    });
   }
   deleteAdventure(id: any) {
     this.adventureService.deleteAdventure(id)
@@ -74,6 +78,8 @@ export class AdminEntitiesComponent implements OnInit {
     });
 
   }
+
+
 
   showCottages() {
     this.cottageShow = true;
