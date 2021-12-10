@@ -2,6 +2,7 @@ package com.isa.ISAproject.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 

@@ -22,10 +22,29 @@ public class Address {
 	private String state;
 	@Column
 	private String city;
+	@Column
+	private double latitude;
+	@Column
+	private double longitude;
 	
-	@OneToMany(mappedBy="address")
-	private Set<User> users=new HashSet<>();
 	
+	
+	
+	
+	
+	
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -54,19 +73,26 @@ public class Address {
 	public Address() {
 		
 	}
-	public Address(Long id, String street, String state, String city) {
+	public Address(Long id, String street, String state, String city, double latitude, double longitude) {
 		super();
 		this.id = id;
 		this.street = street;
 		this.state = state;
 		this.city = city;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
-	public Address(String street, String state, String city) {
+	public Address(String street, String state, String city, double latitude, double longitude) {
 		super();
 		this.street = street;
 		this.state = state;
 		this.city = city;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
+	
+	
+	
 	
 	
 }

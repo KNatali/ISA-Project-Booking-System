@@ -49,7 +49,7 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
-	@RequestMapping(value="delete/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="delete/{id}",method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		this.adventureService.delete(id);

@@ -29,6 +29,14 @@
           <input type="text" [(ngModel)]="adventure.address.state" formControlName="state" class="form-control">
         </div>
         <div class="mb-3">
+          <label for="state" class="form-label">Coordinate:Latitude:</label>
+          <input type="text" [(ngModel)]="adventure.address.latitude" formControlName="state" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="state" class="form-label">Coordinate:Longitude:</label>
+          <input type="text" [(ngModel)]="adventure.address.longitude" formControlName="state" class="form-control">
+        </div>
+        <div class="mb-3">
           <label for="maxPersons" class="form-label">Max number of guests:</label>
           <input type="number" [(ngModel)]="adventure.maxPersons" formControlName="maxPersons" class="form-control">
         </div>
