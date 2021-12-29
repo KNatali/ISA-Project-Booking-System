@@ -62,6 +62,8 @@ public class AdminController {
 	
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
+	
+	
 	@RequestMapping(value="api/admin/addAdmin",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize(" hasRole('SYSADMIN')")
 	public ResponseEntity<?> addNewAdmin(@RequestBody UserDTO dto){

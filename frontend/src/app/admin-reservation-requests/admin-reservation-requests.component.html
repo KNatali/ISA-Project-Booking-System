@@ -15,58 +15,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-
+      <tr *ngFor="let r of requests; index as i">
+        <th scope="row">{{ i + 1 }}</th>
 
         <td>
-          Michael
+          {{r.userDTO.firstName}}
         </td>
         <td>
-          Watson
+          {{r.userDTO.lastName}}
         </td>
-        <td>Have many adventures to show!</td>
+        <td> {{r.reason}}</td>
 
 
-        <td>Instructor</td>
-        <td><button mat-button id="accept">Accept</button></td>
+        <td> {{r.userDTO.role}}</td>
+        <td><button mat-button id="accept" (click)="accept(r)">Accept</button></td>
         <td><button mat-button id="reject">Reject</button></td>
 
       </tr>
 
-      <tr>
 
-
-        <td>
-          Anna
-        </td>
-        <td>
-          Roberts
-        </td>
-        <td>My boats are popular</td>
-
-
-        <td>Boat owner</td>
-        <td><button mat-button id="accept">Accept</button></td>
-        <td><button mat-button id="reject">Reject</button></td>
-
-      </tr>
-      <tr>
-
-
-        <td>
-          Maria
-        </td>
-        <td>
-          Gomez
-        </td>
-        <td>I would like to have profile on this platform</td>
-
-
-        <td>Cottage owner</td>
-        <td><button mat-button id="accept">Accept</button></td>
-        <td><button mat-button id="reject">Reject</button></td>
-
-      </tr>
 
     </tbody>
   </table>
