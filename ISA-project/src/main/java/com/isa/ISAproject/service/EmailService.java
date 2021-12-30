@@ -99,6 +99,19 @@ public class EmailService {
 
 		System.out.println("Email poslat!");
 	}
+	@Async
+	public void sendMessage(String email,String message) throws MailException, InterruptedException {
+		
+		Thread.sleep(10000);
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(email);
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("System message");
+		mail.setText(message);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 
 	
 }

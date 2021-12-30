@@ -9,6 +9,7 @@ import { Client } from '../model/client';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { Admin } from '../model/admin';
 import { User } from '../model/user';
+import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 
 @Injectable({
     providedIn: 'root'
@@ -54,6 +55,15 @@ export class AdminService {
     }
     rejectRegistrationRequest(request: RegistrationRequest): Observable<User> {
         return this.http.put<User>(`${this.urlAdmin}/rejectRegistrationRequest`, request);
+    }
+    getAllProfileDeleteRequests(): Observable<ProfileDeleteRequest[]> {
+        return this.http.get<ProfileDeleteRequest[]>(`${this.urlAdmin}/allProfileDeleteRequests`);
+    }
+    acceptProfileDeleteRequests(request: ProfileDeleteRequest): Observable<User> {
+        return this.http.put<User>(`${this.urlAdmin}/acceptProfileDeleteRequest`, request);
+    }
+    rejectProfileDeleteRequests(request: ProfileDeleteRequest): Observable<User> {
+        return this.http.put<User>(`${this.urlAdmin}/rejectProfileDeleteRequest`, request);
     }
 
 }

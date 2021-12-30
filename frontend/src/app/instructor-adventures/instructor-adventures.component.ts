@@ -42,6 +42,7 @@ export class InstructorAdventuresComponent implements OnInit {
   ngOnInit(): void {
     this.adventures = [];
     this.getAdventures();
+
   }
 
   getAdventures() {
@@ -64,6 +65,7 @@ export class InstructorAdventuresComponent implements OnInit {
   }
 
   addAdventure() {
+    alert(this.instructor.firstName);
     this.router.navigate(['new']);
   }
 

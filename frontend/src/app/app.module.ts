@@ -110,6 +110,7 @@ import { InstructorReservationReportComponent } from './instructor-reservation-r
 import { InstructorDeleteProfileComponent } from './instructor-delete-profile/instructor-delete-profile.component';
 import { AdminRejectRequestComponent } from './admin-reject-request/admin-reject-request.component';
 import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
+import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requests/admin-profile-delete-requests.component';
 
 
 @NgModule({
@@ -204,7 +205,8 @@ import { AdminRequestsComponent } from './admin-requests/admin-requests.componen
     InstructorReservationReportComponent,
     InstructorDeleteProfileComponent,
     AdminRejectRequestComponent,
-    AdminRequestsComponent
+    AdminRequestsComponent,
+    AdminProfileDeleteRequestsComponent
 
 
 
