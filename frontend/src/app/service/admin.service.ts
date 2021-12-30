@@ -50,7 +50,10 @@ export class AdminService {
     }
 
     acceptRegistrationRequest(request: RegistrationRequest): Observable<User> {
-        return this.http.put<User>(`${this.urlAdmin}/acceptRequest`, request);
+        return this.http.put<User>(`${this.urlAdmin}/acceptRegistrationRequest`, request);
+    }
+    rejectRegistrationRequest(request: RegistrationRequest): Observable<User> {
+        return this.http.put<User>(`${this.urlAdmin}/rejectRegistrationRequest`, request);
     }
 
 }

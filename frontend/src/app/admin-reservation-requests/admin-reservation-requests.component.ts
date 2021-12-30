@@ -1,7 +1,10 @@
 import { RegistrationRequest } from './../model/registrationRequest';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../service/admin.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EmailMessage } from '../model/emailMessage';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { EmailMessageService } from '../service/email-message.service';
 
 @Component({
   selector: 'app-admin-reservation-requests',
@@ -10,20 +13,50 @@ import { Router } from '@angular/router';
 })
 export class AdminReservationRequestsComponent implements OnInit {
   requests: RegistrationRequest[];
-  constructor(private adminService: AdminService, private router: Router) { }
+
+  activeTab: string = 'REGISTRATION';
+  rejectMessage: EmailMessage = new EmailMessage({
+
+    message: "",
+    email: ""
+  })
+  formValue!: FormGroup;
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService, private router: Router, private route: ActivatedRoute, private emailService: EmailMessageService) { }
 
   ngOnInit(): void {
     this.getRequests();
+    this.formValue = this.formBuilder.group({
+      message: [''],
+
+    })
+  }
+
+  changeTab(tabName: string) {
+    this.activeTab = tabName;
   }
   getRequests() {
     this.adminService.getAllRegistrationRequests()
       .subscribe(res => this.requests = res);
   }
 
-  accept(request: RegistrationRequest) {
+  accept(request: RegistrationRequest, id: any) {
     this.adminService.acceptRegistrationRequest(request)
       .subscribe();
-    window.location.reload();
+    this.requests.forEach((request, index) => {
+      if (request.id == id) this.requests.splice(index, 1);
+    });
+    alert("Successfully sent message to accepted user!")
   }
+
+  reject(request: RegistrationRequest, id: any) {
+
+    sessionStorage.setItem("message", request.userDTO.email);
+    this.adminService.rejectRegistrationRequest(request)
+      .subscribe();
+    this.requests.forEach((request, index) => {
+      if (request.id == id) this.requests.splice(index, 1);
+    });
+  }
+
 
 }

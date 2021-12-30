@@ -6,8 +6,10 @@
   <mat-tab label="Profile">
     <app-admin-profile [admin]="admin" [id]="id"></app-admin-profile>
   </mat-tab>
-  <mat-tab label="Registration requests">
-    <app-admin-reservation-requests></app-admin-reservation-requests>
+  <mat-tab label="Requests">
+
+
+    <app-admin-requests></app-admin-requests>
   </mat-tab>
   <mat-tab label="Users">
     <app-admin-users></app-admin-users>
@@ -17,64 +19,5 @@
 
   </mat-tab>
 </mat-tab-group>
-<div class="modal fade" id="modalReport" aria-labelledby="modalReportLabel" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalReportLabel">Report:</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="content" class="form-label">Message:</label>
-            <textarea type="text" formControlName="content" class="form-control"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="checkbox-inline">Does this client need to be sanctioned?</label><br>
-            <input type="checkbox" name="santioned"> Yes
 
-          </div>
-          <div class="mb-3">
-            <label class="checkbox-inline">Did this client show up?</label><br>
-            <input type="checkbox" name="showUp"> No
-
-          </div>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!--Za profil tj brisanje profila-->
-<div class="modal fade" id="modalDelete" aria-labelledby="modalDeleteLabel" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDeleteLabel">Report:</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="content" class="form-label">Explanation:</label>
-            <textarea type="text" formControlName="content" class="form-control"></textarea>
-          </div>
-
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-admin-reject-request></app-admin-reject-request>

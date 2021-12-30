@@ -55,8 +55,18 @@ public class RegistrationRequestService {
 		RegistrationRequest request=this.registrationRequestRepository.getById(requestDTO.getId());
 		this.registrationRequestRepository.delete(request);
 		
+	}
+	
+	public void reject(RegistrationRequestDTO requestDTO) {
 		
+		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+	
+		
+		RegistrationRequest request=this.registrationRequestRepository.getById(requestDTO.getId());
+		this.registrationRequestRepository.delete(request);
+		userRepository.delete(user);
 		
 	}
+
 
 }

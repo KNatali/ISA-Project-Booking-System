@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+
+
+    <ul class="list-unstyled components">
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'REGISTRATION' }" (click)="changeTab('REGISTRATION')">Registration
+        </a>
+      </li>
+
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'DELETE' }" (click)="changeTab('DELETE')">Profile Delete </a>
+      </li>
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'REPORT' }" (click)="changeTab('REPORT')">Client Report </a>
+      </li>
+    </ul>
+
+
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+    <div *ngIf="activeTab == 'REGISTRATION'">
+      <app-admin-reservation-requests></app-admin-reservation-requests>
+    </div>
+
+
+  </div>
+</div>
