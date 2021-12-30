@@ -226,5 +226,7 @@ insert into client_boat_reservations(client_id,boat_reservations_id) values(9,6)
 insert into registration_request(user_id,reason) values (13,'Have many adventures to offer');
 insert into registration_request(user_id,reason) values (14,'This site looks pretty amazing and I want to be part of this community');
 
+ insert into profile_delete_request(user_id,reason) values (3,'My services are no longer available');
+insert into profile_delete_request(user_id,reason) values (4,'I am getting to old for this :( ');
  
 

@@ -10,7 +10,8 @@
       </li>
 
       <li>
-        <a [ngClass]="{ 'is-active': activeTab === 'DELETE' }" (click)="changeTab('DELETE')">Profile Delete </a>
+        <a [ngClass]="{ 'is-active': activeTab === 'PROFILE_DELETE' }" (click)="changeTab('PROFILE_DELETE')">Profile
+          Delete </a>
       </li>
       <li>
         <a [ngClass]="{ 'is-active': activeTab === 'REPORT' }" (click)="changeTab('REPORT')">Client Report </a>
@@ -24,6 +25,9 @@
   <div id="content">
     <div *ngIf="activeTab == 'REGISTRATION'">
       <app-admin-reservation-requests></app-admin-reservation-requests>
+    </div>
+    <div *ngIf="activeTab == 'PROFILE_DELETE'">
+      <app-admin-profile-delete-requests></app-admin-profile-delete-requests>
     </div>
 
 

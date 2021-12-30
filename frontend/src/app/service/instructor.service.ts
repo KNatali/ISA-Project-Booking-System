@@ -6,6 +6,7 @@ import { Adventure } from '../model/adventure';
 import { Instructor } from '../model/instructor';
 import { Client } from '../model/client';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
+import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,10 @@ export class InstructorService {
   }
   sortByCity(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.urlInstructor + "/sort-by-city");
+  }
+
+  sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
+    return this.http.post<ProfileDeleteRequest>(`${this.urlInstructor}/` + `profileDeleteRequest`, request);
   }
 
 }
