@@ -78,4 +78,17 @@ public class ProfileDeleteRequestController {
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="api/admin/rejectProfileDeleteRequest",method = RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> rejectProfileDeleteRequest(@RequestBody ProfileDeleteRequestDTO dto){
+
+		profileDeleteRequestService.rejectDeleteRequest(dto);
+		if(dto.getUserDTO()==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		
+		
+		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
+	}
+	
 }

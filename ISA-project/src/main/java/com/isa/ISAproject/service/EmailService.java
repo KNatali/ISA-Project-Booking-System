@@ -81,7 +81,7 @@ public class EmailService {
 		mail.setTo(dto.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
 		mail.setSubject("System message");
-		mail.setText("Your registration request has been rejected. Here is the reason:"+dto.getMessage());
+		mail.setText("Your request has been rejected. Here is the reason:"+dto.getMessage());
 		javaMailSender.send(mail);
 
 		System.out.println("Email poslat!");

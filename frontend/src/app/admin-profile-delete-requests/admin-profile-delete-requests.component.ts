@@ -41,7 +41,7 @@ export class AdminProfileDeleteRequestsComponent implements OnInit {
 
   reject(request: ProfileDeleteRequest, id: any) {
 
-    //sessionStorage.setItem("message", request.userDTO.email);
+    sessionStorage.setItem("message", request.userDTO.email);
     this.adminService.rejectProfileDeleteRequests(request)
       .subscribe();
     this.requests.forEach((request, index) => {

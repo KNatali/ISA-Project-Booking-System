@@ -59,4 +59,15 @@ public class ProfileDeleteRequestService {
 		this.profileDeleteRequestRepository.delete(request);
 		
 	}
+	
+public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO) {
+		
+		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+	
+		
+		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
+		this.profileDeleteRequestRepository.delete(request);
+		
+		
+	}
 }
