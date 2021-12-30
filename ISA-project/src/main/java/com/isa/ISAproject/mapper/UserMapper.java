@@ -10,6 +10,7 @@ public class UserMapper {
 	public static UserDTO convertToDTO(User u) {
 		UserDTO userDTO=new UserDTO(
 				u.getId(),
+				u.getUsername(),
 				u.getPassword(),
 				u.getEmail(),
 				u.getFirstName(),
@@ -18,7 +19,7 @@ public class UserMapper {
 				u.getAddress().getState(),
 				u.getAddress().getCity(),
 				u.getMobile(),
-				u.getUsername(),
+				
 				u.getRole(),
 				u.getAddress().getLatitude(),
 				u.getAddress().getLongitude()

@@ -1,3 +1,4 @@
+import { RegistrationRequest } from './../model/registrationRequest';
 import { AdventureReservation } from './../model/AdventureReservation';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -43,6 +44,16 @@ export class AdminService {
 
     changePassword(id: number, newPassword: string): Observable<Admin> {
         return this.http.post<Admin>(`${this.urlAdmin}/` + `changePassword` + `/${id}`, { newPassword });
+    }
+    getAllRegistrationRequests(): Observable<RegistrationRequest[]> {
+        return this.http.get<RegistrationRequest[]>(`${this.urlAdmin}/allRegistrationRequests`);
+    }
+
+    acceptRegistrationRequest(request: RegistrationRequest): Observable<User> {
+        return this.http.put<User>(`${this.urlAdmin}/acceptRegistrationRequest`, request);
+    }
+    rejectRegistrationRequest(request: RegistrationRequest): Observable<User> {
+        return this.http.put<User>(`${this.urlAdmin}/rejectRegistrationRequest`, request);
     }
 
 }

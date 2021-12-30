@@ -105,6 +105,11 @@ import { AvailableBoatTermsListComponent } from './available-boat-terms-list/ava
 import { AvailableBoatTermsItemComponent } from './available-boat-terms-item/available-boat-terms-item.component';
 import { AdditionalItemBoatListComponent } from './additional-item-boat-list/additional-item-boat-list.component';
 import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
+import { InstructorNavbarComponent } from './instructor-navbar/instructor-navbar.component';
+import { InstructorReservationReportComponent } from './instructor-reservation-report/instructor-reservation-report.component';
+import { InstructorDeleteProfileComponent } from './instructor-delete-profile/instructor-delete-profile.component';
+import { AdminRejectRequestComponent } from './admin-reject-request/admin-reject-request.component';
+import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
 
 
 @NgModule({
@@ -194,7 +199,12 @@ import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/add
     AvailableBoatTermsListComponent,
     AvailableBoatTermsItemComponent,
     AdditionalItemBoatListComponent,
-    AdditionalItemBoatItemComponent
+    AdditionalItemBoatItemComponent,
+    InstructorNavbarComponent,
+    InstructorReservationReportComponent,
+    InstructorDeleteProfileComponent,
+    AdminRejectRequestComponent,
+    AdminRequestsComponent
 
 
 
