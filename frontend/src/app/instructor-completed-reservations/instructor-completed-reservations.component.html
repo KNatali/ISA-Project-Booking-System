@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Adventure name</th>
+
+      <th scope="col">Client</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of completedReservations; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>
+        {{item.reservationStart}}
+      </td>
+      <td>
+
+        {{item.reservationEnd}}
+      </td>
+      <td>{{ item.adventure.name }}</td>
+
+      <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
+      <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View
+            Client</a></button></td>
+      <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport"><a>Add report</a></button>
+      </td>
+
+    </tr>
+  </tbody>
+</table>

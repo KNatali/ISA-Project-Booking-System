@@ -6,27 +6,25 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="formValue">
           <div class="mb-3">
-            <label for="content" class="form-label">Message:</label>
+            <label for="content" class="form-label">Report content:</label>
             <textarea type="text" formControlName="content" class="form-control"></textarea>
           </div>
           <div class="mb-3">
-            <label class="checkbox-inline">Does this client need to be sanctioned?</label><br>
-            <input type="checkbox" name="santioned"> Yes
+            <input type="radio" name="food" value="check" [(ngModel)]="checked">This client need to be sanctioned
+            and get 1 penal
+            <br>
+            <input type="radio" name="food" value="penal" [(ngModel)]="checked"> This client didn't show up
 
           </div>
-          <div class="mb-3">
-            <label class="checkbox-inline">Did this client show up?</label><br>
-            <input type="checkbox" name="showUp"> No
 
-          </div>
 
         </form>
       </div>
       <div class="modal-footer">
         <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" (click)="saveReport()">Save</button>
       </div>
     </div>
   </div>

@@ -1,118 +1,37 @@
-<div class="container">
-  <br>
-
-  <h1>Active reservations:</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Adventure name</th>
-
-        <th scope="col">Client</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-
-        <td>
-          2021-12-6 14:00:00
-        </td>
-        <td>
-
-          2021-12-20 13:0:00
-        </td>
-        <td>The Long Run Sportfishing</td>
-
-        <td>Ana Anic</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',1]"><a>View Client</a></button>
-        </td>
-        <td> <button mat-button [routerLink]="['reservation-add']"><a> Add new
-              reservation</a></button></td>
-
-      </tr>
-    </tbody>
-  </table>
-  <hr>
-
-  <h1>Coming reservations..</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Adventure name</th>
-
-        <th scope="col">Client</th>
-        <th scope="col"></th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of reservations; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-
-        <td>
-          {{item.reservationStart}}
-        </td>
-        <td>
-
-          {{ item.reservationEnd}}
-        </td>
-        <td>{{ item.adventure.name }}</td>
-
-        <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View Client</a></button>
-        </td>
-
-      </tr>
-    </tbody>
-  </table>
-
-  <hr>
-  <h1>Completed reservations:</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Adventure name</th>
-
-        <th scope="col">Client</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of completedReservations; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-
-        <td>
-          {{item.reservationStart}}
-        </td>
-        <td>
-
-          {{ item.reservationEnd}}
-        </td>
-        <td>{{ item.adventure.name }}</td>
-
-        <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
-        <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View
-              Client</a></button></td>
-        <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport"><a>Add report</a></button>
-        </td>
-
-      </tr>
-    </tbody>
-  </table>
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
 
 
+    <ul class="list-unstyled components">
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'ACTIVE' }" (click)="changeTab('ACTIVE')">Active
+        </a>
+      </li>
+
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'UPCOMING' }" (click)="changeTab('UPCOMING')">Upcoming </a>
+      </li>
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'COMPLETED' }" (click)="changeTab('COMPLETED')">Completed</a>
+      </li>
+    </ul>
+
+
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+    <div *ngIf="activeTab == 'ACTIVE'">
+      <app-instructor-active-reservations [id]="id"></app-instructor-active-reservations>
+    </div>
+    <div *ngIf="activeTab == 'UPCOMING'">
+      <app-instructor-upcoming-reservations [id]="id"></app-instructor-upcoming-reservations>
+    </div>
+    <div *ngIf="activeTab == 'COMPLETED'">
+      <app-instructor-completed-reservations [id]="id"></app-instructor-completed-reservations>
+    </div>
+
+
+  </div>
 </div>

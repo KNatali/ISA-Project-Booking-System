@@ -132,7 +132,7 @@ public class InstructorService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isBefore(LocalDateTime.now()))
+			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isAfter(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {
