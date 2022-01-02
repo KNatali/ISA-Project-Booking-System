@@ -1,0 +1,16 @@
+<app-sort-owners (SortedByName)="sortBaName()"
+                    (SortedByGrade)="sortByGrade()"
+                    (SortedByCity)="sortByCity()"></app-sort-owners>
+<div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>First name</th><th>Last name</th><th>State</th><th>City</th><th>Mobile</th><th>Cottages</th>
+            </tr>
+        </thead>
+        <tbody >
+			<!--<tr app-cottage-owner-item *ngFor="let owner of owners" [owner]=owner >    
+            </tr>-->
+		</tbody>
+    </table>
+</div>

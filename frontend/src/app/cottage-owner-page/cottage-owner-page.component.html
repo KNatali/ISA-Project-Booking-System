@@ -1,9 +1,80 @@
+
 <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Overview">Overview Content</mat-tab>
-    <mat-tab label="Profile">
-      <app-cottage-owner-profile [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-profile>
-    </mat-tab>
-    <mat-tab label="My cottages">Overview Content</mat-tab>
-    <mat-tab label="Reservations">Overview Content</mat-tab>
-  </mat-tab-group>
-  
+  <mat-tab label="Overview">
+    <app-cottage-owner-overview></app-cottage-owner-overview>
+  </mat-tab>
+  <mat-tab label="Profile">
+    <app-cottage-owner-profile [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-profile>
+  </mat-tab>
+  <mat-tab label="My cottages">
+    <app-cottage-owner-cottages [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-cottages>
+  </mat-tab>
+  <mat-tab label="Reservations">
+    <app-cottage-owner-reservations [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-reservations>
+  </mat-tab>
+  <mat-tab label="Action">
+    <app-cottage-owner-actions [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-actions>
+
+  </mat-tab>
+</mat-tab-group>
+<div class="modal fade" id="modalReport" aria-labelledby="modalReportLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalReportLabel">Report:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="content" class="form-label">Message:</label>
+            <textarea type="text" formControlName="content" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="checkbox-inline">Does this client need to be sanctioned?</label><br>
+            <input type="checkbox" name="santioned"> Yes
+
+          </div>
+          <div class="mb-3">
+            <label class="checkbox-inline">Did this client show up?</label><br>
+            <input type="checkbox" name="showUp"> No
+
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Za profil tj brisanje profila-->
+<div class="modal fade" id="modalDelete" aria-labelledby="modalDeleteLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeleteLabel">Report:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="content" class="form-label">Explanation:</label>
+            <textarea type="text" formControlName="content" class="form-control"></textarea>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

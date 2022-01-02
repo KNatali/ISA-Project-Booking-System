@@ -15,7 +15,7 @@ export class CottageAdditionItemsEditComponent implements OnInit {
   @Input() showUpdate: boolean;
   @Output() loadAdditionalItems: EventEmitter<any> = new EventEmitter();
   @Input()
-  additionalItems: AdditionalItem[];
+  items: AdditionalItem[];
   newItem: AdditionalItem = new AdditionalItem({
 
     name: "",

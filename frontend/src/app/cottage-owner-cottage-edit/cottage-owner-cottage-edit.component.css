@@ -1,0 +1,126 @@
+* {
+    line-height: 30px;
+    font-size: 16px;
+  
+  }
+  
+  div.block {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 5px;
+  }
+  
+  div.block label {
+    text-align: right;
+  }
+  
+  .flex {
+    display: flex;
+    flex-direction: row;
+  
+  
+  }
+  
+  
+  
+  .fl {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  
+  .mat-button {
+    color: white;
+    background-color: #13315C
+  }
+  
+  .gallery {
+    display: flex;
+  
+  
+  }
+  
+  #lightgallery {
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  .columns {
+    display: flex;
+  
+  
+  }
+  
+  .column {
+    padding: 20px;
+  
+    flex-grow: 1;
+  }
+  
+  
+  #mainImage {
+    height: 420px;
+  }
+  
+  #price {
+    color: green;
+    font-weight: bolder;
+    font-size: 22px;
+  }
+  
+  img {
+    height: 140px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+  }
+  
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .container {
+    margin: auto;
+    width: 80% !important;
+    padding: 30px;
+    color: #0B2545;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  
+  .fa-star {
+    color: rgb(252, 175, 76);
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+  
+  }
+  
+  .is-orange {
+    border-radius: 10px;
+  
+    background-color: #48b893;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+  }
+  
+  article {
+    border: 1px solid #991a11;
+    background-color: rgb(255, 196, 196);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  

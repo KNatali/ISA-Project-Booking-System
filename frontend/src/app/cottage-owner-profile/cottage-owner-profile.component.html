@@ -23,8 +23,8 @@
           </div>
           <div class="row mt-3">
   
-            <div class="col-md-12"><label class="labels">Adress</label>
-              <p>{{cottageOwner.address}}</p>
+            <div class="col-md-12"><label class="labels">Street</label>
+              <p>{{cottageOwner.street}}</p>
             </div>
             <div class="col-md-12"><label class="labels">City</label>
               <p>{{cottageOwner.city}}</p>
@@ -46,8 +46,9 @@
       <div class="col-md-4">
         <div class="p-3 py-5">
           <div class="col-md-12"><button mat-button (click)="edit()">Edit Profile</button></div> <br>
-          <div class="col-md-12"><button mat-button>Change Password</button></div><br>
-          <div class="col-md-12"><button mat-button id="delete">Delete Profile</button></div>
+          <div class="col-md-12"><button mat-button (click)="change()">Change Password</button></div><br>
+        <div class="col-md-12"><button mat-button id="delete" data-bs-toggle="modal"
+            data-bs-target="#modalDelete">Delete Profile</button></div>
         </div>
       </div>
     </div>
@@ -75,8 +76,8 @@
           </div>
           <div class="row mt-3">
   
-            <div class="col-md-12"><label class="labels">Adress</label>
-              <input type="text" class="form-control" name="address" [(ngModel)]="cottageOwner.address">
+            <div class="col-md-12"><label class="labels">Street</label>
+              <input type="text" class="form-control" name="street" [(ngModel)]="cottageOwner.street">
             </div>
             <div class="col-md-12"><label class="labels">City</label>
               <input type="text" class="form-control" name="city" [(ngModel)]="cottageOwner.city">
@@ -109,3 +110,38 @@
     </div>
   </form>
   
+  <form class="container1 rounded bg-white mt-5 mb-5" *ngIf="changePassword">
+    <div class="row">
+  
+      <div class="col">
+        <div class="">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-right">Change passowrd:</h1>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12"><label class="labels">Old Password</label>
+              <input type="password" class="form-control" name="oldPassword" [(ngModel)]="oldPassword">
+            </div><br>
+            <div class="col-md-12"><label class="labels">New Password</label>
+              <input type="password" class="form-control" name="NewPassword" [(ngModel)]="newPassword">
+            </div>
+            <div class="col-md-12"><label class="labels">Confirm New Password</label>
+              <input type="password" class="form-control" name="ConfirmPassord" [(ngModel)]="passwordConfirm">
+            </div>
+          </div>
+          <div class="row mt-4">
+  
+            <div class="col-md-6">
+              <button class="col-md-12 " (click)="submitPassword()" mat-button>Submit</button>
+            </div>
+            <div class="col-md-6">
+              <button class="col-md-12" (click)="close()" mat-button id="delete">Cancel</button>
+            </div>
+          </div>
+  
+  
+        </div>
+      </div>
+  
+    </div>
+  </form>

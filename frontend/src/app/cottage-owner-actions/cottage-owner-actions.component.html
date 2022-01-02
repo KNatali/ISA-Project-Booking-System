@@ -1,0 +1,53 @@
+<div class="container">
+    <br>
+    <button mat-button [routerLink]="['action-add']" id="add"><i class="fa fa-plus-circle"></i><a> Add new
+        action</a></button>
+  
+  
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Validity start</th>
+          <th scope="col">Validity end</th>
+          <th scope="col">Reservation start</th>
+          <th scope="col">Duration(days)</th>
+          <th scope="col">Cottage name</th>
+          <th scope="col">Price($)</th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of fastReservations; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+  
+          <td>
+            {{f.validityStart}}
+          </td>
+          <td>
+            {{f.validityEnd}}
+          </td>
+          <td>
+            {{f.reservationStart}}
+          </td>
+          <td>
+  
+            {{ f.duration}}
+          </td>
+          <td>{{ f.cottage.name }}</td>
+  
+          <td>{{ f.price}}</td>
+  
+  
+        </tr>
+      </tbody>
+    </table>
+  
+    <hr>
+  
+  
+  
+  </div>
+  

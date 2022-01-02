@@ -1,0 +1,92 @@
+<div class="body-wrapper">
+    <div class="container content">
+  
+  
+      <div class="container">
+        <h1>New Reservation:</h1>
+  
+  
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="name" class="form-label">Start date and time:</label>
+            <input type="datetime-local" formControlName="reservationStart" class="form-control">
+          </div>
+  
+          <div class="mb-3">
+            <label for="city" class="form-label">End date and time:</label>
+            <input type="datetime-local" formControlName="city" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="state" class="form-label">Number og guests:</label>
+            <input type="number" formControlName="state" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="maxPersons" class="form-label">Cottage:</label>
+            <br>
+            <select name="cars" id="cars">
+              <option value="volvo">Lucky B Sportfishing</option>
+              <option value="saab">The Long Run Sportfishing</option>
+              <option value="opel">Reel Floridian Fishing</option>
+  
+            </select>
+          </div>
+          <hr>
+  
+          <h3>Additional items:</h3>
+  
+          <div class="mb-3">
+  
+            <input type="checkbox" name="santioned"> FishFInder- 10$
+  
+          </div>
+          <div class="mb-3">
+  
+            <input type="checkbox" name="showUp"> Fridge- 5$
+  
+          </div>
+          <div class="mb-3">
+  
+            <input type="checkbox" name="showUp"> Fishing Certification- 20$
+  
+          </div>
+          <hr>
+          <h2>Price: 200$</h2>
+  
+        </form>
+  
+  
+      </div>
+  
+      <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel1">Additional Item details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formValue">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name:</label>
+                  <input [(ngModel)]="newAdditionalItem.name" type="text" formControlName="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="price" class="form-label">Price:</label>
+                  <input [(ngModel)]="newAdditionalItem.price" type="number" formControlName="price" class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <button class="col-md-12 " mat-button id="submit">Submit</button>
+  
+    </div>
+  
+  </div>
+  

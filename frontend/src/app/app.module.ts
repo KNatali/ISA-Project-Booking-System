@@ -111,6 +111,18 @@ import { CottageCardComponent } from './cottage-card/cottage-card.component';
 import { CottageRulesEditComponent } from './cottage-rules-edit/cottage-rules-edit.component';
 import { CottageOwnerReservationClientComponent } from './cottage-owner-reservation-client/cottage-owner-reservation-client.component';
 import { CottageOwnerReservationsComponent } from './cottage-owner-reservations/cottage-owner-reservations.component';
+import { CottageOwnerOverviewComponent } from './cottage-owner-overview/cottage-owner-overview.component';
+import { CottageOwnerCottagesComponent } from './cottage-owner-cottages/cottage-owner-cottages.component';
+import { CottageOwnerActionsComponent } from './cottage-owner-actions/cottage-owner-actions.component';
+import { CottageOwnerActionAddComponent } from './cottage-owner-action-add/cottage-owner-action-add.component';
+import { CottageOwnerAddReservationComponent } from './cottage-owner-add-reservation/cottage-owner-add-reservation.component';
+import { CottageOwnerCottageEditComponent } from './cottage-owner-cottage-edit/cottage-owner-cottage-edit.component';
+import { CottageOwnerCottageListComponent } from './cottage-owner-cottage-list/cottage-owner-cottage-list.component';
+import { CottageOwnerCottageProfileComponent } from './cottage-owner-cottage-profile/cottage-owner-cottage-profile.component';
+import { CottageOwnerChangePasswordComponent } from './cottage-owner-change-password/cottage-owner-change-password.component';
+import { CottageOwnerItemComponent } from './cottage-owner-item/cottage-owner-item.component';
+import { CottageOwnerListComponent } from './cottage-owner-list/cottage-owner-list.component';
+import { SortOwnersComponent } from './sort-owners/sort-owners.component';
 
 
 
@@ -207,7 +219,19 @@ import { CottageOwnerReservationsComponent } from './cottage-owner-reservations/
     CottageCardComponent,
     CottageRulesEditComponent,
     CottageOwnerReservationClientComponent,
-    CottageOwnerReservationsComponent
+    CottageOwnerReservationsComponent,
+    CottageOwnerOverviewComponent,
+    CottageOwnerCottagesComponent,
+    CottageOwnerActionsComponent,
+    CottageOwnerActionAddComponent,
+    CottageOwnerAddReservationComponent,
+    CottageOwnerCottageEditComponent,
+    CottageOwnerCottageListComponent,
+    CottageOwnerCottageProfileComponent,
+    CottageOwnerChangePasswordComponent,
+    CottageOwnerItemComponent,
+    CottageOwnerListComponent,
+    SortOwnersComponent
 
 
 

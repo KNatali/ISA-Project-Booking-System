@@ -1,0 +1,39 @@
+<div class="container">
+    <button mat-button [routerLink]="['cottage-add']" id="add"><i class="fa fa-plus-circle"></i><a> Add new
+        cottage</a></button><br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+  
+          <th scope="col">Average Grade</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cottage of cottages; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+  
+          <td>
+            <img src="{{cottage.mainPicture}}" style="height: 170px;width: 240px;">
+          </td>
+          <td>
+  
+            {{ cottage.name }}
+          </td>
+          <td>{{ cottage.address.street }},{{cottage.address.city}}</td>
+  
+          <td>{{ cottage.grade}}</td>
+          <td><button mat-button [routerLink]="['/cottageOwner/cottages',cottage.id]"><a>View</a></button></td>
+          <td><button mat-button [routerLink]="['/cottageOwner/cottages/edit',cottage.id]"><a>Edit</a></button></td>
+          <td><button mat-button id="delete"><a>Delete</a></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,321 @@
+<div class="body-wrapper">
+    <div class="container content">
+  
+  
+      <div class="flex">
+        <div>
+          <h1>{{cottage1.name}}</h1>
+          <div>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>{{cottage1.address.street}},{{cottage1.address.city}}
+          </div>
+          <div><strong>Max number of guests: </strong> {{cottage1.maxPersons}}</div>
+          <div><strong>Average grade: </strong>
+            <span class="tag is-large mt-5 rating">{{cottage1.grade}}<i class="ml-1 fa fa-star"></i></span>
+          </div>
+        </div>
+        <br>
+        <div class="fl">
+  
+          <button (click)="editInformation()" mat-button class="button is-success is-large" data-bs-toggle="modal"
+            data-bs-target="#modalData"><i class="fa fa-pencil"></i> Edit this
+            cottage</button>
+  
+        </div>
+  
+      </div>
+      <br>
+      <div class="gallery">
+        <div class="figure">
+          <img id="mainImage" src="{{cottage1.mainPicture}}">
+        </div>
+        <div id="lightgallery">
+  
+          <a href="/assets/cottages/vikendica1.jpg">
+            <img src="/assets/cottages/vikendica1.jpg">
+          </a>
+          <a href="/assets/cottages/vikendica1.jpg">
+            <img src="/assets/cottages/vikendica1.jpg">
+          </a>
+          <a href="/assets/cottages/vikendica1.jpg">
+            <img src="/assets/cottages/vikendica1.jpg">
+          </a>
+        </div>
+      </div>
+      <br>
+      <div>
+        <strong>Price (per day):</strong> <span id="price"> {{cottage1.price}} $</span>
+      </div>
+  
+      <hr />
+  
+      <div>
+        <div>
+          <h2>Description:</h2>
+          <p>
+            {{cottage1.description}}
+          </p>
+        </div>
+        <hr>
+        <div>
+          <h2>About the cottage owner:</h2>
+          <h3>{{cottage1.cottageOwner.firstName}} {{cottage1.cottageOwner.lastName}} </h3>
+          <h4>{{cottage1.cottageOwner.street}}</h4>
+        </div>
+        <hr>
+        <div>
+          <h3>Cancellation Policy:</h3>
+          <span style="color:darkred">{{cottage1.cancellationPercentage}} % keeps cottage owner</span>
+        </div>
+  
+      </div>
+  
+  
+      <hr />
+  
+      <div class="container row">
+        <div class="col-md-12">
+          <h1>Upload Image</h1>
+        </div>
+      </div>
+      <div class="container row">
+        <div class="col-md-6">
+          <input type="file" (change)="onFileChanged($event)">
+        </div>
+        <div class="col-md-6">
+          <input type="button" (click)="onUpload()" value="upload">
+        </div>
+      </div>
+      <hr />
+      <div class="container row">
+        <div class="col-md-12">
+          <div *ngIf=message>{{message}}</div>
+        </div>
+      </div>
+      <div class="container row">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+            name="name" />
+        </div>
+        <div class="col-md-6">
+          <input type="button" (click)="getImage()" value="Get Image">
+        </div>
+      </div>
+      <div class="container row">
+        <div class="col-md-12">
+          <div *ngIf=retrievedImage>
+            <img [src]="retrievedImage">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal -->
+      <div class="modal fade" id="modalData" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalDataLabel">Cottage information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formValue0">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name:</label>
+                  <input type="text" formControlName="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="street" class="form-label">Street:</label>
+                  <input type="text" formControlName="street" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="city" class="form-label">City:</label>
+                  <input type="text" formControlName="city" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="state" class="form-label">State:</label>
+                  <input type="text" formControlName="state" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="maxPersons" class="form-label">Max number of guests:</label>
+                  <input type="number" formControlName="maxPersons" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="price" class="form-label">Price:</label>
+                  <input type="number" formControlName="price" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="cancellationPercentage" class="form-label">Cancellation Policy(%):</label>
+                  <input type="number" formControlName="cancellationPercentage" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description:</label>
+                  <textarea type="textarea" formControlName="description" class="form-control"></textarea>
+                </div>
+                <div class="container row">
+                  <div class="col-md-6">
+                    <input type="file" (change)="onFileChanged($event)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="button" (click)="onUpload()" value="upload">
+                  </div>
+                </div>
+                <div class="container row">
+                  <div class="col-md-6">
+                    <input type="text" formControlName="image" class="form-control" id="image" placeholder="image name"
+                      [(ngModel)]="imageName" name="name" />
+                  </div>
+                  <div class="col-md-6">
+                    <input type="button" (click)="getImage()" value="Get Image">
+                  </div>
+                </div>
+                <div class="container row">
+                  <div class="col-md-12">
+                    <div *ngIf=retrievedImage>
+                      <img [src]="retrievedImage">
+                    </div>
+                  </div>
+                </div>
+  
+  
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" id="cancel0" type="button" data-bs-dismiss="modal">Close</button>
+  
+              <button class="btn btn-primary" type="button" (click)="update()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="columns">
+        <hr>
+        <div class="column">
+          <h3>Additional items:</h3>
+          <button mat-button type="button" class="btn btn-primary" (click)="onAdd()" data-bs-toggle="modal"
+            data-bs-target="#modalItem">
+            Add additional item
+          </button>
+  
+          <app-cottage-addition-items-edit [items]="cottage1.items"
+            (loadAdditionalItems)="loadAdditionalItems()" [showAdd]="showAdd" [showUpdate]="showUpdate">
+          </app-cottage-addition-items-edit>
+        </div>
+      </div>
+      <hr>
+      <div class="columns">
+        <div class="column">
+          <h3>Cottage Rules:</h3>
+          <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRule"
+            (click)="onAdd()">
+            Add Behavioral Rule
+          </button>
+  
+          <app-cottage-rules-edit [rules]="cottage1.rules" [showAdd]="showAdd" [showUpdate]="showUpdate"
+            (loadBehavioralRules)="loadBehavioralRules()">
+          </app-cottage-rules-edit>
+  
+        </div>
+      </div>
+  
+      <div class="my-5">
+        <article class="media ">
+  
+          <div class="media-content">
+            <div class="content">
+              <div>
+                <p style="font-size:16pt; font-weight: 800;">
+                  Happy trip <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                </p>
+  
+                <div>
+                  <strong><i class="fa fa-calendar"></i> Start: 25/12/2021 08:00</strong>
+                  <br />
+                  <strong><i class="fa fa-calendar"></i> Duration: 3 days</strong>
+                  <br />
+                  <strong><i class="fa fa-user"></i> 2 guests</strong>
+                  <br />
+  
+  
+                  <strong><i class="fa fa-map-marker"></i> North Roosevelt Boulevard,Key West</strong>
+                  <div class="column">
+                    <span class="tag is-orange">Kitchen</span>
+                    <span class="tag is-orange">GPS</span>
+                    <span class="tag is-orange">Free Wi-Fi</span>
+                  </div>
+                </div>
+  
+  
+              </div>
+              <div class="columnPrice">
+  
+                <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">
+                  Edit this action
+                </button><br><br>
+                <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
+                <small>Offer validity:10/12/2021 - 30/12/2021</small><br><br>
+  
+  
+  
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+  
+  
+      <!-- Modal -->
+      <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalDataLabel">Cottage information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Validity start:</label>
+                  <input type="date" formControlName="validityStart" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Validity end:</label>
+                  <input type="date" formControlName="vaidityEnd" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Reservation start date and time:</label>
+                  <input type="datetime-local" formControlName="reservationStart" class="form-control">
+                </div>
+  
+                <div class="mb-3">
+                  <label for="city" class="form-label">Duration(days):</label>
+                  <input type="number" formControlName="city" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="state" class="form-label">Number og guests:</label>
+                  <input type="number" formControlName="state" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Price:</label>
+                    <input type="number" formControlName="price" class="form-control">
+                  </div>
+  
+                </div>
+                <hr>
+  
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" id="cancel0" type="button" data-bs-dismiss="modal">Close</button>
+  
+              <button class="btn btn-primary" type="button" (click)="update()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>
+  
