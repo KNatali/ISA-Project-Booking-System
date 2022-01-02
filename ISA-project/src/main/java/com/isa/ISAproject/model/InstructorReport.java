@@ -21,6 +21,8 @@ public class InstructorReport {
 	private boolean checkAdmin;
 	@Column
 	private boolean penal;
+	@Column
+	private boolean checked;
 	
 	@OneToOne
 	private AdventureReservation adventureReservation;
@@ -39,6 +41,12 @@ public class InstructorReport {
 	}
 	
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	public AdventureReservation getAdventureReservation() {
 		return adventureReservation;
 	}
@@ -47,12 +55,13 @@ public class InstructorReport {
 	}
 	
 	public InstructorReport(Long id, String content, boolean checkAdmin, boolean penal,
-			AdventureReservation adventureReservation) {
+			boolean checked,AdventureReservation adventureReservation) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.checkAdmin = checkAdmin;
 		this.penal = penal;
+		this.checked=checked;
 		this.adventureReservation = adventureReservation;
 	}
 	public boolean isCheckAdmin() {

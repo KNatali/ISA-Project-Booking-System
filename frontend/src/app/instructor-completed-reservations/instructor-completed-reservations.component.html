@@ -28,8 +28,8 @@
       <td>{{ item.client.firstName}} {{item.client.lastName}}</td>
       <td><button mat-button [routerLink]="['/instructor/reservations',item.client.id]"><a>View
             Client</a></button></td>
-      <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport" (click)="addReport(item)"><a>Add
-            report</a></button>
+      <td><button mat-button data-bs-toggle="modal" data-bs-target="#modalReport" (click)="addReport(item)">Add
+          Report</button>
       </td>
 
     </tr>

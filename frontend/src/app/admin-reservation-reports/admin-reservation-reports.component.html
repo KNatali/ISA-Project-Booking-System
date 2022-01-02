@@ -18,18 +18,18 @@
       <th scope="row">{{ i + 1 }}</th>
 
       <td>
-        {{r.adventureReservation.client.firstName}},{{r.adventureReservation.client.lastName}}
+        {{r.adventureReservation.client.firstName}} {{r.adventureReservation.client.lastName}}
       </td>
       <td>
-        {{r.adventureReservation.adventure.instructor.firstName}},{{r.adventureReservation.adventure.instructor.lastName}}
+        {{r.adventureReservation.adventure.instructor.firstName}}
+        {{r.adventureReservation.adventure.instructor.lastName}}
       </td>
       <td> {{r.adventureReservation.adventure.name}}</td>
       <td> {{r.content}}</td>
 
 
       <td><button mat-button id="accept" (click)="accept(r,r.id)">Accept</button></td>
-      <td><button mat-button id="reject" data-bs-toggle="modal" data-bs-target="#modalReject"
-          (click)="reject(r,r.id)">Reject</button></td>
+      <td><button mat-button id="reject" (click)="reject(r,r.id)">Reject</button></td>
 
     </tr>
 

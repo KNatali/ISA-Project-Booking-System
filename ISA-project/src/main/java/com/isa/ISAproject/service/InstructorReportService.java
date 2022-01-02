@@ -36,10 +36,11 @@ public class InstructorReportService {
 	public InstructorReportDTO saveReservationReport(InstructorReportDTO dto) {
 		AdventureReservation reservation=adventureReservationRepository.getById(dto.getAdventureReservation().getId());
 		
-		InstructorReport report=new InstructorReport(dto.getId(),dto.getContent(),dto.isCheckAdmin(),dto.isPenal(),reservation);
+		InstructorReport report=new InstructorReport(dto.getId(),dto.getContent(),dto.isCheckAdmin(),dto.isPenal(),false,reservation);
 		if(report.isPenal()) {
 			Client client=clientRepository.getById(dto.getAdventureReservation().getClient().getId());
 			client.setNumberOfPenals(client.getNumberOfPenals()+1);
+			report.setChecked(true);
 			clientRepository.save(client);
 		}
 		
@@ -56,12 +57,33 @@ public class InstructorReportService {
 		List<InstructorReport> requests=instructorReportRepository.findAll();
 		List<InstructorReportDTO> requestsDTO=new ArrayList<>();
 		for (InstructorReport r : requests) {
-			AdventureReservationDTO rDTO=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
-			InstructorReportDTO dto=new InstructorReportDTO(r.getId(),r.getContent(),r.isCheckAdmin(),r.isPenal(),rDTO);
-			requestsDTO.add(dto);
+			if(r.isCheckAdmin() && !r.isChecked()) {
+				AdventureReservationDTO rDTO=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
+				InstructorReportDTO dto=new InstructorReportDTO(r.getId(),r.getContent(),r.isCheckAdmin(),r.isPenal(),r.isChecked(),rDTO);
+				requestsDTO.add(dto);
+			}
+			
 		
 	 }
 	 return requestsDTO;
+	}
+	
+	public void acceptReport(InstructorReportDTO dto) {
+		InstructorReport report=instructorReportRepository.getById(dto.getId());
+		report.setChecked(true);
+		
+		Client client=clientRepository.getById(dto.getAdventureReservation().getClient().getId());
+		client.setNumberOfPenals(client.getNumberOfPenals()+1);
+		clientRepository.save(client);
+		
+		instructorReportRepository.save(report);
+	}
+	
+	public void rejectReport(InstructorReportDTO dto) {
+		InstructorReport report=instructorReportRepository.getById(dto.getId());
+		report.setChecked(true);
+		
+		instructorReportRepository.save(report);
 	}
 
 }

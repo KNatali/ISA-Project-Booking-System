@@ -22,7 +22,8 @@ export class AdminReservationReportsComponent implements OnInit {
       .subscribe(res => this.reports = res);
   }
   accept(report: InstructorReport, id: any) {
-
+    this.adminService.acceptReservationReport(report)
+      .subscribe();
     this.reports.forEach((report, index) => {
       if (report.id == id) this.reports.splice(index, 1);
     });
@@ -30,8 +31,8 @@ export class AdminReservationReportsComponent implements OnInit {
   }
 
   reject(report: InstructorReport, id: any) {
-
-
+    this.adminService.rejectReservationReport(report)
+      .subscribe();
     this.reports.forEach((report, index) => {
       if (report.id == id) this.reports.splice(index, 1);
     });

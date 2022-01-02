@@ -7,6 +7,7 @@ export interface InstructorReportInterface {
     adventureReservation: AdventureReservation;
     checkAdmin: boolean;
     penal: boolean;
+    checked: boolean,
     content: string;
 
 
@@ -17,6 +18,7 @@ export class InstructorReport implements InstructorReportInterface {
 
     checkAdmin: boolean;
     penal: boolean;
+    checked: boolean;
     content: string;
 
     constructor(obj: InstructorReportInterface) {
@@ -24,6 +26,7 @@ export class InstructorReport implements InstructorReportInterface {
         this.adventureReservation = obj.adventureReservation;
         this.checkAdmin = obj.checkAdmin;
         this.penal = obj.penal;
+        this.checked = obj.checked;
         this.content = obj.content;
 
 

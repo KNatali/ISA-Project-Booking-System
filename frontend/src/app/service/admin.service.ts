@@ -70,5 +70,11 @@ export class AdminService {
     getAllReservationRrports(): Observable<InstructorReport[]> {
         return this.http.get<InstructorReport[]>(`${this.urlAdmin}/allReservationReports`);
     }
+    acceptReservationReport(report: InstructorReport) {
+        return this.http.put(`${this.urlAdmin}/acceptInstructorReport`, report);
+    }
+    rejectReservationReport(report: InstructorReport) {
+        return this.http.put(`${this.urlAdmin}/rejectInstructorReport`, report);
+    }
 
 }

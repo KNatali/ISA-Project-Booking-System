@@ -5,6 +5,7 @@ public class InstructorReportDTO {
 	private String content;
 	private boolean checkAdmin;
 	private boolean penal;
+	private boolean checked;
 	private AdventureReservationDTO adventureReservation;
 	public Long getId() {
 		return id;
@@ -26,6 +27,12 @@ public class InstructorReportDTO {
 		this.content = content;
 	}
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	public boolean isCheckAdmin() {
 		return checkAdmin;
 	}
@@ -39,12 +46,13 @@ public class InstructorReportDTO {
 		this.penal = penal;
 	}
 	public InstructorReportDTO(Long id, String content, boolean checkAdmin, boolean penal,
-			AdventureReservationDTO adventureReservation) {
+			boolean checked,AdventureReservationDTO adventureReservation) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.checkAdmin = checkAdmin;
 		this.penal = penal;
+		this.checked=checked;
 		this.adventureReservation = adventureReservation;
 	}
 	public InstructorReportDTO() {

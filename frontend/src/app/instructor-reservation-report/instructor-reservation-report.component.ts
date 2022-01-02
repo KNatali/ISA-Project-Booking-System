@@ -21,6 +21,7 @@ export class InstructorReservationReportComponent implements OnInit {
     adventureReservation: this.reservation,
     checkAdmin: false,
     penal: false,
+    checked: false,
     content: ""
 
   })

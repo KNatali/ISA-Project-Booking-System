@@ -15,6 +15,7 @@ export interface AdventureReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     adventure: Adventure;
+    disabled: boolean;
 
 
 }
@@ -27,6 +28,7 @@ export class AdventureReservation implements AdventureReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     adventure: Adventure;
+    disabled: boolean;
     constructor(obj: AdventureReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -36,6 +38,7 @@ export class AdventureReservation implements AdventureReservationInterface {
         this.additionalItems = obj.additionalItems;
         this.client = obj.client;
         this.adventure = obj.adventure;
+        this.disabled = obj.disabled;
 
 
     }
