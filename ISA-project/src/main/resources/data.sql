@@ -186,13 +186,13 @@ insert into cottage_reservation(date,duration,max_persons,price,client_id,cottag
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2021-11-10-07-00-00','2021-11-12-13-00-00');
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
 
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2023-02-20T06:30:00",1,3,3000,8,3);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2017-02-20T06:30:00",3,1,6000,8,1);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2022-02-20T06:30:00",4,5,9000,8,4);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",2,5,3400,9,2);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2020-02-20T06:30:00",5,6,1200,8,4);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2023-02-20T06:30:00",1,3,3000,8,3);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2017-02-20T06:30:00",3,1,6000,8,1);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2022-02-20T06:30:00",4,5,9000,8,4);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",2,5,3400,9,2);
+--insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2020-02-20T06:30:00",5,6,1200,8,4);
 
 
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
@@ -201,7 +201,7 @@ insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)valu
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,4);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,5);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,6);
-insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,7);
+--insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,7);
 
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(5,1);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,2);
@@ -209,7 +209,7 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,4);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,5);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
-insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
+--insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);

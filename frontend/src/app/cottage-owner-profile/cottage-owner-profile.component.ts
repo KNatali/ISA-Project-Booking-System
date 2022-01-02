@@ -58,6 +58,12 @@ export class CottageOwnerProfileComponent implements OnInit {
     {
       alert("New and confirmed password don't match!");
     }
+    else
+      this.cottageOwnerService.changePassword(this.id, this.newPassword).
+        subscribe(res => {
+          alert("password successfully changed!")
+          this.goToProfilePage();
+        })
   }
   goToProfilePage() {
     this.profileShow = true;

@@ -23,7 +23,9 @@ export class CottageOwnerAddCottageComponent implements OnInit {
     id: 0,
     street: '',
     city: '',
-    state: ''
+    state: '',
+    latitude: 0,
+    longitude: 0
   })
   cottageOwner: CottageOwner = new CottageOwner({
     id: 0,
