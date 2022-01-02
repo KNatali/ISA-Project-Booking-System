@@ -1,0 +1,8 @@
+<td>{{owner.firstName}}</td>
+<td>{{owner.lastName}}</td>
+<td>{{owner.state}}</td>
+<td>{{owner.city}}</td>
+<td>{{owner.mobile}}</td>
+<td>
+    <button class="btn btn-info" (click)="seeCottages()"><a [routerLink]="['/cottageOwners/cottages/client',owner.id]">More</a></button>
+</td>

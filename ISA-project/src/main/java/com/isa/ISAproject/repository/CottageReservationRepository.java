@@ -12,4 +12,5 @@ public interface CottageReservationRepository extends JpaRepository<CottageReser
 	List<CottageReservation> findByOrderByDateDesc();
 	List<CottageReservation> findByOrderByPriceDesc();
 	List<CottageReservation> findByOrderByDurationDesc();
+	List<CottageReservation> findByOrderByReservationStartDesc();
 }

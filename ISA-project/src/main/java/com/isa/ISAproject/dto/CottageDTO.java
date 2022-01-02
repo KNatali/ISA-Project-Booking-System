@@ -18,6 +18,11 @@ public class CottageDTO {
 	private String description;
 	private double grade;
 	private String mainPicture;
+	private AddressDTO address;
+	private double price;
+	private CottageOwnerProfileDTO cottageOwner;
+	private int maxPersons;
+	private int cancellationPercentage;
 	public Long getId() {
 		return id;
 	}
@@ -66,6 +71,41 @@ public class CottageDTO {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
+	public AddressDTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDTO address) {
+		this.address = address;
+	}
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public CottageOwnerProfileDTO getCottageOwner() {
+		return cottageOwner;
+	}
+
+	public void setCottageOwner(CottageOwnerProfileDTO cottageOwner) {
+		this.cottageOwner = cottageOwner;
+	}
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
+	}
+
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
+	}
 	public CottageDTO(Long id, String name, String street, String state, String city, String description, double grade,
 			String mainPicture) {
 		super();
@@ -89,5 +129,21 @@ public class CottageDTO {
 		this.grade = cottage.getGrade();
 		this.mainPicture = cottage.getMainPicture();
 	}
+	
+	public CottageDTO(Long id, String name, AddressDTO address, String description, double grade,double price,
+			CottageOwnerProfileDTO cottageOwner,String mainPicture,int maxPersons,int cancellation) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.grade = grade;
+		this.price=price;
+		this.cottageOwner = cottageOwner;
+		this.mainPicture=mainPicture;
+		this.maxPersons=maxPersons;
+		this.id=id;
+		this.cancellationPercentage=cancellation;
+	}
+	
 	public CottageDTO() {}
 }

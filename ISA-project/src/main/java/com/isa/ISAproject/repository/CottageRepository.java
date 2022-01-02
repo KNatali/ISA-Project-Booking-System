@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.model.CottageOwner;
 @Repository
 public interface CottageRepository extends JpaRepository<Cottage, Long>{
 	List<Cottage> findByName(String name);
 	List<Cottage> findByAddress(String address);
 	List<Cottage> findByOrderByName();
 	List<Cottage> findByOrderByGradeDesc();
+	List<Cottage> findByCottageOwner(CottageOwner cottageOwner);
 }

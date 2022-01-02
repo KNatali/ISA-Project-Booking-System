@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -36,6 +38,8 @@ public class CottageFastReservation {
 	private LocalDate validityStart;
 	@Column
 	private LocalDate validityEnd;
+	@Column(name = "reservationStart", nullable = false)
+    private LocalDateTime reservationStart;
 	
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
@@ -122,6 +126,14 @@ public class CottageFastReservation {
 	public void setCottage(Cottage cottage) {
 		this.cottage = cottage;
 	}
+	
+	public LocalDateTime getReservationStart() {
+		return reservationStart;
+	}
+
+	public void setReservationStart(LocalDateTime reservationStart) {
+		this.reservationStart = reservationStart;
+	}
 
 	public CottageFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
 			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems, Cottage cottage) {
@@ -139,8 +151,4 @@ public class CottageFastReservation {
 	}
 	
 	public CottageFastReservation() {}
-	
-	
-
-	
 }

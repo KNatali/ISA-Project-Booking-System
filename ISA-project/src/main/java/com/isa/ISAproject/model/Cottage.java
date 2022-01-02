@@ -34,18 +34,20 @@ public class Cottage {
 	@Column
 	private String mainPicture;
 	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
-	private CottageOwner owner;
-
-	
+	private CottageOwner cottageOwner;
+	@Column
+	private double price;
+	@Column
+	private int maxPersons;
+	@Column
+	private int cancellationPercentage;
 	@ManyToMany
- @JoinTable(
+	@JoinTable(
 	            name = "cottage_pictures",
 	            joinColumns = @JoinColumn(name = "cottage_id"),
 	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
 	private Set<Picture> pictures=new HashSet<>();
-	
 	@ManyToMany
-
 	@JoinTable(joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<CottageBehavioralRule> rules=new HashSet<>();
@@ -55,7 +57,11 @@ public class Cottage {
 	private Set<CottageFastReservation> cottageFastReservations;
 	@OneToMany
 	private Set<CottageReservation> cottageReservations=new HashSet<>();
-
+	@ManyToMany
+	@JoinTable(name="cottage_items",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "cottage_item_id", referencedColumnName = "id"))
+	private Set<AdditionalItem> items=new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -115,11 +121,11 @@ public class Cottage {
 	}
 
 	public CottageOwner getCottageOwner() {
-		return owner;
+		return cottageOwner;
 	}
 
 	public void setCottageOwner(CottageOwner cottageOwner) {
-		this.owner = cottageOwner;
+		this.cottageOwner = cottageOwner;
 	}
 
 	public Set<CottageFastReservation> getCottageFastReservations() {
@@ -138,13 +144,6 @@ public class Cottage {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
-	public CottageOwner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(CottageOwner owner) {
-		this.owner = owner;
-	}
 
 	public Set<CottageBehavioralRule> getRules() {
 		return rules;
@@ -162,8 +161,37 @@ public class Cottage {
 		this.cottageReservations = cottageReservations;
 	}
 
+	public Set<AdditionalItem> getItems() {
+		return items;
+	}
 
+	public void setItems(Set<AdditionalItem> items) {
+		this.items = items;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
 
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+	
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
+	}
+
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
+	}
 
 	public Cottage(Long id, String name, Address address, String description, double grade, Set<Picture> pictures,
 			Set<CottageBehavioralRule> behavioralRules, Set<Room> rooms, CottageOwner cottageOwner,
@@ -177,7 +205,7 @@ public class Cottage {
 		this.pictures = pictures;
 		this.rules = behavioralRules;
 		this.rooms = rooms;
-		this.owner = cottageOwner;
+		this.cottageOwner = cottageOwner;
 		this.cottageFastReservations = cottageFastReservations;
 		this.mainPicture=mainPicture;
 	}
@@ -193,12 +221,34 @@ public class Cottage {
 		this.description = description;
 		this.grade = grade;
 		this.mainPicture = mainPicture;
-		this.owner = owner;
+		this.cottageOwner = owner;
 		this.pictures = pictures;
 		this.rules = rules;
 		this.rooms = rooms;
 		this.cottageFastReservations = cottageFastReservations;
 		this.cottageReservations = cottageReservations;
+	}
+	
+	public Cottage(Long id, String name, Address address, String description, double grade,double price,
+			CottageOwner cottageOwner,String mainPicture, Set<Picture> pictures,
+			int maxPersons, Set<CottageBehavioralRule> rules,
+			int cancellation, Set<CottageFastReservation> fastReservations, Set<AdditionalItem> items, Set<CottageReservation> reservations) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.grade = grade;
+		this.price=price;
+		this.cottageOwner = cottageOwner;
+		this.mainPicture=mainPicture;
+		this.pictures = pictures;
+		this.maxPersons = maxPersons;
+		this.rules = rules;
+		this.cancellationPercentage = cancellation;
+		this.cottageFastReservations=fastReservations;
+		this.items=items;
+		this.cottageReservations=reservations;
 	}
 
 	public Cottage () {}

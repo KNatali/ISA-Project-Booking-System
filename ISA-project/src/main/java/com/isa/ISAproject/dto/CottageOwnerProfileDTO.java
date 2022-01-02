@@ -94,7 +94,6 @@ public class CottageOwnerProfileDTO {
 	public CottageOwnerProfileDTO(CottageOwner cottageOwner)
 	{
 		super();
-	
 		this.username = cottageOwner.getUsername();
 		this.password = cottageOwner.getPassword();
 		this.email = cottageOwner.getEmail();
@@ -105,6 +104,5 @@ public class CottageOwnerProfileDTO {
 		this.city = cottageOwner.getAddress().getCity();
 		this.mobile = cottageOwner.getMobile();
 		this.id=cottageOwner.getId();
-		
 	}
 }
