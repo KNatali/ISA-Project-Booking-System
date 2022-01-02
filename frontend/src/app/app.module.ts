@@ -105,6 +105,7 @@ import { AvailableBoatTermsListComponent } from './available-boat-terms-list/ava
 import { AvailableBoatTermsItemComponent } from './available-boat-terms-item/available-boat-terms-item.component';
 import { AdditionalItemBoatListComponent } from './additional-item-boat-list/additional-item-boat-list.component';
 import { AdditionalItemBoatItemComponent } from './additional-item-boat-item/additional-item-boat-item.component';
+
 import { CottageOwnerAddCottageComponent } from './cottage-owner-add-cottage/cottage-owner-add-cottage.component';
 import { CottageAdditionItemsEditComponent } from './cottage-addition-items-edit/cottage-addition-items-edit.component';
 import { CottageCardComponent } from './cottage-card/cottage-card.component';
@@ -123,6 +124,18 @@ import { CottageOwnerChangePasswordComponent } from './cottage-owner-change-pass
 import { CottageOwnerItemComponent } from './cottage-owner-item/cottage-owner-item.component';
 import { CottageOwnerListComponent } from './cottage-owner-list/cottage-owner-list.component';
 import { SortOwnersComponent } from './sort-owners/sort-owners.component';
+
+
+import { InstructorNavbarComponent } from './instructor-navbar/instructor-navbar.component';
+import { InstructorReservationReportComponent } from './instructor-reservation-report/instructor-reservation-report.component';
+import { InstructorDeleteProfileComponent } from './instructor-delete-profile/instructor-delete-profile.component';
+import { AdminRejectRequestComponent } from './admin-reject-request/admin-reject-request.component';
+import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
+import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requests/admin-profile-delete-requests.component';
+import { InstructorActiveReservationsComponent } from './instructor-active-reservations/instructor-active-reservations.component';
+import { InstructorUpcomingReservationsComponent } from './instructor-upcoming-reservations/instructor-upcoming-reservations.component';
+import { InstructorCompletedReservationsComponent } from './instructor-completed-reservations/instructor-completed-reservations.component';
+import { AdminReservationReportsComponent } from './admin-reservation-reports/admin-reservation-reports.component';
 
 
 
@@ -214,6 +227,7 @@ import { SortOwnersComponent } from './sort-owners/sort-owners.component';
     AvailableBoatTermsItemComponent,
     AdditionalItemBoatListComponent,
     AdditionalItemBoatItemComponent,
+
     CottageOwnerAddCottageComponent,
     CottageAdditionItemsEditComponent,
     CottageCardComponent,
@@ -231,7 +245,19 @@ import { SortOwnersComponent } from './sort-owners/sort-owners.component';
     CottageOwnerChangePasswordComponent,
     CottageOwnerItemComponent,
     CottageOwnerListComponent,
-    SortOwnersComponent
+    SortOwnersComponent,
+
+    InstructorNavbarComponent,
+    InstructorReservationReportComponent,
+    InstructorDeleteProfileComponent,
+    AdminRejectRequestComponent,
+    AdminRequestsComponent,
+    AdminProfileDeleteRequestsComponent,
+    InstructorActiveReservationsComponent,
+    InstructorUpcomingReservationsComponent,
+    InstructorCompletedReservationsComponent,
+    AdminReservationReportsComponent
+
 
 
 
@@ -248,6 +274,7 @@ import { SortOwnersComponent } from './sort-owners/sort-owners.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatTabsModule,
+
     MatFormFieldModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({

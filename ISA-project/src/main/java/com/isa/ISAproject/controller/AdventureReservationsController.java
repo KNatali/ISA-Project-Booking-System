@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class AdventureReservationsController {
 	
 	@RequestMapping(value="api/adventure-reservations/{id}",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<AdventureReservationDTO>> findAllResrvationsByClient(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.oldReservation(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
@@ -39,20 +41,24 @@ public class AdventureReservationsController {
 		}
 		return res;
 	}
+
 	@RequestMapping(value="api/adventure-reservations/active/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<AdventureReservationDTO>> activeReservations(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.activeReservation(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/adventure-reservations/sort-by-price/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<AdventureReservationDTO>> sortByPrice(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.sortByPrice(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/adventure-reservations/sort-by-date/{id}", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<AdventureReservationDTO>> sortByDate(@PathVariable Long id){
 		List<AdventureReservation> res=this.adventureReservationService.sortByDateStart(id);
 		return new ResponseEntity<>(this.convertToDTOList(res),HttpStatus.OK);

@@ -18,7 +18,7 @@ export class InstructorReservationsComponent implements OnInit {
   start: Date = new Date(2021, 10, 12, 7, 0, 0);
   end: Date = new Date(2021, 12, 20, 13, 0, 0);
   client: Client;
-
+  activeTab: string = 'ACTIVE';
 
 
   @Input() instructor: Instructor = new Instructor({
@@ -53,6 +53,9 @@ export class InstructorReservationsComponent implements OnInit {
     this.getReservations();
     this.getCompletedReservations()
     this.getActiveReservations();
+  }
+  changeTab(tabName: string) {
+    this.activeTab = tabName;
   }
 
   getReservations() {

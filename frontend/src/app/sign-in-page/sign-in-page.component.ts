@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import { UserService } from '../service/user.service';
@@ -13,7 +13,7 @@ export class SignInPageComponent implements OnInit {
   password = ''
   invalidLogin = false;
   @Output()
-  LogIn:EventEmitter<void> = new EventEmitter();
+  LogIn: EventEmitter<void> = new EventEmitter();
 
   @Input() error: string | null;
 
@@ -28,7 +28,7 @@ export class SignInPageComponent implements OnInit {
       this.error = "Username and password must be filled out";
     else {
       this.loginservice.authenticate(this.username, this.password).subscribe(
-        (data: any) => {  
+        (data: any) => {
           this.LogIn.next();
           //window.location.reload();
           this.router.navigate(['']);
@@ -36,7 +36,7 @@ export class SignInPageComponent implements OnInit {
         },
         (error: { message: string | null; }) => {
           this.invalidLogin = true
-          this.error = "Invalid username od password or your account not activate";
+          this.error = "Invalid username or password or your account is not active";
 
         })
     }

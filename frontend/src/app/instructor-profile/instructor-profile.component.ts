@@ -58,9 +58,16 @@ export class InstructorProfileComponent implements OnInit {
   }
 
   submitPassword() {
-    if (this.newPassword != this.passwordConfirm) {
+
+    if ((this.newPassword != this.passwordConfirm))
       alert("New and confirmed password don't match!");
-    }
+    else
+      this.instructorService.changePassword(this.id, this.newPassword).
+        subscribe(res => {
+          alert("password successfully changed!")
+          this.goToProfilePage();
+        })
+
   }
   goToProfilePage() {
     this.profileShow = true;

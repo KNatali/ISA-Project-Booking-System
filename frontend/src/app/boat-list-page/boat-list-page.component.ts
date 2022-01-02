@@ -54,5 +54,13 @@ export class BoatListPageComponent implements OnInit {
   findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number){
     
   }
+  findByName(name:string){
+    this.boatService.findByName(name)
+    .subscribe(res=>this.boats=res)
+  }
+  findByCity(city:string){
+    this.boatService.findByCity(city)
+    .subscribe(res=>this.boats=res)
+  }
 
 }

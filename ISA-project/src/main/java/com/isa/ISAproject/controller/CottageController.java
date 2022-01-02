@@ -84,18 +84,21 @@ public class CottageController {
 	}
 	@RequestMapping(value="api/cottages/sort-by-name", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<CottageDTO>> sortByName(){
 		List<Cottage> cottages=this.cottageService.sortByName();
 		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/sort-by-grade", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<CottageDTO>> sortByGrade(){
 		List<Cottage> cottages=this.cottageService.sortByGrade();
 		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/sort-by-city", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<CottageDTO>> sortByCity(){
 		List<Cottage> cottages=this.cottageService.sortByCity();
 		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);

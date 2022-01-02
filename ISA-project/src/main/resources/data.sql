@@ -1,17 +1,17 @@
 
 
-insert into address (state, city,street) values ('United States','Panama City','3151 West 10th Street');
-insert into address (state, city,street) values ('United States','Key West',' 201 Margaret Street');
-insert into address (state, city,street) values ('United States','Key West',' 5950 Peninsular Avenue');
-insert into address (state, city,street) values ('United States','Key West','  North Roosevelt Boulevard');
-insert into address (state, city,street) values ('United States','Destin',' 210 Harbor Boulevard');
-insert into address (state, city,street) values ('United States','Destin',' 214 Harbor Boulevard');
-insert into address (state, city,street) values ('United States','St. Petersburg',' 3600 Poplar Street Northeast');
-insert into address (state, city,street) values ('United States','St. Petersburg',' 9600 Bay Pines Boulevard');
-insert into address (state, city,street) values ('United States','Miami',' 3400 Pan American Dr,');
-insert into address (state, city,street) values ('United States','Miami','Northwest 7th Street Road 945');
-insert into address (state, city,street) values ('United States','San Diego',' 955 Harbor Island Drive');
-insert into address (state, city,street) values ('United States','San Diego','Emerson Street 2803');
+insert into address (state, city,street,latitude,longitude) values ('United States','Panama City','3151 West 10th Street',30.167530,-85.703880);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West',' 201 Margaret Street',24.561550,-81.800150);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West',' 5950 Peninsular Avenue',24.563920,-81.728150);
+insert into address (state, city,street,latitude,longitude) values ('United States','Key West','  North Roosevelt Boulevard',24.565670,-81.772880);
+insert into address (state, city,street,latitude,longitude) values ('United States','Destin',' 210 Harbor Boulevard',30.3934711,-86.5068368);
+insert into address (state, city,street,latitude,longitude) values ('United States','Destin',' 214 Harbor Boulevard',30.392942,-86.5063408);
+insert into address (state, city,street,latitude,longitude) values ('United States','St. Petersburg',' 3600 Poplar Street Northeast',27.805171,-82.6278321);
+insert into address (state, city,street,latitude,longitude) values ('United States','St. Petersburg',' 9600 Bay Pines Boulevard',27.8141447,-82.7718856);
+insert into address (state, city,street,latitude,longitude) values ('United States','Miami',' 3400 Pan American Dr,',25.7269537,-80.2354768);
+insert into address (state, city,street,latitude,longitude) values ('United States','Miami','Northwest 7th Street Road 945',25.7269537,-80.2354768);
+insert into address (state, city,street,latitude,longitude) values ('United States','San Diego',' 955 Harbor Island Drive',32.7251557,-117.1917584);
+insert into address (state, city,street,latitude,longitude) values ('United States','San Diego','Emerson Street 2803',32.7234718,-117.227589);
 
 
 insert into authority(id, name) values (1, 'ROLE_SYSADMIN');
@@ -26,17 +26,22 @@ insert into authority(id, name) values (6, 'ROLE_BOAT_OWNER');
 insert into authority(id, name) values (5, 'ROLE_COTTAGE_OWNER');
 
 
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','truman', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isa.booking.project+truman@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','raymond', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Raymond', 'Weaving', 'isa.booking.project+raymond@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','stewart', '222', 'Stewart', 'Lindsey', 'isa.booking.project+stewart@gmail.com', '305-555-0000',3,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','bruno', '333', 'Bruno', 'Nicholson', 'isa.booking.project+brunon@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','ana', '$2a$10$qELfQNNCVvxVYgDYv4XUue6QIJ2ca09BFPPC3/M9Ke6q8PqRLkvdy', 'Ana', 'Anic', 'ana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','lana', '$2a$10$PTOW/.r9dgjokBc60GGnIO6csC4ReF7ql/F21IE/spO4fhCQLP9XK', 'Lana', 'Laic', 'lana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','laza', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Laza', 'Anic', 'lazaa@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','dusko', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Dusko', 'Dusic', 'dusko@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','daca', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Danica', 'Danicic', 'dana@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('SysAdmin','taylor', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Taylor', 'Smith', 'isa.booking.project+truman@gmail.com', '305-666-0163',3,true,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('CottageOwner','anna', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Anna', 'Willis', 'isa.booking.project+anna@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
+
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','truman', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isamarkomarkovic99@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','raymond', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Raymond', 'Weaving', 'isamarkomarkovic99@gmail.com', '305-555-0720',2,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','stewart', '222', 'Stewart', 'Lindsey', 'isamarkomarkovic99@gmail.com', '305-555-0000',3,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','bruno', '333', 'Bruno', 'Nicholson', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','ana', '$2a$10$qELfQNNCVvxVYgDYv4XUue6QIJ2ca09BFPPC3/M9Ke6q8PqRLkvdy', 'Ana', 'Anic', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','lana', '$2a$10$PTOW/.r9dgjokBc60GGnIO6csC4ReF7ql/F21IE/spO4fhCQLP9XK', 'Lana', 'Laic', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','laza', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Laza', 'Anic', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','dusko', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Dusko', 'Dusic', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user ( role,username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','daca', '$2a$10$sfvnEaK0mFaQB1VH3b.5k.ZloVuTXQ4DmM/uJazZNWh8.gcMa/2Bi', 'Danica', 'Danicic', 'isamarkomarkovic99@gmail.com', '305-555-0419',4,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('SysAdmin','taylor', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Taylor', 'Smith', 'isamarkomarkovic99@gmail.com', '305-666-0163',3,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('CottageOwner','anna', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Truman', 'Willis', 'isamarkomarkovic99@gmail.com', '305-555-0163',1,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','Maya', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Maya', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','tanya', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Tanya', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,false,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Cottage Owner','sam', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Sam', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,false,'1983-07-12 21:30:55.888');
+
 
 
 
@@ -63,10 +68,10 @@ insert into instructor (id,biography,grade) values (6,'I was born and raised in 
 
 insert into cottage_owner (id,grade) values (11,3);
 
-insert into client (id) values (5);
-insert into client (id) values (7);
-insert into client (id) values (8);
-insert into client (id) values (9);
+insert into client (id,number_of_penals) values (5,0);
+insert into client (id,number_of_penals) values (7,0);
+insert into client (id,number_of_penals) values (8,0);
+insert into client (id,number_of_penals) values (9,0);
 
 insert into admin(id,first_login) values(10,false);
 
@@ -92,16 +97,18 @@ insert into adventure(name,description,average_grade,price,max_persons,main_pict
 values ('Reel Floridian Fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,250,5,'/assets/adventure/Adventure3.jpg',10,1,15);
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
 values ('Fishing river','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,250,5,'/assets/adventure/Adventure5.jpg',1,2,15);
+insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
+values ('Super star fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,415,8,'/assets/adventure/Adventure4.jpg',5,1,20);
 
 
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,1,100,'/assets/boats/slika1.jpeg',1);
+values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,1,10,'/assets/boats/slika2.jpeg',2);
+values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
 values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
-values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,1,'/assets/boats/slika4.jpeg',4);
+values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4);
 insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id) 
 values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5);
 
@@ -141,15 +148,14 @@ insert into adventure_additional_items(adventure_id,additional_item_id) values(2
 insert into adventure_additional_items(adventure_id,additional_item_id) values(3,1);
 
 
- insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
  
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2023-7-10-07-00-00','2023-7-12-13-00-00',3,5400,1,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2023-7-10-07-00-00','2023-7-12-13-00-00',3,5400,1,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5); 
 
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,1);
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (2,2);
@@ -165,11 +171,12 @@ insert into client_adventure_reservations(client_id,adventure_reservations_id) v
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,5);
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(5,6);
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5,null); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5); 
 
 insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00',3,'2021-12-10','2021-12-14',4,460,1);
 insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00',2,'2021-12-12','2021-12-24',2,100,1);
+
 
 
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00');
@@ -179,12 +186,22 @@ insert into cottage_reservation(date,duration,max_persons,price,client_id,cottag
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2021-11-10-07-00-00','2021-11-12-13-00-00');
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
 
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2023-02-20T06:30:00",1,3,3000,8,3);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2017-02-20T06:30:00",3,1,6000,8,1);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2022-02-20T06:30:00",4,5,9000,8,4);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2021-02-20T06:30:00",2,5,3400,9,2);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2020-02-20T06:30:00",5,6,1200,8,4);
+
+
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,1);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,2);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (3,3);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (1,4);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,5);
 insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (2,6);
+insert into cottage_cottage_reservations(cottage_id,cottage_reservations_id)values (4,7);
 
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(5,1);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,2);
@@ -192,6 +209,7 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,4);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,5);
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
+insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
@@ -214,7 +232,10 @@ insert into client_boat_reservations(client_id,boat_reservations_id) values(8,4)
 insert into client_boat_reservations(client_id,boat_reservations_id) values(8,5);
 insert into client_boat_reservations(client_id,boat_reservations_id) values(9,6);
 
+insert into registration_request(user_id,reason) values (13,'Have many adventures to offer');
+insert into registration_request(user_id,reason) values (14,'This site looks pretty amazing and I want to be part of this community');
 
-
+ insert into profile_delete_request(user_id,reason) values (3,'My services are no longer available');
+insert into profile_delete_request(user_id,reason) values (4,'I am getting to old for this :( ');
  
 

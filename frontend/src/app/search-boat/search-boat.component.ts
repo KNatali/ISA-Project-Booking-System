@@ -11,8 +11,14 @@ import { BoatService } from '../service/boat.service';
 export class SearchBoatComponent implements OnInit {
   motorNumber:number;
   motorPower:number;
+  name:string;
+  address:string;
   @Output()
   MotorNumberAdded:EventEmitter<number>=new EventEmitter();
+  @Output()
+  NameAdded : EventEmitter<string> =new EventEmitter();
+  @Output()
+  AddressAdded : EventEmitter<string> =new EventEmitter();
   @Output()
   MotorPowerAdded:EventEmitter<number>=new EventEmitter();
   @Output()
@@ -31,6 +37,12 @@ export class SearchBoatComponent implements OnInit {
     //this.MotorPowerAndMotorNumberAdded.next({motorPower:this.motorPower,motorNumber:this.motorNumber});
     //this.boatService.findBoatByMotorPowerAndMotorNumber(motorPower,motorNumber)
     //.subscribe(res=this.)
+  }
+  findByName(){
+    this.NameAdded.next(this.name)
+  }
+  findByAddress(){
+    this.AddressAdded.next(this.address);
   }
 
 }

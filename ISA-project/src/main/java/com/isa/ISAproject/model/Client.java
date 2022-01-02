@@ -2,11 +2,15 @@ package com.isa.ISAproject.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Client extends User{
+	@Column
+	private int numberOfPenals=0;
 	@OneToMany
 	private List<AdventureReservation> adventureReservations;
 	@OneToMany
@@ -16,6 +20,15 @@ public class Client extends User{
 	public List<AdventureReservation> getAdventureReservations() {
 		return adventureReservations;
 	}
+	
+	public int getNumberOfPenals() {
+		return numberOfPenals;
+	}
+
+	public void setNumberOfPenals(int numberOfPenals) {
+		this.numberOfPenals = numberOfPenals;
+	}
+
 	public void setAdventureReservations(List<AdventureReservation> adventureReservations) {
 		this.adventureReservations = adventureReservations;
 	}

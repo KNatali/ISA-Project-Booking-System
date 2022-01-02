@@ -1,6 +1,7 @@
  package com.isa.ISAproject.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.service.AdventureService;
@@ -46,7 +49,7 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
-	@RequestMapping(value="delete/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="delete/{id}",method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		this.adventureService.delete(id);
@@ -66,6 +69,7 @@ public class AdventureController {
 	}
 	
 	@RequestMapping(value="/add/{id}",method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<?>  addAdventure(@RequestBody AdventureAddDTO dto,@PathVariable Long id){
 		this.adventureService.addAdventure(id, dto);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -89,6 +93,7 @@ public class AdventureController {
 	@RequestMapping( method = RequestMethod.GET,
 			params = "instructorId",
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	
 	public ResponseEntity<List<AdventureDTO>> findAdventuresByInstructor(@RequestParam Long instructorId){
 		Optional<Instructor> instructorOPT=this.instructorService.findById(instructorId);
 		if(!instructorOPT.isPresent()) {
@@ -104,7 +109,27 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
-	
+	@RequestMapping( method = RequestMethod.GET,
+			params = "name",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdventureDTO>> findByName(@RequestParam String name){
+		List<Adventure> adventures=this.adventureService.findByName(name);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	public List<AdventureDTO> convert(List<Adventure> adventures){
+		List<AdventureDTO> res=new ArrayList<>();
+		for (Adventure adv: adventures) {
+			res.add(new AdventureDTO(adv));
+		}
+		return res;
+	}
+	@RequestMapping( method = RequestMethod.GET,
+			params = "city",
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<AdventureDTO>> findByCity(@RequestParam String city){
+		List<Adventure> adventures=this.adventureService.findByCity(city);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
 	
 
 }

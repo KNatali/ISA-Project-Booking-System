@@ -1,0 +1,24 @@
+<div class="modal fade" id="modalDelete" aria-labelledby="modalDeleteLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeleteLabel">Profile delete request:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="content" class="form-label">Explanation:</label>
+            <textarea type="text" [ngModel]="message" formControlName="message" class="form-control"></textarea>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelDelete" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="sendRequest()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

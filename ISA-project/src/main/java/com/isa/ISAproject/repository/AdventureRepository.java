@@ -11,4 +11,5 @@ import com.isa.ISAproject.model.Instructor;
 @Repository
 public interface AdventureRepository extends JpaRepository<Adventure, Long>{
 	List<Adventure> findByInstructor(Instructor instructor);
+	List<Adventure> findByName(String name);
 }

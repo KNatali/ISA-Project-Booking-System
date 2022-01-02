@@ -26,20 +26,31 @@ import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
+
+import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Client;
+
+import com.isa.ISAproject.model.Cottage;
+
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureFishingEquipmentRepository;
 import com.isa.ISAproject.repository.AdventureRepository;
+import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.BehavioralRuleRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 @Service
 public class AdventureService {
 	@Autowired
 	private AdventureRepository adventureRepository;
 	@Autowired
+	private AdventureReservationRepository adventureReservationRepository;
+	@Autowired
 	private AddressRepository addressRepository;
-	
+	@Autowired
+	private ClientRepository clientRepository;
 	@Autowired
 	private AdventureFishingEquipmentRepository equipmentRepository;
 	@Autowired
@@ -62,6 +73,31 @@ public class AdventureService {
 	
 	public void delete(Long id) {
 		Adventure a=adventureRepository.getById(id);
+		//Set<AdventureReservation> list=a.getAdventureReservations();
+		List<AdventureReservation> list=adventureReservationRepository.findByAdventure(a);
+		if(list==null) {
+			for (AdventureReservation adventureReservation : list) {
+				a.getAdventureReservations().remove(adventureReservation);
+				Client c=adventureReservation.getClient();
+				List<AdventureReservation> set=c.getAdventureReservations();
+				set.remove(adventureReservation);
+				clientRepository.save(c);
+				
+			}
+			//a.setAdventureReservations(null);
+			this.adventureRepository.save(a);
+		}
+		/*for (AdventureReservation ar : list) {
+			//Client c=ar.getClient();
+		//	c.setAdventureReservations(null);
+			//clientRepository.save(c);
+			
+			ar.setClient(null);
+			this.adventureReservationRepository.save(ar);
+			this.adventureReservationRepository.delete(ar);
+		}*/
+	//	list.clear();
+		
 		this.adventureRepository.delete(a);
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
@@ -71,6 +107,8 @@ public class AdventureService {
 		address.setStreet(dto.getAddress().getStreet());
 		address.setCity(dto.getAddress().getCity());
 		address.setState(dto.getAddress().getState());
+			address.setLatitude(dto.getAddress().getLatitude());
+			address.setLongitude(dto.getAddress().getLongitude());
 		this.addressRepository.save(address);
 		Set<Adventure> adventures=instructor.getAdventures();
 		Set<AdventureFishingEquipment> equipment=AdventureFishingEquipmentMapper.converFromDTOs(dto.getEquipment());
@@ -91,7 +129,7 @@ public class AdventureService {
 		}
 		this.ruleRepository.saveAll(rules);
 	
-		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,"",null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
+		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,dto.getMainPicture(),null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
 	this.adventureRepository.save(a);
 	}
 	
@@ -107,6 +145,7 @@ public class AdventureService {
 		a.getAddress().setCity(dto.getAddress().getCity());
 		a.getAddress().setState(dto.getAddress().getState());
 		a.setMaxPersons(dto.getMaxPersons());
+		a.setMainPicture(dto.getMainPicture());
 		a.setCancellationPercentage(dto.getCancellationPercentage());
 		a.setPrice(dto.getPrice());
 		a.setDescription(dto.getDescription());
@@ -195,6 +234,19 @@ public class AdventureService {
 			listDTO.add(aDTO);
 		}
 		return listDTO;
+	}
+	public List<Adventure> findByName(String name){
+		return this.adventureRepository.findByName(name);
+	}
+	public List<Adventure> findByCity(String city){
+		List<Adventure> all=this.adventureRepository.findAll();
+		List<Adventure> res=new ArrayList<>();
+		for (Adventure adv : all) {
+			if(adv.getAddress().getCity().equals(city)) {
+				res.add(adv);
+			}
+		}
+		return res;
 	}
 	
 

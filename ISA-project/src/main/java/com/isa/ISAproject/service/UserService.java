@@ -69,7 +69,7 @@ public class UserService {
 		List<UserDTO> usersDTO=new ArrayList<>();
 	 for (User u : users) {
 		 if(!(u.getRole().equalsIgnoreCase("SysAdmin") || u.getRole().equalsIgnoreCase("Admin"))) {
-			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole());
+			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole(),u.getAddress().getLatitude(),u.getAddress().getLongitude());
 			usersDTO.add(dto);
 		 }
 			
@@ -93,7 +93,7 @@ public class UserService {
 		u.setEnabled(false);
 		u.setEmail(userRequest.getEmail());
 		
-		Address address=new Address(userRequest.getStreet(),userRequest.getState(),userRequest.getCity());
+		Address address=new Address(userRequest.getStreet(),userRequest.getState(),userRequest.getCity(),userRequest.getLatitude(),userRequest.getLongitude());
 		Address newAddress=this.addressService.save(address);
 		
 		u.setAddress(newAddress);

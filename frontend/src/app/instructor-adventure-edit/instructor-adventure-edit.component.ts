@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Loader } from '@googlemaps/js-api-loader';
 
 
 
@@ -18,8 +19,10 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./instructor-adventure-edit.component.css']
 })
 export class InstructorAdventureEditComponent implements OnInit {
+  map: any;
+  loader: any;
   selectedFile: File;
-  retrievedImage: any;
+  retrievedImage: string;
   base64Data: any;
   retrieveResonse: any;
   message: string;
@@ -32,7 +35,9 @@ export class InstructorAdventureEditComponent implements OnInit {
     id: 0,
     street: '',
     city: '',
-    state: ''
+    state: '',
+    latitude: 0,
+    longitude: 0
   })
   instructor: Instructor = new Instructor({
     id: 0,
@@ -71,6 +76,9 @@ export class InstructorAdventureEditComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
+    this.loader = new Loader({
+      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+    })
     this.formValue0 = this.formBuilder.group({
       name: [''],
       street: [''],
@@ -116,15 +124,10 @@ export class InstructorAdventureEditComponent implements OnInit {
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
-    alert(this.selectedFile.name);
-    //Make a call to the Spring Boot Application to save the image
+
     this.http.post('http://localhost:8090/api/upload', uploadImageData)
       .subscribe((response) => {
-        /*  if (response.status === 200) {
-            this.message = 'Image uploaded successfully';
-          } else {
-            this.message = 'Image not uploaded successfully';
-          }*/
+
       }
       );
   }
@@ -136,6 +139,10 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.editedAdventure.address.state = this.formValue0.value.state;
     this.editedAdventure.maxPersons = this.formValue0.value.maxPersons;
     this.editedAdventure.price = this.formValue0.value.price;
+    if (this.selectedFile != null)
+      this.editedAdventure.mainPicture = this.selectedFile.name;
+    else
+      this.editedAdventure.mainPicture = this.adventure.mainPicture;
     this.editedAdventure.cancellationPercentage = this.formValue0.value.cancellationPercentage;
     this.editedAdventure.description = this.formValue0.value.description;
     this.editedAdventure.instructor.biography = this.formValue0.value.biography;
@@ -147,6 +154,10 @@ export class InstructorAdventureEditComponent implements OnInit {
           ref?.click();
           this.formValue0.reset();
           this.loadData();
+          this.loadEquipment();
+          this.loadBehavioralRules();
+          this.loadAdditionalItems();
+
           alert("Successfully updated  adventure information!");
         }, error => {
           alert(error)
@@ -156,7 +167,7 @@ export class InstructorAdventureEditComponent implements OnInit {
   //Gets called when the user clicks on retieve image button to get the image from back end
   getImage() {
     //Make a call to Sprinf Boot to get the Image Bytes.
-    alert(this.imageName)
+
     this.http.get('http://localhost:8090/api/get/' + this.imageName)
       .subscribe(
         res => {
@@ -175,9 +186,31 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.adventureService.getAdventure(this.id)
-        .subscribe((adventure: Adventure) => this.adventure = adventure);
+        .subscribe((adventure: Adventure) => {
+          this.adventure = adventure;
+
+          if (this.adventure.mainPicture.substring(0, 7) != "/assets") {
+            this.http.get('http://localhost:8090/api/get/' + this.adventure.mainPicture)
+              .subscribe(
+                res => {
+                  this.retrieveResonse = res;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.adventure.mainPicture = 'data:image/jpeg;base64,' + this.base64Data;
+                }
+              );
+          }
+          this.loader.load().then(() => {
+            this.map = new google.maps.Map(document.getElementById("map")!, {
+              center: { lat: this.adventure.address.latitude, lng: this.adventure.address.longitude },
+              zoom: 11.5
+            })
+          })
+
+
+        });
 
     });
+
 
   }
 

@@ -1,0 +1,31 @@
+<div class="modal fade" id="modalReport" aria-labelledby="modalReportLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalReportLabel">Report:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="content" class="form-label">Report content:</label>
+            <textarea type="text" formControlName="content" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <input type="radio" formControlName="checked" value="check">This client need to be sanctioned
+            and get 1 penal
+            <br>
+            <input type="radio" formControlName="checked" value="penal"> This client didn't show up
+
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelReport" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveReport()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
