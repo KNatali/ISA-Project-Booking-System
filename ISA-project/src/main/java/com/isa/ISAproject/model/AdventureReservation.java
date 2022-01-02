@@ -45,11 +45,11 @@ public class AdventureReservation {
 	private Client client;
 	@OneToMany
 	private List<AdventureComplaint> adventureComplaints;
-	@OneToOne 
+	@OneToOne
 	private InstructorReport report;
 	
 	public AdventureReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
-			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,InstructorReport report,
+			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,
 			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints) {
 		super();
 		this.id = id;
@@ -58,7 +58,6 @@ public class AdventureReservation {
 		this.adventure = adventure;
 		this.numberOfPersons = numberOfPersons;
 		this.price = price;
-		this.report=report;
 		this.additionalItems = additionalItems;
 		this.client = client;
 		this.adventureComplaints = adventureComplaints;

@@ -114,6 +114,7 @@ import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requ
 import { InstructorActiveReservationsComponent } from './instructor-active-reservations/instructor-active-reservations.component';
 import { InstructorUpcomingReservationsComponent } from './instructor-upcoming-reservations/instructor-upcoming-reservations.component';
 import { InstructorCompletedReservationsComponent } from './instructor-completed-reservations/instructor-completed-reservations.component';
+import { AdminReservationReportsComponent } from './admin-reservation-reports/admin-reservation-reports.component';
 
 
 @NgModule({
@@ -212,7 +213,8 @@ import { InstructorCompletedReservationsComponent } from './instructor-completed
     AdminProfileDeleteRequestsComponent,
     InstructorActiveReservationsComponent,
     InstructorUpcomingReservationsComponent,
-    InstructorCompletedReservationsComponent
+    InstructorCompletedReservationsComponent,
+    AdminReservationReportsComponent
 
 
 

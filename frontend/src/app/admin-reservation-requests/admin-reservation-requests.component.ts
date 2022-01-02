@@ -15,11 +15,7 @@ export class AdminReservationRequestsComponent implements OnInit {
   requests: RegistrationRequest[];
 
 
-  rejectMessage: EmailMessage = new EmailMessage({
 
-    message: "",
-    email: ""
-  })
   formValue!: FormGroup;
   constructor(private formBuilder: FormBuilder, private adminService: AdminService, private router: Router, private route: ActivatedRoute, private emailService: EmailMessageService) { }
 

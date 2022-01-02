@@ -16,7 +16,6 @@ public class AdventureReservationMapper {
 	
 	public static AdventureReservationDTO convertToDTO(AdventureReservation a) {
 		AdventureDTO adventure=AdventureMapper.convertToDTO(a.getAdventure());
-		InstructorReportDTO report=new InstructorReportDTO(a.getReport().getId(),a.getReport().getContent(),a.getReport().isSanctioned(),a.getReport().isShowedUp());
 		ClientProfileDTO client=new ClientProfileDTO(a.getClient());
 		Set<AdditionalItemDTO> items=new HashSet<>();
 		for (AdditionalItem i : a.getAdditionalItems()) {
@@ -24,9 +23,11 @@ public class AdventureReservationMapper {
 			items.add(dto);
 			
 		}
-		AdventureReservationDTO dto=new AdventureReservationDTO(a.getId(), a.getReservationStart(), a.getReservationEnd(),adventure,a.getPrice(),a.getNumberOfPersons(),client,report, items);
+		AdventureReservationDTO dto=new AdventureReservationDTO(a.getId(), a.getReservationStart(), a.getReservationEnd(),adventure,a.getPrice(),a.getNumberOfPersons(),client, items);
 	return dto;
 	}
+	
+	
 	
 	
 

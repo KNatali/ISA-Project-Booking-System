@@ -67,10 +67,10 @@ insert into instructor (id,biography,grade) values (6,'I was born and raised in 
 
 insert into cottage_owner (id) values (10);
 
-insert into client (id) values (5);
-insert into client (id) values (7);
-insert into client (id) values (8);
-insert into client (id) values (9);
+insert into client (id,number_of_penals) values (5,0);
+insert into client (id,number_of_penals) values (7,0);
+insert into client (id,number_of_penals) values (8,0);
+insert into client (id,number_of_penals) values (9,0);
 
 insert into admin(id,first_login) values(10,false);
 
@@ -147,15 +147,14 @@ insert into adventure_additional_items(adventure_id,additional_item_id) values(2
 insert into adventure_additional_items(adventure_id,additional_item_id) values(3,1);
 
 
- insert into instructor_report(content,sanctioned,showed_up) values('Everythiing was great',false,true);
  
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2023-7-10-07-00-00','2023-7-12-13-00-00',3,5400,1,8,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5,1); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2023-7-10-07-00-00','2023-7-12-13-00-00',3,5400,1,8); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5); 
 
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,1);
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (2,2);
@@ -171,8 +170,8 @@ insert into client_adventure_reservations(client_id,adventure_reservations_id) v
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,5);
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(5,6);
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5,1); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,report_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5,null); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5); 
 
 insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00',3,'2021-12-10','2021-12-14',4,460,1);
 insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00',2,'2021-12-12','2021-12-24',2,100,1);

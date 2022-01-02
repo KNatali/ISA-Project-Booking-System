@@ -1,3 +1,4 @@
+import { InstructorReport } from './../model/instructorReport';
 import { AdventureReservation } from './../model/AdventureReservation';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -70,6 +71,11 @@ export class InstructorService {
 
   sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
     return this.http.post<ProfileDeleteRequest>(`${this.urlInstructor}/` + `profileDeleteRequest`, request);
+  }
+
+
+  sendReservationReport(report: InstructorReport): Observable<InstructorReport> {
+    return this.http.post<InstructorReport>(`${this.urlInstructor}/` + `sendReservationReport`, report);
   }
 
 }

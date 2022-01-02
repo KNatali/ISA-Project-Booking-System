@@ -64,7 +64,6 @@ export class InstructorDeleteProfileComponent implements OnInit {
     this.request.reason = this.formValue.controls['message'].value;
     this.newUser.id = 2;
     this.request.userDTO = this.newUser;
-    alert(this.request.userDTO.id)
     this.instructorService.sendDeleteRequest(this.request).subscribe(data => {
       let ref = document.getElementById('cancelDelete');
       ref?.click();

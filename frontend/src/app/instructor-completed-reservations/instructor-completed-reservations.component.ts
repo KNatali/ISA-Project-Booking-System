@@ -21,4 +21,9 @@ export class InstructorCompletedReservationsComponent implements OnInit {
       .subscribe(res => this.completedReservations = res)
   }
 
+  addReport(reservation: AdventureReservation) {
+    sessionStorage.setItem("adventureReservation", JSON.stringify(reservation));
+  }
+
+
 }
