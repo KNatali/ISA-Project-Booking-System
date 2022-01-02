@@ -30,7 +30,7 @@ export class AdminRejectRequestComponent implements OnInit {
   sendMessage() {
     this.rejectMessage.message = this.formValue.controls['message'].value
 
-    this.rejectMessage.email = sessionStorage.getItem("message")!;
+    this.rejectMessage.email = sessionStorage.getItem("email")!;
 
     this.emailService.sendRegistrationRejectMessage(this.rejectMessage)
       .subscribe(data => {

@@ -15,11 +15,7 @@ export class AdminReservationRequestsComponent implements OnInit {
   requests: RegistrationRequest[];
 
 
-  rejectMessage: EmailMessage = new EmailMessage({
 
-    message: "",
-    email: ""
-  })
   formValue!: FormGroup;
   constructor(private formBuilder: FormBuilder, private adminService: AdminService, private router: Router, private route: ActivatedRoute, private emailService: EmailMessageService) { }
 
@@ -48,7 +44,7 @@ export class AdminReservationRequestsComponent implements OnInit {
 
   reject(request: RegistrationRequest, id: any) {
 
-    sessionStorage.setItem("message", request.userDTO.email);
+    sessionStorage.setItem("email", request.userDTO.email);
     this.adminService.rejectRegistrationRequest(request)
       .subscribe();
     this.requests.forEach((request, index) => {

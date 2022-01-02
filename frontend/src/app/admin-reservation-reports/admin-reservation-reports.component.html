@@ -1,0 +1,39 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Client</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Reservation</th>
+      <th scope="col">Report</th>
+
+
+
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of reports; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>
+        {{r.adventureReservation.client.firstName}} {{r.adventureReservation.client.lastName}}
+      </td>
+      <td>
+        {{r.adventureReservation.adventure.instructor.firstName}}
+        {{r.adventureReservation.adventure.instructor.lastName}}
+      </td>
+      <td> {{r.adventureReservation.adventure.name}}</td>
+      <td> {{r.content}}</td>
+
+
+      <td><button mat-button id="accept" (click)="accept(r,r.id)">Accept</button></td>
+      <td><button mat-button id="reject" (click)="reject(r,r.id)">Reject</button></td>
+
+    </tr>
+
+
+
+  </tbody>
+</table>

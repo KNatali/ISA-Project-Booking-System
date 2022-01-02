@@ -3,8 +3,10 @@ package com.isa.ISAproject.dto;
 public class InstructorReportDTO {
 	private Long id;
 	private String content;
-	private boolean sanctioned;
-	private boolean showedUp;
+	private boolean checkAdmin;
+	private boolean penal;
+	private boolean checked;
+	private AdventureReservationDTO adventureReservation;
 	public Long getId() {
 		return id;
 	}
@@ -14,27 +16,44 @@ public class InstructorReportDTO {
 	public String getContent() {
 		return content;
 	}
+	
+	public AdventureReservationDTO getAdventureReservation() {
+		return adventureReservation;
+	}
+	public void setAdventureReservation(AdventureReservationDTO adventureReservation) {
+		this.adventureReservation = adventureReservation;
+	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public boolean isSanctioned() {
-		return sanctioned;
+	
+	public boolean isChecked() {
+		return checked;
 	}
-	public void setSanctioned(boolean sanctioned) {
-		this.sanctioned = sanctioned;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
-	public boolean isShowedUp() {
-		return showedUp;
+	public boolean isCheckAdmin() {
+		return checkAdmin;
 	}
-	public void setShowedUp(boolean showedUp) {
-		this.showedUp = showedUp;
+	public void setCheckAdmin(boolean checkAdmin) {
+		this.checkAdmin = checkAdmin;
 	}
-	public InstructorReportDTO(Long id, String content, boolean sanctioned, boolean showedUp) {
+	public boolean isPenal() {
+		return penal;
+	}
+	public void setPenal(boolean penal) {
+		this.penal = penal;
+	}
+	public InstructorReportDTO(Long id, String content, boolean checkAdmin, boolean penal,
+			boolean checked,AdventureReservationDTO adventureReservation) {
 		super();
 		this.id = id;
 		this.content = content;
-		this.sanctioned = sanctioned;
-		this.showedUp = showedUp;
+		this.checkAdmin = checkAdmin;
+		this.penal = penal;
+		this.checked=checked;
+		this.adventureReservation = adventureReservation;
 	}
 	public InstructorReportDTO() {
 		super();

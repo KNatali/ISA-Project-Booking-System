@@ -1,10 +1,12 @@
 package com.isa.ISAproject.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class InstructorReport {
@@ -16,9 +18,15 @@ public class InstructorReport {
 	@Column
 	private String content;
 	@Column 
-	private boolean sanctioned;
+	private boolean checkAdmin;
 	@Column
-	private boolean showedUp;
+	private boolean penal;
+	@Column
+	private boolean checked;
+	
+	@OneToOne
+	private AdventureReservation adventureReservation;
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,24 +39,42 @@ public class InstructorReport {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public boolean isSanctioned() {
-		return sanctioned;
+	
+	
+	public boolean isChecked() {
+		return checked;
 	}
-	public void setSanctioned(boolean sanctioned) {
-		this.sanctioned = sanctioned;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
-	public boolean isShowedUp() {
-		return showedUp;
+	public AdventureReservation getAdventureReservation() {
+		return adventureReservation;
 	}
-	public void setShowedUp(boolean showedUp) {
-		this.showedUp = showedUp;
+	public void setAdventureReservation(AdventureReservation adventureReservation) {
+		this.adventureReservation = adventureReservation;
 	}
-	public InstructorReport(Long id, String content, boolean sanctioned, boolean showedUp) {
+	
+	public InstructorReport(Long id, String content, boolean checkAdmin, boolean penal,
+			boolean checked,AdventureReservation adventureReservation) {
 		super();
 		this.id = id;
 		this.content = content;
-		this.sanctioned = sanctioned;
-		this.showedUp = showedUp;
+		this.checkAdmin = checkAdmin;
+		this.penal = penal;
+		this.checked=checked;
+		this.adventureReservation = adventureReservation;
+	}
+	public boolean isCheckAdmin() {
+		return checkAdmin;
+	}
+	public void setCheckAdmin(boolean checkAdmin) {
+		this.checkAdmin = checkAdmin;
+	}
+	public boolean isPenal() {
+		return penal;
+	}
+	public void setPenal(boolean penal) {
+		this.penal = penal;
 	}
 	public InstructorReport() {
 		super();

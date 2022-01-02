@@ -15,7 +15,6 @@ public class AdventureReservationDTO {
 	private double price;
 	private int numberOfPersons;
 	private ClientProfileDTO client;
-	private InstructorReportDTO report;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
@@ -60,12 +59,7 @@ public class AdventureReservationDTO {
 	public void setClient(ClientProfileDTO client) {
 		this.client = client;
 	}
-	public InstructorReportDTO getReport() {
-		return report;
-	}
-	public void setReport(InstructorReportDTO report) {
-		this.report = report;
-	}
+	
 	public Set<AdditionalItemDTO> getAdditionalItems() {
 		return additionalItems;
 	}
@@ -73,7 +67,7 @@ public class AdventureReservationDTO {
 		this.additionalItems = additionalItems;
 	}
 	public AdventureReservationDTO(Long id, LocalDateTime reservationStart, LocalDateTime resevationEnd, AdventureDTO adventure,
-			double price,int persons, ClientProfileDTO client, InstructorReportDTO report, Set<AdditionalItemDTO> additionalItems) {
+			double price,int persons, ClientProfileDTO client,  Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
@@ -82,7 +76,6 @@ public class AdventureReservationDTO {
 		this.price = price;
 		this.numberOfPersons=persons;
 		this.client = client;
-		this.report = report;
 		this.additionalItems = additionalItems;
 	}
 	public AdventureReservationDTO(AdventureReservation boatReservation) {

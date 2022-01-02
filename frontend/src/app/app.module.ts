@@ -111,6 +111,10 @@ import { InstructorDeleteProfileComponent } from './instructor-delete-profile/in
 import { AdminRejectRequestComponent } from './admin-reject-request/admin-reject-request.component';
 import { AdminRequestsComponent } from './admin-requests/admin-requests.component';
 import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requests/admin-profile-delete-requests.component';
+import { InstructorActiveReservationsComponent } from './instructor-active-reservations/instructor-active-reservations.component';
+import { InstructorUpcomingReservationsComponent } from './instructor-upcoming-reservations/instructor-upcoming-reservations.component';
+import { InstructorCompletedReservationsComponent } from './instructor-completed-reservations/instructor-completed-reservations.component';
+import { AdminReservationReportsComponent } from './admin-reservation-reports/admin-reservation-reports.component';
 
 
 @NgModule({
@@ -206,7 +210,11 @@ import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requ
     InstructorDeleteProfileComponent,
     AdminRejectRequestComponent,
     AdminRequestsComponent,
-    AdminProfileDeleteRequestsComponent
+    AdminProfileDeleteRequestsComponent,
+    InstructorActiveReservationsComponent,
+    InstructorUpcomingReservationsComponent,
+    InstructorCompletedReservationsComponent,
+    AdminReservationReportsComponent
 
 
 
@@ -223,6 +231,7 @@ import { AdminProfileDeleteRequestsComponent } from './admin-profile-delete-requ
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatTabsModule,
+
     MatFormFieldModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({
