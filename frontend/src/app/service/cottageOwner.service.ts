@@ -31,7 +31,7 @@ export class CottageOwnerService {
     return this.http.post<CottageOwner>(`${this.urlCottageOwner}/` + `changePassword` + `/${id}`, { newPassword });
   }
   getCottageOwnerCottages(id: number): Observable<Cottage[]> {
-    return this.http.get<Cottage[]>(`${this.urlCottageOwner}/` + `cottages` + `/${id}`);
+    return this.http.get<Cottage[]>(`http://localhost:8090/api/cottageOwners/` + `cottages` + `/${id}`);
   }
 
   getCottageOwnerReservations(id: number): Observable<CottageReservation[]> {
