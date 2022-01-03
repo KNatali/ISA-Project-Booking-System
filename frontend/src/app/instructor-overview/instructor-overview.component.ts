@@ -1,7 +1,9 @@
+import { InstructorService } from './../service/instructor.service';
 import {
   Component,
   ChangeDetectionStrategy,
   OnInit,
+  Input,
 
 } from '@angular/core';
 import {
@@ -23,6 +25,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TimePeriod } from '../model/timePeriod';
 
 const colors: any = {
   red: {
@@ -50,8 +53,14 @@ const colors: any = {
   templateUrl: './instructor-overview.component.html',
 })
 export class InstructorOverviewComponent implements OnInit {
+  @Input() id: number;
   startTime: any;
   endTime: any;
+  unvailabilities: TimePeriod[];
+  period: TimePeriod = new TimePeriod({
+    start: '',
+    end: ''
+  })
   view: CalendarView = CalendarView.Month;
   newEvent: CalendarEvent;
   CalendarView = CalendarView;
@@ -85,34 +94,68 @@ export class InstructorOverviewComponent implements OnInit {
 
   events: CalendarEvent[] = [
 
+
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private instructorService: InstructorService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
       endTime: ['']
     })
+    this.getUnavailability();
   }
 
-  setAvailability() {
-    alert(new Date(this.startTime));
-    this.newEvent = {
-      start: new Date(this.startTime),
-      end: new Date(this.endTime),
-      title: 'Available',
-      color: colors.green,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    }
-    this.events.push(this.newEvent);
+  getUnavailability() {
+    this.instructorService.getUnavailabilityByInstructor(this.id)
+      .subscribe(res => {
+        this.unvailabilities = res
+        this.set();
+      })
+  }
+
+  set() {
+    this.unvailabilities.forEach((u, index) => {
+
+      this.newEvent = {
+        start: new Date(u.start),
+        end: new Date(u.end),
+        title: 'Unavailable',
+        color: colors.red,
+        actions: this.actions,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+        draggable: true,
+      }
+      this.events.push(this.newEvent);
+    });
+  }
+
+  setUnavailability() {
+    this.period.start = this.startTime.toLocaleString();
+    this.period.end = this.endTime.toLocaleString()
+    this.instructorService.setUnavailability(this.period, this.id).subscribe(data => {
+      this.newEvent = {
+        start: new Date(this.startTime),
+        end: new Date(this.endTime),
+        title: 'Unavailable',
+        color: colors.red,
+        actions: this.actions,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+        draggable: true,
+      }
+      this.events.push(this.newEvent);
+
+    }, error => {
+      alert("The selected time period overlaps with the previously entered one! Please choose another one!")
+    })
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
