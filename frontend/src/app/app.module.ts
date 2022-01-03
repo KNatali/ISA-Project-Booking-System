@@ -136,6 +136,9 @@ import { InstructorActiveReservationsComponent } from './instructor-active-reser
 import { InstructorUpcomingReservationsComponent } from './instructor-upcoming-reservations/instructor-upcoming-reservations.component';
 import { InstructorCompletedReservationsComponent } from './instructor-completed-reservations/instructor-completed-reservations.component';
 import { AdminReservationReportsComponent } from './admin-reservation-reports/admin-reservation-reports.component';
+import { CottageOwnerActiveReservationsComponent } from './cottage-owner-active-reservations/cottage-owner-active-reservations.component';
+import { CottageOwnerUpcomingReservationsComponent } from './cottage-owner-upcoming-reservations/cottage-owner-upcoming-reservations.component';
+import { CottageOwnerCompletedReservationsComponent } from './cottage-owner-completed-reservations/cottage-owner-completed-reservations.component';
 
 
 
@@ -256,7 +259,10 @@ import { AdminReservationReportsComponent } from './admin-reservation-reports/ad
     InstructorActiveReservationsComponent,
     InstructorUpcomingReservationsComponent,
     InstructorCompletedReservationsComponent,
-    AdminReservationReportsComponent
+    AdminReservationReportsComponent,
+    CottageOwnerActiveReservationsComponent,
+    CottageOwnerUpcomingReservationsComponent,
+    CottageOwnerCompletedReservationsComponent
 
 
 

@@ -45,6 +45,7 @@ public class CottageFastReservation {
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	
 	@ManyToOne
+	@JoinColumn(name = "cottage_id")
 	private Cottage cottage;
 
 	public Long getId() {

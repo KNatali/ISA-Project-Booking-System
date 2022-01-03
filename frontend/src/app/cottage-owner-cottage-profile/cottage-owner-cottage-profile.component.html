@@ -1,11 +1,15 @@
-<div class="body-wrapper">
+  <div class="body-wrapper">
     <div class="container content">
   
       <div class="flex">
         <div>
           <h1>{{cottage1.name}}</h1>
+  
           <div>
             <i class="fa fa-map-marker" aria-hidden="true"></i>{{cottage1.address.street}},{{cottage1.address.city}}
+          </div>
+          <div class="full " id="map">
+  
           </div>
           <div><strong>Max number of guests: </strong> {{cottage1.maxPersons}}</div>
           <div><strong>Average grade: </strong>
@@ -21,23 +25,28 @@
         <div class="figure">
           <img id="mainImage" src="{{cottage1.mainPicture}}">
         </div>
+        <!--
         <div id="lightgallery">
   
-          <a href="/assets/cottages/vikendica1.jpg">
-            <img src="/assets/cottages/vikendica1.jpg">
+          <a href="/assets/adventure/Adventure1.jpg">
+            <img src="/assets/adventure/Adventure1.jpg">
           </a>
-          <a href="/assets/cottages/vikendica1.jpg">
-            <img src="/assets/cottages/vikendica1.jpg">
+          <a href="/assets/adventure/Adventure1.jpg">
+            <img src="/assets/adventure/Adventure1.jpg">
           </a>
-          <a href="/assets/cottages/vikendica1.jpg">
-            <img src="/assets/cottages/vikendica1.jpg">
+          <a href="/assets/adventure/Adventure1.jpg">
+            <img src="/assets/adventure/Adventure1.jpg">
           </a>
-        </div>
+        </div>-->
       </div>
       <br>
       <div>
         <strong>Price (per day):</strong> <span id="price"> {{cottage1.price}} $</span>
       </div>
+  
+  
+  
+  
   
       <hr />
       <div>
@@ -52,29 +61,17 @@
           <div>
             <h2>About the cottage owner:</h2>
             <h3>{{cottage1.cottageOwner.firstName}} {{cottage1.cottageOwner.lastName}} </h3>
-            <h4>{{cottage1.cottageOwner.mobile}}</h4>
+            <h4>{{cottage1.cottageOwner.street}}</h4>
           </div>
         </div>
       </div>
       <hr />
   
-      <div class="columns">
         <div class="column">
           <h3>Additional items:</h3>
           <div *ngFor="let a of cottage1.items">
             <i class="fa fa-check-circle"></i>
             <span> {{a.name}} : {{a.price}} $</span>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="columns">
-        <div class="column">
-          <h3>Cottage Rules:</h3>
-          <div *ngFor="let r of cottage1.rules">
-            <i class="fa fa-exclamation-circle"></i>
-            <span> {{r.rule}}
-            </span>
           </div>
         </div>
       </div>
@@ -125,6 +122,3 @@
         </article>
       </div>
     </div>
-  
-  </div>
-  

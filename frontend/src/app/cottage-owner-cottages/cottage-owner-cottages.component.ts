@@ -43,8 +43,7 @@ export class CottageOwnerCottagesComponent implements OnInit {
   getCottages() {
     this.cottageOwnerService.getCottageOwnerCottages(this.id)
       .subscribe(res => {
-        this.cottages = res;
-        }
+        this.cottages = res;}
       )
   }
 
