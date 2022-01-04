@@ -55,6 +55,7 @@ public class TimePeriodService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		
 		for (TimePeriod t : times) {
+			
 			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
 			timesDTO.add(dto);
 			
