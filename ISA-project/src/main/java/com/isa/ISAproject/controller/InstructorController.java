@@ -132,7 +132,7 @@ public class InstructorController {
 	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<List<AdventureDTO>> adventures(@PathVariable(name="id") Long id){
 		
-Optional<Instructor> itemOptionals=this.instructorService.findById(id);
+		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 		
 		if(!itemOptionals.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -159,17 +159,6 @@ Optional<Instructor> itemOptionals=this.instructorService.findById(id);
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
-	
-	@RequestMapping(
-			value="api/instructors/fastReservations/{id}",method = RequestMethod.GET,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservations(@PathVariable(name="id") Long id){
-		List<AdventureFastReservationDTO> list=new ArrayList<>();
-		list=this.instructorService.getFastReservations(id);
-			
-			return new ResponseEntity<>(list,HttpStatus.OK);
-	}
 	
 	@RequestMapping(
 			value="api/instructors/reservationClient/{id}",method = RequestMethod.GET,

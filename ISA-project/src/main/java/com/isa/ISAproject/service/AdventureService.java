@@ -102,7 +102,6 @@ public class AdventureService {
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
 		Instructor instructor=instructorRepository.getById(instructorId);
-		//Address address=AddressMapper.convertFromDTO(dto.getAddress());
 		Address address=new Address();
 		address.setStreet(dto.getAddress().getStreet());
 		address.setCity(dto.getAddress().getCity());
@@ -128,9 +127,8 @@ public class AdventureService {
 			
 		}
 		this.ruleRepository.saveAll(rules);
-	
 		Adventure a=new Adventure(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),instructor,dto.getMainPicture(),null,dto.getMaxPersons(),equipment,rules,dto.getCancellationPercentage(),null,items,null);
-	this.adventureRepository.save(a);
+		this.adventureRepository.save(a);
 	}
 	
 	

@@ -8,6 +8,7 @@ import { Instructor } from '../model/instructor';
 import { Client } from '../model/client';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { TimePeriod } from '../model/timePeriod';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,16 @@ export class InstructorService {
   sendReservationReport(report: InstructorReport): Observable<InstructorReport> {
     return this.http.post<InstructorReport>(`${this.urlInstructor}/` + `sendReservationReport`, report);
   }
+
+  setUnavailability(period: TimePeriod, id: number) {
+    return this.http.post<ProfileDeleteRequest>(`${this.urlInstructor}/` + `setUnavailability` + `/${id}`, period);
+
+  }
+
+  getUnavailabilityByInstructor(id: number): Observable<TimePeriod[]> {
+    return this.http.get<TimePeriod[]>(`${this.urlInstructor}/` + `getUnavailability` + `/${id}`);
+  }
+
+
 
 }

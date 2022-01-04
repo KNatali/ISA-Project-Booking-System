@@ -8,6 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,10 +24,30 @@ public class Instructor extends User{
 	@Column(columnDefinition="LONGTEXT")
 	private String biography;
 	
+	@ManyToMany
+	 @JoinTable(
+	            name = "instructor_unavailability",
+	            joinColumns = @JoinColumn(name = "instructor_id"),
+	            inverseJoinColumns = @JoinColumn(name = "period_id"))
+	private Set<TimePeriod> unavailability;
+	
 	public Set<Adventure> getAdventures() {
 		return adventures;
 	}
 	
+	
+
+	public Set<TimePeriod> getUnavailability() {
+		return unavailability;
+	}
+
+
+
+	public void setUnavailability(Set<TimePeriod> unavailability) {
+		this.unavailability = unavailability;
+	}
+
+
 
 	public String getBiography() {
 		return biography;

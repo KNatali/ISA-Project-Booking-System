@@ -30,8 +30,9 @@ public class AdventureFastReservation {
 	 @Column(name = "reservationStart", nullable = false)
 	    private LocalDateTime reservationStart;
 
-	 @Column
-	 private int duration;
+	 @Column(name = "reservationEnd", nullable = false)
+	    private LocalDateTime reservationEnd;
+
  
 	@Column(nullable=false)
 	private int maxPersons;
@@ -46,21 +47,7 @@ public class AdventureFastReservation {
 	
 	
 	
-	public AdventureFastReservation(Long id, com.isa.ISAproject.model.Adventure adventure, LocalDateTime reservationStart,
-			int duration, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
-			Set<AdditionalItem> additionalItems) {
-		super();
-		this.id = id;
-		this.adventure = adventure;
-		this.reservationStart = reservationStart;
-		this.duration = duration;
-		this.maxPersons = maxPersons;
-		this.price = price;
-		this.validityStart = validityStart;
-		this.validityEnd = validityEnd;
-		this.additionalItems = additionalItems;
-		
-	}
+
 
 
 
@@ -97,20 +84,19 @@ public class AdventureFastReservation {
 	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
-
-
-
 	
 
 
-	public int getDuration() {
-		return duration;
+
+
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
 	}
 
 
 
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 
 
@@ -174,8 +160,20 @@ public class AdventureFastReservation {
 	}
 
 
-
-	
+	public AdventureFastReservation(Long id, Adventure adventure, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
+		super();
+		this.id = id;
+		this.adventure = adventure;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+	}
 
 
 

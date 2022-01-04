@@ -65,6 +65,11 @@ public class Adventure {
     inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	
+	@ManyToMany
+	@JoinTable(name="adventure_subscribers",joinColumns = @JoinColumn(name = "adventure_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
+	private Set<Client> subscribers=new HashSet<>();
+	
 	@Column
 	private int cancellationPercentage;
 
@@ -106,6 +111,15 @@ public class Adventure {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public Set<Client> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(Set<Client> subscribes) {
+		this.subscribers = subscribes;
 	}
 
 	public Address getAddress() {

@@ -104,17 +104,6 @@ public class InstructorService {
 		
 	}
 
-	public List<AdventureFastReservationDTO> getFastReservations(Long id){
-		List<AdventureFastReservationDTO> res=new ArrayList<>();
-		List<AdventureFastReservation> temp=new ArrayList<>();
-		List<AdventureFastReservation> reservations=fastReservationRepository.findAll();
-		
-		for (AdventureFastReservation a : reservations) {
-			res.add(AdventureFastReservationMapper.convertToDTO(a));
-		}
-		return res;
-		
-	}
 	
 	public ClientProfileDTO getReservationClilent(Long id) {
 		Optional<Client> item=this.clientRepository.findById(id);

@@ -1,10 +1,13 @@
 package com.isa.ISAproject.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,10 +20,26 @@ public class Client extends User{
 	private List<BoatReservation> boatReservations;
 	@OneToMany
 	private List<CottageReservation> cottageReservations;
+	@ManyToMany(mappedBy = "subscribers")
+	private Set<Adventure> subscribedAdventures=new HashSet<>();
+	
+	
 	public List<AdventureReservation> getAdventureReservations() {
 		return adventureReservations;
+		
 	}
 	
+	
+	public Set<Adventure> getSubscribedAdventures() {
+		return subscribedAdventures;
+	}
+
+
+	public void setSubscribedAdventures(Set<Adventure> subscribedAdventures) {
+		this.subscribedAdventures = subscribedAdventures;
+	}
+
+
 	public int getNumberOfPenals() {
 		return numberOfPenals;
 	}

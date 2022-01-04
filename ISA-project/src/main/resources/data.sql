@@ -174,8 +174,8 @@ insert into client_adventure_reservations(client_id,adventure_reservations_id) v
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,200,1,5); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id) values('2021-12-4-07-00-00','2021-12-20-14-00-00',5,450,1,5); 
 
-insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00',3,'2021-12-10','2021-12-14',4,460,1);
-insert into adventure_fast_reservation(reservation_start,duration,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00',2,'2021-12-12','2021-12-24',2,100,1);
+insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00','2021-12-17-16-00-00','2021-12-10','2022-02-10',4,460,1);
+insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00','2021-12-25-15-00-00','2021-12-12','2022-02-15',2,100,1);
 
 
 
@@ -238,4 +238,7 @@ insert into registration_request(user_id,reason) values (14,'This site looks pre
  insert into profile_delete_request(user_id,reason) values (3,'My services are no longer available');
 insert into profile_delete_request(user_id,reason) values (4,'I am getting to old for this :( ');
  
+ 
+insert into adventure_subscribers(adventure_id,client_id) values (1,5);
+insert into adventure_subscribers(adventure_id,client_id) values (1,8);
 

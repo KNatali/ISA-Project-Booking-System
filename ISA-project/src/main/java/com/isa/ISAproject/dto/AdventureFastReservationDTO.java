@@ -8,12 +8,13 @@ import java.util.Set;
 public class AdventureFastReservationDTO {
 
 	private Long id;
-	private LocalDateTime reservationStart;
-	private int duration;
+	private String reservationStart;
+
+	private String reservationEnd;
 	private int maxPersons;
 	private double price;
-	private LocalDate validityStart;
-	private LocalDate validityEnd;
+	private String validityStart;
+	private String validityEnd;
 	private AdventureDTO adventure;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
@@ -22,19 +23,7 @@ public class AdventureFastReservationDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDateTime getReservationStart() {
-		return reservationStart;
-	}
-	public void setReservationStart(LocalDateTime reservationStart) {
-		this.reservationStart = reservationStart;
-	}
 	
-	public int getDuration() {
-		return duration;
-	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
 	public int getMaxPersons() {
 		return maxPersons;
 	}
@@ -47,18 +36,7 @@ public class AdventureFastReservationDTO {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public LocalDate getValidityStart() {
-		return validityStart;
-	}
-	public void setValidityStart(LocalDate validityStart) {
-		this.validityStart = validityStart;
-	}
-	public LocalDate getValidityEnd() {
-		return validityEnd;
-	}
-	public void setValidityEnd(LocalDate validityEnd) {
-		this.validityEnd = validityEnd;
-	}
+	
 	public AdventureDTO getAdventure() {
 		return adventure;
 	}
@@ -71,13 +49,41 @@ public class AdventureFastReservationDTO {
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public AdventureFastReservationDTO(Long id, LocalDateTime reservationStart, int duration,
-			int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd, AdventureDTO adventure,
+	
+	public String getReservationStart() {
+		return reservationStart;
+	}
+	public void setReservationStart(String reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+	public String getReservationEnd() {
+		return reservationEnd;
+	}
+	public void setReservationEnd(String reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+	public String getValidityStart() {
+		return validityStart;
+	}
+	public void setValidityStart(String validityStart) {
+		this.validityStart = validityStart;
+	}
+	public String getValidityEnd() {
+		return validityEnd;
+	}
+	public void setValidityEnd(String validityEnd) {
+		this.validityEnd = validityEnd;
+	}
+	public AdventureFastReservationDTO() {
+		super();
+	}
+	public AdventureFastReservationDTO(Long id, String reservationStart, String reservationEnd, int maxPersons,
+			double price, String validityStart, String validityEnd, AdventureDTO adventure,
 			Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
-		this.duration = duration;
+		this.reservationEnd = reservationEnd;
 		this.maxPersons = maxPersons;
 		this.price = price;
 		this.validityStart = validityStart;
@@ -85,9 +91,7 @@ public class AdventureFastReservationDTO {
 		this.adventure = adventure;
 		this.additionalItems = additionalItems;
 	}
-	public AdventureFastReservationDTO() {
-		super();
-	}
+	
 	
 	
 	

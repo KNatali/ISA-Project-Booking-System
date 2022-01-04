@@ -205,49 +205,45 @@
     </div>
 
     <div class="my-5">
-      <article class="media ">
-
+      <article class="media " *ngFor="let action of actions">
         <div class="media-content">
           <div class="content">
             <div>
               <p style="font-size:16pt; font-weight: 800;">
-                Happy trip <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                {{action.adventure.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                  class="fa fa-star"></i>
               </p>
 
               <div>
-                <strong><i class="fa fa-calendar"></i> Start: 25/12/2021 08:00</strong>
+                <strong><i class="fa fa-calendar"></i> Start:{{action.reservationStart}}</strong>
                 <br />
-                <strong><i class="fa fa-calendar"></i> Duration: 3 days</strong>
+                <strong><i class="fa fa-calendar"></i> End: 3 {{action.reservationEnd}}</strong>
                 <br />
-                <strong><i class="fa fa-user"></i> 2 guests</strong>
+                <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
                 <br />
+                <strong><i class="fa fa-map-marker"></i>
+                  {{action.adventure.address.street}},{{action.adventure.address.city}}</strong>
+                <div class="columnAction">
+                  <span class="tag is-orange" *ngFor="let item of action.additionalItems">{{item.name}}</span>
 
-
-                <strong><i class="fa fa-map-marker"></i> North Roosevelt Boulevard,Key West</strong>
-                <div class="column">
-                  <span class="tag is-orange">Kitchen</span>
-                  <span class="tag is-orange">GPS</span>
-                  <span class="tag is-orange">Free Wi-Fi</span>
                 </div>
               </div>
-
-
             </div>
             <div class="columnPrice">
-
               <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">
                 Edit this action
               </button><br><br>
               <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
-              <small>Offer validity:10/12/2021 - 30/12/2021</small><br><br>
-
-
 
             </div>
           </div>
         </div>
+
       </article>
     </div>
+
+
+
 
 
     <!-- Modal -->
