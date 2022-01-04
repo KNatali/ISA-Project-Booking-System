@@ -1,7 +1,7 @@
 import { AdventureReservationService } from './../service/adventure-reservation.service';
 import { AdventureFastReservation } from './../model/adventureFastReservation';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdditionalItem } from '../model/additionalItem';
 import { Adventure } from '../model/adventure';
@@ -83,13 +83,13 @@ export class InstructorActionAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      validityStart: [''],
-      validityEnd: [''],
-      reservationStart: [''],
-      reservationEnd: [''],
-      guests: [''],
-      price: [''],
-      adventure: [''],
+      validityStart: ['', Validators.required],
+      validityEnd: ['', Validators.required],
+      reservationStart: ['', Validators.required],
+      reservationEnd: ['', Validators.required],
+      guests: ['', Validators.required],
+      price: ['', Validators.required],
+      adventure: ['', Validators.required],
       checkArray: this.formBuilder.array([])
     })
     this.formValue2 = this.formBuilder.group({
@@ -97,6 +97,9 @@ export class InstructorActionAddComponent implements OnInit {
     })
     this.getAdventures();
 
+  }
+  get registerFormControl() {
+    return this.formValue.controls;
   }
   onCheckboxChange(e: any) {
     this.checkArray = this.formValue.get('checkArray') as FormArray;

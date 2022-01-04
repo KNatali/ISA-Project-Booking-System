@@ -9,43 +9,69 @@
 
 
 
-      <!-- Modal -->
-
       <form [formGroup]="formValue">
         <div class="mb-3">
-          <label for="name" class="form-label">Validity start:</label>
+          <label for="validityStart" class="form-label">Validity start:</label>
           <input type="date" formControlName="validityStart" [(ngModel)]="newAction.validityStart" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.validityStart.touched ) && registerFormControl.validityStart.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
-          <label for="name" class="form-label">Validity end:</label>
+          <label for="validityEnd" class="form-label">Validity end:</label>
           <input type="date" formControlName="validityEnd" [(ngModel)]="newAction.validityEnd" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.validityEnd.touched ) && registerFormControl.validityEnd.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
-          <label for="name" class="form-label">Reservation start date and time:</label>
+          <label for="reservationStart" class="form-label">Reservation start date and time:</label>
           <input type="datetime-local" formControlName="reservationStart" [(ngModel)]="newAction.reservationStart"
             class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.reservationStart.touched ) && registerFormControl.reservationStart.errors?.required">
+            *required
+          </span>
         </div>
 
         <div class="mb-3">
-          <label for="city" class="form-label">Reservation end date and time::</label>
+          <label for="reservationEnd" class="form-label">Reservation end date and time::</label>
           <input type="datetime-local" formControlName="reservationEnd" [(ngModel)]="newAction.reservationEnd"
             class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.reservationEnd.touched ) && registerFormControl.reservationEnd.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
-          <label for="state" class="form-label">Number og guests:</label>
+          <label for="guests" class="form-label">Number og guests:</label>
           <input type="number" formControlName="guests" [(ngModel)]="newAction.maxPersons" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.guests.touched ) && registerFormControl.guests.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <div class="mb-3">
-            <label for="name" class="form-label">Price:</label>
+            <label for="price" class="form-label">Price:</label>
             <input type="number" formControlName="price" [(ngModel)]="newAction.price" class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.price.touched ) && registerFormControl.price.errors?.required">
+              *required
+            </span>
           </div>
           <div class="mb-3">
-            <label for="maxPersons" class="form-label">Adventure:</label>
+            <label for="adventure" class="form-label">Adventure:</label>
             <br>
             <select formControlName="adventure" (ngModelChange)="onChange($event)">
               <option *ngFor="let a of adventures" [ngValue]="a">{{a.name}}</option>
             </select>
+            <span class="text-danger"
+              *ngIf="(registerFormControl.adventure.touched ) && registerFormControl.adventure.errors?.required">
+              *required
+            </span>
           </div>
 
           <!-- <label for="name" class="form-label">Additional Items:</label>
@@ -57,6 +83,7 @@
           </div>
 -->
         </div>
+
 
 
       </form>
@@ -120,7 +147,8 @@
     </div>
 
 
-    <button class="col-md-12 " mat-button id="submit" (click)="addAction()">Submit</button>
+    <button [disabled]="!formValue.valid" class="col-md-12 " mat-button id="submit"
+      (click)="addAction()">Submit</button>
 
   </div>
 

@@ -60,9 +60,13 @@ div.block label {
 
 .column {
   padding: 20px;
-
   flex-grow: 1;
 }
+
+.columnAction {
+  flex-grow: 1;
+}
+
 
 
 #mainImage {
@@ -131,4 +135,6 @@ article {
   background-color: rgb(255, 196, 196);
   border-radius: 10px;
   padding: 20px;
+  margin-top: 20px;
+
 }

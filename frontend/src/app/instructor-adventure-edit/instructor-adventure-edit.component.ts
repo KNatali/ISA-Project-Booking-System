@@ -1,3 +1,4 @@
+import { AdventureFastReservation } from './../model/adventureFastReservation';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './../model/adventureBehavioralRules';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
@@ -30,6 +31,7 @@ export class InstructorAdventureEditComponent implements OnInit {
   showAdd: boolean;
   showUpdate: boolean;
   cancellation: any;
+  actions: AdventureFastReservation[];
   id: number;
   address = new Address({
     id: 0,
@@ -98,6 +100,7 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.loadEquipment();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
+    this.loadActions();
 
   }
   //Gets called when the user selects an image
@@ -235,6 +238,14 @@ export class InstructorAdventureEditComponent implements OnInit {
       this.id = param.id;
       this.adventureService.getAdventureAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => this.adventure.additionalItems = items);
+    });
+  }
+
+  loadActions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.adventureService.getAdventureFastReservations(this.id)
+        .subscribe((items: AdventureFastReservation[]) => this.actions = items);
     });
   }
 

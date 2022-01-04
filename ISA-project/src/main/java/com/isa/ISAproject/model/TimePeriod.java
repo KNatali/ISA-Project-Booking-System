@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,10 @@ public class TimePeriod {
 	private LocalDateTime start;
 	@Column
 	private LocalDateTime end;
+	
+	@Enumerated(EnumType.STRING)
+    private UnavailabilityType type;
+	
 	
 	@ManyToMany(mappedBy = "unavailability")
 	private Set<Instructor> instructors=new HashSet<>();
@@ -47,6 +53,15 @@ public class TimePeriod {
 	}
 	
 	
+	
+	public UnavailabilityType getType() {
+		return type;
+	}
+
+	public void setType(UnavailabilityType type) {
+		this.type = type;
+	}
+
 	public Set<Instructor> getInstructors() {
 		return instructors;
 	}
@@ -55,12 +70,16 @@ public class TimePeriod {
 		this.instructors = instructors;
 	}
 
-	public TimePeriod(Long id,LocalDateTime start, LocalDateTime end) {
+	
+	public TimePeriod(Long id, LocalDateTime start, LocalDateTime end, UnavailabilityType type) {
 		super();
-		this.id=id;
+		this.id = id;
 		this.start = start;
 		this.end = end;
+		this.type = type;
+		
 	}
+
 	public TimePeriod() {
 		super();
 	}

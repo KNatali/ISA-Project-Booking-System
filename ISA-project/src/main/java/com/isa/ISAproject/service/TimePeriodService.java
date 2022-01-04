@@ -28,7 +28,7 @@ public class TimePeriodService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
-		TimePeriod period=new TimePeriod(dto.getId(),start,end);
+		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
 		Instructor instructor=instructorRepository.getById(id);
 		Set<TimePeriod> periods=new HashSet<>();
 		if(instructor.getUnavailability()!=null) {
@@ -45,6 +45,9 @@ public class TimePeriodService {
 		return true;
 	}
 	
+	
+	
+	
 	public List<TimePeriodDTO> findUnavailabilityByInstructor(Long id){
 		Instructor instructor=instructorRepository.getById(id);
 		Set<TimePeriod> times=instructor.getUnavailability();
@@ -52,7 +55,7 @@ public class TimePeriodService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		
 		for (TimePeriod t : times) {
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter));
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
 			timesDTO.add(dto);
 			
 		}

@@ -30,9 +30,20 @@ public class AdventureFastReservationContoller {
 			value="api/instructors/fastReservations/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservations(@PathVariable(name="id") Long id){
+	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservationsByInstructor(@PathVariable(name="id") Long instructorId){
 		List<AdventureFastReservationDTO> list=new ArrayList<>();
-		list=this.adventureFastReservationService.getFastReservations(id);
+		list=this.adventureFastReservationService.getFastReservationsByInstructor(instructorId);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/instructor/adventure/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservationsByAdventure(@PathVariable(name="id") Long adventureId){
+		List<AdventureFastReservationDTO> list=new ArrayList<>();
+		list=this.adventureFastReservationService.getFastReservationsByAdventure(adventureId);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}

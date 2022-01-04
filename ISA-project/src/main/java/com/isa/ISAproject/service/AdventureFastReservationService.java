@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
@@ -19,7 +20,9 @@ import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureFastReservation;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureFastReservationRepository;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
@@ -29,14 +32,15 @@ public class AdventureFastReservationService {
 	
 	@Autowired
 	private AdventureFastReservationRepository adventureFastReservationRepository;
-	@Autowired
-	private InstructorRepository instructorRepository;
+	
 	@Autowired
 	private AdventureRepository adventureRepository;
 	@Autowired
 	private TimePeriodService timePeriodService;
+	@Autowired 
+	private EmailService emailService;
 
-	public List<AdventureFastReservationDTO> getFastReservations(Long id){
+	public List<AdventureFastReservationDTO> getFastReservationsByInstructor(Long id){
 		
 		List<AdventureFastReservationDTO> res=new ArrayList<>();
 		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
@@ -44,6 +48,19 @@ public class AdventureFastReservationService {
 		for (AdventureFastReservation a : reservations) {
 			if(a.getAdventure().getInstructor().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
+		}
+		return res;
+		
+	}
+	public List<AdventureFastReservationDTO> getFastReservationsByAdventure(Long id){
+		
+		List<AdventureFastReservationDTO> res=new ArrayList<>();
+		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
+		
+		for (AdventureFastReservation a : reservations) {
+			if(a.getAdventure().getInstructor().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(AdventureFastReservationMapper.convertToDTO(a));
+		
 		}
 		return res;
 		
@@ -68,12 +85,25 @@ public class AdventureFastReservationService {
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
+		time.setType(UnavailabilityType.Action);
 		if(timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId())==false)
 			return null;
 		
 		
 		AdventureFastReservation fast=new AdventureFastReservation(dto.getId(),adventure,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
 		adventureFastReservationRepository.save(fast);
+		
+		String message="There is new available action for adventure "+adventure.getName()+".Check this out on our website!";
+		Set<Client> subscribers=adventure.getSubscribers();
+		for (Client c : subscribers) {
+			try {
+				this.emailService.sendMessage(c.getEmail(), message);
+			} catch (MailException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		return AdventureFastReservationMapper.convertToDTO(fast);
 	}
 }

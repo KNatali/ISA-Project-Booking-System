@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
+import { AdventureFastReservation } from '../model/adventureFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,9 @@ export class AdventureService {
   getAdventureAdditionalItems(id: number): Observable<AdditionalItem[]> {
     return this.http.get<AdditionalItem[]>(`${this.urlAdventure}/` + `additionalItems` + `/${id}`);
   }
+  getAdventureFastReservations(id: number): Observable<AdventureFastReservation[]> {
+    return this.http.get<AdventureFastReservation[]>(`${this.urlAdventure}/` + `fastReservations` + `/${id}`);
+  }
 
   updateAdvenuture(id: number, data: Adventure): Observable<Adventure> {
     return this.http.post<Adventure>(`${this.urlAdventure}/${id}`, data);
@@ -62,12 +66,12 @@ export class AdventureService {
     const params: HttpParams = new HttpParams().append('instructorId', instructorId);
     return this.http.get<Adventure[]>(this.urlAdventures, { params });
   }
-  findByName(name:string):Observable<Adventure[]>{
-    const params:HttpParams=new HttpParams().append('name',name);
-    return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  findByName(name: string): Observable<Adventure[]> {
+    const params: HttpParams = new HttpParams().append('name', name);
+    return this.http.get<Adventure[]>(this.urlAdventures, { params });
   }
-  findByCity(city:string):Observable<Adventure[]>{
-    const params:HttpParams=new HttpParams().append('city',city);
-    return this.http.get<Adventure[]>(this.urlAdventures,{params});
+  findByCity(city: string): Observable<Adventure[]> {
+    const params: HttpParams = new HttpParams().append('city', city);
+    return this.http.get<Adventure[]>(this.urlAdventures, { params });
   }
 }

@@ -26,6 +26,7 @@ import {
 } from 'angular-calendar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TimePeriod } from '../model/timePeriod';
+import { UnavailabilityType } from '../model/unavailabilityType';
 
 const colors: any = {
   red: {
@@ -59,14 +60,14 @@ export class InstructorOverviewComponent implements OnInit {
   unvailabilities: TimePeriod[];
   period: TimePeriod = new TimePeriod({
     start: '',
-    end: ''
+    end: '',
+    type: UnavailabilityType.Default
   })
   view: CalendarView = CalendarView.Month;
   newEvent: CalendarEvent;
   CalendarView = CalendarView;
   formValue!: FormGroup;
   viewDate: Date = new Date();
-
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -122,7 +123,7 @@ export class InstructorOverviewComponent implements OnInit {
       this.newEvent = {
         start: new Date(u.start),
         end: new Date(u.end),
-        title: 'Unavailable',
+        title: u.type.toString(),
         color: colors.red,
         actions: this.actions,
         resizable: {
@@ -131,6 +132,11 @@ export class InstructorOverviewComponent implements OnInit {
         },
         draggable: true,
       }
+      if (u.type == UnavailabilityType.Action)
+        this.newEvent.color = colors.yellow;
+      else if (u.type == UnavailabilityType.Reservation)
+        this.newEvent.color = colors.blue;
+
       this.events.push(this.newEvent);
     });
   }

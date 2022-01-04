@@ -1,3 +1,4 @@
+import { AdventureFastReservation } from './../model/adventureFastReservation';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './../model/adventureBehavioralRules';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
@@ -23,6 +24,7 @@ export class InstructorAdventureProfileComponent implements OnInit {
   id: number;
   adventure: Adventure;
   currentRate = 8;
+  actions: AdventureFastReservation[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
 
@@ -34,9 +36,7 @@ export class InstructorAdventureProfileComponent implements OnInit {
     this.loadEquipment();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
-
-
-
+    this.loadActions();
 
 
   }
@@ -92,6 +92,14 @@ export class InstructorAdventureProfileComponent implements OnInit {
       this.id = param.id;
       this.adventureService.getAdventureAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => this.adventure.additionalItems = items);
+    });
+  }
+
+  loadActions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.adventureService.getAdventureFastReservations(this.id)
+        .subscribe((items: AdventureFastReservation[]) => this.actions = items);
     });
   }
 

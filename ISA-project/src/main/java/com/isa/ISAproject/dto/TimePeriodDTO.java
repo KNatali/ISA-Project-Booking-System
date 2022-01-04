@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 
+import com.isa.ISAproject.model.UnavailabilityType;
+
 public class TimePeriodDTO {
 
 	private Long id;
@@ -11,6 +13,8 @@ public class TimePeriodDTO {
 	private String start;
 	
 	private String end;
+	
+	private UnavailabilityType type;
 
 	public Long getId() {
 		return id;
@@ -36,11 +40,21 @@ public class TimePeriodDTO {
 		this.end = end;
 	}
 
-	public TimePeriodDTO(Long id, String start, String end) {
+	public UnavailabilityType getType() {
+		return type;
+	}
+
+	public void setType(UnavailabilityType type) {
+		this.type = type;
+	}
+
+	
+	public TimePeriodDTO(Long id, String start, String end, UnavailabilityType type) {
 		super();
 		this.id = id;
 		this.start = start;
 		this.end = end;
+		this.type = type;
 	}
 
 	public TimePeriodDTO() {
