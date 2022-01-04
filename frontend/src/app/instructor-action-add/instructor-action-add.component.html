@@ -11,47 +11,52 @@
 
       <!-- Modal -->
 
-      <form>
+      <form [formGroup]="formValue">
         <div class="mb-3">
           <label for="name" class="form-label">Validity start:</label>
-          <input type="date" formControlName="validityStart" class="form-control">
+          <input type="date" formControlName="validityStart" [(ngModel)]="newAction.validityStart" class="form-control">
         </div>
         <div class="mb-3">
           <label for="name" class="form-label">Validity end:</label>
-          <input type="date" formControlName="vaidityEnd" class="form-control">
+          <input type="date" formControlName="validityEnd" [(ngModel)]="newAction.validityEnd" class="form-control">
         </div>
         <div class="mb-3">
           <label for="name" class="form-label">Reservation start date and time:</label>
-          <input type="datetime-local" formControlName="reservationStart" class="form-control">
+          <input type="datetime-local" formControlName="reservationStart" [(ngModel)]="newAction.reservationStart"
+            class="form-control">
         </div>
 
         <div class="mb-3">
-          <label for="city" class="form-label">Duration(days):</label>
-          <input type="number" formControlName="city" class="form-control">
+          <label for="city" class="form-label">Reservation end date and time::</label>
+          <input type="datetime-local" formControlName="reservationEnd" [(ngModel)]="newAction.reservationEnd"
+            class="form-control">
         </div>
         <div class="mb-3">
           <label for="state" class="form-label">Number og guests:</label>
-          <input type="number" formControlName="state" class="form-control">
+          <input type="number" formControlName="guests" [(ngModel)]="newAction.maxPersons" class="form-control">
         </div>
         <div class="mb-3">
           <div class="mb-3">
             <label for="name" class="form-label">Price:</label>
-            <input type="number" formControlName="price" class="form-control">
+            <input type="number" formControlName="price" [(ngModel)]="newAction.price" class="form-control">
           </div>
-          <label for="maxPersons" class="form-label">Adventure:</label>
-          <br>
-          <select name="cars" id="cars">
-            <option value="volvo">Lucky B Sportfishing</option>
-            <option value="saab">The Long Run Sportfishing</option>
-            <option value="opel">Reel Floridian Fishing</option>
+          <div class="mb-3">
+            <label for="maxPersons" class="form-label">Adventure:</label>
+            <br>
+            <select formControlName="adventure" (ngModelChange)="onChange($event)">
+              <option *ngFor="let a of adventures" [ngValue]="a">{{a.name}}</option>
+            </select>
+          </div>
 
-          </select>
+          <!-- <label for="name" class="form-label">Additional Items:</label>
+          <div *ngFor="let item of additionalItems; let i=index">
+            <br>
+            <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+            {{item.name}}
+
+          </div>
+-->
         </div>
-        <hr>
-
-
-
-
 
 
       </form>
@@ -59,9 +64,10 @@
 
       <div class="column">
         <h3>Additional items:</h3>
+        <!--
         <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
           Add additional item
-        </button>
+        </button>-->
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -85,16 +91,6 @@
 
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -124,9 +120,7 @@
     </div>
 
 
-
-
-    <button class="col-md-12 " mat-button id="submit">Submit</button>
+    <button class="col-md-12 " mat-button id="submit" (click)="addAction()">Submit</button>
 
   </div>
 

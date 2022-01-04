@@ -37,11 +37,7 @@ import com.isa.ISAproject.service.InstructorService;
 @RequestMapping(value="/api/instructor/adventure")
 public class InstructorAdventureController {
 	@Autowired
-	private InstructorService instructorService;
-	@Autowired
 	private AdventureService adventureService;
-	@Autowired
-	private AddressService addressService;
 	
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

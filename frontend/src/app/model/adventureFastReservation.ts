@@ -8,10 +8,10 @@ import { Adventure } from './adventure';
 
 export interface AdventureFastReservationInterface {
     id?: number;
-    reservationStart: Date;
-    duration: number;
-    validityStart: Date;
-    validityEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -22,10 +22,10 @@ export interface AdventureFastReservationInterface {
 }
 export class AdventureFastReservation implements AdventureFastReservationInterface {
     id?: number;
-    reservationStart: Date;
-    duration: number;
-    validityStart: Date;
-    validityEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -34,7 +34,7 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
     constructor(obj: AdventureFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
-        this.duration = obj.duration;
+        this.reservationEnd = obj.reservationEnd;
         this.validityStart = obj.validityStart;
         this.validityEnd = obj.validityEnd;
         this.maxPersons = obj.maxPersons;

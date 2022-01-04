@@ -1,5 +1,6 @@
 package com.isa.ISAproject.mapper;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +22,10 @@ public class AdventureFastReservationMapper {
 			items.add(dto);
 			
 		}
-		AdventureFastReservationDTO dto=new AdventureFastReservationDTO(a.getId(),a.getReservationStart(),a.getDuration(),a.getMaxPersons(),a.getPrice(),a.getValidityEnd(),a.getValidityEnd(),adventure,items);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		AdventureFastReservationDTO dto=new AdventureFastReservationDTO(a.getId(),a.getReservationStart().format(formatter),a.getReservationEnd().format(formatter),a.getMaxPersons(),a.getPrice(),a.getValidityStart().format(formatter1),a.getValidityEnd().format(formatter1),adventure,items);
 	return dto;
 	}
 
