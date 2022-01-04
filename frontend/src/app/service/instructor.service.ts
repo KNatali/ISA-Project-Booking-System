@@ -14,6 +14,7 @@ import { TimePeriod } from '../model/timePeriod';
   providedIn: 'root'
 })
 export class InstructorService {
+
   urlInstructor = "http://localhost:8090/api/instructors";
   urlInstructor1 = "http://localhost:8090/api/instructors";
 
@@ -39,9 +40,7 @@ export class InstructorService {
     return this.http.get<Adventure[]>(`${this.urlInstructor1}/` + `adventures` + `/${id}`);
   }
 
-  getInstructorReservations(id: number): Observable<AdventureReservation[]> {
-    return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `reservations` + `/${id}`);
-  }
+
 
   getInstructorFastReservations(id: number): Observable<AdventureFastReservation[]> {
     return this.http.get<AdventureFastReservation[]>(`${this.urlInstructor1}/` + `fastReservations` + `/${id}`);
@@ -52,6 +51,9 @@ export class InstructorService {
   }
   getInstructorAdventuresClient(id: number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlInstructor_advetures}/${id}`);
+  }
+  getUpcomingInstructorReservations(id: number): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(`${this.urlInstructor1}/` + `upcomingReservations` + `/${id}`);
   }
 
   getCompletedInstructorReservations(id: number): Observable<AdventureReservation[]> {

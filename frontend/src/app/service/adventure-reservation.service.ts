@@ -24,4 +24,7 @@ export class AdventureReservationService {
   saveFastReservation(reservation: AdventureFastReservation): Observable<AdventureFastReservation> {
     return this.http.put<AdventureFastReservation>(`${this.urlReservation}` + '/addFastReservation', reservation);
   }
+  saveReservation(reservation: AdventureReservation): Observable<AdventureReservation> {
+    return this.http.put<AdventureReservation>(`${this.urlReservation}` + '/addReservation', reservation);
+  }
 }

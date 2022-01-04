@@ -1,20 +1,48 @@
 package com.isa.ISAproject.service;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
+import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.TimePeriodDTO;
+import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
+import com.isa.ISAproject.mapper.AdventureReservationMapper;
+import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.BoatReservation;
+import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.UnavailabilityType;
+import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 
 @Service
 public class AdventureReservationService {
 	@Autowired 
 	private AdventureReservationRepository adventureReservationRepository;
+	@Autowired
+	private AdventureRepository adventureRepository;
+	@Autowired
+	private TimePeriodService timePeriodService;
+	@Autowired 
+	private EmailService emailService;
+	@Autowired
+	private ClientRepository clientRepository;
 	
 	public List<AdventureReservation> findAll() {
 		return this.adventureReservationRepository.findAll();
@@ -77,5 +105,49 @@ public class AdventureReservationService {
 			}
 		}
 		return res;
+	}
+	
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) {
+		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
+		Client client=clientRepository.getById(dto.getClient().getId());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		
+		
+		TimePeriodDTO time=new TimePeriodDTO();
+		time.setStart(dto.getReservationStart());
+		time.setEnd(dto.getReservationEnd());
+		time.setType(UnavailabilityType.Reservation);
+		if(timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId())==false)
+			return null;
+		
+		long days = Duration.between(start, end).toDays();
+		int price=(int) (adventure.getPrice()*days);
+		Set<AdditionalItem> items=new HashSet<>();
+		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
+			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
+			items.add(a);
+			price+=a.getPrice();
+			
+		}
+		AdventureReservation res=new AdventureReservation(dto.getId(),start,end,adventure,dto.getNumberOfPersons(),price,items,client,null);
+		adventureReservationRepository.save(res);
+		List<AdventureReservation> list=client.getAdventureReservations();
+		list.add(res);
+		clientRepository.save(client);
+		
+		String message="Instructor has been make reservation for you for adventure "+adventure.getName()+".Check this in your reservation list";
+		
+			try {
+				this.emailService.sendMessage(client.getEmail(), message);
+			} catch (MailException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		
+		return AdventureReservationMapper.convertToDTO(res);
 	}
 }

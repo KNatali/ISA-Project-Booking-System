@@ -101,23 +101,7 @@ export class InstructorActionAddComponent implements OnInit {
   get registerFormControl() {
     return this.formValue.controls;
   }
-  onCheckboxChange(e: any) {
-    this.checkArray = this.formValue.get('checkArray') as FormArray;
 
-    if (e.target.checked) {
-      this.checkArray.push(new FormControl(e.target.value));
-
-    } else {
-      let i: number = 0;
-      this.checkArray.controls.forEach((item: { value: any; }) => {
-        if (item.value == e.target.value) {
-          this.checkArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
   onChange(newValue: any) {
     this.selectedAdventure = this.formValue.controls['adventure'].value;
     this.loadAdditionalItems();
