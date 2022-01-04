@@ -89,7 +89,7 @@ public class InstructorService {
 		return this.instructorRepository.findByOrderByGradeDesc();
 	}
 	
-	public List<AdventureReservationDTO> getReservations(Long id){
+	public List<AdventureReservationDTO> getUpcomingReservations(Long id){
 		List<AdventureReservationDTO> res=new ArrayList<>();
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
@@ -121,7 +121,22 @@ public class InstructorService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isAfter(LocalDateTime.now()))
+			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isBefore(LocalDateTime.now()))
+				temp.add(a);
+		}
+		for (AdventureReservation a : temp) {
+			res.add(AdventureReservationMapper.convertToDTO(a));
+		}
+		return res;
+		
+	}
+	
+	public List<AdventureReservationDTO> getActiveReservations(Long id){
+		List<AdventureReservationDTO> res=new ArrayList<>();
+		List<AdventureReservation> temp=new ArrayList<>();
+		List<AdventureReservation> reservations=reservationRepository.findAll();
+		for (AdventureReservation a : reservations) {
+			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isAfter(LocalDateTime.now()) && a.getReservationStart().isBefore(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {

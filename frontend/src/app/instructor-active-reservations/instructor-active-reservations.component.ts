@@ -20,4 +20,8 @@ export class InstructorActiveReservationsComponent implements OnInit {
       .subscribe(res => this.activeReservations = res)
   }
 
+  saveCurrentReservation(reservation: AdventureReservation) {
+    sessionStorage.setItem("currentReservation", JSON.stringify(reservation));
+  }
+
 }

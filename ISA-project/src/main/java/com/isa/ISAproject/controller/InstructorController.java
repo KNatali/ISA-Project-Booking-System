@@ -149,12 +149,12 @@ public class InstructorController {
 			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
 	@RequestMapping(
-			value="api/instructors/reservations/{id}",method = RequestMethod.GET,
+			value="api/instructors/upcomingReservations/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<List<AdventureReservationDTO>> getReservations(@PathVariable(name="id") Long id){
+	public ResponseEntity<List<AdventureReservationDTO>> getUpcomingReservations(@PathVariable(name="id") Long id){
 		List<AdventureReservationDTO> list=new ArrayList<>();
-		list=this.instructorService.getReservations(id);
+		list=this.instructorService.getUpcomingReservations(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
@@ -178,6 +178,16 @@ public class InstructorController {
 	public ResponseEntity<List<AdventureReservationDTO>> getCompletedReservations(@PathVariable(name="id") Long id){
 		List<AdventureReservationDTO> list=new ArrayList<>();
 		list=this.instructorService.getCompletedReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/instructors/activeReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureReservationDTO>> getActiveReservations(@PathVariable(name="id") Long id){
+		List<AdventureReservationDTO> list=new ArrayList<>();
+		list=this.instructorService.getActiveReservations(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}

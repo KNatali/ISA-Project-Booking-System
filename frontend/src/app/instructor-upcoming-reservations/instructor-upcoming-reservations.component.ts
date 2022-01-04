@@ -16,7 +16,7 @@ export class InstructorUpcomingReservationsComponent implements OnInit {
     this.getReservations();
   }
   getReservations() {
-    this.instructorService.getInstructorReservations(this.id)
+    this.instructorService.getUpcomingInstructorReservations(this.id)
       .subscribe(res => this.reservations = res)
   }
 

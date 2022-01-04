@@ -13,53 +13,77 @@
 
       <form [formGroup]="formValue">
         <div class="mb-3">
-          <label for="name" class="form-label">Start date and time:</label>
-          <input type="datetime-local" formControlName="reservationStart" class="form-control">
+          <label for="reservationStart" class="form-label">Start date and time:</label>
+          <input type="datetime-local" formControlName="reservationStart" [(ngModel)]="newReservation.reservationStart"
+            class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.reservationStart.touched ) && registerFormControl.reservationStart.errors?.required">
+            *required
+          </span>
         </div>
 
         <div class="mb-3">
-          <label for="city" class="form-label">End date and time:</label>
-          <input type="datetime-local" formControlName="city" class="form-control">
+          <label for="reservationEnd" class="form-label">End date and time:</label>
+          <input type="datetime-local" formControlName="reservationEnd" [(ngModel)]="newReservation.reservationEnd"
+            class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.reservationEnd.touched ) && registerFormControl.reservationEnd.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
-          <label for="state" class="form-label">Number og guests:</label>
-          <input type="number" formControlName="state" class="form-control">
+          <label for="guests" class="form-label">Number og guests:</label>
+          <input type="number" formControlName="guests" [(ngModel)]="newReservation.numberOfPersons"
+            class="form-control">
         </div>
         <div class="mb-3">
-          <label for="maxPersons" class="form-label">Adventure:</label>
+          <label for="adventure" class="form-label">Adventure:</label>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.adventure.touched ) && registerFormControl.adventure.errors?.required">
+            *required
+          </span>
           <br>
-          <select name="cars" id="cars">
-            <option value="volvo">Lucky B Sportfishing</option>
-            <option value="saab">The Long Run Sportfishing</option>
-            <option value="opel">Reel Floridian Fishing</option>
-
+          <select formControlName="adventure" (ngModelChange)="onChange($event)">
+            <option *ngFor="let a of adventures" [ngValue]="a">{{a.name}}</option>
           </select>
         </div>
         <hr>
 
-        <h3>Additional items:</h3>
 
-        <div class="mb-3">
-
-          <input type="checkbox" name="santioned"> FishFInder- 10$
-
-        </div>
-        <div class="mb-3">
-
-          <input type="checkbox" name="showUp"> Fridge- 5$
-
-        </div>
-        <div class="mb-3">
-
-          <input type="checkbox" name="showUp"> Fishing Certification- 20$
-
-        </div>
-        <hr>
-        <h2>Price: 200$</h2>
 
 
 
       </form>
+      <div class="column">
+        <h3>Additional items:</h3>
+        <!--
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          Add additional item
+        </button>-->
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price($)</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of additionalItems;let i = index">
+              <td>{{item.name}}</td>
+              <td>{{item.price}}</td>
+
+              <td>
+                <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+
+
+      </div>
 
 
     </div>
@@ -107,7 +131,7 @@
 
 
 
-    <button class="col-md-12 " mat-button id="submit">Submit</button>
+    <button class="col-md-12 " mat-button id="submit" (click)="saveReservation()">Submit</button>
 
   </div>
 

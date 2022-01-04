@@ -47,29 +47,12 @@ export class InstructorReservationsComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       content: ['']
     })
-    this.reservations = [];
-    this.completedReservations = [];
-    this.activeReservations = [];
-    this.getReservations();
-    this.getCompletedReservations()
-    this.getActiveReservations();
+
   }
   changeTab(tabName: string) {
     this.activeTab = tabName;
   }
 
-  getReservations() {
-    this.instructorService.getInstructorReservations(this.id)
-      .subscribe(res => this.reservations = res)
-  }
 
-  getCompletedReservations() {
-    this.instructorService.getCompletedInstructorReservations(this.id)
-      .subscribe(res => this.completedReservations = res)
-  }
-  getActiveReservations() {
-    this.instructorService.getActiveInstructorReservations(this.id)
-      .subscribe(res => this.activeReservations = res)
-  }
 
 }

@@ -2,6 +2,7 @@ package com.isa.ISAproject.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,8 +10,8 @@ import com.isa.ISAproject.model.AdventureReservation;
 
 public class AdventureReservationDTO {
 	private Long id;
-	private LocalDateTime reservationStart;
-	private LocalDateTime reservationEnd;
+	private String reservationStart;
+	private String reservationEnd;
 	private AdventureDTO adventure;
 	private double price;
 	private int numberOfPersons;
@@ -22,12 +23,7 @@ public class AdventureReservationDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDateTime getReservationStart() {
-		return reservationStart;
-	}
-	public void setReservationStart(LocalDateTime reservationStart) {
-		this.reservationStart = reservationStart;
-	}
+	
 	
 	public int getNumberOfPersons() {
 		return numberOfPersons;
@@ -35,11 +31,18 @@ public class AdventureReservationDTO {
 	public void setNumberOfPersons(int numberOfPersons) {
 		this.numberOfPersons = numberOfPersons;
 	}
-	public LocalDateTime getResevationEnd() {
+	
+	public String getReservationStart() {
+		return reservationStart;
+	}
+	public void setReservationStart(String reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+	public String getReservationEnd() {
 		return reservationEnd;
 	}
-	public void setResevationEnd(LocalDateTime resevationEnd) {
-		this.reservationEnd = resevationEnd;
+	public void setReservationEnd(String reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 	public AdventureDTO getAdventure() {
 		return adventure;
@@ -66,7 +69,7 @@ public class AdventureReservationDTO {
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public AdventureReservationDTO(Long id, LocalDateTime reservationStart, LocalDateTime resevationEnd, AdventureDTO adventure,
+	public AdventureReservationDTO(Long id, String reservationStart, String resevationEnd, AdventureDTO adventure,
 			double price,int persons, ClientProfileDTO client,  Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
@@ -80,9 +83,10 @@ public class AdventureReservationDTO {
 	}
 	public AdventureReservationDTO(AdventureReservation boatReservation) {
 		super();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		this.id = boatReservation.getId();
-		this.reservationStart = boatReservation.getReservationStart();
-		this.reservationEnd = boatReservation.getReservationEnd();
+		this.reservationStart = boatReservation.getReservationStart().format(formatter);
+		this.reservationEnd = boatReservation.getReservationEnd().format(formatter);
 		this.adventure = new AdventureDTO(boatReservation.getAdventure());
 		this.price = boatReservation.getPrice();
 		this.numberOfPersons=boatReservation.getNumberOfPersons();
