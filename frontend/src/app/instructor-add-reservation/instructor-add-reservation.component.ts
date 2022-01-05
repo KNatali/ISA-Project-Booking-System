@@ -77,7 +77,8 @@ export class InstructorAddReservationComponent implements OnInit {
     price: 0,
     additionalItems: this.additionalItems,
     client: this.client,
-    adventure: this.adventure
+    adventure: this.adventure,
+    systemEarning: 0
 
   })
   newAdditionalItem: AdditionalItem = new AdditionalItem({

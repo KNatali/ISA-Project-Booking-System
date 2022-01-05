@@ -47,10 +47,12 @@ public class AdventureReservation {
 	private List<AdventureComplaint> adventureComplaints;
 	@OneToOne
 	private InstructorReport report;
+	@Column
+	private double systemEarning;
 	
 	public AdventureReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
 			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,
-			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints) {
+			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints,double earning) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
@@ -61,6 +63,19 @@ public class AdventureReservation {
 		this.additionalItems = additionalItems;
 		this.client = client;
 		this.adventureComplaints = adventureComplaints;
+		this.systemEarning=earning;
+	}
+
+
+
+	public double getSystemEarning() {
+		return systemEarning;
+	}
+
+
+
+	public void setSystemEarning(double systemEarning) {
+		this.systemEarning = systemEarning;
 	}
 
 

@@ -15,7 +15,7 @@ export interface AdventureReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     adventure: Adventure;
-
+    systemEarning: number
 }
 export class AdventureReservation implements AdventureReservationInterface {
     id?: number;
@@ -26,6 +26,7 @@ export class AdventureReservation implements AdventureReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     adventure: Adventure;
+    systemEarning: number
 
     constructor(obj: AdventureReservationInterface) {
         this.id = obj.id;
@@ -36,6 +37,7 @@ export class AdventureReservation implements AdventureReservationInterface {
         this.additionalItems = obj.additionalItems;
         this.client = obj.client;
         this.adventure = obj.adventure;
+        this.systemEarning = obj.systemEarning;
 
 
 

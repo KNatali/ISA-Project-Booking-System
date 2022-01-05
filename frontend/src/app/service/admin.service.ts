@@ -11,6 +11,7 @@ import { Admin } from '../model/admin';
 import { User } from '../model/user';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { InstructorReport } from '../model/instructorReport';
+import { SystemEarnings } from '../model/systemEarnings';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,13 @@ export class AdminService {
     deleteUser(id: number) {
         return this.http.delete(`${this.urlAdmin}/` + `deleteUser` + `/${id}`);
 
+    }
+
+    getPercentage(): Observable<SystemEarnings> {
+        return this.http.get<SystemEarnings>(`${this.urlAdmin}/` + `getPercentage`);
+    }
+    setPercentage(percentage: SystemEarnings) {
+        return this.http.post(`${this.urlAdmin}/` + `setPercentage`, percentage);
     }
 
     addNewAdmin(newAdmin: User): Observable<User> {

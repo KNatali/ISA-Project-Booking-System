@@ -17,6 +17,7 @@ public class AdventureReservationDTO {
 	private int numberOfPersons;
 	private ClientProfileDTO client;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
+	private double systemEarning;
 	public Long getId() {
 		return id;
 	}
@@ -68,6 +69,13 @@ public class AdventureReservationDTO {
 	}
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
+	}
+	
+	public double getSystemEarning() {
+		return systemEarning;
+	}
+	public void setSystemEarning(double systemEarning) {
+		this.systemEarning = systemEarning;
 	}
 	public AdventureReservationDTO(Long id, String reservationStart, String resevationEnd, AdventureDTO adventure,
 			double price,int persons, ClientProfileDTO client,  Set<AdditionalItemDTO> additionalItems) {
