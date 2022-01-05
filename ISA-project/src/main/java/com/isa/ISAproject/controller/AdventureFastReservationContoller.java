@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
+import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.service.AdventureFastReservationService;
 
 @CrossOrigin("*")
@@ -53,6 +55,17 @@ public class AdventureFastReservationContoller {
 	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<AdventureFastReservationDTO>  addAdventureFastReservation(@RequestBody AdventureFastReservationDTO dto){
 		AdventureFastReservationDTO fastDTO=this.adventureFastReservationService.addAdventureFastReservation( dto);
+		if(fastDTO==null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="api/adventureReservation/editFastReservation",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<AdventureFastReservationDTO>  editAdventureFastReservation(@RequestBody EditAdventureFastReservationDTO dto){
+		AdventureFastReservationDTO fastDTO=this.adventureFastReservationService.editAdventureFastReservation( dto);
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);

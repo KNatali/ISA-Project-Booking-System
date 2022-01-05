@@ -230,10 +230,11 @@
               </div>
             </div>
             <div class="columnPrice">
-              <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">
+              <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3"
+                (click)="editAction(action)">
                 Edit this action
               </button><br><br>
-              <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
+              <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: {{action.price}}</div>
 
             </div>
           </div>
@@ -255,32 +256,37 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form [formGroup]="formAction">
               <div class="mb-3">
                 <label for="name" class="form-label">Validity start:</label>
-                <input type="date" formControlName="validityStart" class="form-control">
+                <input type="date" formControlName="validityStart" [(ngModel)]="selectedAction.validityStart"
+                  class="form-control">
               </div>
               <div class="mb-3">
                 <label for="name" class="form-label">Validity end:</label>
-                <input type="date" formControlName="vaidityEnd" class="form-control">
+                <input type="date" formControlName="validityEnd" [(ngModel)]="selectedAction.validityEnd"
+                  class="form-control">
               </div>
               <div class="mb-3">
                 <label for="name" class="form-label">Reservation start date and time:</label>
-                <input type="datetime-local" formControlName="reservationStart" class="form-control">
+                <input type="datetime-local" formControlName="reservationStart"
+                  [(ngModel)]="selectedAction.reservationStart" class="form-control">
               </div>
 
               <div class="mb-3">
-                <label for="city" class="form-label">Duration(days):</label>
-                <input type="number" formControlName="city" class="form-control">
+                <label for="name" class="form-label">Reservation end date and time:</label>
+                <input type="datetime-local" formControlName="reservationEnd"
+                  [(ngModel)]="selectedAction.reservationEnd" class="form-control">
               </div>
               <div class="mb-3">
                 <label for="state" class="form-label">Number og guests:</label>
-                <input type="number" formControlName="state" class="form-control">
+                <input type="number" formControlName="maxPersons" [(ngModel)]="selectedAction.maxPersons"
+                  class="form-control">
               </div>
               <div class="mb-3">
                 <div class="mb-3">
                   <label for="name" class="form-label">Price:</label>
-                  <input type="number" formControlName="price" class="form-control">
+                  <input type="number" formControlName="price" [(ngModel)]="selectedAction.price" class="form-control">
                 </div>
 
               </div>
@@ -292,11 +298,40 @@
 
 
             </form>
+
+            <div class="column">
+              <h3>Additional items:</h3>
+              <!--
+              <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Add additional item
+              </button>-->
+              <table class="table table-striped ">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of selectedAction.additionalItems;let i = index">
+                    <td>{{item.name}}</td>
+
+                    <td>
+                      <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+
+
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" id="cancel0" type="button" data-bs-dismiss="modal">Close</button>
 
-            <button class="btn btn-primary" type="button" (click)="update()">Update</button>
+            <button class="btn btn-primary" type="button" (click)="updateAction()">Update</button>
           </div>
         </div>
       </div>

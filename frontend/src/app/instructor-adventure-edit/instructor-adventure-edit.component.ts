@@ -1,3 +1,4 @@
+import { AdventureReservationService } from './../service/adventure-reservation.service';
 import { AdventureFastReservation } from './../model/adventureFastReservation';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './../model/adventureBehavioralRules';
@@ -6,11 +7,14 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { ActivatedRoute } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Loader } from '@googlemaps/js-api-loader';
+import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
+import { TimePeriod } from '../model/timePeriod';
+import { UnavailabilityType } from '../model/unavailabilityType';
 
 
 
@@ -31,6 +35,7 @@ export class InstructorAdventureEditComponent implements OnInit {
   showAdd: boolean;
   showUpdate: boolean;
   cancellation: any;
+
   actions: AdventureFastReservation[];
   id: number;
   address = new Address({
@@ -56,7 +61,7 @@ export class InstructorAdventureEditComponent implements OnInit {
 
   });
   adventure: Adventure;
-
+  additionalItems: AdditionalItem[];
   editedAdventure: Adventure = new Adventure({
     id: 0,
     name: '',
@@ -75,7 +80,28 @@ export class InstructorAdventureEditComponent implements OnInit {
   });
   currentRate = 8;
   formValue0!: FormGroup;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
+  formAction: FormGroup;
+  selectedAction: AdventureFastReservation = new AdventureFastReservation({
+    reservationStart: '',
+    reservationEnd: '',
+    validityStart: '',
+    validityEnd: '',
+    maxPersons: 0,
+    price: 0,
+    additionalItems: [],
+    adventure: this.editedAdventure
+  })
+  time: TimePeriod = new TimePeriod({
+    start: '',
+    end: '',
+    type: UnavailabilityType.Action
+  })
+  editFastReservation: EditAdventureFastReservation = new EditAdventureFastReservation({
+    action: this.selectedAction,
+    oldReservationPeriod: this.time
+  })
+
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService, private adventureReservationService: AdventureReservationService) { }
 
   ngOnInit(): void {
     this.loader = new Loader({
@@ -96,11 +122,28 @@ export class InstructorAdventureEditComponent implements OnInit {
 
 
     })
+    this.formAction = this.formBuilder.group({
+      validityStart: [''],
+      validityEnd: [''],
+      reservationStart: [''],
+      reservationEnd: [''],
+      maxPersons: [''],
+      price: [''],
+
+
+
+
+    });
+
     this.loadData();
     this.loadEquipment();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadActions();
+
+
+
+
 
   }
   //Gets called when the user selects an image
@@ -248,6 +291,29 @@ export class InstructorAdventureEditComponent implements OnInit {
         .subscribe((items: AdventureFastReservation[]) => this.actions = items);
     });
   }
+
+  editAction(action: AdventureFastReservation) {
+    this.selectedAction = action;
+    this.editFastReservation.oldReservationPeriod.start = this.selectedAction.reservationStart;
+
+    this.editFastReservation.oldReservationPeriod.end = this.selectedAction.reservationEnd;
+  }
+
+  deleteAdditionalItem(index: any) {
+    this.selectedAction.additionalItems.splice(index, 1);
+  }
+
+  updateAction() {
+    this.editFastReservation.action = this.selectedAction;
+    this.adventureReservationService.editFastReservation(this.editFastReservation)
+      .subscribe(res => {
+        alert("Sucessfully added new action!");
+
+      }, error => {
+        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
+      });
+  }
+
 
 
 }
