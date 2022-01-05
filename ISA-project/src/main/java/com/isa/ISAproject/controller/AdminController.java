@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.dto.AdminProfileDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.PasswordChangeDTO;
+import com.isa.ISAproject.dto.SystemEarningsDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.SystemEarnings;
 import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdminService;
 import com.isa.ISAproject.service.UserService;
@@ -39,6 +41,24 @@ public class AdminController {
 	private AddressService addressService;
 	
 
+	@RequestMapping(value="api/admin/getPercentage",method = RequestMethod.GET,produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<SystemEarningsDTO> getPercentage(){
+		SystemEarningsDTO dto=new SystemEarningsDTO((long) 1,SystemEarnings.percentage);
+		
+	
+		return new ResponseEntity<>(dto,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="api/admin/setPercentage",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<?> Percentage(@RequestBody SystemEarningsDTO dto){
+		SystemEarnings.percentage=dto.getPercentage();
+	
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="api/admin/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")

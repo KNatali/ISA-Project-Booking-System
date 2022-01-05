@@ -13,6 +13,10 @@ export class AdventureReservationService {
   urlReservation = "http://localhost:8090/api/adventureReservation";
   constructor(private http: HttpClient) { }
 
+  allAdventureReservations(): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(this.urlReservation + "/all");
+  }
+
   activeReservations(id: number): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(this.url + "/active/" + id);
   }

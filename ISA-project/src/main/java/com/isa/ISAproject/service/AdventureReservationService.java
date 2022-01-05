@@ -26,10 +26,12 @@ import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.SystemEarnings;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.ClientRepository;
+import com.isa.ISAproject.repository.SystemEarningsRepository;
 
 @Service
 public class AdventureReservationService {
@@ -43,6 +45,9 @@ public class AdventureReservationService {
 	private EmailService emailService;
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private SystemEarningsRepository systemEarningsRepository;
+	
 	
 	public List<AdventureReservation> findAll() {
 		return this.adventureReservationRepository.findAll();
@@ -132,7 +137,9 @@ public class AdventureReservationService {
 			price+=a.getPrice();
 			
 		}
-		AdventureReservation res=new AdventureReservation(dto.getId(),start,end,adventure,dto.getNumberOfPersons(),price,items,client,null);
+		double earning=SystemEarnings.percentage*price/100;
+		AdventureReservation res=new AdventureReservation(dto.getId(),start,end,adventure,dto.getNumberOfPersons(),price,items,client,null,earning);
+		res.setSystemEarning(earning);
 		adventureReservationRepository.save(res);
 		List<AdventureReservation> list=client.getAdventureReservations();
 		list.add(res);

@@ -28,6 +28,21 @@ public class AdventureReservationsController {
 	@Autowired
 	private AdventureReservationService adventureReservationService;
 	
+	@RequestMapping(value="api/adventureReservation/all",method = RequestMethod.GET,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<List<AdventureReservationDTO>> findAllResrvations(){
+		List<AdventureReservation> list=this.adventureReservationService.findAll();
+		List<AdventureReservationDTO> res=new ArrayList<>();
+		for (AdventureReservation advReservation : list) {
+			AdventureReservationDTO a=new AdventureReservationDTO(advReservation);
+			a.setSystemEarning(advReservation.getSystemEarning());
+			res.add(a);
+		}
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value="api/adventure-reservations/{id}",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('CLIENT')")
