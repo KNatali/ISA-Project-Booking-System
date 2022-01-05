@@ -6,7 +6,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { ActivatedRoute } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
 import { HttpClient, HttpEventType } from '@angular/common/http';
@@ -56,7 +56,7 @@ export class InstructorAdventureEditComponent implements OnInit {
 
   });
   adventure: Adventure;
-
+  additionalItems: AdditionalItem[];
   editedAdventure: Adventure = new Adventure({
     id: 0,
     name: '',
@@ -75,6 +75,18 @@ export class InstructorAdventureEditComponent implements OnInit {
   });
   currentRate = 8;
   formValue0!: FormGroup;
+  formAction: FormGroup;
+  selectedAction: AdventureFastReservation = new AdventureFastReservation({
+    reservationStart: '',
+    reservationEnd: '',
+    validityStart: '',
+    validityEnd: '',
+    maxPersons: 0,
+    price: 0,
+    additionalItems: [],
+    adventure: this.editedAdventure
+  })
+
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
@@ -96,6 +108,18 @@ export class InstructorAdventureEditComponent implements OnInit {
 
 
     })
+    this.formAction = this.formBuilder.group({
+      validityStart: [''],
+      validityEnd: [''],
+      reservationStart: [''],
+      reservationEnd: [''],
+      maxPersons: [''],
+      price: [''],
+
+
+
+
+    });
     this.loadData();
     this.loadEquipment();
     this.loadBehavioralRules();
@@ -247,6 +271,10 @@ export class InstructorAdventureEditComponent implements OnInit {
       this.adventureService.getAdventureFastReservations(this.id)
         .subscribe((items: AdventureFastReservation[]) => this.actions = items);
     });
+  }
+
+  editAction(action: AdventureFastReservation) {
+    this.selectedAction = action;
   }
 
 
