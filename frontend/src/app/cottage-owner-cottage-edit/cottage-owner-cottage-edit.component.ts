@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Loader } from '@googlemaps/js-api-loader';
 import { AdditionalItem } from '../model/additionalItem';
 import { Address } from '../model/address';
 import { Cottage } from '../model/cottage1';
@@ -15,8 +16,10 @@ import { Cottage1Service } from '../service/cottage1.service';
   styleUrls: ['./cottage-owner-cottage-edit.component.css']
 })
 export class CottageOwnerCottageEditComponent implements OnInit {
+  map: any;
+  loader: any;
   selectedFile: File;
-  retrievedImage: any;
+  retrievedImage: string;
   base64Data: any;
   retrieveResonse: any;
   message: string;
@@ -69,6 +72,9 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageService: Cottage1Service) { }
 
   ngOnInit(): void {
+    this.loader = new Loader({
+      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+    })
     this.formValue0 = this.formBuilder.group({
       name: [''],
       street: [''],
@@ -132,6 +138,10 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     this.editedCottage.address.state = this.formValue0.value.state;
     this.editedCottage.maxPersons = this.formValue0.value.maxPersons;
     this.editedCottage.price = this.formValue0.value.price;
+    if (this.selectedFile != null)
+      this.editedCottage.mainPicture = this.selectedFile.name;
+    else
+      this.editedCottage.mainPicture = this.cottage1.mainPicture;
     this.editedCottage.cancellationPercentage = this.formValue0.value.cancellationPercentage;
     this.editedCottage.description = this.formValue0.value.description;
     this.route.params.subscribe(param => {
@@ -142,6 +152,8 @@ export class CottageOwnerCottageEditComponent implements OnInit {
           ref?.click();
           this.formValue0.reset();
           this.loadData();
+          this.loadBehavioralRules();
+          this.loadAdditionalItems();
           alert("Successfully updated  adventure information!");
         }, error => {
           alert(error)
@@ -170,10 +182,27 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.cottageService.getCottage(this.id)
-        .subscribe((cottage: Cottage) => this.cottage1 = cottage);
+        .subscribe((cottage1: Cottage) => {
+          this.cottage1 = cottage1;
 
+          if (this.cottage1.mainPicture.substring(0, 7) != "/assets") {
+            this.http.get('http://localhost:8090/api/get/' + this.cottage1.mainPicture)
+              .subscribe(
+                res => {
+                  this.retrieveResonse = res;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.cottage1.mainPicture = 'data:image/jpeg;base64,' + this.base64Data;
+                }
+              );
+          }
+          this.loader.load().then(() => {
+            this.map = new google.maps.Map(document.getElementById("map")!, {
+              center: { lat: this.cottage1.address.latitude, lng: this.cottage1.address.longitude },
+              zoom: 11.5
+            })
+          })
+        });
     });
-
   }
 
   loadBehavioralRules() {
@@ -191,5 +220,4 @@ export class CottageOwnerCottageEditComponent implements OnInit {
         .subscribe((items: AdditionalItem[]) => this.cottage1.items = items);
     });
   }
-
 }

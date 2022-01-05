@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Cottage } from '../model/cottage';
+import { Cottage } from '../model/cottage1';
 import { ActivatedRoute } from '@angular/router';
-import { CottageService } from '../service/cottage.service';
 import { CottageOwner } from '../model/cottageOwner';
+import { Cottage1Service } from '../service/cottage1.service';
 
 @Component({
   selector: 'app-cottage-details-page',
@@ -11,7 +11,7 @@ import { CottageOwner } from '../model/cottageOwner';
 })
 export class CottageDetailsPageComponent implements OnInit {
   id: number;
-  cottage:Cottage=new Cottage({
+  cottage:Cottage;/*=new Cottage({
     id:0,
     name:'',
     state:'',
@@ -20,9 +20,9 @@ export class CottageDetailsPageComponent implements OnInit {
     description:'',
     grade:0,
     mainPicture:''
-  });
+  });*/
 
-  constructor(private route: ActivatedRoute,private cottageService:CottageService) { }
+  constructor(private route: ActivatedRoute,private cottageService: Cottage1Service) { }
 
   ngOnInit(): void {
     this.loadData();

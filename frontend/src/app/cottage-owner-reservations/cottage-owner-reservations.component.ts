@@ -18,8 +18,7 @@ export class CottageOwnerReservationsComponent implements OnInit {
   start: Date = new Date(2021, 10, 12, 7, 0, 0);
   end: Date = new Date(2021, 12, 20, 13, 0, 0);
   client: Client;
-
-
+  activeTab: string = 'ACTIVE';
 
   @Input() cottageOwner: CottageOwner = new CottageOwner({
     id: 0,
@@ -48,6 +47,9 @@ export class CottageOwnerReservationsComponent implements OnInit {
     this.getReservations();
     this.getCompletedReservations()
     this.getActiveReservations();
+  }
+  changeTab(tabName: string) {
+    this.activeTab = tabName;
   }
 
   getReservations() {

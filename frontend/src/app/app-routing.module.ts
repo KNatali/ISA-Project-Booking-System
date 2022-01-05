@@ -33,6 +33,12 @@ import { InstructorAddReservationComponent } from './instructor-add-reservation/
 import { InstructorActionAddComponent } from './instructor-action-add/instructor-action-add.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminAddAdminComponent } from './admin-add-admin/admin-add-admin.component';
+import { CottageOwnerCottageProfileComponent } from './cottage-owner-cottage-profile/cottage-owner-cottage-profile.component';
+import { CottageOwnerCottageEditComponent } from './cottage-owner-cottage-edit/cottage-owner-cottage-edit.component';
+import { CottageOwnerAddCottageComponent } from './cottage-owner-add-cottage/cottage-owner-add-cottage.component';
+import { CottageOwnerActionAddComponent } from './cottage-owner-action-add/cottage-owner-action-add.component';
+import { CottageOwnerReservationClientComponent } from './cottage-owner-reservation-client/cottage-owner-reservation-client.component';
+import { CottageOwnerAddReservationComponent } from './cottage-owner-add-reservation/cottage-owner-add-reservation.component';
 
 
 const routes: Routes = [
@@ -55,15 +61,21 @@ const routes: Routes = [
   { path: 'client-profil', component: ClientPageComponent },
   { path: 'instructor/adventures/:id', component: InstructorAdventureProfileComponent },
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
+  { path: 'cottageOwner/cottages/:id', component: CottageOwnerCottageProfileComponent },
+  { path: 'cottageOwner/cottages/edit/:id', component: CottageOwnerCottageEditComponent },
   { path: 'files', component: FileUploadComponent },
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
+  { path: 'cottageOwner/:id/cottage-add', component: CottageOwnerAddCottageComponent },
   { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
+  { path: 'cottageOwner/:id/action-add', component: CottageOwnerActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
+  { path: 'cottageOwner/:id/reservation-add', component: CottageOwnerAddReservationComponent },
 
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructor/reservations/:id', component: InstructorReservationClientComponent },
+  { path: 'cottageOwner/reservations/:id', component: CottageOwnerReservationClientComponent },
 
   { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
