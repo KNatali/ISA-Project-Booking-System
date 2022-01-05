@@ -1,3 +1,4 @@
+import { AdventureReservationService } from './../service/adventure-reservation.service';
 import { AdventureFastReservation } from './../model/adventureFastReservation';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules, AdventureBehavioralRulesInterface } from './../model/adventureBehavioralRules';
@@ -11,6 +12,9 @@ import { Address } from '../model/address';
 import { Instructor } from '../model/instructor';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Loader } from '@googlemaps/js-api-loader';
+import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
+import { TimePeriod } from '../model/timePeriod';
+import { UnavailabilityType } from '../model/unavailabilityType';
 
 
 
@@ -31,6 +35,7 @@ export class InstructorAdventureEditComponent implements OnInit {
   showAdd: boolean;
   showUpdate: boolean;
   cancellation: any;
+
   actions: AdventureFastReservation[];
   id: number;
   address = new Address({
@@ -86,8 +91,17 @@ export class InstructorAdventureEditComponent implements OnInit {
     additionalItems: [],
     adventure: this.editedAdventure
   })
+  time: TimePeriod = new TimePeriod({
+    start: '',
+    end: '',
+    type: UnavailabilityType.Action
+  })
+  editFastReservation: EditAdventureFastReservation = new EditAdventureFastReservation({
+    action: this.selectedAction,
+    oldReservationPeriod: this.time
+  })
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private adventureService: AdventureService, private adventureReservationService: AdventureReservationService) { }
 
   ngOnInit(): void {
     this.loader = new Loader({
@@ -120,11 +134,16 @@ export class InstructorAdventureEditComponent implements OnInit {
 
 
     });
+
     this.loadData();
     this.loadEquipment();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadActions();
+
+
+
+
 
   }
   //Gets called when the user selects an image
@@ -275,7 +294,26 @@ export class InstructorAdventureEditComponent implements OnInit {
 
   editAction(action: AdventureFastReservation) {
     this.selectedAction = action;
+    this.editFastReservation.oldReservationPeriod.start = this.selectedAction.reservationStart;
+
+    this.editFastReservation.oldReservationPeriod.end = this.selectedAction.reservationEnd;
   }
+
+  deleteAdditionalItem(index: any) {
+    this.selectedAction.additionalItems.splice(index, 1);
+  }
+
+  updateAction() {
+    this.editFastReservation.action = this.selectedAction;
+    this.adventureReservationService.editFastReservation(this.editFastReservation)
+      .subscribe(res => {
+        alert("Sucessfully added new action!");
+
+      }, error => {
+        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
+      });
+  }
+
 
 
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
@@ -22,10 +23,12 @@ import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureFastReservationRepository;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
+import com.isa.ISAproject.repository.TimePeriodRepository;
 
 @Service
 public class AdventureFastReservationService {
@@ -39,6 +42,11 @@ public class AdventureFastReservationService {
 	private TimePeriodService timePeriodService;
 	@Autowired 
 	private EmailService emailService;
+	@Autowired
+	private InstructorRepository instructorRepository;
+
+	@Autowired
+	private TimePeriodRepository timePeriodRepository;
 
 	public List<AdventureFastReservationDTO> getFastReservationsByInstructor(Long id){
 		
@@ -105,5 +113,60 @@ public class AdventureFastReservationService {
 			}
 		}
 		return AdventureFastReservationMapper.convertToDTO(fast);
+	}
+	
+	public AdventureFastReservationDTO editAdventureFastReservation(EditAdventureFastReservationDTO dto) {
+		AdventureFastReservationDTO actionDTO=dto.getAction();
+		TimePeriodDTO oldPeriod=dto.getOldReservationPeriod();
+		AdventureFastReservation res=adventureFastReservationRepository.getById(actionDTO.getId());
+		Adventure adventure=adventureRepository.getById(actionDTO.getAdventure().getId());
+		Set<AdditionalItem> items=new HashSet<>();
+		for (AdditionalItemDTO adto : actionDTO.getAdditionalItems()) {
+			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
+			items.add(a);
+			
+		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(actionDTO.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(actionDTO.getReservationEnd(),formatter);
+		
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
+		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
+		
+		/*Set<TimePeriod> unavailability=adventure.getInstructor().getUnavailability();
+		for (TimePeriod t : unavailability) {
+			if(t.getStart().isEqual(LocalDateTime.parse(oldPeriod.getStart(),formatter)) && t.getEnd().isEqual(LocalDateTime.parse(oldPeriod.getStart(),formatter))) 
+				unavailability.remove(t);
+		}
+		instructorRepository.save(adventure.getInstructor());
+		List<TimePeriod> times=timePeriodRepository.findAll();
+		for (TimePeriod t : times) {
+			if(t.getStart().isEqual(LocalDateTime.parse(oldPeriod.getStart(),formatter)) && t.getEnd().isEqual(LocalDateTime.parse(oldPeriod.getStart(),formatter))) 
+				timePeriodRepository.delete(t);
+		
+		}*/
+		timePeriodService.removeUnavailabilityInstructor(oldPeriod,(long) 1);
+			
+		
+		TimePeriodDTO time=new TimePeriodDTO();
+		time.setStart(actionDTO.getReservationStart());
+		time.setEnd(actionDTO.getReservationEnd());
+		time.setType(UnavailabilityType.Action);
+		if(timePeriodService.setUnavailabilityInstructor(time, actionDTO.getAdventure().getInstructor().getId())==false)
+			return null;
+		
+		res.setReservationStart(start);
+		res.setReservationEnd(end);
+		res.setValidityStart(start1);
+		res.setValidityEnd(end1);
+		res.setMaxPersons(actionDTO.getMaxPersons());
+		res.setPrice(actionDTO.getPrice());
+		res.setAdditionalItems(items);
+		adventureFastReservationRepository.save(res);
+		
+		
+		return AdventureFastReservationMapper.convertToDTO(res);
+		//return oldPeriod;
 	}
 }

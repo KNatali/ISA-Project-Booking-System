@@ -45,6 +45,29 @@ public class TimePeriodService {
 		return true;
 	}
 	
+	public boolean removeUnavailabilityInstructor(TimePeriodDTO dto,Long id) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
+		Instructor instructor=instructorRepository.getById(id);
+		Set<TimePeriod> periods=new HashSet<>();
+		if(instructor.getUnavailability()!=null) {
+			periods=instructor.getUnavailability();
+			for (TimePeriod t : periods) {
+				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
+					//instructor.getUnavailability().remove(period);
+					periods.remove(t);
+					this.instructorRepository.save(instructor);
+					this.timePeriodRepository.delete(period);
+					return true;
+				}
+			}
+		}
+	
+		return false;
+	}
+	
 	
 	
 	

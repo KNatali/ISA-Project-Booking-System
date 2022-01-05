@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
+import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,8 @@ export class AdventureReservationService {
   }
   saveReservation(reservation: AdventureReservation): Observable<AdventureReservation> {
     return this.http.put<AdventureReservation>(`${this.urlReservation}` + '/addReservation', reservation);
+  }
+  editFastReservation(reservation: EditAdventureFastReservation): Observable<AdventureFastReservation> {
+    return this.http.post<AdventureFastReservation>(`${this.urlReservation}` + '/editFastReservation', reservation);
   }
 }
