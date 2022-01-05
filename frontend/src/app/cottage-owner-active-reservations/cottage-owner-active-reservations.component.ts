@@ -19,4 +19,8 @@ export class CottageOwnerActiveReservationsComponent implements OnInit {
     this.cottageOwnerService.getActiveCottageOwnerReservations(this.id)
       .subscribe(res => this.activeReservations = res)
   }
+
+  saveCurrentReservation(reservation: CottageReservation) {
+    sessionStorage.setItem("currentReservation", JSON.stringify(reservation));
+  }
 }
