@@ -1,72 +1,27 @@
-<div class="container">
-  <h2>Define the percentage of earnings from the reservation:</h2>
-  <form [formGroup]="formValue">
-    <div class="mb-3">
-      <label for="percentage" class="form-label">Percentage(%):</label>
-      <input type="number" formControlName="percentage" class="form-control">
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
 
-    </div>
-    <button mat-button (click)="submit()">Submit</button>
-    <br>
 
-  </form>
-  <br>
-  <div class="mb-3">
-    <h1>Last defined percentage: {{earning.percentage}} %</h1>
+    <ul class="list-unstyled components">
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'OVERVIEW' }" (click)="changeTab('OVERVIEW')">Overview
+        </a>
+      </li>
+
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'ANALYTICS' }" (click)="changeTab('ANALYTICS')">Analytics</a>
+      </li>
+    </ul>
+  </nav>
+  <div id="content" *ngIf="activeTab=='OVERVIEW'">
+    <app-admin-earnings></app-admin-earnings>
   </div>
-  <hr>
-</div>
-<div class="content">
-  <h1>Total amount of earnings: {{total}}$</h1>
-  <hr>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-
-        <th scope="col">Service</th>
-        <th scope="col">Owner</th>
-        <th scope="col">Client</th>
 
 
-        <th scope="col">Price</th>
-        <th scope="col">Earnings</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of adventureReservations ; index as i">
 
 
-        <td>
-          {{item.adventure.name}}
-        </td>
-        <td>
-          {{item.adventure.instructor.firstName}} {{item.adventure.instructor.lastName}}
-        </td>
-        <td> {{item.client.firstName}} {{item.client.lastName}}</td>
-        <td> {{item.price}}</td>
-        <td> {{item.systemEarning}}</td>
 
-
-      </tr>
-      <tr *ngFor="let item of adventureReservations ; index as i">
-
-
-        <td>
-          {{item.adventure.name}}
-        </td>
-        <td>
-          {{item.adventure.instructor.firstName}} {{item.adventure.instructor.lastName}}
-        </td>
-        <td> {{item.client.firstName}} {{item.client.lastName}}</td>
-        <td> {{item.price}}</td>
-        <td> {{item.systemEarning}}</td>
-
-
-      </tr>
-
-
-    </tbody>
-  </table>
-  <hr>
-
-</div>
+  <div id="content" *ngIf="activeTab=='ANALYTICS'">
+    <app-admin-analytics></app-admin-analytics>
+  </div>

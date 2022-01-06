@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Define the time period of earnings:</h2>
+  <form [formGroup]="formValue">
+    <div class="mb-3">
+      <label for="startTime" class="form-label">Start date and time:</label>
+      <input type="datetime-local" formControlName="startTime" [(ngModel)]="period.start" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="endTime" class="form-label">End date and time:</label>
+      <input type="datetime-local" formControlName="endTime" [(ngModel)]="period.end" class="form-control">
+    </div>
+    <button mat-button (click)="submit()">Submit</button>
+
+  </form>
+  <br>
+  <div class="mb-3">
+    <h1>Total amount of earnings in seletced period: {{earningPeriod}} $</h1>
+  </div>
+  <hr>
+</div>
+<div class="content">
+  <div class="cards ">
+    <div class="card text-center">
+      <div class="card-header">
+        Total earnings
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{total}} $</p>
+      </div>
+    </div>
+    <div class="card text-center">
+      <div class="card-header">
+        Avg.reservation earning
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{average}} $</p>
+      </div>
+    </div>
+    <div class="card text-center">
+      <div class="card-header">
+        Completed payments
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{count}}</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

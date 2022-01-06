@@ -1,0 +1,34 @@
+.container {
+  padding: 30px;
+  width: 70%;
+  margin: auto;
+}
+
+/* ---------------------------------------------------
+          CONTENT STYLE
+      ----------------------------------------------------- */
+
+#content {
+  margin: auto;
+  width: 70% !important;
+  padding: 30px;
+  color: #0B2545;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+
+}
+
+.card {
+  width: 30%;
+}
+
+.card-text {
+  font-size: 18pt;
+}

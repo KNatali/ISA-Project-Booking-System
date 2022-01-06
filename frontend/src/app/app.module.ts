@@ -63,7 +63,7 @@ import { SortInstructorsComponent } from './sort-instructors/sort-instructors.co
 
 import { InstructorReservationsComponent } from './instructor-reservations/instructor-reservations.component';
 import { InstructorChangePasswordComponent } from './instructor-change-password/instructor-change-password.component';
-
+import { NgChartsModule } from 'ng2-charts';
 import { InstructorAdventureListComponent } from './instructor-adventure-list/instructor-adventure-list.component';
 import { CottageReservationListComponent } from './cottage-reservation-list/cottage-reservation-list.component';
 import { CottageReservationItemComponent } from './cottage-reservation-item/cottage-reservation-item.component';
@@ -139,6 +139,10 @@ import { AdminReservationReportsComponent } from './admin-reservation-reports/ad
 import { CottageOwnerActiveReservationsComponent } from './cottage-owner-active-reservations/cottage-owner-active-reservations.component';
 import { CottageOwnerUpcomingReservationsComponent } from './cottage-owner-upcoming-reservations/cottage-owner-upcoming-reservations.component';
 import { CottageOwnerCompletedReservationsComponent } from './cottage-owner-completed-reservations/cottage-owner-completed-reservations.component';
+import { AdminEarningsComponent } from './admin-earnings/admin-earnings.component';
+import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
+import { InstructorCalendarComponent } from './instructor-calendar/instructor-calendar.component';
+import { InstructorAnalyticsComponent } from './instructor-analytics/instructor-analytics.component';
 
 
 
@@ -262,7 +266,11 @@ import { CottageOwnerCompletedReservationsComponent } from './cottage-owner-comp
     AdminReservationReportsComponent,
     CottageOwnerActiveReservationsComponent,
     CottageOwnerUpcomingReservationsComponent,
-    CottageOwnerCompletedReservationsComponent
+    CottageOwnerCompletedReservationsComponent,
+    AdminEarningsComponent,
+    AdminAnalyticsComponent,
+    InstructorCalendarComponent,
+    InstructorAnalyticsComponent
 
 
 
@@ -280,7 +288,7 @@ import { CottageOwnerCompletedReservationsComponent } from './cottage-owner-comp
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatTabsModule,
-
+    NgChartsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({
