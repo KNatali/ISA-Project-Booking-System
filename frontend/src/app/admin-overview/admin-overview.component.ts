@@ -12,59 +12,39 @@ import { AdventureReservation } from '../model/AdventureReservation';
 })
 export class AdminOverviewComponent implements OnInit {
   formValue: FormGroup;
+  activeTab: string = 'OVERVIEW';
   adventureReservations: AdventureReservation[];
   earning: SystemEarnings = new SystemEarnings({
     percentage: 0
   })
+
   total: number = 0;
   constructor(private fb: FormBuilder, private adminService: AdminService, private adventureReservationService: AdventureReservationService) { }
-
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  startTime: '';
+  endTime: '';
+  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
   ngOnInit(): void {
     this.formValue = this.fb.group({
-
       percentage: ['']
-
     }
 
     );
-    this.getPercentage();
-
-    this.getAllAdventureReservations();
 
   }
 
-  getPercentage() {
-    this.adminService.getPercentage().subscribe(
-      res => {
-        this.earning = res;
-
-      }
-
-    );
+  changeTab(tabName: string) {
+    this.activeTab = tabName;
   }
 
-  getTotal() {
-    this.adventureReservations.forEach((value) => {
-      this.total = this.total + value.systemEarning;
-    });
-  }
-
-  submit() {
-    this.earning.percentage = this.formValue.controls['percentage'].value;
-    this.adminService.setPercentage(this.earning).subscribe(
-      res => {
-        this.getPercentage();
-      }
-    )
-
-  }
-
-  getAllAdventureReservations() {
-    this.adventureReservationService.allAdventureReservations()
-      .subscribe(res => {
-        this.adventureReservations = res;
-        this.getTotal();
-      })
-  }
 
 }
