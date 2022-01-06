@@ -1,12 +1,12 @@
 import { AdditionalItem } from "./additionalItem";
-import { Cottage } from "./cottage1";
+import { Cottage } from "./cottage";
 
 export interface CottageFastReservationInterface {
     id?: number;
-    reservationStart: Date;
-    duration: number;
-    validityStart: Date;
-    validityEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -14,10 +14,10 @@ export interface CottageFastReservationInterface {
 }
 export class CottageFastReservation implements CottageFastReservationInterface {
     id?: number;
-    reservationStart: Date;
-    duration: number;
-    validityStart: Date;
-    validityEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -25,7 +25,7 @@ export class CottageFastReservation implements CottageFastReservationInterface {
     constructor(obj: CottageFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
-        this.duration = obj.duration;
+        this.reservationEnd = obj.reservationEnd;
         this.validityStart = obj.validityStart;
         this.validityEnd = obj.validityEnd;
         this.maxPersons = obj.maxPersons;

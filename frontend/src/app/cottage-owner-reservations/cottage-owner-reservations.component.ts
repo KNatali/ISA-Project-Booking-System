@@ -41,29 +41,10 @@ export class CottageOwnerReservationsComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       content: ['']
     })
-    this.reservations = [];
-    this.completedReservations = [];
-    this.activeReservations = [];
-    this.getReservations();
-    this.getCompletedReservations()
-    this.getActiveReservations();
+
   }
   changeTab(tabName: string) {
     this.activeTab = tabName;
-  }
-
-  getReservations() {
-    this.cottageOwnerService.getCottageOwnerReservations(this.id)
-      .subscribe(res => this.reservations = res)
-  }
-
-  getCompletedReservations() {
-    this.cottageOwnerService.getCompletedCottageOwnerReservations(this.id)
-      .subscribe(res => this.completedReservations = res)
-  }
-  getActiveReservations() {
-    this.cottageOwnerService.getActiveCottageOwnerReservations(this.id)
-      .subscribe(res => this.activeReservations = res)
   }
 
 }

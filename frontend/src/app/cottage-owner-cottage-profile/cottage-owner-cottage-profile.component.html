@@ -43,11 +43,6 @@
       <div>
         <strong>Price (per day):</strong> <span id="price"> {{cottage1.price}} $</span>
       </div>
-  
-  
-  
-  
-  
       <hr />
       <div>
         <div>
@@ -66,56 +61,49 @@
         </div>
       </div>
       <hr />
-  
-        <div class="column">
-          <h3>Additional items:</h3>
-          <div *ngFor="let a of cottage1.items">
-            <i class="fa fa-check-circle"></i>
-            <span> {{a.name}} : {{a.price}} $</span>
-          </div>
+      <div class="columns">
+      <div class="column">
+        <h3>Additional items:</h3>
+        <div *ngFor="let a of cottage1.items">
+          <i class="fa fa-check-circle"></i>
+          <span> {{a.name}} : {{a.price}} $</span>
         </div>
       </div>
-      <hr>
-      <div>
-        <h3>Cancellation Policy:</h3>
-        <span style="color:darkred">{{cottage1.cancellationPercentage}} % keeps cottage owner</span>
-      </div>
+    </div>      
+    <hr>
+    <div>
+      <h3>Cancellation Policy:</h3>
+      <span style="color:darkred">{{cottage1.cancellationPercentage}} % keeps cottage owner</span>
+    </div>
+  </div>
   
       <!--DIO sa akcijama-->
       <div class="my-5">
-        <article class="media ">
-  
+        <article class="media " *ngFor="let action of actions">
           <div class="media-content">
             <div class="content">
               <div>
                 <p style="font-size:16pt; font-weight: 800;">
-                  Happy trip <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  {{action.cottage.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                    class="fa fa-star"></i>
                 </p>
   
                 <div>
-                  <strong><i class="fa fa-calendar"></i> Start: 25/12/2021 08:00</strong>
+                  <strong><i class="fa fa-calendar"></i> Start:{{action.validityStart}}</strong>
                   <br />
-                  <strong><i class="fa fa-calendar"></i> Duration: 3 days</strong>
+                  <strong><i class="fa fa-calendar"></i> End: 3 {{action.validityEnd}}</strong>
                   <br />
-                  <strong><i class="fa fa-user"></i> 2 guests</strong>
+                  <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
                   <br />
-  
-  
-                  <strong><i class="fa fa-map-marker"></i> North Roosevelt Boulevard,Key West</strong>
+                  <strong><i class="fa fa-map-marker"></i>
+                    {{action.cottage.address.street}},{{action.cottage.address.city}}</strong>
                   <div class="column">
-                    <span class="tag is-orange">Kitchen</span>
-                    <span class="tag is-orange">GPS</span>
-                    <span class="tag is-orange">Free Wi-Fi</span>
+                    <span class="tag is-orange" *ngFor="let item of action.additionalItems">{{item.name}}</span>
                   </div>
                 </div>
-  
-  
               </div>
               <div class="columnPrice">
-  
-  
                 <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
-                <small>Offer expires in 2 days!</small>
               </div>
             </div>
           </div>

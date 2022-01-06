@@ -92,10 +92,10 @@ public class CottageReservationDTO {
 	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
-	public LocalDateTime getResevationEnd() {
+	public LocalDateTime getReservationEnd() {
 		return reservationEnd;
 	}
-	public void setResevationEnd(LocalDateTime resevationEnd) {
+	public void setReservationEnd(LocalDateTime resevationEnd) {
 		this.reservationEnd = resevationEnd;
 	}
 	public CottageOwnerReportDTO getReport() {

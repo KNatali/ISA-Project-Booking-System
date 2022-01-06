@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
+import { CottageFastReservation } from '../model/cottageFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 export class CottageService {
   urlCottages="http://localhost:8090/api/cottages";
   urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
+  urlCottage1 = "http://localhost:8090/api/cottageOwners/cottages";
 
   constructor(private http:HttpClient) { }
 
@@ -62,5 +64,19 @@ export class CottageService {
     const params: HttpParams = new HttpParams().append('cottageOwnerId', cottageOwnerId);
     return this.http.get<Cottage[]>(this.urlCottages, { params });
   }
-  
+  getCottageFastReservations(id: number): Observable<CottageFastReservation[]> {
+    return this.http.get<CottageFastReservation[]>(`${this.urlCottage1}/` + `fastReservations` + `/${id}`);
+  }
+  getBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage1}/` + `rules` + `/${id}`);
+  }
+  getAdditionalItems(id: number): Observable<AdditionalItem[]> {
+    return this.http.get<AdditionalItem[]>(`${this.urlCottage1}/` + `additionalItems` + `/${id}`);
+  }
+  updateCottages(id: number, data: Cottage): Observable<Cottage> {
+    return this.http.post<Cottage>(`${this.urlCottage1}/${id}`, data);
+  }
+  addCottage(id: number, newCottage: Cottage): Observable<Cottage> {
+    return this.http.put<Cottage>(`${this.urlCottages}/` + `add` + `/${id}`, newCottage);
+  }
 }

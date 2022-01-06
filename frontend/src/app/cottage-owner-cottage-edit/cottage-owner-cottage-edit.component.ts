@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { AdditionalItem } from '../model/additionalItem';
 import { Address } from '../model/address';
-import { Cottage } from '../model/cottage1';
+import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
+import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageOwner } from '../model/cottageOwner';
-import { Cottage1Service } from '../service/cottage1.service';
+import { CottageService } from '../service/cottage.service';
 
 @Component({
   selector: 'app-cottage-owner-cottage-edit',
@@ -27,6 +28,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   showAdd: boolean;
   showUpdate: boolean;
   cancellation: any;
+  actions: CottageFastReservation[];
   id: number;
   address = new Address({
     id: 0,
@@ -66,10 +68,13 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     rules: [],
     items: [],
     rooms: [],
+    state: '',
+    street: '',
+    city: ''
   });
   currentRate = 8;
   formValue0!: FormGroup;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageService: Cottage1Service) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageService: CottageService) { }
 
   ngOnInit(): void {
     this.loader = new Loader({
@@ -93,7 +98,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
-
+    this.loadActions();
   }
   //Gets called when the user selects an image
   public onFileChanged(event: any) {
@@ -118,15 +123,10 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
-    alert(this.selectedFile.name);
-    //Make a call to the Spring Boot Application to save the image
+
     this.http.post('http://localhost:8090/api/upload', uploadImageData)
       .subscribe((response) => {
-        /*  if (response.status === 200) {
-            this.message = 'Image uploaded successfully';
-          } else {
-            this.message = 'Image not uploaded successfully';
-          }*/
+
       }
       );
   }
@@ -163,7 +163,6 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   //Gets called when the user clicks on retieve image button to get the image from back end
   getImage() {
     //Make a call to Sprinf Boot to get the Image Bytes.
-    alert(this.imageName)
     this.http.get('http://localhost:8090/api/get/' + this.imageName)
       .subscribe(
         res => {
@@ -208,7 +207,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   loadBehavioralRules() {
     this.route.params.subscribe(param => {
       this.id = param.id;
-      this.cottageService.getCottageBehavioralRules(this.id)
+      this.cottageService.getBehavioralRules(this.id)
         .subscribe((rules: CottageBehavioralRules[]) => this.cottage1.rules = rules);
     });
   }
@@ -216,8 +215,15 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   loadAdditionalItems() {
     this.route.params.subscribe(param => {
       this.id = param.id;
-      this.cottageService.getCottageAdditionalItems(this.id)
+      this.cottageService.getAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => this.cottage1.items = items);
+    });
+  }
+  loadActions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.cottageService.getCottageFastReservations(this.id)
+        .subscribe((items: CottageFastReservation[]) => this.actions = items);
     });
   }
 }

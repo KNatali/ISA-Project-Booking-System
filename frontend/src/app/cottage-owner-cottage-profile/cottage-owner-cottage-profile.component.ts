@@ -5,6 +5,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
+import { CottageFastReservation } from '../model/cottageFastReservation';
 import { Cottage1Service } from '../service/cottage1.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
   id: number;
   cottage1: Cottage;
   currentRate = 8;
+  actions: CottageFastReservation[];
 
   constructor(private http: HttpClient,private route: ActivatedRoute, private router: Router, private cottageService: Cottage1Service) { }
 
@@ -32,6 +34,7 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
+    this.loadActions();
   }
 
   loadData() {
@@ -78,6 +81,13 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
     });
   }
 
+  loadActions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.cottageService.getCottageFastReservations(this.id)
+        .subscribe((items: CottageFastReservation[]) => this.actions = items);
+    });
+  }
   edit() {
     this.router.navigate(['cottageOwner/cottages/edit/:id'])
   }

@@ -1,6 +1,6 @@
 import { AdditionalItem } from "./additionalItem";
 import { Client } from "./client";
-import { Cottage } from "./cottage1";
+import { Cottage } from "./cottage";
 
 export interface CottageReservationInterface {
     id?: number;
