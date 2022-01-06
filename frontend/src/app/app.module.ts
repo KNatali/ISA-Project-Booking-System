@@ -141,6 +141,8 @@ import { CottageOwnerUpcomingReservationsComponent } from './cottage-owner-upcom
 import { CottageOwnerCompletedReservationsComponent } from './cottage-owner-completed-reservations/cottage-owner-completed-reservations.component';
 import { AdminEarningsComponent } from './admin-earnings/admin-earnings.component';
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
+import { InstructorCalendarComponent } from './instructor-calendar/instructor-calendar.component';
+import { InstructorAnalyticsComponent } from './instructor-analytics/instructor-analytics.component';
 
 
 
@@ -266,7 +268,9 @@ import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.compo
     CottageOwnerUpcomingReservationsComponent,
     CottageOwnerCompletedReservationsComponent,
     AdminEarningsComponent,
-    AdminAnalyticsComponent
+    AdminAnalyticsComponent,
+    InstructorCalendarComponent,
+    InstructorAnalyticsComponent
 
 
 
