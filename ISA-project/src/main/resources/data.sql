@@ -244,3 +244,6 @@ insert into profile_delete_request(user_id,reason) values (4,'I am getting to ol
 insert into adventure_subscribers(adventure_id,client_id) values (1,5);
 insert into adventure_subscribers(adventure_id,client_id) values (1,8);
 
+insert into adventure_complaint(description,client_id,adventure_id) values('Instructor was very unpolite and rude!',5,1);
+
+insert into adventure_complaint(description,client_id,adventure_id) values('Service is too expensive. Nothing is like on pictures',8,1);
