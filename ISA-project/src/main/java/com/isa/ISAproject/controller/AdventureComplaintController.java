@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureComplaintDTO;
@@ -33,11 +34,12 @@ public class AdventureComplaintController {
 	
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
-	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,produces = {
+	
+	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,params = {"message"},produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
-	public ResponseEntity<?>  editAdventureFastReservation(@RequestBody AdventureComplaintDTO dto){
-		adventurComplaintService.answerAdventureComplaints(dto);
+	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody AdventureComplaintDTO dto,@RequestParam String message){
+		adventurComplaintService.answerAdventureComplaints(dto,message);
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}

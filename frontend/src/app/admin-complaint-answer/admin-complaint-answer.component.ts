@@ -23,9 +23,16 @@ export class AdminComplaintAnswerComponent implements OnInit {
 
   sendMessage() {
     this.answer = JSON.parse(sessionStorage.getItem("adventureComplaint")!);
-    this.answer.description = this.formValue.controls['message'].value;
-    alert(this.answer.description)
-    this.adminService.answerComplaint(this.answer).subscribe();
+    this.message = this.formValue.controls['message'].value;
+    this.adminService.answerComplaint(this.answer, this.message)
+      .subscribe(data => {
+        let ref = document.getElementById('cancelC');
+        ref?.click();
+        this.formValue.reset();
+        alert("Successfully sent answer to client and instructor");
+      }, error => {
+        alert(error)
+      });
 
   }
 

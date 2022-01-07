@@ -88,8 +88,9 @@ export class AdminService {
     getAllAdventureComplaints(): Observable<AdventureComplaint[]> {
         return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
     }
-    answerComplaint(answer: AdventureComplaint) {
-        return this.http.post(`${this.urlAdmin}/answerComplaint`, answer);
+    answerComplaint(complaint: AdventureComplaint, message: string) {
+        const params: HttpParams = new HttpParams().append('message', message);
+        return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint, { params });
     }
 
 }

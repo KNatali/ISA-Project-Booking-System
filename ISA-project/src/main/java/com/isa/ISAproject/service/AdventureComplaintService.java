@@ -44,20 +44,22 @@ public class AdventureComplaintService {
 		
 	}
 	
-	public void answerAdventureComplaints(AdventureComplaintDTO dto){
+	public void answerAdventureComplaints(AdventureComplaintDTO dto,String message){
 		
 				try {
 					System.out.println("Thread id: " + Thread.currentThread().getId());
-					emailService.sendMessage(dto.getClient().getEmail(),dto.getDescription());
+					emailService.sendMessage(dto.getClient().getEmail(),message);
 				}catch( Exception e ){
 					logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 				}
 		try {
 			System.out.println("Thread id: " + Thread.currentThread().getId());
-			emailService.sendMessage(dto.getAdventure().getInstructor().getEmail(),dto.getDescription());
+			emailService.sendMessage(dto.getAdventure().getInstructor().getEmail(),message);
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
+		AdventureComplaint ac=adventureComplaintRespository.getById(dto.getId());
+		adventureComplaintRespository.delete(ac);
 		
 		
 		
