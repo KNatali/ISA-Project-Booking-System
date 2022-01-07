@@ -16,7 +16,7 @@ public class AdventureComplaint {
 	@ManyToOne
 	private Client client;
 	@ManyToOne
-	private AdventureReservation adventureReservation;
+	private Adventure adventure;
 	public Long getId() {
 		return id;
 	}
@@ -35,19 +35,21 @@ public class AdventureComplaint {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public AdventureReservation getAdventureReservation() {
-		return adventureReservation;
+	
+	
+	public Adventure getAdventure() {
+		return adventure;
 	}
-	public void setAdventureReservation(AdventureReservation adventureReservation) {
-		this.adventureReservation = adventureReservation;
-	}
-	public AdventureComplaint(Long id, String description, Client client, AdventureReservation adventureReservation) {
+	
+	public AdventureComplaint(Long id, String description, Client client, Adventure adventure) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.client = client;
-		this.adventureReservation = adventureReservation;
+		this.adventure = adventure;
 	}
-	
+	public void setAdventure(Adventure adventure) {
+		this.adventure = adventure;
+	}
 	public AdventureComplaint () {}
 }

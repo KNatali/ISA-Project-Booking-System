@@ -1,9 +1,13 @@
+import { AdventureFastReservation } from './../model/adventureFastReservation';
+import { AnalyticsService } from './../service/analytics.service';
 import { InstructorService } from './../service/instructor.service';
 import {
   Component,
   ChangeDetectionStrategy,
   OnInit,
   Input,
+  ViewChild,
+  TemplateRef,
 
 } from '@angular/core';
 import {
@@ -24,9 +28,12 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TimePeriod } from '../model/timePeriod';
 import { UnavailabilityType } from '../model/unavailabilityType';
+import { AdventureReservation } from '../model/AdventureReservation';
+import { ThrowStmt } from '@angular/compiler';
 
 const colors: any = {
   red: {
@@ -55,6 +62,8 @@ const colors: any = {
 })
 export class InstructorCalendarComponent implements OnInit {
   @Input() id: number;
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('modalContentAction', { static: true }) modalContentAction: TemplateRef<any>;
   startTime: any;
   endTime: any;
   unvailabilities: TimePeriod[];
@@ -63,6 +72,7 @@ export class InstructorCalendarComponent implements OnInit {
     end: '',
     type: UnavailabilityType.Default
   })
+  showReport: boolean = false;
   view: CalendarView = CalendarView.Month;
   newEvent: CalendarEvent;
   CalendarView = CalendarView;
@@ -99,14 +109,31 @@ export class InstructorCalendarComponent implements OnInit {
   ];
 
   activeDayIsOpen: boolean = true;
-
-  constructor(private formBuilder: FormBuilder, private instructorService: InstructorService) { }
+  reservations: AdventureReservation[];
+  fastReservations: AdventureFastReservation[];
+  selectedReservation: AdventureReservation;
+  selectedFastReservation: AdventureFastReservation;
+  constructor(private modal: NgbModal, private formBuilder: FormBuilder, private instructorService: InstructorService, private analyticsService: AnalyticsService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
       endTime: ['']
     })
     this.getUnavailability();
+    this.getInstructorReservations();
+    this.getInstructorFastReservations();
+  }
+
+  getInstructorReservations() {
+    this.analyticsService.getInstructorReservations(this.id)
+      .subscribe(res => {
+        this.reservations = res;
+      })
+  }
+
+  getInstructorFastReservations() {
+    this.instructorService.getInstructorFastReservations(this.id)
+      .subscribe(res => this.fastReservations = res)
   }
 
   getUnavailability() {
@@ -197,6 +224,28 @@ export class InstructorCalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.reservations.forEach((u, index) => {
+
+      if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
+        this.selectedReservation = u;
+        this.showReport = false;
+        if (new Date() > new Date(u.reservationEnd)) {
+          this.showReport = true;
+        }
+
+        this.modal.open(this.modalContent, { size: 'md' });
+      }
+    })
+    this.fastReservations.forEach((u, index) => {
+
+      if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
+        this.selectedFastReservation = u;
+        this.modal.open(this.modalContentAction, { size: 'md' });
+
+      }
+    })
+
 
   }
 
@@ -227,5 +276,11 @@ export class InstructorCalendarComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  addReport() {
+    sessionStorage.setItem("adventureReservation", JSON.stringify(this.selectedReservation));
+    let ref = document.getElementById('closeOK');
+    ref?.click();
   }
 }

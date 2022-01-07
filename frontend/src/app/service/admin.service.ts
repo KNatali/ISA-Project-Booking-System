@@ -12,6 +12,7 @@ import { User } from '../model/user';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { InstructorReport } from '../model/instructorReport';
 import { SystemEarnings } from '../model/systemEarnings';
+import { AdventureComplaint } from '../model/adventureComplaint';
 
 @Injectable({
     providedIn: 'root'
@@ -83,6 +84,13 @@ export class AdminService {
     }
     rejectReservationReport(report: InstructorReport) {
         return this.http.put(`${this.urlAdmin}/rejectInstructorReport`, report);
+    }
+    getAllAdventureComplaints(): Observable<AdventureComplaint[]> {
+        return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+    }
+    answerComplaint(complaint: AdventureComplaint, message: string) {
+        const params: HttpParams = new HttpParams().append('message', message);
+        return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint, { params });
     }
 
 }

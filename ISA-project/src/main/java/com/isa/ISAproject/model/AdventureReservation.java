@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,7 +41,9 @@ public class AdventureReservation {
 	private int numberOfPersons;
 	@Column(nullable=false)
 	private double price;
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name="adventure_reservation_additional_items",joinColumns = @JoinColumn(name = "adventure_reservation_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@ManyToOne
 	private Client client;

@@ -143,6 +143,8 @@ import { AdminEarningsComponent } from './admin-earnings/admin-earnings.componen
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { InstructorCalendarComponent } from './instructor-calendar/instructor-calendar.component';
 import { InstructorAnalyticsComponent } from './instructor-analytics/instructor-analytics.component';
+import { AdminClientComplaintsComponent } from './admin-client-complaints/admin-client-complaints.component';
+import { AdminComplaintAnswerComponent } from './admin-complaint-answer/admin-complaint-answer.component';
 
 
 
@@ -270,7 +272,9 @@ import { InstructorAnalyticsComponent } from './instructor-analytics/instructor-
     AdminEarningsComponent,
     AdminAnalyticsComponent,
     InstructorCalendarComponent,
-    InstructorAnalyticsComponent
+    InstructorAnalyticsComponent,
+    AdminClientComplaintsComponent,
+    AdminComplaintAnswerComponent
 
 
 
