@@ -72,8 +72,9 @@ export class AdminService {
     acceptProfileDeleteRequests(request: ProfileDeleteRequest): Observable<User> {
         return this.http.put<User>(`${this.urlAdmin}/acceptProfileDeleteRequest`, request);
     }
-    rejectProfileDeleteRequests(request: ProfileDeleteRequest): Observable<User> {
-        return this.http.put<User>(`${this.urlAdmin}/rejectProfileDeleteRequest`, request);
+    rejectProfileDeleteRequests(request: ProfileDeleteRequest, message: string): Observable<User> {
+        const params: HttpParams = new HttpParams().append('message', message);
+        return this.http.put<User>(`${this.urlAdmin}/rejectProfileDeleteRequest`, request, { params });
     }
 
     getAllReservationRrports(): Observable<InstructorReport[]> {
