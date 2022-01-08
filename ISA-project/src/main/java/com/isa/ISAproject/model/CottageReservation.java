@@ -192,7 +192,7 @@ public class CottageReservation {
 		this.cottage=cottage;
 	}
 	
-	/*public CottageReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
+	public CottageReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
 			Cottage cottage, int maxPersons, double price, CottageReport report,
 			Set<AdditionalItem> additionalItems, Client client, Set<CottageComplaint> cottageComplaints) {
 		super();
@@ -206,7 +206,7 @@ public class CottageReservation {
 		this.additionalItems = additionalItems;
 		this.client = client;
 		this.cottageComplaints = cottageComplaints;
-	}*/
+	}
 	
 	public CottageReservation() {}
 }

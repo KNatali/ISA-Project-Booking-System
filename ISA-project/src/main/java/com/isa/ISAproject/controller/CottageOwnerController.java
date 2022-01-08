@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
@@ -154,16 +155,6 @@ public class CottageOwnerController {
 		return new ResponseEntity<>(dto,HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value="api/cottageOwners/completedReservations/{id}",method = RequestMethod.GET,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('COTTAGE_OWNER')")
-	public ResponseEntity<List<CottageReservationDTO>> getCompletedReservations(@PathVariable(name="id") Long id){
-		List<CottageReservationDTO> list=new ArrayList<>();
-		list=this.cottageOwnerService.getCompletedReservations(id);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
-	
 	@RequestMapping(value = "api/cottageOwners/cottages/{id}",method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('COTTAGE_OWNER')")
 	public ResponseEntity<CottageDTO> delete(@PathVariable Long id){
@@ -210,5 +201,37 @@ public class CottageOwnerController {
 				cottagesDTO.add(cottage);
 			}
 			return new ResponseEntity<>(cottagesDTO,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/cottageOwners/activeReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<List<CottageReservationDTO>> getActiveReservations(@PathVariable(name="id") Long id){
+		List<CottageReservationDTO> list=new ArrayList<>();
+		list=this.cottageOwnerService.getActiveReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/cottageOwners/upcomingReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<List<CottageReservationDTO>> getUpcomingReservations(@PathVariable(name="id") Long id){
+		List<CottageReservationDTO> list=new ArrayList<>();
+		list=this.cottageOwnerService.getUpcomingReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/cottageOwners/completedReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<List<CottageReservationDTO>> getCompletedReservations(@PathVariable(name="id") Long id){
+		List<CottageReservationDTO> list=new ArrayList<>();
+		list=this.cottageOwnerService.getCompletedReservations(id);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 }

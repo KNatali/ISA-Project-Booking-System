@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
+import { CottageFastReservation } from '../model/cottageFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,8 @@ export class Cottage1Service {
   findByCottageOwner(cottageOwnerId: number): Observable<Cottage[]> {
     const params: HttpParams = new HttpParams().append('cottageOwnerId', cottageOwnerId);
     return this.http.get<Cottage[]>(this.urlCottages, { params });
+  }
+  getCottageFastReservations(id: number): Observable<CottageFastReservation[]> {
+    return this.http.get<CottageFastReservation[]>(`${this.urlCottage}/` + `fastReservations` + `/${id}`);
   }
 }

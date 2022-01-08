@@ -184,9 +184,9 @@ insert into cottage_fast_reservation(reservation_start,date,time,duration,validi
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00');
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
 insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2023-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00');
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2021-12-4-07-00-00','2021-12-20-14-00-00');
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2021-11-10-07-00-00','2021-11-12-13-00-00');
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-20-14-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00');
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00');
 
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
