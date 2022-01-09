@@ -32,18 +32,21 @@ export class AdminProfileDeleteRequestsComponent implements OnInit {
 
   accept(request: ProfileDeleteRequest, id: any) {
     this.adminService.acceptProfileDeleteRequests(request)
-      .subscribe();
-    this.requests.forEach((request, index) => {
-      if (request.id == id) this.requests.splice(index, 1);
-    });
-    alert("Successfully sent message to accepted user!")
+      .subscribe(res => {
+        this.requests.forEach((request, index) => {
+          if (request.id == id) this.requests.splice(index, 1);
+        });
+        alert("Successfully sent message to accepted user!")
+      }, error => {
+        alert("Error! Please try again!");
+      });
+
   }
 
   reject(request: ProfileDeleteRequest, id: any) {
 
-    sessionStorage.setItem("email", request.userDTO.email);
-    this.adminService.rejectProfileDeleteRequests(request)
-      .subscribe();
+    sessionStorage.setItem("profileDeleteRequest", JSON.stringify(request));
+
     this.requests.forEach((request, index) => {
       if (request.id == id) this.requests.splice(index, 1);
     });

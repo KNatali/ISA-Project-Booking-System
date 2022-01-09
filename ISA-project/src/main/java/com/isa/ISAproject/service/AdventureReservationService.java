@@ -112,7 +112,7 @@ public class AdventureReservationService {
 		return res;
 	}
 	
-	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) {
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws Exception {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
 		

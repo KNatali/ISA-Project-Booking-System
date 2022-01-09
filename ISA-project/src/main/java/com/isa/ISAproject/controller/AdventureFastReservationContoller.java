@@ -53,7 +53,7 @@ public class AdventureFastReservationContoller {
 	@RequestMapping(value="api/adventureReservation/addFastReservation",method = RequestMethod.PUT,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<AdventureFastReservationDTO>  addAdventureFastReservation(@RequestBody AdventureFastReservationDTO dto){
+	public ResponseEntity<AdventureFastReservationDTO>  addAdventureFastReservation(@RequestBody AdventureFastReservationDTO dto) throws Exception{
 		AdventureFastReservationDTO fastDTO=this.adventureFastReservationService.addAdventureFastReservation( dto);
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,7 +64,7 @@ public class AdventureFastReservationContoller {
 	@RequestMapping(value="api/adventureReservation/editFastReservation",method = RequestMethod.POST,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<AdventureFastReservationDTO>  editAdventureFastReservation(@RequestBody EditAdventureFastReservationDTO dto){
+	public ResponseEntity<AdventureFastReservationDTO>  editAdventureFastReservation(@RequestBody EditAdventureFastReservationDTO dto) throws Exception{
 		AdventureFastReservationDTO fastDTO=this.adventureFastReservationService.editAdventureFastReservation( dto);
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,8 +1,10 @@
+import { ProfileDeleteRequest } from './../model/profileDeleteRequest';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdditionalItem } from '../model/additionalItem';
 import { EmailMessage } from '../model/emailMessage';
 import { EmailMessageService } from '../service/email-message.service';
+import { AdminService } from '../service/admin.service';
 
 @Component({
   selector: 'app-admin-reject-request',
@@ -17,7 +19,8 @@ export class AdminRejectRequestComponent implements OnInit {
     message: "",
     email: ""
   })
-  constructor(private formBuilder: FormBuilder, private emailService: EmailMessageService) { }
+  answer: ProfileDeleteRequest;
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       message: [''],
@@ -28,20 +31,21 @@ export class AdminRejectRequestComponent implements OnInit {
 
 
   sendMessage() {
-    this.rejectMessage.message = this.formValue.controls['message'].value
+    this.message = this.formValue.controls['message'].value
 
-    this.rejectMessage.email = sessionStorage.getItem("email")!;
+    this.answer = JSON.parse(sessionStorage.getItem("profileDeleteRequest")!);
 
-    this.emailService.sendRegistrationRejectMessage(this.rejectMessage)
+
+    this.adminService.rejectProfileDeleteRequests(this.answer, this.message)
       .subscribe(data => {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-
         alert("Successfully sent message to rejected user");
       }, error => {
-        alert(error)
+        alert("Error! Please try againg!")
       });
+
 
 
   }

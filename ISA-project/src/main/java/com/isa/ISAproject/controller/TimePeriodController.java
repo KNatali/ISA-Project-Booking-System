@@ -3,6 +3,7 @@ package com.isa.ISAproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import com.isa.ISAproject.dto.ProfileDeleteRequestDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.service.TimePeriodService;
 
+import javassist.NotFoundException;
+
 @CrossOrigin("*")
 @RestController
 public class TimePeriodController {
@@ -28,10 +31,18 @@ public class TimePeriodController {
 	@RequestMapping(value="api/instructors/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<?> setUnavailabilityInstructor(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
-		if(timePeriodService.setUnavailabilityInstructor(dto,id))
-			return new ResponseEntity<>(HttpStatus.OK);
+		try {
+			timePeriodService.setUnavailabilityInstructor(dto,id);
+		}catch(PessimisticLockingFailureException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch(NotFoundException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		
+			
 	}
 	
 

@@ -24,7 +24,7 @@ public class Instructor extends User{
 	@Column(columnDefinition="LONGTEXT")
 	private String biography;
 	
-	@ManyToMany
+	@ManyToMany(cascade =CascadeType.ALL)
 	 @JoinTable(
 	            name = "instructor_unavailability",
 	            joinColumns = @JoinColumn(name = "instructor_id"),
