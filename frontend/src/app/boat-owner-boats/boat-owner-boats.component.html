@@ -1,0 +1,39 @@
+<div class="container">
+    <button mat-button [routerLink]="['boat-add']" id="add"><i class="fa fa-plus-circle"></i><a> Add new
+        boat</a></button><br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+  
+          <th scope="col">Average Grade</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let boat of boats; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+  
+          <td>
+            <img src="{{boat.mainPicture}}" style="height: 170px;width: 240px;">
+          </td>
+          <td>
+  
+            {{ boat.name }}
+          </td>
+          <td>{{ boat.address.street }},{{boat.address.city}}</td>
+  
+          <td>{{ boat.grade}}</td>
+          <td><button mat-button [routerLink]="['/boatOwner/boats',boat.id]"><a>View</a></button></td>
+          <td><button mat-button [routerLink]="['/boatOwner/boats/edit',boat.id]"><a>Edit</a></button></td>
+          <td><button mat-button id="delete"><a>Delete</a></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

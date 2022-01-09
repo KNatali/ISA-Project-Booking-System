@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -12,6 +13,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class BoatOwner extends User {
 
+	@Column
+	private double grade;
 	@OneToMany(mappedBy="owner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Boat> boats=new HashSet<>();
 
@@ -27,12 +30,20 @@ public class BoatOwner extends User {
 		super();
 		this.boats = boats;
 	}
+	public double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
 	public BoatOwner () {}
 
 	public BoatOwner(Long id, String username, String password, String email, String firstName, String lastName,
-			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,Set<Boat> boats) {
+			Address address, String mobile, boolean enabled, String role, List<Authority> authorities,Set<Boat> boats, double grade) {
 		super(id, username, password, email, firstName, lastName, address, mobile, enabled, role, authorities);
 		this.boats=boats;
+		this.grade=grade;
 	}
 
 	public BoatOwner(String username, String password, String email, String firstName, String lastName, Address address,

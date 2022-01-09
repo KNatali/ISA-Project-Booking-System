@@ -39,21 +39,26 @@ public class Boat {
 	private int maxSpeed;
 	@Column
 	private String description;
-	@ElementCollection
-	private Set<String> pictures=new HashSet<>();
-	
+	@ManyToMany
+	 @JoinTable(
+	            name = "boat_pictures",
+	            joinColumns = @JoinColumn(name = "boat_id"),
+	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+	private Set<Picture> pictures=new HashSet<>(); 
+
 	@Column
 	private String mainPicture;//slika koje ce da bude prikazana kada se izlistaju svi brodovi
-	
+	@Column
+	private double price;
 	@Column
 	private int capacity;
 	@Column
 	private double grade;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private BoatOwner owner;
-	@OneToMany
-	private Set<BoatReservation> boatReservations;
 	
+	@OneToMany
+	private Set<BoatReservation> boatReservations=new HashSet<>();
 	
 	public Set<BoatReservation> getBoatReservations() {
 		return boatReservations;
@@ -87,6 +92,18 @@ public class Boat {
 	@OneToMany(mappedBy="boat",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<BoatFastReservation> boatFastReservations=new HashSet<>();
 	
+	@ManyToMany
+	@JoinTable(name="boat_additional_items",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
+	private Set<AdditionalItem> additionalItems=new HashSet<>();
+	@ManyToMany
+	@JoinTable(name="boat_subscribers",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
+	private Set<Client> subscribers=new HashSet<>();
+	@Column
+	private int cancellationPercentage;
+	
+
 	public Long getId() {
 		return id;
 	}
@@ -142,10 +159,10 @@ public class Boat {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Set<String> getPictures() {
+	public Set<Picture> getPictures() {
 		return pictures;
 	}
-	public void setPictures(Set<String> pictures) {
+	public void setPictures(Set<Picture> pictures) {
 		this.pictures = pictures;
 	}
 	public int getCapacity() {
@@ -190,8 +207,36 @@ public class Boat {
 	public void setMainPicture(String mainPicture) {
 		this.mainPicture = mainPicture;
 	}
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public Set<AdditionalItem> getAdditionalItems() {
+		return additionalItems;
+	}
+
+	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
+	}
+
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
+	}
+	public Set<Client> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(Set<Client> subscribes) {
+		this.subscribers = subscribes;
+	}
 	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber,
-			double motorPower, int maxSpeed, String description, Set<String> pictures, int capacity, double grade,
+			double motorPower, int maxSpeed, String description, Set<Picture> pictures, int capacity, double grade,
 			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,
 			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations, String mainPicture) {
 		super();
@@ -217,7 +262,7 @@ public class Boat {
 	
 	
 	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber, double motorPower,
-			int maxSpeed, String description, Set<String> pictures, String mainPicture, int capacity, double grade,
+			int maxSpeed, String description, Set<Picture> pictures, String mainPicture, int capacity, double grade,
 			BoatOwner owner, Set<BoatReservation> boatReservations, Set<BoatBehavioralRule> rules,
 			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations) {
 		super();

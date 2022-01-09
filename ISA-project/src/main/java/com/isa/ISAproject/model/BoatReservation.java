@@ -39,7 +39,12 @@ public class BoatReservation {
 	
 	@ManyToOne
 	private Boat boat;
-	
+	@Column(name = "reservationStart", nullable = false)
+    private LocalDateTime reservationStart;
+
+    @Column(name = "reservationEnd", nullable = false)
+    private LocalDateTime reservationEnd;
+
 	
 	public Boat getBoat() {
 		return boat;
@@ -122,6 +127,21 @@ public class BoatReservation {
 
 	public void setBoatComplaints(Set<BoatComplaint> boatComplaints) {
 		BoatComplaints = boatComplaints;
+	}
+	public LocalDateTime getReservationStart() {
+		return reservationStart;
+	}
+
+	public void setReservationStart(LocalDateTime reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
+	}
+
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 
 	public BoatReservation(Long id, LocalDateTime date, int duration, int maxPersons,
