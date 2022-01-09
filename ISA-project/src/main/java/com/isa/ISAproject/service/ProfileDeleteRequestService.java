@@ -3,8 +3,10 @@ package com.isa.ISAproject.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProfileDeleteRequestService {
@@ -68,23 +73,23 @@ public class ProfileDeleteRequestService {
 	 return requestsDTO;
 	}
 	
-	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws MailException, InterruptedException {
-		User user=userRepository.getById(requestDTO.getUserDTO().getId());
-		user.setEnabled(false);
-		userRepository.save(user);
+	@Transactional(readOnly = false)
+	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws MailException, InterruptedException,ObjectOptimisticLockingFailureException {
+		
 		//userRepository.delete(user);
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Accepted);
 		this.profileDeleteRequestRepository.save(request);
-		
+		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+		user.setEnabled(false);
+		userRepository.save(user);
 		emailService.sendMessage(requestDTO.getUserDTO().getEmail(),"Your profile delete request has been accepted. Your account has been deleted and you can not log in!");
 		
 		
 	}
 	
-public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException {
-		
-		
+	@Transactional(readOnly = false)
+	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,ObjectOptimisticLockingFailureException {
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Rejected);
 		this.profileDeleteRequestRepository.save(request);

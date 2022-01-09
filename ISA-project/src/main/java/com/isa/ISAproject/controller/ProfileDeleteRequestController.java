@@ -2,6 +2,7 @@ package com.isa.ISAproject.controller;
 
 import java.util.List;
 
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,12 +69,10 @@ public class ProfileDeleteRequestController {
 		
 		try {
 			profileDeleteRequestService.acceptDeleteRequest(dto);
-		} catch (MailException e) {
-			
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (InterruptedException e) {
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 			
-			e.printStackTrace();
 		}
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
 	}
@@ -89,9 +89,12 @@ public class ProfileDeleteRequestController {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}catch(ObjectOptimisticLockingFailureException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		}
 		
-			return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);	
 		
 		
 	}

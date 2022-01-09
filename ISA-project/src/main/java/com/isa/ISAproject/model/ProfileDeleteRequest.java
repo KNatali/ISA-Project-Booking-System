@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 public class ProfileDeleteRequest {
@@ -22,6 +23,16 @@ public class ProfileDeleteRequest {
 	@Enumerated(EnumType.STRING)
     private ProfileDeleteRequestType type;
 	
+	@Version
+	private Long version;
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 	public Long getId() {
 		return id;
 	}

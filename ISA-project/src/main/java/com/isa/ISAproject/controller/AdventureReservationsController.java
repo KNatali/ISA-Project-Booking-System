@@ -85,7 +85,7 @@ public class AdventureReservationsController {
 	@RequestMapping(value="api/adventureReservation/addReservation",method = RequestMethod.PUT,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<AdventureReservationDTO>  addAdventureReservation(@RequestBody AdventureReservationDTO dto){
+	public ResponseEntity<AdventureReservationDTO>  addAdventureReservation(@RequestBody AdventureReservationDTO dto) throws Exception{
 		AdventureReservationDTO fastDTO=this.adventureReservationService.addAdventureReservation( dto);
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

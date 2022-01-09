@@ -34,6 +34,7 @@ import { TimePeriod } from '../model/timePeriod';
 import { UnavailabilityType } from '../model/unavailabilityType';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { ThrowStmt } from '@angular/compiler';
+import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 
 const colors: any = {
   red: {
@@ -187,7 +188,11 @@ export class InstructorCalendarComponent implements OnInit {
       this.events.push(this.newEvent);
 
     }, error => {
-      alert("The selected time period overlaps with the previously entered one! Please choose another one!")
+      if (error.status = "404")
+        alert("The selected time period overlaps with the previously entered one! Please choose another one!");
+      else
+        alert("Something went wrong! Try again!")
+      //alert("The selected time period overlaps with the previously entered one! Please choose another one!")
     })
   }
 

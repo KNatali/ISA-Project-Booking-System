@@ -43,7 +43,7 @@ export class AdminRejectRequestComponent implements OnInit {
         this.formValue.reset();
         alert("Successfully sent message to rejected user");
       }, error => {
-        alert(error)
+        alert("Error! Please try againg!")
       });
 
 

@@ -74,7 +74,7 @@ public class AdventureFastReservationService {
 		
 	}
 	
-	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) {
+	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) throws Exception {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
@@ -115,7 +115,7 @@ public class AdventureFastReservationService {
 		return AdventureFastReservationMapper.convertToDTO(fast);
 	}
 	
-	public AdventureFastReservationDTO editAdventureFastReservation(EditAdventureFastReservationDTO dto) {
+	public AdventureFastReservationDTO editAdventureFastReservation(EditAdventureFastReservationDTO dto) throws Exception {
 		AdventureFastReservationDTO actionDTO=dto.getAction();
 		TimePeriodDTO oldPeriod=dto.getOldReservationPeriod();
 		AdventureFastReservation res=adventureFastReservationRepository.getById(actionDTO.getId());
