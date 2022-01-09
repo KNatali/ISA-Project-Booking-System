@@ -11,6 +11,7 @@ export interface CottageReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     cottage: Cottage;
+    systemEarning: number
 }
 export class CottageReservation implements CottageReservationInterface {
     id?: number;
@@ -21,6 +22,7 @@ export class CottageReservation implements CottageReservationInterface {
     additionalItems: AdditionalItem[];
     client: Client;
     cottage: Cottage;
+    systemEarning: number
     constructor(obj: CottageReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -30,6 +32,7 @@ export class CottageReservation implements CottageReservationInterface {
         this.additionalItems = obj.additionalItems;
         this.client = obj.client;
         this.cottage = obj.cottage;
+        this.systemEarning = obj.systemEarning;
     }
 
 }

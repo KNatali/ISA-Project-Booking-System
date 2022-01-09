@@ -1,0 +1,27 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Overview">
+      <app-boat-owner-overview [id]="id"></app-boat-owner-overview>
+    </mat-tab>
+    <mat-tab label="Profile">
+      <app-boat-owner-profile [boatOwner]="boatOwner" [id]="id"></app-boat-owner-profile>
+    </mat-tab>
+    <mat-tab label="My Boats">
+      <app-boat-owner-boats [boatOwner]="boatOwner" [id]="id"></app-boat-owner-boats>
+    </mat-tab>
+    <mat-tab label="Reservations">
+      <app-boat-owner-reservations [boatOwner]="boatOwner" [id]="id"></app-boat-owner-reservations>
+    </mat-tab>
+    <mat-tab label="Actions">
+      <app-boat-owner-actions [boatOwner]="boatOwner" [id]="id"></app-boat-owner-actions>
+  
+    </mat-tab>
+  </mat-tab-group>
+  
+  <!--Modalni prozor za pisanje izvestaja nakon reservacije-->
+  <app-boat-owner-reservation-report></app-boat-owner-reservation-report>
+  
+  
+  
+  <!--Modalni prozor za zahtev za brisanje profila-->
+  <app-boat-owner-delete-profile [boatOwner]="boatOwner" [id]="id"></app-boat-owner-delete-profile>
+  

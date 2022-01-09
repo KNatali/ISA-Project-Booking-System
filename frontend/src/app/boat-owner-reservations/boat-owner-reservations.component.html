@@ -1,0 +1,38 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+  
+  
+      <ul class="list-unstyled components">
+        <li>
+          <a [ngClass]="{ 'is-active': activeTab === 'ACTIVE' }" (click)="changeTab('ACTIVE')">Active
+          </a>
+        </li>
+  
+        <li>
+          <a [ngClass]="{ 'is-active': activeTab === 'UPCOMING' }" (click)="changeTab('UPCOMING')">Upcoming </a>
+        </li>
+        <li>
+          <a [ngClass]="{ 'is-active': activeTab === 'COMPLETED' }" (click)="changeTab('COMPLETED')">Completed</a>
+        </li>
+      </ul>
+  
+  
+    </nav>
+  
+    <!-- Page Content  -->
+    <div id="content">
+      <div *ngIf="activeTab == 'ACTIVE'">
+        <app-boat-owner-active-reservations [id]="id"></app-boat-owner-active-reservations>
+      </div>
+      <div *ngIf="activeTab == 'UPCOMING'">
+        <app-boat-owner-upcoming-reservations [id]="id"></app-boat-owner-upcoming-reservations>
+      </div>
+      <div *ngIf="activeTab == 'COMPLETED'">
+        <app-boat-owner-completed-reservations [id]="id"></app-boat-owner-completed-reservations>
+      </div>
+  
+  
+    </div>
+  </div>
+  

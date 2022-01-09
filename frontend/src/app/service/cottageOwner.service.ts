@@ -8,6 +8,7 @@ import { CottageFastReservation } from '../model/cottageFastReservation';
 import { Client } from '../model/client';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { TimePeriod } from '../model/timePeriod';
+import { CottageOwnerReport } from '../model/cottageOwnerReport';
 
 @Injectable({
   providedIn: 'root'
@@ -69,10 +70,10 @@ export class CottageOwnerService {
   sortByCity(): Observable<CottageOwner[]> {
     return this.http.get<CottageOwner[]>(this.urlCottageOwner + "/sort-by-city");
   }
-  sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
+  /*sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
     return this.http.post<ProfileDeleteRequest>(`${this.urlCottageOwner}/` + `profileDeleteRequest`, request);
   }
-  /*sendReservationReport(report: CottageOwnerReport): Observable<CottageOwnerReport> {
+  sendReservationReport(report: CottageOwnerReport): Observable<CottageOwnerReport> {
     return this.http.post<CottageOwnerReport>(`${this.urlCottageOwner}/` + `sendReservationReport`, report);
   }*/
   setUnavailability(period: TimePeriod, id: number) {
@@ -80,5 +81,11 @@ export class CottageOwnerService {
   }
   getUnavailabilityByCottageOwner(id: number): Observable<TimePeriod[]> {
     return this.http.get<TimePeriod[]>(`${this.urlCottageOwner}/` + `getUnavailability` + `/${id}`);
+  }
+  sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
+    return this.http.post<ProfileDeleteRequest>(`http://localhost:8090/api/cottageOwners/` + `profileDeleteRequest`, request);
+  }
+  sendReservationReport(report: CottageOwnerReport): Observable<CottageOwnerReport> {
+    return this.http.post<CottageOwnerReport>(`http://localhost:8090/api/cottageOwners/` + `sendReservationReport`, report);
   }
 }

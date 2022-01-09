@@ -14,6 +14,7 @@ export interface BoatInterface{
     capacity:number;
     grade:number;
     mainPicture:string;
+    address: Address;
 }
 export class Boat implements BoatInterface{
     id?: number | undefined;
@@ -29,6 +30,7 @@ export class Boat implements BoatInterface{
     state:string;
     street:string;
     city:string;
+    address: Address;
     constructor(obj:BoatInterface){
         this.id=obj.id;
         this.name=obj.name;
@@ -43,6 +45,7 @@ export class Boat implements BoatInterface{
         this.capacity=obj.capacity;
         this.grade=obj.grade;
         this.mainPicture=obj.mainPicture;
+        this.address = obj.address;
     }
     
 }

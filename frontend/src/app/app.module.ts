@@ -143,8 +143,25 @@ import { AdminEarningsComponent } from './admin-earnings/admin-earnings.componen
 import { AdminAnalyticsComponent } from './admin-analytics/admin-analytics.component';
 import { InstructorCalendarComponent } from './instructor-calendar/instructor-calendar.component';
 import { InstructorAnalyticsComponent } from './instructor-analytics/instructor-analytics.component';
+import { BoatOwnerCalendarComponent } from './boat-owner-calendar/boat-owner-calendar.component';
+import { BoatOwnerAnalyticsComponent } from './boat-owner-analytics/boat-owner-analytics.component';
 import { AdminClientComplaintsComponent } from './admin-client-complaints/admin-client-complaints.component';
 import { AdminComplaintAnswerComponent } from './admin-complaint-answer/admin-complaint-answer.component';
+import { BoatOwnerPageComponent } from './boat-owner-page/boat-owner-page.component';
+import { BoatOwnerOverviewComponent } from './boat-owner-overview/boat-owner-overview.component';
+import { BoatOwnerProfileComponent } from './boat-owner-profile/boat-owner-profile.component';
+import { BoatOwnerBoatsComponent } from './boat-owner-boats/boat-owner-boats.component';
+import { BoatOwnerReservationsComponent } from './boat-owner-reservations/boat-owner-reservations.component';
+import { BoatOwnerActionsComponent } from './boat-owner-actions/boat-owner-actions.component';
+import { BoatOwnerReservationReportComponent } from './boat-owner-reservation-report/boat-owner-reservation-report.component';
+import { BoatOwnerDeleteProfileComponent } from './boat-owner-delete-profile/boat-owner-delete-profile.component';
+import { BoatOwnerActiveReservationsComponent } from './boat-owner-active-reservations/boat-owner-active-reservations.component';
+import { BoatOwnerUpcomingReservationsComponent } from './boat-owner-upcoming-reservations/boat-owner-upcoming-reservations.component';
+import { BoatOwnerCompletedReservationsComponent } from './boat-owner-completed-reservations/boat-owner-completed-reservations.component';
+import { CottageOwnerReservationReportComponent } from './cottage-owner-reservation-report/cottage-owner-reservation-report.component';
+import { CottageOwnerDeleteProfileComponent } from './cottage-owner-delete-profile/cottage-owner-delete-profile.component';
+import { CottageOwnerCalendarComponent } from './cottage-owner-calendar/cottage-owner-calendar.component';
+import { CottageOwnerAnalyticsComponent } from './cottage-owner-analytics/cottage-owner-analytics.component';
 
 
 
@@ -273,8 +290,25 @@ import { AdminComplaintAnswerComponent } from './admin-complaint-answer/admin-co
     AdminAnalyticsComponent,
     InstructorCalendarComponent,
     InstructorAnalyticsComponent,
+    BoatOwnerCalendarComponent,
+    BoatOwnerAnalyticsComponent,
     AdminClientComplaintsComponent,
-    AdminComplaintAnswerComponent
+    AdminComplaintAnswerComponent,
+    BoatOwnerPageComponent,
+    BoatOwnerOverviewComponent,
+    BoatOwnerProfileComponent,
+    BoatOwnerBoatsComponent,
+    BoatOwnerReservationsComponent,
+    BoatOwnerActionsComponent,
+    BoatOwnerReservationReportComponent,
+    BoatOwnerDeleteProfileComponent,
+    BoatOwnerActiveReservationsComponent,
+    BoatOwnerUpcomingReservationsComponent,
+    BoatOwnerCompletedReservationsComponent,
+    CottageOwnerReservationReportComponent,
+    CottageOwnerDeleteProfileComponent,
+    CottageOwnerCalendarComponent,
+    CottageOwnerAnalyticsComponent
 
 
 

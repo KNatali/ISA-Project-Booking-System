@@ -39,6 +39,7 @@ import { CottageOwnerAddCottageComponent } from './cottage-owner-add-cottage/cot
 import { CottageOwnerActionAddComponent } from './cottage-owner-action-add/cottage-owner-action-add.component';
 import { CottageOwnerReservationClientComponent } from './cottage-owner-reservation-client/cottage-owner-reservation-client.component';
 import { CottageOwnerAddReservationComponent } from './cottage-owner-add-reservation/cottage-owner-add-reservation.component';
+import { BoatOwnerPageComponent } from './boat-owner-page/boat-owner-page.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'admin/:id/admin-add', component: AdminAddAdminComponent },
   { path: 'first-login', component: AdminFirstLoginComponent },
   { path: 'cottageOwner/:id', component: CottageOwnerPageComponent },
+  { path: 'boatOwner/:id', component: BoatOwnerPageComponent },
   { path: 'adventures/:id', component: AdventureDatailsPageComponent },
   { path: 'cottages/:id', component: CottageDetailsPageComponent },
   { path: 'boats/:id', component: BoatDetailsPageComponent },
