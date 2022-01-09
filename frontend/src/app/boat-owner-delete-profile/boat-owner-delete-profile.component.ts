@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BoatOwner } from '../model/boatOwner';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { ProfileDeleteRequestType } from '../model/profileDeleteRequestType';
 import { User } from '../model/user';
 import { BoatOwnerService } from '../service/boat-owner.service';
 
@@ -45,7 +46,8 @@ export class BoatOwnerDeleteProfileComponent implements OnInit {
   request: ProfileDeleteRequest = new ProfileDeleteRequest({
     id: 0,
     userDTO: this.newUser,
-    reason: ''
+    reason: '',
+    type: ProfileDeleteRequestType.Unverified
   }
   )
   constructor(private formBuilder: FormBuilder, private boatOwnerService: BoatOwnerService) { }
