@@ -83,7 +83,7 @@ export class BoatOwnerService {
     return this.http.get<TimePeriod[]>(`${this.urlBoatOwner}/` + `getUnavailability` + `/${id}`);
   }
   sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
-    return this.http.post<ProfileDeleteRequest>(`${this.urlBoatOwner}/` + `profileDeleteRequest`, request);
+    return this.http.post<ProfileDeleteRequest>(`http://localhost:8090/api/boatOwners/` + `profileDeleteRequest`, request);
   }
   sendReservationReport(report: BoatOwnerReport): Observable<BoatOwnerReport> {
     return this.http.post<BoatOwnerReport>(`${this.urlBoatOwner}/` + `sendReservationReport`, report);
