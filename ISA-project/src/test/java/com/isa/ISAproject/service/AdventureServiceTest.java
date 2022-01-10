@@ -118,7 +118,7 @@ public class AdventureServiceTest {
 		assertThat(adventuresDTO).hasSize(1);
 		assertEquals(adventuresDTO.get(0).getId(), NEW_ID);
 		assertEquals(adventuresDTO.get(0).getName(), NEW_NAME);
-		
+		assertEquals(adventuresDTO.get(0).getAddress().getStreet(), NEW_ADDRESS_STREET);
 		verify(adventureRepositoryMock, times(1)).findAll();
         verifyNoMoreInteractions(adventureRepositoryMock);
 	}
