@@ -99,4 +99,20 @@ public class ProfileDeleteRequestController {
 		
 	}
 	
+	@RequestMapping(value="/api/cottageOwners/profileDeleteRequest",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<?> sendProfifleDeleteRequestCottageOwner(@RequestBody ProfileDeleteRequestDTO dto){
+	
+		ProfileDeleteRequestDTO req=profileDeleteRequestService.sendProfileDeleteRequest(dto);
+		return new ResponseEntity<>(req,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/api/boatOwners/profileDeleteRequest",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public ResponseEntity<?> sendProfifleDeleteRequestBoatOwner(@RequestBody ProfileDeleteRequestDTO dto){
+	
+		ProfileDeleteRequestDTO req=profileDeleteRequestService.sendProfileDeleteRequest(dto);
+		return new ResponseEntity<>(req,HttpStatus.OK);
+	}
+	
 }

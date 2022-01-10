@@ -18,6 +18,8 @@ import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
 import com.isa.ISAproject.model.RegistrationRequest;
 import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.repository.BoatOwnerRepository;
+import com.isa.ISAproject.repository.CottageOwnerRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
@@ -36,6 +38,10 @@ public class ProfileDeleteRequestService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private CottageOwnerRepository cottageOwnerRepository;
+	@Autowired
+	private BoatOwnerRepository boatOwnerRepository;
 	
 	public ProfileDeleteRequestDTO sendProfileDeleteRequest(ProfileDeleteRequestDTO dto) {
 		
