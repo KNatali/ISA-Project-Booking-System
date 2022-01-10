@@ -12,14 +12,14 @@ public class AdventureConstants {
     public static final String NEW_ADDRESS_STATE = "United States";
     public static final Long NEW_ID = 4L;
     
-    public static final String DB_NAME = "Star fish";
+    public static final String DB_NAME ="Lucky B Sportfishing";
 	public static final String DB_DESCRIPTION = "Best adventure";
-	public static final double DB_GRADE = 9;
-	public static final double DB_PRICE = 300;
-	public static final int DB_PERSONS = 7;
-	public static final int DB_PERCENTAGE = 15;
-    public static final String DB_ADDRESS_STREET = "3100 West 12th Street";
-    public static final String DB_ADDRESS_CITY = "Miami";
+	public static final double DB_GRADE = 5.0;
+	public static final double DB_PRICE = 100;
+	public static final int DB_PERSONS = 10;
+	public static final int DB_PERCENTAGE = 0;
+    public static final String DB_ADDRESS_STREET = "3151 West 10th Street";
+    public static final String DB_ADDRESS_CITY = "Panama City";
     public static final String DB_ADDRESS_STATE = "United States";
     public static final Long DB_ID = 1L;
     
