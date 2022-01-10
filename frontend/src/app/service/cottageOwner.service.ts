@@ -31,7 +31,7 @@ export class CottageOwnerService {
   }
 
   changePassword(id: number, newPassword: string): Observable<CottageOwner> {
-    return this.http.post<CottageOwner>(`${this.urlCottageOwner}/` + `changePassword` + `/${id}`, { newPassword });
+    return this.http.post<CottageOwner>(`http://localhost:8090/api/cottageOwners/` + `changePassword` + `/${id}`, { newPassword });
   }
   getCottageOwnerCottages(id: number): Observable<Cottage[]> {
     return this.http.get<Cottage[]>(`http://localhost:8090/api/cottageOwners/` + `cottages` + `/${id}`);
@@ -42,7 +42,7 @@ export class CottageOwnerService {
   }
 
   getCottageOwnerFastReservations(id: number): Observable<CottageFastReservation[]> {
-    return this.http.get<CottageFastReservation[]>(`${this.urlCottageOwner}/` + `fastReservations` + `/${id}`);
+    return this.http.get<CottageFastReservation[]>(`http://localhost:8090/api/cottageOwners/` + `fastReservations` + `/${id}`);
   }
 
   getReservationClient(clientId: number): Observable<Client> {

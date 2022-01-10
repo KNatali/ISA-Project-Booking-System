@@ -24,9 +24,9 @@ public class CottageFastReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
+	@Column
 	private LocalDate date;
-	@Column(nullable=false)
+	@Column
 	private LocalTime time;
 	@Column(nullable=false)
 	private int duration;
@@ -40,6 +40,9 @@ public class CottageFastReservation {
 	private LocalDate validityEnd;
 	@Column(name = "reservationStart", nullable = false)
     private LocalDateTime reservationStart;
+	@Column(name = "reservationEnd", nullable = false)
+    private LocalDateTime reservationEnd;
+
 	
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
@@ -135,8 +138,18 @@ public class CottageFastReservation {
 	public void setReservationStart(LocalDateTime reservationStart) {
 		this.reservationStart = reservationStart;
 	}
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
+	}
 
-	public CottageFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
+
+
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+
+	public CottageFastReservation(Long id, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
 			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems, Cottage cottage) {
 		super();
 		this.id = id;
@@ -149,7 +162,24 @@ public class CottageFastReservation {
 		this.validityEnd = validityEnd;
 		this.additionalItems = additionalItems;
 		this.cottage = cottage;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
 	}
 	
 	public CottageFastReservation() {}
+	
+	public CottageFastReservation(Long id, Cottage cottage, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
+		super();
+		this.id = id;
+		this.cottage = cottage;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+	}
 }

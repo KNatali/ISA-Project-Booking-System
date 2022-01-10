@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.TimePeriodDTO;
+import com.isa.ISAproject.model.CottageOwner;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.TimePeriod;
+import com.isa.ISAproject.repository.CottageOwnerRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.TimePeriodRepository;
 
@@ -27,6 +29,8 @@ public class TimePeriodService {
 	private TimePeriodRepository timePeriodRepository;
 	@Autowired
 	private InstructorRepository instructorRepository;
+	@Autowired
+	private CottageOwnerRepository cottageOwnerRepository;
 	
 	@Transactional(readOnly = false)
 	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, NotFoundException {
@@ -85,6 +89,76 @@ public class TimePeriodService {
 	public List<TimePeriodDTO> findUnavailabilityByInstructor(Long id){
 		Instructor instructor=instructorRepository.getById(id);
 		Set<TimePeriod> times=instructor.getUnavailability();
+		List<TimePeriodDTO> timesDTO=new ArrayList<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		
+		for (TimePeriod t : times) {
+			
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			timesDTO.add(dto);
+			
+		}
+		return timesDTO;
+		
+	}
+	
+/**/
+	@Transactional(readOnly = false)
+	public boolean setUnavailabilityCottageOwner(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, NotFoundException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
+		CottageOwner cottageOwner=new CottageOwner();
+		
+		cottageOwner=cottageOwnerRepository.findOneById(id);
+		
+		Set<TimePeriod> periods=new HashSet<>();
+			if(cottageOwner.getUnavailability()!=null) {
+				periods=cottageOwner.getUnavailability();
+				for (TimePeriod t : periods) {
+					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+						throw new NotFoundException("Overlaps time period");
+					}
+				}
+			}
+			//this.timePeriodRepository.save(period);
+			periods.add(period);
+			this.cottageOwnerRepository.save(cottageOwner);
+		
+		return true;
+		
+		
+	}
+	
+	public boolean removeUnavailabilityCottageOwner(TimePeriodDTO dto,Long id) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		Set<TimePeriod> periods=new HashSet<>();
+		if(cottageOwner.getUnavailability()!=null) {
+			periods=cottageOwner.getUnavailability();
+			for (TimePeriod t : periods) {
+				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
+					periods.remove(t);
+					this.cottageOwnerRepository.save(cottageOwner);
+					this.timePeriodRepository.delete(period);
+					return true;
+				}
+			}
+		}
+	
+		return false;
+	}
+	
+	
+	
+	
+	public List<TimePeriodDTO> findUnavailabilityByCottageOwner(Long id){
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		Set<TimePeriod> times=cottageOwner.getUnavailability();
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		

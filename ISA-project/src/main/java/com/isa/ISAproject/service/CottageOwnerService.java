@@ -1,6 +1,7 @@
 package com.isa.ISAproject.service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
@@ -18,8 +20,11 @@ import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
 import com.isa.ISAproject.dto.CottageOwnerReportDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
@@ -53,6 +58,8 @@ public class CottageOwnerService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<CottageOwner> findAll()
 	{
@@ -80,7 +87,7 @@ public class CottageOwnerService {
 	public List<CottageOwner> sortByGrade(){
 		return this.cottageOwnerRepository.findByOrderByGradeDesc();
 	}
-	public List<CottageReservationDTO> getReservations(Long id){
+	/*public List<CottageReservationDTO> getReservations(Long id){
 		List<CottageReservationDTO> res=new ArrayList<>();
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
@@ -102,18 +109,47 @@ public class CottageOwnerService {
 			res.add(ctdto);
 		}
 		return res;
-	}
+	}*/
 	
-	public List<CottageFastReservationDTO> getFastReservations(Long id){
+	/*public List<CottageFastReservationDTO> getFastReservations(Long id){
 		List<CottageFastReservationDTO> res=new ArrayList<>();
 		List<CottageFastReservation> temp=new ArrayList<>();
 		List<CottageFastReservation> reservations=fastReservationRepository.findAll();
 		
 		for (CottageFastReservation c : reservations) {
-			res.add(CottageFastReservationMapper.convertToDTO(c));
+			//res.add(CottageFastReservationMapper.convertToDTO(c));
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			//ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart(), c.getValidityEnd(), cottage, items);
+			res.add(ctfdto);
 		}
-		return res;
-	}
+	// OVO JE ISPRAVLJENO I RADI
+		
+		
+		/*for (CottageReservation c : reservations) {
+			if(c.getCottage().getCottageOwner().getId()==id && c.getReservationEnd().isBefore(LocalDateTime.now()))
+				temp.add(c);
+		}
+		for (CottageReservation c : temp) {
+			//res.add(CottageReservationMapper.convertToDTO(c));
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			//CottageOwnerReportDTO report=new CottageOwnerReportDTO(c.getReport().getId(),c.getOwnerReport().getContent(),c.getOwnerReport().isSanctioned(),c.getOwnerReport().isShowedUp());
+			ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			res.add(ctdto);
+		}*/
+		//return res;
+	//}
 	
 	public ClientProfileDTO getReservationClilent(Long id) {
 		Optional<Client> item=this.clientRepository.findById(id);
@@ -143,7 +179,9 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;
@@ -181,7 +219,9 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;
@@ -205,10 +245,19 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;
-		
+	}
+	public CottageOwnerProfileDTO changePassword(Long id,PasswordChangeDTO dto) {
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		String newPasswordHash=passwordEncoder.encode(dto.getNewPassword());
+		cottageOwner.setPassword(newPasswordHash);
+		cottageOwnerRepository.save(cottageOwner);
+		CottageOwnerProfileDTO cottageOwnerDTO=new CottageOwnerProfileDTO(cottageOwner);
+		return cottageOwnerDTO;
 	}
 }

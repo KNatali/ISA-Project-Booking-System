@@ -28,8 +28,8 @@ public class CottageReservationDTO {
 	private double price;
 	private ClientProfileDTO client;
 	private CottageDTO cottage;
-	private LocalDateTime reservationStart;
-	private LocalDateTime reservationEnd;
+	private String reservationStart;
+	private String reservationEnd;
 	private CottageOwnerReportDTO report;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
@@ -86,16 +86,16 @@ public class CottageReservationDTO {
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public LocalDateTime getReservationStart() {
+	public String getReservationStart() {
 		return reservationStart;
 	}
-	public void setReservationStart(LocalDateTime reservationStart) {
+	public void setReservationStart(String reservationStart) {
 		this.reservationStart = reservationStart;
 	}
-	public LocalDateTime getReservationEnd() {
+	public String getReservationEnd() {
 		return reservationEnd;
 	}
-	public void setReservationEnd(LocalDateTime resevationEnd) {
+	public void setReservationEnd(String resevationEnd) {
 		this.reservationEnd = resevationEnd;
 	}
 	public CottageOwnerReportDTO getReport() {
@@ -128,7 +128,7 @@ public class CottageReservationDTO {
 	}
 	public CottageReservationDTO() {}
 
-	public CottageReservationDTO(Long id, LocalDateTime reservationStart, LocalDateTime resevationEnd, CottageDTO cottage,
+	public CottageReservationDTO(Long id, String reservationStart, String resevationEnd, CottageDTO cottage,
 			double price,int persons, ClientProfileDTO client, CottageOwnerReportDTO report, Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;

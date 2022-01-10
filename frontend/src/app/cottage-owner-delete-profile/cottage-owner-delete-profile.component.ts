@@ -59,7 +59,7 @@ export class CottageOwnerDeleteProfileComponent implements OnInit {
   }
   sendRequest() {
     this.request.reason = this.formValue.controls['message'].value;
-    this.newUser.id = 2;
+    this.newUser.id = this.id;
     this.request.userDTO = this.newUser;
     this.cottageOwnerService.sendDeleteRequest(this.request).subscribe(data => {
       let ref = document.getElementById('cancelDelete');
