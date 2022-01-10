@@ -65,8 +65,8 @@ export class NavbarProfileComponent implements OnInit {
     } else if (this.role == 'Admin' || this.role == 'SysAdmin') {
 
       this.router.navigate(['admin', this.id]);
-
-
+    } else if (this.role == 'BoatOwner') {
+    this.router.navigate(['boatOwner', this.id]);
     }
   }
 
