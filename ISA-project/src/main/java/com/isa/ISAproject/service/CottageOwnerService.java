@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
@@ -18,8 +19,11 @@ import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
 import com.isa.ISAproject.dto.CottageOwnerReportDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
@@ -53,6 +57,8 @@ public class CottageOwnerService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<CottageOwner> findAll()
 	{
@@ -80,7 +86,7 @@ public class CottageOwnerService {
 	public List<CottageOwner> sortByGrade(){
 		return this.cottageOwnerRepository.findByOrderByGradeDesc();
 	}
-	public List<CottageReservationDTO> getReservations(Long id){
+	/*public List<CottageReservationDTO> getReservations(Long id){
 		List<CottageReservationDTO> res=new ArrayList<>();
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
@@ -102,9 +108,9 @@ public class CottageOwnerService {
 			res.add(ctdto);
 		}
 		return res;
-	}
+	}*/
 	
-	public List<CottageFastReservationDTO> getFastReservations(Long id){
+	/*public List<CottageFastReservationDTO> getFastReservations(Long id){
 		List<CottageFastReservationDTO> res=new ArrayList<>();
 		List<CottageFastReservation> temp=new ArrayList<>();
 		List<CottageFastReservation> reservations=fastReservationRepository.findAll();
@@ -121,6 +127,7 @@ public class CottageOwnerService {
 			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart(), c.getValidityEnd(), cottage, items);
 			res.add(ctfdto);
 		}
+	// OVO JE ISPRAVLJENO I RADI
 		
 		
 		/*for (CottageReservation c : reservations) {
@@ -140,8 +147,8 @@ public class CottageOwnerService {
 			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}*/
-		return res;
-	}
+		//return res;
+	//}
 	
 	public ClientProfileDTO getReservationClilent(Long id) {
 		Optional<Client> item=this.clientRepository.findById(id);
@@ -237,6 +244,13 @@ public class CottageOwnerService {
 			res.add(ctdto);
 		}
 		return res;
-		
+	}
+	public CottageOwnerProfileDTO changePassword(Long id,PasswordChangeDTO dto) {
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		String newPasswordHash=passwordEncoder.encode(dto.getNewPassword());
+		cottageOwner.setPassword(newPasswordHash);
+		cottageOwnerRepository.save(cottageOwner);
+		CottageOwnerProfileDTO cottageOwnerDTO=new CottageOwnerProfileDTO(cottageOwner);
+		return cottageOwnerDTO;
 	}
 }

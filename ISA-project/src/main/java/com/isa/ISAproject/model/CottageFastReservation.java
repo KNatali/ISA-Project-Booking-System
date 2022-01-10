@@ -167,4 +167,19 @@ public class CottageFastReservation {
 	}
 	
 	public CottageFastReservation() {}
+	
+	public CottageFastReservation(Long id, Cottage cottage, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
+		super();
+		this.id = id;
+		this.cottage = cottage;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
+	}
 }

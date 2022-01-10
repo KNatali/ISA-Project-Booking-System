@@ -61,7 +61,10 @@ public class Cottage {
 	@JoinTable(name="cottage_items",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "cottage_item_id", referencedColumnName = "id"))
 	private Set<AdditionalItem> items=new HashSet<>();
-	
+	@ManyToMany
+	@JoinTable(name="cottage_subscribers",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
+	private Set<Client> subscribers=new HashSet<>();
 	public Long getId() {
 		return id;
 	}
@@ -191,6 +194,13 @@ public class Cottage {
 
 	public void setCancellationPercentage(int cancellationPercentage) {
 		this.cancellationPercentage = cancellationPercentage;
+	}
+	public Set<Client> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(Set<Client> subscribes) {
+		this.subscribers = subscribes;
 	}
 
 	public Cottage(Long id, String name, Address address, String description, double grade, Set<Picture> pictures,

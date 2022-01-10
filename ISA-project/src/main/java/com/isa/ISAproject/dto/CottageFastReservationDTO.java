@@ -8,13 +8,13 @@ import java.util.Set;
 public class CottageFastReservationDTO {
 
 	private Long id;
-	private LocalDateTime reservationStart;
-	private LocalDateTime reservationEnd;
+	private String reservationStart;
+	private String reservationEnd;
 	private int duration;
 	private int maxPersons;
 	private double price;
-	private LocalDate validityStart;
-	private LocalDate validityEnd;
+	private String validityStart;
+	private String validityEnd;
 	private CottageDTO cottage;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
@@ -23,10 +23,10 @@ public class CottageFastReservationDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDateTime getReservationStart() {
+	public String getReservationStart() {
 		return reservationStart;
 	}
-	public void setReservationStart(LocalDateTime reservationStart) {
+	public void setReservationStart(String reservationStart) {
 		this.reservationStart = reservationStart;
 	}
 	
@@ -48,16 +48,16 @@ public class CottageFastReservationDTO {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public LocalDate getValidityStart() {
+	public String getValidityStart() {
 		return validityStart;
 	}
-	public void setValidityStart(LocalDate validityStart) {
+	public void setValidityStart(String validityStart) {
 		this.validityStart = validityStart;
 	}
-	public LocalDate getValidityEnd() {
+	public String getValidityEnd() {
 		return validityEnd;
 	}
-	public void setValidityEnd(LocalDate validityEnd) {
+	public void setValidityEnd(String validityEnd) {
 		this.validityEnd = validityEnd;
 	}
 	public CottageDTO getCottage() {
@@ -72,14 +72,14 @@ public class CottageFastReservationDTO {
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public LocalDateTime getReservationEnd() {
+	public String getReservationEnd() {
 		return reservationEnd;
 	}
-	public void setReservationEnd(LocalDateTime reservationEnd) {
+	public void setReservationEnd(String reservationEnd) {
 		this.reservationEnd = reservationEnd;
 	}
-	public CottageFastReservationDTO(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd, int duration,
-			int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd, CottageDTO cottage,
+	public CottageFastReservationDTO(Long id, String reservationStart, String reservationEnd, int duration,
+			int maxPersons, double price, String validityStart, String validityEnd, CottageDTO cottage,
 			Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
