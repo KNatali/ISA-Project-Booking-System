@@ -62,7 +62,7 @@ public class Client extends User{
 	}
 	public void setCottageReservations(List<CottageReservation> cottageReservations) {
 		this.cottageReservations = cottageReservations;
-	}	
+	}
 	
 	public Client() {}
 	public Client(String username, String password, String email, String firstName, String lastName,

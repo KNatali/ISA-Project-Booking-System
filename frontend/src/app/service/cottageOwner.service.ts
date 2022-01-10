@@ -42,7 +42,7 @@ export class CottageOwnerService {
   }
 
   getCottageOwnerFastReservations(id: number): Observable<CottageFastReservation[]> {
-    return this.http.get<CottageFastReservation[]>(`${this.urlCottageOwner}/` + `fastReservations` + `/${id}`);
+    return this.http.get<CottageFastReservation[]>(`http://localhost:8090/api/cottageOwners/` + `fastReservations` + `/${id}`);
   }
 
   getReservationClient(clientId: number): Observable<Client> {

@@ -9,6 +9,7 @@ public class CottageFastReservationDTO {
 
 	private Long id;
 	private LocalDateTime reservationStart;
+	private LocalDateTime reservationEnd;
 	private int duration;
 	private int maxPersons;
 	private double price;
@@ -71,12 +72,19 @@ public class CottageFastReservationDTO {
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
 	}
-	public CottageFastReservationDTO(Long id, LocalDateTime reservationStart, int duration,
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
+	}
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
+	public CottageFastReservationDTO(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd, int duration,
 			int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd, CottageDTO cottage,
 			Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
 		this.duration = duration;
 		this.maxPersons = maxPersons;
 		this.price = price;

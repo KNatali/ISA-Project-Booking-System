@@ -110,8 +110,36 @@ public class CottageOwnerService {
 		List<CottageFastReservation> reservations=fastReservationRepository.findAll();
 		
 		for (CottageFastReservation c : reservations) {
-			res.add(CottageFastReservationMapper.convertToDTO(c));
+			//res.add(CottageFastReservationMapper.convertToDTO(c));
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			//ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart(), c.getValidityEnd(), cottage, items);
+			res.add(ctfdto);
 		}
+		
+		
+		/*for (CottageReservation c : reservations) {
+			if(c.getCottage().getCottageOwner().getId()==id && c.getReservationEnd().isBefore(LocalDateTime.now()))
+				temp.add(c);
+		}
+		for (CottageReservation c : temp) {
+			//res.add(CottageReservationMapper.convertToDTO(c));
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			//CottageOwnerReportDTO report=new CottageOwnerReportDTO(c.getReport().getId(),c.getOwnerReport().getContent(),c.getOwnerReport().isSanctioned(),c.getOwnerReport().isShowedUp());
+			ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			res.add(ctdto);
+		}*/
 		return res;
 	}
 	
