@@ -55,7 +55,6 @@ insert into user_authority (user_id,authority_id) values (6,3);
 insert into user_authority (user_id,authority_id) values (7,4);
 insert into user_authority (user_id,authority_id) values (8,4);
 insert into user_authority (user_id,authority_id) values (9,4);
-
 insert into user_authority (user_id,authority_id) values (11,5);
 insert into user_authority (user_id,authority_id) values (15,6);
 
