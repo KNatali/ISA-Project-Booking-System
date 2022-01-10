@@ -1,6 +1,7 @@
 package com.isa.ISAproject.service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -178,7 +179,9 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;
@@ -216,7 +219,9 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;
@@ -240,7 +245,9 @@ public class CottageOwnerService {
 				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 				items.add(dto);
 			}
-			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+			CottageReservationDTO ctdto = new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), cottage, c.getPrice(), c.getMaxPersons(), client, null, items);
 			res.add(ctdto);
 		}
 		return res;

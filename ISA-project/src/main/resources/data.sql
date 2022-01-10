@@ -129,6 +129,10 @@ insert into additional_item(name,price) values ('Live Bait',5);
 insert into additional_item(name,price) values ('Fridge',5);
 insert into additional_item(name,price) values ('Kitchen',10);
 insert into additional_item(name,price) values ('fishfinder',15);
+insert into additional_item(name,price) values ('Rend a car',15);
+insert into additional_item(name,price) values ('Spa',5);
+insert into additional_item(name,price) values ('Wi-fi',5);
+
 
 insert into adventure_equipment(adventure_id,equipment_id) values (1,1);
 insert into adventure_equipment(adventure_id,equipment_id) values (1,2);
@@ -151,7 +155,14 @@ insert into adventure_additional_items(adventure_id,additional_item_id) values(2
 insert into adventure_additional_items(adventure_id,additional_item_id) values(2,4);
 insert into adventure_additional_items(adventure_id,additional_item_id) values(3,1);
 
-
+insert into cottage_items(cottage_id,additional_item_id) values(1,3);
+insert into cottage_items(cottage_id,additional_item_id) values(1,7);
+insert into cottage_items(cottage_id,additional_item_id) values(2,4);
+insert into cottage_items(cottage_id,additional_item_id) values(2,6);
+insert into cottage_items(cottage_id,additional_item_id) values(3,7);
+insert into cottage_items(cottage_id,additional_item_id) values(3,8);
+insert into cottage_items(cottage_id,additional_item_id) values(4,8);
+insert into cottage_items(cottage_id,additional_item_id) values(5,6);
  
 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,200); 

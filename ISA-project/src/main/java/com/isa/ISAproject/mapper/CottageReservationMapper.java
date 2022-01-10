@@ -1,5 +1,6 @@
 package com.isa.ISAproject.mapper;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,9 @@ public class CottageReservationMapper {
 			AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
 			items.add(dto);
 		}
-		CottageReservationDTO dto=new CottageReservationDTO(c.getId(), c.getReservationStart(), c.getReservationEnd(),cottage,c.getPrice(),c.getMaxPersons(),client,report, items);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+		CottageReservationDTO dto=new CottageReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter),cottage,c.getPrice(),c.getMaxPersons(),client,report, items);
 		return dto;
 	}
 }

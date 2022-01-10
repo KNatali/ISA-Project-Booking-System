@@ -24,9 +24,9 @@ public class CottageFastReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
+	@Column
 	private LocalDate date;
-	@Column(nullable=false)
+	@Column
 	private LocalTime time;
 	@Column(nullable=false)
 	private int duration;

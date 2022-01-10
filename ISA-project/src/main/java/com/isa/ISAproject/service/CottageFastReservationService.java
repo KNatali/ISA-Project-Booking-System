@@ -13,11 +13,13 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.CottageFastReservationMapper;
+import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
@@ -49,8 +51,21 @@ public class CottageFastReservationService {
 		List<CottageFastReservation> reservations=cottageFastReservationRepository.findAll();
 		
 		for (CottageFastReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
-				res.add(CottageFastReservationMapper.convertToDTO(c));
+			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
+				//res.add(CottageFastReservationMapper.convertToDTO(c));
+			
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart().format(formatter1), c.getValidityEnd().format(formatter1), cottage, items);
+			res.add(ctfdto); 
+			 
 		}
 		return res;
 		
@@ -61,8 +76,19 @@ public class CottageFastReservationService {
 		List<CottageFastReservation> reservations=cottageFastReservationRepository.findAll();
 		
 		for (CottageFastReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
-				res.add(CottageFastReservationMapper.convertToDTO(c));
+			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
+				//res.add(CottageFastReservationMapper.convertToDTO(c));
+			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+			Set<AdditionalItemDTO> items=new HashSet<>();
+			for (AdditionalItem i : c.getAdditionalItems()) {
+				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+				items.add(dto);
+			}
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart().format(formatter1), c.getValidityEnd().format(formatter1), cottage, items);
+			res.add(ctfdto); 
 		}
 		return res;
 		
@@ -106,7 +132,11 @@ public class CottageFastReservationService {
 				e.printStackTrace();
 			}
 		}
-		return CottageFastReservationMapper.convertToDTO(fast);
+		CottageDTO cottageDTO=CottageMapper.convertToDTO(fast.getCottage());
+		CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(fast.getId(), fast.getReservationStart().format(formatter), fast.getReservationEnd().format(formatter), fast.getDuration(), fast.getMaxPersons(), fast.getPrice(), fast.getValidityStart().format(formatter1), fast.getValidityEnd().format(formatter1), cottageDTO, dto.getAdditionalItems());
+		
+		//return CottageFastReservationMapper.convertToDTO(fast);
+		return ctfdto;
 	}
 	
 	public CottageFastReservationDTO editCottageFastReservation(EditCottageFastReservationDTO dto) throws Exception {

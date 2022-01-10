@@ -59,7 +59,7 @@ public class Cottage {
 	private Set<CottageReservation> cottageReservations=new HashSet<>();
 	@ManyToMany
 	@JoinTable(name="cottage_items",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "cottage_item_id", referencedColumnName = "id"))
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
 	private Set<AdditionalItem> items=new HashSet<>();
 	@ManyToMany
 	@JoinTable(name="cottage_subscribers",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
