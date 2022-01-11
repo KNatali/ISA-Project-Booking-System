@@ -1,3 +1,4 @@
+import { AdventureRevision } from './../model/adventureRevision';
 import { RegistrationRequest } from './../model/registrationRequest';
 import { AdventureReservation } from './../model/AdventureReservation';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
@@ -92,6 +93,9 @@ export class AdminService {
     answerComplaint(complaint: AdventureComplaint, message: string) {
         const params: HttpParams = new HttpParams().append('message', message);
         return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint, { params });
+    }
+    getAllAdventureRevisions(): Observable<AdventureRevision[]> {
+        return this.http.get<AdventureRevision[]>(`${this.urlAdmin}/allAdventureRevisions`);
     }
 
 }
