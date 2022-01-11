@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 public class Client extends User{
 	@Column
 	private int numberOfPenals=0;
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<AdventureReservation> adventureReservations;
 	@OneToMany
 	private List<BoatReservation> boatReservations;

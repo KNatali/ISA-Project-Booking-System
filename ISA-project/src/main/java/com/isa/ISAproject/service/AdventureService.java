@@ -75,18 +75,19 @@ public class AdventureService {
 		Adventure a=adventureRepository.getById(id);
 		//Set<AdventureReservation> list=a.getAdventureReservations();
 		List<AdventureReservation> list=adventureReservationRepository.findByAdventure(a);
-		if(list==null) {
+		
 			for (AdventureReservation adventureReservation : list) {
 				a.getAdventureReservations().remove(adventureReservation);
 				Client c=adventureReservation.getClient();
-				List<AdventureReservation> set=c.getAdventureReservations();
-				set.remove(adventureReservation);
+				
+				c.getAdventureReservations().remove(adventureReservation);
 				clientRepository.save(c);
+				adventureReservation.getAdventureRevisions().removeAll(null);
 				
 			}
 			//a.setAdventureReservations(null);
 			this.adventureRepository.save(a);
-		}
+		
 		/*for (AdventureReservation ar : list) {
 			//Client c=ar.getClient();
 		//	c.setAdventureReservations(null);
@@ -98,7 +99,7 @@ public class AdventureService {
 		}*/
 	//	list.clear();
 		
-		this.adventureRepository.delete(a);
+		//this.adventureRepository.delete(a);
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
 		Instructor instructor=instructorRepository.getById(instructorId);

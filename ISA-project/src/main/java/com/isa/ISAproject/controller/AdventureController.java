@@ -49,8 +49,8 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);
 	}
-	@RequestMapping(value="delete/{id}",method = RequestMethod.POST)
-	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')" )
+	@RequestMapping(value="/delete/{id}",method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN') || hasRole('INSTRUCTOR')" )
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		this.adventureService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
