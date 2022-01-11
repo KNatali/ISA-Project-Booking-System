@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -42,15 +44,13 @@ public class AdventureFastReservation {
 	private LocalDate validityStart;
 	@Column
 	private LocalDate validityEnd;
-	@OneToMany
+	
+	@ManyToMany
+	@JoinTable(name="adventure_fast_reservation_additional_items",joinColumns = @JoinColumn(name = "adventure_fast_reservation_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "additional_item_id", referencedColumnName = "id"))
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	
 	
-	
-
-
-
-
 	public Long getId() {
 		return id;
 	}
