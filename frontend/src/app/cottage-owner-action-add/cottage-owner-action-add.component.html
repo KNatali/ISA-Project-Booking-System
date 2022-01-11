@@ -38,7 +38,7 @@
           </span>
         </div>
         <div class="mb-3">
-          <label for="guests" class="form-label">Number og guests:</label>
+          <label for="guests" class="form-label">Number of guests:</label>
           <input type="number" formControlName="guests" [(ngModel)]="newAction.maxPersons" class="form-control">
           <span class="text-danger"
             *ngIf="(registerFormControl.guests.touched ) && registerFormControl.guests.errors?.required">

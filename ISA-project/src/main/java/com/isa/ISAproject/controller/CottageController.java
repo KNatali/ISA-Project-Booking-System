@@ -110,6 +110,7 @@ public class CottageController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@RequestMapping(value="api/cottages/add/{id}",method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
 	public ResponseEntity<?>  addCottage(@RequestBody CottageAddDTO dto,@PathVariable Long id){
 		this.cottageService.addCottage(id, dto);
 			return new ResponseEntity<>(HttpStatus.OK);
