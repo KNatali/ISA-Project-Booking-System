@@ -260,3 +260,6 @@ insert into adventure_subscribers(adventure_id,client_id) values (1,8);
 
 insert into adventure_complaint(description,client_id,adventure_id) values('Instructor was very unpolite and rude!',5,1);
 insert into adventure_complaint(description,client_id,adventure_id) values('Service is too expensive. Nothing is like on pictures',8,1);
+
+insert into revision(grade,revision,type) values(7,'Boat was very dirty','Unchecked');
+insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);

@@ -162,6 +162,7 @@ import { CottageOwnerReservationReportComponent } from './cottage-owner-reservat
 import { CottageOwnerDeleteProfileComponent } from './cottage-owner-delete-profile/cottage-owner-delete-profile.component';
 import { CottageOwnerCalendarComponent } from './cottage-owner-calendar/cottage-owner-calendar.component';
 import { CottageOwnerAnalyticsComponent } from './cottage-owner-analytics/cottage-owner-analytics.component';
+import { AdminRevisionsComponent } from './admin-revisions/admin-revisions.component';
 
 
 
@@ -308,7 +309,8 @@ import { CottageOwnerAnalyticsComponent } from './cottage-owner-analytics/cottag
     CottageOwnerReservationReportComponent,
     CottageOwnerDeleteProfileComponent,
     CottageOwnerCalendarComponent,
-    CottageOwnerAnalyticsComponent
+    CottageOwnerAnalyticsComponent,
+    AdminRevisionsComponent
 
 
 

@@ -21,6 +21,10 @@
         <a [ngClass]="{ 'is-active': activeTab === 'CLIENT_COMPLAINT' }" (click)="changeTab('CLIENT_COMPLAINT')">Client
           Complaint </a>
       </li>
+      <li>
+        <a [ngClass]="{ 'is-active': activeTab === 'REVISIONS' }" (click)="changeTab('REVISIONS')">Client
+          Revisions </a>
+      </li>
     </ul>
 
 
@@ -39,6 +43,9 @@
     </div>
     <div *ngIf="activeTab == 'CLIENT_COMPLAINT'">
       <app-admin-client-complaints></app-admin-client-complaints>
+    </div>
+    <div *ngIf="activeTab == 'REVISIONS'">
+      <app-admin-revisions></app-admin-revisions>
     </div>
 
 
