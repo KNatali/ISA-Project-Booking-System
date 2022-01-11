@@ -4,8 +4,8 @@ import { Cottage } from "./cottage";
 
 export interface CottageReservationInterface {
     id?: number;
-    reservationStart: Date;
-    reservationEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -15,8 +15,8 @@ export interface CottageReservationInterface {
 }
 export class CottageReservation implements CottageReservationInterface {
     id?: number;
-    reservationStart: Date;
-    reservationEnd: Date;
+    reservationStart: string;
+    reservationEnd: string;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];

@@ -16,7 +16,7 @@ export class CottageOwnerUpcomingReservationsComponent implements OnInit {
     this.getReservations();
   }
   getReservations() {
-    this.cottageOwnerService.getCottageOwnerReservations(this.id)
+    this.cottageOwnerService.getUpcomingCottageOwnerReservations(this.id)
       .subscribe(res => this.reservations = res)
   }
 

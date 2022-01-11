@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AnalyticsService;
+import com.isa.ISAproject.service.CottageOwnerService;
 import com.isa.ISAproject.service.InstructorService;
 
 @CrossOrigin("*")
@@ -36,6 +38,8 @@ public class AnalyticsController {
 	private AnalyticsService analyticsService;
 	@Autowired
 	private InstructorService instructorService;
+	@Autowired
+	private CottageOwnerService cottageOwnerService;
 	
 	@RequestMapping(value="api/adventureReservation/periodEarnings",method = RequestMethod.POST,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -70,5 +74,33 @@ public class AnalyticsController {
 	public @ResponseBody Double instructrAverageGrade(@PathVariable(name="id") Long id){
 		
 		return analyticsService.instructrAverageGrade(id);
+	}
+	
+	/**/
+	
+	@RequestMapping(value="api/cottageReservation/cottageOwnerEarnings/{id}",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public @ResponseBody Double getCottageOwnerPeriodEarnings(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+		
+		return analyticsService.getCottageOwnerEarnings(dto,id);
+	}
+	@RequestMapping(
+			value="api/cottageOwner/reservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<List<CottageReservationDTO>> getActiveReservationsCottage(@PathVariable(name="id") Long id){
+		List<CottageReservationDTO> list=new ArrayList<>();
+		list=this.analyticsService.getCottageOwnerReservations(id);
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/cottageOwner/averageGrade/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public @ResponseBody Double cottageOwnerAverageGrade(@PathVariable(name="id") Long id){
+		
+		return analyticsService.cottageOwnerAverageGrade(id);
 	}
 }
