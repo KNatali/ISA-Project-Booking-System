@@ -24,6 +24,8 @@ import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.PasswordChangeDTO;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Cottage;
@@ -124,7 +126,7 @@ public class CottageOwnerController {
 			}
 			return new ResponseEntity<>(cottagesDTO,HttpStatus.OK);
 	}
-	@RequestMapping(
+	/*@RequestMapping(
 			value="api/cottageOwners/reservations/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('COTTAGE_OWNER')")
@@ -142,7 +144,7 @@ public class CottageOwnerController {
 		List<CottageFastReservationDTO> list=new ArrayList<>();
 		list=this.cottageOwnerService.getFastReservations(id);
 		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
+	}*/
 	
 	@RequestMapping(
 			value="api/cottageOwners/reservationClient/{id}",method = RequestMethod.GET,
@@ -233,5 +235,14 @@ public class CottageOwnerController {
 		list=this.cottageOwnerService.getCompletedReservations(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottageOwners/changePassword/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<CottageOwnerProfileDTO> changePassword(@RequestBody PasswordChangeDTO dto,@PathVariable Long id){
+		CottageOwnerProfileDTO cottageOwnerDTO=cottageOwnerService.changePassword(id, dto);
+		if(cottageOwnerDTO==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(cottageOwnerDTO,HttpStatus.OK);
 	}
 }

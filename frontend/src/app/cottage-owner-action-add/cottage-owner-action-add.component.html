@@ -65,10 +65,23 @@
               *required
             </span>
           </div>
+
+          <!-- <label for="name" class="form-label">Additional Items:</label>
+          <div *ngFor="let item of additionalItems; let i=index">
+            <br>
+            <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+            {{item.name}}
+
+          </div>
+-->
         </div>
       </form>
       <div class="column">
         <h3>Additional items:</h3>
+        <!--
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          Add additional item
+        </button>-->
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -100,7 +113,6 @@
                 <label for="name" class="form-label">Name:</label>
                 <input [(ngModel)]="newAdditionalItem.name" type="text" formControlName="name" class="form-control">
               </div>
-
             </form>
           </div>
           <div class="modal-footer">
@@ -112,5 +124,6 @@
     </div>
     <button [disabled]="!formValue.valid" class="col-md-12 " mat-button id="submit"
       (click)="addAction()">Submit</button>
+
   </div>
 </div>

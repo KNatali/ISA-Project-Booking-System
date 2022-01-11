@@ -46,7 +46,7 @@ export class CottageService {
     return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `rules` + `/${id}`);
   }
   getCottageAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlCottage}/` + `additionalItems` + `/${id}`);
+    return this.http.get<AdditionalItem[]>(`${this.urlCottage}/` + `cottageAdditionalItems` + `/${id}`);
   }
   updateCottage(id: number, data: Cottage): Observable<Cottage> {
     return this.http.post<Cottage>(`${this.urlCottage}/${id}`, data);

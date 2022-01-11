@@ -91,9 +91,4 @@ public class AdventureFastReservationDTO {
 		this.adventure = adventure;
 		this.additionalItems = additionalItems;
 	}
-	
-	
-	
-	
-	
 }

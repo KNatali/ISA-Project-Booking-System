@@ -30,6 +30,8 @@ public class TimePeriod {
 	
 	@ManyToMany(mappedBy = "unavailability")
 	private Set<Instructor> instructors=new HashSet<>();
+	@ManyToMany(mappedBy = "unavailability")
+	private Set<CottageOwner> cottageOwners=new HashSet<>();
 	public LocalDateTime getStart() {
 		return start;
 	}
@@ -69,7 +71,13 @@ public class TimePeriod {
 	public void setInstructors(Set<Instructor> instructors) {
 		this.instructors = instructors;
 	}
+	public Set<CottageOwner> getCottageOwners() {
+		return cottageOwners;
+	}
 
+	public void setCottageOwners(Set<CottageOwner> cottageOwners) {
+		this.cottageOwners = cottageOwners;
+	}
 	
 	public TimePeriod(Long id, LocalDateTime start, LocalDateTime end, UnavailabilityType type) {
 		super();

@@ -1,9 +1,12 @@
 package com.isa.ISAproject.mapper;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
 import com.isa.ISAproject.model.AdditionalItem;
@@ -17,9 +20,13 @@ public class CottageFastReservationMapper {
 		Set<AdditionalItemDTO> items=new HashSet<>();
 		for (AdditionalItem i : c.getAdditionalItems()) {
 			AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
-			items.add(dto);	
+			items.add(dto);
+			
 		}
-		CottageFastReservationDTO dto=new CottageFastReservationDTO(c.getId(),c.getReservationStart(),c.getDuration(),c.getMaxPersons(),c.getPrice(),c.getValidityEnd(),c.getValidityEnd(),cottage,items);
-	return dto;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		CottageFastReservationDTO dto=new CottageFastReservationDTO(c.getId(),c.getReservationStart().format(formatter),c.getReservationEnd().format(formatter),c.getDuration(),c.getMaxPersons(),c.getPrice(),c.getValidityStart().format(formatter1),c.getValidityEnd().format(formatter1),cottage,items);
+		return dto;
 	}
 }

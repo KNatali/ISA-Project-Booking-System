@@ -22,7 +22,8 @@ public class Client extends User{
 	private List<CottageReservation> cottageReservations;
 	@ManyToMany(mappedBy = "subscribers")
 	private Set<Adventure> subscribedAdventures=new HashSet<>();
-	
+	@ManyToMany(mappedBy = "subscribers")
+	private Set<Cottage> subscribedCottages=new HashSet<>();
 	
 	public List<AdventureReservation> getAdventureReservations() {
 		return adventureReservations;
@@ -62,7 +63,7 @@ public class Client extends User{
 	}
 	public void setCottageReservations(List<CottageReservation> cottageReservations) {
 		this.cottageReservations = cottageReservations;
-	}	
+	}
 	
 	public Client() {}
 	public Client(String username, String password, String email, String firstName, String lastName,

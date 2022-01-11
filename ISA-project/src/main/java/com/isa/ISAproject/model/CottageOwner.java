@@ -8,6 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,6 +20,12 @@ public class CottageOwner extends User{
 	private double grade;
 	@OneToMany(mappedBy="cottageOwner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Cottage> cottages=new HashSet<>();
+	@ManyToMany(cascade =CascadeType.ALL)
+	 @JoinTable(
+	            name = "cottageOwner_unavailability",
+	            joinColumns = @JoinColumn(name = "cottageOwner_id"),
+	            inverseJoinColumns = @JoinColumn(name = "period_id"))
+	private Set<TimePeriod> unavailability;
 
 	public Set<Cottage> getCottages() {
 		return cottages;
@@ -29,6 +38,14 @@ public class CottageOwner extends User{
 	public CottageOwner(Set<Cottage> cottages) {
 		super();
 		this.cottages = cottages;
+	}
+	
+	public Set<TimePeriod> getUnavailability() {
+		return unavailability;
+	}
+
+	public void setUnavailability(Set<TimePeriod> unavailability) {
+		this.unavailability = unavailability;
 	}
 	
 	public CottageOwner() {}
