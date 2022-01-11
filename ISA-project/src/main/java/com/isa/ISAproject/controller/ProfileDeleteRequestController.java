@@ -78,6 +78,7 @@ public class ProfileDeleteRequestController {
 	}
 	
 	@RequestMapping(value="api/admin/rejectProfileDeleteRequest",method = RequestMethod.PUT,params= {"message"},consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
 	public ResponseEntity<?> rejectProfileDeleteRequest(@RequestBody ProfileDeleteRequestDTO dto,@RequestParam String message){
 
 		try {

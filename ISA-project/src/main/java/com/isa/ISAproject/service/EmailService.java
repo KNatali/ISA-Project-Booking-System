@@ -80,7 +80,7 @@ public class EmailService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(dto.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("System message");
+		mail.setSubject("Fun Booking");
 		mail.setText("Your request has been rejected. Here is the reason:"+dto.getMessage());
 		javaMailSender.send(mail);
 
@@ -93,7 +93,7 @@ public class EmailService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("System message");
+		mail.setSubject("Fun Booking");
 		mail.setText("Your registration request has been accepted. Now you can log in!");
 		javaMailSender.send(mail);
 
@@ -106,7 +106,7 @@ public class EmailService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("System message");
+		mail.setSubject("Fun Booking");
 		mail.setText(message);
 		javaMailSender.send(mail);
 

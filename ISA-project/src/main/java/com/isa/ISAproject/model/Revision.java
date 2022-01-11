@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Revision {
@@ -17,6 +18,9 @@ public class Revision {
 	private double grade;
 	@Column
 	private String revision;
+	
+	
+	
 	@Enumerated(EnumType.STRING)
 	private RevisionType type;
 	public Long getId() {
@@ -43,12 +47,15 @@ public class Revision {
 	public void setType(RevisionType type) {
 		this.type = type;
 	}
+	
+	
 	public Revision(Long id, double grade, String revision, RevisionType type) {
 		super();
 		this.id = id;
 		this.grade = grade;
 		this.revision = revision;
 		this.type = type;
+		
 	}
 	public Revision() {
 		super();

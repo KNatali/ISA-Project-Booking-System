@@ -97,5 +97,11 @@ export class AdminService {
     getAllAdventureRevisions(): Observable<AdventureRevision[]> {
         return this.http.get<AdventureRevision[]>(`${this.urlAdmin}/allAdventureRevisions`);
     }
+    acceptAdventureResvision(revision: AdventureRevision) {
+        return this.http.post(`${this.urlAdmin}/acceptAdventureRevision`, revision);
+    }
+    rejectAdventureResvision(revision: AdventureRevision) {
+        return this.http.post(`${this.urlAdmin}/rejectAdventureRevision`, revision);
+    }
 
 }

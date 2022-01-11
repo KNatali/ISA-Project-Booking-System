@@ -33,28 +33,29 @@ export class AdminRevisionsComponent implements OnInit {
       .subscribe(res => this.adventureRevisions = res);
   }
 
-  accept(request: ProfileDeleteRequest, id: any) {
-    /*this.adminService.acceptProfileDeleteRequests(request)
+  accept(revision: AdventureRevision, id: any) {
+    this.adminService.acceptAdventureResvision(revision)
       .subscribe(res => {
-        this.requests.forEach((request, index) => {
-          if (request.id == id) this.requests.splice(index, 1);
+        this.adventureRevisions.forEach((revision, index) => {
+          if (revision.id == id) this.adventureRevisions.splice(index, 1);
         });
-        alert("Successfully sent message to accepted user!")
+        alert("Successfully accepted revision! It will become public")
       }, error => {
         alert("Error! Please try again!");
       });
-*/
+
   }
 
-  reject(request: ProfileDeleteRequest, id: any) {
-    /*
-        sessionStorage.setItem("profileDeleteRequest", JSON.stringify(request));
-    
-        this.requests.forEach((request, index) => {
-          if (request.id == id) this.requests.splice(index, 1);
+  reject(revision: AdventureRevision, id: any) {
+    this.adminService.rejectAdventureResvision(revision)
+      .subscribe(res => {
+        this.adventureRevisions.forEach((revision, index) => {
+          if (revision.id == id) this.adventureRevisions.splice(index, 1);
         });
-
-        */
+        alert("Successfully rejected revision!")
+      }, error => {
+        alert("Error! Please try again!");
+      });
   }
 
 }

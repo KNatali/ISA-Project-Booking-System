@@ -32,12 +32,14 @@ public class RevisionDTO {
 	public void setType(RevisionType type) {
 		this.type = type;
 	}
+	
 	public RevisionDTO(Long id, double grade, String revision, RevisionType type) {
 		super();
 		this.id = id;
 		this.grade = grade;
 		this.revision = revision;
 		this.type = type;
+		
 	}
 	public RevisionDTO() {
 		super();
