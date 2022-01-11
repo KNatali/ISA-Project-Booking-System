@@ -30,8 +30,8 @@
   
           <td>{{ cottage.grade}}</td>
           <td><button mat-button [routerLink]="['/cottageOwner/cottages',cottage.id]"><a>View</a></button></td>
-          <td><button mat-button [routerLink]="['/cottageOwner/cottages/edit',cottage.id]"><a>Edit</a></button></td>
-          <td><button mat-button id="delete"><a>Delete</a></button></td>
+          <td><button mat-button (click)="edit(cottage.id)"><a>Edit</a></button></td>
+          <td><button mat-button id="delete" (click)="delete(cottage.id)"><a>Delete</a></button></td>
         </tr>
       </tbody>
     </table>
