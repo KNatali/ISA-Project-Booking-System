@@ -85,6 +85,7 @@ public class AnalyticsController {
 		
 		return analyticsService.getCottageOwnerEarnings(dto,id);
 	}
+
 	@RequestMapping(
 			value="api/cottageOwner/reservations/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)

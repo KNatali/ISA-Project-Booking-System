@@ -54,6 +54,9 @@
           <label for="biography" class="form-label">Choose main picture:</label>
           <input type="file" (change)="onFileChanged($event)">
         </div>
+        <div class="mb-3">
+          <input type="button" (click)="onUpload()" value="upload">
+        </div>
       </form>
     </div>
     <div class="columns">

@@ -122,6 +122,8 @@ public class CottageService {
 		address.setStreet(dto.getAddress().getStreet());
 		address.setCity(dto.getAddress().getCity());
 		address.setState(dto.getAddress().getState());
+		address.setLatitude(dto.getAddress().getLatitude());
+		address.setLongitude(dto.getAddress().getLongitude());
 		this.addressRepository.save(address);
 		Set<Cottage> cottages=cottageOwner.getCottages();
 		Set<AdditionalItem> items=new HashSet<>();
@@ -136,7 +138,7 @@ public class CottageService {
 			rules.add(c);
 		}
 		this.ruleRepository.saveAll(rules);
-		Cottage c=new Cottage(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),cottageOwner,"",null,dto.getMaxPersons(),rules,dto.getCancellationPercentage(),null,items,null);
+		Cottage c=new Cottage(dto.getId(),dto.getName(),address,dto.getDescription(),0,dto.getPrice(),cottageOwner,dto.getMainPicture(),null,dto.getMaxPersons(),rules,dto.getCancellationPercentage(),null,items,null);
 		this.cottageRepository.save(c);
 	}
 	

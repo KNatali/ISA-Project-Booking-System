@@ -166,7 +166,6 @@ public class AnalyticsService {
 		double grade=0;
 		int count=0;
 		double averageGrade=0;
-			
 		for(Cottage c:cottages) {
 			if(c.getGrade()!=0) {
 				grade+=c.getGrade();
