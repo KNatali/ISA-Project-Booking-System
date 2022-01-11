@@ -24,17 +24,17 @@ public class CottageReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
+	@Column
 	private LocalDateTime date;
 	//@Column(nullable=false)
 	//private LocalTime time;
-	@Column(nullable=false)
+	@Column
 	private int duration;
-	@Column(nullable=false)
+	@Column
 	private int maxPersons;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
-	@Column(nullable=false)
+	@Column
 	private double price;
 	@ManyToOne
 	private Client client;
