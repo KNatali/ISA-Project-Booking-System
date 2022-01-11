@@ -134,9 +134,13 @@ export class InstructorActionAddComponent implements OnInit {
     this.adventureReservationService.saveFastReservation(this.newAction)
       .subscribe(res => {
         alert("Sucessfully added new action!");
-        this.router.navigate(['/instructor/:id']);
+        this.router.navigate(['']);
       }, error => {
-        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
+        if (error.status = "500")
+          alert("The selected time period overlaps with the previously entered one! Please choose another one!");
+        else
+          alert("Something went wrong! Try again!")
+        //alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
       });
   }
 

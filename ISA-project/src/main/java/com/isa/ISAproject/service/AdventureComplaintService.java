@@ -3,9 +3,12 @@ package com.isa.ISAproject.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.controller.UserController;
@@ -44,20 +47,20 @@ public class AdventureComplaintService {
 		
 	}
 	
-	public void answerAdventureComplaints(AdventureComplaintDTO dto,String message){
+	public void answerAdventureComplaints(AdventureComplaintDTO dto,String message) throws MailException, InterruptedException,OptimisticLockException {
 		
-				try {
+				
 					System.out.println("Thread id: " + Thread.currentThread().getId());
 					emailService.sendMessage(dto.getClient().getEmail(),message);
-				}catch( Exception e ){
-					logger.info("Greska prilikom slanja emaila: " + e.getMessage());
-				}
-		try {
+				
+					
+				
+		
 			System.out.println("Thread id: " + Thread.currentThread().getId());
 			emailService.sendMessage(dto.getAdventure().getInstructor().getEmail(),message);
-		}catch( Exception e ){
-			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
-		}
+	
+		
+	
 		AdventureComplaint ac=adventureComplaintRespository.getById(dto.getId());
 		adventureComplaintRespository.delete(ac);
 		

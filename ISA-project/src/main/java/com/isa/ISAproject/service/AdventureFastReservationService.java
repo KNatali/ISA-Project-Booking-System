@@ -1,5 +1,6 @@
 package com.isa.ISAproject.service;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +78,8 @@ public class AdventureFastReservationService {
 		
 	}
 	
-	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) throws Exception {
+	@Transactional(readOnly=false)
+	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
@@ -94,8 +99,8 @@ public class AdventureFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId())==false)
-			return null;
+		timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId());
+			
 		
 		
 		AdventureFastReservation fast=new AdventureFastReservation(dto.getId(),adventure,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);

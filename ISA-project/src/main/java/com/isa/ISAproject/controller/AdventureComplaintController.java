@@ -2,10 +2,13 @@ package com.isa.ISAproject.controller;
 
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +42,12 @@ public class AdventureComplaintController {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
 	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody AdventureComplaintDTO dto,@RequestParam String message){
-		adventurComplaintService.answerAdventureComplaints(dto,message);
+		try {
+			adventurComplaintService.answerAdventureComplaints(dto,message);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}

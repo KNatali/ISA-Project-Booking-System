@@ -143,6 +143,7 @@ export class InstructorAddReservationComponent implements OnInit {
     this.adventureReservationService.saveReservation(this.newReservation)
       .subscribe(res => {
         alert("Sucessfully added new reservation!");
+        this.router.navigate(['']);
 
       }, error => {
         alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
