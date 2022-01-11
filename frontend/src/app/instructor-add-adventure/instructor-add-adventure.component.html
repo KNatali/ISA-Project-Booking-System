@@ -15,44 +15,84 @@
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
           <input type="text" [(ngModel)]="adventure.name" formControlName="name" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.name.touched ) && registerFormControl.name.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="street" class="form-label">Street:</label>
           <input type="text" [(ngModel)]="adventure.address.street" formControlName="street" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.street.touched ) && registerFormControl.street.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="city" class="form-label">City:</label>
           <input type="text" [(ngModel)]="adventure.address.city" formControlName="city" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.city.touched ) && registerFormControl.city.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="state" class="form-label">State:</label>
           <input type="text" [(ngModel)]="adventure.address.state" formControlName="state" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.state.touched ) && registerFormControl.state.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="state" class="form-label">Coordinate:Latitude:</label>
-          <input type="text" [(ngModel)]="adventure.address.latitude" formControlName="state" class="form-control">
+          <input type="text" [(ngModel)]="adventure.address.latitude" formControlName="latitude" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.latitude.touched ) && registerFormControl.latitude.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="state" class="form-label">Coordinate:Longitude:</label>
-          <input type="text" [(ngModel)]="adventure.address.longitude" formControlName="state" class="form-control">
+          <input type="text" [(ngModel)]="adventure.address.longitude" formControlName="longitude" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.longitude.touched ) && registerFormControl.longitude.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="maxPersons" class="form-label">Max number of guests:</label>
           <input type="number" [(ngModel)]="adventure.maxPersons" formControlName="maxPersons" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.maxPersons.touched ) && registerFormControl.maxPersons.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="price" class="form-label">Price:</label>
           <input type="number" [(ngModel)]="adventure.price" formControlName="price" class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.price.touched ) && registerFormControl.price.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="cancellationPercentage" class="form-label">Cancellation Policy(%):</label>
           <input type="number" [(ngModel)]="adventure.cancellationPercentage" formControlName="cancellationPercentage"
             class="form-control">
+          <span class="text-danger"
+            *ngIf="(registerFormControl.cancellationPercentage.touched ) && registerFormControl.cancellationPercentage.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description:</label>
           <textarea type="textarea" [(ngModel)]="adventure.description" formControlName="description"
             class="form-control"></textarea>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.description.touched ) && registerFormControl.description.errors?.required">
+            *required
+          </span>
         </div>
         <div class="mb-3">
           <label for="biography" class="form-label">Choose main picture:</label>
