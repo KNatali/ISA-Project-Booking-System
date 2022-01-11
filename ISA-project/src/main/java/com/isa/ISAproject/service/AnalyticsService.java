@@ -11,12 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
+import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.model.CottageOwner;
+import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
+import com.isa.ISAproject.repository.CottageReservationRepository;
 
 @Service
 public class AnalyticsService {
@@ -29,7 +35,12 @@ public class AnalyticsService {
 	@Autowired
 	private AdventureReservationRepository adventureReservationRepository;
 
-
+	@Autowired
+	private CottageReservationService cottageReservationService;
+	@Autowired
+	private CottageOwnerService cottageOwnerService;
+	@Autowired
+	private CottageReservationRepository cottageReservationRepository;
 	
 	public Double getAdventureEarnings(TimePeriodDTO dto){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -99,7 +110,70 @@ public class AnalyticsService {
 		averageGrade=grade/count;
 		return averageGrade;
 	}
+	
+	/**/
+	
+	public Double getCottageEarnings(TimePeriodDTO dto){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		List<CottageReservation> list=this.cottageReservationService.findAll();
+		
+		double earnings=0;
+		for (CottageReservation c : list) {
+			if(c.getReservationEnd().isAfter(start) && c.getReservationEnd().isBefore(end) )
+				earnings+=c.getSystemEarning();
+		}
+		return earnings;
+	}
+	public Double getCottageOwnerEarnings(TimePeriodDTO dto,Long id){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		
+		List<CottageReservation> temp=new ArrayList<>();
+		List<CottageReservation> reservations=cottageReservationRepository.findAll();
+		for (CottageReservation c : reservations) {
+			if(c.getCottage().getCottageOwner().getId()==id)
+				temp.add(c);
+		}
+		double earnings=0;
+		for (CottageReservation c : temp) {
+			if(c.getReservationEnd().isAfter(start) && c.getReservationEnd().isBefore(end))
+				earnings+=(c.getPrice()-c.getSystemEarning());
+		}
+		return earnings;
+	}
+	
+	public List<CottageReservationDTO> getCottageOwnerReservations(Long id){
+		List<CottageReservationDTO> res=new ArrayList<>();
+		List<CottageReservation> temp=new ArrayList<>();
+		List<CottageReservation> reservations=cottageReservationRepository.findAll();
+		for (CottageReservation c : reservations) {
+			if(c.getCottage().getCottageOwner().getId()==id)
+				temp.add(c);
+		}
+		for (CottageReservation c : temp) {
+			res.add(CottageReservationMapper.convertToDTO(c));
+		}
+		return res;	
+	}
+	
+	public Double cottageOwnerAverageGrade(Long id) {
+		Optional<CottageOwner> itemOptionals=this.cottageOwnerService.findById(id);
+		CottageOwner cottageOwner=itemOptionals.get();
+		Set<Cottage> cottages=cottageOwner.getCottages();
+		double grade=0;
+		int count=0;
+		double averageGrade=0;
+			
+		for(Cottage c:cottages) {
+			if(c.getGrade()!=0) {
+				grade+=c.getGrade();
+				count++;
+			}
+		}
+		averageGrade=grade/count;
+		return averageGrade;
+	}
 }
-
-
-

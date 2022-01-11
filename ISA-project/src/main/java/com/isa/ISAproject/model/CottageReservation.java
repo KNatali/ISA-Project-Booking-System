@@ -43,8 +43,8 @@ public class CottageReservation {
     @Column(name = "reservationEnd", nullable = false)
     private LocalDateTime reservationEnd;
 	
-	@OneToMany
-	private Set<CottageComplaint> cottageComplaints=new HashSet<>();
+    @OneToMany
+	private List<CottageComplaint> cottageComplaints;
 	
 	//
 	
@@ -63,6 +63,9 @@ public class CottageReservation {
     
     @OneToOne 
 	private CottageOwnerReport ownerReport;
+    
+    @Column
+	private double systemEarning;
     
 	public Long getId() {
 		return id;
@@ -128,11 +131,11 @@ public class CottageReservation {
 		this.client = client;
 	}
 
-	public Set<CottageComplaint> getCottageComplaints() {
+	public List<CottageComplaint> getCottageComplaints() {
 		return cottageComplaints;
 	}
 
-	public void setCottageComplaints(Set<CottageComplaint> cottageComplaints) {
+	public void setCottageComplaints(List<CottageComplaint> cottageComplaints) {
 		this.cottageComplaints = cottageComplaints;
 	}
 	
@@ -177,9 +180,17 @@ public class CottageReservation {
 		this.ownerReport = ownerReport;
 	}
 	
+	public double getSystemEarning() {
+		return systemEarning;
+	}
+
+	public void setSystemEarning(double systemEarning) {
+		this.systemEarning = systemEarning;
+	}
+	
 	public CottageReservation(Long id, LocalDateTime date, int duration, int maxPersons,
 			Set<AdditionalItem> additionalItems, double price, Client client,
-			Set<CottageComplaint> cottageComplaints,Cottage cottage) {
+			List<CottageComplaint> cottageComplaints,Cottage cottage) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -194,7 +205,7 @@ public class CottageReservation {
 	
 	public CottageReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
 			Cottage cottage, int maxPersons, double price, CottageReport report,
-			Set<AdditionalItem> additionalItems, Client client, Set<CottageComplaint> cottageComplaints) {
+			Set<AdditionalItem> additionalItems, Client client, List<CottageComplaint> cottageComplaints) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
@@ -209,4 +220,20 @@ public class CottageReservation {
 	}
 	
 	public CottageReservation() {}
+	
+	public CottageReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
+			Cottage cottage, int numberOfPersons, double price,
+			Set<AdditionalItem> additionalItems, Client client, List<CottageComplaint> cottageComplaints,double earning) {
+		super();
+		this.id = id;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.cottage = cottage;
+		this.maxPersons = numberOfPersons;
+		this.price = price;
+		this.additionalItems = additionalItems;
+		this.client = client;
+		this.cottageComplaints = cottageComplaints;
+		this.systemEarning=earning;
+	}
 }
