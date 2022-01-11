@@ -4,7 +4,7 @@ import { AdditionalItem } from './../model/additionalItem';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
 import { AdventureEquipmentEditComponent } from './../adventure-equipment-edit/adventure-equipment-edit.component';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Adventure } from '../model/adventure';
 import { Instructor } from '../model/instructor';
 import { Address } from '../model/address';
@@ -84,14 +84,16 @@ export class InstructorAddAdventureComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      name: [''],
-      street: [''],
-      city: [''],
-      state: [''],
-      maxPersons: [''],
-      price: [''],
-      cancellationPercentage: [''],
-      description: ['']
+      name: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+      maxPersons: ['', Validators.required],
+      price: ['', Validators.required],
+      cancellationPercentage: ['', Validators.required],
+      description: ['', Validators.required]
 
     })
     this.formValue1 = this.formBuilder.group({
@@ -107,6 +109,9 @@ export class InstructorAddAdventureComponent implements OnInit {
       rule: [''],
 
     })
+  }
+  get registerFormControl() {
+    return this.formValue.controls;
   }
 
   public onFileChanged(event: any) {

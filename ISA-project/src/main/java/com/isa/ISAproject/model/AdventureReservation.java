@@ -49,11 +49,25 @@ public class AdventureReservation {
 	private Client client;
 	@OneToMany
 	private List<AdventureComplaint> adventureComplaints;
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<AdventureRevision> adventureRevisions;
 	@OneToOne
 	private InstructorReport report;
 	@Column
 	private double systemEarning;
 	
+	public List<AdventureRevision> getAdventureRevisions() {
+		return adventureRevisions;
+	}
+
+
+
+	public void setAdventureRevisions(List<AdventureRevision> adventureRevisions) {
+		this.adventureRevisions = adventureRevisions;
+	}
+
+
+
 	public AdventureReservation(Long id, LocalDateTime reservationStart, LocalDateTime reservationEnd,
 			com.isa.ISAproject.model.Adventure adventure, int numberOfPersons, double price,
 			Set<AdditionalItem> additionalItems, Client client, List<AdventureComplaint> adventureComplaints,double earning) {

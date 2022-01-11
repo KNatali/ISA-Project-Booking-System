@@ -56,8 +56,20 @@ public class AdventureFastReservationService {
 		
 		List<AdventureFastReservationDTO> res=new ArrayList<>();
 		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (AdventureFastReservation a : reservations) {
+			//za one akcije koje ne vaze vise treba izbirsati taj period iz nedostupnosti insturktora
+			if( a.getValidityEnd().isBefore(LocalDate.now()) && a.getAdventure().getInstructor().getId()==id) {
+				List<TimePeriodDTO> periods=timePeriodService.findUnavailabilityByInstructor(id);
+				for (TimePeriodDTO t : periods) {
+					LocalDateTime start = LocalDateTime.parse(t.getStart(),formatter);
+					LocalDateTime end = LocalDateTime.parse(t.getEnd(),formatter);
+					if(start.isEqual(a.getReservationStart()) && end.isEqual(a.getReservationEnd())) {
+						timePeriodService.removeUnavailabilityInstructor(t, id);
+						break;
+					}
+				}
+			}
 			if(a.getAdventure().getInstructor().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		}
@@ -70,7 +82,7 @@ public class AdventureFastReservationService {
 		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
 		
 		for (AdventureFastReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getAdventure().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		
 		}

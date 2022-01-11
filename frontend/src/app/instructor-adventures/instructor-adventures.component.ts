@@ -1,3 +1,4 @@
+import { AdventureService } from './../service/adventure.service';
 import { HttpClient } from '@angular/common/http';
 import { ReadKeyExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
@@ -40,7 +41,7 @@ export class InstructorAdventuresComponent implements OnInit {
   @Input() id: number;
   upcomingReservations: AdventureReservation[];
   activeReservations: AdventureReservation[];
-  constructor(private http: HttpClient, private instructorService: InstructorService, private router: Router) { }
+  constructor(private http: HttpClient, private instructorService: InstructorService, private router: Router, private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.adventures = [];
@@ -106,17 +107,23 @@ export class InstructorAdventuresComponent implements OnInit {
   }
 
   edit(id: any) {
-    if (this.checkReservation(id) > 0) {
-      alert("Can't edit! This adventure has reservation!")
-    }
-    else
-      this.router.navigate(['/instructor/adventures/edit', id]);
+    this.router.navigate(['/instructor/adventures/edit', id]);
+    /* if (this.checkReservation(id) > 0) {
+      
+       alert("Can't edit! This adventure has reservation!")
+     }
+     else
+       this.router.navigate(['/instructor/adventures/edit', id]);*/
   }
 
   delete(id: any) {
-    if (this.checkReservation(id) > 0) {
-      alert("Can't delete! This adventure has reservation!")
-    }
+    this.adventureService.deleteAdventure(id).subscribe();
+    /*  if (this.checkReservation(id) > 0) {
+        alert("Can't delete! This adventure has reservation!")
+      }
+      else {
+        this.adventureService.deleteAdventure(id).subscribe();
+      }*/
 
   }
 

@@ -307,6 +307,9 @@ export class InstructorAdventureEditComponent implements OnInit {
     this.editFastReservation.action = this.selectedAction;
     this.adventureReservationService.editFastReservation(this.editFastReservation)
       .subscribe(res => {
+        let ref = document.getElementById('cancelAction');
+        ref?.click();
+        this.formAction.reset();
         alert("Sucessfully added new action!");
 
       }, error => {
