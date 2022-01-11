@@ -1,5 +1,6 @@
 package com.isa.ISAproject.service;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,7 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.TimePeriodDTO;
+
+import com.isa.ISAproject.exception.ResourceConflictException;
+
 import com.isa.ISAproject.model.CottageOwner;
+
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
@@ -33,7 +38,7 @@ public class TimePeriodService {
 	private CottageOwnerRepository cottageOwnerRepository;
 	
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, NotFoundException {
+	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
@@ -47,7 +52,7 @@ public class TimePeriodService {
 				periods=instructor.getUnavailability();
 				for (TimePeriod t : periods) {
 					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
-						throw new NotFoundException("Overlaps time period");
+						throw new DateTimeException("Overlapping");
 					}
 				}
 			}

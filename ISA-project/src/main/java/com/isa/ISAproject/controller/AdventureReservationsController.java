@@ -1,9 +1,11 @@
 package com.isa.ISAproject.controller;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.service.AdventureReservationService;
+
+import javassist.NotFoundException;
 
 @CrossOrigin("*")
 @RestController
@@ -85,10 +89,16 @@ public class AdventureReservationsController {
 	@RequestMapping(value="api/adventureReservation/addReservation",method = RequestMethod.PUT,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('INSTRUCTOR')")
-	public ResponseEntity<AdventureReservationDTO>  addAdventureReservation(@RequestBody AdventureReservationDTO dto) throws Exception{
-		AdventureReservationDTO fastDTO=this.adventureReservationService.addAdventureReservation( dto);
-		if(fastDTO==null)
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<AdventureReservationDTO>  addAdventureReservation(@RequestBody AdventureReservationDTO dto) {
+		AdventureReservationDTO fastDTO;
+		try {
+			fastDTO = this.adventureReservationService.addAdventureReservation( dto);
+		} catch (PessimisticLockingFailureException e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		} catch (DateTimeException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
 		
 	}

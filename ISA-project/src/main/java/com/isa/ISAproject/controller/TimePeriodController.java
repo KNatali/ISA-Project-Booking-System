@@ -1,5 +1,6 @@
 package com.isa.ISAproject.controller;
 
+import java.time.DateTimeException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class TimePeriodController {
 		try {
 			timePeriodService.setUnavailabilityInstructor(dto,id);
 		}catch(PessimisticLockingFailureException e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}catch(DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}catch(NotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 		

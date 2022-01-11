@@ -1,5 +1,6 @@
 package com.isa.ISAproject.service;
 
+import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,8 +11,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
@@ -32,6 +35,8 @@ import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.SystemEarningsRepository;
+
+import javassist.NotFoundException;
 
 @Service
 public class AdventureReservationService {
@@ -112,7 +117,8 @@ public class AdventureReservationService {
 		return res;
 	}
 	
-	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws Exception {
+	@Transactional(readOnly = false)
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
 		
@@ -125,8 +131,10 @@ public class AdventureReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Reservation);
-		if(timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId())==false)
-			return null;
+		
+		timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId());
+				
+		
 		
 		long days = Duration.between(start, end).toDays();
 		int price=(int) (adventure.getPrice()*days);

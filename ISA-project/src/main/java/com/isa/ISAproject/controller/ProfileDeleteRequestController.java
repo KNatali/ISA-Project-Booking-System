@@ -82,14 +82,7 @@ public class ProfileDeleteRequestController {
 
 		try {
 			profileDeleteRequestService.rejectDeleteRequest(dto,message);
-		} catch (MailException e) {
-			
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}catch(ObjectOptimisticLockingFailureException e) {
+		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}

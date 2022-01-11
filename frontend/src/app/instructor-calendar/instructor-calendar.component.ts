@@ -188,7 +188,7 @@ export class InstructorCalendarComponent implements OnInit {
       this.events.push(this.newEvent);
 
     }, error => {
-      if (error.status = "404")
+      if (error.status = "500")
         alert("The selected time period overlaps with the previously entered one! Please choose another one!");
       else
         alert("Something went wrong! Try again!")

@@ -3,6 +3,8 @@ package com.isa.ISAproject.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
+
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -95,7 +97,7 @@ public class ProfileDeleteRequestService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,ObjectOptimisticLockingFailureException {
+	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,OptimisticLockException {
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Rejected);
 		this.profileDeleteRequestRepository.save(request);
