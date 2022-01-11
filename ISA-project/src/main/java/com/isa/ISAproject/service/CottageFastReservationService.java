@@ -1,5 +1,6 @@
 package com.isa.ISAproject.service;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,8 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.CottageDTO;
@@ -94,7 +97,8 @@ public class CottageFastReservationService {
 		
 	}
 	
-	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws Exception {
+	@Transactional(readOnly=false)
+	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException  {
 		Cottage cottage=cottageRepository.getById(dto.getCottage().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
@@ -114,8 +118,7 @@ public class CottageFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getCottageOwner().getId())==false)
-			return null;
+		timePeriodService.setUnavailabilityCottage(time, dto.getCottage().getId());
 		
 		
 		CottageFastReservation fast=new CottageFastReservation(dto.getId(),cottage,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
@@ -158,13 +161,13 @@ public class CottageFastReservationService {
 		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
 		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
 		
-		timePeriodService.removeUnavailabilityCottageOwner(oldPeriod,(long) 1);
+		timePeriodService.removeUnavailabilityCottage(oldPeriod,(long) 1);
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(actionDTO.getReservationStart());
 		time.setEnd(actionDTO.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityCottageOwner(time, actionDTO.getCottage().getCottageOwner().getId())==false)
+		if(timePeriodService.setUnavailabilityCottage(time, actionDTO.getCottage().getCottageOwner().getId())==false)
 			return null;
 		
 		res.setReservationStart(start);

@@ -65,6 +65,14 @@ public class Cottage {
 	@JoinTable(name="cottage_subscribers",joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
 	private Set<Client> subscribers=new HashSet<>();
+	
+	@ManyToMany(cascade =CascadeType.ALL)
+	 @JoinTable(
+	            name = "cottage_unavailability",
+	            joinColumns = @JoinColumn(name = "cottage_id"),
+	            inverseJoinColumns = @JoinColumn(name = "period_id"))
+	private Set<TimePeriod> unavailability;
+
 	public Long getId() {
 		return id;
 	}
@@ -201,6 +209,13 @@ public class Cottage {
 
 	public void setSubscribers(Set<Client> subscribes) {
 		this.subscribers = subscribes;
+	}
+	public Set<TimePeriod> getUnavailability() {
+		return unavailability;
+	}
+
+	public void setUnavailability(Set<TimePeriod> unavailability) {
+		this.unavailability = unavailability;
 	}
 
 	public Cottage(Long id, String name, Address address, String description, double grade, Set<Picture> pictures,

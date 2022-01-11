@@ -54,5 +54,28 @@ public class TimePeriodController {
 		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByInstructor(id);
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
+	
+	/**/
+	
+	@RequestMapping(value="api/cottages/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<?> setUnavailabilityCottage(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+		try {
+			timePeriodService.setUnavailabilityCottage(dto,id);
+		}catch(PessimisticLockingFailureException e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}catch(DateTimeException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);		
+	}
+	
+	@RequestMapping(value="api/cottages/getUnavailability/{id}",method = RequestMethod.GET,produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('COTTAGE_OWNER')")
+	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByCottage(@PathVariable Long id){
+		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByCottage(id);
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
 
 }

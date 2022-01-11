@@ -34,6 +34,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { CottageReservation } from '../model/cottageReservation';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageOwnerService } from '../service/cottageOwner.service';
+import { CottageService } from '../service/cottage.service';
 
 const colors: any = {
   red: {
@@ -110,7 +111,7 @@ export class CottageOwnerCalendarComponent implements OnInit {
   fastReservations: CottageFastReservation[];
   selectedReservation: CottageReservation;
   selectedFastReservation: CottageFastReservation;
-  constructor(private modal: NgbModal, private formBuilder: FormBuilder, private cottageOwnerService: CottageOwnerService, private analyticsService: AnalyticsService) { }
+  constructor(private modal: NgbModal, private formBuilder: FormBuilder, private cottageOwnerService: CottageOwnerService, private cottageService: CottageService, private analyticsService: AnalyticsService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
@@ -134,7 +135,7 @@ export class CottageOwnerCalendarComponent implements OnInit {
   }
 
   getUnavailability() {
-    this.cottageOwnerService.getUnavailabilityByCottageOwner(this.id)
+    this.cottageService.getUnavailabilityByCottage(this.id)
       .subscribe(res => {
         this.unvailabilities = res
         this.set();
@@ -168,7 +169,7 @@ export class CottageOwnerCalendarComponent implements OnInit {
   setUnavailability() {
     this.period.start = this.startTime.toLocaleString();
     this.period.end = this.endTime.toLocaleString()
-    this.cottageOwnerService.setUnavailability(this.period, this.id).subscribe(data => {
+    this.cottageService.setUnavailability(this.period, this.id).subscribe(data => {
       this.newEvent = {
         start: new Date(this.startTime),
         end: new Date(this.endTime),

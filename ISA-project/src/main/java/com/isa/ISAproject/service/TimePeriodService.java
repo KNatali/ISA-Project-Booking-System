@@ -16,12 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 
 import com.isa.ISAproject.exception.ResourceConflictException;
-
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageOwner;
 
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
+import com.isa.ISAproject.repository.CottageRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.TimePeriodRepository;
 
@@ -35,7 +36,7 @@ public class TimePeriodService {
 	@Autowired
 	private InstructorRepository instructorRepository;
 	@Autowired
-	private CottageOwnerRepository cottageOwnerRepository;
+	private CottageRepository cottageRepository;
 	
 	@Transactional(readOnly = false)
 	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, DateTimeException {
@@ -109,46 +110,43 @@ public class TimePeriodService {
 	
 /**/
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityCottageOwner(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, NotFoundException {
+	public boolean setUnavailabilityCottage(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		CottageOwner cottageOwner=new CottageOwner();
+		Cottage cottage=new Cottage();
 		
-		cottageOwner=cottageOwnerRepository.findOneById(id);
+		cottage=cottageRepository.findOneById(id);
 		
 		Set<TimePeriod> periods=new HashSet<>();
-			if(cottageOwner.getUnavailability()!=null) {
-				periods=cottageOwner.getUnavailability();
+			if(cottage.getUnavailability()!=null) {
+				periods=cottage.getUnavailability();
 				for (TimePeriod t : periods) {
 					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
-						throw new NotFoundException("Overlaps time period");
+						throw new DateTimeException("Overlapping");
 					}
 				}
 			}
 			//this.timePeriodRepository.save(period);
 			periods.add(period);
-			this.cottageOwnerRepository.save(cottageOwner);
-		
+			this.cottageRepository.save(cottage);
 		return true;
-		
-		
 	}
 	
-	public boolean removeUnavailabilityCottageOwner(TimePeriodDTO dto,Long id) {
+	public boolean removeUnavailabilityCottage(TimePeriodDTO dto,Long id) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		Cottage cottage=cottageRepository.getById(id);
 		Set<TimePeriod> periods=new HashSet<>();
-		if(cottageOwner.getUnavailability()!=null) {
-			periods=cottageOwner.getUnavailability();
+		if(cottage.getUnavailability()!=null) {
+			periods=cottage.getUnavailability();
 			for (TimePeriod t : periods) {
 				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
 					periods.remove(t);
-					this.cottageOwnerRepository.save(cottageOwner);
+					this.cottageRepository.save(cottage);
 					this.timePeriodRepository.delete(period);
 					return true;
 				}
@@ -161,20 +159,17 @@ public class TimePeriodService {
 	
 	
 	
-	public List<TimePeriodDTO> findUnavailabilityByCottageOwner(Long id){
-		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
-		Set<TimePeriod> times=cottageOwner.getUnavailability();
+	public List<TimePeriodDTO> findUnavailabilityByCottage(Long id){
+		Cottage cottage=cottageRepository.getById(id);
+		Set<TimePeriod> times=cottage.getUnavailability();
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-		
 		for (TimePeriod t : times) {
-			
 			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
 			timesDTO.add(dto);
 			
 		}
-		return timesDTO;
-		
+		return timesDTO;		
 	}
 
 }
