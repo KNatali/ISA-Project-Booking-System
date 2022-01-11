@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.isa.ISAproject.model.Boat;
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
 @Repository
 public interface CottageReservationRepository extends JpaRepository<CottageReservation, Long>{
@@ -13,4 +14,5 @@ public interface CottageReservationRepository extends JpaRepository<CottageReser
 	List<CottageReservation> findByOrderByPriceDesc();
 	List<CottageReservation> findByOrderByDurationDesc();
 	List<CottageReservation> findByOrderByReservationStartDesc();
+	List<CottageReservation> findByCottage(Cottage cottage);
 }

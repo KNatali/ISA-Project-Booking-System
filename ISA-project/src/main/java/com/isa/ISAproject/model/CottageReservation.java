@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -45,7 +46,8 @@ public class CottageReservation {
 	
     @OneToMany
 	private List<CottageComplaint> cottageComplaints;
-	
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CottageRevision> cottageRevisions;
 	//
 	
 	//@Column(name = "reservationStart", nullable = false)
@@ -186,6 +188,13 @@ public class CottageReservation {
 
 	public void setSystemEarning(double systemEarning) {
 		this.systemEarning = systemEarning;
+	}
+	public List<CottageRevision> getCottageRevisions() {
+		return cottageRevisions;
+	}
+
+	public void setCottageRevisions(List<CottageRevision> cottageRevisions) {
+		this.cottageRevisions = cottageRevisions;
 	}
 	
 	public CottageReservation(Long id, LocalDateTime date, int duration, int maxPersons,

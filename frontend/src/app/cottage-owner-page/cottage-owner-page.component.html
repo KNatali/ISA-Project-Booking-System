@@ -1,7 +1,7 @@
 
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Overview">
-    <app-cottage-owner-overview></app-cottage-owner-overview>
+    <app-cottage-owner-overview [id]="id"></app-cottage-owner-overview>
   </mat-tab>
   <mat-tab label="Profile">
     <app-cottage-owner-profile [cottageOwner]="cottageOwner" [id]="id"></app-cottage-owner-profile>

@@ -5,6 +5,8 @@ import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
+import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { TimePeriod } from '../model/timePeriod';
 
 @Injectable({
   providedIn: 'root'
@@ -78,5 +80,11 @@ export class CottageService {
   }
   addCottage(id: number, newCottage: Cottage): Observable<Cottage> {
     return this.http.put<Cottage>(`${this.urlCottages}/` + `add` + `/${id}`, newCottage);
+  }
+  setUnavailability(period: TimePeriod, id: number) {
+    return this.http.post<ProfileDeleteRequest>(`${this.urlCottages}/` + `setUnavailability` + `/${id}`, period);
+  }
+  getUnavailabilityByCottage(id: number): Observable<TimePeriod[]> {
+    return this.http.get<TimePeriod[]>(`${this.urlCottages}/` + `getUnavailability` + `/${id}`);
   }
 }

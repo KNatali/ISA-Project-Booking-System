@@ -75,13 +75,13 @@ export class CottageOwnerService {
   }
   sendReservationReport(report: CottageOwnerReport): Observable<CottageOwnerReport> {
     return this.http.post<CottageOwnerReport>(`${this.urlCottageOwner}/` + `sendReservationReport`, report);
-  }*/
+  }
   setUnavailability(period: TimePeriod, id: number) {
     return this.http.post<ProfileDeleteRequest>(`${this.urlCottageOwner}/` + `setUnavailability` + `/${id}`, period);
   }
   getUnavailabilityByCottageOwner(id: number): Observable<TimePeriod[]> {
     return this.http.get<TimePeriod[]>(`${this.urlCottageOwner}/` + `getUnavailability` + `/${id}`);
-  }
+  }*/
   sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
     return this.http.post<ProfileDeleteRequest>(`http://localhost:8090/api/cottageOwners/` + `profileDeleteRequest`, request);
   }

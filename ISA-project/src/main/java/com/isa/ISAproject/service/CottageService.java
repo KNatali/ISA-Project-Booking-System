@@ -24,15 +24,19 @@ import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageBehavioralRule;
 import com.isa.ISAproject.model.CottageOwner;
+import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
+import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.CottageBehavioralRuleRepository;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
 import com.isa.ISAproject.repository.CottageRepository;
+import com.isa.ISAproject.repository.CottageReservationRepository;
 
 @Service
 public class CottageService {
@@ -46,6 +50,10 @@ public class CottageService {
 	private CottageBehavioralRuleRepository ruleRepository;
 	@Autowired
 	private AdditionalItemRepository addtitionalItemRepository;
+	@Autowired
+	private CottageReservationRepository cottageReservationRepository;
+	@Autowired
+	private ClientRepository clientRepository;
 	
 	public List<Cottage> findAll() {
 		return this.cottageRepository.findAll();
@@ -56,7 +64,19 @@ public class CottageService {
 	}
 	public void delete(Long id) {
 		Cottage c=cottageRepository.getById(id);
-		this.cottageRepository.delete(c);
+		//this.cottageRepository.delete(c);
+		List<CottageReservation> list=cottageReservationRepository.findByCottage(c);
+		
+			for (CottageReservation cottageReservation : list) {
+				c.getCottageReservations().remove(cottageReservation);
+				Client client=cottageReservation.getClient();
+				
+				client.getCottageReservations().remove(cottageReservation);
+				clientRepository.save(client);
+				cottageReservation.getCottageRevisions().removeAll(null);
+				
+			}
+			this.cottageRepository.save(c);
 	}
 	public Optional<Cottage> getOne(Long id) {
 		return this.cottageRepository.findById(id);
