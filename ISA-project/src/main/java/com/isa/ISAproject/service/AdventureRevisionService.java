@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.AdventureRevisionDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.RevisionDTO;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.AdventureRevision;
@@ -22,11 +24,15 @@ public class AdventureRevisionService {
 	private AdventureRevisionRepository adventureRevisionRepository;
 	@Autowired
 	private RevisionRepository revisionRepository;
+	@Autowired
+	private EmailService emailService;
+	
 	
 	public List<AdventureRevisionDTO> getAll() {
 		List<AdventureRevision> revisions=adventureRevisionRepository.findAll();
 		List<AdventureRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (AdventureRevision r : revisions) {
+			
 			RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
 			
 			AdventureReservationDTO reservation=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
@@ -35,6 +41,26 @@ public class AdventureRevisionService {
 			}
 		return revisionsDTO;
 	}
+	
+	public void acceptAdventureRevision(AdventureRevisionDTO dto) throws MailException, InterruptedException {
+		AdventureRevision adventureRevision=adventureRevisionRepository.getById(dto.getId());
+		Revision revision=revisionRepository.getById(adventureRevision.getRevision().getId());
+		revision.setType(RevisionType.Accepted);
+		revisionRepository.save(revision);
+		emailService.sendMessage(adventureRevision.getAdventureReservation().getAdventure().getInstructor().getEmail(),"CLient left revision about your adventure:"+adventureRevision.getAdventureReservation().getAdventure().getName()+". Check out your profile!");
+		
+		
+	}
+	
+	public void rejectAdventureRevision(AdventureRevisionDTO dto) {
+		AdventureRevision adventureRevision=adventureRevisionRepository.getById(dto.getId());
+		Revision revision=revisionRepository.getById(adventureRevision.getRevision().getId());
+		revision.setType(RevisionType.Rejected);
+		revisionRepository.save(revision);
+		
+	}
+	
+
 	
 
 }
