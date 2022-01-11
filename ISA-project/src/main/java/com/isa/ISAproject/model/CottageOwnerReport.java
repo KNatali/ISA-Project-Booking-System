@@ -5,19 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CottageOwnerReport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column
 	private String content;
 	@Column 
-	private boolean sanctioned;
+	private boolean checkAdmin;
 	@Column
-	private boolean showedUp;
+	private boolean penal;
+	@Column
+	private boolean checked;
+	@OneToOne
+	private CottageReservation cottageReservation;
+	
 	public Long getId() {
 		return id;
 	}
@@ -29,25 +34,41 @@ public class CottageOwnerReport {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}	
+	public boolean isChecked() {
+		return checked;
 	}
-	public boolean isSanctioned() {
-		return sanctioned;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
-	public void setSanctioned(boolean sanctioned) {
-		this.sanctioned = sanctioned;
+	public CottageReservation getCottageReservation() {
+		return cottageReservation;
 	}
-	public boolean isShowedUp() {
-		return showedUp;
+	public void setCottageReservation(CottageReservation cottageReservation) {
+		this.cottageReservation = cottageReservation;
 	}
-	public void setShowedUp(boolean showedUp) {
-		this.showedUp = showedUp;
-	}
-	public CottageOwnerReport(Long id, String content, boolean sanctioned, boolean showedUp) {
+	
+	public CottageOwnerReport(Long id, String content, boolean checkAdmin, boolean penal,
+			boolean checked,CottageReservation cottageReservation) {
 		super();
 		this.id = id;
 		this.content = content;
-		this.sanctioned = sanctioned;
-		this.showedUp = showedUp;
+		this.checkAdmin = checkAdmin;
+		this.penal = penal;
+		this.checked=checked;
+		this.cottageReservation = cottageReservation;
+	}
+	public boolean isCheckAdmin() {
+		return checkAdmin;
+	}
+	public void setCheckAdmin(boolean checkAdmin) {
+		this.checkAdmin = checkAdmin;
+	}
+	public boolean isPenal() {
+		return penal;
+	}
+	public void setPenal(boolean penal) {
+		this.penal = penal;
 	}
 	public CottageOwnerReport() {
 		super();
