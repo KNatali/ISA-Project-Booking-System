@@ -3,6 +3,7 @@ package com.isa.ISAproject.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageComplaint;
@@ -141,4 +143,15 @@ public class CottageReservationDTO {
 		this.report = report;
 		this.additionalItems = additionalItems;
 	}
+	/*public CottageReservationDTO(CottageReservation cottageReservation) {
+		super();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		this.id = cottageReservation.getId();
+		this.reservationStart = cottageReservation.getReservationStart().format(formatter);
+		this.reservationEnd = cottageReservation.getReservationEnd().format(formatter);
+		this.cottage = new CottageDTO(cottageReservation.getCottage());
+		this.price = cottageReservation.getPrice();
+		this.maxPersons=cottageReservation.getMaxPersons();
+		this.client = new ClientProfileDTO(cottageReservation.getClient());
+	}*/
 }
