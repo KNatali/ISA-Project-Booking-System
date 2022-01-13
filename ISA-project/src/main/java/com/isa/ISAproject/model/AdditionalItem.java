@@ -28,6 +28,9 @@ public class AdditionalItem {
 	@ManyToMany(mappedBy = "items")
 	private Set<Cottage> cottages=new HashSet<>();
 	
+	@ManyToMany(mappedBy = "additionalItems")
+	private Set<Boat> boats=new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -59,6 +62,12 @@ public class AdditionalItem {
 	public void SetCottages(Set<Cottage> cottage) {
 		this.cottages = cottage;
 	}
+	public Set<Boat> getBoats() {
+		return boats;
+	}
+	public void SetBoats(Set<Boat> boat) {
+		this.boats= boat;
+	}
 	public AdditionalItem(Long id, String name, double price,Set<Adventure> adventure) {
 		super();
 		this.id = id;
@@ -72,6 +81,13 @@ public class AdditionalItem {
 		this.name = name;
 		this.price = price;
 		this.cottages=cottage;
+	}
+	public AdditionalItem(Long id, Set<Boat> boat, String name, double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.boats=boat;
 	}
 	public AdditionalItem() {}
 }

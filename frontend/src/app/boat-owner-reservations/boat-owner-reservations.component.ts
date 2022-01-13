@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Address } from '../model/address';
 import { BoatOwner } from '../model/boatOwner';
 import { BoatReservation } from '../model/boatReservation';
 import { Client } from '../model/client';
@@ -32,6 +33,7 @@ export class BoatOwnerReservationsComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
+    address: '',
     grade: 0
 
   });

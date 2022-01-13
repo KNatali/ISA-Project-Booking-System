@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { Boat } from '../model/boat';
+import { BoatBehavioralRules } from '../model/boatBehavioralRules';
+import { BoatFastReservation } from '../model/boatFastReservation';
+import { NavigationEquipment } from '../model/navigationEquipment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,8 @@ import { Boat } from '../model/boat';
 export class BoatService {
   urlBoats = "http://localhost:8090/api/boats";
   urlAdditionalItem = "http://localhost:8090/api/additional-items";
+  urlBoat1 = "http://localhost:8090/api/boatOwners/boats";
+  urlBoat = "http://localhost:8090/api/boatOwner/boat";
 
   constructor(private http: HttpClient) { }
 
@@ -53,5 +58,23 @@ export class BoatService {
   findByCity(city:string):Observable<Boat[]>{
     const params:HttpParams=new HttpParams().append('city',city);
     return this.http.get<Boat[]>(this.urlBoats,{params});
+  }
+  deleteBoat(id: number) {
+    return this.http.delete(`${this.urlBoats}/` + `delete` + `/${id}`);
+  }
+  getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
+    return this.http.get<BoatFastReservation[]>(`${this.urlBoat1}/` + `fastReservations` + `/${id}`);
+  }
+  getBehavioralRules(id: number): Observable<BoatBehavioralRules[]> {
+    return this.http.get<BoatBehavioralRules[]>(`${this.urlBoat1}/` + `rules` + `/${id}`);
+  }
+  getAdditionalItems(id: number): Observable<AdditionalItem[]> {
+    return this.http.get<AdditionalItem[]>(`${this.urlBoat1}/` + `additionalItems` + `/${id}`);
+  }
+  getNavigationEquipment(id: number): Observable<NavigationEquipment[]> {
+    return this.http.get<NavigationEquipment[]>(`${this.urlBoat1}/` + `additionalItems` + `/${id}`);
+  }
+  updateBoat(id: number, data: Boat): Observable<Boat> {
+    return this.http.post<Boat>(`${this.urlBoat}/${id}`, data);
   }
 }

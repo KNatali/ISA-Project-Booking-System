@@ -1,6 +1,8 @@
 package com.isa.ISAproject.dto;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.isa.ISAproject.model.BoatReservation;
 
@@ -12,6 +14,10 @@ public class BoatReservationDTO {
 	private double price;
 	private ClientProfileDTO client;
 	private BoatDTO boat;
+	private String reservationStart;
+	private String reservationEnd;
+	private BoatOwnerReportDTO report;
+	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +60,30 @@ public class BoatReservationDTO {
 	public void setBoat(BoatDTO boat) {
 		this.boat = boat;
 	}
+	public String getReservationStart() {
+		return reservationStart;
+	}
+	public void setReservationStart(String reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+	public String getReservationEnd() {
+		return reservationEnd;
+	}
+	public void setReservationEnd(String resevationEnd) {
+		this.reservationEnd = resevationEnd;
+	}
+	public BoatOwnerReportDTO getReport() {
+		return report;
+	}
+	public void setReport(BoatOwnerReportDTO report) {
+		this.report = report;
+	}
+	public Set<AdditionalItemDTO> getAdditionalItems() {
+		return additionalItems;
+	}
+	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
+		this.additionalItems = additionalItems;
+	}
 	public BoatReservationDTO(Long id, LocalDateTime date, int duration, int maxPersons, double price,
 			ClientProfileDTO client, BoatDTO boat) {
 		super();
@@ -74,6 +104,19 @@ public class BoatReservationDTO {
 		this.price = res.getPrice();
 		this.client = new ClientProfileDTO(res.getClient());
 		this.boat = new BoatDTO(res.getBoat());
+	}
+	public BoatReservationDTO(Long id, String reservationStart, String resevationEnd, BoatDTO boat,
+			double price,int persons, ClientProfileDTO client, BoatOwnerReportDTO report, Set<AdditionalItemDTO> additionalItems) {
+		super();
+		this.id = id;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = resevationEnd;
+		this.boat = boat;
+		this.price = price;
+		this.maxPersons=persons;
+		this.client = client;
+		this.report = report;
+		this.additionalItems = additionalItems;
 	}
 	public BoatReservationDTO() {}
 }

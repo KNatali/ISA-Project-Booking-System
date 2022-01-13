@@ -21,7 +21,9 @@ export class BoatOwnerPageComponent implements OnInit {
     street: '',
     city: '',
     state: '',
-    mobile: ''
+    mobile: '',
+    address: '',
+    grade: 0
   });
 
   constructor(private boatOwnerService: BoatOwnerService, private route: ActivatedRoute) {

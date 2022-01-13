@@ -60,6 +60,9 @@ public class Boat {
 	@OneToMany
 	private Set<BoatReservation> boatReservations=new HashSet<>();
 	
+	@Column
+	private int maxPersons;
+	
 	public Set<BoatReservation> getBoatReservations() {
 		return boatReservations;
 	}
@@ -102,7 +105,13 @@ public class Boat {
 	private Set<Client> subscribers=new HashSet<>();
 	@Column
 	private int cancellationPercentage;
-	
+	@ManyToMany(cascade =CascadeType.ALL)
+	 @JoinTable(
+	            name = "boat_unavailability",
+	            joinColumns = @JoinColumn(name = "boat_id"),
+	            inverseJoinColumns = @JoinColumn(name = "period_id"))
+	private Set<TimePeriod> unavailability;
+
 
 	public Long getId() {
 		return id;
@@ -235,6 +244,20 @@ public class Boat {
 	public void setSubscribers(Set<Client> subscribes) {
 		this.subscribers = subscribes;
 	}
+	public Set<TimePeriod> getUnavailability() {
+		return unavailability;
+	}
+
+	public void setUnavailability(Set<TimePeriod> unavailability) {
+		this.unavailability = unavailability;
+	}
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
 	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber,
 			double motorPower, int maxSpeed, String description, Set<Picture> pictures, int capacity, double grade,
 			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,
@@ -262,9 +285,9 @@ public class Boat {
 	
 	
 	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber, double motorPower,
-			int maxSpeed, String description, Set<Picture> pictures, String mainPicture, int capacity, double grade,
-			BoatOwner owner, Set<BoatReservation> boatReservations, Set<BoatBehavioralRule> rules,
-			Set<NavigationEquipment> navigationEquipment, Set<BoatFastReservation> boatFastReservations) {
+			int maxSpeed, int capacity, String description, double grade, double price, BoatOwner owner, String mainPicture, Set<Picture> pictures,
+			int maxPersons, Set<BoatBehavioralRule> rules, int cancellation, Set<BoatFastReservation> boatFastReservations, Set<AdditionalItem> items, 
+			Set<NavigationEquipment> navigationEquipment, Set<BoatReservation> boatReservations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -274,16 +297,20 @@ public class Boat {
 		this.motorNumber = motorNumber;
 		this.motorPower = motorPower;
 		this.maxSpeed = maxSpeed;
+		this.capacity=capacity;
 		this.description = description;
-		this.pictures = pictures;
-		this.mainPicture = mainPicture;
-		this.capacity = capacity;
 		this.grade = grade;
+		this.price = price;
 		this.owner = owner;
+		this.mainPicture = mainPicture;
+		this.pictures = pictures;
+		this.maxPersons = maxPersons;		
 		this.boatReservations = boatReservations;
+		this.cancellationPercentage = cancellation;
 		this.rules = rules;
 		this.navigationEquipment = navigationEquipment;
 		this.boatFastReservations = boatFastReservations;
+		this.additionalItems = items;
 	}
 	public Boat () {}
 }

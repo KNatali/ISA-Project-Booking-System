@@ -9,6 +9,7 @@ import { AdditionalItem } from '../model/additionalItem';
 export class AdditionalItemService {
   urlAdventure = "http://localhost:8090/api/instructor/adventure";
   urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
+  urlBoat = "http://localhost:8090/api/boatOwner/boat";
   constructor(private http: HttpClient) { }
 
   saveAdventureAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
@@ -29,5 +30,15 @@ export class AdditionalItemService {
   }
   deleteCottageAdditionalItem(cottageId: number, additionalItemId: number): Observable<AdditionalItem> {
     return this.http.post<AdditionalItem>(`${this.urlCottage}/${cottageId}/${additionalItemId}`, null);
+  }
+
+  saveBoatAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
+    return this.http.post<AdditionalItem>(`${this.urlBoat}/` + `additionalItem` + `/${id}`, data);
+  }
+  updateBoatAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
+    return this.http.post<AdditionalItem>(`${this.urlBoat}/` + `additionalItemEdit` + `/${id}`, data);
+  }
+  deleteBoatAdditionalItem(boatId: number, additionalItemId: number): Observable<AdditionalItem> {
+    return this.http.post<AdditionalItem>(`${this.urlBoat}/${boatId}/${additionalItemId}`, null);
   }
 }

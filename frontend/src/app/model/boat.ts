@@ -1,4 +1,8 @@
+import { AdditionalItem } from "./additionalItem";
 import { Address } from "./address";
+import { BoatBehavioralRules } from "./boatBehavioralRules";
+import { BoatOwner } from "./boatOwner";
+import { NavigationEquipment } from "./navigationEquipment";
 
 export interface BoatInterface{
     id?:number;
@@ -15,6 +19,13 @@ export interface BoatInterface{
     grade:number;
     mainPicture:string;
     address: Address;
+    rules: BoatBehavioralRules[];
+    items: AdditionalItem[];
+    owner: BoatOwner;
+    maxPersons: number;
+    price: number;
+    cancellationPercentage: number;
+    equipment: NavigationEquipment[];
 }
 export class Boat implements BoatInterface{
     id?: number | undefined;
@@ -31,6 +42,13 @@ export class Boat implements BoatInterface{
     street:string;
     city:string;
     address: Address;
+    rules: BoatBehavioralRules[];
+    items: AdditionalItem[];
+    owner: BoatOwner;
+    maxPersons: number;
+    price: number;
+    cancellationPercentage: number;
+    equipment: NavigationEquipment[];
     constructor(obj:BoatInterface){
         this.id=obj.id;
         this.name=obj.name;
@@ -46,6 +64,13 @@ export class Boat implements BoatInterface{
         this.grade=obj.grade;
         this.mainPicture=obj.mainPicture;
         this.address = obj.address;
+        this.rules=obj.rules;
+        this.items=obj.items;
+        this.owner=obj.owner;
+        this.maxPersons=obj.maxPersons;
+        this.price=obj.price;
+        this.cancellationPercentage=obj.cancellationPercentage;
+        this.equipment=obj.equipment;
     }
     
 }

@@ -1,9 +1,10 @@
 export interface BoatOwnerInterface {
-    id?: number;
+    id?: number ;
     firstName: string;
     lastName: string;
     username: string;
     password: string;
+    address: string;
     street: string;
     state: string;
     city: string;
@@ -12,11 +13,12 @@ export interface BoatOwnerInterface {
     grade?:number;
 }
 export class BoatOwner implements BoatOwnerInterface {
-    id?: number;
+    id?: number ;
     firstName: string;
     lastName: string;
     username: string;
     password: string;
+    address: string;
     street: string;
     state: string;
     city: string;
@@ -30,6 +32,7 @@ export class BoatOwner implements BoatOwnerInterface {
         this.lastName = obj.lastName;
         this.username = obj.username
         this.password = obj.password;
+        this.address=obj.address;
         this.street = obj.street;
         this.city = obj.city;
         this.state = obj.state;
