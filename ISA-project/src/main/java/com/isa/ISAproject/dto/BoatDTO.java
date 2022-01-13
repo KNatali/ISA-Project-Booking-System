@@ -31,6 +31,11 @@ public class BoatDTO {
 	private String mainPicture;//slika koje ce da bude prikazana kada se izlistaju svi brodovi
 	private int capacity;
 	private double grade;
+	private AddressDTO address;
+	private double price;
+	private BoatOwnerProfileDTO boatOwner;
+	private int maxPersons;
+	private int cancellationPercentage;
 	//private BoatOwner owner;
 	public Long getId() {
 		return id;
@@ -116,6 +121,41 @@ public class BoatDTO {
 	public void setGrade(double grade) {
 		this.grade = grade;
 	}
+	public AddressDTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDTO address) {
+		this.address = address;
+	}
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public BoatOwnerProfileDTO getBoatOwner() {
+		return boatOwner;
+	}
+
+	public void setBoatOwner(BoatOwnerProfileDTO boatOwner) {
+		this.boatOwner = boatOwner;
+	}
+	public int getMaxPersons() {
+		return maxPersons;
+	}
+
+	public void setMaxPersons(int maxPersons) {
+		this.maxPersons = maxPersons;
+	}
+	public int getCancellationPercentage() {
+		return cancellationPercentage;
+	}
+
+	public void setCancellationPercentage(int cancellationPercentage) {
+		this.cancellationPercentage = cancellationPercentage;
+	}
 	public BoatDTO(Long id, String name, String street, String state, String city, BoatType type, double length,
 			int motorNumber, double motorPower, int maxSpeed, String description, String mainPicture, int capacity,
 			double grade) {
@@ -151,6 +191,20 @@ public class BoatDTO {
 		this.mainPicture = boat.getMainPicture();
 		this.capacity = boat.getCapacity();
 		this.grade = boat.getGrade();
+	}
+	public BoatDTO(Long id, String name, AddressDTO address, String description, double grade,double price,
+			BoatOwnerProfileDTO boatOwner,String mainPicture,int maxPersons,int cancellation) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.grade = grade;
+		this.price=price;
+		this.boatOwner = boatOwner;
+		this.mainPicture=mainPicture;
+		this.maxPersons=maxPersons;
+		this.id=id;
+		this.cancellationPercentage=cancellation;
 	}
 	public BoatDTO() {}
 }

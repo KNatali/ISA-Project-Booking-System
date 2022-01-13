@@ -39,8 +39,8 @@ export class BoatOwnerDeleteProfileComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
+    address: '',
     grade: 0
-
   });
   @Input() id: number;
   request: ProfileDeleteRequest = new ProfileDeleteRequest({
@@ -60,7 +60,7 @@ export class BoatOwnerDeleteProfileComponent implements OnInit {
   }
   sendRequest() {
     this.request.reason = this.formValue.controls['message'].value;
-    this.newUser.id = 2;
+    this.newUser.id = this.id;
     this.request.userDTO = this.newUser;
     this.boatOwnerService.sendDeleteRequest(this.request).subscribe(data => {
       let ref = document.getElementById('cancelDelete');

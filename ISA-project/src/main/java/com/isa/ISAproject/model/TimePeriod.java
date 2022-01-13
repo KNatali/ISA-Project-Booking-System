@@ -32,6 +32,8 @@ public class TimePeriod {
 	private Set<Instructor> instructors=new HashSet<>();
 	@ManyToMany(mappedBy = "unavailability")
 	private Set<Cottage> cottages=new HashSet<>();
+	@ManyToMany(mappedBy = "unavailability")
+	private Set<Boat> boats=new HashSet<>();
 	public LocalDateTime getStart() {
 		return start;
 	}
@@ -70,6 +72,13 @@ public class TimePeriod {
 
 	public void setInstructors(Set<Instructor> instructors) {
 		this.instructors = instructors;
+	}
+	public Set<Boat> getBoats() {
+		return boats;
+	}
+
+	public void setBoats(Set<Boat> boats) {
+		this.boats = boats;
 	}
 	public Set<Cottage> getCottages() {
 		return cottages;

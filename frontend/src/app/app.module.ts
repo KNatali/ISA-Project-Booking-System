@@ -163,6 +163,11 @@ import { CottageOwnerDeleteProfileComponent } from './cottage-owner-delete-profi
 import { CottageOwnerCalendarComponent } from './cottage-owner-calendar/cottage-owner-calendar.component';
 import { CottageOwnerAnalyticsComponent } from './cottage-owner-analytics/cottage-owner-analytics.component';
 import { AdminRevisionsComponent } from './admin-revisions/admin-revisions.component';
+import { BoatOwnerChangePasswordComponent } from './boat-owner-change-password/boat-owner-change-password.component';
+import { BoatOwnerBoatProfileComponent } from './boat-owner-boat-profile/boat-owner-boat-profile.component';
+import { BoatOwnerBoatEditComponent } from './boat-owner-boat-edit/boat-owner-boat-edit.component';
+import { BoatAdditionItemsEditComponent } from './boat-addition-items-edit/boat-addition-items-edit.component';
+import { BoatNavigationEquipmentEditComponent } from './boat-navigation-equipment-edit/boat-navigation-equipment-edit.component';
 
 
 
@@ -310,7 +315,12 @@ import { AdminRevisionsComponent } from './admin-revisions/admin-revisions.compo
     CottageOwnerDeleteProfileComponent,
     CottageOwnerCalendarComponent,
     CottageOwnerAnalyticsComponent,
-    AdminRevisionsComponent
+    AdminRevisionsComponent,
+    BoatOwnerChangePasswordComponent,
+    BoatOwnerBoatProfileComponent,
+    BoatOwnerBoatEditComponent,
+    BoatAdditionItemsEditComponent,
+    BoatNavigationEquipmentEditComponent
 
 
 

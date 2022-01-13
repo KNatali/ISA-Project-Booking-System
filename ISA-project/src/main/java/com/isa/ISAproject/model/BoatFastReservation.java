@@ -1,6 +1,7 @@
 package com.isa.ISAproject.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,9 +24,9 @@ public class BoatFastReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
+	@Column
 	private LocalDate date;
-	@Column(nullable=false)
+	@Column
 	private LocalTime time;
 	@Column(nullable=false)
 	private int duration;
@@ -39,7 +41,12 @@ public class BoatFastReservation {
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@ManyToOne
+	@JoinColumn(name = "boat_id")
 	private Boat boat;
+	@Column(name = "reservationStart", nullable = false)
+    private LocalDateTime reservationStart;
+	@Column(name = "reservationEnd", nullable = false)
+    private LocalDateTime reservationEnd;
 	public Long getId() {
 		return id;
 	}
@@ -100,6 +107,20 @@ public class BoatFastReservation {
 	public void setBoat(Boat boat) {
 		this.boat = boat;
 	}
+	public LocalDateTime getReservationStart() {
+		return reservationStart;
+	}
+
+	public void setReservationStart(LocalDateTime reservationStart) {
+		this.reservationStart = reservationStart;
+	}
+	public LocalDateTime getReservationEnd() {
+		return reservationEnd;
+	}
+
+	public void setReservationEnd(LocalDateTime reservationEnd) {
+		this.reservationEnd = reservationEnd;
+	}
 	public BoatFastReservation(Long id, LocalDate date, LocalTime time, int duration, int maxPersons, double price,
 			LocalDate validityStart, LocalDate validityEnd, Set<AdditionalItem> additionalItems, Boat boat) {
 		super();
@@ -113,6 +134,20 @@ public class BoatFastReservation {
 		this.validityEnd = validityEnd;
 		this.additionalItems = additionalItems;
 		this.boat = boat;
+	}
+	public BoatFastReservation(Long id, Boat boat, LocalDateTime reservationStart,
+			LocalDateTime reservationEnd, int maxPersons, double price, LocalDate validityStart, LocalDate validityEnd,
+			Set<AdditionalItem> additionalItems) {
+		super();
+		this.id = id;
+		this.boat = boat;
+		this.reservationStart = reservationStart;
+		this.reservationEnd = reservationEnd;
+		this.maxPersons = maxPersons;
+		this.price = price;
+		this.validityStart = validityStart;
+		this.validityEnd = validityEnd;
+		this.additionalItems = additionalItems;
 	}
 	
 	public BoatFastReservation () {}

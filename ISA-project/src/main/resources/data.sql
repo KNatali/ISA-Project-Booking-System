@@ -104,16 +104,16 @@ insert into adventure(name,description,average_grade,price,max_persons,main_pict
 values ('Super star fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,415,8,'/assets/adventure/Adventure4.jpg',5,1,20);
 
 
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price) 
-values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1,15,150);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price) 
-values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2,20,250);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price) 
-values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3,10,300);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price) 
-values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4,50,180);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price) 
-values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5,30,120);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
+values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1,15,150, 10, 15);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
+values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2,20,250, 15, 15);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
+values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3,10,300, 20, 15);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
+values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4,50,180, 30, 15);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
+values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5,30,120, 20, 15);
 
 insert into cottage(description,  grade, main_picture, name,address_id, cottage_owner_id, cancellation_percentage, max_persons, price) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 10, 'assets/cottages/vikendica1.jpg','Sun cottage',1, 11, 20, 5, 120);
 insert into cottage(description,  grade, main_picture, name,address_id, cottage_owner_id, cancellation_percentage, max_persons, price) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 8, 'assets/cottages/vikendica5.jpg','Star cottage',5, 11, 30, 10, 100);
@@ -227,12 +227,12 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
 --insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00');
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00');
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00');
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-20-14-00-00');
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2025-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00');
-insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00');
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',120);
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00', 150);
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00', 200);
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-20-14-00-00', 250);
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2025-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00', 300);
+insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00', 100);
 
 insert into boat_boat_reservations(boat_id,boat_reservations_id)values (1,1);
 insert into boat_boat_reservations(boat_id,boat_reservations_id)values (2,2);

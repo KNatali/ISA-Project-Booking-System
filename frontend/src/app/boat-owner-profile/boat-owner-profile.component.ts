@@ -25,7 +25,9 @@ export class BoatOwnerProfileComponent implements OnInit {
     street: '',
     city: '',
     state: '',
-    mobile: ''
+    mobile: '',
+    address: '',
+    grade: 0
   });
   @Input() id: number;
 
@@ -55,8 +57,10 @@ export class BoatOwnerProfileComponent implements OnInit {
 
   submitPassword() {
 
-    if ((this.newPassword != this.passwordConfirm))
+    if(this.newPassword !=this.passwordConfirm) 
+    {
       alert("New and confirmed password don't match!");
+    }
     else
       this.boatOwnerService.changePassword(this.id, this.newPassword).
         subscribe(res => {

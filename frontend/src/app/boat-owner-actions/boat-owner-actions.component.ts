@@ -23,8 +23,8 @@ export class BoatOwnerActionsComponent implements OnInit {
     city: '',
     state: '',
     mobile: '',
+    address: '',
     grade: 0
-
   });
   @Input() id: number;
   constructor(private formBuilder: FormBuilder, private boatOwnerService: BoatOwnerService, private route: ActivatedRoute) { }

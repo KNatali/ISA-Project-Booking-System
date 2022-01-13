@@ -40,6 +40,8 @@ import { CottageOwnerActionAddComponent } from './cottage-owner-action-add/cotta
 import { CottageOwnerReservationClientComponent } from './cottage-owner-reservation-client/cottage-owner-reservation-client.component';
 import { CottageOwnerAddReservationComponent } from './cottage-owner-add-reservation/cottage-owner-add-reservation.component';
 import { BoatOwnerPageComponent } from './boat-owner-page/boat-owner-page.component';
+import { BoatOwnerBoatProfileComponent } from './boat-owner-boat-profile/boat-owner-boat-profile.component';
+import { BoatOwnerBoatEditComponent } from './boat-owner-boat-edit/boat-owner-boat-edit.component';
 
 
 const routes: Routes = [
@@ -65,6 +67,8 @@ const routes: Routes = [
   { path: 'instructor/adventures/edit/:id', component: InstructorAdventureEditComponent },
   { path: 'cottageOwner/cottages/:id', component: CottageOwnerCottageProfileComponent },
   { path: 'cottageOwner/cottages/edit/:id', component: CottageOwnerCottageEditComponent },
+  { path: 'boatOwner/boats/:id', component: BoatOwnerBoatProfileComponent },
+  { path: 'boatOwner/boats/edit/:id', component: BoatOwnerBoatEditComponent },
   { path: 'files', component: FileUploadComponent },
   { path: 'instructors/:id/adventure-add', component: InstructorAddAdventureComponent },
   { path: 'cottageOwner/:id/cottage-add', component: CottageOwnerAddCottageComponent },

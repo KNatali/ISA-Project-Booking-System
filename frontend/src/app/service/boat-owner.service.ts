@@ -31,7 +31,7 @@ export class BoatOwnerService {
   }
 
   changePassword(id: number, newPassword: string): Observable<BoatOwner> {
-    return this.http.post<BoatOwner>(`${this.urlBoatOwner}/` + `changePassword` + `/${id}`, { newPassword });
+    return this.http.post<BoatOwner>(`http://localhost:8090/api/boatOwners/` + `changePassword` + `/${id}`, { newPassword });
   }
   getBoatOwnerBoats(id: number): Observable<Boat[]> {
     return this.http.get<Boat[]>(`http://localhost:8090/api/boatOwners/` + `boats` + `/${id}`);
