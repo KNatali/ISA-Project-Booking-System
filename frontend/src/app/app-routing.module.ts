@@ -42,6 +42,8 @@ import { CottageOwnerAddReservationComponent } from './cottage-owner-add-reserva
 import { BoatOwnerPageComponent } from './boat-owner-page/boat-owner-page.component';
 import { BoatOwnerBoatProfileComponent } from './boat-owner-boat-profile/boat-owner-boat-profile.component';
 import { BoatOwnerBoatEditComponent } from './boat-owner-boat-edit/boat-owner-boat-edit.component';
+import { BoatOwnerReservationClientComponent } from './boat-owner-reservation-client/boat-owner-reservation-client.component';
+import { BoatOwnerAddReservationComponent } from './boat-owner-add-reservation/boat-owner-add-reservation.component';
 
 
 const routes: Routes = [
@@ -77,11 +79,13 @@ const routes: Routes = [
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
   { path: 'cottageOwner/:id/reservation-add', component: CottageOwnerAddReservationComponent },
+  { path: 'boatOwner/:id/reservation-add', component: BoatOwnerAddReservationComponent },
 
 
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructor/reservations/:id', component: InstructorReservationClientComponent },
   { path: 'cottageOwner/reservations/:id', component: CottageOwnerReservationClientComponent },
+  { path: 'boatOwner/reservations/:id', component: BoatOwnerReservationClientComponent },
 
   { path: 'instructors/adventures/client/:id', component: InstructorAdventureListComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },

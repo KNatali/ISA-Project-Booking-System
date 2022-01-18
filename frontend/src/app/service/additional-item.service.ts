@@ -9,6 +9,7 @@ import { AdditionalItem } from '../model/additionalItem';
 export class AdditionalItemService {
   urlAdventure = "http://localhost:8090/api/instructor/adventure";
   urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
+  urlCottage1 = "http://localhost:8090/api/cottageOwner/cottage/cottageAdditionalItem";
   urlBoat = "http://localhost:8090/api/boatOwner/boat";
   constructor(private http: HttpClient) { }
 
@@ -23,13 +24,13 @@ export class AdditionalItemService {
   }
 
   saveCottageAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
-    return this.http.post<AdditionalItem>(`${this.urlCottage}/` + `additionalItem` + `/${id}`, data);
+    return this.http.post<AdditionalItem>(`${this.urlCottage}/` + `cottageAdditionalItem` + `/${id}`, data);
   }
   updateCottageAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
-    return this.http.post<AdditionalItem>(`${this.urlCottage}/` + `additionalItemEdit` + `/${id}`, data);
+    return this.http.post<AdditionalItem>(`${this.urlCottage}/` + `cottageAdditionalItemEdit` + `/${id}`, data);
   }
   deleteCottageAdditionalItem(cottageId: number, additionalItemId: number): Observable<AdditionalItem> {
-    return this.http.post<AdditionalItem>(`${this.urlCottage}/${cottageId}/${additionalItemId}`, null);
+    return this.http.post<AdditionalItem>(`${this.urlCottage1}/${cottageId}/${additionalItemId}`, null);
   }
 
   saveBoatAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {
