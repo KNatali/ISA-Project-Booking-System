@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BoatReservation } from '../model/boatReservation';
+import { BoatOwnerService } from '../service/boat-owner.service';
 
 @Component({
   selector: 'app-boat-owner-active-reservations',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./boat-owner-active-reservations.component.css']
 })
 export class BoatOwnerActiveReservationsComponent implements OnInit {
-
-  constructor() { }
+  @Input() id: number;
+  activeReservations: BoatReservation[];
+  constructor(private boatOwnerService: BoatOwnerService) { }
 
   ngOnInit(): void {
+    this.getActiveReservations();
+  }
+  getActiveReservations() {
+    this.boatOwnerService.getActiveBoatOwnerReservations(this.id)
+      .subscribe(res => this.activeReservations = res)
+  }
+
+  saveCurrentReservation(reservation: BoatReservation) {
+    sessionStorage.setItem("currentReservation", JSON.stringify(reservation));
   }
 
 }

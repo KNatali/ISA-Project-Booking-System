@@ -25,7 +25,7 @@ public class BoatAdditionalItemController {
 	@Autowired
 	private BoatAdditionalItemService additionalItemService;
 	
-	@RequestMapping(value="boatAdditionalItems/{id}",method = RequestMethod.GET,produces=
+	@RequestMapping(value="additionalItems/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<List<AdditionalItemDTO>> getBoatAdditionalItems(@PathVariable Long id){
@@ -36,21 +36,21 @@ public class BoatAdditionalItemController {
 		return new ResponseEntity<>(item,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="boatAdditionalItem/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="additionalItem/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> saveNewAdditionalItem(@RequestBody AdditionalItemDTO dto, @PathVariable Long id){
 		this.additionalItemService.saveNewAdditonalItem(id, dto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="boatAdditionalItemEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="additionalItemEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> editAdditionalItem(@RequestBody AdditionalItemDTO dto,@PathVariable Long id){
 		this.additionalItemService.editAdditionalItem(id, dto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="boatAdditionalItem/{boatId}/{id}",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="additionalItem/{boatId}/{id}",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> deleteAdditionnalItem(@PathVariable(name="boatId") Long cottageId,@PathVariable(name="id") Long additionalItemId){
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

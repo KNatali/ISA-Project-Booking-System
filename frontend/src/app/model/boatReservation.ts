@@ -4,23 +4,25 @@ import { Client } from "./client";
 
 export interface BoatReservationInterface {
     id?: number;
-    reservationStart: Date;
-    reservationEnd: Date;
+    reservationStart: String;
+    reservationEnd: String;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
     client: Client;
     boat: Boat;
+    systemEarning: number
 }
 export class BoatReservation implements BoatReservationInterface {
     id?: number;
-    reservationStart: Date;
-    reservationEnd: Date;
+    reservationStart: String;
+    reservationEnd: String;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
     client: Client;
     boat: Boat;
+    systemEarning: number
     constructor(obj: BoatReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -30,6 +32,7 @@ export class BoatReservation implements BoatReservationInterface {
         this.additionalItems = obj.additionalItems;
         this.client = obj.client;
         this.boat = obj.boat;
+        this.systemEarning = obj.systemEarning;
     }
 
 }
