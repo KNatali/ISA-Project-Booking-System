@@ -1,0 +1,130 @@
+<div class="body-wrapper">
+    <div class="container content">
+      <div class="container">
+        <h1>New Action:</h1>
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="validityStart" class="form-label">Validity start:</label>
+            <input type="date" formControlName="validityStart" [(ngModel)]="newAction.validityStart" class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.validityStart.touched ) && registerFormControl.validityStart.errors?.required">
+              *required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="validityEnd" class="form-label">Validity end:</label>
+            <input type="date" formControlName="validityEnd" [(ngModel)]="newAction.validityEnd" class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.validityEnd.touched ) && registerFormControl.validityEnd.errors?.required">
+              *required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="reservationStart" class="form-label">Reservation start date and time:</label>
+            <input type="datetime-local" formControlName="reservationStart" [(ngModel)]="newAction.reservationStart"
+              class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.reservationStart.touched ) && registerFormControl.reservationStart.errors?.required">
+              *required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="reservationEnd" class="form-label">Reservation end date and time::</label>
+            <input type="datetime-local" formControlName="reservationEnd" [(ngModel)]="newAction.reservationEnd"
+              class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.reservationEnd.touched ) && registerFormControl.reservationEnd.errors?.required">
+              *required
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="guests" class="form-label">Number of guests:</label>
+            <input type="number" formControlName="guests" [(ngModel)]="newAction.maxPersons" class="form-control">
+            <span class="text-danger"
+              *ngIf="(registerFormControl.guests.touched ) && registerFormControl.guests.errors?.required">
+              *required
+            </span>
+          </div>
+          <div class="mb-3">
+            <div class="mb-3">
+              <label for="price" class="form-label">Price:</label>
+              <input type="number" formControlName="price" [(ngModel)]="newAction.price" class="form-control">
+              <span class="text-danger"
+                *ngIf="(registerFormControl.price.touched ) && registerFormControl.price.errors?.required">
+                *required
+              </span>
+            </div>
+            <div class="mb-3">
+              <label for="boat" class="form-label">Boat:</label>
+              <br>
+              <select formControlName="boat" (ngModelChange)="onChange($event)">
+                <option *ngFor="let b of boats" [ngValue]="b">{{b.name}}</option>
+              </select>
+              <span class="text-danger"
+                *ngIf="(registerFormControl.boat.touched ) && registerFormControl.boat.errors?.required">
+                *required
+              </span>
+            </div>
+  
+            <!-- <label for="name" class="form-label">Additional Items:</label>
+            <div *ngFor="let item of additionalItems; let i=index">
+              <br>
+              <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+              {{item.name}}
+  
+            </div>
+  -->
+          </div>
+        </form>
+        <div class="column">
+          <h3>Additional items:</h3>
+          <!--
+          <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            Add additional item
+          </button>-->
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of additionalItems;let i = index">
+                <td>{{item.name}}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel1">Additional Item details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formValue2">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name:</label>
+                  <input [(ngModel)]="newAdditionalItem.name" type="text" formControlName="name" class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="addAdditionalItem()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button [disabled]="!formValue.valid" class="col-md-12 " mat-button id="submit"
+        (click)="addAction()">Submit</button>
+  
+    </div>
+  </div>
+  

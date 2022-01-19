@@ -44,6 +44,7 @@ import { BoatOwnerBoatProfileComponent } from './boat-owner-boat-profile/boat-ow
 import { BoatOwnerBoatEditComponent } from './boat-owner-boat-edit/boat-owner-boat-edit.component';
 import { BoatOwnerReservationClientComponent } from './boat-owner-reservation-client/boat-owner-reservation-client.component';
 import { BoatOwnerAddReservationComponent } from './boat-owner-add-reservation/boat-owner-add-reservation.component';
+import { BoatOwnerActionAddComponent } from './boat-owner-action-add/boat-owner-action-add.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: 'cottageOwner/:id/cottage-add', component: CottageOwnerAddCottageComponent },
   { path: 'instructors/:id/action-add', component: InstructorActionAddComponent },
   { path: 'cottageOwner/:id/action-add', component: CottageOwnerActionAddComponent },
+  { path: 'boatOwner/:id/action-add', component: BoatOwnerActionAddComponent },
   { path: 'confirm-registration/:id', component: ConfirmRegistrationClientComponent },
   { path: 'instructors/:id/reservation-add', component: InstructorAddReservationComponent },
   { path: 'cottageOwner/:id/reservation-add', component: CottageOwnerAddReservationComponent },
