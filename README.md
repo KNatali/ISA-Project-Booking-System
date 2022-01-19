@@ -1,6 +1,6 @@
 # ISA-Project-Booking-System
 
-<h2>Student project for a course ISA (Internet Software Architecture)</h2>
+<h2>Student project for a course ISA (Internet Software Architecture):web appllication for cottages, boats and adventures reservations.</h2>
 <br>
 Students: <br>
 Aleksandra Borisavljević IN17/2018 -Student 1 <br>
