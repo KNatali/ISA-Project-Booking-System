@@ -78,6 +78,6 @@ export class BoatService {
     return this.http.post<Boat>(`${this.urlBoat}/${id}`, data);
   }
   getBoatAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlBoat1}/` + `additionalItems` + `/${id}`);
+    return this.http.get<AdditionalItem[]>(`${this.urlBoat}/` + `additionalItems` + `/${id}`);
   }
 }

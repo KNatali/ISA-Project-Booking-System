@@ -86,6 +86,6 @@ export class BoatOwnerService {
     return this.http.post<ProfileDeleteRequest>(`http://localhost:8090/api/boatOwners/` + `profileDeleteRequest`, request);
   }
   sendReservationReport(report: BoatOwnerReport): Observable<BoatOwnerReport> {
-    return this.http.post<BoatOwnerReport>(`${this.urlBoatOwner}/` + `sendReservationReport`, report);
+    return this.http.post<BoatOwnerReport>(`http://localhost:8090/api/boatOwners/` + `sendReservationReport`, report);
   }
 }
