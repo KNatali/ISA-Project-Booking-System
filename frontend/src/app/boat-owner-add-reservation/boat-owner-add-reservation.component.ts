@@ -103,7 +103,7 @@ export class BoatOwnerAddReservationComponent implements OnInit {
       reservationStart: ['', Validators.required],
       reservationEnd: ['', Validators.required],
       guests: ['', Validators.required],
-      boat: ['', Validators.required],
+      boat: [''],// Validators.required],
     })
     this.reservation = JSON.parse(sessionStorage.getItem("currentReservation")!);
 
@@ -118,12 +118,13 @@ export class BoatOwnerAddReservationComponent implements OnInit {
   }
 
   getBoats() {
+    alert("radi pliz");
     this.id = this.reservation.boat.owner.id!;
     this.boatOwnerService.getBoatOwnerBoats(this.id)
       .subscribe(res => {
         this.boats = res;
       })
-
+      
   }
   loadAdditionalItems() {
     this.route.params.subscribe(param => {

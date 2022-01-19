@@ -4,8 +4,8 @@ import { Client } from "./client";
 
 export interface BoatReservationInterface {
     id?: number;
-    reservationStart: String;
-    reservationEnd: String;
+    reservationStart: string;
+    reservationEnd: string;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -15,8 +15,8 @@ export interface BoatReservationInterface {
 }
 export class BoatReservation implements BoatReservationInterface {
     id?: number;
-    reservationStart: String;
-    reservationEnd: String;
+    reservationStart: string;
+    reservationEnd: string;
     numberOfPersons: number;
     price: number;
     additionalItems: AdditionalItem[];

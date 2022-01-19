@@ -33,7 +33,9 @@ public class Cottage {
 	private double grade;
 	@Column
 	private String mainPicture;
-	@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
+	
+	//@ManyToOne(cascade=CascadeType.PERSIST) //da se ne bi obrisao vlasnik ako se obrise vikendica
+	@ManyToOne(fetch=FetchType.EAGER)
 	private CottageOwner cottageOwner;
 	@Column
 	private double price;

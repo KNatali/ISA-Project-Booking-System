@@ -80,4 +80,7 @@ export class BoatService {
   getBoatAdditionalItems(id: number): Observable<AdditionalItem[]> {
     return this.http.get<AdditionalItem[]>(`${this.urlBoat}/` + `additionalItems` + `/${id}`);
   }
+  addBoat(id: number, newBoat: Boat): Observable<Boat> {
+    return this.http.put<Boat>(`${this.urlBoats}/` + `add` + `/${id}`, newBoat);
+  }
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
@@ -103,5 +104,34 @@ public class AnalyticsController {
 	public @ResponseBody Double cottageOwnerAverageGrade(@PathVariable(name="id") Long id){
 		
 		return analyticsService.cottageOwnerAverageGrade(id);
+	}
+	
+	/**/
+	
+	@RequestMapping(value="api/boatReservation/boatOwnerEarnings/{id}",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public @ResponseBody Double getBoatOwnerPeriodEarnings(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+		
+		return analyticsService.getBoatOwnerEarnings(dto,id);
+	}
+
+	@RequestMapping(
+			value="api/boatOwner/reservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public ResponseEntity<List<BoatReservationDTO>> getActiveReservationsBoat(@PathVariable(name="id") Long id){
+		List<BoatReservationDTO> list=new ArrayList<>();
+		list=this.analyticsService.getBoatOwnerReservations(id);
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/boatOwner/averageGrade/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public @ResponseBody Double boatOwnerAverageGrade(@PathVariable(name="id") Long id){
+		
+		return analyticsService.boatOwnerAverageGrade(id);
 	}
 }

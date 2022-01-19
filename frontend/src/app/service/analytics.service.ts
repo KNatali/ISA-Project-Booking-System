@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { CottageReservation } from '../model/cottageReservation';
+import { BoatReservation } from '../model/boatReservation';
 
 @Injectable({
     providedIn: 'root'
@@ -33,5 +34,14 @@ export class AnalyticsService {
     }
     getCottageOwnerEarnings(period: TimePeriod, id: number): Observable<Number> {
         return this.http.post<Number>(`${this.baseUrl}/` + `cottageReservation/cottageOwnerEarnings/${id}`, period);
+    }
+    getBoatOwnerReservations(id: number): Observable<BoatReservation[]> {
+        return this.http.get<BoatReservation[]>(`${this.baseUrl}/` + `boatOwner/reservations/${id}`);
+    }
+    getBoatOwnerEarnings(period: TimePeriod, id: number): Observable<Number> {
+        return this.http.post<Number>(`${this.baseUrl}/` + `boatReservation/boatOwnerEarnings/${id}`, period);
+    }
+    getBoatOwnerAverageGrade(id: number): Observable<Number> {
+        return this.http.get<Number>(`${this.baseUrl}/` + `boatOwner/averageGrade/${id}`);
     }
 }
