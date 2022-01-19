@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails {
+public class AppUser implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,11 +152,11 @@ public class User implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 	
-	public User() {}
+	public AppUser() {}
 	
 	
 	
-	 public User(Long id, String username, String password, String email, String firstName, String lastName,
+	 public AppUser(Long id, String username, String password, String email, String firstName, String lastName,
 			Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
 		super();
 		this.id = id;
@@ -171,7 +171,7 @@ public class User implements UserDetails {
 		this.role = role;
 		this.authorities = authorities;
 	}
-	 public User(String username, String password, String email, String firstName, String lastName,
+	 public AppUser(String username, String password, String email, String firstName, String lastName,
 				Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
 			super();
 			this.username = username;

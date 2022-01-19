@@ -17,7 +17,7 @@ import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.AdminRepository;
 import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.UserRepository;
@@ -63,7 +63,7 @@ public class AdminService {
 	}
 	
 	public void deleteUser(Long id) {
-		User user=this.userRepository.getById(id);
+		AppUser user=this.userRepository.getById(id);
 		if(user.getRole()=="Client") {
 			Client c=this.clientRepository.getById(id);
 			this.clientRepository.delete(c);
@@ -73,14 +73,14 @@ public class AdminService {
 	}
 	
 	public boolean addNewAdmin(UserDTO dto) {
-		User existUser = this.userService.findByUsername(dto.getUsername());
+		AppUser existUser = this.userService.findByUsername(dto.getUsername());
 
 		if (existUser != null) {
 			throw new ResourceConflictException(dto.getId(), "Username already exists");
 			
 		}
 
-		User user = this.userService.save(dto);
+		AppUser user = this.userService.save(dto);
 		return true;
 	}
 

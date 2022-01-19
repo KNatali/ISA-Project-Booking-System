@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.isa.ISAproject.dto.EmailMessageDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.exception.ResourceConflictException;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -39,13 +39,13 @@ public class EmailService {
 		Thread.sleep(10000);
 		System.out.println("Slanje emaila...");
 		//deo iz Authetication controller
-		User existUser = this.userService.findByUsername(userRequest.getUsername());
+		AppUser existUser = this.userService.findByUsername(userRequest.getUsername());
 
 		if (existUser != null) {
 			throw new ResourceConflictException(userRequest.getId(), "Username already exists");
 		}
 
-		User user = this.userService.save(userRequest);
+		AppUser user = this.userService.save(userRequest);
 
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(user.getEmail());
@@ -57,7 +57,7 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 
-	public void sendNotificaitionSync(User user) throws MailException, InterruptedException {
+	public void sendNotificaitionSync(AppUser user) throws MailException, InterruptedException {
 		System.out.println("Sync metoda se izvrsava u istom Threadu koji je i prihvatio zahtev. Thread id: " + Thread.currentThread().getId());
 		//Simulacija duze aktivnosti da bi se uocila razlika
 		Thread.sleep(10000);

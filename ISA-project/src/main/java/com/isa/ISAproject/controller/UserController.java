@@ -35,7 +35,7 @@ import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.Admin;
 import com.isa.ISAproject.model.RegistrationRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.RegistrationRequestRepository;
 import com.isa.ISAproject.service.EmailService;
 import com.isa.ISAproject.service.UserService;
@@ -60,7 +60,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 		// Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
 		@GetMapping("/user/{userId}")
 		
-		public User loadById(@PathVariable Long userId) {
+		public AppUser loadById(@PathVariable Long userId) {
 			return this.userService.findById(userId);
 		}
 		
@@ -69,7 +69,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 	    UserDTO getLoggedInUser(Principal user) {
 			
 			
-	        User loggedIn = userService.findByUsername(user.getName());
+	        AppUser loggedIn = userService.findByUsername(user.getName());
 	        return UserMapper.convertToDTO(loggedIn);
 
 	    }
@@ -94,7 +94,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 	    }
 		@GetMapping
 		public String getNew(Model model) {
-			model.addAttribute("user", new User());
+			model.addAttribute("user", new AppUser());
 			return "registration";
 		}
 
@@ -102,13 +102,13 @@ private RegistrationRequestRepository reservationRequestRepository;
 		@RequestMapping(value="/register",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<?> register(@RequestBody RegistrationRequestDTO dto){
 		
-		User existUser = this.userService.findByUsername(dto.getUserDTO().getUsername());
+		AppUser existUser = this.userService.findByUsername(dto.getUserDTO().getUsername());
 
 		if (existUser != null) {
 			throw new ResourceConflictException(dto.getUserDTO().getId(), "Username already exists");
 		}
 
-		User user = this.userService.save(dto.getUserDTO());
+		AppUser user = this.userService.save(dto.getUserDTO());
 		RegistrationRequest request=new RegistrationRequest(dto.getId(),user,dto.getReason());
 	this.reservationRequestRepository.save(request);
 		RegistrationRequestDTO req=new RegistrationRequestDTO(request.getId(),dto.getUserDTO(),request.getReason());
@@ -132,7 +132,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 		}
 		
 		@PostMapping("/signup/sync")//ceka se da se prva radnja zavrsi
-		public String signUpSync(User user){
+		public String signUpSync(AppUser user){
 			System.out.println("Thread id: " + Thread.currentThread().getId());
 			//slanje emaila
 			try {

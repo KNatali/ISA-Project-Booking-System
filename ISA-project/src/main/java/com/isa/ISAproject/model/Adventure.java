@@ -29,7 +29,7 @@ public class Adventure {
 	private Address address;
 	
 	
-	@Column(columnDefinition="LONGTEXT")
+	@Column
 	private String description;
 	@Column
 	private double averageGrade;

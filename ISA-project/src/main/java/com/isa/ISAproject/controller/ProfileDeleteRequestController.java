@@ -25,7 +25,7 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.RegistrationRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
 import com.isa.ISAproject.service.EmailService;

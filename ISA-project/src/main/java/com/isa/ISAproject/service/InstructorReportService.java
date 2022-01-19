@@ -17,7 +17,7 @@ import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.InstructorReport;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.InstructorReportRepository;

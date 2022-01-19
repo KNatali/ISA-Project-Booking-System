@@ -15,7 +15,7 @@ public class Authority implements GrantedAuthority{
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(name="name")

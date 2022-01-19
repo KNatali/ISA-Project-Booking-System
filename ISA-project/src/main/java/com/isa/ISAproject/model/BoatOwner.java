@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class BoatOwner extends User {
+public class BoatOwner extends AppUser {
 
 	@Column
 	private double grade;

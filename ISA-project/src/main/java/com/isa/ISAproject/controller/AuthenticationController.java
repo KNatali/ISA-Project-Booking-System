@@ -23,7 +23,7 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.dto.UserRequest;
 import com.isa.ISAproject.dto.UserTokenState;
 import com.isa.ISAproject.exception.ResourceConflictException;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.security.auth.JwtAuthenticationRequest;
 import com.isa.ISAproject.service.UserService;
 import com.isa.ISAproject.util.TokenUtils;
@@ -49,7 +49,7 @@ public class AuthenticationController {
 			@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
 
 		 AuthenticatedUserDTO authenticatedUserDTO = new AuthenticatedUserDTO();
-	        User u = userService.findByUsername(authenticationRequest.getUsername());
+	        AppUser u = userService.findByUsername(authenticationRequest.getUsername());
 	      
 	        if(u!=null){
 	           
@@ -61,7 +61,7 @@ public class AuthenticationController {
 	                SecurityContextHolder.setContext(ctx);
 	                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-	                User user = (User) authentication.getPrincipal();
+	                AppUser user = (AppUser) authentication.getPrincipal();
 	                String jwt = tokenUtils.generateToken(user.getUsername());
 	                int expiresIn = tokenUtils.getExpiredIn();
 	                authenticatedUserDTO = new AuthenticatedUserDTO(user.getId(), user.getRole(), user.getUsername(), new UserTokenState(jwt, expiresIn));
@@ -72,15 +72,15 @@ public class AuthenticationController {
 
 	// Endpoint za registraciju novog korisnika
 	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody UserDTO userRequest, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<AppUser> addUser(@RequestBody UserDTO userRequest, UriComponentsBuilder ucBuilder) {
 
-		User existUser = this.userService.findByUsername(userRequest.getUsername());
+		AppUser existUser = this.userService.findByUsername(userRequest.getUsername());
 
 		if (existUser != null) {
 			throw new ResourceConflictException(userRequest.getId(), "Username already exists");
 		}
 
-		User user = this.userService.save(userRequest);
+		AppUser user = this.userService.save(userRequest);
 
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}/*

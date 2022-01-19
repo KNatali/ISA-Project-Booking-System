@@ -12,7 +12,7 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.RegistrationRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.RegistrationRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
@@ -49,7 +49,7 @@ public class RegistrationRequestService {
 			
 		}*/
 		
-		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+		AppUser user=userRepository.getById(requestDTO.getUserDTO().getId());
 		user.setEnabled(true);
 		userRepository.save(user);
 		RegistrationRequest request=this.registrationRequestRepository.getById(requestDTO.getId());
@@ -59,7 +59,7 @@ public class RegistrationRequestService {
 	
 	public void reject(RegistrationRequestDTO requestDTO) {
 		
-		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+		AppUser user=userRepository.getById(requestDTO.getUserDTO().getId());
 	
 		
 		RegistrationRequest request=this.registrationRequestRepository.getById(requestDTO.getId());

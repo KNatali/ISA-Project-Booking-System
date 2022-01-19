@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Client extends User{
+public class Client extends AppUser{
 	@Column
 	private int numberOfPenals=0;
 	@OneToMany (cascade = CascadeType.ALL,orphanRemoval = true)

@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Admin extends User{
+public class Admin extends AppUser{
 	
 @Column
 private boolean firstLogin;
