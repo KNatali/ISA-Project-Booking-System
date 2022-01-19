@@ -171,6 +171,7 @@ import { BoatNavigationEquipmentEditComponent } from './boat-navigation-equipmen
 import { BoatOwnerReservationClientComponent } from './boat-owner-reservation-client/boat-owner-reservation-client.component';
 import { BoatOwnerAddReservationComponent } from './boat-owner-add-reservation/boat-owner-add-reservation.component';
 import { BoatOwnerActionAddComponent } from './boat-owner-action-add/boat-owner-action-add.component';
+import { BoatOwnerAddBoatComponent } from './boat-owner-add-boat/boat-owner-add-boat.component';
 
 
 
@@ -326,7 +327,8 @@ import { BoatOwnerActionAddComponent } from './boat-owner-action-add/boat-owner-
     BoatNavigationEquipmentEditComponent,
     BoatOwnerReservationClientComponent,
     BoatOwnerAddReservationComponent,
-    BoatOwnerActionAddComponent
+    BoatOwnerActionAddComponent,
+    BoatOwnerAddBoatComponent
 
 
 

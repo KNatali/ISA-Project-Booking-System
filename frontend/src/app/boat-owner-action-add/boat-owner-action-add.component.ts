@@ -94,7 +94,7 @@ export class BoatOwnerActionAddComponent implements OnInit {
       reservationEnd: ['', Validators.required],
       guests: ['', Validators.required],
       price: ['', Validators.required],
-      boat: ['', Validators.required],
+      boat: [''], //Validators.required],
       checkArray: this.formBuilder.array([])
     })
     this.formValue2 = this.formBuilder.group({

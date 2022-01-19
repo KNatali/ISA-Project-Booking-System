@@ -18,7 +18,8 @@ public class CottageOwner extends User{
 	
 	@Column
 	private double grade;
-	@OneToMany(mappedBy="cottageOwner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	//@OneToMany(mappedBy="cottageOwner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cottageOwner",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Cottage> cottages=new HashSet<>();
 	@ManyToMany(cascade =CascadeType.ALL)
 	 @JoinTable(

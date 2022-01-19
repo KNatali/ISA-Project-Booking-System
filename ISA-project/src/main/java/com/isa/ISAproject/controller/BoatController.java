@@ -11,13 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.BoatAddDTO;
 import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Boat;
@@ -122,6 +125,12 @@ public class BoatController {
 	public ResponseEntity<List<BoatDTO>> findByCity(@RequestParam String city){
 		List<Boat> boats=this.boatService.findByCity(city);
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/add/{id}",method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public ResponseEntity<?>  addBoat(@RequestBody BoatAddDTO dto,@PathVariable Long id){
+		this.boatService.addBoat(id, dto);
+			return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
