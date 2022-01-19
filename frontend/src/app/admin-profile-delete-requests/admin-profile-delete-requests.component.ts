@@ -32,7 +32,7 @@ export class AdminProfileDeleteRequestsComponent implements OnInit {
 
   accept(request: ProfileDeleteRequest, id: any) {
     this.adminService.acceptProfileDeleteRequests(request)
-      .subscribe(res => {
+      .subscribe(data => {
         this.requests.forEach((request, index) => {
           if (request.id == id) this.requests.splice(index, 1);
         });

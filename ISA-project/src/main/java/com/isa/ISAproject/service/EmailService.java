@@ -73,6 +73,23 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 	
+	public void sendMessageSync(String email,String message) throws MailException, InterruptedException {
+		System.out.println("Sync metoda se izvrsava u istom Threadu koji je i prihvatio zahtev. Thread id: " + Thread.currentThread().getId());
+		//Simulacija duze aktivnosti da bi se uocila razlika
+		Thread.sleep(1000);
+		System.out.println("Slanje emaila...");
+
+		Thread.sleep(10000);
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(email);
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Fun Booking");
+		mail.setText(message);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+	
 	@Async
 	public void sendAdminMessage(EmailMessageDTO dto) throws MailException, InterruptedException {
 		

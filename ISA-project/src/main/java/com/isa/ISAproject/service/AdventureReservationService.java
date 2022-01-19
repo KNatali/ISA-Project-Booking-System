@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.PessimisticLockException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
@@ -118,7 +120,7 @@ public class AdventureReservationService {
 	}
 	
 	@Transactional(readOnly = false)
-	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockException, DateTimeException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
 		
