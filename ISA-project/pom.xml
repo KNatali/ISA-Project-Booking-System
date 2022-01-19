@@ -11,7 +11,7 @@
 	<groupId>com.isa</groupId>
 	<artifactId>ISA-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	
 	<name>ISA-project</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
