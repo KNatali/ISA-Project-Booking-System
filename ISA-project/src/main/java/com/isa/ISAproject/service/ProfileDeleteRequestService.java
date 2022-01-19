@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.OptimisticLockException;
+import javax.persistence.PessimisticLockException;
 
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
 
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -82,26 +82,25 @@ public class ProfileDeleteRequestService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws MailException, InterruptedException,ObjectOptimisticLockingFailureException {
+	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws MailException, InterruptedException,PessimisticLockException {
 		
 		//userRepository.delete(user);
-		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
+		ProfileDeleteRequest request=this.profileDeleteRequestRepository.findOneById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Accepted);
 		this.profileDeleteRequestRepository.save(request);
 		User user=userRepository.getById(requestDTO.getUserDTO().getId());
 		user.setEnabled(false);
 		userRepository.save(user);
-		emailService.sendMessage(requestDTO.getUserDTO().getEmail(),"Your profile delete request has been accepted. Your account has been deleted and you can not log in!");
-		
+		emailService.sendMessageSync(requestDTO.getUserDTO().getEmail(),"Your profile delete request has been accepted. Your account has been deleted and you can not log in!");
 		
 	}
 	
 	@Transactional(readOnly = false)
-	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,OptimisticLockException {
-		ProfileDeleteRequest request=this.profileDeleteRequestRepository.getById(requestDTO.getId());
+	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,PessimisticLockException {
+		ProfileDeleteRequest request=this.profileDeleteRequestRepository.findOneById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Rejected);
 		this.profileDeleteRequestRepository.save(request);
-		emailService.sendMessage(requestDTO.getUserDTO().getEmail(),message);
+		emailService.sendMessageSync(requestDTO.getUserDTO().getEmail(),message);
 		
 		
 	}
