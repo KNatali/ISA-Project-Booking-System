@@ -31,7 +31,7 @@ export class AdminComplaintAnswerComponent implements OnInit {
         this.formValue.reset();
         alert("Successfully sent answer to client and instructor");
       }, error => {
-        alert(error)
+        alert("Error!Try again!")
       });
 
   }

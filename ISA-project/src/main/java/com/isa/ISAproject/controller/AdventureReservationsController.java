@@ -4,6 +4,8 @@ import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.PessimisticLockException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
@@ -93,7 +95,7 @@ public class AdventureReservationsController {
 		AdventureReservationDTO fastDTO;
 		try {
 			fastDTO = this.adventureReservationService.addAdventureReservation( dto);
-		} catch (PessimisticLockingFailureException e) {
+		} catch (PessimisticLockException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
