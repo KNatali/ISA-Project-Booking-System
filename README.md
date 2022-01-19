@@ -16,12 +16,48 @@ Natalija Krsmanović IN21/2018 -Student 3 <br>
   
 </ul>
 
-<h2>How to start:</h2>
-```
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
+<h2>Need to install:</h2>
+<ul>
+  <li>Angular Material:<br>
+    <code>ng add @angular/material</code>
+  </li>
+  <li>Bootstrap: <br>
+    <code>$ npm install bootstrap</code><br>
+    <code> npm install --save @ng-bootstrap/ng-bootstrap</code> <code>
+npm config set legacy-peer-deps true</code>
+  </li>
+  <li>Calendar:<br>
+    <code>npm install --save angular-calendar date-fns</code></li>
+  <li>Charts:
+  <br>
+    <code>npm install ng2-charts --save</code> <code>
+npm install chart.js --save</code>
+  </li>
+  <li>Maps:<br>
+    <code>npm install @agm/core</code></li>
+  
+</ul>
+<h2>How to run:</h2>
+<ul>
+  <li>Back: run as Maven project
+  </li>
+  <li>
+    Front:
+    from frontend 
+    <code>npm install</code>
+     <code>ng serve</code>
+  </li>
+</ul>
+
+<h2>Email service:</h2>
+<ul>
+  <li>e-mail:isamarkomarkovic99@gmail.com
+  </li>
+  <li>
+   password:isaMarko123
+  </li>
+</ul>
+<h1>Password for all users: 123<h1>
   
   
 
