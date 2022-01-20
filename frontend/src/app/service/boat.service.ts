@@ -6,6 +6,8 @@ import { Boat } from '../model/boat';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { NavigationEquipment } from '../model/navigationEquipment';
+import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { TimePeriod } from '../model/timePeriod';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +84,11 @@ export class BoatService {
   }
   addBoat(id: number, newBoat: Boat): Observable<Boat> {
     return this.http.put<Boat>(`${this.urlBoats}/` + `add` + `/${id}`, newBoat);
+  }
+  getUnavailabilityByBoat(id: number): Observable<TimePeriod[]> {
+    return this.http.get<TimePeriod[]>(`${this.urlBoats}/` + `getUnavailability` + `/${id}`);
+  }
+  setUnavailability(period: TimePeriod, id: number) {
+    return this.http.post<ProfileDeleteRequest>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
   }
 }

@@ -116,7 +116,7 @@ public class TimePeriodService {
 	
 /**/
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityCottage(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, DateTimeException {
+	public boolean setUnavailabilityCottage(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
@@ -180,7 +180,7 @@ public class TimePeriodService {
 	
 /**/
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityBoat(TimePeriodDTO dto,Long id)throws PessimisticLockingFailureException, DateTimeException {
+	public boolean setUnavailabilityBoat(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
