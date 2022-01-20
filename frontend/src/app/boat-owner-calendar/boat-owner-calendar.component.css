@@ -1,0 +1,16 @@
+* {
+    font-size: 16px;
+  }
+  
+  .container {
+    padding: 30px;
+    width: 70%;
+    margin: auto;
+  }
+  
+  .labels {
+    font-size: 16px;
+    color: #0B2545;
+    font-weight: bolder;
+  }
+  

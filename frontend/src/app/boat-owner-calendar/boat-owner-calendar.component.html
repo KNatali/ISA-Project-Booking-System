@@ -1,1 +1,172 @@
-<p>boat-owner-calendar works!</p>
+<div class="container">
+    <h2>Set your unavailability:</h2>
+    <form [formGroup]="formValue">
+      <div class="mb-3">
+        <label for="startTime" class="form-label">Start date and time:</label>
+        <input type="datetime-local" formControlName="startTime" [(ngModel)]="startTime" class="form-control">
+      </div>
+  
+      <div class="mb-3">
+        <label for="endTime" class="form-label">End date and time:</label>
+        <input type="datetime-local" formControlName="endTime" [(ngModel)]="endTime" class="form-control">
+      </div>
+    </form>
+    <br>
+    <button mat-button (click)="setUnavailability()">Submit</button>
+    <hr>
+  </div>
+  <div class="calendar">
+  
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            Previous
+          </div>
+          <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+            Today
+          </div>
+          <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+            Month
+          </div>
+          <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+            Week
+          </div>
+          <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+            Day
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+        [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+        [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-day-view>
+    </div>
+  </div>
+  
+  
+  <ng-template #modalContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Reservation information:</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+  
+      <div class="row mt-2">
+        <div class="col-md-6"><label class="labels">Reservation start:</label>
+          <p>{{selectedReservation.reservationStart}}</p>
+  
+        </div>
+        <div class="col-md-6"><label class="labels">Reservation end:</label>
+          <p>{{selectedReservation.reservationEnd}}</p>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Boat name:</label>
+          <p>{{selectedReservation.boat.name}}</p>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Nuber of quests:</label>
+          <p>{{selectedReservation.boat.maxPersons}}</p>
+        </div>
+        <div class="col-md-12"><label class="labels">Price:</label>
+          <p>{{selectedReservation.price}} $</p>
+        </div>
+        <div class="col-md-12"><label class="labels">Client</label>
+          <p>{{selectedReservation.client.firstName}} {{selectedReservation.client.lastName}} </p>
+        </div>
+  
+  
+      </div>
+  
+  
+  
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="showReport" mat-button data-bs-toggle="modal" (click)="addReport()" data-bs-target="#modalReport">Add
+        Report</button>
+      <button type="button" id="closeOK" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+    </div>
+  </ng-template>
+  
+  <ng-template #modalContentAction let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Action information:</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row mt-2">
+        <div class="col-md-6"><label class="labels">Validity start:</label>
+          <p>{{selectedFastReservation.validityStart}}</p>
+  
+        </div>
+        <div class="col-md-6"><label class="labels">Vaidity end:</label>
+          <p>{{selectedFastReservation.validityEnd}}</p>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-6"><label class="labels">Reservation start:</label>
+          <p>{{selectedFastReservation.reservationStart}}</p>
+  
+        </div>
+        <div class="col-md-6"><label class="labels">Reservation end:</label>
+          <p>{{selectedFastReservation.reservationEnd}}</p>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Boat name:</label>
+          <p>{{selectedFastReservation.boat.name}}</p>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Nuber of quests:</label>
+          <p>{{selectedFastReservation.maxPersons}}</p>
+        </div>
+        <div class="col-md-12"><label class="labels">Price:</label>
+          <p>{{selectedFastReservation.price}} $</p>
+        </div>
+  
+  
+  
+      </div>
+  
+  
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+  
+    </div>
+  </ng-template>
+  
