@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
 import { HttpClient } from '@angular/common/http';
 import { Loader } from '@googlemaps/js-api-loader';
+import { AdventureRevision } from '../model/adventureRevision';
 
 @Component({
   selector: 'app-instructor-adventure-profile',
@@ -25,6 +26,7 @@ export class InstructorAdventureProfileComponent implements OnInit {
   adventure: Adventure;
   currentRate = 8;
   actions: AdventureFastReservation[];
+  revisions: AdventureRevision[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private adventureService: AdventureService) { }
 
@@ -37,6 +39,7 @@ export class InstructorAdventureProfileComponent implements OnInit {
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadActions();
+    this.loadRevisions();
 
 
   }
@@ -100,6 +103,14 @@ export class InstructorAdventureProfileComponent implements OnInit {
       this.id = param.id;
       this.adventureService.getAdventureFastReservations(this.id)
         .subscribe((items: AdventureFastReservation[]) => this.actions = items);
+    });
+  }
+
+  loadRevisions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.adventureService.getAllAdventureRevisionsByAdveture(this.id)
+        .subscribe((items: AdventureRevision[]) => this.revisions = items);
     });
   }
 

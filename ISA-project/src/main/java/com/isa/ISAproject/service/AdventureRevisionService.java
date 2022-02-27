@@ -42,6 +42,22 @@ public class AdventureRevisionService {
 		return revisionsDTO;
 	}
 	
+	public List<AdventureRevisionDTO> getAllByAdventure(Long adventureId) {
+		List<AdventureRevision> revisions=adventureRevisionRepository.findAll();
+		List<AdventureRevisionDTO> revisionsDTO=new  ArrayList<>();
+		for (AdventureRevision r : revisions) {
+			if(r.getAdventureReservation().getAdventure().getId()==adventureId) {
+				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
+				
+				AdventureReservationDTO reservation=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
+				AdventureRevisionDTO rDTO=new AdventureRevisionDTO(r.getId(),reservation,revision);
+				revisionsDTO.add(rDTO);
+			}
+			
+		}
+		return revisionsDTO;
+	}
+	
 	public void acceptAdventureRevision(AdventureRevisionDTO dto) throws MailException, InterruptedException {
 		AdventureRevision adventureRevision=adventureRevisionRepository.getById(dto.getId());
 		Revision revision=revisionRepository.getById(adventureRevision.getRevision().getId());

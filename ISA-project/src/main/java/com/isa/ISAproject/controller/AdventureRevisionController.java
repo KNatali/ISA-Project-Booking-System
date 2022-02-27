@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,15 @@ public class AdventureRevisionController {
 	@PreAuthorize("hasRole('SYSADMIN') || hasRole('ADMIN')")
 	public ResponseEntity<List<AdventureRevisionDTO>> getAdventureRevisions(){
 		List<AdventureRevisionDTO> dtos=adventureRevisionService.getAll();
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value="api/instructor/adventure/allAdventureRevisionsByAdventure/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('INSTRUCTOR')")
+	public ResponseEntity<List<AdventureRevisionDTO>> getAdventureRevisionsByAdventure(@PathVariable Long id){
+		List<AdventureRevisionDTO> dtos=adventureRevisionService.getAllByAdventure(id);
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 	

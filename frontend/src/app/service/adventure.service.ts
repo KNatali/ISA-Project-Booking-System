@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
+import { AdventureRevision } from '../model/adventureRevision';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class AdventureService {
   }
   getAdventureFastReservations(id: number): Observable<AdventureFastReservation[]> {
     return this.http.get<AdventureFastReservation[]>(`${this.urlAdventure}/` + `fastReservations` + `/${id}`);
+  }
+
+  getAllAdventureRevisionsByAdveture(id: number): Observable<AdventureRevision[]> {
+    return this.http.get<AdventureRevision[]>(`${this.urlAdventure}/allAdventureRevisionsByAdventure` + `/${id}`);
   }
 
   updateAdvenuture(id: number, data: Adventure): Observable<Adventure> {
