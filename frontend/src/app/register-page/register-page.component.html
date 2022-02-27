@@ -46,7 +46,7 @@
           <div *ngFor="let choice of choices">
             <input type="radio" id="role" name="role" value="{{ choice }}" [(ngModel)]="value"
               (ngModelChange)="choose($event)" />
-            <label class="toggle-button" for="{{choice}}">{{ choice }}</label>
+            <label class="toggle-button" for="{{choice}}"> {{ choice }}</label>
           </div>
         </div>
         <div class="form-group" *ngIf="showReason">

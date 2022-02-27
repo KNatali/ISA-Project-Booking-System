@@ -25,8 +25,42 @@
       <td> {{r.revision.grade}}</td>
 
 
-      <td><button mat-button id="accept" (click)="accept(r,r.id)">Accept</button></td>
-      <td><button mat-button id="reject" (click)="reject(r,r.id)">Reject</button></td>
+      <td><button mat-button id="accept" (click)="acceptAdventure(r,r.id)">Accept</button></td>
+      <td><button mat-button id="reject" (click)="rejectAdventure(r,r.id)">Reject</button></td>
+
+    </tr>
+    <tr *ngFor="let r of boatRevisions; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>
+        {{r.boatReservation.client.firstName}} {{r.boatReservation.client.lastName}}
+      </td>
+      <td> {{r.boatReservation.boat.name}}</td>
+      <td>
+        {{r.revision.revision}}
+      </td>
+      <td> {{r.revision.grade}}</td>
+
+
+      <td><button mat-button id="accept" (click)="acceptBoat(r,r.id)">Accept</button></td>
+      <td><button mat-button id="reject" (click)="rejectBoat(r,r.id)">Reject</button></td>
+
+    </tr>
+    <tr *ngFor="let k of cottageRevisions; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>
+        {{k.cottageReservation.client.firstName}} {{k.cottageReservation.client.lastName}}
+      </td>
+      <td> {{k.cottageReservation.cottage.name}}</td>
+      <td>
+        {{k.revision.revision}}
+      </td>
+      <td> {{k.revision.grade}}</td>
+
+
+      <td><button mat-button id="accept" (click)="acceptCottage(k,k.id)">Accept</button></td>
+      <td><button mat-button id="reject" (click)="rejectCottage(k,k.id)">Reject</button></td>
 
     </tr>
 

@@ -1,3 +1,4 @@
+import { CottageRevision } from './../model/cottageRevision';
 import { AdventureRevision } from './../model/adventureRevision';
 import { RegistrationRequest } from './../model/registrationRequest';
 import { AdventureReservation } from './../model/AdventureReservation';
@@ -14,6 +15,7 @@ import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { InstructorReport } from '../model/instructorReport';
 import { SystemEarnings } from '../model/systemEarnings';
 import { AdventureComplaint } from '../model/adventureComplaint';
+import { BoatRevision } from '../model/boatRevision';
 
 @Injectable({
     providedIn: 'root'
@@ -78,6 +80,7 @@ export class AdminService {
         return this.http.put<User>(`${this.urlAdmin}/rejectProfileDeleteRequest`, request, { params });
     }
 
+
     getAllReservationRrports(): Observable<InstructorReport[]> {
         return this.http.get<InstructorReport[]>(`${this.urlAdmin}/allReservationReports`);
     }
@@ -87,21 +90,51 @@ export class AdminService {
     rejectReservationReport(report: InstructorReport) {
         return this.http.put(`${this.urlAdmin}/rejectInstructorReport`, report);
     }
+
+
     getAllAdventureComplaints(): Observable<AdventureComplaint[]> {
+        return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+    }
+    getAllBoatComplaints(): Observable<AdventureComplaint[]> {
+        return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+    }
+    getAllCottageComplaints(): Observable<AdventureComplaint[]> {
         return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
     }
     answerComplaint(complaint: AdventureComplaint, message: string) {
         const params: HttpParams = new HttpParams().append('message', message);
         return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint, { params });
     }
+
+
     getAllAdventureRevisions(): Observable<AdventureRevision[]> {
         return this.http.get<AdventureRevision[]>(`${this.urlAdmin}/allAdventureRevisions`);
     }
+    getAllBoatRevisions(): Observable<BoatRevision[]> {
+        return this.http.get<BoatRevision[]>(`${this.urlAdmin}/allBoatRevisions`);
+    }
+    getAllCottageRevisions(): Observable<CottageRevision[]> {
+        return this.http.get<CottageRevision[]>(`${this.urlAdmin}/allCottageRevisions`);
+    }
+
+
     acceptAdventureResvision(revision: AdventureRevision) {
         return this.http.post(`${this.urlAdmin}/acceptAdventureRevision`, revision);
     }
     rejectAdventureResvision(revision: AdventureRevision) {
         return this.http.post(`${this.urlAdmin}/rejectAdventureRevision`, revision);
+    }
+    acceptBoatResvision(revision: BoatRevision) {
+        return this.http.post(`${this.urlAdmin}/acceptBoatRevision`, revision);
+    }
+    rejectBoatResvision(revision: BoatRevision) {
+        return this.http.post(`${this.urlAdmin}/rejectBoatRevision`, revision);
+    }
+    acceptCottageResvision(revision: CottageRevision) {
+        return this.http.post(`${this.urlAdmin}/acceptCottageRevision`, revision);
+    }
+    rejectCottageResvision(revision: CottageRevision) {
+        return this.http.post(`${this.urlAdmin}/rejectCottageRevision`, revision);
     }
 
 }

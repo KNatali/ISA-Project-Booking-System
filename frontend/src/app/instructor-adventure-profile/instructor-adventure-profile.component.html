@@ -1,48 +1,41 @@
 <div class="body-wrapper">
   <div class="container content">
 
-    <div class="flex">
-      <div>
-        <h1>{{adventure.name}}</h1>
-
+    <div class="top-content">
+      <div class="flex">
         <div>
-          <i class="fa fa-map-marker" aria-hidden="true"></i>{{adventure.address.street}},{{adventure.address.city}}
-        </div>
-        <div class="full " id="map">
+          <h1>{{adventure.name}}</h1>
+
+          <div>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>{{adventure.address.street}},{{adventure.address.city}}
+          </div>
+          <div class="full " id="map">
+
+          </div>
+          <br>
+          <div><strong>Max number of guests: </strong> {{adventure.maxPersons}}</div>
+          <div><strong>Average grade: </strong>
+            <span class="tag is-large mt-5 rating">{{adventure.averageGrade}}<i class="ml-1 fa fa-star"></i></span>
+          </div>
+          <br>
+          <div id="price">
+            <strong>Price (per day) : </strong> <span> {{adventure.price}} $</span>
+          </div>
 
         </div>
-        <div><strong>Max number of guests: </strong> {{adventure.maxPersons}}</div>
-        <div><strong>Average grade: </strong>
-          <span class="tag is-large mt-5 rating">{{adventure.averageGrade}}<i class="ml-1 fa fa-star"></i></span>
-        </div>
+        <br>
+
+
       </div>
       <br>
+      <div class="gallery">
+        <div class="figure">
+          <img id="mainImage" src="{{adventure.mainPicture}}">
+        </div>
 
-
-    </div>
-    <br>
-    <div class="gallery">
-      <div class="figure">
-        <img id="mainImage" src="{{adventure.mainPicture}}">
       </div>
-      <!--
-      <div id="lightgallery">
-
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-      </div>-->
     </div>
     <br>
-    <div>
-      <strong>Price (per day):</strong> <span id="price"> {{adventure.price}} $</span>
-    </div>
 
 
 
@@ -115,9 +108,9 @@
               </p>
 
               <div>
-                <strong><i class="fa fa-calendar"></i> Start:{{action.reservationStart}}</strong>
+                <strong><i class="fa fa-calendar"></i> Start: {{action.reservationStart}}</strong>
                 <br />
-                <strong><i class="fa fa-calendar"></i> End: 3 {{action.reservationEnd}}</strong>
+                <strong><i class="fa fa-calendar"></i> End: {{action.reservationEnd}}</strong>
                 <br />
                 <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
                 <br />
@@ -138,6 +131,27 @@
 
       </article>
     </div>
+
+    <hr>
+    <h2>Reviews:</h2>
+    <article class="revision" *ngFor="let revision of revisions">
+      <i class="fa fa-comments-o" aria-hidden="true"></i>
+      <span><b> {{revision.revision.grade}} </b> <i class="fa fa-star"></i></span>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <b>{{revision.adventureReservation.client.firstName}} {{revision.adventureReservation.client.lastName}} </b>
+            | {{revision.adventureReservation.reservationEnd}}
+
+
+
+            <br />
+            {{revision.revision.revision}}
+          </p>
+        </div>
+
+      </div>
+    </article>
 
 
 
