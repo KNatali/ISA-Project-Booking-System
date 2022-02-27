@@ -273,3 +273,6 @@ insert into adventure_complaint(description,client_id,adventure_id,type) values(
 
 insert into revision(grade,revision,type) values(7,'Boat was very dirty','Unchecked');
 insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
+
+insert into revision(grade,revision,type) values(4,'Beds are very uncomfotable','Unchecked');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(2,1);
