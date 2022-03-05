@@ -9,6 +9,8 @@ import { BoatReservation } from '../model/boat-reservation';
 export class BoatReservationItemComponent implements OnInit {
   @Input()
   res:BoatReservation;
+  @Input()
+  rate_boat_button:boolean;
   constructor() { }
 
   ngOnInit(): void {
