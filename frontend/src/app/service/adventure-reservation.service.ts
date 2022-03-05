@@ -35,4 +35,7 @@ export class AdventureReservationService {
   editFastReservation(reservation: EditAdventureFastReservation): Observable<AdventureFastReservation> {
     return this.http.post<AdventureFastReservation>(`${this.urlReservation}` + '/editFastReservation', reservation);
   }
+  getById(id: number): Observable<AdventureReservation> {
+    return this.http.get<AdventureReservation>(`${this.urlReservation}/${id}`);
+  }
 }

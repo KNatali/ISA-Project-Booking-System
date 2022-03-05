@@ -2,3 +2,6 @@
 <td>{{res.adventure.name}}</td>
 <td>{{res.numberOfPersons}}</td>
 <td>{{res.price}}</td>
+<td *ngIf="rate_adveture_button"> 
+    <button class="btn btn-info"><a [routerLink]="['/rate-instructor',res.adventure.instructor.id]">Rate</a></button>
+</td>

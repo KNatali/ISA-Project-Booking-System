@@ -8,8 +8,8 @@ export interface RevisionInterface {
     id?: number;
     grade: number;
     revision: string;
-    type: RevisionType
-    client: Client
+    type: RevisionType;
+    //client?: Client//stavila sam da bude neobavezno zato sto ga nema u modelu
 
 
 }
@@ -18,13 +18,13 @@ export class Revision implements RevisionInterface {
     grade: number;
     revision: string;
     type: RevisionType
-    client: Client
+    //client?: Client
     constructor(obj: RevisionInterface) {
         this.id = obj.id;
         this.grade = obj.grade;
         this.revision = obj.revision;
         this.type = obj.type;
-        this.client = obj.client;
+        //this.client = obj.client;
 
 
     }

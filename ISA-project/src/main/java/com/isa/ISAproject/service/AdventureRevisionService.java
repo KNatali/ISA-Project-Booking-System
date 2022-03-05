@@ -2,16 +2,23 @@ package com.isa.ISAproject.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.AdventureRevisionDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.RevisionDTO;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.AdventureRevision;
 import com.isa.ISAproject.model.Revision;
 import com.isa.ISAproject.model.RevisionType;
@@ -74,6 +81,10 @@ public class AdventureRevisionService {
 		revision.setType(RevisionType.Rejected);
 		revisionRepository.save(revision);
 		
+	}
+	
+	public AdventureRevision save(AdventureRevision newRevision) {
+		return this.adventureRevisionRepository.save(newRevision);
 	}
 	
 

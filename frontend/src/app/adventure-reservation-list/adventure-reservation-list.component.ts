@@ -12,11 +12,13 @@ export class AdventureReservationListComponent implements OnInit {
 
   reservations: AdventureReservation[];
   id:any;
+  rate_adveture_button=true;//moguce je oceniti samo rezervaciju koja je vec prosla
   constructor(private clientService:ClientService, private adventureReservationService: AdventureReservationService) { }
 
   ngOnInit(): void {
     this.id = sessionStorage.getItem('id');
     this.loadData();
+
   }
   loadData(){
     this.clientService.findAllAdventureRes(this.id)

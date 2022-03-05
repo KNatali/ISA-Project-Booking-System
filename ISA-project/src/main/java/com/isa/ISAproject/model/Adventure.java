@@ -242,6 +242,20 @@ public class Adventure {
 		this.additionalItems=additionalItems;
 		this.adventureReservations=reservations;
 	}
+	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
+			Instructor instructor,String mainPicture,
+			int maxPersons) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.averageGrade = averageGrade;
+		this.price=price;
+		this.instructor = instructor;
+		this.mainPicture=mainPicture;
+		this.maxPersons = maxPersons;
+	}
 	
 	public Adventure() {}
 	

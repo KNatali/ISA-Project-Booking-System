@@ -9,6 +9,8 @@ import { AdventureReservation } from '../model/AdventureReservation';
 export class AdvetureReservationItemComponent implements OnInit {
   @Input()
   res:AdventureReservation;
+  @Input()
+  rate_adveture_button:boolean;
   
   constructor() { }
 
