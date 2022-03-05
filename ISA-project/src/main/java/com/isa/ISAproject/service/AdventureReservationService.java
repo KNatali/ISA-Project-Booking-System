@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Optional;
 
 import javax.persistence.PessimisticLockException;
 
@@ -19,11 +20,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
+import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Adventure;
@@ -69,6 +72,9 @@ public class AdventureReservationService {
 			}
 		}
 		return res;
+	}
+	public Optional<AdventureReservation> findById(Long id) {
+		return this.adventureReservationRepository.findById(id);
 	}
 	public List<AdventureReservation> sortByDateStart(Long id) {
 		List<AdventureReservation> reservations=this.oldReservation(id);

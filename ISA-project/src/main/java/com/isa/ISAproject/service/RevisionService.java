@@ -2,12 +2,14 @@ package com.isa.ISAproject.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.RevisionDTO;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Revision;
 import com.isa.ISAproject.model.RevisionType;
 import com.isa.ISAproject.repository.RevisionRepository;
@@ -45,5 +47,12 @@ public class RevisionService {
 		revisionRepository.save(revision);
 		
 	}
+	public Revision save(Revision newRevision) {
+		return this.revisionRepository.save(newRevision);
+	}
+	public Optional<Revision> findById(Long id) {
+		return this.revisionRepository.findById(id);
+	}
+	
 
 }

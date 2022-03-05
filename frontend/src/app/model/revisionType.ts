@@ -3,4 +3,10 @@ export enum RevisionType {
     Accepted = 'Accepted',
     Rejected = 'Rejected',
 
-}
+}/*
+export enum RevisionType {
+    Unchecked = 0,
+    Accepted = 1,
+    Rejected = 2
+
+}*/

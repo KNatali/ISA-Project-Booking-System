@@ -1,5 +1,6 @@
 package com.isa.ISAproject.dto;
 
+import com.isa.ISAproject.model.Revision;
 import com.isa.ISAproject.model.RevisionType;
 
 public class RevisionDTO {
@@ -39,6 +40,14 @@ public class RevisionDTO {
 		this.grade = grade;
 		this.revision = revision;
 		this.type = type;
+		
+	}
+	public RevisionDTO(Revision revision) {
+		super();
+		this.id = revision.getId();
+		this.grade = revision.getGrade();
+		this.revision = revision.getRevision();
+		this.type = revision.getType();
 		
 	}
 	public RevisionDTO() {

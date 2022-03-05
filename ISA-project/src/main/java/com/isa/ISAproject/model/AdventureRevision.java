@@ -51,6 +51,10 @@ public class AdventureRevision {
 		this.adventureReservation = adventureReservation;
 		this.revision = revision;
 	}
+	public AdventureRevision(AdventureReservation adventureReservation, Revision revision) {
+		this.adventureReservation = adventureReservation;
+		this.revision = revision;
+	}
 
 	public AdventureRevision() {
 		super();

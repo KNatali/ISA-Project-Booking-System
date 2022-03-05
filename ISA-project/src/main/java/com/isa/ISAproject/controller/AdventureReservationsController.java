@@ -3,6 +3,7 @@ package com.isa.ISAproject.controller;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.PessimisticLockException;
 
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.service.AdventureReservationService;
 
@@ -46,6 +49,14 @@ public class AdventureReservationsController {
 			res.add(a);
 		}
 		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/adventureReservation/{id}",method = RequestMethod.GET)
+	public ResponseEntity<AdventureReservationDTO>  findOne(@PathVariable Long id){
+		Optional<AdventureReservation> adventureReservation=this.adventureReservationService.findById(id);
+		if (!adventureReservation.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		return new ResponseEntity<>(new AdventureReservationDTO(adventureReservation.get()), HttpStatus.OK);
 	}
 
 	
