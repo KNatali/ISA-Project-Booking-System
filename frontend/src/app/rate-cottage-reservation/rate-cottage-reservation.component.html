@@ -1,0 +1,39 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>You want to rate:</h2>
+            <div class="whoToRate" >
+              <div *ngFor="let choice of choices_for_rate" class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="{{choice}}" [(ngModel)]="grade">
+                <label class="form-check-label" for="inlineRadio1">{{choice}}</label>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>Check your grade</h2>
+            <div class="grade" >
+              <div *ngFor="let choice of choices" class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="{{choice}}" [(ngModel)]="grade">
+                <label class="form-check-label" for="inlineRadio1">{{choice}}</label>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>Write your revision</h2>
+            <textarea [(ngModel)]="revision_text">Some text...</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"><br>
+            <button id="submit" class="btn btn-primary" (click)="sendRevision()">Send your revision and grade</button>
+        </div>
+    </div>
+  </div>

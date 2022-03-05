@@ -12,6 +12,8 @@ import { ClientService } from '../service/client.service';
 export class CottageReservationItemComponent implements OnInit {
   @Input()
   res:CottageReservation;
+  @Input()
+  rate_cottage_button:boolean;
   constructor() {}
 
   ngOnInit(): void {

@@ -3,3 +3,6 @@
 <td>{{res.boat.name}}</td>
 <td>{{res.maxPersons}}</td>
 <td>{{res.price}}</td>
+<td *ngIf="rate_boat_button"> 
+    <button class="btn btn-info"><a [routerLink]="['/rate-boat-reservation',res.id]">Rate</a></button>
+</td>

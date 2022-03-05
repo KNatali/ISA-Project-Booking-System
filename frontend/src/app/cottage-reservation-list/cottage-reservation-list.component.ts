@@ -11,6 +11,7 @@ import { CottageReservationService } from '../service/cottage-reservation.servic
 export class CottageReservationListComponent implements OnInit {
   reservations: CottageReservation[];
   id:any;
+  rate_cottage_button=true;
 
   constructor(private clientService:ClientService, private cottageResService:CottageReservationService) { }
 

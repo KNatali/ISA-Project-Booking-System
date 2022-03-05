@@ -5,11 +5,11 @@
     <table class="table table-striped ">
         <thead>
             <tr>
-                <th>Date [yyyy,mm,dd,hh,mm]</th><th>Duration [h]</th><th>Cottage name</th><th>Max persons</th><th>Price [din]</th>
+                <th>Date [yyyy,mm,dd,hh,mm]</th><th>Duration [h]</th><th>Cottage name</th><th>Max persons</th><th>Price [din]</th><th>Rate</th>
             </tr>
         </thead>
         <tbody >   
-            <tr app-cottage-reservation-item *ngFor="let res of reservations" [res]=res></tr>
+            <tr [rate_cottage_button]="rate_cottage_button" app-cottage-reservation-item *ngFor="let res of reservations" [res]=res></tr>
 		</tbody>
     </table>
 </div>

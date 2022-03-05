@@ -47,6 +47,8 @@ import { BoatOwnerAddReservationComponent } from './boat-owner-add-reservation/b
 import { BoatOwnerActionAddComponent } from './boat-owner-action-add/boat-owner-action-add.component';
 import { BoatOwnerAddBoatComponent } from './boat-owner-add-boat/boat-owner-add-boat.component';
 import { RateIntructorComponent } from './rate-intructor/rate-intructor.component';
+import { RateCottageReservationComponent } from './rate-cottage-reservation/rate-cottage-reservation.component';
+import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-reservation.component';
 
 
 const routes: Routes = [
@@ -99,7 +101,9 @@ const routes: Routes = [
   { path: 'history-boat-reservations/:id', component: BoatReservationListComponent },
   { path: 'history-adventure-reservations/:id', component: AdventureReservationListComponent },
 
-  { path: 'rate-instructor/:id',component: RateIntructorComponent}
+  { path: 'rate-instructor/:id',component: RateIntructorComponent},
+  { path: 'rate-cottage-reservation/:id',component:RateCottageReservationComponent},
+  { path: 'rate-boat-reservation/:id',component:RateBoatReservationComponent}
 
 
 
