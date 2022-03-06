@@ -31,4 +31,7 @@ export class BoatReservationService {
   saveFastReservation(reservation: BoatFastReservation): Observable<BoatFastReservation> {
     return this.http.put<BoatFastReservation>(`${this.urlReservation}` + '/addFastReservation', reservation);
   }
+  getById(id: number): Observable<BoatReservation> {
+    return this.http.get<BoatReservation>(`${this.urlReservation}/${id}`);
+  }
 }

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,5 +165,8 @@ public class BoatReservationService {
 			}
 		
 		return BoatReservationMapper.convertToDTO(res);
+	}
+	public Optional<BoatReservation> findById(Long id) {
+		return this.boatReservationRepository.findById(id);
 	}
 }
