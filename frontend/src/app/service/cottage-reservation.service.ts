@@ -30,4 +30,7 @@ export class CottageReservationService {
   saveReservation(reservation: CottageReservation): Observable<CottageReservation> {
     return this.http.put<CottageReservation>(`${this.urlReservation}` + '/addReservation', reservation);
   }
+  getById(id: number): Observable<CottageReservation> {
+    return this.http.get<CottageReservation>(`${this.urlReservation}/${id}`);
+  }
 }

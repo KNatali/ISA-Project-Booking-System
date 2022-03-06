@@ -29,8 +29,10 @@ public class CottageReservation {
 	//@Column(nullable=false)
 	//private LocalTime time;
 	@Column
+	
 	private int duration;
 	@Column
+	//private int maxPersons;//ovde sam zamenila sa numberOfPersons zato sto se ne poklapa sa frontom
 	private int maxPersons;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();

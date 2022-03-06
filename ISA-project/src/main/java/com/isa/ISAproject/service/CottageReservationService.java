@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
@@ -167,5 +169,8 @@ public class CottageReservationService {
 			}
 		
 		return CottageReservationMapper.convertToDTO(res);
+	}
+	public Optional<CottageReservation> findById(Long id) {
+		return this.cottageReservationRepository.findById(id);
 	}
 }

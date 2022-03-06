@@ -1,6 +1,7 @@
 package com.isa.ISAproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureRevisionDTO;
 import com.isa.ISAproject.dto.CottageRevisionDTO;
+import com.isa.ISAproject.dto.SpecificRevisionDTO;
+import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.AdventureRevision;
+import com.isa.ISAproject.model.CottageReservation;
+import com.isa.ISAproject.model.CottageRevision;
+import com.isa.ISAproject.model.Revision;
+import com.isa.ISAproject.service.CottageReservationService;
 import com.isa.ISAproject.service.CottageRevisionService;
+import com.isa.ISAproject.service.RevisionService;
 
 
 @CrossOrigin("*")
@@ -26,6 +35,12 @@ public class CottageRevisionController {
 
 	@Autowired
 	private CottageRevisionService cottageRevisionService;
+	
+	@Autowired
+	private CottageReservationService cottageReservationService;
+	
+	@Autowired 
+	private RevisionService revisionService;
 
 	@RequestMapping(value="api/admin/allCottageRevisions",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
@@ -60,5 +75,24 @@ public class CottageRevisionController {
 		return new ResponseEntity<>(HttpStatus.OK);	
 		
 		
+	}
+	@RequestMapping(value="api/client/makeNewCottageRevision",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CottageRevisionDTO> saveNewCottageRevision(@RequestBody SpecificRevisionDTO specificRevisionDTO){
+		Optional<CottageReservation> cottageReservation=this.cottageReservationService.findById(specificRevisionDTO.getId_reservation());
+		if (!cottageReservation.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		CottageReservation cott=cottageReservation.get();
+		
+		Optional<Revision> revision=this.revisionService.findById(specificRevisionDTO.getId_revision());
+		if (!revision.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		Revision rev=revision.get();
+		
+		CottageRevision newCottageRevision=new CottageRevision(cott, rev);
+		CottageRevision saved=this.cottageRevisionService.save(newCottageRevision);
+		return new ResponseEntity<>(new CottageRevisionDTO(saved),HttpStatus.CREATED);
 	}
 }
