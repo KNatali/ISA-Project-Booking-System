@@ -3,6 +3,7 @@ package com.isa.ISAproject.controller;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.service.CottageReservationService;
@@ -86,5 +88,15 @@ public class CottageReservationController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="api/cottageReservation/{id}",method = RequestMethod.GET)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<CottageReservationDTO>  findOne(@PathVariable Long id){
+		Optional<CottageReservation> cottageReservation=this.cottageReservationService.findById(id);
+		if (!cottageReservation.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		return new ResponseEntity<>(new CottageReservationDTO(cottageReservation.get()), HttpStatus.OK);
 	}
 }

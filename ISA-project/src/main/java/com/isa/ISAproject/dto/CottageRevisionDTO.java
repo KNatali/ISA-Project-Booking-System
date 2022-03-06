@@ -1,5 +1,8 @@
 package com.isa.ISAproject.dto;
 
+import com.isa.ISAproject.model.AdventureRevision;
+import com.isa.ISAproject.model.CottageRevision;
+
 public class CottageRevisionDTO {
 
 	private Long id;
@@ -29,6 +32,12 @@ public class CottageRevisionDTO {
 		this.id = id;
 		this.cottageReservation = cottageReservation;
 		this.revision = revision;
+	}
+	public CottageRevisionDTO(CottageRevision a) {
+		super();
+		this.id = a.getId();
+		this.cottageReservation = new CottageReservationDTO(a.getCottageReservation());
+		this.revision = new RevisionDTO(a.getRevision());
 	}
 	public CottageRevisionDTO() {
 		super();

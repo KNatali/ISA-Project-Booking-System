@@ -50,6 +50,10 @@ public class CottageRevision {
 		this.cottageReservation = cottageReservation;
 		this.revision = revision;
 	}
+	public CottageRevision(CottageReservation cottageReservation, Revision revision) {
+		this.cottageReservation = cottageReservation;
+		this.revision = revision;
+	}
 
 	public CottageRevision() {
 		super();

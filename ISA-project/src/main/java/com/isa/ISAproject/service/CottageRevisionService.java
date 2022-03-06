@@ -12,6 +12,7 @@ import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.CottageRevisionDTO;
 import com.isa.ISAproject.dto.RevisionDTO;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
+import com.isa.ISAproject.model.AdventureRevision;
 import com.isa.ISAproject.model.CottageRevision;
 import com.isa.ISAproject.model.Revision;
 import com.isa.ISAproject.model.RevisionType;
@@ -75,5 +76,8 @@ public class CottageRevisionService {
 		revision.setType(RevisionType.Rejected);
 		revisionRepository.save(revision);
 		
+	}
+	public CottageRevision save(CottageRevision newRevision) {
+		return this.cottageRevisionRepository.save(newRevision);
 	}
 }
