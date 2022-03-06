@@ -3,6 +3,7 @@ package com.isa.ISAproject.controller;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
@@ -86,5 +87,14 @@ public class BoatReservationController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boatReservation/{id}",method = RequestMethod.GET)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<BoatReservationDTO>  findOne(@PathVariable Long id){
+		Optional<BoatReservation> boatReservation=this.boatReservationService.findById(id);
+		if (!boatReservation.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		return new ResponseEntity<>(new BoatReservationDTO(boatReservation.get()), HttpStatus.OK);
 	}
 }

@@ -54,4 +54,8 @@ public class BoatRevision {
 	public BoatRevision() {
 		super();
 	}
+	public BoatRevision(BoatReservation boatReservation, Revision revision) {
+		this.boatReservation = boatReservation;
+		this.revision = revision;
+	}
 }

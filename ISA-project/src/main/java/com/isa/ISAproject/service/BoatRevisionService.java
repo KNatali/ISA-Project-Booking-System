@@ -80,6 +80,9 @@ public class BoatRevisionService {
 		revisionRepository.save(revision);
 		
 	}
+	public BoatRevision save(BoatRevision newRevision) {
+		return this.boatRevisionRepository.save(newRevision);
+	}
 	
 
 
