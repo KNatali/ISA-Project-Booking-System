@@ -25,7 +25,7 @@ public class BoatBehavioralRuleController {
 	@Autowired
 	private BoatBehavioralRuleService behavioralRuleService;
 	
-	@RequestMapping(value="boatRules/{id}",method = RequestMethod.GET,produces=
+	@RequestMapping(value="/boatRules/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<List<BoatBehavioralRuleDTO>> getBoatRules(@PathVariable Long id){
@@ -36,14 +36,14 @@ public class BoatBehavioralRuleController {
 		return new ResponseEntity<>(item,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="boatRule/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/boatRule/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> saveNewBehavioralRule(@RequestBody BoatBehavioralRuleDTO dto,@PathVariable Long id){
 		this.behavioralRuleService.saveNewBehavioralRule(id, dto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="boatRuleEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/boatRuleEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> editBehavioralRule(@RequestBody BoatBehavioralRuleDTO dto,@PathVariable Long id){
 		this.behavioralRuleService.editBehavioralRule(id, dto);

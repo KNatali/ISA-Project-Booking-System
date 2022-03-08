@@ -54,7 +54,7 @@ export class BoatOwnerAddReservationComponent implements OnInit {
     cancellationPercentage: 0,
     owner: this.boatOwner,
     rules: [],
-    items: [],
+    additionalItems: [],
     state: '',
     street: '',
     city: '',

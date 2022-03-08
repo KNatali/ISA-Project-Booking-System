@@ -66,7 +66,7 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     cancellationPercentage: 0,
     owner: this.boatOwner,
     rules: [],
-    items: [],
+    additionalItems: [],
     state: '',
     street: '',
     city: '',
@@ -222,7 +222,7 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.boatService.getAdditionalItems(this.id)
-        .subscribe((items: AdditionalItem[]) => this.boat.items = items);
+        .subscribe((items: AdditionalItem[]) => this.boat.additionalItems = items);
     });
   }
   loadNavigationEquipment() {

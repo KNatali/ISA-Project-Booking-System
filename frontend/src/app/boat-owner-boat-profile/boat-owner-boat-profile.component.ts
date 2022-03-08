@@ -29,7 +29,7 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader = new Loader({
-      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+      apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
     })
     this.loadData();
     this.loadBehavioralRules();
@@ -61,7 +61,6 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
               zoom: 11.5
             })
           })
-
         });
     });
   }
@@ -78,7 +77,10 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.boatService.getAdditionalItems(this.id)
-        .subscribe((items: AdditionalItem[]) => this.boat.items = items);
+        .subscribe((items: AdditionalItem[]) => 
+        {
+        this.boat.additionalItems = items
+        alert(this.boat.additionalItems.length)});
     });
   }
 
