@@ -20,7 +20,7 @@ export interface BoatInterface{
     mainPicture:string;
     address: Address;
     rules: BoatBehavioralRules[];
-    items: AdditionalItem[];
+    additionalItems: AdditionalItem[];
     owner: BoatOwner;
     maxPersons: number;
     price: number;
@@ -43,7 +43,7 @@ export class Boat implements BoatInterface{
     city:string;
     address: Address;
     rules: BoatBehavioralRules[];
-    items: AdditionalItem[];
+    additionalItems: AdditionalItem[];
     owner: BoatOwner;
     maxPersons: number;
     price: number;
@@ -65,7 +65,7 @@ export class Boat implements BoatInterface{
         this.mainPicture=obj.mainPicture;
         this.address = obj.address;
         this.rules=obj.rules;
-        this.items=obj.items;
+        this.additionalItems=obj.additionalItems;
         this.owner=obj.owner;
         this.maxPersons=obj.maxPersons;
         this.price=obj.price;

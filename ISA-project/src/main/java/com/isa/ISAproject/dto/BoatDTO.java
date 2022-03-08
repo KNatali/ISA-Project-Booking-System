@@ -191,6 +191,7 @@ public class BoatDTO {
 		this.mainPicture = boat.getMainPicture();
 		this.capacity = boat.getCapacity();
 		this.grade = boat.getGrade();
+		this.address = new AddressDTO(boat.getAddress().getId(), boat.getAddress().getStreet(), boat.getAddress().getState(), boat.getAddress().getCity(), boat.getAddress().getLatitude(), boat.getAddress().getLongitude());
 	}
 	public BoatDTO(Long id, String name, AddressDTO address, String description, double grade,double price,
 			BoatOwnerProfileDTO boatOwner,String mainPicture,int maxPersons,int cancellation) {

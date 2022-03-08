@@ -33,7 +33,7 @@ public class BoatOwnerBoatController {
 	}
 	
 	
-	@RequestMapping(value="equipment/{id}",method = RequestMethod.GET,produces=
+	@RequestMapping(value="/equipment/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<List<NavigationEquipmentDTO>> getBoatEquipment(@PathVariable Long id){
@@ -44,21 +44,21 @@ public class BoatOwnerBoatController {
 		return new ResponseEntity<>(item,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="equipment/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/equipment/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> saveNewEquipment(@RequestBody NavigationEquipmentDTO dto,@PathVariable Long id){
 		this.boatService.saveNewEquipment(id, dto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="equipmentEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/equipmentEdit/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> editEquipment(@RequestBody NavigationEquipmentDTO dto,@PathVariable Long id){
 		this.boatService.editEquipment(id, dto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="equipment/{boatId}/{equipmentId}",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/equipment/{boatId}/{equipmentId}",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> deleteEquipment(@PathVariable(name="boatId") Long boatId,@PathVariable(name="equipmentId") Long equipmentId){
 		if(this.boatService.deleteEquipment(boatId,equipmentId)) {

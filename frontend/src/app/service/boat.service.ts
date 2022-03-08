@@ -68,13 +68,13 @@ export class BoatService {
     return this.http.get<BoatFastReservation[]>(`${this.urlBoat1}/` + `fastReservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<BoatBehavioralRules[]> {
-    return this.http.get<BoatBehavioralRules[]>(`${this.urlBoat1}/` + `rules` + `/${id}`);
+    return this.http.get<BoatBehavioralRules[]>(`${this.urlBoat}/` + `boatRules` + `/${id}`);
   }
   getAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlBoat1}/` + `additionalItems` + `/${id}`);
+    return this.http.get<AdditionalItem[]>(`${this.urlBoat}/` + `additionalItems` + `/${id}`);
   }
   getNavigationEquipment(id: number): Observable<NavigationEquipment[]> {
-    return this.http.get<NavigationEquipment[]>(`${this.urlBoat1}/` + `additionalItems` + `/${id}`);
+    return this.http.get<NavigationEquipment[]>(`${this.urlBoat}/` + `equipment` + `/${id}`);
   }
   updateBoat(id: number, data: Boat): Observable<Boat> {
     return this.http.post<Boat>(`${this.urlBoat}/${id}`, data);

@@ -59,7 +59,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     cancellationPercentage: 0,
     owner: this.boatOwner,
     rules: [],
-    items: [],
+    additionalItems: [],
     state: '',
     street: '',
     city: '',
@@ -168,7 +168,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
       alert("Please upload image!")
     else {
       this.boat.mainPicture = this.selectedFile.name;
-      this.boat.items = this.additionalItems;
+      this.boat.additionalItems = this.additionalItems;
       this.boat.equipment = this.navigationEquipments;
       this.boat.rules = this.rules;
       this.route.params.subscribe(param => {
