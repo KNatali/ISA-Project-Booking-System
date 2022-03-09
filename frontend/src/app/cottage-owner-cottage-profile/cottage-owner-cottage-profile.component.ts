@@ -29,7 +29,7 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader = new Loader({
-      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+      apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
     })
     this.loadData();
     this.loadBehavioralRules();

@@ -128,6 +128,8 @@ public class CottageDTO {
 		this.description = cottage.getDescription();
 		this.grade = cottage.getGrade();
 		this.mainPicture = cottage.getMainPicture();
+		this.address = new AddressDTO(cottage.getAddress().getId(), cottage.getAddress().getStreet(), cottage.getAddress().getState(), cottage.getAddress().getCity(), cottage.getAddress().getLatitude(), cottage.getAddress().getLongitude());
+
 	}
 	
 	public CottageDTO(Long id, String name, AddressDTO address, String description, double grade,double price,

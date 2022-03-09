@@ -18,6 +18,9 @@ export interface CottageInterface{
     rules: CottageBehavioralRules[];
     items: AdditionalItem[];
     rooms: Room[];
+    state:string;
+    street:string;
+    city:string;
 }
 export class Cottage implements CottageInterface{
     id?: number;
@@ -33,6 +36,9 @@ export class Cottage implements CottageInterface{
     rules: CottageBehavioralRules[];
     items: AdditionalItem[];
     rooms: Room[];
+    state:string;
+    street:string;
+    city:string;
     constructor(obj:CottageInterface){
         this.id = obj.id;
         this.name = obj.name;
@@ -46,5 +52,8 @@ export class Cottage implements CottageInterface{
         this.rules = obj.rules;
         this.items = obj.items;
         this.cancellationPercentage = obj.cancellationPercentage;
+        this.state=obj.state;
+        this.street=obj.street;
+        this.city=obj.city;
     }
 }
