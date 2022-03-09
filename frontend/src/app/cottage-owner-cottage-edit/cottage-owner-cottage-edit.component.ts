@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { AdditionalItem } from '../model/additionalItem';
 import { Address } from '../model/address';
-import { Cottage } from '../model/cottage';
+import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageOwner } from '../model/cottageOwner';
@@ -78,7 +78,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader = new Loader({
-      apiKey: 'AIzaSyAHO2M3hFpxZPCjEBmoWnaetSWNC8DHOKI'
+      apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
     })
     this.formValue0 = this.formBuilder.group({
       name: [''],
