@@ -51,7 +51,7 @@ export class BoatOwnerActionAddComponent implements OnInit {
     description: '',
     mainPicture: 'string;',
     cancellationPercentage: 0,
-    owner: this.boatOwner,
+    boatOwner: this.boatOwner,
     rules: [],
     additionalItems: [],
     state: '',

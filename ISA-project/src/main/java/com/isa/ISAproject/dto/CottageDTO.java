@@ -23,7 +23,7 @@ public class CottageDTO {
 	private CottageOwnerProfileDTO cottageOwner;
 	private int maxPersons;
 	private int cancellationPercentage;
-	private AdditionalItemDTO items;
+	//private AdditionalItemDTO items;
 	public Long getId() {
 		return id;
 	}
@@ -108,13 +108,13 @@ public class CottageDTO {
 		this.cancellationPercentage = cancellationPercentage;
 	}
 	
-	public AdditionalItemDTO getItems() {
+	/*public AdditionalItemDTO getItems() {
 		return items;
 	}
 	
 	public void setItems(AdditionalItemDTO items) {
 		this.items = items;
-	}
+	}*/
 	
 	public CottageDTO(Long id, String name, String street, String state, String city, String description, double grade,
 			String mainPicture) {
@@ -143,7 +143,7 @@ public class CottageDTO {
 		this.price = cottage.getPrice();
 		this.cottageOwner = new CottageOwnerProfileDTO(cottage.getCottageOwner());
 		this.cancellationPercentage = cottage.getCancellationPercentage(); 
-		this.items = new AdditionalItemDTO();
+		//this.items = new AdditionalItemDTO();
 	}
 	
 	public CottageDTO(Long id, String name, AddressDTO address, String description, double grade,double price,
