@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BoatReservationService } from '../service/boat-reservation.service';
 import { RevisionService } from '../service/revision.service';
 import { BoatRevisionService } from '../service/boat-revision.service';
+import { BoatOwnerRevisionService } from '../service/boat-owner-revision.service';
 
 @Component({
   selector: 'app-rate-boat-reservation',
@@ -18,6 +19,7 @@ export class RateBoatReservationComponent implements OnInit {
   revision_text:string;
   boatReservation:BoatReservation;
   grade:number;
+  who_to_rate:string;
   id:number;
   choices = [1,2,3,4,5];
   choices_for_rate=['owner','boat'];
@@ -31,12 +33,17 @@ export class RateBoatReservationComponent implements OnInit {
     id_reservation:0,
     id_revision:0
   })
+  boatOwnerRevision=new SpecificRevision({
+    id_reservation:0,
+    id_revision:0
+  })
 
 
   constructor(private route: ActivatedRoute,
             private boatReservationService: BoatReservationService,
             private revisionService: RevisionService ,
-            private boatRevisionService: BoatRevisionService         
+            private boatRevisionService: BoatRevisionService   ,
+            private boatOwnerRevisionService: BoatOwnerRevisionService     
       ) { }
 
   ngOnInit(): void {
@@ -54,12 +61,18 @@ export class RateBoatReservationComponent implements OnInit {
     this.revision.revision=this.revision_text;
     this.revisionService.save(this.revision)
       .subscribe(res=>{
-        
-        this.boatRevision.id_reservation=this.boatReservation.id;
-        this.boatRevision.id_revision=res.id;
-
-        this.boatRevisionService.save(this.boatRevision)
-      .subscribe()
+        if(this.who_to_rate=="boat"){
+          this.boatRevision.id_reservation=this.boatReservation.id;
+          this.boatRevision.id_revision=res.id;
+          this.boatRevisionService.save(this.boatRevision)
+          .subscribe()
+        }else{
+          this.boatOwnerRevision.id_reservation=this.boatReservation.id;
+          this.boatOwnerRevision.id_revision=res.id;
+          this.boatOwnerRevisionService.save(this.boatOwnerRevision)
+          .subscribe()
+        }
+      
       })
   }
 
