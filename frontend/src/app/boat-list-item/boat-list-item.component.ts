@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Boat } from '../model/boat';
+import { BoatRevisionService } from '../service/boat-revision.service';
 import { BoatService } from '../service/boat.service';
 
 @Component({
@@ -11,9 +12,14 @@ export class BoatListItemComponent implements OnInit {
   @Input()
   boats:Boat[];
 
-  constructor() { }
+  averageGrade:number;
+
+  constructor(private boatRevisionService: BoatRevisionService) { }
 
   ngOnInit(): void {
+  }
+  LoadAverageGrade(){
+    
   }
   
 

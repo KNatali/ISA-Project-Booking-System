@@ -10,10 +10,14 @@ import { BoatRevision } from '../model/boatRevision';
 export class BoatRevisionService {
 
   url="http://localhost:8090/api/client/makeNewBoatRevision";
+  urlAverageGrade="http://localhost:8090/api/client/viewAverageGradeForBoat";
 
   constructor(private http:HttpClient) { }
 
   save(revision:SpecificRevision):Observable<BoatRevision>{
     return this.http.post<BoatRevision>(this.url,revision);
+  }
+  getAverageGrade(id:number):Observable<number>{
+    return this.http.get<number>(`${this.urlAverageGrade}/${id}`);
   }
 }

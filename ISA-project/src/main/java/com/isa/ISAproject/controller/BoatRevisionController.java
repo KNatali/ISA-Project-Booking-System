@@ -95,4 +95,18 @@ public class BoatRevisionController {
 		BoatRevision saved=this.boatRevisionService.save(newBoatRevision);
 		return new ResponseEntity<>(new BoatRevisionDTO(saved),HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(value="api/client/viewAverageGradeForBoat/{id}",method=RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Double> getAverageGradeForBoat(@PathVariable Long id){
+		List<BoatRevisionDTO> boatBaotRevisonDTOs=this.boatRevisionService.getAll();
+		Double sum_grades=0.0;
+		Double number_grade=0.0;
+		for (BoatRevisionDTO boatRevisionDTO : boatBaotRevisonDTOs) {
+			sum_grades+=boatRevisionDTO.getRevision().getGrade();
+			number_grade++;
+		}
+		Double average_grade=sum_grades/number_grade;
+		return new ResponseEntity<>(average_grade,HttpStatus.OK);
+	}
 }
