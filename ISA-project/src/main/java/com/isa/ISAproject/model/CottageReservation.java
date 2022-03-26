@@ -50,6 +50,9 @@ public class CottageReservation {
 	private List<CottageComplaint> cottageComplaints;
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<CottageRevision> cottageRevisions;
+    
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CottageOwnerRevision> cottageOwnerRevisions;
 	//
 	
 	//@Column(name = "reservationStart", nullable = false)
