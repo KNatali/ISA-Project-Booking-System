@@ -76,7 +76,7 @@ export class CottageOwnerActionAddComponent implements OnInit {
     validityEnd: '',
     maxPersons: 0,
     price: 0,
-    additionalItems: this.additionalItems,
+    items: this.additionalItems,
     cottage: this.selectedCottage
   })
   constructor(private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageOwnerService: CottageOwnerService, private cottageService: CottageService, private cottageReservationService: CottageReservationService) { }
@@ -129,7 +129,7 @@ export class CottageOwnerActionAddComponent implements OnInit {
   addAction() {
     this.selectedCottage = this.formValue.controls['cottage'].value;
     this.newAction.cottage = this.selectedCottage;
-    this.newAction.additionalItems = this.additionalItems;
+    this.newAction.items = this.additionalItems;
 
     this.cottageReservationService.saveFastReservation(this.newAction)
       .subscribe(res => {

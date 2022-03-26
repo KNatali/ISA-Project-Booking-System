@@ -21,7 +21,7 @@ export interface BoatInterface{
     address: Address;
     rules: BoatBehavioralRules[];
     additionalItems: AdditionalItem[];
-    owner: BoatOwner;
+    boatOwner: BoatOwner;
     maxPersons: number;
     price: number;
     cancellationPercentage: number;
@@ -44,7 +44,7 @@ export class Boat implements BoatInterface{
     address: Address;
     rules: BoatBehavioralRules[];
     additionalItems: AdditionalItem[];
-    owner: BoatOwner;
+    boatOwner: BoatOwner;
     maxPersons: number;
     price: number;
     cancellationPercentage: number;
@@ -66,7 +66,7 @@ export class Boat implements BoatInterface{
         this.address = obj.address;
         this.rules=obj.rules;
         this.additionalItems=obj.additionalItems;
-        this.owner=obj.owner;
+        this.boatOwner=obj.boatOwner;
         this.maxPersons=obj.maxPersons;
         this.price=obj.price;
         this.cancellationPercentage=obj.cancellationPercentage;

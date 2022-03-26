@@ -9,7 +9,7 @@ export interface CottageFastReservationInterface {
     validityEnd: string;
     maxPersons: number;
     price: number;
-    additionalItems: AdditionalItem[];
+    items: AdditionalItem[];
     cottage: Cottage;
 }
 export class CottageFastReservation implements CottageFastReservationInterface {
@@ -20,7 +20,7 @@ export class CottageFastReservation implements CottageFastReservationInterface {
     validityEnd: string;
     maxPersons: number;
     price: number;
-    additionalItems: AdditionalItem[];
+    items: AdditionalItem[];
     cottage: Cottage;
     constructor(obj: CottageFastReservationInterface) {
         this.id = obj.id;
@@ -30,7 +30,7 @@ export class CottageFastReservation implements CottageFastReservationInterface {
         this.validityEnd = obj.validityEnd;
         this.maxPersons = obj.maxPersons;
         this.price = obj.price;
-        this.additionalItems = obj.additionalItems;
+        this.items = obj.items;
         this.cottage = obj.cottage;
     }
 }

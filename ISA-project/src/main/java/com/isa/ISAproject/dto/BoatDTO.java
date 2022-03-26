@@ -192,6 +192,10 @@ public class BoatDTO {
 		this.capacity = boat.getCapacity();
 		this.grade = boat.getGrade();
 		this.address = new AddressDTO(boat.getAddress().getId(), boat.getAddress().getStreet(), boat.getAddress().getState(), boat.getAddress().getCity(), boat.getAddress().getLatitude(), boat.getAddress().getLongitude());
+		this.maxPersons = boat.getMaxPersons();
+		this.price = boat.getPrice();
+		this.boatOwner = new BoatOwnerProfileDTO(boat.getOwner());
+		this.cancellationPercentage = boat.getCancellationPercentage(); 
 	}
 	public BoatDTO(Long id, String name, AddressDTO address, String description, double grade,double price,
 			BoatOwnerProfileDTO boatOwner,String mainPicture,int maxPersons,int cancellation) {

@@ -52,7 +52,7 @@ export class BoatOwnerAddReservationComponent implements OnInit {
     description: '',
     mainPicture: 'string;',
     cancellationPercentage: 0,
-    owner: this.boatOwner,
+    boatOwner: this.boatOwner,
     rules: [],
     additionalItems: [],
     state: '',
@@ -119,7 +119,7 @@ export class BoatOwnerAddReservationComponent implements OnInit {
 
   getBoats() {
     alert("radi pliz");
-    this.id = this.reservation.boat.owner.id!;
+    this.id = this.reservation.boat.boatOwner.id!;
     this.boatOwnerService.getBoatOwnerBoats(this.id)
       .subscribe(res => {
         this.boats = res;
