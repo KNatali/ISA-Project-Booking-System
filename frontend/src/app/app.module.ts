@@ -175,6 +175,9 @@ import { BoatOwnerAddBoatComponent } from './boat-owner-add-boat/boat-owner-add-
 import { RateIntructorComponent } from './rate-intructor/rate-intructor.component';
 import { RateCottageReservationComponent } from './rate-cottage-reservation/rate-cottage-reservation.component';
 import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-reservation.component';
+import { ComplainBoatReservationComponent } from './complain-boat-reservation/complain-boat-reservation.component';
+import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
+import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 
 
 
@@ -334,7 +337,10 @@ import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-
     BoatOwnerAddBoatComponent,
     RateIntructorComponent,
     RateCottageReservationComponent,
-    RateBoatReservationComponent
+    RateBoatReservationComponent,
+    ComplainBoatReservationComponent,
+    ComplainCottageReservationComponent,
+    ComplainInstructorComponent
 
 
 

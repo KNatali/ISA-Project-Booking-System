@@ -11,6 +11,8 @@ export class AdvetureReservationItemComponent implements OnInit {
   res:AdventureReservation;
   @Input()
   rate_adveture_button:boolean;
+  @Input()
+  complaint_adveture_button:boolean;
   
   constructor() { }
 

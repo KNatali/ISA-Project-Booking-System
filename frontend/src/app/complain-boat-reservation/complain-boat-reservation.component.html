@@ -1,0 +1,27 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>You want to complain:</h2>
+            <div class="whoToRate" >
+              <div *ngFor="let choice of choices_for_complain" class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="{{choice}}" [(ngModel)]="who_to_rate">
+                <label class="form-check-label" for="inlineRadio2">{{choice}}</label>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>Write your complaint</h2>
+            <textarea [(ngModel)]="complaint_text">Some text...</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"><br>
+            <button id="submit" class="btn btn-primary" (click)="sendComplaint()">Send your complaint</button>
+        </div>
+    </div>
+  </div>
