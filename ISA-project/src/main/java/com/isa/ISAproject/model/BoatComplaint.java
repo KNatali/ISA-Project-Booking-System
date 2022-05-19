@@ -60,6 +60,11 @@ public class BoatComplaint {
 		this.client = client;
 		this.boatReservation = boatReservation;
 	}
+	public BoatComplaint( String description, BoatReservation boatReservation) {
+		super();
+		this.description = description;
+		this.boatReservation = boatReservation;
+	}
 	
 	public BoatComplaint () {}
 }

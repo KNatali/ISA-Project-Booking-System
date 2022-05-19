@@ -50,6 +50,9 @@ public class BoatReservationService {
 	public List<BoatReservation> findAll() {
 		return this.boatReservationRepository.findAll();
 	}
+	public BoatReservation save(BoatReservation newRes){
+		return this.boatReservationRepository.save(newRes);
+	}
 	public List<BoatReservation> findAllResByIdClient(Long id){
 		List<BoatReservation> res=new ArrayList<>();
 		List<BoatReservation> all=this.findAll();
