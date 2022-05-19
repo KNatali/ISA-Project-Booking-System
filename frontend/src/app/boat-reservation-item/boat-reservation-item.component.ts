@@ -11,6 +11,8 @@ export class BoatReservationItemComponent implements OnInit {
   res:BoatReservation;
   @Input()
   rate_boat_button:boolean;
+  @Input()
+  complain_boat_button:boolean;
   constructor() { }
 
   ngOnInit(): void {

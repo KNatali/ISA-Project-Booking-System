@@ -1,0 +1,20 @@
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm"><br>
+        <h1>Complain your instructor: {{adventureReservation.adventure.instructor.firstName}} {{adventureReservation.adventure.instructor.lastName}}</h1>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <br>
+            <h2>Write your complaint</h2>
+            <textarea [(ngModel)]="complaint_text">Some text...</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"><br>
+            <button id="submit" class="btn btn-primary" (click)="sendComplaint()">Send your complaint</button>
+        </div>
+    </div>
+  </div>
