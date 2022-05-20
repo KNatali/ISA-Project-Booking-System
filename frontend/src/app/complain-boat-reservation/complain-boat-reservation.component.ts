@@ -36,10 +36,6 @@ export class ComplainBoatReservationComponent implements OnInit {
   sendComplaint(){
     this.newComplaint.description=this.complaint_text;
     this.newComplaint.idReservation=this.id;
-    console.log(this.id);
-    console.log("sledece");
-    console.log(this.newComplaint.description);
-    //ovaj deo treba popraviti
     this.complaintBoat.save(this.newComplaint).subscribe();
   }
 
