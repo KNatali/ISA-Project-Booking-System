@@ -1,6 +1,7 @@
 package com.isa.ISAproject.dto;
 
 import com.isa.ISAproject.model.BoatComplaint;
+import com.isa.ISAproject.model.CottageComplaint;
 
 public class ComplaintDTO {
 	private Long id;
@@ -37,6 +38,11 @@ public class ComplaintDTO {
 		this.id=boatComplaint.getId();
 		this.description=boatComplaint.getDescription();
 		this.idReservation=boatComplaint.getBoatReservation().getId();
+	}
+	public ComplaintDTO(CottageComplaint cottageComplaint) {
+		this.id=cottageComplaint.getId();
+		this.description=cottageComplaint.getDescription();
+		this.idReservation=cottageComplaint.getCottageReservation().getId();
 	}
 	
 	

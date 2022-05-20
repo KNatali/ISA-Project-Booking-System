@@ -60,6 +60,10 @@ public class CottageComplaint {
 		this.client = client;
 		this.cottageReservation = cottageReservation;
 	}
+	public CottageComplaint(String description,CottageReservation cottageReservation) {
+		this.description = description;
+		this.cottageReservation = cottageReservation;
+	}
 	public CottageComplaint() {}
 	
 }
