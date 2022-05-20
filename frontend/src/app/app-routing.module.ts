@@ -53,6 +53,8 @@ import { ComplainBoatReservationComponent } from './complain-boat-reservation/co
 import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 
+import { ComplaintBoatReservationService } from './service/complaint-boat-reservation.service';
+
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },

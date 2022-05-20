@@ -51,6 +51,9 @@ public class CottageReservationService {
 	public List<CottageReservation> findAll() {
 		return this.cottageReservationRepository.findAll();
 	}
+	public CottageReservation save(CottageReservation newRes) {
+		return this.cottageReservationRepository.save(newRes);
+	}
 	public List<CottageReservation> sortByPrice(Long id) {
 		List<CottageReservation> reservations=this.oldReservation(id);
 		List<CottageReservation> res=new ArrayList<>();

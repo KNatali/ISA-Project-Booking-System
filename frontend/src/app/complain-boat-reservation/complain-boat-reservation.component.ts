@@ -4,6 +4,7 @@ import { Complaint } from '../model/complaint';
 import { BoatReservationService } from '../service/boat-reservation.service';
 import { RevisionService } from '../service/revision.service';
 import { BoatReservation } from '../model/boat-reservation';
+import { ComplaintBoatReservationService } from '../service/complaint-boat-reservation.service';
 
 @Component({
   selector: 'app-complain-boat-reservation',
@@ -21,25 +22,25 @@ export class ComplainBoatReservationComponent implements OnInit {
     idReservation:0
   });
   constructor(private route: ActivatedRoute,
-    private boatReservationService: BoatReservationService,
-    private boatReservation: BoatReservation ) { }
+              private complaintBoat:ComplaintBoatReservationService
+    ) { }
 
   ngOnInit(): void {
     this.loadData();
   }
-  loadData() {
+  loadData(){
     this.route.params.subscribe(param => {
       this.id = param.id;
-      this.boatReservationService.getById(this.id)
-        .subscribe(res => this.boatReservation = res);
     });
   }
   sendComplaint(){
     this.newComplaint.description=this.complaint_text;
     this.newComplaint.idReservation=this.id;
-    if (this.who_to_rate=="boat"){
-      
-    }
+    console.log(this.id);
+    console.log("sledece");
+    console.log(this.newComplaint.description);
+    //ovaj deo treba popraviti
+    this.complaintBoat.save(this.newComplaint).subscribe();
   }
 
 }
