@@ -20,6 +20,10 @@ public class BoatOwner extends User {
 	private double grade;
 	@OneToMany(mappedBy="owner",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Boat> boats=new HashSet<>();
+	
+	@OneToMany
+	private Set<BoatOwnerComplaint> complaints=new HashSet<>();
+	
 	@ManyToMany(cascade =CascadeType.ALL)
 	 @JoinTable(
 	            name = "boatOwner_unavailability",
@@ -53,6 +57,15 @@ public class BoatOwner extends User {
 	public void setUnavailability(Set<TimePeriod> unavailability) {
 		this.unavailability = unavailability;
 	}
+	
+	public Set<BoatOwnerComplaint> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(Set<BoatOwnerComplaint> complaints) {
+		this.complaints = complaints;
+	}
+
 	public BoatOwner () {}
 
 	public BoatOwner(Long id, String username, String password, String email, String firstName, String lastName,
