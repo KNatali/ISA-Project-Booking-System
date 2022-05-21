@@ -17,7 +17,8 @@ public class BoatOwnerComplaint {
 	private String description;
 	
 	@ManyToOne
-	private BoatOwner boatOwner;
+	private BoatReservation boatReservation;;
+	//treba rezervacija**
 
 	public Long getId() {
 		return id;
@@ -35,24 +36,25 @@ public class BoatOwnerComplaint {
 		this.description = description;
 	}
 
-	public BoatOwner getBoatOwner() {
-		return boatOwner;
+	public BoatReservation getBoatReservation() {
+		return boatReservation;
 	}
 
-	public void setBoatOwner(BoatOwner boatOwner) {
-		this.boatOwner = boatOwner;
+	public void setBoatReservation(BoatReservation boatReservation) {
+		this.boatReservation = boatReservation;
 	}
 
-	public BoatOwnerComplaint(Long id, String description, BoatOwner boatOwner) {
+	public BoatOwnerComplaint(Long id, String description, BoatReservation boatReservation) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.boatOwner = boatOwner;
+		this.boatReservation = boatReservation;
 	}
-	public BoatOwnerComplaint( String description, BoatOwner boatOwner) {
+	public BoatOwnerComplaint(String description, BoatReservation boatReservation) {
 		this.description = description;
-		this.boatOwner = boatOwner;
+		this.boatReservation = boatReservation;
 	}
+
 	
 	public BoatOwnerComplaint() {}
 	

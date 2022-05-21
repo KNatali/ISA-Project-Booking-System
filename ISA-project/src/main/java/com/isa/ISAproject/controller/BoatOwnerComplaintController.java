@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isa.ISAproject.dto.BoatOwnerComplaintDTO;
 import com.isa.ISAproject.dto.ComplaintDTO;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.BoatOwner;
@@ -37,22 +36,21 @@ public class BoatOwnerComplaintController {
 
 	@RequestMapping(value="api/client/makeNewBoatOwnerComplaint",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BoatOwnerComplaintDTO> makeNewBoatOwnerComplaint(@RequestBody ComplaintDTO newComplaint ){
+	public ResponseEntity<ComplaintDTO> makeNewBoatOwnerComplaint(@RequestBody ComplaintDTO newComplaint ){
 		//prvo treba da nadjem tu rezervaciju
 		Optional<BoatReservation> boatReservation=this.boatReservationService.findById(newComplaint.getIdReservation());
 		if (!boatReservation.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} 
 		BoatReservation adv=boatReservation.get();
-		BoatOwner owner=adv.getBoat().getOwner();//za ovog vlasnika broda odnosi se zalba
 		
-		BoatOwnerComplaint newComplaint1=new BoatOwnerComplaint(newComplaint.getDescription(), owner);
+		BoatOwnerComplaint newComplaint1=new BoatOwnerComplaint(newComplaint.getDescription(), adv);
 		BoatOwnerComplaint savedComplaint=this.boatOwnerComplaintService.save(newComplaint1);
-		BoatOwnerComplaintDTO savedComplaintDTO=new BoatOwnerComplaintDTO(savedComplaint);
-		
-		owner.getComplaints().add(savedComplaint);
-		this.boatOwnerService.save(owner);
-		
+		ComplaintDTO savedComplaintDTO=new ComplaintDTO(savedComplaint);
+		//potrebno je jos sacuvati zalbu u listi yalbi kod te reyervacije
+		adv.getBoatOwnerComplaints().add(savedComplaint);
+		adv.setBoatOwnerComplaints(adv.getBoatOwnerComplaints());
+		this.boatReservationService.save(adv);
 		return new ResponseEntity<>(savedComplaintDTO,HttpStatus.OK);
 	}
 }
