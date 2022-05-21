@@ -66,5 +66,8 @@ public class AdventureComplaintService {
 		
 		
 	}
+	public AdventureComplaint save(AdventureComplaint newAdventureComplaint) {
+		return this.adventureComplaintRespository.save(newAdventureComplaint);
+	}
 
 }
