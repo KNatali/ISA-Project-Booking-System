@@ -72,9 +72,10 @@ export class ClientProfileComponent implements OnInit {
     }
   }
   deleteClient(){
-    this.clientService.deleteById(this.client.id)
-    .subscribe();
-    this.logOut();
+    //this.clientService.deleteById(this.client.id)
+    //.subscribe();
+    //this.logOut();
+    
   }
   logOut() {
     this.loginService.logOut();
