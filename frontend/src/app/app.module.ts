@@ -178,6 +178,7 @@ import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-
 import { ComplainBoatReservationComponent } from './complain-boat-reservation/complain-boat-reservation.component';
 import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
+import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 
 
 @NgModule({
@@ -339,7 +340,8 @@ import { ComplainInstructorComponent } from './complain-instructor/complain-inst
     RateBoatReservationComponent,
     ComplainBoatReservationComponent,
     ComplainCottageReservationComponent,
-    ComplainInstructorComponent
+    ComplainInstructorComponent,
+    ClientDeleteProfilComponent
 
 
 

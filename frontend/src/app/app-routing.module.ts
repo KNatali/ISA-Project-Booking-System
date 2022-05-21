@@ -54,6 +54,7 @@ import { ComplainCottageReservationComponent } from './complain-cottage-reservat
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 
 import { ComplaintBoatReservationService } from './service/complaint-boat-reservation.service';
+import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 
 
 const routes: Routes = [
@@ -112,7 +113,9 @@ const routes: Routes = [
 
   { path: 'complaint-boat-reservation/:id',component:ComplainBoatReservationComponent},
   { path: 'complaint-cottage-reservation/:id',component:ComplainCottageReservationComponent},
-  { path: 'complaint-instructor/:id', component:ComplainInstructorComponent}
+  { path: 'complaint-instructor/:id', component:ComplainInstructorComponent},
+
+  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent}
 
 
 
