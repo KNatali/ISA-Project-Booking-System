@@ -34,7 +34,11 @@ export class ComplainCottageReservationComponent implements OnInit {
     sendComplaint(){
       this.newComplaint.description=this.complaint_text;
       this.newComplaint.idReservation=this.id;
-      this.complaintCottage.save(this.newComplaint).subscribe();
+      if (this.who_to_rate=="cottage"){
+        this.complaintCottage.save(this.newComplaint).subscribe();
+      }else{
+        this.complaintCottage.saveCottageOwnerComplaint(this.newComplaint).subscribe();
+      }
     }
 
 }
