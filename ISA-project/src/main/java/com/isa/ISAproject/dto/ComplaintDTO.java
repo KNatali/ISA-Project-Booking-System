@@ -10,7 +10,7 @@ import com.isa.ISAproject.model.BoatOwnerComplaint;
 import com.isa.ISAproject.model.CottageComplaint;
 import com.isa.ISAproject.model.CottageOwnerComplaint;
 import com.isa.ISAproject.service.AdventureReservationService;
-@Component
+
 public class ComplaintDTO {
 	private Long id;
 	private String description;
