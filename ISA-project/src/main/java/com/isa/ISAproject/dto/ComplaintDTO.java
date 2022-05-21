@@ -40,6 +40,11 @@ public class ComplaintDTO {
 		this.description=boatComplaint.getDescription();
 		this.idReservation=boatComplaint.getBoatReservation().getId();
 	}
+	public ComplaintDTO(BoatOwnerComplaint boatOwnerComplaint) {
+		this.id=boatOwnerComplaint.getId();
+		this.description=boatOwnerComplaint.getDescription();
+		this.idReservation=boatOwnerComplaint.getBoatReservation().getId();
+	}
 	public ComplaintDTO(CottageComplaint cottageComplaint) {
 		this.id=cottageComplaint.getId();
 		this.description=cottageComplaint.getDescription();

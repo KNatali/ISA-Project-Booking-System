@@ -46,6 +46,8 @@ public class BoatReservation {
     private LocalDateTime reservationEnd;
     @OneToMany
 	private List<BoatComplaint> boatComplaints;
+    @OneToMany
+	private List<BoatOwnerComplaint> boatOwnerComplaints;
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<BoatRevision> boatRevisions;
     @OneToOne 
@@ -57,6 +59,14 @@ public class BoatReservation {
     @Column
 	private double systemEarning;
 	
+	public List<BoatOwnerComplaint> getBoatOwnerComplaints() {
+		return boatOwnerComplaints;
+	}
+
+	public void setBoatOwnerComplaints(List<BoatOwnerComplaint> boatOwnerComplaints) {
+		this.boatOwnerComplaints = boatOwnerComplaints;
+	}
+
 	public Boat getBoat() {
 		return boat;
 	}
