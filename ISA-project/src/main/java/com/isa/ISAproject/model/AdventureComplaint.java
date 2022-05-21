@@ -66,4 +66,10 @@ public class AdventureComplaint {
 		this.adventure = adventure;
 	}
 	public AdventureComplaint () {}
+	public AdventureComplaint(String description, Client client, Adventure adventure, ComplaintType type) {
+		this.description = description;
+		this.client = client;
+		this.adventure = adventure;
+		this.type = type;
+	}
 }

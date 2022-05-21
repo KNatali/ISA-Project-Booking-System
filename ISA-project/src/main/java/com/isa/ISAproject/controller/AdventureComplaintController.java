@@ -1,6 +1,7 @@
 package com.isa.ISAproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.OptimisticLockException;
 
@@ -19,8 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureComplaintDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.ComplaintDTO;
 import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
+import com.isa.ISAproject.model.Adventure;
+import com.isa.ISAproject.model.AdventureComplaint;
+import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.BoatComplaint;
+import com.isa.ISAproject.model.BoatReservation;
+import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.ComplaintType;
+import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AdventureComplaintService;
+import com.isa.ISAproject.service.AdventureReservationService;
 
 @CrossOrigin("*")
 @RestController
@@ -28,6 +39,9 @@ public class AdventureComplaintController {
 	
 	@Autowired
 	private AdventureComplaintService adventurComplaintService;
+	
+	@Autowired
+	private AdventureReservationService adventureReservationService;
 	
 	@RequestMapping(value="api/admin/getAdventureComplaints",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
@@ -51,5 +65,25 @@ public class AdventureComplaintController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
-
+	@RequestMapping(value="api/client/makeNewIntructorComplaint",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ComplaintDTO> makeNewIntructorComplaint(@RequestBody ComplaintDTO newComplaint ){
+		//prvo treba da nadjem tu rezervaciju
+		Optional<AdventureReservation> adventureReservation=this.adventureReservationService.findById(newComplaint.getIdReservation());
+		if (!adventureReservation.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		AdventureReservation adv=adventureReservation.get();
+		Adventure adventure=adv.getAdventure();
+		Client client=adv.getClient();
+		
+		AdventureComplaint newComplaint1=new AdventureComplaint(newComplaint.getDescription(), client, adventure,ComplaintType.Default);
+		AdventureComplaint savedComplaint=this.adventurComplaintService.save(newComplaint1);
+		ComplaintDTO savedComplaintDTO=new ComplaintDTO(savedComplaint);
+		//potrebno je jos sacuvati zalbu u listi yalbi kod te reyervacije
+		adv.getAdventureComplaints().add(savedComplaint);
+		adv.setAdventureComplaints(adv.getAdventureComplaints());
+		this.adventureReservationService.save(adv);
+		return new ResponseEntity<>(savedComplaintDTO,HttpStatus.OK);
+	}
 }

@@ -180,7 +180,6 @@ import { ComplainCottageReservationComponent } from './complain-cottage-reservat
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

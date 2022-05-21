@@ -1,10 +1,16 @@
 package com.isa.ISAproject.dto;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.isa.ISAproject.model.AdventureComplaint;
+import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.BoatOwnerComplaint;
 import com.isa.ISAproject.model.CottageComplaint;
 import com.isa.ISAproject.model.CottageOwnerComplaint;
-
+import com.isa.ISAproject.service.AdventureReservationService;
+@Component
 public class ComplaintDTO {
 	private Long id;
 	private String description;
@@ -56,5 +62,12 @@ public class ComplaintDTO {
 		this.description=cottageOwnerComplaint.getDescription();
 		this.idReservation=cottageOwnerComplaint.getCottageReservation().getId();
 	}
-	
+	public ComplaintDTO(AdventureComplaint adventureComplaint) {
+		this.id=adventureComplaint.getId();
+		this.description=adventureComplaint.getDescription();
+		//AdventureReservationService adventureReservationService = new AdventureReservationService();
+		//trebam da pronadjem tu rezervaciju
+		//AdventureReservation adv=adventureReservationService.findByClientAndAdventure(adventureComplaint.getClient(),adventureComplaint.getAdventure());
+		//this.idReservation=adv.getId();
+	}
 }
