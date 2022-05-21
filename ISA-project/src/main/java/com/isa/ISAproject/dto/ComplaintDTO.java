@@ -3,6 +3,7 @@ package com.isa.ISAproject.dto;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.BoatOwnerComplaint;
 import com.isa.ISAproject.model.CottageComplaint;
+import com.isa.ISAproject.model.CottageOwnerComplaint;
 
 public class ComplaintDTO {
 	private Long id;
@@ -49,6 +50,11 @@ public class ComplaintDTO {
 		this.id=cottageComplaint.getId();
 		this.description=cottageComplaint.getDescription();
 		this.idReservation=cottageComplaint.getCottageReservation().getId();
+	}
+	public ComplaintDTO(CottageOwnerComplaint cottageOwnerComplaint) {
+		this.id=cottageOwnerComplaint.getId();
+		this.description=cottageOwnerComplaint.getDescription();
+		this.idReservation=cottageOwnerComplaint.getCottageReservation().getId();
 	}
 	
 }

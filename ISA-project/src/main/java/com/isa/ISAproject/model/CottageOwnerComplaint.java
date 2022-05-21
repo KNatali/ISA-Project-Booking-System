@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BoatOwnerComplaint {
+public class CottageOwnerComplaint {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -17,8 +17,7 @@ public class BoatOwnerComplaint {
 	private String description;
 	
 	@ManyToOne
-	private BoatReservation boatReservation;
-	//treba rezervacija**
+	private CottageReservation cottageReservation;
 
 	public Long getId() {
 		return id;
@@ -36,28 +35,24 @@ public class BoatOwnerComplaint {
 		this.description = description;
 	}
 
-	public BoatReservation getBoatReservation() {
-		return boatReservation;
+	public CottageReservation getCottageReservation() {
+		return cottageReservation;
 	}
 
-	public void setBoatReservation(BoatReservation boatReservation) {
-		this.boatReservation = boatReservation;
+	public void setCottageReservation(CottageReservation cottageReservation) {
+		this.cottageReservation = cottageReservation;
 	}
 
-	public BoatOwnerComplaint(Long id, String description, BoatReservation boatReservation) {
+	public CottageOwnerComplaint(Long id, String description, CottageReservation cottageReservation) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.boatReservation = boatReservation;
+		this.cottageReservation = cottageReservation;
 	}
-	public BoatOwnerComplaint(String description, BoatReservation boatReservation) {
+	public CottageOwnerComplaint(String description, CottageReservation cottageReservation) {
 		this.description = description;
-		this.boatReservation = boatReservation;
+		this.cottageReservation = cottageReservation;
 	}
-
+	public CottageOwnerComplaint() {}
 	
-	public BoatOwnerComplaint() {}
-	
-	
-
 }

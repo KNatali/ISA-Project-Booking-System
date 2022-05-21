@@ -48,6 +48,8 @@ public class CottageReservation {
 	
     @OneToMany
 	private List<CottageComplaint> cottageComplaints;
+    @OneToMany
+	private List<CottageOwnerComplaint> cottageOwnerComplaints;
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<CottageRevision> cottageRevisions;
     
@@ -146,6 +148,23 @@ public class CottageReservation {
 		this.cottageComplaints = cottageComplaints;
 	}
 	
+	
+
+	public List<CottageOwnerComplaint> getCottageOwnerComplaints() {
+		return cottageOwnerComplaints;
+	}
+
+	public void setCottageOwnerComplaints(List<CottageOwnerComplaint> cottageOwnerComplaints) {
+		this.cottageOwnerComplaints = cottageOwnerComplaints;
+	}
+
+	public List<CottageOwnerRevision> getCottageOwnerRevisions() {
+		return cottageOwnerRevisions;
+	}
+
+	public void setCottageOwnerRevisions(List<CottageOwnerRevision> cottageOwnerRevisions) {
+		this.cottageOwnerRevisions = cottageOwnerRevisions;
+	}
 
 	public Cottage getCottage() {
 		return cottage;
