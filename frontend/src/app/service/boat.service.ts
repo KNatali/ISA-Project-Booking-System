@@ -7,6 +7,7 @@ import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { NavigationEquipment } from '../model/navigationEquipment';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class BoatService {
   urlAdditionalItem = "http://localhost:8090/api/additional-items";
   urlBoat1 = "http://localhost:8090/api/boatOwners/boats";
   urlBoat = "http://localhost:8090/api/boatOwner/boat";
+  urlSearchBoat="http://localhost:8090/api/client/allAvailableBoats";
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +37,7 @@ export class BoatService {
     return this.http.get<Boat[]>(this.urlBoats,{params});
   }
   findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number):Observable<Boat[]>{
-    
+
     const params=new HttpParams()
       .set('motorPower',motorPower)
       .set('motorNumber',motorNumber);
@@ -90,5 +92,8 @@ export class BoatService {
   }
   setUnavailability(period: TimePeriod, id: number) {
     return this.http.post<ProfileDeleteRequest>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
+  }
+  searchBoatsForReservation(obj:SearchForReservation):Observable<Boat[]>{
+    return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`,obj);
   }
 }

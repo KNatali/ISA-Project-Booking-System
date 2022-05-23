@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoatService } from '../service/boat.service';
 import { Boat } from '../model/boat';
+import { SearchForReservation } from '../model/searchForReservation';
 
 @Component({
   selector: 'app-boat-list-page',
@@ -52,7 +53,7 @@ export class BoatListPageComponent implements OnInit {
     .subscribe(res=>this.boats=res)
   }
   findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number){
-    
+
   }
   findByName(name:string){
     this.boatService.findByName(name)
@@ -62,5 +63,8 @@ export class BoatListPageComponent implements OnInit {
     this.boatService.findByCity(city)
     .subscribe(res=>this.boats=res)
   }
-
+  Search(obj:SearchForReservation){
+    this.boatService.searchBoatsForReservation(obj).subscribe(res=>this.boats=res);
+    console.log(obj);
+  }
 }

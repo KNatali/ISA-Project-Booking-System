@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +16,7 @@ import com.isa.ISAproject.dto.BoatAddDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatBehavioralRuleDTO;
 import com.isa.ISAproject.dto.NavigationEquipmentDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.BoatBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
@@ -26,6 +29,7 @@ import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.BoatBehavioralRule;
 import com.isa.ISAproject.model.NavigationEquipment;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.BoatBehavioralRuleRepository;
@@ -243,5 +247,30 @@ public class BoatService {
 		this.equipmentRepository.delete(e);
 		this.boatRepository.save(b);
 		return true;		
+	}
+
+	public List<Boat> findAllAvailableBoat(SearchForReservationDTO dto){
+		//treba dobaviti sve brodove
+		List<Boat> boats=this.findAll();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getDateAndTime(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumOfDay());
+		
+		List<Boat> availableBoats=new ArrayList<>();
+		for (Boat boat : boats) {
+			Set<TimePeriod> unavailability=boat.getUnavailability();//sve zautestosti jednog broda
+			int broj_zauzetosti=unavailability.size();
+			int brojac=0;//brokjim koliko yautesto se  preklapa sa zeljenim datumom
+			for (TimePeriod timePeriod : unavailability) {
+				if ((end.isAfter(timePeriod.getStart()) && end.isBefore(timePeriod.getEnd()))||(start.isAfter(timePeriod.getStart()) && start.isBefore(timePeriod.getEnd()))) {
+					brojac++;
+				}
+			}
+			if (broj_zauzetosti!=brojac || broj_zauzetosti==0) {
+				availableBoats.add(boat);
+			}
+		}
+		return availableBoats;
 	}
 }
