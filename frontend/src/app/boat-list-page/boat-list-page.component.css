@@ -2,3 +2,11 @@
   margin: auto;
   width: 75% !important;
 }
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comp1{
+  flex-grow: 1;
+}
