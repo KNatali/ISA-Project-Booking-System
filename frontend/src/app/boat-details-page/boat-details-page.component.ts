@@ -3,6 +3,7 @@ import { Boat } from '../model/boat';
 
 import { ActivatedRoute } from '@angular/router';
 import { BoatService } from '../service/boat.service';
+import { AdditionalItem } from '../model/additionalItem';
 
 @Component({
   selector: 'app-boat-details-page',
@@ -32,12 +33,24 @@ export class BoatDetailsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.loadAdditionalItems();
   }
   loadData() {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.boatService.getBoat(this.id)
         .subscribe((boat: Boat) => this.boat = boat);
+    });
+  }
+  loadAdditionalItems() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.boatService.getAdditionalItems(this.id)
+        .subscribe((items: AdditionalItem[]) =>
+        {
+        this.boat.additionalItems = items
+        //alert(this.boat.additionalItems.length)
+      });
     });
   }
 

@@ -11,8 +11,10 @@ import { SearchForReservation } from '../model/searchForReservation';
 export class BoatListPageComponent implements OnInit {
   sort_boats:Boat[];
   boats:Boat[];
+  searchForReserevaiotParametars:SearchForReservation;
   role:any;
   visiable_sort_button:boolean;
+
 
   constructor(private boatService:BoatService) {
     this.boats=[];
@@ -66,6 +68,7 @@ export class BoatListPageComponent implements OnInit {
   Search(obj:SearchForReservation){
     this.boatService.searchBoatsForReservation(obj).subscribe(res=>this.boats=res);
     console.log(obj);
+    this.searchForReserevaiotParametars=obj;
   }
   sortByPriceAvailableBoat(){
     this.boatService.sortByPriceAvailableBoat(this.boats).subscribe(res=>this.boats=res);
