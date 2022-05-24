@@ -180,6 +180,7 @@ import { ComplainCottageReservationComponent } from './complain-cottage-reservat
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 import { ReservationSearchFormComponent } from './reservation-search-form/reservation-search-form.component';
+import { SearchParametarsForReservationComponent } from './search-parametars-for-reservation/search-parametars-for-reservation.component';
 
 
 @NgModule({
@@ -343,7 +344,8 @@ import { ReservationSearchFormComponent } from './reservation-search-form/reserv
     ComplainCottageReservationComponent,
     ComplainInstructorComponent,
     ClientDeleteProfilComponent,
-    ReservationSearchFormComponent
+    ReservationSearchFormComponent,
+    SearchParametarsForReservationComponent
 
 
 

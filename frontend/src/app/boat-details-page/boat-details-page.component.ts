@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Boat } from '../model/boat';
 
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +12,14 @@ import { AdditionalItem } from '../model/additionalItem';
 })
 export class BoatDetailsPageComponent implements OnInit {
   id: number;
+  additionalItem:AdditionalItem=new AdditionalItem({
+    name:'',
+    price:0,
+    id:0
+  });
+  price:number=0;
+  @Output()
+  addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   boat:Boat;/*=new Boat({
     id: 0,
     name: '',
@@ -53,5 +61,10 @@ export class BoatDetailsPageComponent implements OnInit {
       });
     });
   }
-
+  addAdditionalItem(item:AdditionalItem){
+    this.additionalItem=item;
+    //this.addedOneAdditioanlItem.next(item);
+    this.price=this.price+item.price;
+    console.log("boat details",this.price);
+  }
 }

@@ -16,9 +16,10 @@
   <div  id="comp2">
     <h2>Available terms</h2>
 
-    <app-additional-item-boat-list></app-additional-item-boat-list>
+    <app-additional-item-boat-list (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
+   <!-- <h3>Total price of added additioanl items: {{price}} $</h3>-->
   </div>
-
+<app-search-parametars-for-reservation id="comp3" [additionalItemPrice]="price" [boatPrice]="boat.price"  [additionalItem]="additionalItem" [additionalItemPrice]="price" ></app-search-parametars-for-reservation>
 </div>
 
 <!--<app-available-boat-terms-list></app-available-boat-terms-list><br>-->

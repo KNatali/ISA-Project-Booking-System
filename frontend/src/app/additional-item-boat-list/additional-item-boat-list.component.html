@@ -6,7 +6,7 @@
             </tr>
         </thead>
         <tbody >
-            <tr app-additional-item-boat-item *ngFor="let item of items" [addItem]="item"></tr>
+            <tr app-additional-item-boat-item *ngFor="let item of items" [addItem]="item" (addedOneAdditioanlItem)="AddAdditionalItem($event)"></tr>
 		</tbody>
     </table>
 </div>

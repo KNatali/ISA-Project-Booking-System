@@ -1,0 +1,31 @@
+#num_of_day{
+  width: 250px;
+  margin-left: 25px;
+}
+#date{
+  width: 250px;
+  margin-left: 25px;
+}
+#num_of_person{
+  width: 250px;
+  margin-left: 25px;
+}
+.forma{
+  margin-top: 10px;
+  margin-left: 50px;
+  background-color:lightblue;
+  width: 300px;
+
+}
+input{
+  margin-bottom: 10px;
+}
+h2{
+  text-align: center;
+}
+.btn{
+margin-left: 25px;
+margin-bottom: 10px;
+width: 250px;
+align-content: center;
+}
