@@ -9,7 +9,7 @@ import { SearchForReservation } from '../model/searchForReservation';
   styleUrls: ['./boat-list-page.component.css']
 })
 export class BoatListPageComponent implements OnInit {
-
+  sort_boats:Boat[];
   boats:Boat[];
   role:any;
   visiable_sort_button:boolean;
@@ -66,5 +66,11 @@ export class BoatListPageComponent implements OnInit {
   Search(obj:SearchForReservation){
     this.boatService.searchBoatsForReservation(obj).subscribe(res=>this.boats=res);
     console.log(obj);
+  }
+  sortByPriceAvailableBoat(){
+    this.boatService.sortByPriceAvailableBoat(this.boats).subscribe(res=>this.boats=res);
+  }
+  sortByGradeAvailableBoat(){
+    this.boatService.sortByGradeAvailableBoat(this.boats).subscribe(res=>this.boats=res);
   }
 }

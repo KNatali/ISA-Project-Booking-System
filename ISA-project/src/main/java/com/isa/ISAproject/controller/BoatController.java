@@ -93,6 +93,20 @@ public class BoatController {
 		List<Boat> boats=this.boatService.sortByGrade();
 		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boats/sort-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>> sortByGrade(@RequestBody List<BoatDTO> boatsDTOS){
+		List<Boat> boats=this.boatService.sortByGradeAvailableBoat(boatsDTOS);
+		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/sort-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>> sortByPrice(@RequestBody List<BoatDTO> boatsDTOS){
+		List<Boat> boats=this.boatService.sortByPriceAvailableBoat(boatsDTOS);
+		return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
+	}
 	@RequestMapping(value="api/boats/sort-by-city", method = RequestMethod.GET,
 			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	@PreAuthorize("hasRole('CLIENT')")
