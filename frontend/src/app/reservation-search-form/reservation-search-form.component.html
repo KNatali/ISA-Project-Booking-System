@@ -10,6 +10,9 @@
       <label id="date" for="num_of_person">Number of persons:</label><br/>
       <input id="num_of_person" name="num_of_person" class="form-control"  [(ngModel)]="search.numOfPerson"><br/>
 
-      <button class="btn btn-primary" (click)="Search1()">find</button><br/>
+      <button class="btn btn-primary" (click)="Search1()">Find</button><br/>
+      <button type="button" class="btn btn-primary"  (click)="sortByPriceAvailableBoat()">Sort by price</button>
+      <button type="button" class="btn btn-secondary" (click)="sortByGradeAvailableBoat()" >Sort by grade </button>
   </form>
+
 </div>

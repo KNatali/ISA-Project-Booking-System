@@ -18,6 +18,11 @@ export class ReservationSearchFormComponent implements OnInit {
   @Output()
   formIsFill:EventEmitter<SearchForReservation>=new EventEmitter();
 
+  @Output()
+  sortByPriceAvailable:EventEmitter<void>=new EventEmitter();
+  @Output()
+  sortByGradeAvailable:EventEmitter<void>=new EventEmitter();
+
   constructor(private boatService: BoatService) {
     this.search.dateAndTime = new Date().toISOString().slice(0, 16);
   }
@@ -27,5 +32,10 @@ export class ReservationSearchFormComponent implements OnInit {
   Search1(){
     this.formIsFill.next(this.search);
   }
-
+  sortByPriceAvailableBoat(){
+    this.sortByPriceAvailable.next();
+  }
+  sortByGradeAvailableBoat(){
+    this.sortByGradeAvailable.next();
+  }
 }

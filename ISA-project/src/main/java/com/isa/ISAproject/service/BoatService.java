@@ -79,6 +79,9 @@ public class BoatService {
 	public List<Boat> sortByGrade(){
 		return this.boatRepository.findByOrderByGradeDesc();
 	}
+	public List<Boat> sortByPrice(){
+		return this.boatRepository.findByOrderByPriceDesc();
+	}
 	public List<Boat> sortByCity(){
 		List<Boat> allBoats=this.boatRepository.findAll();
 		List<Address> allAddressesSortByCities=this.addressRepository.findByOrderByCity();
@@ -272,5 +275,29 @@ public class BoatService {
 			}
 		}
 		return availableBoats;
+	}
+	public List<Boat> sortByGradeAvailableBoat(List<BoatDTO> boats) {
+		List<Boat> all_sorted_boats = this.sortByGrade();
+		List<Boat> sorted_boats =new ArrayList<>();
+		for (Boat boat : all_sorted_boats) {
+			for (BoatDTO boat2 : boats) {
+				if(boat.getId()==boat2.getId()) {
+					sorted_boats.add(boat);
+				}
+			}
+		}
+		return sorted_boats;
+	}
+	public List<Boat> sortByPriceAvailableBoat(List<BoatDTO> boats) {
+		List<Boat> all_sorted_boats = this.sortByPrice();
+		List<Boat> sorted_boats =new ArrayList<>();
+		for (Boat boat : all_sorted_boats) {
+			for (BoatDTO boat2 : boats) {
+				if(boat.getId()==boat2.getId()) {
+					sorted_boats.add(boat);
+				}
+			}
+		}
+		return sorted_boats;
 	}
 }
