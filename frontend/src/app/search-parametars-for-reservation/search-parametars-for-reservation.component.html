@@ -1,0 +1,23 @@
+<div class="forma">
+  <h2>Calculate price for yor reservation</h2>
+  <form class="center">
+      <label id="date" for="date">Datum:</label><br/>
+      <input  name="date" id="date" type="datetime-local" class="form-control" [(ngModel)]="this.search.dateAndTime"><br/>
+
+      <label id="date" for="num_of_day">Number of days:</label><br/>
+      <input id="num_of_day" name="num_of_day" class="form-control"  [(ngModel)]="search.numOfDay"><br/>
+
+      <label id="date" for="num_of_person">Number of persons:</label><br/>
+      <input id="num_of_person" name="num_of_person" class="form-control"  [(ngModel)]="search.numOfPerson"><br/>
+
+      <label id="date" for="additionalItemPrice">Additional Item Price:</label><br/>
+      <input id="num_of_day" name="additionalItemPrice" class="form-control"  [(ngModel)]="additionalItemPrice"><br/>
+
+      <label id="date" for="additionalItemPrice">Total price:</label><br/>
+      <input id="num_of_day" name="additionalItemPrice" class="form-control"  [(ngModel)]="priceOfReservation"><br/>
+
+      <button class="btn btn-primary"  (click)="CalculatePrice()">Calculate</button><br/>
+      <button class="btn btn-primary"  (click)="Reservate()">Reservate</button><br/>
+  </form>
+
+</div>

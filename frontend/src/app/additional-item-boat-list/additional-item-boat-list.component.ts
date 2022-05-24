@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { BoatService } from '../service/boat.service';
@@ -10,6 +10,8 @@ import { BoatService } from '../service/boat.service';
 })
 export class AdditionalItemBoatListComponent implements OnInit {
   items:AdditionalItem[];
+  @Output()
+  addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   id:number;
   constructor(private boatService: BoatService,private route: ActivatedRoute) {
     this.items=[];
@@ -34,5 +36,9 @@ export class AdditionalItemBoatListComponent implements OnInit {
       });
     });
   }
-
+  AddAdditionalItem(item:AdditionalItem){
+    console.log("list");
+    console.log(item);
+    this.addedOneAdditioanlItem.next(item);
+  }
 }
