@@ -9,11 +9,17 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.BoatAddDTO;
 import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.BoatBehavioralRuleDTO;
 import com.isa.ISAproject.dto.NavigationEquipmentDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;

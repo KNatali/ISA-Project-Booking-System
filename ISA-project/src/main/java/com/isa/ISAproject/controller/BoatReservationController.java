@@ -18,17 +18,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.service.BoatReservationService;
+import com.isa.ISAproject.service.BoatService;
+import com.isa.ISAproject.service.ClientService;
 
 @CrossOrigin("*")
 @RestController
 public class BoatReservationController {
 	@Autowired
 	private BoatReservationService boatReservationService;
+	
+	@Autowired
+	private BoatService boatService;
+	@Autowired
+	private ClientService clientService;
 	
 	@RequestMapping(value="api/boat-reservations/{id}",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -87,6 +99,15 @@ public class BoatReservationController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boatReservation/client/addReservation",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<BoatReservationDTO>  addBoatReservation(@RequestBody BoatReservationCreateDTO dto) {
+		//hocu da napravim BoatREservation dto
+		BoatReservationDTO res=this.boatReservationService.addBoatReservationClient(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+		
 	}
 	@RequestMapping(value="api/boatReservation/{id}",method = RequestMethod.GET)
 	@PreAuthorize("hasRole('CLIENT')")

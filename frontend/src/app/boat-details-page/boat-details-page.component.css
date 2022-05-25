@@ -16,6 +16,7 @@ h1,h2,h3{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .comp1, .comp2, .comp3 {

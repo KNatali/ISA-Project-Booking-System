@@ -10,6 +10,8 @@ export class AdditionalItemBoatItemComponent implements OnInit {
   @Input()
   addItem:AdditionalItem;
   @Output()
+  allAddedItems:AdditionalItem[];
+  @Output()
   addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   constructor() { }
 
@@ -17,6 +19,7 @@ export class AdditionalItemBoatItemComponent implements OnInit {
   }
   AddAditionalItem(){
     console.log(this.addItem);
+
     this.addedOneAdditioanlItem.next(this.addItem);
   }
 }
