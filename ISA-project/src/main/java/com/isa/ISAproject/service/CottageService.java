@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,7 @@ import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageBehavioralRuleDTO;
 import com.isa.ISAproject.dto.CottageDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
@@ -30,6 +33,7 @@ import com.isa.ISAproject.model.CottageBehavioralRule;
 import com.isa.ISAproject.model.CottageOwner;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.ClientRepository;
@@ -181,5 +185,30 @@ public class CottageService {
 			listDTO.add(aDTO);
 		}
 		return listDTO;
+	}
+
+	public List<Cottage> findAllAvailableCottage(SearchForReservationDTO dto){
+		//treba dobaviti sve brodove
+		List<Cottage> cottages=this.findAll();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getDateAndTime(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumOfDay());
+
+		List<Cottage> availableCottages=new ArrayList<>();
+		for (Cottage cottage : cottages) {
+			Set<TimePeriod> unavailability=cottage.getUnavailability();//sve zautestosti jednog broda
+			int broj_zauzetosti=unavailability.size();
+			int brojac=0;//brokjim koliko yautesto se  preklapa sa zeljenim datumom
+			for (TimePeriod timePeriod : unavailability) {
+				if ((end.isAfter(timePeriod.getStart()) && end.isBefore(timePeriod.getEnd()))||(start.isAfter(timePeriod.getStart()) && start.isBefore(timePeriod.getEnd()))) {
+					brojac++;
+				}
+			}
+			if (broj_zauzetosti!=brojac || broj_zauzetosti==0) {
+				availableCottages.add(cottage);
+			}
+		}
+		return availableCottages;
 	}
 }
