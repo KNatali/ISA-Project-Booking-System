@@ -214,6 +214,9 @@ public class BoatReservationService {
 		boatReservation.setSystemEarning(price);
 		boatReservation.setPrice(price);
 		boatReservation.setMaxPersons(dto.getNumberOfPersons());
+		//dodato
+		boat.setCapacity(boat.getCapacity()-boatReservation.getMaxPersons());
+		boatRepository.save(boat);
 		
 		int day_start=start.getDayOfYear();
 		int day_end=end.getDayOfYear();

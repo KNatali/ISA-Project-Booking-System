@@ -1,4 +1,8 @@
-<app-search-cottage (NameAdded)="findCottageByName($event)" (AddressAdded)="findCottageByAddress($event)"></app-search-cottage>
+<div class="container">
+<app-search-cottage class="comp1"  (NameAdded)="findCottageByName($event)" (AddressAdded)="findCottageByAddress($event)"></app-search-cottage>
+
+                    <app-reservation-search-form class="comp1" [type]="type" (formIsFillCottage)="Search($event)"></app-reservation-search-form>
+</div>
 <app-sort-cottages *ngIf="visiable_sort_button" (SortedByName)="sortByName()"
                     (SortedByGrade)="sortByGrade()"
                     (SortedByCity)="sortByCity()"></app-sort-cottages>

@@ -1,5 +1,5 @@
 import { SearchForReservation } from './../model/searchForReservation';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BoatService } from '../service/boat.service';
 
 @Component({
@@ -15,8 +15,13 @@ export class ReservationSearchFormComponent implements OnInit {
     numOfDay:0,
     numOfPerson:0
   })
+  @Input()
+  type:string;
   @Output()
   formIsFill:EventEmitter<SearchForReservation>=new EventEmitter();
+  @Output()
+  formIsFillCottage:EventEmitter<SearchForReservation>=new EventEmitter();
+
 
   @Output()
   sortByPriceAvailable:EventEmitter<void>=new EventEmitter();
@@ -30,7 +35,13 @@ export class ReservationSearchFormComponent implements OnInit {
   ngOnInit(): void {
   }
   Search1(){
-    this.formIsFill.next(this.search);
+    if (this.type=="cottage"){
+      this.formIsFillCottage.next(this.search);
+    }
+    if(this.type=="boat"){
+      this.formIsFill.next(this.search);
+    }
+
   }
   sortByPriceAvailableBoat(){
     this.sortByPriceAvailable.next();

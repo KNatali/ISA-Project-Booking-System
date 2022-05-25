@@ -6,6 +6,7 @@ import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
 
 @Injectable({
@@ -18,6 +19,9 @@ export class CottageService {
 
   constructor(private http:HttpClient) { }
 
+  searchCottagesForReservation(obj:SearchForReservation):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(`${this.urlCottages}/` + `allAvailableCottages`,obj);
+  }
   getCottages():Observable<Cottage[]>{
     return this.http.get<Cottage[]>(this.urlCottages);
   }
