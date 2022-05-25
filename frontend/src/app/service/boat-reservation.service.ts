@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BoatReservation } from '../model/boat-reservation';
 import { BoatFastReservation } from '../model/boatFastReservation';
+import { BoatReservationCreate } from '../model/boatReservationCreate';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class BoatReservationService {
   urlReservation = "http://localhost:8090/api/boatReservation";
 
   constructor(private http: HttpClient) { }
+  addBoatReservationClient(res:BoatReservationCreate){
+    return this.http.post<BoatReservationCreate>(this.urlReservation+"/client/addReservation",res);
+  }
+
   sortByPrice(id:number):Observable<BoatReservation[]>{
     return this.http.get<BoatReservation[]>(this.url+"/sort-by-price/"+id);
   }

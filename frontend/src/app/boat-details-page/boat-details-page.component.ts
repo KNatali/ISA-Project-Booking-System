@@ -17,6 +17,7 @@ export class BoatDetailsPageComponent implements OnInit {
     price:0,
     id:0
   });
+  additionalItems:AdditionalItem[]=[];
   price:number=0;
   @Output()
   addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
@@ -63,6 +64,7 @@ export class BoatDetailsPageComponent implements OnInit {
   }
   addAdditionalItem(item:AdditionalItem){
     this.additionalItem=item;
+    this.additionalItems.push(item);
     //this.addedOneAdditioanlItem.next(item);
     this.price=this.price+item.price;
     console.log("boat details",this.price);
