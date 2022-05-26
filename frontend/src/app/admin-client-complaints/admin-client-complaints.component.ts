@@ -22,6 +22,20 @@ export class AdminClientComplaintsComponent implements OnInit {
       })
   }
 
+   getBoatComplaints() {
+    this.adminService.getAllAdventureComplaints()
+      .subscribe(res => {
+        this.adventureComplaints = res;
+      })
+  }
+
+  getCottageComplaints() {
+    this.adminService.getAllAdventureComplaints()
+      .subscribe(res => {
+        this.adventureComplaints = res;
+      })
+  }
+
   comment(answer: AdventureComplaint, id: any) {
     sessionStorage.setItem("adventureComplaint", JSON.stringify(answer));
 
