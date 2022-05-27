@@ -82,9 +82,9 @@ export class BoatOwnerBoatEditComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private boatService: BoatService) { }
 
   ngOnInit(): void {
-    this.loader = new Loader({
+    /*this.loader = new Loader({
       apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
-    })
+    })*/
     this.formValue0 = this.formBuilder.group({
       name: [''],
       street: [''],

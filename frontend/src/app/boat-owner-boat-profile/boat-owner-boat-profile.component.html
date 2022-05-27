@@ -1,67 +1,74 @@
 <div class="body-wrapper">
-    <div class="container content">
-  
+  <div class="container content">
+
+    <div class="top-content">
       <div class="flex">
         <div>
           <h1>{{boat.name}}</h1>
-  
+
           <div>
             <i class="fa fa-map-marker" aria-hidden="true"></i>{{boat.address.street}},{{boat.address.city}}
           </div>
           <div class="full " id="map">
-  
+
           </div>
+          <br>
           <div><strong>Max number of guests: </strong> {{boat.maxPersons}}</div>
           <div><strong>Average grade: </strong>
             <span class="tag is-large mt-5 rating">{{boat.grade}}<i class="ml-1 fa fa-star"></i></span>
           </div>
+          <br>
+          <div id="price">
+            <strong>Price (per day) : </strong> <span> {{boat.price}} $</span>
+          </div>
+
         </div>
         <br>
-  
-  
+
+
       </div>
       <br>
       <div class="gallery">
         <div class="figure">
           <img id="mainImage" src="{{boat.mainPicture}}">
         </div>
-        <!--
-        <div id="lightgallery">
-  
-          <a href="/assets/adventure/Adventure1.jpg">
-            <img src="/assets/adventure/Adventure1.jpg">
-          </a>
-          <a href="/assets/adventure/Adventure1.jpg">
-            <img src="/assets/adventure/Adventure1.jpg">
-          </a>
-          <a href="/assets/adventure/Adventure1.jpg">
-            <img src="/assets/adventure/Adventure1.jpg">
-          </a>
-        </div>-->
+
       </div>
-      <br>
-      <div>
-        <strong>Price (per day):</strong> <span id="price"> {{boat.price}} $</span>
-      </div>
-      <hr />
+    </div>
+    <br>
+
+
+
+
+
+    <hr />
+    <div>
       <div>
         <div>
-          <div>
-            <h2>Description:</h2>
-            <p>
-              {{boat.description}}
-            </p>
-          </div>
-          <hr>
-          <div>
-            <h2>About the boat owner:</h2>
-            <h3>{{boat.boatOwner.firstName}} {{boat.boatOwner.lastName}} </h3>
-            <h4>{{boat.boatOwner.street}}</h4>
-          </div>
+          <h2>Description:</h2>
+          <p>
+            {{boat.description}}
+          </p>
+        </div>
+        <hr>
+        <div>
+          <h2>About the boat owner:</h2>
+          <h3>{{boat.boatOwner.firstName}} {{boat.boatOwner.lastName}} </h3>
+          <h4>{{boat.boatOwner.street}}</h4>
         </div>
       </div>
-      <hr />
-      <div class="columns">
+    </div>
+    <hr />
+
+    <div class="columns">
+      <div class="column">
+        <h3>Navigation equipment:</h3>
+        <div *ngFor="let e of boat.equipment">
+          <i class="fa fa-check-circle"></i>
+          <span> {{e.name}}</span>
+        </div>
+      </div>
+      <hr>
       <div class="column">
         <h3>Additional items:</h3>
         <div *ngFor="let a of boat.additionalItems">
@@ -69,57 +76,75 @@
           <span> {{a.name}} : {{a.price}} $</span>
         </div>
       </div>
-    </div>      
+    </div>
     <hr>
     <div class="columns">
       <div class="column">
-        <h3>Navigation Equipment:</h3>
-        <div *ngFor="let n of boat.equipment">
-          <i class="fa fa-check-circle"></i>
-          <span> {{n.name}} </span>
+        <h3>Boat Rules:</h3>
+        <div *ngFor="let r of boat.rules">
+          <i class="fa fa-exclamation-circle"></i>
+          <span> {{r.rule}}
+          </span>
         </div>
       </div>
-    </div>      
+    </div>
     <hr>
     <div>
       <h3>Cancellation Policy:</h3>
       <span style="color:darkred">{{boat.cancellationPercentage}} % keeps boat owner</span>
     </div>
-  </div>
-  
-      <!--DIO sa akcijama-->
-      <div class="my-5">
-        <article class="media " *ngFor="let action of actions">
-          <div class="media-content">
-            <div class="content">
+
+    <!--DIO sa akcijama-->
+    <div class="my-5">
+      <article class="media " *ngFor="let action of actions">
+        <div class="media-content">
+          <div class="content">
+            <div>
+              <p style="font-size:16pt; font-weight: 800;">
+                {{action.boat.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                  class="fa fa-star"></i>
+              </p>
+
               <div>
-                <p style="font-size:16pt; font-weight: 800;">
-                  {{action.boat.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                    class="fa fa-star"></i>
-                </p>
-  
-                <div>
-                  <strong><i class="fa fa-calendar"></i> Start:{{action.validityStart}}</strong>
-                  <br />
-                  <strong><i class="fa fa-calendar"></i> End: 3 {{action.validityEnd}}</strong>
-                  <br />
-                  <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
-                  <br />
-                  <strong><i class="fa fa-map-marker"></i>
-                    {{action.boat.address.street}},{{action.boat.address.city}}</strong>
-                  <div class="column">
-                    <span class="tag is-orange" *ngFor="let item of action.additionalItems">{{item.name}}</span>
-                  </div>
-                  <div class="column">
-                    <span class="tag is-orange" *ngFor="let item of action.boat.equipment">{{item.name}}</span>
-                  </div>
+                <strong><i class="fa fa-calendar"></i> Start: {{action.reservationStart}}</strong>
+                <br />
+                <strong><i class="fa fa-calendar"></i> End: {{action.reservationEnd}}</strong>
+                <br />
+                <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
+                <br />
+                <strong><i class="fa fa-map-marker"></i>
+                  {{action.boat.address.street}},{{action.boat.address.city}}</strong>
+                <div class="column">
+                  <span class="tag is-orange" *ngFor="let item of action.additionalItems">{{item.name}}</span>
+
                 </div>
               </div>
-              <div class="columnPrice">
-                <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
-              </div>
+            </div>
+            <div class="columnPrice">
+              <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: 300$</div>
+
             </div>
           </div>
-        </article>
-      </div>
+        </div>
+
+      </article>
     </div>
+
+    <!--<hr>
+    <h2>Reviews:</h2>
+    <article class="revision" *ngFor="let revision of revisions">
+      <i class="fa fa-comments-o" aria-hidden="true"></i>
+      <span><b> {{revision.revision.grade}} </b> <i class="fa fa-star"></i></span>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <b>{{revision.adventureReservation.client.firstName}} {{revision.adventureReservation.client.lastName}} </b>
+            | {{revision.adventureReservation.reservationEnd}}
+            <br />
+            {{revision.revision.revision}}
+          </p>
+        </div>
+      </div>
+    </article> -->
+  </div>
+</div>
