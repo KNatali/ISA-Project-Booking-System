@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 
 @Component({
@@ -9,9 +9,17 @@ import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem
 export class AdditionalItemBoatItemComponent implements OnInit {
   @Input()
   addItem:AdditionalItem;
+  @Output()
+  allAddedItems:AdditionalItem[];
+  @Output()
+  addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
+  AddAditionalItem(){
+    console.log(this.addItem);
 
+    this.addedOneAdditioanlItem.next(this.addItem);
+  }
 }

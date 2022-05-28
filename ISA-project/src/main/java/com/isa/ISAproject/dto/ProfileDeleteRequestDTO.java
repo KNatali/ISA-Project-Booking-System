@@ -1,5 +1,6 @@
 package com.isa.ISAproject.dto;
 
+import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
 import com.isa.ISAproject.model.UnavailabilityType;
 

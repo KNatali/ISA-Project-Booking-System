@@ -62,6 +62,9 @@ public class AdventureReservationService {
 	public List<AdventureReservation> findAll() {
 		return this.adventureReservationRepository.findAll();
 	}
+	public AdventureReservation save(AdventureReservation  newAdventureReservation) {
+		return this.adventureReservationRepository.save(newAdventureReservation);
+	}
 	
 	public List<AdventureReservation> findAllResByIdClient(Long id){
 		List<AdventureReservation> res=new ArrayList<>();
@@ -172,5 +175,14 @@ public class AdventureReservationService {
 			}
 		
 		return AdventureReservationMapper.convertToDTO(res);
+	}
+	public AdventureReservation findByClientAndAdventure(Client client,Adventure adv) {
+		List<AdventureReservation> all=this.adventureReservationRepository.findAll();
+		for (AdventureReservation adventureReservation : all) {
+			if(adventureReservation.getClient()==client && adventureReservation.getAdventure()==adv) {
+				return adventureReservation;
+			}
+		}
+		return null;
 	}
 }

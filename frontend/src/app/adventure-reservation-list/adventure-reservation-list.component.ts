@@ -13,6 +13,7 @@ export class AdventureReservationListComponent implements OnInit {
   reservations: AdventureReservation[];
   id:any;
   rate_adveture_button=true;//moguce je oceniti samo rezervaciju koja je vec prosla
+  complaint_adveture_button=true;
   constructor(private clientService:ClientService, private adventureReservationService: AdventureReservationService) { }
 
   ngOnInit(): void {

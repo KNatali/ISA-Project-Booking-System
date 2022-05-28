@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cottage } from '../model/cottage';
+import { SearchForReservation } from '../model/searchForReservation';
 import { CottageService } from '../service/cottage.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class CottageListPageComponent implements OnInit {
   cottages:Cottage[];
   role:any;
   visiable_sort_button:boolean;
+  type:string="cottage";
 
   constructor(private cottageService : CottageService) { }
 
@@ -46,5 +48,11 @@ export class CottageListPageComponent implements OnInit {
   sortByGrade(){
     this.cottageService.sortByGrade()
     .subscribe(res=>this.cottages=res)
+  }
+
+
+  Search(obj:SearchForReservation){
+    this.cottageService.searchCottagesForReservation(obj).subscribe(res=>this.cottages=res);
+    console.log(obj);
   }
 }

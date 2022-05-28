@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { BoatService } from '../service/boat.service';
 
@@ -9,16 +10,35 @@ import { BoatService } from '../service/boat.service';
 })
 export class AdditionalItemBoatListComponent implements OnInit {
   items:AdditionalItem[];
-  constructor(private boatService: BoatService) { 
+  @Output()
+  addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
+  id:number;
+  constructor(private boatService: BoatService,private route: ActivatedRoute) {
     this.items=[];
   }
 
   ngOnInit(): void {
-    this.loadData();
+    //this.loadData();
+    this.loadAdditionalItems();
   }
   loadData(){
     this.boatService.findAllAdditionalItems()
     .subscribe(res=>this.items=res)
   }
-
+  loadAdditionalItems() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.boatService.getAdditionalItems(this.id)
+        .subscribe((items: AdditionalItem[]) =>
+        {
+        this.items = items
+        //alert(this.boat.additionalItems.length)
+      });
+    });
+  }
+  AddAdditionalItem(item:AdditionalItem){
+    console.log("list");
+    console.log(item);
+    this.addedOneAdditioanlItem.next(item);
+  }
 }

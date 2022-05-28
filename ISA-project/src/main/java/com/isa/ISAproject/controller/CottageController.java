@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.CottageOwnerMapper;
 import com.isa.ISAproject.model.Boat;
@@ -146,5 +147,16 @@ public class CottageController {
 		List<CottageDTO> res=CottageMapper.convertoToDTOs(cottages);
 		
 		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/allAvailableCottages",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)	
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> findAllAvailableBoat(@RequestBody SearchForReservationDTO dto){
+		List<Cottage> cottages=this.cottageService.findAllAvailableCottage(dto);
+		if(cottages==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+		}
 	}
 }

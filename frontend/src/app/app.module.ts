@@ -176,7 +176,12 @@ import { RateIntructorComponent } from './rate-intructor/rate-intructor.componen
 import { RateCottageReservationComponent } from './rate-cottage-reservation/rate-cottage-reservation.component';
 import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-reservation.component';
 import { BoatRulesEditComponent } from './boat-rules-edit/boat-rules-edit.component';
-
+import { ComplainBoatReservationComponent } from './complain-boat-reservation/complain-boat-reservation.component';
+import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
+import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
+import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
+import { ReservationSearchFormComponent } from './reservation-search-form/reservation-search-form.component';
+import { SearchParametarsForReservationComponent } from './search-parametars-for-reservation/search-parametars-for-reservation.component';
 
 
 @NgModule({
@@ -336,10 +341,13 @@ import { BoatRulesEditComponent } from './boat-rules-edit/boat-rules-edit.compon
     RateIntructorComponent,
     RateCottageReservationComponent,
     RateBoatReservationComponent,
-    BoatRulesEditComponent
-
-
-
+    BoatRulesEditComponent,
+    ComplainBoatReservationComponent,
+    ComplainCottageReservationComponent,
+    ComplainInstructorComponent,
+    ClientDeleteProfilComponent,
+    ReservationSearchFormComponent,
+    SearchParametarsForReservationComponent
 
   ],
   imports: [

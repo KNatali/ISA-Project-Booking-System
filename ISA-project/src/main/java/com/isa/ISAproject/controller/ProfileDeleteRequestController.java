@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.ProfileDeleteRequestDTO;
 import com.isa.ISAproject.dto.RegistrationRequestDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.exception.ResourceConflictException;
+import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.RegistrationRequest;
 import com.isa.ISAproject.model.User;
@@ -30,6 +31,7 @@ import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
 import com.isa.ISAproject.service.EmailService;
 import com.isa.ISAproject.service.ProfileDeleteRequestService;
+import com.isa.ISAproject.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -44,6 +46,8 @@ public class ProfileDeleteRequestController {
 	private ProfileDeleteRequestService profileDeleteRequestService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/api/instructors/profileDeleteRequest",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('INSTRUCTOR')")
@@ -108,5 +112,16 @@ public class ProfileDeleteRequestController {
 		ProfileDeleteRequestDTO req=profileDeleteRequestService.sendProfileDeleteRequest(dto);
 		return new ResponseEntity<>(req,HttpStatus.OK);
 	}
+	@RequestMapping(value="/api/client/profileDeleteRequest",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<?> sendProfifleDeleteRequestClient(@RequestBody ProfileDeleteRequestDTO dto){
 	
+		//ProfileDeleteRequestDTO req=profileDeleteRequestService.sendProfileDeleteRequest(dto);
+		User user=this.userService.findById(dto.getUserDTO().getId());
+		UserDTO userDTO=UserMapper.convertToDTO(user);
+		ProfileDeleteRequest req=new ProfileDeleteRequest(dto.getId(), user, dto.getReason(), dto.getType());
+		ProfileDeleteRequest saved=this.profileDeleteRequestService.save(req);
+		ProfileDeleteRequestDTO savedDTO=new ProfileDeleteRequestDTO(saved.getId(),userDTO,saved.getReason(),saved.getType());
+		return new ResponseEntity<>(savedDTO,HttpStatus.OK);
+	}
 }

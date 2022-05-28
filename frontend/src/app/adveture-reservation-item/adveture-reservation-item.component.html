@@ -5,3 +5,6 @@
 <td *ngIf="rate_adveture_button"> 
     <button class="btn btn-info"><a [routerLink]="['/rate-instructor',res.adventure.instructor.id]">Rate</a></button>
 </td>
+<td *ngIf="complaint_adveture_button"> 
+    <button class="btn btn-info"><a [routerLink]="['/complaint-instructor',res.adventure.instructor.id]">Complain</a></button>
+</td>

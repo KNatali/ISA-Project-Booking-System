@@ -49,6 +49,12 @@ import { BoatOwnerAddBoatComponent } from './boat-owner-add-boat/boat-owner-add-
 import { RateIntructorComponent } from './rate-intructor/rate-intructor.component';
 import { RateCottageReservationComponent } from './rate-cottage-reservation/rate-cottage-reservation.component';
 import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-reservation.component';
+import { ComplainBoatReservationComponent } from './complain-boat-reservation/complain-boat-reservation.component';
+import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
+import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
+
+import { ComplaintBoatReservationService } from './service/complaint-boat-reservation.service';
+import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 
 
 const routes: Routes = [
@@ -103,7 +109,13 @@ const routes: Routes = [
 
   { path: 'rate-instructor/:id',component: RateIntructorComponent},
   { path: 'rate-cottage-reservation/:id',component:RateCottageReservationComponent},
-  { path: 'rate-boat-reservation/:id',component:RateBoatReservationComponent}
+  { path: 'rate-boat-reservation/:id',component:RateBoatReservationComponent},
+
+  { path: 'complaint-boat-reservation/:id',component:ComplainBoatReservationComponent},
+  { path: 'complaint-cottage-reservation/:id',component:ComplainCottageReservationComponent},
+  { path: 'complaint-instructor/:id', component:ComplainInstructorComponent},
+
+  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent}
 
 
 

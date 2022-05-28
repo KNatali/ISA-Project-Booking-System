@@ -27,8 +27,10 @@ public class BoatReservation {
 	//private LocalTime time;
 	@Column
 	private int duration;
+	//@Column
+	//private int maxPersons;//menjala sam naziv, ako pravi neke probleme vratiti
 	@Column
-	private int maxPersons;
+	private int numberOfPersons;
 	@OneToMany
 	private Set<AdditionalItem> additionalItems=new HashSet<>();
 	@Column
@@ -46,6 +48,8 @@ public class BoatReservation {
     private LocalDateTime reservationEnd;
     @OneToMany
 	private List<BoatComplaint> boatComplaints;
+    @OneToMany
+	private List<BoatOwnerComplaint> boatOwnerComplaints;
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<BoatRevision> boatRevisions;
     @OneToOne 
@@ -57,6 +61,14 @@ public class BoatReservation {
     @Column
 	private double systemEarning;
 	
+	public List<BoatOwnerComplaint> getBoatOwnerComplaints() {
+		return boatOwnerComplaints;
+	}
+
+	public void setBoatOwnerComplaints(List<BoatOwnerComplaint> boatOwnerComplaints) {
+		this.boatOwnerComplaints = boatOwnerComplaints;
+	}
+
 	public Boat getBoat() {
 		return boat;
 	}
@@ -98,11 +110,11 @@ public class BoatReservation {
 	}
 
 	public int getMaxPersons() {
-		return maxPersons;
+		return numberOfPersons;
 	}
 
 	public void setMaxPersons(int maxPersons) {
-		this.maxPersons = maxPersons;
+		this.numberOfPersons = maxPersons;
 	}
 
 	public Set<AdditionalItem> getAdditionalItems() {
@@ -189,7 +201,7 @@ public class BoatReservation {
 		this.date = date;
 		//this.time = time;
 		this.duration = duration;
-		this.maxPersons = maxPersons;
+		this.numberOfPersons = maxPersons;
 		this.additionalItems = additionalItems;
 		this.price = price;
 		this.client = client;
@@ -204,7 +216,7 @@ public class BoatReservation {
 		this.reservationStart = reservationStart;
 		this.reservationEnd = reservationEnd;
 		this.boat = boat;
-		this.maxPersons = numberOfPersons;
+		this.numberOfPersons = numberOfPersons;
 		this.price = price;
 		this.additionalItems = additionalItems;
 		this.client = client;

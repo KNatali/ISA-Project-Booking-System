@@ -27,7 +27,7 @@ public class BoatAdditionalItemController {
 	
 	@RequestMapping(value="/additionalItems/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('BOAT_OWNER')")
+	@PreAuthorize("hasAnyRole('BOAT_OWNER','CLIENT')")
 	public ResponseEntity<List<AdditionalItemDTO>> getBoatAdditionalItems(@PathVariable Long id){
 		List<AdditionalItemDTO> item=additionalItemService.getAdditionalIem(id);
 		if(item==null) {

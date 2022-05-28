@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Boat } from '../model/boat';
 
 import { ActivatedRoute } from '@angular/router';
 import { BoatService } from '../service/boat.service';
+import { AdditionalItem } from '../model/additionalItem';
 
 @Component({
   selector: 'app-boat-details-page',
@@ -11,6 +12,15 @@ import { BoatService } from '../service/boat.service';
 })
 export class BoatDetailsPageComponent implements OnInit {
   id: number;
+  additionalItem:AdditionalItem=new AdditionalItem({
+    name:'',
+    price:0,
+    id:0
+  });
+  additionalItems:AdditionalItem[]=[];
+  price:number=0;
+  @Output()
+  addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   boat:Boat;/*=new Boat({
     id: 0,
     name: '',
@@ -32,6 +42,7 @@ export class BoatDetailsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.loadAdditionalItems();
   }
   loadData() {
     this.route.params.subscribe(param => {
@@ -40,5 +51,22 @@ export class BoatDetailsPageComponent implements OnInit {
         .subscribe((boat: Boat) => this.boat = boat);
     });
   }
-
+  loadAdditionalItems() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.boatService.getAdditionalItems(this.id)
+        .subscribe((items: AdditionalItem[]) =>
+        {
+        this.boat.additionalItems = items
+        //alert(this.boat.additionalItems.length)
+      });
+    });
+  }
+  addAdditionalItem(item:AdditionalItem){
+    this.additionalItem=item;
+    this.additionalItems.push(item);
+    //this.addedOneAdditioanlItem.next(item);
+    this.price=this.price+item.price;
+    console.log("boat details",this.price);
+  }
 }

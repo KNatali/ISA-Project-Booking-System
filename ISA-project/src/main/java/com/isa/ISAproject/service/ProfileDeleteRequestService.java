@@ -104,4 +104,7 @@ public class ProfileDeleteRequestService {
 		
 		
 	}
+	public ProfileDeleteRequest save (ProfileDeleteRequest newProfileDeleteRequest) {
+		return this.profileDeleteRequestRepository.save(newProfileDeleteRequest);
+	}
 }

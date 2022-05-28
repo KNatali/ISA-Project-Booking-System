@@ -14,6 +14,8 @@ export class CottageReservationItemComponent implements OnInit {
   res:CottageReservation;
   @Input()
   rate_cottage_button:boolean;
+  @Input()
+  complain_cottage_button:boolean;
   constructor() {}
 
   ngOnInit(): void {

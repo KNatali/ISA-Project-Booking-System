@@ -12,11 +12,16 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
@@ -46,9 +51,14 @@ public class BoatReservationService {
 	private TimePeriodService timePeriodService;
 	@Autowired 
 	private EmailService emailService;
+	@Autowired
+	private BoatService boatService;
 	
 	public List<BoatReservation> findAll() {
 		return this.boatReservationRepository.findAll();
+	}
+	public BoatReservation save(BoatReservation newRes){
+		return this.boatReservationRepository.save(newRes);
 	}
 	public List<BoatReservation> findAllResByIdClient(Long id){
 		List<BoatReservation> res=new ArrayList<>();
@@ -168,5 +178,62 @@ public class BoatReservationService {
 	}
 	public Optional<BoatReservation> findById(Long id) {
 		return this.boatReservationRepository.findById(id);
+	}
+	public BoatReservationDTO  addBoatReservationClient(BoatReservationCreateDTO dto) {
+		Optional<Client> clientOpt=this.clientRepository.findById(dto.getClientId());
+		if(!clientOpt.isPresent()) {
+			return null;
+		}
+		Client client=clientOpt.get();///////client
+		
+		Optional<Boat> boatOpt=this.boatRepository.findById(dto.getBoatId());
+		if(!boatOpt.isPresent()) {
+			return null;
+		}
+		Boat boat=boatOpt.get();////boat
+		
+		BoatReservation boatReservation=new BoatReservation();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumberOfDays());
+		
+		boatReservation.setReservationStart(start);
+		boatReservation.setReservationEnd(end);
+		boatReservation.setBoat(boat);
+		boatReservation.setClient(client);
+		
+		Set<AdditionalItem> items=new HashSet<>();
+		int price=(int) (boat.getPrice()*dto.getNumberOfDays()*dto.getNumberOfPersons());
+		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
+			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
+			items.add(a);
+			price+=a.getPrice();		
+		}
+		boatReservation.setAdditionalItems(items);
+		boatReservation.setSystemEarning(price);
+		boatReservation.setPrice(price);
+		boatReservation.setMaxPersons(dto.getNumberOfPersons());
+		//dodato
+		boat.setCapacity(boat.getCapacity()-boatReservation.getMaxPersons());
+		boatRepository.save(boat);
+		
+		int day_start=start.getDayOfYear();
+		int day_end=end.getDayOfYear();
+		
+		int duration=day_end-day_start;
+		boatReservation.setDuration(duration);
+		BoatReservation saved=this.boatReservationRepository.save(boatReservation);
+		
+		String message="Yoe successufuly made reservation for boat "+boat.getName()+".Check this in your reservation list";
+		
+		try {
+			this.emailService.sendMessage(client.getEmail(), message);
+		} catch (MailException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return BoatReservationMapper.convertToDTO(saved);
 	}
 }

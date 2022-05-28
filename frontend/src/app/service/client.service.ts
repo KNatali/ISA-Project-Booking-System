@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { CottageReservation } from '../model/cottage-reservation';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { BoatReservation } from '../model/boat-reservation';
+import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,15 @@ export class ClientService {
   url_cottage_res = "http://localhost:8090/api/cottages-reservations";
   url_boat_res = "http://localhost:8090/api/boat-reservations";
   url_adventure_res = "http://localhost:8090/api/adventure-reservations";
+  url_delete_request="http://localhost:8090/api/client/profileDeleteRequest";
+
 
   constructor(private http: HttpClient) { }
   getById(id: number): Observable<Client> {
     return this.http.get<Client>(`${this.url}/${id}`);
+  }
+  save(del :ProfileDeleteRequest):Observable<ProfileDeleteRequest>{
+    return this.http.post<ProfileDeleteRequest>(this.url_delete_request,del);
   }
   activateById(id: number): Observable<Client> {
     return this.http.get<Client>(`${this.url_confirm}/${id}`);
