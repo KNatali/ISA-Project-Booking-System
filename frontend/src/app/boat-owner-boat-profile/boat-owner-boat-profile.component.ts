@@ -28,9 +28,9 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
   constructor(private http: HttpClient,private route: ActivatedRoute, private router: Router, private boatService: BoatService) { }
 
   ngOnInit(): void {
-    this.loader = new Loader({
+    /*this.loader = new Loader({
       apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
-    })
+    })*/
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
@@ -79,8 +79,7 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
       this.boatService.getAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => 
         {
-        this.boat.additionalItems = items
-        alert(this.boat.additionalItems.length)});
+        this.boat.additionalItems = items});
     });
   }
 

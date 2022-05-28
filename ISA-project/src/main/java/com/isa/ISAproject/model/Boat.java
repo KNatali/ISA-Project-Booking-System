@@ -83,12 +83,12 @@ public class Boat {
 	}
 
 	@ManyToMany
-	@JoinTable(name="boat_and_rules",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+	@JoinTable(name="boat_behavioral_rules",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<BoatBehavioralRule> rules=new HashSet<>();
 	
 	@ManyToMany
-	@JoinTable(name="boat_and_equipment",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
+	@JoinTable(name="boat_navigation_equipment",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
 	private Set<NavigationEquipment> navigationEquipment=new HashSet<>();
 	

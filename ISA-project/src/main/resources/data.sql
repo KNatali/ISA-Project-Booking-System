@@ -89,7 +89,7 @@ insert into adventure_behavioral_rule(rule) values ('Just bring good energy');
 insert into adventure_behavioral_rule(rule) values ('You Keep Catch');
 insert into adventure_behavioral_rule(rule) values ('Catch and Release Allowed');
 
-
+insert into boat_behavioral_rule(rule) values ('Pet friendly');
 
 
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
@@ -132,6 +132,12 @@ insert into additional_item(name,price) values ('Rend a car',15);
 insert into additional_item(name,price) values ('Spa',5);
 insert into additional_item(name,price) values ('Wi-fi',5);
 
+insert into navigation_equipment (name) values ('Gyro Compass');
+insert into navigation_equipment (name) values ('Radar');
+insert into navigation_equipment (name) values ('Magnetic Compass');
+insert into navigation_equipment (name) values ('Autopilot');
+insert into navigation_equipment (name) values ('Speed & Distance Log Device');
+
 
 insert into adventure_equipment(adventure_id,equipment_id) values (1,1);
 insert into adventure_equipment(adventure_id,equipment_id) values (1,2);
@@ -146,6 +152,12 @@ insert into adventure_rules(adventure_id,rule_id) values (2,3);
 insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
+
+insert into boat_behavioral_rules(boat_id,rule_id) values (1,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (2,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (3,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (4,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (5,1);
 
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,1);
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,2);
@@ -170,6 +182,15 @@ insert into boat_additional_items(boat_id,additional_item_id) values(4,4);
 insert into boat_additional_items(boat_id,additional_item_id) values(5,5);
 insert into boat_additional_items(boat_id,additional_item_id) values(1,8);
  
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,1);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,2);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,3);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (2,1);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (2,4);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (3,5);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (3,4);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (4,3);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (5,2);
 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,200); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,300); 
