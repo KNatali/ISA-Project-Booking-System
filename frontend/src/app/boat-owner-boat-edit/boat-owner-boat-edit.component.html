@@ -4,7 +4,7 @@
 
       <button (click)="editInformation()" mat-button class="button is-success is-large" data-bs-toggle="modal"
         data-bs-target="#modalData"><i class="fa fa-pencil"></i> Edit this
-        adventure</button>
+        boat</button>
 
     </div>
     <br>
@@ -162,9 +162,9 @@
           Add equipment
         </button>
 
-        <app-adventure-equipment-edit [equipment]="adventure.equipment" (loadEquipment)="loadEquipment()"
+        <app-boat-navigation-equipment-edit [equipment]="boat.equipment" (loadNavigationEquipment)="loadNavigationEquipment()"
           [showAdd]="showAdd" [showUpdate]="showUpdate">
-        </app-adventure-equipment-edit>
+        </app-boat-navigation-equipment-edit>
       </div>
       <hr>
       <div class="column">
@@ -174,9 +174,9 @@
           Add additional item
         </button>
 
-        <app-adventure-additional-items-edit [additionalItems]="adventure.additionalItems"
+        <app-boat-addition-items-edit [items]="boat.additionalItems"
           (loadAdditionalItems)="loadAdditionalItems()" [showAdd]="showAdd" [showUpdate]="showUpdate">
-        </app-adventure-additional-items-edit>
+        </app-boat-addition-items-edit>
       </div>
     </div>
     <hr>
@@ -188,9 +188,9 @@
           Add Behavioral Rule
         </button>
 
-        <app-adventure-rules-edit [rules]="adventure.rules" [showAdd]="showAdd" [showUpdate]="showUpdate"
+        <app-boat-rules-edit [rules]="boat.rules" [showAdd]="showAdd" [showUpdate]="showUpdate"
           (loadBehavioralRules)="loadBehavioralRules()">
-        </app-adventure-rules-edit>
+        </app-boat-rules-edit>
 
       </div>
     </div>
@@ -201,7 +201,7 @@
           <div class="content">
             <div>
               <p style="font-size:16pt; font-weight: 800;">
-                {{action.adventure.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                {{action.boat.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                   class="fa fa-star"></i>
               </p>
 
@@ -213,7 +213,7 @@
                 <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
                 <br />
                 <strong><i class="fa fa-map-marker"></i>
-                  {{action.adventure.address.street}},{{action.adventure.address.city}}</strong>
+                  {{action.boat.address.street}},{{action.boat.address.city}}</strong>
                 <div class="columnAction">
                   <span class="tag is-orange" *ngFor="let item of action.additionalItems">{{item.name}}</span>
 
@@ -243,41 +243,41 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalDataLabel">Adventure information</h5>
+            <h5 class="modal-title" id="modalDataLabel">Boat information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form [formGroup]="formAction">
               <div class="mb-3">
                 <label for="name" class="form-label">Validity start:</label>
-                <input type="date" formControlName="validityStart" [(ngModel)]="actions.validityStart"
+                <input type="date" formControlName="validityStart" [(ngModel)]="selectedAction.validityStart"
                   class="form-control">
               </div>
               <div class="mb-3">
                 <label for="name" class="form-label">Validity end:</label>
-                <input type="date" formControlName="validityEnd" [(ngModel)]="actions.validityEnd"
+                <input type="date" formControlName="validityEnd" [(ngModel)]="selectedAction.validityEnd"
                   class="form-control">
               </div>
               <div class="mb-3">
                 <label for="name" class="form-label">Reservation start date and time:</label>
                 <input type="datetime-local" formControlName="reservationStart"
-                  [(ngModel)]="actions.reservationStart" class="form-control">
+                  [(ngModel)]="selectedAction.reservationStart" class="form-control">
               </div>
 
               <div class="mb-3">
                 <label for="name" class="form-label">Reservation end date and time:</label>
                 <input type="datetime-local" formControlName="reservationEnd"
-                  [(ngModel)]="actions.reservationEnd" class="form-control">
+                  [(ngModel)]="selectedAction.reservationEnd" class="form-control">
               </div>
               <div class="mb-3">
                 <label for="state" class="form-label">Number og guests:</label>
-                <input type="number" formControlName="maxPersons" [(ngModel)]="actions.maxPersons"
+                <input type="number" formControlName="maxPersons" [(ngModel)]="selectedAction.maxPersons"
                   class="form-control">
               </div>
               <div class="mb-3">
                 <div class="mb-3">
                   <label for="name" class="form-label">Price:</label>
-                  <input type="number" formControlName="price" [(ngModel)]="actions.price" class="form-control">
+                  <input type="number" formControlName="price" [(ngModel)]="selectedAction.price" class="form-control">
                 </div>
 
               </div>
@@ -305,7 +305,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of actions.additionalItems;let i = index">
+                  <tr *ngFor="let item of selectedAction.additionalItems;let i = index">
                     <td>{{item.name}}</td>
 
                     <td>

@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BoatReservation } from '../model/boat-reservation';
 import { BoatFastReservation } from '../model/boatFastReservation';
+import { EditBoatFastReservation } from '../model/editBoatFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class BoatReservationService {
   }
   saveFastReservation(reservation: BoatFastReservation): Observable<BoatFastReservation> {
     return this.http.put<BoatFastReservation>(`${this.urlReservation}` + '/addFastReservation', reservation);
+  }
+  editFastReservation(reservation: EditBoatFastReservation): Observable<BoatFastReservation> {
+    return this.http.post<BoatFastReservation>(`${this.urlReservation}` + '/editFastReservation', reservation);
   }
   getById(id: number): Observable<BoatReservation> {
     return this.http.get<BoatReservation>(`${this.urlReservation}/${id}`);
