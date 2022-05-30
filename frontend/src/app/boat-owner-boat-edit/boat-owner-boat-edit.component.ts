@@ -123,19 +123,23 @@ export class BoatOwnerBoatEditComponent implements OnInit {
       description: [''],
       biography: [''],
       image: ['']
-
-
-
     })
+    this.formAction = this.formBuilder.group({
+      validityStart: [''],
+      validityEnd: [''],
+      reservationStart: [''],
+      reservationEnd: [''],
+      maxPersons: [''],
+      price: [''],
+    });
+
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadNavigationEquipment();
     this.loadActions();
   }
-  //Gets called when the user selects an image
   public onFileChanged(event: any) {
-    //Select File
     this.selectedFile = event.target.files[0];
   }
   editInformation() {
@@ -149,11 +153,8 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     this.formValue0.controls['description'].setValue(this.boat.description);
 
   }
-  //Gets called when the user clicks on submit to upload the image
   onUpload() {
     console.log(this.selectedFile);
-
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
 
@@ -185,6 +186,7 @@ export class BoatOwnerBoatEditComponent implements OnInit {
           ref?.click();
           this.formValue0.reset();
           this.loadData();
+          this.loadNavigationEquipment();
           this.loadBehavioralRules();
           this.loadAdditionalItems();
           alert("Successfully updated  adventure information!");

@@ -28,9 +28,9 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
   constructor(private http: HttpClient,private route: ActivatedRoute, private router: Router, private cottageService: Cottage1Service) { }
 
   ngOnInit(): void {
-    this.loader = new Loader({
+    /*this.loader = new Loader({
       apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
-    })
+    })*/
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();

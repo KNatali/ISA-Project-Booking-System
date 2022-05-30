@@ -161,7 +161,6 @@
           data-bs-target="#exampleModal">
           Add equipment
         </button>
-
         <app-boat-navigation-equipment-edit [equipment]="boat.equipment" (loadNavigationEquipment)="loadNavigationEquipment()"
           [showAdd]="showAdd" [showUpdate]="showUpdate">
         </app-boat-navigation-equipment-edit>
@@ -194,6 +193,7 @@
 
       </div>
     </div>
+    
 
     <div class="my-5">
       <article class="media " *ngFor="let action of actions">
