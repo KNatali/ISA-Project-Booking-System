@@ -91,6 +91,8 @@ insert into adventure_behavioral_rule(rule) values ('Catch and Release Allowed')
 
 insert into boat_behavioral_rule(rule) values ('Pet friendly');
 
+insert into cottage_behavioral_rule(rule) values ('Pet friendly');
+
 
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
 values ('Lucky B Sportfishing','Lucky B Sportfishing welcomes you to one of the most beautiful fisheries in the world. This charter service is operated by a professional crew that always strives to exceed their guests’ expectations. No matter what time of year you join, you can always count on a great water experience.The adventure starts on a 36’ Yellowfin boat . The boat features all necessary safety gear, modern navigational electronics, a live bait tank, and a cooler.You can fish the inshore waters of Coronado Islands or visit offshore spots for big game fish. Some of the species you’ll target on your trip are Calico Bass, Halibut, Lingcod, Tuna, Swordfish, Mahi Mahi, and many more. With such a variety of fish species and fishing techniques, it never gets boring or repetitive on board.The only thing you need to prepare in advance is your fishing license. The crew takes care of everything else - your fishing equipment, catch cleaning, snacks, and drinks.The main goal for the Lucky B Sportfishing’s crew is for you to have a memorable and enjoyable experience. They look forward to seeing you on their boat!',5.0,100,10,'/assets/adventure/Adventure1.jpg',1,1,0);
@@ -158,6 +160,12 @@ insert into boat_behavioral_rules(boat_id,rule_id) values (2,1);
 insert into boat_behavioral_rules(boat_id,rule_id) values (3,1);
 insert into boat_behavioral_rules(boat_id,rule_id) values (4,1);
 insert into boat_behavioral_rules(boat_id,rule_id) values (5,1);
+
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (1,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (2,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (3,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (4,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (5,1);
 
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,1);
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,2);

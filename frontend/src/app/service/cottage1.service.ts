@@ -12,6 +12,7 @@ import { CottageFastReservation } from '../model/cottageFastReservation';
 export class Cottage1Service {
   urlCottages="http://localhost:8090/api/cottages";
   urlCottage = "http://localhost:8090/api/cottageOwners/cottages";
+  urlCottageRule = "http://localhost:8090/api/cottageOwner/cottage";
 
   constructor(private http:HttpClient) { }
 
@@ -33,10 +34,10 @@ export class Cottage1Service {
   }
 
   getCottageBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
-    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `rules` + `/${id}`);
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottageRule}/` + `cottageRules` + `/${id}`);
   }
   getCottageAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlCottage}/` + `additionalItems` + `/${id}`);
+    return this.http.get<AdditionalItem[]>(`${this.urlCottageRule}/` + `cottageAdditionalItems` + `/${id}`);
   }
 
   updateCottage(id: number, data: Cottage): Observable<Cottage> {
