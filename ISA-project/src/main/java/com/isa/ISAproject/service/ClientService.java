@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.repository.AddressRepository;
@@ -26,6 +27,14 @@ public class ClientService {
 	
 	public Optional<Client> findById(Long id) {
 		return this.clientRepository.findById(id);
+	}
+	public ClientProfileDTO findByIdDTO(Long id) {
+		Optional<Client> clientOPt=this.clientRepository.findById(id);
+		if (!clientOPt.isPresent()) {
+			return null;
+		} 
+		ClientProfileDTO dto=new ClientProfileDTO(clientOPt.get());
+		return dto;
 	}
 	public Client save(Client newClient) {
 		return this.clientRepository.save(newClient);

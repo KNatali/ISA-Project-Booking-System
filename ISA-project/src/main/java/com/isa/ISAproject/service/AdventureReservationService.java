@@ -22,16 +22,22 @@ import org.springframework.transaction.annotation.Transactional;
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationCreateDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
+import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.SystemEarnings;
@@ -57,7 +63,11 @@ public class AdventureReservationService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private SystemEarningsRepository systemEarningsRepository;
+	@Autowired
+	private AdventureService adventureService;
 	
+	@Autowired
+	private ClientService clientService;
 	
 	public List<AdventureReservation> findAll() {
 		return this.adventureReservationRepository.findAll();
@@ -184,5 +194,28 @@ public class AdventureReservationService {
 			}
 		}
 		return null;
+	}
+	public AdventureReservationDTO convertFromAdventureReservationCreateDTO(AdventureReservationCreateDTO dto) {
+		AdventureReservationDTO adventureReservationDTO=new AdventureReservationDTO();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumberOfDays());
+		
+		adventureReservationDTO.setReservationStart(start.toString());
+		adventureReservationDTO.setReservationEnd(end.toString());
+		
+		AdventureDTO adv=this.adventureService.findById(dto.getAdventureId());
+		adventureReservationDTO.setAdventure(adv);
+		
+		ClientProfileDTO client=this.clientService.findByIdDTO(dto.getClientId());
+		adventureReservationDTO.setClient(client);
+		
+		adventureReservationDTO.setPrice(dto.getPrice());
+		adventureReservationDTO.setNumberOfPersons(dto.getNumberOfPersons());
+		adventureReservationDTO.setAdditionalItems(dto.getAdditionalItems());
+		adventureReservationDTO.setSystemEarning(dto.getSystemEarning());
+		
+		return adventureReservationDTO;
 	}
 }

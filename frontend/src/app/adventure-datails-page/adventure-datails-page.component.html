@@ -1,23 +1,32 @@
-<div class="center" >
-  <h1>{{adventure.name}}</h1>
-  <img src="{{adventure.mainPicture}}">
-  <h2>Description: {{adventure.description}}</h2>
-  <h2>Average grade: {{adventure.averageGrade}}</h2>
-  <h2>Max person: {{adventure.maxPersons}}</h2>
-  <h2>Address:</h2>
-  <h3>State: {{adventure.address.state}}</h3>
-  <h3>City: {{adventure.address.city}}</h3>
-  <h3>Street: {{adventure.address.street}}</h3>
+<div class="container">
+  <div class="center" id="comp1" >
+    <h1>{{adventure.name}}</h1>
+    <img src="{{adventure.mainPicture}}">
+    <h2>Description: {{adventure.description}}</h2>
+    <h2>Average grade: {{adventure.averageGrade}}</h2>
+    <h2>Price per day: {{adventure.price}} $</h2>
+    <h2>Max person: {{adventure.maxPersons}}</h2>
+    <h2>Address:</h2>
+    <h3>State: {{adventure.address.state}}</h3>
+    <h3>City: {{adventure.address.city}}</h3>
+    <h3>Street: {{adventure.address.street}}</h3>
+  </div>
+  <div class="center">
+    <h2>Information about instructor:</h2>
+    <h3 id="ins">First name: {{adventure.instructor.firstName}}</h3>
+    <h3 id="ins">Last name: {{adventure.instructor.lastName}}</h3>
+    <h3 id="ins">Username: {{adventure.instructor.username}}</h3>
+    <h3 id="ins">Biography: </h3>
+    <h3 id="ins">{{adventure.instructor.biography}}</h3>
+    <h3 id="ins">Mobile: {{adventure.instructor.mobile}}</h3>
+
+  </div><br>
+  <div  id="comp2">
+    <h2>Available terms</h2>
+
+    <app-additional-item-boat-list (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
+   <!-- <h3>Total price of added additioanl items: {{price}} $</h3>-->
+
+  </div>
+<app-search-parametars-for-reservation [type]="type" id="comp3" [additionalItems]="additionalItems" [additionalItemPrice]="price" [boatPrice]="adventure.price" [adventure]="adventure"  [additionalItem]="additionalItem" ></app-search-parametars-for-reservation>
 </div>
-<div class="center">
-  <h2>Information about instructor:</h2>
-  <h3 id="ins">First name: {{adventure.instructor.firstName}}</h3>
-  <h3 id="ins">Last name: {{adventure.instructor.lastName}}</h3>
-  <h3 id="ins">Username: {{adventure.instructor.username}}</h3>
-  <h3 id="ins">Biography: </h3>
-  <h3 id="ins">{{adventure.instructor.biography}}</h3>
-  <h3 id="ins">Mobile: {{adventure.instructor.mobile}}</h3>
-  
-</div>
- 
-  

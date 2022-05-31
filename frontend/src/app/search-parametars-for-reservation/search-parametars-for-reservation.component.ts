@@ -9,6 +9,9 @@ import { Boat } from '../model/boat';
 import { CottageReservationCreate } from '../model/cottageReservationCreate';
 import { isThisSecond } from 'date-fns';
 import { CottageReservationService } from '../service/cottage-reservation.service';
+import { Adventure } from '../model/adventure';
+import { AdventureReservationCreate } from '../model/adventureReservationCreate';
+import { AdventureReservationService } from '../service/adventure-reservation.service';
 
 @Component({
   selector: 'app-search-parametars-for-reservation',
@@ -40,9 +43,12 @@ export class SearchParametarsForReservationComponent implements OnInit {
   @Input()
   boat :Boat;
   @Input()
+  adventure:Adventure;
+  @Input()
   cottage:Cottage;
   constructor(private boatReservationService: BoatReservationService,
-    private cottageReservationService: CottageReservationService
+    private cottageReservationService: CottageReservationService,
+    private adventureReservationService: AdventureReservationService
     ) { }
   resBoat:BoatReservationCreate=new BoatReservationCreate({
     id: 0,
@@ -64,6 +70,17 @@ export class SearchParametarsForReservationComponent implements OnInit {
     additionalItems: [],
     clientId:0,
     cottageId: 0,
+    systemEarning: 0,
+  })
+  resAdventure:AdventureReservationCreate=new AdventureReservationCreate({
+    id: 0,
+    reservationStart: '',
+    numberOfDays:0,
+    numberOfPersons: 0,
+    price: 0,
+    additionalItems: [],
+    clientId:0,
+    adventureId: 0,
     systemEarning: 0,
   })
   ngOnInit(): void {
@@ -102,6 +119,18 @@ export class SearchParametarsForReservationComponent implements OnInit {
       this.resBoat.additionalItems=this.additionalItems;
       console.log(this.resBoat);
       this.boatReservationService.addBoatReservationClient(this.resBoat).subscribe();
+    }
+    if(this.type=="adventure"){
+      this.resAdventure.reservationStart=this.search.dateAndTime;
+      this.resAdventure.numberOfPersons=this.search.numOfPerson;
+      this.resAdventure.numberOfDays=this.search.numOfDay;
+      this.resAdventure.price=this.priceOfReservation;
+      this.resAdventure.adventureId=this.adventure.id;
+      this.resAdventure.additionalItems.push(this.additionalItem);
+      this.resAdventure.clientId=this.idClient;
+      this.resAdventure.additionalItems=this.additionalItems;
+      console.log(this.resBoat);
+      this.adventureReservationService.addAdventureReservationClient(this.resAdventure).subscribe();
     }
     this.showForm=false;
     this.reservationSeccess=true;
