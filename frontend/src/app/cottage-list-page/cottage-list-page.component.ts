@@ -55,4 +55,10 @@ export class CottageListPageComponent implements OnInit {
     this.cottageService.searchCottagesForReservation(obj).subscribe(res=>this.cottages=res);
     console.log(obj);
   }
+  sortByPriceAvailableCottage(){
+    this.cottageService.sortByPriceAvailableCottage(this.cottages).subscribe(res=>this.cottages=res);
+  }
+  sortByGradeAvailableCottage(){
+    this.cottageService.sortByGradeAvailableCottage(this.cottages).subscribe(res=>this.cottages=res);
+  }
 }

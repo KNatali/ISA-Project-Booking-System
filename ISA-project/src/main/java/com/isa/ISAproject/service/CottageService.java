@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageBehavioralRuleDTO;
 import com.isa.ISAproject.dto.CottageDTO;
@@ -27,6 +28,7 @@ import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureBehavioralRule;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageBehavioralRule;
@@ -210,5 +212,30 @@ public class CottageService {
 			}
 		}
 		return availableCottages;
+	}
+	public List<Cottage> sortByGradeAvailableCottage(List<CottageDTO> cottages) {
+		List<Cottage> all_sorted_cottages = this.sortByGrade();
+		List<Cottage> sorted_cottages =new ArrayList<>();
+		for (Cottage boat : all_sorted_cottages) {
+			for (CottageDTO boat2 : cottages) {
+				if(boat.getId()==boat2.getId()) {
+					sorted_cottages.add(boat);
+				}
+			}
+		}
+		return sorted_cottages;
+	}
+	
+	public List<Cottage> sortByPriceAvailableCottage(List<CottageDTO> cottages) {
+		List<Cottage> all_sorted_cottages = this.cottageRepository.findByOrderByPriceDesc();
+		List<Cottage> sorted_cottages =new ArrayList<>();
+		for (Cottage cottage : all_sorted_cottages) {
+			for (CottageDTO cottage2 : cottages) {
+				if(cottage.getId()==cottage2.getId()) {
+					sorted_cottages.add(cottage);
+				}
+			}
+		}
+		return sorted_cottages;
 	}
 }

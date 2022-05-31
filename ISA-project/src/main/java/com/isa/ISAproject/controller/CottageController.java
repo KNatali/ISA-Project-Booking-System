@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
@@ -158,5 +158,20 @@ public class CottageController {
 		}else {
 			return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(value="api/cottages/sort-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> sortByGrade(@RequestBody List<CottageDTO> cottagesDTOS){
+		List<Cottage> cottages=this.cottageService.sortByGradeAvailableCottage(cottagesDTOS);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/sort-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> sortByPrice(@RequestBody List<CottageDTO> cottagesDTOS){
+		List<Cottage> cottages=this.cottageService.sortByPriceAvailableCottage(cottagesDTOS);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 	}
 }

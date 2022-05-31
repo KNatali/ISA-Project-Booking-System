@@ -83,4 +83,10 @@ export class AdventureService {
   searchAdventuresForReservation(obj:SearchForReservation):Observable<Adventure[]>{
     return this.http.post<Adventure[]>(`${this.urlAdventures}/` + `allAvailableAdventures`,obj);
   }
+  sortByGradeAvailableAdventure(obj:Adventure[]):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/sort-by-grade",obj);
+  }
+  sortByPriceAvailableAdventure(obj:Adventure[]):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/sort-by-price",obj);
+  }
 }

@@ -29,6 +29,14 @@ export class ReservationSearchFormComponent implements OnInit {
   sortByPriceAvailable:EventEmitter<void>=new EventEmitter();
   @Output()
   sortByGradeAvailable:EventEmitter<void>=new EventEmitter();
+  @Output()
+  sortByPriceAvailableCottage:EventEmitter<void>=new EventEmitter();
+  @Output()
+  sortByGradeAvailableCottage:EventEmitter<void>=new EventEmitter();
+  @Output()
+  sortByPriceAvailableAdventure:EventEmitter<void>=new EventEmitter();
+  @Output()
+  sortByGradeAvailableAdventure:EventEmitter<void>=new EventEmitter();
 
   constructor(private boatService: BoatService) {
     this.search.dateAndTime = new Date().toISOString().slice(0, 16);
@@ -49,9 +57,25 @@ export class ReservationSearchFormComponent implements OnInit {
 
   }
   sortByPriceAvailableBoat(){
-    this.sortByPriceAvailable.next();
+    if (this.type=="cottage"){
+      this.sortByPriceAvailableCottage.next();
+    }
+    if(this.type=="boat"){
+      this.sortByPriceAvailable.next();
+    }
+    if(this.type=="adventure"){
+      this.sortByPriceAvailableAdventure.next();
+    }
   }
   sortByGradeAvailableBoat(){
-    this.sortByGradeAvailable.next();
+    if (this.type=="cottage"){
+      this.sortByGradeAvailableCottage.next();
+    }
+    if(this.type=="boat"){
+      this.sortByGradeAvailable.next();
+    }
+    if(this.type=="adventure"){
+      this.sortByGradeAvailableAdventure.next();
+    }
   }
 }

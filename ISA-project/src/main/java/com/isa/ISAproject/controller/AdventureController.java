@@ -142,5 +142,19 @@ public class AdventureController {
 			return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value="/sort-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> sortByGrade(@RequestBody List<AdventureDTO> adventuresDTOS){
+		List<Adventure> adventures=this.adventureService.sortByGradeAvailableAdventure(adventuresDTOS);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	@RequestMapping(value="/sort-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> sortByPrice(@RequestBody List<AdventureDTO> adventuresDTOS){
+		List<Adventure> adventures=this.adventureService.sortByPriceAvailableAdventure(adventuresDTOS);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
 
 }

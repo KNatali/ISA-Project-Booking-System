@@ -74,4 +74,10 @@ export class AdventureListPageComponent implements OnInit {
     this.adventureService.searchAdventuresForReservation(obj).subscribe(res=>this.adventures=res);
     console.log(obj);
   }
+  sortByPriceAvailableAdventure(){
+    this.adventureService.sortByPriceAvailableAdventure(this.adventures).subscribe(res=>this.adventures=res);
+  }
+  sortByGradeAvailableAdventure(){
+    this.adventureService.sortByGradeAvailableAdventure(this.adventures).subscribe(res=>this.adventures=res);
+  }
 }

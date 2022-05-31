@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageOwner;
@@ -22,6 +23,7 @@ public interface CottageRepository extends JpaRepository<Cottage, Long>{
 	List<Cottage> findByAddress(String address);
 	List<Cottage> findByOrderByName();
 	List<Cottage> findByOrderByGradeDesc();
+	List<Cottage> findByOrderByPriceDesc();
 	List<Cottage> findByCottageOwner(CottageOwner cottageOwner);
 	
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
