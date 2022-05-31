@@ -5,6 +5,7 @@ import { AdventureService } from '../service/adventure.service';
 import { Instructor } from '../model/instructor';
 import { InstructorService } from '../service/instructor.service';
 import { HttpClient } from '@angular/common/http';
+import { SearchForReservation } from '../model/searchForReservation';
 
 @Component({
   selector: 'app-adventure-list-page',
@@ -17,6 +18,7 @@ export class AdventureListPageComponent implements OnInit {
   retrieveResonse: any;
   adventures: Adventure[];
   instructors: Instructor[];
+  type:string="adventure";
 
   constructor(private http: HttpClient, private adventureService: AdventureService,
     private instructorService: InstructorService, private userService: UserService) {
@@ -67,5 +69,9 @@ export class AdventureListPageComponent implements OnInit {
   findByCity(city:string){
     this.adventureService.findByCity(city)
     .subscribe(res=>this.adventures=res)
+  }
+  Search(obj:SearchForReservation){
+    this.adventureService.searchAdventuresForReservation(obj).subscribe(res=>this.adventures=res);
+    console.log(obj);
   }
 }

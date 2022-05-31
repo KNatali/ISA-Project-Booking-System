@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +18,7 @@ import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AddressMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
@@ -33,6 +36,7 @@ import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureFishingEquipmentRepository;
@@ -247,6 +251,29 @@ public class AdventureService {
 		}
 		return res;
 	}
-	
+	public List<Adventure> findAllAvailableAdventure(SearchForReservationDTO dto){
+		//treba dobaviti sve brodove
+		List<Adventure> adventures=this.adventureRepository.findAll();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getDateAndTime(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumOfDay());
+
+		List<Adventure> availableAdventures=new ArrayList<>();
+		for (Adventure adventure : adventures) {
+			Set<TimePeriod> unavailability=adventure.getUnavailability();//sve zautestosti jednog broda
+			int broj_zauzetosti=unavailability.size();
+			int brojac=0;//brokjim koliko yautesto se  preklapa sa zeljenim datumom
+			for (TimePeriod timePeriod : unavailability) {
+				if ((end.isAfter(timePeriod.getStart()) && end.isBefore(timePeriod.getEnd()))||(start.isAfter(timePeriod.getStart()) && start.isBefore(timePeriod.getEnd()))) {
+					brojac++;
+				}
+			}
+			if (broj_zauzetosti!=brojac || broj_zauzetosti==0) {
+				availableAdventures.add(adventure);
+			}
+		}
+		return availableAdventures;
+	}
 
 }

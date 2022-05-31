@@ -36,7 +36,12 @@ public class Adventure {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Instructor instructor;
-	
+	@ManyToMany(cascade =CascadeType.ALL)
+	 @JoinTable(
+	            name = "adventure_unavailability",
+	            joinColumns = @JoinColumn(name = "adventure_id"),
+	            inverseJoinColumns = @JoinColumn(name = "period_id"))
+	private Set<TimePeriod> unavailability;
 	
 	@Column
 	private double price;
@@ -218,6 +223,15 @@ public class Adventure {
 
 	public void setAdditionalItems(Set<AdditionalItem> additionalItems) {
 		this.additionalItems = additionalItems;
+	}
+	
+
+	public Set<TimePeriod> getUnavailability() {
+		return unavailability;
+	}
+
+	public void setUnavailability(Set<TimePeriod> unavailability) {
+		this.unavailability = unavailability;
 	}
 
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,

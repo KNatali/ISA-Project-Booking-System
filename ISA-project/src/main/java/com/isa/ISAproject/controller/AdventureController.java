@@ -22,6 +22,7 @@ import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
@@ -130,6 +131,16 @@ public class AdventureController {
 		List<Adventure> adventures=this.adventureService.findByCity(city);
 		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
 	}
-	
+	@RequestMapping(value="/allAvailableAdventures",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)	
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> findAllAvailableAdventure(@RequestBody SearchForReservationDTO dto){
+		List<Adventure> adventures=this.adventureService.findAllAvailableAdventure(dto);
+		if(adventures==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+		}
+	}
 
 }

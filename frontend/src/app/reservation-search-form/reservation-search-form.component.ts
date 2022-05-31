@@ -21,6 +21,8 @@ export class ReservationSearchFormComponent implements OnInit {
   formIsFill:EventEmitter<SearchForReservation>=new EventEmitter();
   @Output()
   formIsFillCottage:EventEmitter<SearchForReservation>=new EventEmitter();
+  @Output()
+  formIsFillAdventure:EventEmitter<SearchForReservation>=new EventEmitter();
 
 
   @Output()
@@ -40,6 +42,9 @@ export class ReservationSearchFormComponent implements OnInit {
     }
     if(this.type=="boat"){
       this.formIsFill.next(this.search);
+    }
+    if(this.type=="adventure"){
+      this.formIsFillAdventure.next(this.search);
     }
 
   }

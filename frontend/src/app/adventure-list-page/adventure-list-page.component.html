@@ -1,4 +1,7 @@
-<app-search-adventure [instructors]=instructors (AddedInstructor)="findByInstructor($event)"
+<div class="container">
+  <app-search-adventure class="comp1" [instructors]=instructors (AddedInstructor)="findByInstructor($event)"
     (NameAdded)="findByName($event)"
     (AddressAdded)="findByCity($event)"></app-search-adventure>
+    <app-reservation-search-form class="comp1" [type]="type" (formIsFillAdventure)="Search($event)"></app-reservation-search-form>
+</div>
 <app-adventure-card [adventures]=adventures></app-adventure-card>

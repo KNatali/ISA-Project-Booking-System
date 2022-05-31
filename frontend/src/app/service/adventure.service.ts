@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { AdventureRevision } from '../model/adventureRevision';
+import { SearchForReservation } from '../model/searchForReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -78,5 +79,8 @@ export class AdventureService {
   findByCity(city: string): Observable<Adventure[]> {
     const params: HttpParams = new HttpParams().append('city', city);
     return this.http.get<Adventure[]>(this.urlAdventures, { params });
+  }
+  searchAdventuresForReservation(obj:SearchForReservation):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(`${this.urlAdventures}/` + `allAvailableAdventures`,obj);
   }
 }
