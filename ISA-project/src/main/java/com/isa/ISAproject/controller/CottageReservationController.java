@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Boat;
@@ -98,5 +99,13 @@ public class CottageReservationController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} 
 		return new ResponseEntity<>(new CottageReservationDTO(cottageReservation.get()), HttpStatus.OK);
+	}
+
+	@RequestMapping(value="api/cottageReservation/client/addReservation",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<CottageReservationDTO>  addCottageReservation(@RequestBody CottageReservationClientDTO dto) {
+		CottageReservationDTO res=this.cottageReservationService.addCottageReservationClient(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 }

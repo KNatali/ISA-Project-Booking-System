@@ -17,6 +17,7 @@ export class BoatDetailsPageComponent implements OnInit {
     price:0,
     id:0
   });
+  type:string="boat";
   additionalItems:AdditionalItem[]=[];
   price:number=0;
   @Output()
