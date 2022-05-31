@@ -4,6 +4,7 @@ import { CottageReservationListComponent } from '../cottage-reservation-list/cot
 import { Observable } from 'rxjs';
 import { CottageReservation } from '../model/cottage-reservation';
 import { CottageFastReservation } from '../model/cottageFastReservation';
+import { CottageReservationCreate } from '../model/cottageReservationCreate';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +33,8 @@ export class CottageReservationService {
   }
   getById(id: number): Observable<CottageReservation> {
     return this.http.get<CottageReservation>(`${this.urlReservation}/${id}`);
+  }
+  addCottageReservationClient(res:CottageReservationCreate){
+    return this.http.post<CottageReservationCreate>(this.urlReservation+"/client/addReservation",res);
   }
 }

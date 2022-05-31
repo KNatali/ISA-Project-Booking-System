@@ -4,6 +4,8 @@ import { Client } from "./client";
 interface BoatReservationInterface{
     id?:number;
     date:Date;
+    reservationStart:string;
+    reservationEnd:string;
     price:number;
     maxPersons:number;
     duration:number;
@@ -18,6 +20,9 @@ export class BoatReservation implements BoatReservationInterface{
     duration: number;
     client: Client;
     boat:Boat;
+    //dodata 2 naredna reda
+    reservationStart:string;
+    reservationEnd:string;
     constructor(obj:BoatReservationInterface){
         this.id=obj.id;
         this.date=obj.date;
@@ -26,5 +31,7 @@ export class BoatReservation implements BoatReservationInterface{
         this.maxPersons=obj.maxPersons;
         this.price=obj.price;
         this.duration=obj.duration;
+        this.reservationStart=obj.reservationStart;
+        this.reservationEnd=obj.reservationEnd;
     }
 }

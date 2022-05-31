@@ -123,6 +123,7 @@ public class CottageReservationDTO {
 		this.client=new ClientProfileDTO(res.getClient());
 		this.cottage=new CottageDTO(res.getCottage());
 		this.date=res.getDate();
+		this.reservationStart=res.getReservationStart().toString();
 		//this.time=res.getTime();
 		this.duration=res.getDuration();
 		this.maxPersons=res.getMaxPersons();

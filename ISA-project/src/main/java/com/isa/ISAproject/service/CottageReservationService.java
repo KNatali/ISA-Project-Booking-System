@@ -16,6 +16,7 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
@@ -119,7 +120,7 @@ public class CottageReservationService {
 		List<CottageReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (CottageReservation r : allRes) {
-			if(r.getDate().isBefore(lt)) {
+			if(r.getReservationStart().isBefore(lt)) {
 				res.add(r);
 			}
 		}
@@ -175,5 +176,61 @@ public class CottageReservationService {
 	}
 	public Optional<CottageReservation> findById(Long id) {
 		return this.cottageReservationRepository.findById(id);
+	}
+
+	public CottageReservationDTO  addCottageReservationClient(CottageReservationClientDTO dto)
+	{
+		Optional<Client> clientOpt=this.clientRepository.findById(dto.getClientId());
+		if(!clientOpt.isPresent()) {
+			return null;
+		}
+		Client client=clientOpt.get();///////client
+	
+		Optional<Cottage> cottageOpt=this.cottageRepository.findById(dto.getCottageId());
+		if(!cottageOpt.isPresent()) {
+			return null;
+		}
+		Cottage cottage=cottageOpt.get();////boat
+	
+		CottageReservation cottageReservation=new CottageReservation();
+	
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = start.plusDays(dto.getNumberOfDays());
+	
+		cottageReservation.setReservationStart(start);
+		cottageReservation.setReservationEnd(end);
+		cottageReservation.setCottage(cottage);
+		cottageReservation.setClient(client);
+	
+		Set<AdditionalItem> items=new HashSet<>();
+		int price=(int) (cottage.getPrice()*dto.getNumberOfDays()*dto.getNumberOfPersons());
+		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
+			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
+			items.add(a);
+			price+=a.getPrice();		
+		}
+		cottageReservation.setAdditionalItems(items);
+		cottageReservation.setSystemEarning(price);
+		cottageReservation.setPrice(price);
+		cottageReservation.setMaxPersons(dto.getNumberOfPersons());
+	
+		int day_start=start.getDayOfYear();
+		int day_end=end.getDayOfYear();
+	
+		int duration=day_end-day_start;
+		cottageReservation.setDuration(duration);
+		CottageReservation saved=this.cottageReservationRepository.save(cottageReservation);
+	
+		String message="Yoe successufuly made reservation for cottage "+cottage.getName()+".Check this in your reservation list";
+	
+		try {
+			this.emailService.sendMessage(client.getEmail(), message);
+		} catch (MailException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return CottageReservationMapper.convertToDTO(saved);
 	}
 }
