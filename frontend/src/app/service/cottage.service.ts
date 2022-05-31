@@ -91,4 +91,10 @@ export class CottageService {
   getUnavailabilityByCottage(id: number): Observable<TimePeriod[]> {
     return this.http.get<TimePeriod[]>(`${this.urlCottages}/` + `getUnavailability` + `/${id}`);
   }
+  sortByGradeAvailableCottage(obj:Cottage[]):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/sort-by-grade",obj);
+  }
+  sortByPriceAvailableCottage(obj:Cottage[]):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/sort-by-price",obj);
+  }
 }

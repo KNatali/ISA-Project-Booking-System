@@ -17,6 +17,7 @@ import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
@@ -274,6 +275,32 @@ public class AdventureService {
 			}
 		}
 		return availableAdventures;
+	}
+
+	public List<Adventure> sortByGradeAvailableAdventure(List<AdventureDTO> adventures) {
+		List<Adventure> all_sorted_adventures = this.adventureRepository.findByOrderByAverageGradeDesc();
+		List<Adventure> sorted_adventures =new ArrayList<>();
+		for (Adventure adventure : all_sorted_adventures) {
+			for (AdventureDTO adventure2 : adventures) {
+				if(adventure.getId()==adventure2.getId()) {
+					sorted_adventures.add(adventure);
+				}
+			}
+		}
+		return sorted_adventures;
+	}
+	
+	public List<Adventure> sortByPriceAvailableAdventure(List<AdventureDTO> adventures) {
+		List<Adventure> all_sorted_adventures = this.adventureRepository.findByOrderByPriceDesc();
+		List<Adventure> sorted_adventures =new ArrayList<>();
+		for (Adventure adventure : all_sorted_adventures) {
+			for (AdventureDTO adventure2 : adventures) {
+				if(adventure.getId()==adventure2.getId()) {
+					sorted_adventures.add(adventure);
+				}
+			}
+		}
+		return sorted_adventures;
 	}
 
 }
