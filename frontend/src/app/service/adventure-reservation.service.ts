@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
+import { AdventureReservationCreate } from '../model/adventureReservationCreate';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,8 @@ export class AdventureReservationService {
   }
   getById(id: number): Observable<AdventureReservation> {
     return this.http.get<AdventureReservation>(`${this.urlReservation}/${id}`);
+  }
+  addAdventureReservationClient(res:AdventureReservationCreate){
+    return this.http.post<AdventureReservationCreate>(this.urlReservation+"/client/addReservation",res);
   }
 }

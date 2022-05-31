@@ -17,3 +17,16 @@ h1,h2,h3{
 #ins{
   text-align: left;
 }
+.container {
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+margin-bottom: 30px;
+}
+
+.comp1, .comp2, .comp3 {
+border: 1px solid black;
+flex-grow: 1;
+margin-left: 30px;
+}
+

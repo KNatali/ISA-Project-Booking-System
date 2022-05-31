@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Adventure } from '../model/adventure';
 import { ActivatedRoute } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
+import { AdditionalItem } from '../model/additionalItem';
 
 @Component({
   selector: 'app-adventure-datails-page',
@@ -10,7 +11,15 @@ import { AdventureService } from '../service/adventure.service';
 })
 export class AdventureDatailsPageComponent implements OnInit {
   id: number;
+  additionalItems:AdditionalItem[]=[];
+  price:number=0;
   adventure: Adventure;
+  type:string="adventure";
+  additionalItem:AdditionalItem=new AdditionalItem({
+    name:'',
+    price:0,
+    id:0
+  });
 
   constructor(private route: ActivatedRoute,private adventureService:AdventureService) { }
 
@@ -23,6 +32,13 @@ export class AdventureDatailsPageComponent implements OnInit {
       this.adventureService.getAdventure(this.id)
         .subscribe((adventure: Adventure) => this.adventure = adventure);
     });
+  }
+  addAdditionalItem(item:AdditionalItem){
+    this.additionalItem=item;
+    this.additionalItems.push(item);
+    //this.addedOneAdditioanlItem.next(item);
+    this.price=this.price+item.price;
+    console.log("boat details",this.price);
   }
 
 }
