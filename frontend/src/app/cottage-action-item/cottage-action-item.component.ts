@@ -53,6 +53,17 @@ export class CottageActionItemComponent implements OnInit {
       .subscribe(res => this.client = res)
   }
   Reserve(){
-    this.reserved.next();
+    this.reservation.reservationStart=this.cottageFastReservation.reservationStart;
+    this.reservation.reservationEnd=this.cottageFastReservation.reservationEnd;
+    this.reservation.validityStart=this.cottageFastReservation.validityStart;
+    this.reservation.validityEnd=this.cottageFastReservation.validityEnd;
+    this.reservation.duration=this.cottageFastReservation.duration;
+    this.reservation.maxPersons=this.cottageFastReservation.maxPersons;
+    this.reservation.items=this.cottageFastReservation.items;
+    this.reservation.client=this.client;
+    this.reservation.cottage=this.cottageFastReservation.cottage;
+    this.cottageReservationService.reserveCottageFastReservation(this.reservation)
+    .subscribe();
+    this.reserved.next()
   }
 }

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
+import com.isa.ISAproject.dto.ReserveCottageFastReservation;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.BoatFastReservationMapper;
@@ -75,6 +80,17 @@ public class CottageFastReservationService {
 		}
 		return res;
 		
+	}
+	public CottageFastReservation findById(Long id) {
+		Optional<CottageFastReservation> OPt=this.cottageFastReservationRepository.findById(id);
+		if (!OPt.isPresent()) {
+			return null;
+		} 
+		CottageFastReservation res=OPt.get();
+		return res;
+	}
+	public void delite(CottageFastReservation a) {
+		this.cottageFastReservationRepository.delete(a);
 	}
 	public List<CottageFastReservationDTO> getFastReservationsByCottageClient(Long id){
 		
@@ -207,5 +223,25 @@ public class CottageFastReservationService {
 		
 		
 		return CottageFastReservationMapper.convertToDTO(res);
+	}
+	public CottageReservationDTO convertToCottageReservationDTO(ReserveCottageFastReservation dto){
+		CottageReservationDTO res=new CottageReservationDTO();
+		res.setReservationStart(dto.getReservationStart());
+		res.setReservationEnd(dto.getReservationEnd());
+		
+		//treba ispuniti i duratino
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		res.setDuration(duration);
+		
+		res.setCottage(dto.getCottage());
+		res.setClient(dto.getClient());
+		res.setMaxPersons(dto.getMaxPersons());
+		res.setAdditionalItems(dto.getAdditionalItems());
+		return res;
 	}
 }

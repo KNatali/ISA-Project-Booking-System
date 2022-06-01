@@ -6,7 +6,7 @@
           </tr>
       </thead>
       <tbody >
-        <tr app-boat-action-item *ngFor="let action of actions" [boatFastReservation]=action
+        <tr app-boat-action-item *ngFor="let action of actions" [boatFastReservation]=action (reserved)="refresh()"
         ></tr>
   </tbody>
   </table>

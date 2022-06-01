@@ -19,9 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
+import com.isa.ISAproject.dto.ReserveCottageFastReservation;
+import com.isa.ISAproject.model.BoatFastReservation;
+import com.isa.ISAproject.model.CottageFastReservation;
 import com.isa.ISAproject.service.CottageFastReservationService;
+import com.isa.ISAproject.service.CottageReservationService;
 
 
 @CrossOrigin("*")
@@ -30,6 +37,9 @@ public class CottageFastReservationController {
 
 	@Autowired
 	private CottageFastReservationService cottageFastReservationService;
+	
+	@Autowired
+	private CottageReservationService cottageReservationService;
 	
 	@RequestMapping(
 			value="api/cottageOwners/fastReservations/{id}",method = RequestMethod.GET,
@@ -94,5 +104,16 @@ public class CottageFastReservationController {
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/fastReservations/reserve",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<CottageReservationDTO> reserveFastReservation(@RequestBody ReserveCottageFastReservation dto){
+		CottageReservationDTO reservationDTO=this.cottageFastReservationService.convertToCottageReservationDTO(dto);
+		CottageReservationDTO created=this.cottageReservationService.addCottageReservation(reservationDTO);
+		//treba izbrisati tu akciju
+		CottageFastReservation fast=this.cottageFastReservationService.findById(dto.getCottage().getId());
+		this.cottageFastReservationService.delite(fast);
+		return new ResponseEntity<>(created,HttpStatus.OK);
 	}
 }
