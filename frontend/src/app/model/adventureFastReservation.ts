@@ -40,6 +40,6 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
         this.price = obj.price;
         this.additionalItems = obj.additionalItems;
         this.adventure = obj.adventure;
-        this.durationHours=obj.durationHours*obj.maxPersons*obj.price;
+        this.durationHours=obj.durationHours;
     }
 }
