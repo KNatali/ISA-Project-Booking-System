@@ -1,7 +1,8 @@
+import { Client } from './client';
 import { AdditionalItem } from "./additionalItem";
 import { Boat } from "./boat";
 
-export interface BoatFastReservationInterface {
+export interface ReserveBoatFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -10,10 +11,11 @@ export interface BoatFastReservationInterface {
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-    boat: Boat;
+    boat?: Boat;
     duration:number;
+    client:Client;
 }
-export class BoatFastReservation implements BoatFastReservationInterface {
+export class ReserveBoatFastReservation implements ReserveBoatFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -22,9 +24,10 @@ export class BoatFastReservation implements BoatFastReservationInterface {
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-    boat: Boat;
+    boat?: Boat;
     duration:number;
-    constructor(obj: BoatFastReservationInterface) {
+    client:Client;
+    constructor(obj: ReserveBoatFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
         this.reservationEnd = obj.reservationEnd;
@@ -35,5 +38,6 @@ export class BoatFastReservation implements BoatFastReservationInterface {
         this.additionalItems = obj.additionalItems;
         this.boat = obj.boat;
         this.duration=obj.duration;
+        this.boat=obj.boat;
     }
 }

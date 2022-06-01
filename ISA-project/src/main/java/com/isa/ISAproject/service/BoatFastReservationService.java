@@ -16,14 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.EditBoatFastReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.BoatFastReservationMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.model.Client;
@@ -69,6 +72,29 @@ public class BoatFastReservationService {
 			BoatFastReservationDTO btfdto = new BoatFastReservationDTO(b.getId(), b.getReservationStart().format(formatter), b.getReservationEnd().format(formatter), b.getDuration(), b.getMaxPersons(), b.getPrice(), b.getValidityStart().format(formatter1), b.getValidityEnd().format(formatter1), boat, items);
 			res.add(btfdto); 
 			 
+		}
+		return res;
+		
+	}
+	public List<BoatFastReservationDTO> getFastReservationsByBoatClient(Long id){
+		
+		List<BoatFastReservationDTO> res=new ArrayList<>();
+		List<BoatFastReservation> reservations=boatFastReservationRepository.findAll();
+		
+		for (BoatFastReservation a : reservations) {
+			if(a.getBoat().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(BoatFastReservationMapper.convertToDTO(a));
+		
+		}
+		for (BoatFastReservation boatFastReservation : reservations) {
+			for (BoatFastReservationDTO dto : res) {
+				if(boatFastReservation.getId()==dto.getId()) {
+					int startDay=boatFastReservation.getReservationStart().getDayOfYear();
+					int endDay=boatFastReservation.getReservationEnd().getDayOfYear();
+					int duration=endDay-startDay;
+					dto.setDuration(duration);
+				}
+			}
 		}
 		return res;
 		

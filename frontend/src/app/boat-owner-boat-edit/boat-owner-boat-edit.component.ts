@@ -93,7 +93,8 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     maxPersons: 0,
     price: 0,
     additionalItems: [],
-    boat: this.editedBoat
+    boat: this.editedBoat,
+    duration:0
   })
   time: TimePeriod = new TimePeriod({
     start: '',

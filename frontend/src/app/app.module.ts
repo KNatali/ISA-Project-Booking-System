@@ -184,6 +184,8 @@ import { ReservationSearchFormComponent } from './reservation-search-form/reserv
 import { SearchParametarsForReservationComponent } from './search-parametars-for-reservation/search-parametars-for-reservation.component';
 import { AdventureActionListComponent } from './adventure-action-list/adventure-action-list.component';
 import { AdventureActionItemComponent } from './adventure-action-item/adventure-action-item.component';
+import { BoatActionItemComponent } from './boat-action-item/boat-action-item.component';
+import { BoatActionListComponent } from './boat-action-list/boat-action-list.component';
 
 
 @NgModule({
@@ -351,7 +353,9 @@ import { AdventureActionItemComponent } from './adventure-action-item/adventure-
     ReservationSearchFormComponent,
     SearchParametarsForReservationComponent,
     AdventureActionListComponent,
-    AdventureActionItemComponent
+    AdventureActionItemComponent,
+    BoatActionItemComponent,
+    BoatActionListComponent
 
   ],
   imports: [

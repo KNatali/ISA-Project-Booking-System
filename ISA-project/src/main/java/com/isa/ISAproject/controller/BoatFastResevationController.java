@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.EditBoatFastReservationDTO;
 import com.isa.ISAproject.service.BoatFastReservationService;
@@ -46,6 +47,16 @@ public class BoatFastResevationController {
 		List<BoatFastReservationDTO> list=new ArrayList<>();
 		list=this.boatFastReservationService.getFastReservationsByBoat(boatId);
 		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/boat/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatFastReservationDTO>> getFastReservationsByBoatClient(@PathVariable(name="id") Long boatId){
+		List<BoatFastReservationDTO> list=new ArrayList<>();
+		list=this.boatFastReservationService.getFastReservationsByBoatClient(boatId);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="api/boatReservation/addFastReservation",method = RequestMethod.PUT,produces = {
