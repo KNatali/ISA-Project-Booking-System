@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
 import com.isa.ISAproject.service.CottageFastReservationService;
@@ -48,6 +49,16 @@ public class CottageFastReservationController {
 	public ResponseEntity<List<CottageFastReservationDTO>> getFastReservationsByCottage(@PathVariable(name="id") Long cottageId){
 		List<CottageFastReservationDTO> list=new ArrayList<>();
 		list=this.cottageFastReservationService.getFastReservationsByCottage(cottageId);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/cottages/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageFastReservationDTO>> getFastReservationsByCottageClient(@PathVariable(name="id") Long id){
+		List<CottageFastReservationDTO> list=new ArrayList<>();
+		list=this.cottageFastReservationService.getFastReservationsByCottageClient(id);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}

@@ -1,7 +1,8 @@
+import { Client } from './client';
 import { AdditionalItem } from "./additionalItem";
 import { Cottage } from "./cottage";
 
-export interface CottageFastReservationInterface {
+export interface ReserveCottageFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -10,10 +11,11 @@ export interface CottageFastReservationInterface {
     maxPersons: number;
     price: number;
     items: AdditionalItem[];
-    cottage: Cottage;
+    cottage?: Cottage;
     duration:number;
+    client:Client;
 }
-export class CottageFastReservation implements CottageFastReservationInterface {
+export class ReserveCottageFastReservation implements ReserveCottageFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -22,9 +24,10 @@ export class CottageFastReservation implements CottageFastReservationInterface {
     maxPersons: number;
     price: number;
     items: AdditionalItem[];
-    cottage: Cottage;
+    cottage?: Cottage;
     duration:number;
-    constructor(obj: CottageFastReservationInterface) {
+    client:Client;
+    constructor(obj: ReserveCottageFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
         this.reservationEnd = obj.reservationEnd;
@@ -35,5 +38,6 @@ export class CottageFastReservation implements CottageFastReservationInterface {
         this.items = obj.items;
         this.cottage = obj.cottage;
         this.duration=obj.duration;
+        this.client=obj.client;
     }
 }

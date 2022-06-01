@@ -77,7 +77,8 @@ export class CottageOwnerActionAddComponent implements OnInit {
     maxPersons: 0,
     price: 0,
     items: this.additionalItems,
-    cottage: this.selectedCottage
+    cottage: this.selectedCottage,
+    duration:0
   })
   constructor(private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageOwnerService: CottageOwnerService, private cottageService: CottageService, private cottageReservationService: CottageReservationService) { }
 
