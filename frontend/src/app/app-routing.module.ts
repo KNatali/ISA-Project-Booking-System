@@ -1,3 +1,4 @@
+import { AdventureActionListComponent } from './adventure-action-list/adventure-action-list.component';
 import { AdminFirstLoginComponent } from './admin-first-login/admin-first-login.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
@@ -115,7 +116,8 @@ const routes: Routes = [
   { path: 'complaint-cottage-reservation/:id',component:ComplainCottageReservationComponent},
   { path: 'complaint-instructor/:id', component:ComplainInstructorComponent},
 
-  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent}
+  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent},
+  { path: 'adventure-actions/:id',component:AdventureActionListComponent}
 
 
 

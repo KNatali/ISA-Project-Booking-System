@@ -182,6 +182,8 @@ import { ComplainInstructorComponent } from './complain-instructor/complain-inst
 import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 import { ReservationSearchFormComponent } from './reservation-search-form/reservation-search-form.component';
 import { SearchParametarsForReservationComponent } from './search-parametars-for-reservation/search-parametars-for-reservation.component';
+import { AdventureActionListComponent } from './adventure-action-list/adventure-action-list.component';
+import { AdventureActionItemComponent } from './adventure-action-item/adventure-action-item.component';
 
 
 @NgModule({
@@ -347,7 +349,9 @@ import { SearchParametarsForReservationComponent } from './search-parametars-for
     ComplainInstructorComponent,
     ClientDeleteProfilComponent,
     ReservationSearchFormComponent,
-    SearchParametarsForReservationComponent
+    SearchParametarsForReservationComponent,
+    AdventureActionListComponent,
+    AdventureActionItemComponent
 
   ],
   imports: [

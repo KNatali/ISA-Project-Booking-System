@@ -1,0 +1,14 @@
+<div>
+  <table class="table table-striped ">
+      <thead>
+          <tr>
+              <th>Start</th><th>End</th><th>Persons</th><th>Duration [h]</th><th>End of validity</th><th>Price before [per hour for one person]</th><th>Price after</th><th>Reserve</th>
+          </tr>
+      </thead>
+      <tbody >
+        <tr app-adventure-action-item *ngFor="let action of actions" [adventureFastReservation]=action [startReseration]="action.reservationStart"
+        [endReseration]="action.reservationEnd" [normal_price]="action.adventure.price"
+        ></tr>
+  </tbody>
+  </table>
+</div>

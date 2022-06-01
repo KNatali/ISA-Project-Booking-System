@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,10 @@ import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveAdventureFastResrvationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
@@ -52,6 +56,17 @@ public class AdventureFastReservationService {
 	@Autowired
 	private TimePeriodRepository timePeriodRepository;
 
+	public void delite(AdventureFastReservation a) {
+		this.adventureFastReservationRepository.delete(a);
+	}
+	public AdventureFastReservation findById(Long id) {
+		Optional<AdventureFastReservation> OPt=this.adventureFastReservationRepository.findById(id);
+		if (!OPt.isPresent()) {
+			return null;
+		} 
+		AdventureFastReservation res=OPt.get();
+		return res;
+	}
 	public List<AdventureFastReservationDTO> getFastReservationsByInstructor(Long id){
 		
 		List<AdventureFastReservationDTO> res=new ArrayList<>();
@@ -85,6 +100,29 @@ public class AdventureFastReservationService {
 			if(a.getAdventure().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		
+		}
+		return res;
+		
+	}
+	public List<AdventureFastReservationDTO> getFastReservationsByAdventureClient(Long id){
+		
+		List<AdventureFastReservationDTO> res=new ArrayList<>();
+		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
+		
+		for (AdventureFastReservation a : reservations) {
+			if(a.getAdventure().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(AdventureFastReservationMapper.convertToDTO(a));
+		
+		}
+		for (AdventureFastReservation adventureFastReservation : reservations) {
+			for (AdventureFastReservationDTO dto : res) {
+				if(adventureFastReservation.getId()==dto.getId()) {
+					int startHour=adventureFastReservation.getReservationStart().getHour();
+					int endHour=adventureFastReservation.getReservationEnd().getHour();
+					int duration=endHour-startHour;
+					dto.setDurationHours(duration);
+				}
+			}
 		}
 		return res;
 		
@@ -185,5 +223,15 @@ public class AdventureFastReservationService {
 		
 		return AdventureFastReservationMapper.convertToDTO(res);
 		//return oldPeriod;
+	}
+	public AdventureReservationDTO convertToAdventureReservation(ReserveAdventureFastResrvationDTO dto){
+		AdventureReservationDTO res=new AdventureReservationDTO();
+		res.setReservationStart(dto.getReservationStart());
+		res.setReservationEnd(dto.getReservationEnd());
+		res.setAdventure(dto.getAdventure());
+		res.setClient(dto.getClient());
+		res.setNumberOfPersons(dto.getMaxPersons());
+		res.setAdditionalItems(dto.getAdditionalItems());
+		return res;
 	}
 }

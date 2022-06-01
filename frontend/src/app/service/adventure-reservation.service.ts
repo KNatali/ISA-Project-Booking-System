@@ -5,6 +5,7 @@ import { AdventureReservation } from '../model/AdventureReservation';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
 import { AdventureReservationCreate } from '../model/adventureReservationCreate';
+import { ReserveAdventureFastReservation } from '../model/reserveAdventureFastReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { AdventureReservationCreate } from '../model/adventureReservationCreate'
 export class AdventureReservationService {
   url = "http://localhost:8090/api/adventure-reservations";
   urlReservation = "http://localhost:8090/api/adventureReservation";
+  url_fast="http://localhost:8090/api/adventure/fastReservations";
   constructor(private http: HttpClient) { }
 
   allAdventureReservations(): Observable<AdventureReservation[]> {
@@ -41,5 +43,11 @@ export class AdventureReservationService {
   }
   addAdventureReservationClient(res:AdventureReservationCreate){
     return this.http.post<AdventureReservationCreate>(this.urlReservation+"/client/addReservation",res);
+  }
+  getFastReservation(id:number):Observable<AdventureFastReservation[]>{
+    return this.http.get<AdventureFastReservation[]>(`${this.url_fast}/${id}`);
+  }
+  reserveAdventureFastReservation(res:ReserveAdventureFastReservation){
+    return this.http.post<ReserveAdventureFastReservation>(this.url_fast+"/reserve",res);
   }
 }
