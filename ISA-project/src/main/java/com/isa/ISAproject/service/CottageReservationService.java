@@ -146,7 +146,7 @@ public class CottageReservationService {
 		
 		
 		long days = Duration.between(start, end).toDays();
-		int price=(int) (cottage.getPrice()*days);
+		int price=(int) (cottage.getPrice()*days*dto.getMaxPersons());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
 			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
@@ -156,6 +156,7 @@ public class CottageReservationService {
 		}
 		double earning=SystemEarnings.percentage*price/100;
 		CottageReservation res=new CottageReservation(dto.getId(),start,end,cottage,dto.getMaxPersons(),price,items,client,null,earning);
+		res.setDuration((int)days);
 		res.setSystemEarning(earning);
 		cottageReservationRepository.save(res);
 		List<CottageReservation> list=client.getCottageReservations();
