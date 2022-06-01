@@ -9,6 +9,7 @@ import { BoatFastReservation } from '../model/boatFastReservation';
 import { EditBoatFastReservation } from '../model/editBoatFastReservation';
 
 import { BoatReservationCreate } from '../model/boatReservationCreate';
+import { ReserveBoatFastReservation } from '../model/reserveBoatFastReservation';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ import { BoatReservationCreate } from '../model/boatReservationCreate';
 export class BoatReservationService {
   url = "http://localhost:8090/api/boat-reservations";
   urlReservation = "http://localhost:8090/api/boatReservation";
+  url_fast="http://localhost:8090/api/boat/fastReservations";
 
   constructor(private http: HttpClient) { }
   addBoatReservationClient(res:BoatReservationCreate){
@@ -46,5 +48,11 @@ export class BoatReservationService {
   }
   getById(id: number): Observable<BoatReservation> {
     return this.http.get<BoatReservation>(`${this.urlReservation}/${id}`);
+  }
+  getFastReservation(id:number):Observable<BoatFastReservation[]>{
+    return this.http.get<BoatFastReservation[]>(`${this.url_fast}/${id}`);
+  }
+  reserveAdventureFastReservation(res:ReserveBoatFastReservation){
+    return this.http.post<ReserveBoatFastReservation>(this.url_fast+"/reserve",res);
   }
 }

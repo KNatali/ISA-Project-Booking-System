@@ -1,0 +1,13 @@
+<div>
+  <table class="table table-striped ">
+      <thead>
+          <tr>
+              <th>Start</th><th>End</th><th>Persons</th><th>Duration [day]</th><th>End of validity</th><th>Price before [per hour for one person]</th><th>Price after</th><th>Reserve</th>
+          </tr>
+      </thead>
+      <tbody >
+        <tr app-boat-action-item *ngFor="let action of actions" [boatFastReservation]=action
+        ></tr>
+  </tbody>
+  </table>
+</div>
