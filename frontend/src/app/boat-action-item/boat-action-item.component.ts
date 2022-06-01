@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { Client } from '../model/client';
 import { ReserveBoatFastReservation } from '../model/reserveBoatFastReservation';
@@ -13,6 +13,8 @@ import { ClientService } from '../service/client.service';
 export class BoatActionItemComponent implements OnInit {
   @Input()
   boatFastReservation:BoatFastReservation;
+  @Output()
+  reserved:EventEmitter<null>=new EventEmitter();
   constructor(private clientService:ClientService,
     private boatReservationService: BoatReservationService
 ) { }
@@ -49,6 +51,19 @@ export class BoatActionItemComponent implements OnInit {
     this.clientService.getById(this.id)
       .subscribe(res => this.client = res)
   }
-  Reserve(){}
+  Reserve(){
+    this.reservation.reservationStart=this.boatFastReservation.reservationStart;
+    this.reservation.reservationEnd=this.boatFastReservation.reservationEnd;
+    this.reservation.validityStart=this.boatFastReservation.validityStart;
+    this.reservation.validityEnd=this.boatFastReservation.validityEnd;
+    this.reservation.duration=this.boatFastReservation.duration;
+    this.reservation.maxPersons=this.boatFastReservation.maxPersons;
+    this.reservation.additionalItems=this.boatFastReservation.additionalItems;
+    this.reservation.client=this.client;
+    this.reservation.boat=this.boatFastReservation.boat;
+    this.boatReservationService.reserveBoatFastReservation(this.reservation)
+    .subscribe();
+    this.reserved.next()
+  }
 
 }

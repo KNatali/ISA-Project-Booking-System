@@ -52,7 +52,7 @@ export class BoatReservationService {
   getFastReservation(id:number):Observable<BoatFastReservation[]>{
     return this.http.get<BoatFastReservation[]>(`${this.url_fast}/${id}`);
   }
-  reserveAdventureFastReservation(res:ReserveBoatFastReservation){
+  reserveBoatFastReservation(res:ReserveBoatFastReservation){
     return this.http.post<ReserveBoatFastReservation>(this.url_fast+"/reserve",res);
   }
 }
