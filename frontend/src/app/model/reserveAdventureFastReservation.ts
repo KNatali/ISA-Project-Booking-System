@@ -6,7 +6,7 @@ import { AdventureFishingEquipment } from "./adventureFishingEquipment";
 import { Instructor } from "./instructor";
 import { Adventure } from './adventure';
 
-export interface AdventureFastReservationInterface {
+export interface ReserveAdventureFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -15,11 +15,11 @@ export interface AdventureFastReservationInterface {
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-    adventure: Adventure;
+    adventure?: Adventure;
     durationHours:number;
-
+    client:Client;
 }
-export class AdventureFastReservation implements AdventureFastReservationInterface {
+export class ReserveAdventureFastReservation implements ReserveAdventureFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
@@ -28,9 +28,10 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-    adventure: Adventure;
+    adventure?: Adventure;
     durationHours:number;
-    constructor(obj: AdventureFastReservationInterface) {
+    client:Client;
+    constructor(obj: ReserveAdventureFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
         this.reservationEnd = obj.reservationEnd;
@@ -40,6 +41,7 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
         this.price = obj.price;
         this.additionalItems = obj.additionalItems;
         this.adventure = obj.adventure;
-        this.durationHours=obj.durationHours*obj.maxPersons*obj.price;
+        this.durationHours=obj.durationHours;
+        this.client=obj.client;
     }
 }

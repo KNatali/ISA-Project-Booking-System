@@ -25,7 +25,7 @@ public class AdventureFastReservationMapper {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
-		AdventureFastReservationDTO dto=new AdventureFastReservationDTO(a.getId(),a.getReservationStart().format(formatter),a.getReservationEnd().format(formatter),a.getMaxPersons(),a.getPrice(),a.getValidityStart().format(formatter1),a.getValidityEnd().format(formatter1),adventure,items);
+		AdventureFastReservationDTO dto=new AdventureFastReservationDTO(a.getId(),a.getReservationStart().format(formatter),a.getReservationEnd().format(formatter),0,a.getMaxPersons(),a.getPrice(),a.getValidityStart().format(formatter1),a.getValidityEnd().format(formatter1),adventure,items);
 	return dto;
 	}
 

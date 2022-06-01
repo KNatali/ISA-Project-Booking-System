@@ -77,7 +77,8 @@ export class InstructorActionAddComponent implements OnInit {
     maxPersons: 0,
     price: 0,
     additionalItems: this.additionalItems,
-    adventure: this.selectedAdventure
+    adventure: this.selectedAdventure,
+    durationHours:0
   })
   constructor(private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private instructorService: InstructorService, private adventureService: AdventureService, private adventureReservationService: AdventureReservationService) { }
 

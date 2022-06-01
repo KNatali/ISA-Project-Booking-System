@@ -89,7 +89,8 @@ export class InstructorAdventureEditComponent implements OnInit {
     maxPersons: 0,
     price: 0,
     additionalItems: [],
-    adventure: this.editedAdventure
+    adventure: this.editedAdventure,
+    durationHours:0
   })
   time: TimePeriod = new TimePeriod({
     start: '',
