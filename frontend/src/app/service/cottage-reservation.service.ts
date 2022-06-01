@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { CottageReservation } from '../model/cottage-reservation';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageReservationCreate } from '../model/cottageReservationCreate';
+import { ReserveCottageFastReservation } from '../model/reserveCottageFastReservation';
 @Injectable({
   providedIn: 'root'
 })
 export class CottageReservationService {
   url = "http://localhost:8090/api/cottages-reservations";
   urlReservation = "http://localhost:8090/api/cottageReservation";
+  url_fast="http://localhost:8090/api/cottages/fastReservations";
 
   constructor(private http: HttpClient) { }
   sortByPrice(id: number): Observable<CottageReservation[]> {
@@ -36,5 +38,11 @@ export class CottageReservationService {
   }
   addCottageReservationClient(res:CottageReservationCreate){
     return this.http.post<CottageReservationCreate>(this.urlReservation+"/client/addReservation",res);
+  }
+  getFastReservation(id:number):Observable<CottageFastReservation[]>{
+    return this.http.get<CottageFastReservation[]>(`${this.url_fast}/${id}`);
+  }
+  reserveCottageFastReservation(res:ReserveCottageFastReservation){
+    return this.http.post<ReserveCottageFastReservation>(this.url_fast+"/reserve",res);
   }
 }

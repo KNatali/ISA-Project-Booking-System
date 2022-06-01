@@ -186,6 +186,8 @@ import { AdventureActionListComponent } from './adventure-action-list/adventure-
 import { AdventureActionItemComponent } from './adventure-action-item/adventure-action-item.component';
 import { BoatActionItemComponent } from './boat-action-item/boat-action-item.component';
 import { BoatActionListComponent } from './boat-action-list/boat-action-list.component';
+import { CottageActionItemComponent } from './cottage-action-item/cottage-action-item.component';
+import { CottageActionListComponent } from './cottage-action-list/cottage-action-list.component';
 
 
 @NgModule({
@@ -355,7 +357,9 @@ import { BoatActionListComponent } from './boat-action-list/boat-action-list.com
     AdventureActionListComponent,
     AdventureActionItemComponent,
     BoatActionItemComponent,
-    BoatActionListComponent
+    BoatActionListComponent,
+    CottageActionItemComponent,
+    CottageActionListComponent
 
   ],
   imports: [

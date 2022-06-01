@@ -16,14 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.BoatFastReservationMapper;
 import com.isa.ISAproject.mapper.CottageFastReservationMapper;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageFastReservation;
@@ -69,6 +72,29 @@ public class CottageFastReservationService {
 			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart().format(formatter1), c.getValidityEnd().format(formatter1), cottage, items);
 			res.add(ctfdto); 
 			 
+		}
+		return res;
+		
+	}
+	public List<CottageFastReservationDTO> getFastReservationsByCottageClient(Long id){
+		
+		List<CottageFastReservationDTO> res=new ArrayList<>();
+		List<CottageFastReservation> reservations=cottageFastReservationRepository.findAll();
+		
+		for (CottageFastReservation a : reservations) {
+			if(a.getCottage().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(CottageFastReservationMapper.convertToDTO(a));
+		
+		}
+		for (CottageFastReservation cottageFastReservation : reservations) {
+			for (CottageFastReservationDTO dto : res) {
+				if(cottageFastReservation.getId()==dto.getId()) {
+					int startDay=cottageFastReservation.getReservationStart().getDayOfYear();
+					int endDay=cottageFastReservation.getReservationEnd().getDayOfYear();
+					int duration=endDay-startDay;
+					dto.setDuration(duration);
+				}
+			}
 		}
 		return res;
 		

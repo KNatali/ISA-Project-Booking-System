@@ -157,8 +157,9 @@ public class AdventureReservationService {
 				
 		
 		
-		long days = Duration.between(start, end).toDays();
-		int price=(int) (adventure.getPrice()*days);
+		//long days = Duration.between(start, end).toDays();
+		long hours = Duration.between(start, end).toHours();
+		int price=(int) (adventure.getPrice()*hours*dto.getNumberOfPersons());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
 			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);

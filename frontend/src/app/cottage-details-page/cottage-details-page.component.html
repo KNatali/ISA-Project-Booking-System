@@ -17,6 +17,7 @@
     <h3 id="ins">Last name: {{cottage.cottageOwner.lastName}}</h3>
     <h3 id="ins">Username: {{cottage.cottageOwner.username}}</h3>
     <h3 id="ins">Mobile: {{cottage.cottageOwner.mobile}}</h3>
+    <button class="btn btn-success"><a [routerLink]="['/cottage-actions',cottage.id]">View actions</a></button>
   </div>
   <br>
   <div  id="comp2">
