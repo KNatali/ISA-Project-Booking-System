@@ -75,7 +75,7 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getDate().isBefore(lt)) {
+			if(boatReservation.getReservationStart().isBefore(lt)) {
 				res.add(boatReservation);
 			}
 		}
@@ -148,7 +148,7 @@ public class BoatReservationService {
 		timePeriodService.setUnavailabilityBoat(time, dto.getBoat().getId());
 				
 		long days = Duration.between(start, end).toDays();
-		int price=(int) (boat.getPrice()*days);
+		int price=(int) (boat.getPrice()*days*dto.getMaxPersons());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
 			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
@@ -158,6 +158,7 @@ public class BoatReservationService {
 		}
 		double earning=SystemEarnings.percentage*price/100;
 		BoatReservation res=new BoatReservation(dto.getId(),start,end,boat,dto.getMaxPersons(),price,items,client,null,earning);
+		res.setDuration((int)days);
 		res.setSystemEarning(earning);
 		boatReservationRepository.save(res);
 		List<BoatReservation> list=client.getBoatReservations();

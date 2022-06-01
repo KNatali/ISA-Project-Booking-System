@@ -24,5 +24,7 @@ export class BoatActionListComponent implements OnInit {
       .subscribe(res=>this.actions=res)
     });
   }
-
+  refresh(){
+    this.loadData();
+  }
 }
