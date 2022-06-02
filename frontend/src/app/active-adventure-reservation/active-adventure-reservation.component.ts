@@ -10,6 +10,7 @@ import { AdventureReservationService } from '../service/adventure-reservation.se
 export class ActiveAdventureReservationComponent implements OnInit {
   reservations:AdventureReservation[];
   id:any;
+  delete_adveture_button:boolean=true;
   constructor(private adventureeReservationService:AdventureReservationService) { }
 
   ngOnInit(): void {
