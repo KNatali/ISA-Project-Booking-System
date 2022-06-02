@@ -20,6 +20,7 @@ import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AddressMapper;
@@ -255,6 +256,21 @@ public class AdventureService {
 	}
 	public List<AdventureDTO> findAvailableByGrade(SearchAvailableAdventureByGradeDTO dto){
 		List<Adventure> all_adventures=this.adventureRepository.findByAverageGrade(dto.getGrade());
+		List<AdventureDTO> available_adventuredtos=dto.getAdventures();
+		List<AdventureDTO> all_adventuresdtos=AdventureMapper.convertoToDTOs(all_adventures);
+		List<AdventureDTO> res=new ArrayList<AdventureDTO>();
+		
+		for (AdventureDTO adventure : available_adventuredtos) {
+			for (AdventureDTO adventure2 : all_adventuresdtos) {
+				if (adventure.getId()==adventure2.getId()) {
+					res.add(adventure);
+				}
+			}
+		}
+		return res;
+	}
+	public List<AdventureDTO> findAvailableByPrice(SearchAvailableAdventureByPriceDTO dto){
+		List<Adventure> all_adventures=this.adventureRepository.findByPrice(dto.getPrice());
 		List<AdventureDTO> available_adventuredtos=dto.getAdventures();
 		List<AdventureDTO> all_adventuresdtos=AdventureMapper.convertoToDTOs(all_adventures);
 		List<AdventureDTO> res=new ArrayList<AdventureDTO>();

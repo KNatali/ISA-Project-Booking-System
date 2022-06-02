@@ -9,6 +9,7 @@ import { Adventure } from '../model/adventure';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { AdventureRevision } from '../model/adventureRevision';
 import { SearchForReservation } from '../model/searchForReservation';
+import { SearchAvailableAdventureByPrice } from '../model/searchAvailableAdventureByPrice';
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +93,8 @@ export class AdventureService {
   }
   findByGradeAvailable(obj:SearchAvailableAdventureByGrade):Observable<Adventure[]>{
     return this.http.post<Adventure[]>(this.urlAdventures+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableAdventureByPrice):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/find-available-by-price",obj);
   }
 }
