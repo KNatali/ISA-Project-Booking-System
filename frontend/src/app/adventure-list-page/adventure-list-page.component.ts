@@ -7,6 +7,7 @@ import { InstructorService } from '../service/instructor.service';
 import { HttpClient } from '@angular/common/http';
 import { SearchForReservation } from '../model/searchForReservation';
 import { SearchAvailableAdventureByGrade } from '../model/searchAvailableAdventureByGrade';
+import { SearchAvailableAdventureByPrice } from '../model/searchAvailableAdventureByPrice';
 
 @Component({
   selector: 'app-adventure-list-page',
@@ -23,6 +24,10 @@ export class AdventureListPageComponent implements OnInit {
   searchByGrade: SearchAvailableAdventureByGrade=new SearchAvailableAdventureByGrade({
     adventures:[],
     grade:0
+  });
+  searchByPrice: SearchAvailableAdventureByPrice=new SearchAvailableAdventureByPrice({
+    adventures:[],
+    price:0
   });
 
   constructor(private http: HttpClient, private adventureService: AdventureService,
@@ -91,6 +96,13 @@ export class AdventureListPageComponent implements OnInit {
     this.searchByGrade.adventures=this.adventures;
     this.searchByGrade.grade=find_by_grade;
     this.adventureService.findByGradeAvailable(this.searchByGrade)
+    .subscribe(res=>this.adventures=res);
+  }
+  findByPriceAvailable(find_by_price:number){
+    //sada treba napraviti objekat koji se salje
+    this.searchByPrice.adventures=this.adventures;
+    this.searchByPrice.price=find_by_price;
+    this.adventureService.findByPriceAvailable(this.searchByPrice)
     .subscribe(res=>this.adventures=res);
   }
 }

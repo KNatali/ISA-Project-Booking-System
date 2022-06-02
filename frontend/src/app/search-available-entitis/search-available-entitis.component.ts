@@ -11,6 +11,9 @@ export class SearchAvailableEntitisComponent implements OnInit {
   @Output()
   startFindByGradeAvailableAdventure:EventEmitter<number>=new EventEmitter();
   find_by_grade:number;
+  @Output()
+  startFindByPriceAvailableAdventure:EventEmitter<number>=new EventEmitter();
+  find_by_price:number;
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +21,11 @@ export class SearchAvailableEntitisComponent implements OnInit {
   findByGradeAvailable(){
     if (this.type=="adventure"){
       this.startFindByGradeAvailableAdventure.next(this.find_by_grade);
+    }
   }
-}
+  findByPriceAvailable(){
+    if (this.type=="adventure"){
+      this.startFindByPriceAvailableAdventure.next(this.find_by_price);
+    }
+  }
 }

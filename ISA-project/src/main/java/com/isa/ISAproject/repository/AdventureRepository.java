@@ -14,6 +14,7 @@ public interface AdventureRepository extends JpaRepository<Adventure, Long>{
 	List<Adventure> findByInstructor(Instructor instructor);
 	List<Adventure> findByName(String name);
 	List<Adventure> findByAverageGrade(double averageGrade);
+	List<Adventure> findByPrice(double price);
 	List<Adventure> findByOrderByAverageGradeDesc();
 	List<Adventure> findByOrderByPriceDesc();
 }
