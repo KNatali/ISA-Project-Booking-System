@@ -20,12 +20,17 @@ import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.BoatBehavioralRuleDTO;
 import com.isa.ISAproject.dto.NavigationEquipmentDTO;
+import com.isa.ISAproject.dto.SearchAvailableBoatByPriceOrGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.BoatBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
+import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.NavigationEquipmentMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
@@ -33,6 +38,7 @@ import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.BoatBehavioralRule;
 import com.isa.ISAproject.model.NavigationEquipment;
 import com.isa.ISAproject.model.TimePeriod;
@@ -305,5 +311,35 @@ public class BoatService {
 			}
 		}
 		return sorted_boats;
+	}
+	public List<BoatDTO> findAvailableByGrade(SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<Boat> all_boats=this.boatRepository.findByGrade(dto.getPriceOrGrade());
+		List<BoatDTO> available_boatdtos=dto.getBoats();
+		List<BoatDTO> all_boatsdtos=BoatMapper.convertoToDTOs(all_boats);
+		List<BoatDTO> res=new ArrayList<BoatDTO>();
+		
+		for (BoatDTO boat : available_boatdtos) {
+			for (BoatDTO boat2 : all_boatsdtos) {
+				if (boat.getId()==boat2.getId()) {
+					res.add(boat);
+				}
+			}
+		}
+		return res;
+	}
+	public List<BoatDTO> findAvailableByPrice(SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<Boat> all_boats=this.boatRepository.findByPrice(dto.getPriceOrGrade());
+		List<BoatDTO> available_boatdtos=dto.getBoats();
+		List<BoatDTO> all_boatsdtos=BoatMapper.convertoToDTOs(all_boats);
+		List<BoatDTO> res=new ArrayList<BoatDTO>();
+		
+		for (BoatDTO boat : available_boatdtos) {
+			for (BoatDTO boat2 : all_boatsdtos) {
+				if (boat.getId()==boat2.getId()) {
+					res.add(boat);
+				}
+			}
+		}
+		return res;
 	}
 }

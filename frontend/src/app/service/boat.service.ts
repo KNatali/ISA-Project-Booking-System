@@ -7,6 +7,7 @@ import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { NavigationEquipment } from '../model/navigationEquipment';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchAvailableBoatByPriceOrGrade } from '../model/searchAvailableBoatByGradeOrPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
 
@@ -101,5 +102,11 @@ export class BoatService {
   }
   searchBoatsForReservation(obj:SearchForReservation):Observable<Boat[]>{
     return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`,obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
+    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
+    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-price",obj);
   }
 }
