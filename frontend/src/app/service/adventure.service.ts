@@ -1,3 +1,4 @@
+import { SearchAvailableAdventureByGrade } from './../model/searchAvailableAdventureByGrade';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules } from './../model/adventureBehavioralRules';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
@@ -88,5 +89,8 @@ export class AdventureService {
   }
   sortByPriceAvailableAdventure(obj:Adventure[]):Observable<Adventure[]>{
     return this.http.post<Adventure[]>(this.urlAdventures+"/sort-by-price",obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableAdventureByGrade):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/find-available-by-grade",obj);
   }
 }

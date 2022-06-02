@@ -22,6 +22,7 @@ import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
@@ -155,6 +156,13 @@ public class AdventureController {
 	public ResponseEntity<List<AdventureDTO>> sortByPrice(@RequestBody List<AdventureDTO> adventuresDTOS){
 		List<Adventure> adventures=this.adventureService.sortByPriceAvailableAdventure(adventuresDTOS);
 		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	@RequestMapping(value="/find-available-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> findAvailableByGrade(@RequestBody SearchAvailableAdventureByGradeDTO dto){
+		List<AdventureDTO> adventures=this.adventureService.findAvailableByGrade(dto);
+		return new ResponseEntity<>(adventures,HttpStatus.OK);
 	}
 
 }
