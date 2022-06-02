@@ -12,8 +12,10 @@ export class AdvetureReservationItemComponent implements OnInit {
   @Input()
   rate_adveture_button:boolean;
   @Input()
+  delete_adveture_button:boolean;
+  @Input()
   complaint_adveture_button:boolean;
-  
+
   constructor() { }
 
   ngOnInit(): void {

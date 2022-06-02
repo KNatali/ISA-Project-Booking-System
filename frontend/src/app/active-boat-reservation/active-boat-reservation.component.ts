@@ -11,6 +11,7 @@ import { ClientService } from '../service/client.service';
 export class ActiveBoatReservationComponent implements OnInit {
   reservations:BoatReservation[];
   id:any;
+  delete_boat_button:boolean=true;
   constructor(private boatReservationService:BoatReservationService) { }
 
   ngOnInit(): void {

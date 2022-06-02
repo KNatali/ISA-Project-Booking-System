@@ -12,6 +12,8 @@ export class BoatReservationItemComponent implements OnInit {
   @Input()
   rate_boat_button:boolean;
   @Input()
+  delete_boat_button:boolean;
+  @Input()
   complain_boat_button:boolean;
   constructor() { }
 

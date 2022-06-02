@@ -13,6 +13,8 @@ export class CottageReservationItemComponent implements OnInit {
   @Input()
   res:CottageReservation;
   @Input()
+  delete_cottage_button:boolean;
+  @Input()
   rate_cottage_button:boolean;
   @Input()
   complain_cottage_button:boolean;
