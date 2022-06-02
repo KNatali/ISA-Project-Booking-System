@@ -6,5 +6,6 @@
     (sortByGradeAvailableAdventure)="sortByGradeAvailableAdventure()"
     (sortByPriceAvailableAdventure)="sortByPriceAvailableAdventure()"
     (formIsFillAdventure)="Search($event)"></app-reservation-search-form>
+    <app-search-available-entitis class="comp1" [type]="type" (startFindByGradeAvailableAdventure)="findByGradeAvailable($event)"></app-search-available-entitis>
 </div>
 <app-adventure-card [adventures]=adventures></app-adventure-card>

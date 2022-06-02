@@ -188,6 +188,7 @@ import { BoatActionItemComponent } from './boat-action-item/boat-action-item.com
 import { BoatActionListComponent } from './boat-action-list/boat-action-list.component';
 import { CottageActionItemComponent } from './cottage-action-item/cottage-action-item.component';
 import { CottageActionListComponent } from './cottage-action-list/cottage-action-list.component';
+import { SearchAvailableEntitisComponent } from './search-available-entitis/search-available-entitis.component';
 
 
 @NgModule({
@@ -359,7 +360,8 @@ import { CottageActionListComponent } from './cottage-action-list/cottage-action
     BoatActionItemComponent,
     BoatActionListComponent,
     CottageActionItemComponent,
-    CottageActionListComponent
+    CottageActionListComponent,
+    SearchAvailableEntitisComponent
 
   ],
   imports: [
