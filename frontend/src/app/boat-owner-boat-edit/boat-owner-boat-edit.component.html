@@ -172,7 +172,6 @@
           data-bs-target="#modalItem">
           Add additional item
         </button>
-
         <app-boat-addition-items-edit [items]="boat.additionalItems"
           (loadAdditionalItems)="loadAdditionalItems()" [showAdd]="showAdd" [showUpdate]="showUpdate">
         </app-boat-addition-items-edit>
@@ -181,10 +180,10 @@
     <hr>
     <div class="columns">
       <div class="column">
-        <h3>Boat Rules:</h3>
+        <h3>Boat rules:</h3>
         <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRule"
           (click)="onAdd()">
-          Add Behavioral Rule
+          Add behavioral rule
         </button>
 
         <app-boat-rules-edit [rules]="boat.rules" [showAdd]="showAdd" [showUpdate]="showUpdate"
