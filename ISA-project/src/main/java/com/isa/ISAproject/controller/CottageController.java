@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.CottageOwnerMapper;
@@ -173,5 +178,19 @@ public class CottageController {
 	public ResponseEntity<List<CottageDTO>> sortByPrice(@RequestBody List<CottageDTO> cottagesDTOS){
 		List<Cottage> cottages=this.cottageService.sortByPriceAvailableCottage(cottagesDTOS);
 		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/find-available-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> findAvailableByGrade(@RequestBody SearchAvailableCottageByGradeDTO dto){
+		List<CottageDTO> res=this.cottageService.findAvailableByGrade(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/find-available-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> findAvailableByPrice(@RequestBody SearchAvailableCottageByPriceDTO dto){
+		List<CottageDTO> res=this.cottageService.findAvailableByPrice(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 }

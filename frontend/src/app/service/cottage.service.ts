@@ -6,6 +6,8 @@ import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchAvailableCottageByGrade } from '../model/searchAvailableCottageByGrade';
+import { SearchAvailableCottageByPrice } from '../model/searchAvailableCottageByPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
 
@@ -96,5 +98,11 @@ export class CottageService {
   }
   sortByPriceAvailableCottage(obj:Cottage[]):Observable<Cottage[]>{
     return this.http.post<Cottage[]>(this.urlCottages+"/sort-by-price",obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableCottageByGrade):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableCottageByPrice):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/find-available-by-price",obj);
   }
 }
