@@ -22,6 +22,8 @@ public interface CottageRepository extends JpaRepository<Cottage, Long>{
 	List<Cottage> findByName(String name);
 	List<Cottage> findByAddress(String address);
 	List<Cottage> findByOrderByName();
+	List<Cottage> findByPrice(double price);
+	List<Cottage> findByGrade(double grade);
 	List<Cottage> findByOrderByGradeDesc();
 	List<Cottage> findByOrderByPriceDesc();
 	List<Cottage> findByCottageOwner(CottageOwner cottageOwner);

@@ -18,6 +18,10 @@ import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageBehavioralRuleDTO;
 import com.isa.ISAproject.dto.CottageDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
@@ -237,5 +241,35 @@ public class CottageService {
 			}
 		}
 		return sorted_cottages;
+	}
+	public List<CottageDTO> findAvailableByGrade(SearchAvailableCottageByGradeDTO dto){
+		List<Cottage> all_cottages=this.cottageRepository.findByGrade(dto.getGrade());
+		List<CottageDTO> available_cottagedtos=dto.getCottages();
+		List<CottageDTO> all_cottagesdtos=CottageMapper.convertoToDTOs(all_cottages);
+		List<CottageDTO> res=new ArrayList<CottageDTO>();
+		
+		for (CottageDTO cottage : available_cottagedtos) {
+			for (CottageDTO cottage2 : all_cottagesdtos) {
+				if (cottage.getId()==cottage2.getId()) {
+					res.add(cottage);
+				}
+			}
+		}
+		return res;
+	}
+	public List<CottageDTO> findAvailableByPrice(SearchAvailableCottageByPriceDTO dto){
+		List<Cottage> all_cottages=this.cottageRepository.findByPrice(dto.getPrice());
+		List<CottageDTO> available_cottagedtos=dto.getCottages();
+		List<CottageDTO> all_cottagesdtos=CottageMapper.convertoToDTOs(all_cottages);
+		List<CottageDTO> res=new ArrayList<CottageDTO>();
+		
+		for (CottageDTO cottage : available_cottagedtos) {
+			for (CottageDTO cottage2 : all_cottagesdtos) {
+				if (cottage.getId()==cottage2.getId()) {
+					res.add(cottage);
+				}
+			}
+		}
+		return res;
 	}
 }

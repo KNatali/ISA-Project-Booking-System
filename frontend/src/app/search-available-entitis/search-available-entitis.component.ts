@@ -13,6 +13,10 @@ export class SearchAvailableEntitisComponent implements OnInit {
   find_by_grade:number;
   @Output()
   startFindByPriceAvailableAdventure:EventEmitter<number>=new EventEmitter();
+  @Output()
+  startFindByGradeAvailableCottage:EventEmitter<number>=new EventEmitter();
+  @Output()
+  startFindByPriceAvailableCottage:EventEmitter<number>=new EventEmitter();
   find_by_price:number;
   constructor() { }
 
@@ -22,10 +26,16 @@ export class SearchAvailableEntitisComponent implements OnInit {
     if (this.type=="adventure"){
       this.startFindByGradeAvailableAdventure.next(this.find_by_grade);
     }
+    if (this.type=="cottage"){
+      this.startFindByGradeAvailableCottage.next(this.find_by_grade);
+    }
   }
   findByPriceAvailable(){
     if (this.type=="adventure"){
       this.startFindByPriceAvailableAdventure.next(this.find_by_price);
+    }
+    if (this.type=="cottage"){
+      this.startFindByPriceAvailableCottage.next(this.find_by_price);
     }
   }
 }
