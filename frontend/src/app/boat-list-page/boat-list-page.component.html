@@ -3,9 +3,14 @@
 (MotorPowerAdded)="findBoatByMotorPower($event)"
 (AddressAdded)="findByCity($event)"
 (NameAdded)="findByName($event)"></app-search-boat>
-<app-reservation-search-form *ngIf="visiable_sort_button" class="comp1" (formIsFill)="Search($event)"
+<app-reservation-search-form *ngIf="visiable_sort_button" class="comp1" (formIsFill)="Search($event)" [type]="type"
   (sortByGradeAvailable)="sortByGradeAvailableBoat()" (sortByPriceAvailable)="sortByPriceAvailableBoat()"
 ></app-reservation-search-form>
+<app-search-available-entitis class="comp1" [type]="type"
+(startFindByGradeAvailableBoat)="findByGradeAvailable($event)"
+(startFindByPriceAvailableBoat)="findByPriceAvailable($event)"
+
+></app-search-available-entitis>
 </div>
 <app-sort-boats *ngIf="visiable_sort_button" (SortedByName)="sortByName()"
               (SortedByGrade)="sortByGrade()"

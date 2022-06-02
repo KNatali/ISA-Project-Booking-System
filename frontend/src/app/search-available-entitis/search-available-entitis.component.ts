@@ -17,6 +17,10 @@ export class SearchAvailableEntitisComponent implements OnInit {
   startFindByGradeAvailableCottage:EventEmitter<number>=new EventEmitter();
   @Output()
   startFindByPriceAvailableCottage:EventEmitter<number>=new EventEmitter();
+  @Output()
+  startFindByGradeAvailableBoat:EventEmitter<number>=new EventEmitter();
+  @Output()
+  startFindByPriceAvailableBoat:EventEmitter<number>=new EventEmitter();
   find_by_price:number;
   constructor() { }
 
@@ -29,6 +33,9 @@ export class SearchAvailableEntitisComponent implements OnInit {
     if (this.type=="cottage"){
       this.startFindByGradeAvailableCottage.next(this.find_by_grade);
     }
+    if (this.type=="boat"){
+      this.startFindByGradeAvailableBoat.next(this.find_by_grade);
+    }
   }
   findByPriceAvailable(){
     if (this.type=="adventure"){
@@ -36,6 +43,9 @@ export class SearchAvailableEntitisComponent implements OnInit {
     }
     if (this.type=="cottage"){
       this.startFindByPriceAvailableCottage.next(this.find_by_price);
+    }
+    if (this.type=="boat"){
+      this.startFindByPriceAvailableBoat.next(this.find_by_price);
     }
   }
 }
