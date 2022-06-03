@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
@@ -170,6 +171,13 @@ public class AdventureController {
 	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<List<AdventureDTO>> findAvailableByPrice(@RequestBody SearchAvailableAdventureByPriceDTO dto){
 		List<AdventureDTO> adventures=this.adventureService.findAvailableByPrice(dto);
+		return new ResponseEntity<>(adventures,HttpStatus.OK);
+	}
+	@RequestMapping(value="/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>>  getALlSubscribedAdventures(@PathVariable Long clientId){
+		List<AdventureDTO> adventures=this.adventureService.getAllSubscribedAdventures(clientId);
 		return new ResponseEntity<>(adventures,HttpStatus.OK);
 	}
 }

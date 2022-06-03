@@ -1,0 +1,14 @@
+
+<div>
+  <table class="table table-striped ">
+      <thead>
+          <tr>
+              <th>Name</th><th>Description</th><th>Average grade</th>
+          </tr>
+      </thead>
+      <tbody >
+        <tr app-adventure-list-item *ngFor="let adventure of adventures" [adventure]="adventure"
+        ></tr>
+  </tbody>
+  </table>
+</div>

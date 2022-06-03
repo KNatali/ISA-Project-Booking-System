@@ -189,6 +189,11 @@ import { BoatActionListComponent } from './boat-action-list/boat-action-list.com
 import { CottageActionItemComponent } from './cottage-action-item/cottage-action-item.component';
 import { CottageActionListComponent } from './cottage-action-list/cottage-action-list.component';
 import { SearchAvailableEntitisComponent } from './search-available-entitis/search-available-entitis.component';
+import { SubscribedAdventureListComponent } from './subscribed-adventure-list/subscribed-adventure-list.component';
+import { SubscribedBoatListComponent } from './subscribed-boat-list/subscribed-boat-list.component';
+import { SubscribedCottageListComponent } from './subscribed-cottage-list/subscribed-cottage-list.component';
+import { BoatItemComponent } from './boat-item/boat-item.component';
+import { CottageItemComponent } from './cottage-item/cottage-item.component';
 
 
 @NgModule({
@@ -361,7 +366,12 @@ import { SearchAvailableEntitisComponent } from './search-available-entitis/sear
     BoatActionListComponent,
     CottageActionItemComponent,
     CottageActionListComponent,
-    SearchAvailableEntitisComponent
+    SearchAvailableEntitisComponent,
+    SubscribedAdventureListComponent,
+    SubscribedBoatListComponent,
+    SubscribedCottageListComponent,
+    BoatItemComponent,
+    CottageItemComponent
 
   ],
   imports: [

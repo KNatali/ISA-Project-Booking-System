@@ -17,6 +17,7 @@ import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
@@ -27,6 +28,7 @@ import com.isa.ISAproject.mapper.AddressMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.AdventureFishingEquipmentMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
+import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
@@ -34,6 +36,7 @@ import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Client;
 
 import com.isa.ISAproject.model.Cottage;
@@ -66,6 +69,8 @@ public class AdventureService {
 	private BehavioralRuleRepository ruleRepository;
 	@Autowired
 	private InstructorRepository instructorRepository;
+	@Autowired
+	private ClientService clientService;
 	
 	public List<AdventureDTO> findAll(){
 		List<Adventure> adventures= this.adventureRepository.findAll();
@@ -333,6 +338,19 @@ public class AdventureService {
 			}
 		}
 		return sorted_adventures;
+	}
+	public List<AdventureDTO> getAllSubscribedAdventures(Long clientId){
+		Optional<Client> opt=this.clientService.findById(clientId);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Client client=opt.get();
+		Set<Adventure> subscribed=client.getSubscribedAdventures();
+		List<Adventure> list_subscribed=new ArrayList<Adventure>();
+		for (Adventure adv : subscribed) {
+			list_subscribed.add(adv);
+		}
+		return AdventureMapper.convertoToDTOs(list_subscribed);
 	}
 
 }

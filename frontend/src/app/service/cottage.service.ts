@@ -24,6 +24,9 @@ export class CottageService {
   searchCottagesForReservation(obj:SearchForReservation):Observable<Cottage[]>{
     return this.http.post<Cottage[]>(`${this.urlCottages}/` + `allAvailableCottages`,obj);
   }
+  getSubscribedCottages(id:number): Observable<Cottage[]> {
+    return this.http.get<Cottage[]>(`${this.urlCottages}`+`/subscribed`+`/${id}`);
+  }
   getCottages():Observable<Cottage[]>{
     return this.http.get<Cottage[]>(this.urlCottages);
   }

@@ -45,6 +45,8 @@ public class Boat {
 	            joinColumns = @JoinColumn(name = "boat_id"),
 	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
 	private Set<Picture> pictures=new HashSet<>(); 
+	
+	
 
 	@Column
 	private String mainPicture;//slika koje ce da bude prikazana kada se izlistaju svi brodovi

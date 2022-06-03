@@ -26,6 +26,9 @@ export class BoatService {
   getBoats(): Observable<Boat[]> {
     return this.http.get<Boat[]>(this.urlBoats);
   }
+  getSubscribedBoats(id:number): Observable<Boat[]> {
+    return this.http.get<Boat[]>(`${this.urlBoats}`+`/subscribed`+`/${id}`);
+  }
   getBoat(id:number):Observable<Boat>{
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
   }

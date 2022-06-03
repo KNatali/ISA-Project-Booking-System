@@ -177,4 +177,11 @@ public class BoatController {
 		List<BoatDTO> res=this.boatService.findAvailableByPrice(dto);
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boats/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>>  getALlSubscribedBoats(@PathVariable Long clientId){
+		List<BoatDTO> boats=this.boatService.getALlSubscribedBoats(clientId);
+		return new ResponseEntity<>(boats,HttpStatus.OK);
+	}
 }

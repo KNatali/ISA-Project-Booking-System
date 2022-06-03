@@ -193,4 +193,11 @@ public class CottageController {
 		List<CottageDTO> res=this.cottageService.findAvailableByPrice(dto);
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	@RequestMapping(value="api/cottages/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>>  getALlSubscribedCottages(@PathVariable Long clientId){
+		List<CottageDTO> cottages=this.cottageService.getAllSubscribedCottages(clientId);
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
 }
