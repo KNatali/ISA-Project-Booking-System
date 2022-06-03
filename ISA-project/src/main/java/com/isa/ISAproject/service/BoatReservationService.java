@@ -125,7 +125,7 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getDate().isAfter(lt)) {
+			if(boatReservation.getDate().isAfter(lt)  && !boatReservation.isDeleted()) {
 				res.add(boatReservation);
 			}
 		}
@@ -236,5 +236,18 @@ public class BoatReservationService {
 			e.printStackTrace();
 		}
 		return BoatReservationMapper.convertToDTO(saved);
+	}
+	public BoatReservation deleteReservation(Long id) {
+		Optional<BoatReservation> opt =this.findById(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		BoatReservation found=opt.get();
+		found.setDeleted(true);
+		//treba obrisati zauzetosti za tu avanturu
+		found.getBoat().setUnavailability(null);
+		found.setAdditionalItems(null);
+		BoatReservation saved=this.boatReservationRepository.save(found);
+		return saved;
 	}
 }

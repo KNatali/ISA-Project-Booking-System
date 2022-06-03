@@ -118,4 +118,11 @@ public class BoatReservationController {
 		} 
 		return new ResponseEntity<>(new BoatReservationDTO(boatReservation.get()), HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "api/boatReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity cancleReservation(@PathVariable Long id){
+		this.boatReservationService.deleteReservation(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

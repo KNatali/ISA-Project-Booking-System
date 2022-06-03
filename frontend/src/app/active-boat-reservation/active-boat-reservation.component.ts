@@ -22,5 +22,9 @@ export class ActiveBoatReservationComponent implements OnInit {
     this.boatReservationService.activeReservation(this.id)
     .subscribe(res=>this.reservations=res)
   }
+  canceledReservaiton(resId:number){
+    this.boatReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
+  }
 
 }
