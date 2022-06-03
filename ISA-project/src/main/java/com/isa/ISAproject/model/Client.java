@@ -24,6 +24,8 @@ public class Client extends User{
 	private Set<Adventure> subscribedAdventures=new HashSet<>();
 	@ManyToMany(mappedBy = "subscribers")
 	private Set<Cottage> subscribedCottages=new HashSet<>();
+	@ManyToMany(mappedBy = "subscribers")
+	private Set<Boat> subscribedBoats=new HashSet<>();
 	
 	public List<AdventureReservation> getAdventureReservations() {
 		return adventureReservations;
@@ -65,6 +67,28 @@ public class Client extends User{
 		this.cottageReservations = cottageReservations;
 	}
 	
+	
+	
+	public Set<Cottage> getSubscribedCottages() {
+		return subscribedCottages;
+	}
+
+
+	public void setSubscribedCottages(Set<Cottage> subscribedCottages) {
+		this.subscribedCottages = subscribedCottages;
+	}
+
+
+	public Set<Boat> getSubscribedBoats() {
+		return subscribedBoats;
+	}
+
+
+	public void setSubscribedBoats(Set<Boat> subscribedBoats) {
+		this.subscribedBoats = subscribedBoats;
+	}
+
+
 	public Client() {}
 	public Client(String username, String password, String email, String firstName, String lastName,
 			Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {

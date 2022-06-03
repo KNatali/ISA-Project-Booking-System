@@ -64,6 +64,8 @@ public class BoatService {
 	@Autowired
 	private ClientRepository clientRepository;
 	@Autowired
+	private ClientService clientService;
+	@Autowired
 	private BoatOwnerRepository boatOwnerRepository;
 	@Autowired
 	private BoatBehavioralRuleRepository ruleRepository;
@@ -341,5 +343,18 @@ public class BoatService {
 			}
 		}
 		return res;
+	}
+	public List<BoatDTO> getALlSubscribedBoats(Long clientId){
+		Optional<Client> opt=this.clientService.findById(clientId);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Client client=opt.get();
+		Set<Boat> subscribed=client.getSubscribedBoats();
+		List<Boat> list_subscribed=new ArrayList<Boat>();
+		for (Boat boat : subscribed) {
+			list_subscribed.add(boat);
+		}
+		return BoatMapper.convertoToDTOs(list_subscribed);
 	}
 }

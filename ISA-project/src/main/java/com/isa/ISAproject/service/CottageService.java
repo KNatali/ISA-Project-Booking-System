@@ -64,6 +64,8 @@ public class CottageService {
 	private CottageReservationRepository cottageReservationRepository;
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private ClientService clientService;
 	
 	public List<Cottage> findAll() {
 		return this.cottageRepository.findAll();
@@ -271,5 +273,18 @@ public class CottageService {
 			}
 		}
 		return res;
+	}
+	public List<CottageDTO> getAllSubscribedCottages(Long clientId){
+		Optional<Client> opt=this.clientService.findById(clientId);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Client client=opt.get();
+		Set<Cottage> subscribed=client.getSubscribedCottages();
+		List<Cottage> list_subscribed=new ArrayList<Cottage>();
+		for (Cottage cot : subscribed) {
+			list_subscribed.add(cot);
+		}
+		return CottageMapper.convertoToDTOs(list_subscribed);
 	}
 }

@@ -296,6 +296,15 @@ insert into profile_delete_request(user_id,reason,type) values (4,'I am getting 
  
 insert into adventure_subscribers(adventure_id,client_id) values (1,5);
 insert into adventure_subscribers(adventure_id,client_id) values (1,8);
+insert into adventure_subscribers(adventure_id,client_id) values (3,8);
+
+insert into boat_subscribers(boat_id,client_id) values (1,5);
+insert into boat_subscribers(boat_id,client_id) values (1,8);
+insert into boat_subscribers(boat_id,client_id) values (4,8);
+
+insert into cottage_subscribers(cottage_id,client_id) values (1,5);
+insert into cottage_subscribers(cottage_id,client_id) values (1,8);
+insert into cottage_subscribers(cottage_id,client_id) values (5,8);
 
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Instructor was very unpolite and rude!',5,1,'Default');
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Service is too expensive. Nothing is like on pictures',8,1,'Default');

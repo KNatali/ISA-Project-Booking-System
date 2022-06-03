@@ -23,6 +23,9 @@ export class AdventureService {
   getAdventures(): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(this.urlAdventures);
   }
+  getSubscribedAdventures(id:number): Observable<Adventure[]> {
+    return this.http.get<Adventure[]>(`${this.urlAdventures}`+`/subscribed`+`/${id}`);
+  }
   getAdventure(id: number): Observable<Adventure> {
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);
   }
