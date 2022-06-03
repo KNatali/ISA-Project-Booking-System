@@ -19,11 +19,13 @@ import com.isa.ISAproject.dto.TimePeriodDTO;
 
 import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.model.Boat;
+import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageOwner;
 
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.TimePeriod;
+import com.isa.ISAproject.repository.BoatOwnerRepository;
 import com.isa.ISAproject.repository.BoatRepository;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
 import com.isa.ISAproject.repository.CottageRepository;
@@ -40,9 +42,9 @@ public class TimePeriodService {
 	@Autowired
 	private InstructorRepository instructorRepository;
 	@Autowired
-	private CottageRepository cottageRepository;
+	private CottageOwnerRepository cottageOwnerRepository;
 	@Autowired
-	private BoatRepository boatRepository;
+	private BoatOwnerRepository boatOwnerRepository;
 	
 	@Transactional(readOnly = false)
 	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
@@ -116,18 +118,18 @@ public class TimePeriodService {
 	
 /**/
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityCottage(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
+	public boolean setUnavailabilityCottageOwner(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		Cottage cottage=new Cottage();
+		CottageOwner cottageOwner=new CottageOwner();
 		
-		cottage=cottageRepository.findOneById(id);
+		cottageOwner=cottageOwnerRepository.findOneById(id);
 		
 		Set<TimePeriod> periods=new HashSet<>();
-			if(cottage.getUnavailability()!=null) {
-				periods=cottage.getUnavailability();
+			if(cottageOwner.getUnavailability()!=null) {
+				periods=cottageOwner.getUnavailability();
 				for (TimePeriod t : periods) {
 					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
 						throw new DateTimeException("Overlapping");
@@ -136,23 +138,23 @@ public class TimePeriodService {
 			}
 			//this.timePeriodRepository.save(period);
 			periods.add(period);
-			this.cottageRepository.save(cottage);
+			this.cottageOwnerRepository.save(cottageOwner);
 		return true;
 	}
 	
-	public boolean removeUnavailabilityCottage(TimePeriodDTO dto,Long id) {
+	public boolean removeUnavailabilityCottageOwner(TimePeriodDTO dto,Long id) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		Cottage cottage=cottageRepository.getById(id);
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
 		Set<TimePeriod> periods=new HashSet<>();
-		if(cottage.getUnavailability()!=null) {
-			periods=cottage.getUnavailability();
+		if(cottageOwner.getUnavailability()!=null) {
+			periods=cottageOwner.getUnavailability();
 			for (TimePeriod t : periods) {
 				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
 					periods.remove(t);
-					this.cottageRepository.save(cottage);
+					this.cottageOwnerRepository.save(cottageOwner);
 					this.timePeriodRepository.delete(period);
 					return true;
 				}
@@ -165,9 +167,9 @@ public class TimePeriodService {
 	
 	
 	
-	public List<TimePeriodDTO> findUnavailabilityByCottage(Long id){
-		Cottage cottage=cottageRepository.getById(id);
-		Set<TimePeriod> times=cottage.getUnavailability();
+	public List<TimePeriodDTO> findUnavailabilityByCottageOwner(Long id){
+		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
+		Set<TimePeriod> times=cottageOwner.getUnavailability();
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
@@ -180,18 +182,18 @@ public class TimePeriodService {
 	
 /**/
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityBoat(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
+	public boolean setUnavailabilityBoatOwner(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		Boat boat=new Boat();
+		BoatOwner boatOwner=new BoatOwner();
 		
-		boat=boatRepository.findOneById(id);
+		boatOwner=boatOwnerRepository.findOneById(id);
 		
 		Set<TimePeriod> periods=new HashSet<>();
-			if(boat.getUnavailability()!=null) {
-				periods=boat.getUnavailability();
+			if(boatOwner.getUnavailability()!=null) {
+				periods=boatOwner.getUnavailability();
 				for (TimePeriod t : periods) {
 					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
 						throw new DateTimeException("Overlapping");
@@ -200,23 +202,23 @@ public class TimePeriodService {
 			}
 			//this.timePeriodRepository.save(period);
 			periods.add(period);
-			this.boatRepository.save(boat);
+			this.boatOwnerRepository.save(boatOwner);
 		return true;
 	}
 	
-	public boolean removeUnavailabilityBoat(TimePeriodDTO dto,Long id) {
+	public boolean removeUnavailabilityBoatOwner(TimePeriodDTO dto,Long id) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
 		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
-		Boat boat=boatRepository.getById(id);
+		BoatOwner boatOwner=boatOwnerRepository.getById(id);
 		Set<TimePeriod> periods=new HashSet<>();
-		if(boat.getUnavailability()!=null) {
-			periods=boat.getUnavailability();
+		if(boatOwner.getUnavailability()!=null) {
+			periods=boatOwner.getUnavailability();
 			for (TimePeriod t : periods) {
 				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
 					periods.remove(t);
-					this.boatRepository.save(boat);
+					this.boatOwnerRepository.save(boatOwner);
 					this.timePeriodRepository.delete(period);
 					return true;
 				}
@@ -226,9 +228,9 @@ public class TimePeriodService {
 		return false;
 	}
 	
-	public List<TimePeriodDTO> findUnavailabilityByBoat(Long id){
-		Boat boat=boatRepository.getById(id);
-		Set<TimePeriod> times=boat.getUnavailability();
+	public List<TimePeriodDTO> findUnavailabilityByBoatOwner(Long id){
+		BoatOwner boatOwner=boatOwnerRepository.getById(id);
+		Set<TimePeriod> times=boatOwner.getUnavailability();
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
