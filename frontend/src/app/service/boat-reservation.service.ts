@@ -55,4 +55,7 @@ export class BoatReservationService {
   reserveBoatFastReservation(res:ReserveBoatFastReservation){
     return this.http.post<ReserveBoatFastReservation>(this.url_fast+"/reserve",res);
   }
+  cancelReservation(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.urlReservation}`+"/delete-by-client/"+`${id}`);
+  }
 }

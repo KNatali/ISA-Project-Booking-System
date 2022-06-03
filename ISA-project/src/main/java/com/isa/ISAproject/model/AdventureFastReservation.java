@@ -26,7 +26,7 @@ public class AdventureFastReservation {
 	private Long id;
 	
 	@ManyToOne
-    //@JoinColumn(name = "adventure_id")
+    @JoinColumn(name = "adventure_id")
     private Adventure adventure;
 	
 	 @Column(name = "reservationStart", nullable = false)
