@@ -28,7 +28,7 @@ export interface BoatInterface{
     equipment: NavigationEquipment[];
 }
 export class Boat implements BoatInterface{
-    id?: number | undefined;
+    id?: number ;//| undefined;
     name: string;
     length: number;
     motorNumber: number;
@@ -72,5 +72,5 @@ export class Boat implements BoatInterface{
         this.cancellationPercentage=obj.cancellationPercentage;
         this.equipment=obj.equipment;
     }
-    
+
 }

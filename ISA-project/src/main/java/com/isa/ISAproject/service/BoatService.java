@@ -27,6 +27,7 @@ import com.isa.ISAproject.dto.SearchAvailableBoatByPriceOrGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.BoatBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
@@ -356,5 +357,24 @@ public class BoatService {
 			list_subscribed.add(boat);
 		}
 		return BoatMapper.convertoToDTOs(list_subscribed);
+	}
+	public boolean unsubscribedBoat(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+		
+		Optional<Boat> boatopt=this.boatRepository.findById(dto.getEntityId());
+		if(!boatopt.isPresent()) {
+			return false;
+		}
+		Boat boat=boatopt.get();
+		boolean deleted;
+		client.getSubscribedBoats().remove(boat);
+		deleted=boat.getSubscribers().remove(client);
+		this.boatRepository.save(boat);
+		this.clientService.save(client);
+		return deleted;
 	}
 }
