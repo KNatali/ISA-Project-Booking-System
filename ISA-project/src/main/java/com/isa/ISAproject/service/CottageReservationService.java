@@ -141,7 +141,7 @@ public class CottageReservationService {
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Reservation);
 		
-		timePeriodService.setUnavailabilityCottage(time, dto.getCottage().getId());
+		timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getId());
 				
 		
 		
