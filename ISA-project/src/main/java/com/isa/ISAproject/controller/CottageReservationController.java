@@ -108,4 +108,10 @@ public class CottageReservationController {
 		CottageReservationDTO res=this.cottageReservationService.addCottageReservationClient(dto);
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	@RequestMapping(value = "api/cottageReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity cancleReservation(@PathVariable Long id){
+		this.cottageReservationService.deleteReservation(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

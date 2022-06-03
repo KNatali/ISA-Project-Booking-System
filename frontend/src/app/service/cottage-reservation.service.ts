@@ -45,4 +45,7 @@ export class CottageReservationService {
   reserveCottageFastReservation(res:ReserveCottageFastReservation){
     return this.http.post<ReserveCottageFastReservation>(this.url_fast+"/reserve",res);
   }
+  cancelReservation(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.urlReservation}`+"/delete-by-client/"+`${id}`);
+  }
 }
