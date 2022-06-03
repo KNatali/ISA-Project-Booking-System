@@ -10,6 +10,7 @@ import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { SearchAvailableBoatByPriceOrGrade } from '../model/searchAvailableBoatByGradeOrPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,9 @@ export class BoatService {
   }
   getSubscribedBoats(id:number): Observable<Boat[]> {
     return this.http.get<Boat[]>(`${this.urlBoats}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlBoats+"/unsubscribed",obj);
   }
   getBoat(id:number):Observable<Boat>{
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
