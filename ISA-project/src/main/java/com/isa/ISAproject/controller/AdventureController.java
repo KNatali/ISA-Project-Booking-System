@@ -26,6 +26,7 @@ import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
@@ -179,5 +180,17 @@ public class AdventureController {
 	public ResponseEntity<List<AdventureDTO>>  getALlSubscribedAdventures(@PathVariable Long clientId){
 		List<AdventureDTO> adventures=this.adventureService.getAllSubscribedAdventures(clientId);
 		return new ResponseEntity<>(adventures,HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/unsubscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  UnsubscribedAdventures(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.adventureService.unsubscribedAdventure(dto);
+		if(!success) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

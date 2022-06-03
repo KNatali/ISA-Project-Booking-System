@@ -10,6 +10,7 @@ import { SearchAvailableCottageByGrade } from '../model/searchAvailableCottageBy
 import { SearchAvailableCottageByPrice } from '../model/searchAvailableCottageByPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,9 @@ export class CottageService {
   }
   getSubscribedCottages(id:number): Observable<Cottage[]> {
     return this.http.get<Cottage[]>(`${this.urlCottages}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlCottages+"/unsubscribed",obj);
   }
   getCottages():Observable<Cottage[]>{
     return this.http.get<Cottage[]>(this.urlCottages);
