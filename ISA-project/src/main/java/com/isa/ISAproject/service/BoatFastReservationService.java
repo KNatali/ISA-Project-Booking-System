@@ -161,7 +161,7 @@ public class BoatFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityBoat(time, dto.getBoat().getId());
+		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getId());
 		
 		
 		BoatFastReservation fast=new BoatFastReservation(dto.getId(),boat,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
@@ -204,13 +204,13 @@ public class BoatFastReservationService {
 		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
 		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
 		
-		timePeriodService.removeUnavailabilityBoat(oldPeriod,(long) 1);
+		timePeriodService.removeUnavailabilityBoatOwner(oldPeriod,(long) 1);
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(actionDTO.getReservationStart());
 		time.setEnd(actionDTO.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityBoat(time, actionDTO.getBoat().getBoatOwner().getId())==false)
+		if(timePeriodService.setUnavailabilityBoatOwner(time, actionDTO.getBoat().getBoatOwner().getId())==false)
 			return null;
 		
 		res.setReservationStart(start);

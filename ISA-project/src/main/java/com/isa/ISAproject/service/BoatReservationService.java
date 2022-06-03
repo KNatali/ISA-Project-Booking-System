@@ -145,7 +145,7 @@ public class BoatReservationService {
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Reservation);
 		
-		timePeriodService.setUnavailabilityBoat(time, dto.getBoat().getId());
+		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getId());
 				
 		long days = Duration.between(start, end).toDays();
 		int price=(int) (boat.getPrice()*days*dto.getMaxPersons());

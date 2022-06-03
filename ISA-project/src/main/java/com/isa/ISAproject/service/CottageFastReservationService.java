@@ -160,7 +160,7 @@ public class CottageFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityCottage(time, dto.getCottage().getId());
+		timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getId());
 		
 		
 		CottageFastReservation fast=new CottageFastReservation(dto.getId(),cottage,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
@@ -203,13 +203,13 @@ public class CottageFastReservationService {
 		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
 		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
 		
-		timePeriodService.removeUnavailabilityCottage(oldPeriod,(long) 1);
+		timePeriodService.removeUnavailabilityCottageOwner(oldPeriod,(long) 1);
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(actionDTO.getReservationStart());
 		time.setEnd(actionDTO.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityCottage(time, actionDTO.getCottage().getCottageOwner().getId())==false)
+		if(timePeriodService.setUnavailabilityCottageOwner(time, actionDTO.getCottage().getCottageOwner().getId())==false)
 			return null;
 		
 		res.setReservationStart(start);
