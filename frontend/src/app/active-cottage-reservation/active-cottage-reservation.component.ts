@@ -22,5 +22,8 @@ export class ActiveCottageReservationComponent implements OnInit {
     this.cottageReservationService.activeReservations(this.id)
     .subscribe(res=>this.reservations=res)
   }
-
+  canceledReservaiton(resId:number){
+    this.cottageReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
+  }
 }

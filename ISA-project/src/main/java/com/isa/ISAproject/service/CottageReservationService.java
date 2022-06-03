@@ -109,7 +109,7 @@ public class CottageReservationService {
 		List<CottageReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (CottageReservation r : allRes) {
-			if(r.getDate().isAfter(lt)) {
+			if(r.getDate().isAfter(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -233,5 +233,19 @@ public class CottageReservationService {
 			e.printStackTrace();
 		}
 		return CottageReservationMapper.convertToDTO(saved);
+	}
+
+	public CottageReservation deleteReservation(Long id) {
+		Optional<CottageReservation> opt =this.findById(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		CottageReservation found=opt.get();
+		found.setDeleted(true);
+		//treba obrisati zauzetosti za tu avanturu
+		found.getCottage().setUnavailability(null);
+		found.setAdditionalItems(null);
+		CottageReservation saved=this.cottageReservationRepository.save(found);
+		return saved;
 	}
 }
