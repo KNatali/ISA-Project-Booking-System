@@ -136,4 +136,11 @@ public class AdventureReservationsController {
 		//AdventureReservationDTO created=this.adventureReservationService.addAdventureReservation(adventureReservationDTO);
 		return this.addAdventureReservation(adventureReservationDTO);
 	}
+	@RequestMapping(value = "api/adventureReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity cancleReservation(@PathVariable Long id){
+		this.adventureReservationService.deleteReservation(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 }

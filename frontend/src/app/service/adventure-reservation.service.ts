@@ -50,4 +50,8 @@ export class AdventureReservationService {
   reserveAdventureFastReservation(res:ReserveAdventureFastReservation){
     return this.http.post<ReserveAdventureFastReservation>(this.url_fast+"/reserve",res);
   }
+  cancelReservation(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.urlReservation}`+"/delete-by-client/"+`${id}`);
+  }
+
 }

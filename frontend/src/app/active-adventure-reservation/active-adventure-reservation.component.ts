@@ -21,5 +21,9 @@ export class ActiveAdventureReservationComponent implements OnInit {
     this.adventureeReservationService.activeReservations(this.id)
     .subscribe(res=>this.reservations=res)
   }
+  canceledReservaiton(resId:number){
+    this.adventureeReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
+  }
 
 }
