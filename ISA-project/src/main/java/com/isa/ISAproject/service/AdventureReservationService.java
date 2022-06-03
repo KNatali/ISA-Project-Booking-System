@@ -120,7 +120,7 @@ public class AdventureReservationService {
 		List<AdventureReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (AdventureReservation r : allRes) {
-			if(r.getReservationStart().isAfter(lt)) {
+			if(r.getReservationStart().isAfter(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -218,5 +218,21 @@ public class AdventureReservationService {
 		adventureReservationDTO.setSystemEarning(dto.getSystemEarning());
 		
 		return adventureReservationDTO;
+	}
+	
+	public AdventureReservation deleteReservation(Long id) {
+		Optional<AdventureReservation> opt =this.findById(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		AdventureReservation found=opt.get();
+		found.setDeleted(true);
+		//treba obrisati zauzetosti za tu avanturu
+		found.getAdventure().setUnavailability(null);
+		found.setAdditionalItems(null);
+		AdventureReservation saved=this.adventureReservationRepository.save(found);
+		//treba obrisati zauzetosti za tu avanturu
+		
+		return saved;
 	}
 }

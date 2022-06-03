@@ -1,4 +1,5 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { AdventureReservationService } from './../service/adventure-reservation.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdventureReservation } from '../model/AdventureReservation';
 
 @Component({
@@ -15,10 +16,14 @@ export class AdvetureReservationItemComponent implements OnInit {
   delete_adveture_button:boolean;
   @Input()
   complaint_adveture_button:boolean;
+  @Output()
+  canceledReservaiton:EventEmitter<number>=new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  cancelReservation(){
+    this.canceledReservaiton.next(this.res.id);
+  }
 }

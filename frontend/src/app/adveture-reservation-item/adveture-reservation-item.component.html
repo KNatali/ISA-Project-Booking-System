@@ -9,5 +9,5 @@
     <button class="btn btn-info"><a [routerLink]="['/complaint-instructor',res.adventure.instructor.id]">Complain</a></button>
 </td>
 <td *ngIf="delete_adveture_button">
-  <button class="btn btn-info">Cancle</button>
+  <button class="btn btn-info" (click)="cancelReservation()">Cancle</button>
 </td>

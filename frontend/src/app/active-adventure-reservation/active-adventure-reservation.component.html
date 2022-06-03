@@ -6,7 +6,9 @@
             </tr>
         </thead>
         <tbody >
-            <tr app-adveture-reservation-item *ngFor="let res of reservations" [res]="res" [delete_adveture_button]="delete_adveture_button"></tr>
+            <tr app-adveture-reservation-item *ngFor="let res of reservations" [res]="res" [delete_adveture_button]="delete_adveture_button"
+          (canceledReservaiton)="canceledReservaiton($event)"
+            ></tr>
 		</tbody>
     </table>
 </div>
