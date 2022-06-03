@@ -61,9 +61,9 @@ public class TimePeriodController {
 	
 	@RequestMapping(value="api/cottages/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('COTTAGE_OWNER')")
-	public ResponseEntity<?> setUnavailabilityCottage(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+	public ResponseEntity<?> setUnavailabilityCottageOwner(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
 		try {
-			timePeriodService.setUnavailabilityCottage(dto,id);
+			timePeriodService.setUnavailabilityCottageOwner(dto,id);
 		}catch(PessimisticLockingFailureException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}catch(DateTimeException e) {
@@ -75,8 +75,8 @@ public class TimePeriodController {
 	@RequestMapping(value="api/cottages/getUnavailability/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('COTTAGE_OWNER')")
-	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByCottage(@PathVariable Long id){
-		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByCottage(id);
+	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByCottageOwner(@PathVariable Long id){
+		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByCottageOwner(id);
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 	
@@ -84,9 +84,9 @@ public class TimePeriodController {
 	
 	@RequestMapping(value="api/boats/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
-	public ResponseEntity<?> setUnavailabilityBoat(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+	public ResponseEntity<?> setUnavailabilityBoatOwner(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
 		try {
-			timePeriodService.setUnavailabilityBoat(dto,id);
+			timePeriodService.setUnavailabilityBoatOwner(dto,id);
 		}catch(PessimisticLockingFailureException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}catch(DateTimeException e) {
@@ -98,8 +98,8 @@ public class TimePeriodController {
 	@RequestMapping(value="api/boats/getUnavailability/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
-	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByBoat(@PathVariable Long id){
-		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByBoat(id);
+	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByBoatOwner(@PathVariable Long id){
+		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByBoatOwner(id);
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 
