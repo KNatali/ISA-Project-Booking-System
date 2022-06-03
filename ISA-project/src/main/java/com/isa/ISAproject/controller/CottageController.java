@@ -27,6 +27,7 @@ import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.CottageOwnerMapper;
 import com.isa.ISAproject.model.Boat;
@@ -199,5 +200,17 @@ public class CottageController {
 	public ResponseEntity<List<CottageDTO>>  getALlSubscribedCottages(@PathVariable Long clientId){
 		List<CottageDTO> cottages=this.cottageService.getAllSubscribedCottages(clientId);
 		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
+
+	@RequestMapping(value="api/cottages/unsubscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  UnsubscribedCottages(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.cottageService.unsubscribedCottage(dto);
+		if(!success) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

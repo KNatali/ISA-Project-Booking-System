@@ -1,5 +1,5 @@
 import { Adventure } from './../model/adventure';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'tr[app-adventure-list-item]',
@@ -9,10 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AdventureListItemComponent implements OnInit {
   @Input()
   adventure: Adventure;
-
+  @Output()
+  Unsubsrcibed:EventEmitter<number>=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  Unsubscribe(){
+    this.Unsubsrcibed.next(this.adventure.id);
+  }
 }

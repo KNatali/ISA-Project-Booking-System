@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
@@ -286,5 +287,24 @@ public class CottageService {
 			list_subscribed.add(cot);
 		}
 		return CottageMapper.convertoToDTOs(list_subscribed);
+	}
+	public boolean unsubscribedCottage(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Cottage> cottageopt=this.cottageRepository.findById(dto.getEntityId());
+		if(!cottageopt.isPresent()) {
+			return false;
+		}
+		Cottage cottage=cottageopt.get();
+		boolean deleted;
+		client.getSubscribedCottages().remove(cottage);
+		deleted=cottage.getSubscribers().remove(client);
+		this.cottageRepository.save(cottage);
+		this.clientService.save(client);
+		return deleted;
 	}
 }

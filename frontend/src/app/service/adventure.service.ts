@@ -10,6 +10,7 @@ import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { AdventureRevision } from '../model/adventureRevision';
 import { SearchForReservation } from '../model/searchForReservation';
 import { SearchAvailableAdventureByPrice } from '../model/searchAvailableAdventureByPrice';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,9 @@ export class AdventureService {
   }
   getSubscribedAdventures(id:number): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(`${this.urlAdventures}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlAdventures+"/unsubscribed",obj);
   }
   getAdventure(id: number): Observable<Adventure> {
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);

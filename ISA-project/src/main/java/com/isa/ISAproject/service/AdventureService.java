@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.InstructorProfileDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
 import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AddressMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
@@ -353,4 +354,23 @@ public class AdventureService {
 		return AdventureMapper.convertoToDTOs(list_subscribed);
 	}
 
+	public boolean unsubscribedAdventure(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Adventure> adventureOpt=this.adventureRepository.findById(dto.getEntityId());
+		if(!adventureOpt.isPresent()) {
+			return false;
+		}
+		Adventure adventure=adventureOpt.get();
+		boolean deleted;
+		client.getSubscribedAdventures().remove(adventure);
+		deleted=adventure.getSubscribers().remove(client);
+		this.adventureRepository.save(adventure);
+		this.clientService.save(client);
+		return deleted;
+	}
 }

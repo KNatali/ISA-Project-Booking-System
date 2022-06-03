@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cottage } from '../model/cottage';
 
 @Component({
@@ -9,9 +9,14 @@ import { Cottage } from '../model/cottage';
 export class CottageItemComponent implements OnInit {
   @Input()
   cottage:Cottage;
+  @Output()
+  Unsubsrcibed:EventEmitter<number>=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+  }
+  Unsubscribe(){
+    this.Unsubsrcibed.next(this.cottage.id);
   }
 
 }
