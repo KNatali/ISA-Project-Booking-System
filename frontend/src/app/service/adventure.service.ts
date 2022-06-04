@@ -30,6 +30,9 @@ export class AdventureService {
   unsubscribe(obj:UnsubscribedItem):Observable<void>{
     return this.http.post<void>(this.urlAdventures+"/unsubscribed",obj);
   }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlAdventures+"/subscribed",obj);
+  }
   getAdventure(id: number): Observable<Adventure> {
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);
   }

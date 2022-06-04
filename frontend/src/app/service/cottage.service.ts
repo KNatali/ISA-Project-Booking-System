@@ -31,6 +31,9 @@ export class CottageService {
   unsubscribe(obj:UnsubscribedItem):Observable<void>{
     return this.http.post<void>(this.urlCottages+"/unsubscribed",obj);
   }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlCottages+"/subscribed",obj);
+  }
   getCottages():Observable<Cottage[]>{
     return this.http.get<Cottage[]>(this.urlCottages);
   }

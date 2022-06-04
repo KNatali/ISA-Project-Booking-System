@@ -13,6 +13,7 @@
     <h3>City: {{boat.city}}</h3>
     <h3>Street: {{boat.street}}</h3>
     <button class="btn btn-success"><a [routerLink]="['/boat-actions',boat.id]">View actions</a></button>
+    <button class="btn btn-success" (click)="subscribe()">Subscribe</button>
   </div><br>
   <div  id="comp2">
     <h2>Available terms</h2>
