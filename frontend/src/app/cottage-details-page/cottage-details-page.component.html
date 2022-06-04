@@ -18,6 +18,7 @@
     <h3 id="ins">Username: {{cottage.cottageOwner.username}}</h3>
     <h3 id="ins">Mobile: {{cottage.cottageOwner.mobile}}</h3>
     <button class="btn btn-success"><a [routerLink]="['/cottage-actions',cottage.id]">View actions</a></button>
+    <button class="btn btn-success" (click)="subscribe()">Subscribe</button>
   </div>
   <br>
   <div  id="comp2">

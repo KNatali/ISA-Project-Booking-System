@@ -307,4 +307,23 @@ public class CottageService {
 		this.clientService.save(client);
 		return deleted;
 	}
+	public boolean subscribe(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Cottage> cottageopt=this.cottageRepository.findById(dto.getEntityId());
+		if(!cottageopt.isPresent()) {
+			return false;
+		}
+		Cottage cottage=cottageopt.get();
+		boolean deleted;
+		client.getSubscribedCottages().add(cottage);
+		deleted=cottage.getSubscribers().add(client);
+		this.cottageRepository.save(cottage);
+		this.clientService.save(client);
+		return deleted;
+	}
 }

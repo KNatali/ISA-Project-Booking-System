@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Adventure } from '../model/adventure';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdventureService } from '../service/adventure.service';
 import { AdditionalItem } from '../model/additionalItem';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Component({
   selector: 'app-adventure-datails-page',
@@ -20,12 +21,17 @@ export class AdventureDatailsPageComponent implements OnInit {
     price:0,
     id:0
   });
-
-  constructor(private route: ActivatedRoute,private adventureService:AdventureService) { }
+  clientId:any;
+  constructor(private route: ActivatedRoute,private adventureService:AdventureService,private router: Router) { }
 
   ngOnInit(): void {
+    this.clientId = sessionStorage.getItem('id');
     this.loadData();
   }
+  subscribedItem:UnsubscribedItem=new UnsubscribedItem({
+    clientIt:0,
+    entityId:0
+  });
   loadData() {
     this.route.params.subscribe(param => {
       this.id = param.id;
@@ -40,6 +46,12 @@ export class AdventureDatailsPageComponent implements OnInit {
     this.price=this.price+item.price;
     console.log("boat details",this.price);
   }
-  subscribe(){}
+  subscribe(){
+    this.subscribedItem.clientIt=this.clientId;
+    this.subscribedItem.entityId=this.id;
+    this.adventureService.subscribe(this.subscribedItem)
+    .subscribe()
+    this.router.navigate(['clients', this.clientId]);
+  }
 
 }
