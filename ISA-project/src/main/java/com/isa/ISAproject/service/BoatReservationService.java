@@ -34,6 +34,7 @@ import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.SystemEarnings;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.BoatRepository;
 import com.isa.ISAproject.repository.BoatReservationRepository;
@@ -125,7 +126,7 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getDate().isAfter(lt)  && !boatReservation.isDeleted()) {
+			if(boatReservation.getReservationStart().isAfter(lt)  && !boatReservation.isDeleted()) {
 				res.add(boatReservation);
 			}
 		}
@@ -224,6 +225,11 @@ public class BoatReservationService {
 		
 		int duration=day_end-day_start;
 		boatReservation.setDuration(duration);
+		
+		TimePeriod period=new TimePeriod(null, start, end, UnavailabilityType.Reservation);
+		boat.getUnavailability().add(period);
+		this.boatRepository.save(boat); 
+		
 		BoatReservation saved=this.boatReservationRepository.save(boatReservation);
 		
 		String message="Yoe successufuly made reservation for boat "+boat.getName()+".Check this in your reservation list";
@@ -243,11 +249,15 @@ public class BoatReservationService {
 			return null;
 		}
 		BoatReservation found=opt.get();
-		found.setDeleted(true);
-		//treba obrisati zauzetosti za tu avanturu
-		found.getBoat().setUnavailability(null);
-		found.setAdditionalItems(null);
-		BoatReservation saved=this.boatReservationRepository.save(found);
-		return saved;
+		LocalDateTime lt= LocalDateTime.now();
+		if(found.getReservationStart().getDayOfYear()>=lt.getDayOfYear()+3) {
+			found.setDeleted(true);
+			//treba obrisati zauzetosti za tu avanturu
+			found.getBoat().setUnavailability(null);
+			found.setAdditionalItems(null);
+			BoatReservation saved=this.boatReservationRepository.save(found);
+			return saved;
+		}
+		return null;
 	}
 }

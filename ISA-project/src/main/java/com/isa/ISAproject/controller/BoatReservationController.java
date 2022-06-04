@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
@@ -121,8 +122,12 @@ public class BoatReservationController {
 
 	@RequestMapping(value = "api/boatReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('CLIENT')")
-	public ResponseEntity cancleReservation(@PathVariable Long id){
-		this.boatReservationService.deleteReservation(id);
+	public ResponseEntity<Void> cancleReservation(@PathVariable Long id){
+		BoatReservation deletedRes=this.boatReservationService.deleteReservation(id);
+		if (deletedRes==null) {
+			System.out.println("ima manje od 3 dana do pocetka rezervacije");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

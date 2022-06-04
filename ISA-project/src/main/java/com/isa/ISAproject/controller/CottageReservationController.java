@@ -111,7 +111,11 @@ public class CottageReservationController {
 	@RequestMapping(value = "api/cottageReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity cancleReservation(@PathVariable Long id){
-		this.cottageReservationService.deleteReservation(id);
+		CottageReservation deletedRes=this.cottageReservationService.deleteReservation(id);
+		if (deletedRes==null) {
+			System.out.println("ima manje od 3 dana do pocetka rezervacije");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
