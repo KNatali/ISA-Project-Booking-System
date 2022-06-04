@@ -101,6 +101,7 @@ public class BoatReservationDTO {
 		this.date = res.getDate();
 		this.duration = res.getDuration();
 		this.maxPersons = res.getMaxPersons();
+		this.reservationStart=res.getReservationStart().toString();
 		this.price = res.getPrice();
 		this.client = new ClientProfileDTO(res.getClient());
 		this.boat = new BoatDTO(res.getBoat());

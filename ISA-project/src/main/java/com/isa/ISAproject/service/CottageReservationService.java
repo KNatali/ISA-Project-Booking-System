@@ -27,6 +27,7 @@ import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.SystemEarnings;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.ClientRepository;
 import com.isa.ISAproject.repository.CottageRepository;
@@ -109,7 +110,7 @@ public class CottageReservationService {
 		List<CottageReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (CottageReservation r : allRes) {
-			if(r.getDate().isAfter(lt) && !r.isDeleted()) {
+			if(r.getReservationStart().isAfter(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -221,6 +222,11 @@ public class CottageReservationService {
 	
 		int duration=day_end-day_start;
 		cottageReservation.setDuration(duration);
+		
+		TimePeriod period=new TimePeriod(null, start, end, UnavailabilityType.Reservation);
+		cottage.getUnavailability().add(period);
+		this.cottageRepository.save(cottage); 
+		
 		CottageReservation saved=this.cottageReservationRepository.save(cottageReservation);
 	
 		String message="Yoe successufuly made reservation for cottage "+cottage.getName()+".Check this in your reservation list";
@@ -241,11 +247,15 @@ public class CottageReservationService {
 			return null;
 		}
 		CottageReservation found=opt.get();
-		found.setDeleted(true);
-		//treba obrisati zauzetosti za tu avanturu
-		found.getCottage().setUnavailability(null);
-		found.setAdditionalItems(null);
-		CottageReservation saved=this.cottageReservationRepository.save(found);
-		return saved;
+		LocalDateTime lt= LocalDateTime.now();
+		if(found.getReservationStart().getDayOfYear()>=lt.getDayOfYear()+3) {
+			found.setDeleted(true);
+			//treba obrisati zauzetosti za tu avanturu
+			found.getCottage().setUnavailability(null);
+			found.setAdditionalItems(null);
+			CottageReservation saved=this.cottageReservationRepository.save(found);
+			return saved;
+		}
+		return null;
 	}
 }
