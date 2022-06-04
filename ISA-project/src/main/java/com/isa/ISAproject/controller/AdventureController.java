@@ -193,4 +193,16 @@ public class AdventureController {
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	@RequestMapping(value="/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedAdventures(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.adventureService.subscribe(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

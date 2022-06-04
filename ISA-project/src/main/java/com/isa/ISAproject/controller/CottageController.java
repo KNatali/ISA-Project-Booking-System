@@ -213,4 +213,16 @@ public class CottageController {
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	@RequestMapping(value="api/cottages/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedCottages(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.cottageService.subscribe(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Cottage } from '../model/cottage1';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CottageOwner } from '../model/cottageOwner';
 import { Cottage1Service } from '../service/cottage1.service';
 import { AdditionalItem } from '../model/additionalItem';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
+import { CottageService } from '../service/cottage.service';
 
 @Component({
   selector: 'app-cottage-details-page',
@@ -29,11 +31,17 @@ export class CottageDetailsPageComponent implements OnInit {
     grade:0,
     mainPicture:''
   });*/
+  clientId:any;
+  subscribedItem:UnsubscribedItem=new UnsubscribedItem({
+    clientIt:0,
+    entityId:0
+  });
   additionalItems:AdditionalItem[]=[];
 
-  constructor(private route: ActivatedRoute,private cottageService: Cottage1Service) { }
+  constructor(private route: ActivatedRoute,private cottageService: CottageService,private router: Router) { }
 
   ngOnInit(): void {
+    this.clientId = sessionStorage.getItem('id');
     this.loadData();
   }
   loadData() {
@@ -49,6 +57,13 @@ export class CottageDetailsPageComponent implements OnInit {
     //this.addedOneAdditioanlItem.next(item);
     this.price=this.price+item.price;
     console.log("boat details",this.price);
+  }
+  subscribe(){
+    this.subscribedItem.clientIt=this.clientId;
+    this.subscribedItem.entityId=this.id;
+    this.cottageService.subscribe(this.subscribedItem)
+    .subscribe()
+    this.router.navigate(['clients', this.clientId]);
   }
 
 }

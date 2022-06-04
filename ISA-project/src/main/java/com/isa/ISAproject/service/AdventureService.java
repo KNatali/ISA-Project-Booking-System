@@ -373,4 +373,23 @@ public class AdventureService {
 		this.clientService.save(client);
 		return deleted;
 	}
+	public boolean subscribe(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Adventure> adventureOpt=this.adventureRepository.findById(dto.getEntityId());
+		if(!adventureOpt.isPresent()) {
+			return false;
+		}
+		Adventure adventure=adventureOpt.get();
+		boolean deleted;
+		client.getSubscribedAdventures().add(adventure);
+		deleted=adventure.getSubscribers().add(client);
+		this.adventureRepository.save(adventure);
+		this.clientService.save(client);
+		return deleted;
+	}
 }
