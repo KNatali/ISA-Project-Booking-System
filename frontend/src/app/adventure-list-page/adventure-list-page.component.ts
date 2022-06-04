@@ -21,6 +21,8 @@ export class AdventureListPageComponent implements OnInit {
   adventures: Adventure[];
   instructors: Instructor[];
   type:string="adventure";
+  role:any;
+  visiable_sort_button:boolean;
   searchByGrade: SearchAvailableAdventureByGrade=new SearchAvailableAdventureByGrade({
     adventures:[],
     grade:0
@@ -40,6 +42,12 @@ export class AdventureListPageComponent implements OnInit {
   ngOnInit(): void {
     this.getAdventures();
     this.getInstructors();
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
 
   getAdventures() {

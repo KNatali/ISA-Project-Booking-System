@@ -138,8 +138,13 @@ public class AdventureReservationsController {
 	}
 	@RequestMapping(value = "api/adventureReservation/delete-by-client/{id}",method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('CLIENT')")
-	public ResponseEntity cancleReservation(@PathVariable Long id){
-		this.adventureReservationService.deleteReservation(id);
+	public ResponseEntity<Void> cancleReservation(@PathVariable Long id){
+		AdventureReservation deletedRes;
+		deletedRes= this.adventureReservationService.deleteReservation(id);
+		if (deletedRes==null) {
+			System.out.println("ima manje od 3 dana do pocetka rezervacije");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
