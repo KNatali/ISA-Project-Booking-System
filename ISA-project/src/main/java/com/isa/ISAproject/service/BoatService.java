@@ -358,6 +358,26 @@ public class BoatService {
 		}
 		return BoatMapper.convertoToDTOs(list_subscribed);
 	}
+	public boolean subscribedBoat(UnsubscribedItemDTO dto) {
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+		
+		Optional<Boat> boatopt=this.boatRepository.findById(dto.getEntityId());
+		if(!boatopt.isPresent()) {
+			return false;
+		}
+		Boat boat=boatopt.get();
+		boolean deleted;
+		client.getSubscribedBoats().add(boat);
+		deleted=boat.getSubscribers().add(client);
+		this.boatRepository.save(boat);
+		this.clientService.save(client);
+		return deleted;
+	}
+	
 	public boolean unsubscribedBoat(UnsubscribedItemDTO dto){
 		Optional<Client> opt=this.clientService.findById(dto.getClientId());
 		if(!opt.isPresent()) {

@@ -20,6 +20,7 @@
     <h3 id="ins">{{adventure.instructor.biography}}</h3>
     <h3 id="ins">Mobile: {{adventure.instructor.mobile}}</h3>
     <button class="btn btn-success"><a [routerLink]="['/adventure-actions',adventure.id]">View actions</a></button>
+    <button class="btn btn-success" (click)="subscribe()">Subscribe</button>
   </div><br>
   <div  id="comp2">
     <h2>Available terms</h2>

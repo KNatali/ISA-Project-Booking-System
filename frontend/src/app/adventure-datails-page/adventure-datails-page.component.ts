@@ -40,5 +40,6 @@ export class AdventureDatailsPageComponent implements OnInit {
     this.price=this.price+item.price;
     console.log("boat details",this.price);
   }
+  subscribe(){}
 
 }

@@ -196,4 +196,16 @@ public class BoatController {
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boats/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedBoats(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.boatService.subscribedBoat(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

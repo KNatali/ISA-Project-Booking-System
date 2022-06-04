@@ -33,6 +33,9 @@ export class BoatService {
   unsubscribe(obj:UnsubscribedItem):Observable<void>{
     return this.http.post<void>(this.urlBoats+"/unsubscribed",obj);
   }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlBoats+"/subscribed",obj);
+  }
   getBoat(id:number):Observable<Boat>{
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
   }
