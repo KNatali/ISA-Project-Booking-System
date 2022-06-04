@@ -75,7 +75,7 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getReservationStart().isBefore(lt)) {
+			if(boatReservation.getReservationStart().isBefore(lt) && !boatReservation.isDeleted()) {
 				res.add(boatReservation);
 			}
 		}

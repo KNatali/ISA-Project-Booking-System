@@ -2,11 +2,11 @@
   <app-search-adventure class="comp1" [instructors]=instructors (AddedInstructor)="findByInstructor($event)"
     (NameAdded)="findByName($event)"
     (AddressAdded)="findByCity($event)"></app-search-adventure>
-    <app-reservation-search-form class="comp1" [type]="type"
+    <app-reservation-search-form *ngIf="visiable_sort_button" class="comp1" [type]="type"
     (sortByGradeAvailableAdventure)="sortByGradeAvailableAdventure()"
     (sortByPriceAvailableAdventure)="sortByPriceAvailableAdventure()"
     (formIsFillAdventure)="Search($event)"></app-reservation-search-form>
-    <app-search-available-entitis class="comp1" [type]="type"
+    <app-search-available-entitis *ngIf="visiable_sort_button" class="comp1" [type]="type"
      (startFindByGradeAvailableAdventure)="findByGradeAvailable($event)"
      (startFindByPriceAvailableAdventure)="findByPriceAvailable($event)"
      ></app-search-available-entitis>

@@ -41,6 +41,7 @@ import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.SystemEarnings;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
@@ -131,7 +132,7 @@ public class AdventureReservationService {
 		List<AdventureReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (AdventureReservation r : allRes) {
-			if(r.getReservationStart().isBefore(lt)) {
+			if(r.getReservationStart().isBefore(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -154,6 +155,11 @@ public class AdventureReservationService {
 		time.setType(UnavailabilityType.Reservation);
 		
 		timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId());
+		
+		//samo dodati jos zauzetost za avanturu, client
+		TimePeriod period=new TimePeriod(null, start, end, UnavailabilityType.Reservation);
+		adventure.getUnavailability().add(period);
+		this.adventureRepository.save(adventure);
 				
 		
 		
@@ -226,13 +232,17 @@ public class AdventureReservationService {
 			return null;
 		}
 		AdventureReservation found=opt.get();
-		found.setDeleted(true);
-		//treba obrisati zauzetosti za tu avanturu
-		found.getAdventure().setUnavailability(null);
-		found.setAdditionalItems(null);
-		AdventureReservation saved=this.adventureReservationRepository.save(found);
-		//treba obrisati zauzetosti za tu avanturu
-		
-		return saved;
+		//pre nego sto se reservacija obrise treba proveriti da li je manje od 3 dana do pocetka avanture
+		LocalDateTime lt= LocalDateTime.now();
+		if (found.getReservationStart().getDayOfYear()>=lt.getDayOfYear()+3) {
+			found.setDeleted(true);
+			//treba obrisati zauzetosti za tu avanturu
+			found.getAdventure().setUnavailability(null);
+			found.setAdditionalItems(null);
+			AdventureReservation saved=this.adventureReservationRepository.save(found);
+			
+			return saved;			
+		}
+		return null;
 	}
 }

@@ -120,7 +120,7 @@ public class CottageReservationService {
 		List<CottageReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (CottageReservation r : allRes) {
-			if(r.getReservationStart().isBefore(lt)) {
+			if(r.getReservationStart().isBefore(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}

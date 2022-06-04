@@ -6,7 +6,7 @@
 <app-reservation-search-form *ngIf="visiable_sort_button" class="comp1" (formIsFill)="Search($event)" [type]="type"
   (sortByGradeAvailable)="sortByGradeAvailableBoat()" (sortByPriceAvailable)="sortByPriceAvailableBoat()"
 ></app-reservation-search-form>
-<app-search-available-entitis class="comp1" [type]="type"
+<app-search-available-entitis *ngIf="visiable_sort_button" class="comp1" [type]="type"
 (startFindByGradeAvailableBoat)="findByGradeAvailable($event)"
 (startFindByPriceAvailableBoat)="findByPriceAvailable($event)"
 
