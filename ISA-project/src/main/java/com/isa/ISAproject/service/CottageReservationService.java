@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
+import com.isa.ISAproject.dto.ReserveCottageFastReservation;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
@@ -72,7 +73,7 @@ public class CottageReservationService {
 	public List<CottageReservation> sortByDate(Long id) {
 		List<CottageReservation> reservations=this.oldReservation(id);
 		List<CottageReservation> res=new ArrayList<>();
-		List<CottageReservation> sorted=this.cottageReservationRepository.findByOrderByDateDesc();
+		List<CottageReservation> sorted=this.cottageReservationRepository.findByOrderByReservationStartDesc();
 		for (CottageReservation cottageReservation : sorted) {
 			for (CottageReservation cottageReservation2 : reservations) {
 				if(cottageReservation.getId().equals(cottageReservation2.getId())) {
@@ -239,6 +240,23 @@ public class CottageReservationService {
 			e.printStackTrace();
 		}
 		return CottageReservationMapper.convertToDTO(saved);
+	}
+	public CottageReservationClientDTO convertReserveCottageFastReservation(ReserveCottageFastReservation dto) {
+		CottageReservationClientDTO converted=new CottageReservationClientDTO();
+		converted.setReservationStart(dto.getReservationStart());
+		//
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		converted.setNumberOfDays(duration);
+		converted.setNumberOfPersons(dto.getMaxPersons());
+		converted.setAdditionalItems(dto.getAdditionalItems());
+		converted.setClientId(dto.getClient().getId());
+		converted.setCottageId(dto.getCottage().getId());
+		return converted;
 	}
 
 	public CottageReservation deleteReservation(Long id) {

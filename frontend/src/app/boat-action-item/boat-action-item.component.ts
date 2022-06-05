@@ -52,6 +52,7 @@ export class BoatActionItemComponent implements OnInit {
       .subscribe(res => this.client = res)
   }
   Reserve(){
+    this.reservation.id=this.boatFastReservation.id;
     this.reservation.reservationStart=this.boatFastReservation.reservationStart;
     this.reservation.reservationEnd=this.boatFastReservation.reservationEnd;
     this.reservation.validityStart=this.boatFastReservation.validityStart;
@@ -62,8 +63,8 @@ export class BoatActionItemComponent implements OnInit {
     this.reservation.client=this.client;
     this.reservation.boat=this.boatFastReservation.boat;
     this.boatReservationService.reserveBoatFastReservation(this.reservation)
-    .subscribe();
-    this.reserved.next()
+    .subscribe(res=>this.reserved.next());
+
   }
 
 }

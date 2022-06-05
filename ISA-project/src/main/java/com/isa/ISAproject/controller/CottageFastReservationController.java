@@ -21,6 +21,7 @@ import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
 import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
@@ -109,10 +110,11 @@ public class CottageFastReservationController {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<CottageReservationDTO> reserveFastReservation(@RequestBody ReserveCottageFastReservation dto){
-		CottageReservationDTO reservationDTO=this.cottageFastReservationService.convertToCottageReservationDTO(dto);
-		CottageReservationDTO created=this.cottageReservationService.addCottageReservation(reservationDTO);
+		//CottageReservationDTO reservationDTO=this.cottageFastReservationService.convertToCottageReservationDTO(dto);
+		CottageReservationClientDTO reservedDTO=this.cottageReservationService.convertReserveCottageFastReservation(dto);
+		CottageReservationDTO created=this.cottageReservationService.addCottageReservationClient(reservedDTO);
 		//treba izbrisati tu akciju
-		CottageFastReservation fast=this.cottageFastReservationService.findById(dto.getCottage().getId());
+		CottageFastReservation fast=this.cottageFastReservationService.findById(dto.getId());
 		this.cottageFastReservationService.delite(fast);
 		return new ResponseEntity<>(created,HttpStatus.OK);
 	}

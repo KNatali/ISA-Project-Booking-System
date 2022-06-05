@@ -103,6 +103,7 @@ public class AdventureRevisionController {
 	}*/
 	@RequestMapping(value="api/client/makeNewAdventureRevision",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<AdventureRevisionDTO> saveNewAdventureRevision(@RequestBody SpecificRevisionDTO specificRevisionDTO){
 		Optional<AdventureReservation> adventureReservation=this.adventureReservationService.findById(specificRevisionDTO.getId_reservation());
 		if (!adventureReservation.isPresent()) {

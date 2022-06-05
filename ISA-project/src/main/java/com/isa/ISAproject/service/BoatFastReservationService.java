@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.EditBoatFastReservationDTO;
 import com.isa.ISAproject.dto.ReserveAdventureFastResrvationDTO;
 import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
@@ -228,11 +229,20 @@ public class BoatFastReservationService {
 	public BoatReservationCreateDTO convertToBoatReservationCreateDTO(BoatReservationDTO dto){
 		BoatReservationCreateDTO res=new BoatReservationCreateDTO();
 		res.setReservationStart(dto.getReservationStart());
-		res.setNumberOfDays(dto.getDuration());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		res.setNumberOfDays(duration);
+		
 		res.setBoatId(dto.getBoat().getId());
 		res.setClientId(dto.getClient().getId());
 		res.setNumberOfPersons(dto.getMaxPersons());
 		res.setAdditionalItems(dto.getAdditionalItems());
+		
 		return res;
 	}
 	public BoatReservationDTO convertToBoatReservationDTO(ReserveBoatFastResrvationDTO dto){

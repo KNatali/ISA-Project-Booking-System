@@ -103,7 +103,7 @@ public class AdventureFastReservationContoller {
 		AdventureReservationDTO reservationDTO=this.adventureFastReservationService.convertToAdventureReservation(dto);
 		AdventureReservationDTO created=this.adventureReservationService.addAdventureReservation(reservationDTO);
 		//treba izbrisati tu akciju
-		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getAdventure().getId());
+		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getId());
 		this.adventureFastReservationService.delite(fast);
 		return new ResponseEntity<>(created,HttpStatus.OK);
 	}

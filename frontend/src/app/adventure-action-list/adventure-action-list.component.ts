@@ -27,5 +27,7 @@ export class AdventureActionListComponent implements OnInit {
       .subscribe(res=>this.actions=res)
     });
   }
-
+  reserveRefrash(){
+    this.loadData();
+  }
 }

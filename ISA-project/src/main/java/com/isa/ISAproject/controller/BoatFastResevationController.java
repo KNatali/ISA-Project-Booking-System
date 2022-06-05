@@ -100,11 +100,11 @@ public class BoatFastResevationController {
 	public ResponseEntity<BoatReservationDTO> reserveFastReservation(@RequestBody ReserveBoatFastResrvationDTO dto){
 		BoatReservationDTO reservationDTO=this.boatFastReservationService.convertToBoatReservationDTO(dto);
 		//da bi se sacuvalo pomocu moje metode
-		//BoatReservationCreateDTO boatReservationCreateDTO=this.boatFastReservationService.convertToBoatReservationCreateDTO(reservationDTO); 
-		//BoatReservationDTO created=this.boatReservationService.addBoatReservationClient(boatReservationCreateDTO);
-		BoatReservationDTO created=this.boatReservationService.addBoatReservation(reservationDTO);
+		BoatReservationCreateDTO boatReservationCreateDTO=this.boatFastReservationService.convertToBoatReservationCreateDTO(reservationDTO); 
+		BoatReservationDTO created=this.boatReservationService.addBoatReservationClient(boatReservationCreateDTO);
+		//BoatReservationDTO created=this.boatReservationService.addBoatReservation(reservationDTO);
 		//treba izbrisati tu akciju
-		BoatFastReservation fast=this.boatFastReservationService.findById(dto.getBoat().getId());
+		BoatFastReservation fast=this.boatFastReservationService.findById(dto.getId());
 		this.boatFastReservationService.delite(fast);
 		return new ResponseEntity<>(created,HttpStatus.OK);
 	}
