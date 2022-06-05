@@ -296,7 +296,7 @@ public class AdventureService {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getDateAndTime(),formatter);
-		LocalDateTime end = start.plusDays(dto.getNumOfDay());
+		LocalDateTime end = start.plusHours(dto.getNumOfDay());
 
 		List<Adventure> availableAdventures=new ArrayList<>();
 		for (Adventure adventure : adventures) {

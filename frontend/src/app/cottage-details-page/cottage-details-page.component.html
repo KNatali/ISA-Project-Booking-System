@@ -24,7 +24,7 @@
   <div  id="comp2">
     <h2 *ngIf="visiable_sort_button">Additional items</h2>
 
-    <app-additional-item-boat-list *ngIf="visiable_sort_button" (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
+    <app-additional-item-boat-list  [visable_button]="visiable_sort_button"  (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
    <!-- <h3>Total price of added additioanl items: {{price}} $</h3>-->
 
   </div>
