@@ -36,6 +36,8 @@ export class CottageDetailsPageComponent implements OnInit {
     clientIt:0,
     entityId:0
   });
+  role:any;
+  visiable_sort_button:boolean;
   additionalItems:AdditionalItem[]=[];
 
   constructor(private route: ActivatedRoute,private cottageService: CottageService,private router: Router) { }
@@ -50,6 +52,12 @@ export class CottageDetailsPageComponent implements OnInit {
       this.cottageService.getCottage(this.id)
         .subscribe((cottage: Cottage) => this.cottage = cottage);
     });
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
   addAdditionalItem(item:AdditionalItem){
     this.additionalItem=item;

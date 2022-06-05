@@ -17,18 +17,18 @@
     <h3 id="ins">Last name: {{cottage.cottageOwner.lastName}}</h3>
     <h3 id="ins">Username: {{cottage.cottageOwner.username}}</h3>
     <h3 id="ins">Mobile: {{cottage.cottageOwner.mobile}}</h3>
-    <button class="btn btn-success"><a [routerLink]="['/cottage-actions',cottage.id]">View actions</a></button>
-    <button class="btn btn-success" (click)="subscribe()">Subscribe</button>
+    <button *ngIf="visiable_sort_button" class="btn btn-success"><a [routerLink]="['/cottage-actions',cottage.id]">View actions</a></button>
+    <button *ngIf="visiable_sort_button" class="btn btn-success" (click)="subscribe()">Subscribe</button>
   </div>
   <br>
   <div  id="comp2">
-    <h2>Additional items</h2>
+    <h2 *ngIf="visiable_sort_button">Additional items</h2>
 
-    <app-additional-item-boat-list (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
+    <app-additional-item-boat-list *ngIf="visiable_sort_button" (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
    <!-- <h3>Total price of added additioanl items: {{price}} $</h3>-->
 
   </div>
-  <app-search-parametars-for-reservation id="comp3" [type]="type"  [additionalItems]="additionalItems" [boatPrice]="cottage.price" [cottage]="cottage"  [additionalItem]="additionalItem" [additionalItemPrice]="price" ></app-search-parametars-for-reservation>
+  <app-search-parametars-for-reservation *ngIf="visiable_sort_button" id="comp3" [type]="type"  [additionalItems]="additionalItems" [boatPrice]="cottage.price" [cottage]="cottage"  [additionalItem]="additionalItem" [additionalItemPrice]="price" ></app-search-parametars-for-reservation>
 </div>
 
 

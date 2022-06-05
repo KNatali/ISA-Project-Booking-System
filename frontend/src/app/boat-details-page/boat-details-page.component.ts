@@ -40,6 +40,8 @@ export class BoatDetailsPageComponent implements OnInit {
     address
   });*/
   clientId:any;
+  role:any;
+  visiable_sort_button:boolean;
   subscribedItem:UnsubscribedItem=new UnsubscribedItem({
     clientIt:0,
     entityId:0
@@ -60,6 +62,12 @@ export class BoatDetailsPageComponent implements OnInit {
       this.boatService.getBoat(this.id)
         .subscribe((boat: Boat) => this.boat = boat);
     });
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
   loadAdditionalItems() {
     this.route.params.subscribe(param => {

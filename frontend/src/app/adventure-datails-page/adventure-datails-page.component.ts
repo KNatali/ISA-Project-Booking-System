@@ -16,6 +16,8 @@ export class AdventureDatailsPageComponent implements OnInit {
   price:number=0;
   adventure: Adventure;
   type:string="adventure";
+  visiable_sort_button:boolean;
+  role:any;
   additionalItem:AdditionalItem=new AdditionalItem({
     name:'',
     price:0,
@@ -27,6 +29,12 @@ export class AdventureDatailsPageComponent implements OnInit {
   ngOnInit(): void {
     this.clientId = sessionStorage.getItem('id');
     this.loadData();
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
   subscribedItem:UnsubscribedItem=new UnsubscribedItem({
     clientIt:0,
