@@ -22,6 +22,7 @@ export class BoatListPageComponent implements OnInit {
     priceOrGrade:0
   });
 
+
   constructor(private boatService:BoatService) {
     this.boats=[];
    }
