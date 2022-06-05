@@ -227,7 +227,7 @@ insert into adventure_reservation(reservation_start,reservation_end,number_of_pe
 insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-15-13-00-00','2021-12-15-16-00-00','2022-05-15','2022-08-10',4,460,1);
 insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2021-12-25-7-00-00','2021-12-25-15-00-00','2022-05-10','2022-08-15',2,100,1);
 
-insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-10-06-30-00','2021-12-14-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2022-12-10','2022-12-14',4,460,1);
+insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-10-06-30-00','2021-12-15-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2022-12-10','2022-12-14',4,460,1);
 insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2022-12-12','2022-12-24',2,100,1);
 
 insert into boat_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,boat_id) values ('2021-12-10-06-30-00','2021-12-14-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2022-12-10','2022-12-14',4,460,1);
