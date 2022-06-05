@@ -207,7 +207,8 @@ public class AdventureReservationService {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
-		LocalDateTime end = start.plusDays(dto.getNumberOfDays());
+		//number od days je u slucaju avanture sat
+		LocalDateTime end = start.plusHours(dto.getNumberOfDays());
 		
 		adventureReservationDTO.setReservationStart(start.toString());
 		adventureReservationDTO.setReservationEnd(end.toString());
