@@ -9,6 +9,8 @@ import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem
 export class AdditionalItemBoatItemComponent implements OnInit {
   @Input()
   addItem:AdditionalItem;
+  @Input()
+  visable_button:boolean;
   @Output()
   allAddedItems:AdditionalItem[];
   @Output()

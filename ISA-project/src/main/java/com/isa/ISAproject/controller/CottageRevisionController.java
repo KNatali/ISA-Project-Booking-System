@@ -78,6 +78,7 @@ public class CottageRevisionController {
 	}
 	@RequestMapping(value="api/client/makeNewCottageRevision",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<CottageRevisionDTO> saveNewCottageRevision(@RequestBody SpecificRevisionDTO specificRevisionDTO){
 		Optional<CottageReservation> cottageReservation=this.cottageReservationService.findById(specificRevisionDTO.getId_reservation());
 		if (!cottageReservation.isPresent()) {

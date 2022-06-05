@@ -2,7 +2,7 @@ import { AdventureReservationService } from './../service/adventure-reservation.
 import { AdventureReservation } from './../model/AdventureReservation';
 import { ReserveAdventureFastReservation } from './../model/reserveAdventureFastReservation';
 import { ClientService } from './../service/client.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AdventureFastReservation, AdventureFastReservationInterface } from '../model/adventureFastReservation';
 import { Client } from '../model/client';
 import { Adventure } from '../model/adventure';
@@ -21,6 +21,8 @@ export class AdventureActionItemComponent implements OnInit {
   startReseration:string;
   @Input()
   endReseration:string;
+  @Output()
+  Reserved: EventEmitter<void>=new EventEmitter();
   startDate:Date = new Date();
   endDate:Date = new Date();
   startDay:number;
@@ -51,6 +53,7 @@ export class AdventureActionItemComponent implements OnInit {
     client:this.client
   });
   id:any;
+
   constructor(private clientService:ClientService,
               private adventureReservationService: AdventureReservationService
     ) { }
@@ -64,6 +67,7 @@ export class AdventureActionItemComponent implements OnInit {
       .subscribe(res => this.client = res)
   }
   Reserve(){
+    this.reservation.id=this.adventureFastReservation.id;
     this.reservation.reservationStart=this.adventureFastReservation.reservationStart;
     this.reservation.reservationEnd=this.adventureFastReservation.reservationEnd;
     this.reservation.validityStart=this.adventureFastReservation.validityStart;
@@ -74,7 +78,8 @@ export class AdventureActionItemComponent implements OnInit {
     this.reservation.client=this.client;
     this.reservation.adventure=this.adventureFastReservation.adventure;
     this.adventureReservationService.reserveAdventureFastReservation(this.reservation)
-    .subscribe();
+    .subscribe(res=>this.Reserved.next());
+
   }
 
 }

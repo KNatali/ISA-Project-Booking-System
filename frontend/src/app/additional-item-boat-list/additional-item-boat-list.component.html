@@ -2,11 +2,11 @@
     <table class="table table-striped ">
         <thead>
             <tr>
-                <th>Name</th><th>Price [$]</th><th>Add</th>
+                <th>Name</th><th>Price [$]</th><th *ngIf="visable_button">Add</th>
             </tr>
         </thead>
         <tbody >
-            <tr app-additional-item-boat-item *ngFor="let item of items" [addItem]="item" (addedOneAdditioanlItem)="AddAdditionalItem($event)"></tr>
+            <tr  app-additional-item-boat-item [visable_button]="visable_button" *ngFor="let item of items" [addItem]="item" (addedOneAdditioanlItem)="AddAdditionalItem($event)"></tr>
 		</tbody>
     </table>
 </div>

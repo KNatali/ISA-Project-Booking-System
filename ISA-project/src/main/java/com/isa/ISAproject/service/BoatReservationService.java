@@ -85,7 +85,7 @@ public class BoatReservationService {
 	public List<BoatReservation> sortByDate(Long id) {
 		List<BoatReservation> reservations=this.oldReservationForClinet(id);
 		List<BoatReservation> res=new ArrayList<>();
-		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDateDesc();
+		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByReservationStartDesc();
 		for (BoatReservation boatReservation : sorted) {
 			for (BoatReservation Reservation2 : reservations) {
 				if(boatReservation.getId().equals(Reservation2.getId())) {

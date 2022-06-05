@@ -7,7 +7,7 @@
       </thead>
       <tbody >
         <tr app-adventure-action-item *ngFor="let action of actions" [adventureFastReservation]=action [startReseration]="action.reservationStart"
-        [endReseration]="action.reservationEnd" [normal_price]="action.adventure.price"
+        [endReseration]="action.reservationEnd" [normal_price]="action.adventure.price" (Reserved)="reserveRefrash()"
         ></tr>
   </tbody>
   </table>
