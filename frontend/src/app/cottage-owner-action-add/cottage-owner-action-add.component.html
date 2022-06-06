@@ -28,6 +28,7 @@
             *required
           </span>
         </div>
+
         <div class="mb-3">
           <label for="reservationEnd" class="form-label">Reservation end date and time::</label>
           <input type="datetime-local" formControlName="reservationEnd" [(ngModel)]="newAction.reservationEnd"
@@ -38,7 +39,7 @@
           </span>
         </div>
         <div class="mb-3">
-          <label for="guests" class="form-label">Number of guests:</label>
+          <label for="guests" class="form-label">Number og guests:</label>
           <input type="number" formControlName="guests" [(ngModel)]="newAction.maxPersons" class="form-control">
           <span class="text-danger"
             *ngIf="(registerFormControl.guests.touched ) && registerFormControl.guests.errors?.required">
@@ -65,23 +66,10 @@
               *required
             </span>
           </div>
-
-          <!-- <label for="name" class="form-label">Additional Items:</label>
-          <div *ngFor="let item of additionalItems; let i=index">
-            <br>
-            <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
-            {{item.name}}
-
-          </div>
--->
         </div>
       </form>
       <div class="column">
         <h3>Additional items:</h3>
-        <!--
-        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-          Add additional item
-        </button>-->
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -91,6 +79,7 @@
           <tbody>
             <tr *ngFor="let item of additionalItems;let i = index">
               <td>{{item.name}}</td>
+
               <td>
                 <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
               </td>
@@ -124,6 +113,5 @@
     </div>
     <button [disabled]="!formValue.valid" class="col-md-12 " mat-button id="submit"
       (click)="addAction()">Submit</button>
-
   </div>
 </div>

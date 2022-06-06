@@ -51,7 +51,7 @@ public class BoatRevisionController {
 	}
 	
 
-	@RequestMapping(value="api/instructor/adventure/allBoatRevisionsByBoat/{id}",method = RequestMethod.GET,
+	@RequestMapping(value="api/boatOwner/boat/allBoatRevisionsByBoat/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<List<BoatRevisionDTO>> getBoatRevisionsByBoat(@PathVariable Long id){

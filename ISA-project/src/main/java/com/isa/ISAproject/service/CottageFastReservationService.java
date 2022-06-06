@@ -140,7 +140,7 @@ public class CottageFastReservationService {
 	}
 	
 	@Transactional(readOnly=false)
-	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException  {
+	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Cottage cottage=cottageRepository.getById(dto.getCottage().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
