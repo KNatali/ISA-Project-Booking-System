@@ -77,10 +77,10 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     name: "",
     price: 0
   })
-  newNavigationEquipment: NavigationEquipment = new NavigationEquipment({
+  /*newNavigationEquipment: NavigationEquipment = new NavigationEquipment({
     name: "",
     price: 0
-  })
+  })*/
   newRule: BoatBehavioralRules = new BoatBehavioralRules({
     rule: ""
   })
@@ -141,7 +141,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     this.additionalItems.splice(index, 1);
   }
 
-  addNavigationEquipment() {
+  /*addNavigationEquipment() {
     this.navigationEquipments.push(this.newNavigationEquipment);
     this.newNavigationEquipment = new NavigationEquipment({
       name: "",
@@ -151,7 +151,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
 
   deleteNavigationEquipment(index: any) {
     this.additionalItems.splice(index, 1);
-  }
+  }*/
 
   addRule() {
 
