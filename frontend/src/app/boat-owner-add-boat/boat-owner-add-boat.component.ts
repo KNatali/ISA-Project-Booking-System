@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdditionalItem } from '../model/additionalItem';
 import { Address } from '../model/address';
@@ -55,7 +55,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     price: 0,
     maxPersons: 0,
     description: '',
-    mainPicture: 'string;',
+    mainPicture: '',
     cancellationPercentage: 0,
     boatOwner: this.boatOwner,
     rules: [],
@@ -78,7 +78,8 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     price: 0
   })
   newNavigationEquipment: NavigationEquipment = new NavigationEquipment({
-    name: ""
+    name: "",
+    price: 0
   })
   newRule: BoatBehavioralRules = new BoatBehavioralRules({
     rule: ""
@@ -87,14 +88,16 @@ export class BoatOwnerAddBoatComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      name: [''],
-      street: [''],
-      city: [''],
-      state: [''],
-      maxPersons: [''],
-      price: [''],
-      cancellationPercentage: [''],
-      description: ['']
+      name: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+      maxPersons: ['', Validators.required],
+      price: ['', Validators.required],
+      cancellationPercentage: ['', Validators.required],
+      description: ['', Validators.required]
 
     })
     this.formValue1 = this.formBuilder.group({
@@ -112,6 +115,9 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     })
   }
 
+  get registerFormControl() {
+    return this.formValue.controls;
+  }
   public onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -143,7 +149,8 @@ export class BoatOwnerAddBoatComponent implements OnInit {
   addNavigationEquipment() {
     this.navigationEquipments.push(this.newNavigationEquipment);
     this.newNavigationEquipment = new NavigationEquipment({
-      name: ""
+      name: "",
+      price: 0
     })
   }
 
@@ -167,6 +174,16 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     if (this.selectedFile == null)
       alert("Please upload image!")
     else {
+      /*this.boat.name = this.formValue.value.name;
+      this.boat.address.street = this.formValue.value.street;
+      this.boat.address.city = this.formValue.value.city;
+      this.boat.address.state = this.formValue.value.state;
+      this.boat.address.latitude = this.formValue.value.latitude;
+      this.boat.address.longitude = this.formValue.value.longitude;
+      this.boat.maxPersons = this.formValue.value.maxPersons;
+      this.boat.price = this.formValue.value.price;
+      this.boat.cancellationPercentage = this.formValue.value.cancellationPercentage;
+      this.boat.description = this.formValue.value.description;*/
       this.boat.mainPicture = this.selectedFile.name;
       this.boat.additionalItems = this.additionalItems;
       this.boat.equipment = this.navigationEquipments;
@@ -176,7 +193,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
         this.boatService.addBoat(this.id, this.boat)
           .subscribe(data => {
 
-            alert("Successfully added cottage");
+            alert("Successfully added new boat");
             this.router.navigate(['']);
           }, error => {
             alert(error)

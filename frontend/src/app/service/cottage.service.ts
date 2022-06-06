@@ -86,7 +86,7 @@ export class CottageService {
     return this.http.get<CottageFastReservation[]>(`${this.urlCottage1}/` + `fastReservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
-    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage1}/` + `rules` + `/${id}`);
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `cottageRules` + `/${id}`);
   }
   getAdditionalItems(id: number): Observable<AdditionalItem[]> {
     return this.http.get<AdditionalItem[]>(`${this.urlCottage1}/` + `additionalItems` + `/${id}`);

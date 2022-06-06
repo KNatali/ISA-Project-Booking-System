@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.BoatDTO;
@@ -132,6 +133,8 @@ public class BoatReservationService {
 		}
 		return res;
 	}
+	
+	@Transactional(readOnly = false)
 	public BoatReservationDTO addBoatReservation(BoatReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Boat boat=boatRepository.getById(dto.getBoat().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());

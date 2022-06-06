@@ -17,7 +17,8 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
   @Input()
   equipment: NavigationEquipment[];
   newItem: NavigationEquipment = new NavigationEquipment({
-    name: ""
+    name: "",
+    price: 0
   })
   formValue2!: FormGroup;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private navigationEquipmentService: NavigationEquipmentService) { }
@@ -64,7 +65,7 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
     });
   }
 
-  deleteEquipment(itemId: any) {
+  /*deleteEquipment(itemId: any) {
 
 
     this.route.params.subscribe(param => {
@@ -78,7 +79,7 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
         });
     });
 
-  }
+  }*/
 
   editEquipment(item: any) {
     this.showAdd = false;

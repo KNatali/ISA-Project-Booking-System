@@ -114,6 +114,8 @@ public class Boat {
 	            inverseJoinColumns = @JoinColumn(name = "period_id"))
 	private Set<TimePeriod> unavailability;
 
+	@Column
+	private boolean deleted=false;
 
 	public Long getId() {
 		return id;
@@ -260,6 +262,14 @@ public class Boat {
 	public void setMaxPersons(int maxPersons) {
 		this.maxPersons = maxPersons;
 	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 	public Boat(Long id, String name, Address address, BoatType type, double length, int motorNumber,
 			double motorPower, int maxSpeed, String description, Set<Picture> pictures, int capacity, double grade,
 			BoatOwner owner, Set<BoatBehavioralRule> boatBehavioralRules,

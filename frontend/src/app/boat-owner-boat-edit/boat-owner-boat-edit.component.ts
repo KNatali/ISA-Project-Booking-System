@@ -277,9 +277,9 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     this.editFastReservation.oldReservationPeriod.end = this.selectedAction.reservationEnd;
   }
 
-  deleteAdditionalItem(index: any) {
+  /*deleteAdditionalItem(index: any) {
     this.selectedAction.additionalItems.splice(index, 1);
-  }
+  } */
 
   updateAction() {
     this.editFastReservation.action = this.selectedAction;

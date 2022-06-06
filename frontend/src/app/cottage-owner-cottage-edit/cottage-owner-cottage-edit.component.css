@@ -14,6 +14,16 @@ div.block label {
   text-align: right;
 }
 
+.top-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+
+}
+
+
 .flex {
   display: flex;
   flex-direction: row;
@@ -74,9 +84,15 @@ div.block label {
 }
 
 #price {
-  color: green;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  border: 1px solid #a8a8a8;
   font-weight: bolder;
-  font-size: 22px;
+  font-size: 30pt;
+  border-radius: 10px;
+
+
 }
 
 img {

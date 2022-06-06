@@ -86,15 +86,18 @@ public class BoatOwnerController {
 		return new ResponseEntity<>(new BoatOwnerProfileDTO(savedBoatOwner),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "api/boatOwners/boats/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "api/boatOwners/boats/delete/{id}",method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
-	public ResponseEntity<BoatDTO> delete(@PathVariable Long id){
-		BoatDTO bDTO=this.boatService.findById(id);
+	//public ResponseEntity<BoatDTO> delete(@PathVariable Long id){
+	public ResponseEntity delete(@PathVariable Long id){
+		this.boatService.deleteBoat(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+		/*BoatDTO bDTO=this.boatService.findById(id);
 		if(bDTO==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		this.boatService.delete(id);
-		return new ResponseEntity<>(bDTO,HttpStatus.OK);
+		return new ResponseEntity<>(bDTO,HttpStatus.OK);*/
 	}
 	@RequestMapping(value="api/boatOwners/changePassword/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")

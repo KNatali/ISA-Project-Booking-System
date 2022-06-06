@@ -29,12 +29,14 @@ import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
 import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureFishingEquipmentMapper;
 import com.isa.ISAproject.mapper.BoatBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.NavigationEquipmentMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.BoatReservation;
@@ -74,8 +76,35 @@ public class BoatService {
 	private BoatNavigationEquipmentRepository equipmentRepository;
 	
 	public List<Boat> findAll(){
-		return this.boatRepository.findAll();
+		List<Boat> allBoats = this.boatRepository.findAll();
+		List<Boat> res = new ArrayList<>();
+		for(Boat boats : allBoats)
+		{
+			if(!boats.isDeleted())
+			{
+				res.add(boats);
+			}
+		}
+		return res;
+		//return this.boatRepository.findAll();
 	}
+	
+	public Boat deleteBoat(Long id) {
+		Optional<Boat> opt =this.getOne(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Boat found=opt.get();
+		found.setDeleted(true);
+		
+		found.setUnavailability(null);
+		found.setAdditionalItems(null);
+		found.setBoatBehavioralRules(null);
+		found.setNavigationEquipment(null);
+		Boat saved=this.boatRepository.save(found);
+		return saved;
+	}
+	
 	public Optional<Boat> getOne(Long id) {
 		return this.boatRepository.findById(id);
 	}
@@ -161,12 +190,10 @@ public class BoatService {
 			AdditionalItem it=AdditionalItemMapper.convertFromDTO(itto);
 			items.add(it);
 		}
-		Set<NavigationEquipment> equipment=new HashSet<>();
-		for (NavigationEquipmentDTO itto : dto.getNavigationEquipment()) {
-			NavigationEquipment ne=NavigationEquipmentMapper.convertFromDTO(itto);
-			equipment.add(ne);
-		}
 		this.additionalItemRepository.saveAll(items);
+		Set<NavigationEquipment> equipment=NavigationEquipmentMapper.convertFromDTOs(dto.getNavigationEquipment());
+		this.equipmentRepository.saveAll(equipment);
+		
 		Set<BoatBehavioralRule> rules=new HashSet<>();
 		for (BoatBehavioralRuleDTO rdto : dto.getRules()) {
 			BoatBehavioralRule b=BoatBehavioralRuleMapper.convertFromDTO(rdto);

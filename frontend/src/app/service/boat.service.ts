@@ -81,7 +81,7 @@ export class BoatService {
     return this.http.get<Boat[]>(this.urlBoats,{params});
   }
   deleteBoat(id: number) {
-    return this.http.delete(`${this.urlBoats}/` + `delete` + `/${id}`);
+    return this.http.delete(`${this.urlBoat1}/` + `delete` + `/${id}`);
   }
   getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
     return this.http.get<BoatFastReservation[]>(`${this.urlBoat1}/` + `fastReservations` + `/${id}`);

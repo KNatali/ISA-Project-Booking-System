@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.CottageReservationClientDTO;
@@ -129,6 +130,7 @@ public class CottageReservationService {
 		return res;
 	}
 	
+	@Transactional(readOnly = false)
 	public CottageReservationDTO addCottageReservation(CottageReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Cottage cottage=cottageRepository.getById(dto.getCottage().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());

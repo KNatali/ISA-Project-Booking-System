@@ -42,7 +42,7 @@ export class BoatRulesEditComponent implements OnInit {
           ref?.click();
           this.formValue1.reset();
           this.loadBehavioralRules.emit();
-          alert("Successfully added ner behvioral rule!");
+          alert("Successfully added new behvioral rule!");
         }, error => {
           alert(error)
         });
