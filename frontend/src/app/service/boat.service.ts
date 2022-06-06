@@ -5,6 +5,7 @@ import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem
 import { Boat } from '../model/boat';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
+import { BoatRevision } from '../model/boatRevision';
 import { NavigationEquipment } from '../model/navigationEquipment';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { SearchAvailableBoatByPriceOrGrade } from '../model/searchAvailableBoatByGradeOrPrice';
@@ -84,7 +85,7 @@ export class BoatService {
     return this.http.delete(`${this.urlBoat1}/` + `delete` + `/${id}`);
   }
   getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
-    return this.http.get<BoatFastReservation[]>(`${this.urlBoat1}/` + `fastReservations` + `/${id}`);
+    return this.http.get<BoatFastReservation[]>(`${this.urlBoat}/` + `fastReservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<BoatBehavioralRules[]> {
     return this.http.get<BoatBehavioralRules[]>(`${this.urlBoat}/` + `boatRules` + `/${id}`);
@@ -118,5 +119,8 @@ export class BoatService {
   }
   findByPriceAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
     return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-price",obj);
+  }
+  getAllBoatRevisionsByBoat(id: number): Observable<BoatRevision[]> {
+    return this.http.get<BoatRevision[]>(`${this.urlBoat}/allBoatRevisionsByBoat` + `/${id}`);
   }
 }

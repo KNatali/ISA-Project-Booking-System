@@ -88,16 +88,14 @@ export class BoatOwnerAddBoatComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      name: ['', Validators.required],
-      street: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
-      maxPersons: ['', Validators.required],
-      price: ['', Validators.required],
-      cancellationPercentage: ['', Validators.required],
-      description: ['', Validators.required]
+      name: [''],
+      street: [''],
+      city: [''],
+      state: [''],
+      maxPersons: [''],
+      price: [''],
+      cancellationPercentage: [''],
+      description: ['']
 
     })
     this.formValue1 = this.formBuilder.group({
@@ -115,9 +113,6 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     })
   }
 
-  get registerFormControl() {
-    return this.formValue.controls;
-  }
   public onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -155,7 +150,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
   }
 
   deleteNavigationEquipment(index: any) {
-    this.navigationEquipments.splice(index, 1);
+    this.additionalItems.splice(index, 1);
   }
 
   addRule() {
@@ -174,26 +169,15 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     if (this.selectedFile == null)
       alert("Please upload image!")
     else {
-      /*this.boat.name = this.formValue.value.name;
-      this.boat.address.street = this.formValue.value.street;
-      this.boat.address.city = this.formValue.value.city;
-      this.boat.address.state = this.formValue.value.state;
-      this.boat.address.latitude = this.formValue.value.latitude;
-      this.boat.address.longitude = this.formValue.value.longitude;
-      this.boat.maxPersons = this.formValue.value.maxPersons;
-      this.boat.price = this.formValue.value.price;
-      this.boat.cancellationPercentage = this.formValue.value.cancellationPercentage;
-      this.boat.description = this.formValue.value.description;*/
       this.boat.mainPicture = this.selectedFile.name;
       this.boat.additionalItems = this.additionalItems;
-      this.boat.equipment = this.navigationEquipments;
       this.boat.rules = this.rules;
       this.route.params.subscribe(param => {
         this.id = param.id;
         this.boatService.addBoat(this.id, this.boat)
           .subscribe(data => {
 
-            alert("Successfully added new boat");
+            alert("Successfully added boat");
             this.router.navigate(['']);
           }, error => {
             alert(error)

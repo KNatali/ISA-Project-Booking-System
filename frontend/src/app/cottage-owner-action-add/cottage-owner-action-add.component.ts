@@ -133,12 +133,15 @@ export class CottageOwnerActionAddComponent implements OnInit {
     this.newAction.items = this.additionalItems;
 
     this.cottageReservationService.saveFastReservation(this.newAction)
-      .subscribe(res => {
-        alert("Sucessfully added new action!");
-        this.router.navigate(['/cottageOwner/:id']);
-      }, error => {
-        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
-      });
+    .subscribe(res => {
+      alert("Sucessfully added new action!");
+      this.router.navigate(['']);
+    }, error => {
+      if (error.status = "500")
+        alert("The selected time period overlaps with the previously entered one! Please choose another one!");
+      else
+        alert("Something went wrong! Try again!")
+    });
   }
 
 

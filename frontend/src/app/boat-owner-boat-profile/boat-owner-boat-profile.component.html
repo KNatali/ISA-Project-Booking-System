@@ -130,7 +130,7 @@
       </article>
     </div>
 
-    <!--<hr>
+    <hr>
     <h2>Reviews:</h2>
     <article class="revision" *ngFor="let revision of revisions">
       <i class="fa fa-comments-o" aria-hidden="true"></i>
@@ -138,13 +138,17 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <b>{{revision.adventureReservation.client.firstName}} {{revision.adventureReservation.client.lastName}} </b>
-            | {{revision.adventureReservation.reservationEnd}}
+            <b>{{revision.boatReservation.client.firstName}} {{revision.boatReservation.client.lastName}} </b>
+            | {{revision.boatReservation.reservationEnd}}
+
+
+
             <br />
             {{revision.revision.revision}}
           </p>
         </div>
+
       </div>
-    </article> -->
+    </article>
   </div>
 </div>

@@ -322,3 +322,8 @@ insert into revision(grade,revision,type) values(5,'Beds are very uncomfotable',
 insert into cottage_revision(revision_id,cottage_reservation_id) values(5,5);
 insert into revision(grade,revision,type) values(2,'Beds are very uncomfotable','Unchecked');
 insert into cottage_revision(revision_id,cottage_reservation_id) values(6,6);
+
+insert into revision(grade,revision,type) values(4,'Boat was very dirty','Unchecked');
+insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
+insert into revision(grade,revision,type) values(3,'Boat was very dirty','Unchecked');
+insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
