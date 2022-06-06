@@ -70,7 +70,7 @@ export class CottageAdditionItemsEditComponent implements OnInit {
     });
   }
 
-  deleteItem(itemId: any) {
+  /*deleteItem(itemId: any) {
 
 
     this.route.params.subscribe(param => {
@@ -84,7 +84,8 @@ export class CottageAdditionItemsEditComponent implements OnInit {
         });
     });
 
-  }
+  }*/
+  
   editItem(item: any) {
     this.showAdd = false;
     this.showUpdate = true;

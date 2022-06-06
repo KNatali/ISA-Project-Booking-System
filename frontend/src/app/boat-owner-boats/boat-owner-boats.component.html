@@ -31,7 +31,7 @@
           <td>{{ boat.grade}}</td>
           <td><button mat-button [routerLink]="['/boatOwner/boats',boat.id]"><a>View</a></button></td>
           <td><button mat-button (click)="edit(boat.id)"><a>Edit</a></button></td>
-          <td><button mat-button id="delete"><a>Delete</a></button></td>
+          <td><button mat-button id="delete" (click)="deleteBoat(boat.id)"><a>Delete</a></button></td>
         </tr>
       </tbody>
     </table>

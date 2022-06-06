@@ -9,6 +9,10 @@ import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageOwner } from '../model/cottageOwner';
+import { EditCottageFastReservation } from '../model/editCottageFastReservation';
+import { TimePeriod } from '../model/timePeriod';
+import { UnavailabilityType } from '../model/unavailabilityType';
+import { CottageReservation1Service } from '../service/cottage-reservation1.service';
 import { CottageService } from '../service/cottage.service';
 
 @Component({
@@ -29,6 +33,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   showUpdate: boolean;
   cancellation: any;
   actions: CottageFastReservation[];
+  formAction: FormGroup;
   id: number;
   address = new Address({
     id: 0,
@@ -74,7 +79,27 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   });
   currentRate = 8;
   formValue0!: FormGroup;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageService: CottageService) { }
+  selectedAction: CottageFastReservation = new CottageFastReservation({
+    reservationStart: '',
+    reservationEnd: '',
+    validityStart: '',
+    validityEnd: '',
+    maxPersons: 0,
+    price: 0,
+    items: [],
+    cottage: this.editedCottage,
+    duration:0
+  })
+  time: TimePeriod = new TimePeriod({
+    start: '',
+    end: '',
+    type: UnavailabilityType.Action
+  })
+  editFastReservation: EditCottageFastReservation = new EditCottageFastReservation({
+    action: this.selectedAction,
+    oldReservationPeriod: this.time
+  })
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private cottageService: CottageService, private cottageReservationService: CottageReservation1Service) { }
 
   ngOnInit(): void {
     this.loader = new Loader({
@@ -114,7 +139,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
     this.formValue0.controls['price'].setValue(this.cottage1.price);
     this.formValue0.controls['cancellationPercentage'].setValue(this.cottage1.cancellationPercentage);
     this.formValue0.controls['description'].setValue(this.cottage1.description);
-
+    this.formValue0.controls['mainPicture'].setValue(this.cottage1.mainPicture);
   }
   //Gets called when the user clicks on submit to upload the image
   onUpload() {
@@ -215,7 +240,7 @@ export class CottageOwnerCottageEditComponent implements OnInit {
   loadAdditionalItems() {
     this.route.params.subscribe(param => {
       this.id = param.id;
-      this.cottageService.getAdditionalItems(this.id)
+      this.cottageService.getCottageAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => this.cottage1.items = items);
     });
   }
@@ -225,5 +250,26 @@ export class CottageOwnerCottageEditComponent implements OnInit {
       this.cottageService.getCottageFastReservations(this.id)
         .subscribe((items: CottageFastReservation[]) => this.actions = items);
     });
+  }
+
+  editAction(action: CottageFastReservation) {
+    this.selectedAction = action;
+    this.editFastReservation.oldReservationPeriod.start = this.selectedAction.reservationStart;
+
+    this.editFastReservation.oldReservationPeriod.end = this.selectedAction.reservationEnd;
+  }
+
+  updateAction() {
+    this.editFastReservation.action = this.selectedAction;
+    this.cottageReservationService.editFastReservation(this.editFastReservation)
+      .subscribe(res => {
+        let ref = document.getElementById('cancelAction');
+        ref?.click();
+        this.formAction.reset();
+        alert("Sucessfully added new action!");
+
+      }, error => {
+        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
+      });
   }
 }

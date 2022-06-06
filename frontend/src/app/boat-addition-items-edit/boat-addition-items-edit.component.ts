@@ -16,6 +16,7 @@ export class BoatAdditionItemsEditComponent implements OnInit {
   @Output() loadAdditionalItems: EventEmitter<any> = new EventEmitter();
   @Input()
   items: AdditionalItem[];
+  additionalItems: Array<AdditionalItem> = [];
   newItem: AdditionalItem = new AdditionalItem({
 
     name: "",
@@ -70,7 +71,7 @@ export class BoatAdditionItemsEditComponent implements OnInit {
     });
   }
 
-  deleteItem(itemId: any) {
+  /*deleteItem(itemId: any) {
 
 
     this.route.params.subscribe(param => {
@@ -84,7 +85,8 @@ export class BoatAdditionItemsEditComponent implements OnInit {
         });
     });
 
-  }
+  }*/
+  
   editItem(item: any) {
     this.showAdd = false;
     this.showUpdate = true;

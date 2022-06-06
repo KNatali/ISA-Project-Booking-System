@@ -6,6 +6,7 @@ import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
+import { CottageRevision } from '../model/cottageRevision';
 import { Cottage1Service } from '../service/cottage1.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
   cottage1: Cottage;
   currentRate = 8;
   actions: CottageFastReservation[];
+  revisions: CottageRevision[];
 
   constructor(private http: HttpClient,private route: ActivatedRoute, private router: Router, private cottageService: Cottage1Service) { }
 
@@ -35,6 +37,7 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadActions();
+    this.loadRevisions();
   }
 
   loadData() {
@@ -88,6 +91,14 @@ export class CottageOwnerCottageProfileComponent implements OnInit {
         .subscribe((items: CottageFastReservation[]) => this.actions = items);
     });
   }
+  loadRevisions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.cottageService.getAllCottageRevisionsByCottage(this.id)
+        .subscribe((items: CottageRevision[]) => this.revisions = items);
+    });
+  }
+
   edit() {
     this.router.navigate(['cottageOwner/cottages/edit/:id'])
   }

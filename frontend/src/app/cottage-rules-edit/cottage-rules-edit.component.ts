@@ -42,7 +42,7 @@ export class CottageRulesEditComponent implements OnInit {
           ref?.click();
           this.formValue1.reset();
           this.loadBehavioralRules.emit();
-          alert("Successfully added ner behvioral rule!");
+          alert("Successfully added new behvioral rule!");
         }, error => {
           alert(error)
         });
@@ -67,23 +67,6 @@ export class CottageRulesEditComponent implements OnInit {
     });
   }
 
-  deleteRule(ruleId: any) {
-
-
-    this.route.params.subscribe(param => {
-      this.id = param.id;
-      this.cottageRuleService.deleteCottageRule(this.id, ruleId)
-        .subscribe(data => {
-
-
-          alert("Successfully deleted behavioral rule!");
-          this.loadBehavioralRules.emit();
-        }, error => {
-          alert(error)
-        });
-    });
-
-  }
   editRule(item: any) {
     this.showAdd = false;
     this.showUpdate = true;
