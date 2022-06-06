@@ -135,12 +135,19 @@ export class CottageOwnerCalendarComponent implements OnInit {
   }
 
   getUnavailability() {
-    this.cottageService.getUnavailabilityByCottage(this.id)
+    this.cottageOwnerService.getUnavailabilityByCottageOwner(this.id)
       .subscribe(res => {
         this.unvailabilities = res
         this.set();
       })
   }
+  /*getUnavailability() {
+    this.cottageService.getUnavailabilityByCottage(this.id)
+      .subscribe(res => {
+        this.unvailabilities = res
+        this.set();
+      })
+  }*/
 
   set() {
     this.unvailabilities.forEach((u, index) => {
@@ -169,7 +176,7 @@ export class CottageOwnerCalendarComponent implements OnInit {
   setUnavailability() {
     this.period.start = this.startTime.toLocaleString();
     this.period.end = this.endTime.toLocaleString()
-    this.cottageService.setUnavailability(this.period, this.id).subscribe(data => {
+    this.cottageOwnerService.setUnavailability(this.period, this.id).subscribe(data => {
       this.newEvent = {
         start: new Date(this.startTime),
         end: new Date(this.endTime),
@@ -185,7 +192,11 @@ export class CottageOwnerCalendarComponent implements OnInit {
       this.events.push(this.newEvent);
 
     }, error => {
-      alert("The selected time period overlaps with the previously entered one! Please choose another one!")
+      if (error.status = "500")
+        alert("The selected time period overlaps with the previously entered one! Please choose another one!");
+      else
+        alert("Something went wrong! Try again!")
+      //alert("The selected time period overlaps with the previously entered one! Please choose another one!")
     })
   }
 

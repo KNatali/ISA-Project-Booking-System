@@ -64,7 +64,6 @@ export class CottageOwnerAnalyticsComponent implements OnInit {
     );
     this.getAverageGrade(this.id);
     this.getCottageOwnerReservtions(this.id);
-
   }
   trueYear() {
     this.yearView = true;
