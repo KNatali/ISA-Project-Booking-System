@@ -33,6 +33,7 @@ public class CottageReservationDTO {
 	private String reservationStart;
 	private String reservationEnd;
 	private CottageOwnerReportDTO report;
+	private double systemEarning;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
@@ -99,6 +100,12 @@ public class CottageReservationDTO {
 	}
 	public void setReservationEnd(String resevationEnd) {
 		this.reservationEnd = resevationEnd;
+	}
+	public double getSystemEarning() {
+		return systemEarning;
+	}
+	public void setSystemEarning(double systemEarning) {
+		this.systemEarning = systemEarning;
 	}
 	public CottageOwnerReportDTO getReport() {
 		return report;

@@ -162,7 +162,7 @@ public class BoatFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getId());
+		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getBoatOwner().getId());
 		
 		
 		BoatFastReservation fast=new BoatFastReservation(dto.getId(),boat,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);

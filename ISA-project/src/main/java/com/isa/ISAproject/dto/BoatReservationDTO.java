@@ -17,6 +17,7 @@ public class BoatReservationDTO {
 	private String reservationStart;
 	private String reservationEnd;
 	private BoatOwnerReportDTO report;
+	private double systemEarning;
 	private Set<AdditionalItemDTO> additionalItems=new HashSet<>();
 	public Long getId() {
 		return id;
@@ -83,6 +84,12 @@ public class BoatReservationDTO {
 	}
 	public void setAdditionalItems(Set<AdditionalItemDTO> additionalItems) {
 		this.additionalItems = additionalItems;
+	}
+	public double getSystemEarning() {
+		return systemEarning;
+	}
+	public void setSystemEarning(double systemEarning) {
+		this.systemEarning = systemEarning;
 	}
 	public BoatReservationDTO(Long id, LocalDateTime date, int duration, int maxPersons, double price,
 			ClientProfileDTO client, BoatDTO boat) {

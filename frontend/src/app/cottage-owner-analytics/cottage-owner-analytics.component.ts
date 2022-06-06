@@ -64,7 +64,6 @@ export class CottageOwnerAnalyticsComponent implements OnInit {
     );
     this.getAverageGrade(this.id);
     this.getCottageOwnerReservtions(this.id);
-
   }
   trueYear() {
     this.yearView = true;
@@ -164,12 +163,12 @@ export class CottageOwnerAnalyticsComponent implements OnInit {
   }
   getTotal() {
     this.cottageReservations.forEach((value) => {
+      console.log(value);
       this.total = this.total + (value.price - value.systemEarning);
       this.count = this.count + 1;
     });
     const factor = 10 ** 2;
     this.average = Math.round((this.total / this.count) * factor) / factor;
-
   }
 
 

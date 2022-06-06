@@ -27,12 +27,4 @@ public interface BoatRepository extends JpaRepository<Boat, Long> {
 	List<Boat> findByOrderByPriceDesc();
 	List<Boat> findByAddress(String address);
 	List<Boat> findByOwner(BoatOwner owner);
-	
-	@Lock(LockModeType.PESSIMISTIC_WRITE)
-	@Query("select p from Boat p where p.id = :id")
-	//Postgres po defaultu poziva for update bez no wait, tako da treba dodati vrednost 0 za timeout
-	//kako bismo dobili PessimisticLockingFailureException ako pri pozivu ove metode torka nije dostupna
-
-	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
-	public Boat findOneById(@Param("id")Long id);
 }

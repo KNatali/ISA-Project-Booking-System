@@ -160,7 +160,7 @@ public class CottageFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getId());
+		timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getCottageOwner().getId());
 		
 		
 		CottageFastReservation fast=new CottageFastReservation(dto.getId(),cottage,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
