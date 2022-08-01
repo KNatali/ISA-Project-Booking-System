@@ -28,14 +28,9 @@ export class AdminRejectRequestComponent implements OnInit {
     })
   }
 
-
-
   sendMessage() {
     this.message = this.formValue.controls['message'].value
-
     this.answer = JSON.parse(sessionStorage.getItem("profileDeleteRequest")!);
-
-
     this.adminService.rejectProfileDeleteRequests(this.answer, this.message)
       .subscribe(data => {
         let ref = document.getElementById('cancel');
@@ -45,11 +40,5 @@ export class AdminRejectRequestComponent implements OnInit {
       }, error => {
         alert("Error! Please try againg!")
       });
-
-
-
   }
-
-
-
 }

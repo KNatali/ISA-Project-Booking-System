@@ -46,7 +46,11 @@ export class AdminReservationRequestsComponent implements OnInit {
 
     sessionStorage.setItem("email", request.userDTO.email);
     this.adminService.rejectRegistrationRequest(request)
-      .subscribe();
+      .subscribe(data => {
+        alert("sucessfully")
+      }, error => {
+        alert("Error!")
+      });
     this.requests.forEach((request, index) => {
       if (request.id == id) this.requests.splice(index, 1);
     });

@@ -63,7 +63,7 @@ public class InstructorReportController {
 		
 		try {
 			System.out.println("Thread id: " + Thread.currentThread().getId());
-			emailService.sendMessage(dto.getAdventureReservation().getAdventure().getInstructor().getEmail(),"Admin aproved your registration report.CLient have got 1 penal!");
+			emailService.sendMessage(dto.getAdventureReservation().getAdventure().getInstructor().getEmail(),"Admin aproved your reservation report.Client have got 1 penal!");
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}

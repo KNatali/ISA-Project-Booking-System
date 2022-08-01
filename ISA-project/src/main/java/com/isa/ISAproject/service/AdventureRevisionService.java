@@ -39,13 +39,15 @@ public class AdventureRevisionService {
 		List<AdventureRevision> revisions=adventureRevisionRepository.findAll();
 		List<AdventureRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (AdventureRevision r : revisions) {
-			
-			RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
-			
-			AdventureReservationDTO reservation=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
-			AdventureRevisionDTO rDTO=new AdventureRevisionDTO(r.getId(),reservation,revision);
-			revisionsDTO.add(rDTO);
+			if(r.getRevision().getType()== RevisionType.Unchecked) {
+				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
+				
+				AdventureReservationDTO reservation=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
+				AdventureRevisionDTO rDTO=new AdventureRevisionDTO(r.getId(),reservation,revision);
+				revisionsDTO.add(rDTO);
+				}
 			}
+			
 		return revisionsDTO;
 	}
 	
@@ -53,7 +55,7 @@ public class AdventureRevisionService {
 		List<AdventureRevision> revisions=adventureRevisionRepository.findAll();
 		List<AdventureRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (AdventureRevision r : revisions) {
-			if(r.getAdventureReservation().getAdventure().getId()==adventureId) {
+			if(r.getAdventureReservation().getAdventure().getId()==adventureId && r.getRevision().getType() ==RevisionType.Accepted) {
 				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
 				
 				AdventureReservationDTO reservation=AdventureReservationMapper.convertToDTO(r.getAdventureReservation());
