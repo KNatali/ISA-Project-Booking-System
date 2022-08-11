@@ -10,6 +10,7 @@ import { AdventureReservationService } from '../service/adventure-reservation.se
 export class ActiveAdventureReservationComponent implements OnInit {
   reservations:AdventureReservation[];
   id:any;
+  delete_adveture_button:boolean=true;
   constructor(private adventureeReservationService:AdventureReservationService) { }
 
   ngOnInit(): void {
@@ -19,6 +20,10 @@ export class ActiveAdventureReservationComponent implements OnInit {
   loadData(){
     this.adventureeReservationService.activeReservations(this.id)
     .subscribe(res=>this.reservations=res)
+  }
+  canceledReservaiton(resId:number){
+    this.adventureeReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
   }
 
 }

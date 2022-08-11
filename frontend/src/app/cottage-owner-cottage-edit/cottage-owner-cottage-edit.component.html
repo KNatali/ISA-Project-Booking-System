@@ -1,5 +1,313 @@
 <div class="body-wrapper">
   <div class="container content">
+    <div class="fl">
+
+      <button (click)="editInformation()" mat-button class="button is-success is-large" data-bs-toggle="modal"
+        data-bs-target="#modalData"><i class="fa fa-pencil"></i> Edit this
+        cottage</button>
+
+    </div>
+    <br>
+
+    <div class="top-content">
+
+      <div class="flex">
+
+        <div>
+          <h1>{{cottage1.name}}</h1>
+
+          <div>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>{{cottage1.address.street}},{{cottage1.address.city}}
+          </div>
+          <div class="full " id="map">
+
+          </div>
+          <br>
+          <div><strong>Max number of guests: </strong> {{cottage1.maxPersons}}</div>
+          <div><strong>Average grade: </strong>
+            <span class="tag is-large mt-5 rating">{{cottage1.grade}}<i class="ml-1 fa fa-star"></i></span>
+          </div>
+          <br>
+          <div id="price">
+            <strong>Price (per day) : </strong> <span> {{cottage1.price}} $</span>
+          </div>
+
+        </div>
+        <br>
+
+
+      </div>
+      <br>
+      <div class="gallery">
+        <div class="figure">
+          <img id="mainImage" src="{{cottage1.mainPicture}}">
+        </div>
+
+      </div>
+    </div>
+    <br>
+
+
+    <hr />
+
+    <div>
+      <div>
+        <h2>Description:</h2>
+        <p>
+          {{cottage1.description}}
+        </p>
+      </div>
+      <hr>
+      <div>
+        <h2>About the cottage owner:</h2>
+        <h3>{{cottage1.cottageOwner.firstName}} {{cottage1.cottageOwner.lastName}} </h3>
+        <h4>{{cottage1.cottageOwner.street}}</h4>
+      </div>
+      <hr>
+      <div>
+        <h3>Cancellation Policy:</h3>
+        <span style="color:darkred">{{cottage1.cancellationPercentage}} % keeps cottage owner</span>
+      </div>
+
+    </div>
+
+
+    <hr />
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalData" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalDataLabel">Cottage information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formValue0">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" formControlName="name" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="street" class="form-label">Street:</label>
+                <input type="text" formControlName="street" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City:</label>
+                <input type="text" formControlName="city" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="state" class="form-label">State:</label>
+                <input type="text" formControlName="state" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="maxPersons" class="form-label">Max number of guests:</label>
+                <input type="number" formControlName="maxPersons" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" formControlName="price" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="cancellationPercentage" class="form-label">Cancellation Policy(%):</label>
+                <input type="number" formControlName="cancellationPercentage" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea type="textarea" formControlName="description" class="form-control"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="biography" class="form-label">Choose another main picture:</label>
+                <input type="file" (change)="onFileChanged($event)">
+              </div>
+              <div class="mb-3">
+                <input type="button" (click)="onUpload()" value="upload">
+              </div>
+
+
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancel0" type="button" data-bs-dismiss="modal">Close</button>
+
+            <button class="btn btn-primary" type="button" (click)="update()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <h3>Additional items:</h3>
+        <button mat-button type="button" class="btn btn-primary" (click)="onAdd()" data-bs-toggle="modal"
+          data-bs-target="#modalItem">
+          Add additional item
+        </button>
+        <app-cottage-addition-items-edit [items]="cottage1.items"
+          (loadAdditionalItems)="loadAdditionalItems()" [showAdd]="showAdd" [showUpdate]="showUpdate">
+        </app-cottage-addition-items-edit>
+      </div>
+    </div>
+    <hr>
+    <div class="columns">
+      <div class="column">
+        <h3>Cottage rules:</h3>
+        <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRule"
+          (click)="onAdd()">
+          Add behavioral rule
+        </button>
+
+        <app-cottage-rules-edit [rules]="cottage1.rules" [showAdd]="showAdd" [showUpdate]="showUpdate"
+          (loadBehavioralRules)="loadBehavioralRules()">
+        </app-cottage-rules-edit>
+
+      </div>
+    </div>
+    
+
+    <div class="my-5">
+      <article class="media " *ngFor="let action of actions">
+        <div class="media-content">
+          <div class="content">
+            <div>
+              <p style="font-size:16pt; font-weight: 800;">
+                {{action.cottage.name}} <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                  class="fa fa-star"></i>
+              </p>
+
+              <div>
+                <strong><i class="fa fa-calendar"></i> Start:{{action.reservationStart}}</strong>
+                <br />
+                <strong><i class="fa fa-calendar"></i> End: 3 {{action.reservationEnd}}</strong>
+                <br />
+                <strong><i class="fa fa-user"></i> {{action.maxPersons}} guests</strong>
+                <br />
+                <strong><i class="fa fa-map-marker"></i>
+                  {{action.cottage.address.street}},{{action.cottage.address.city}}</strong>
+                <div class="columnAction">
+                  <span class="tag is-orange" *ngFor="let item of action.items">{{item.name}}</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="columnPrice">
+              <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3"
+                (click)="editAction(action)">
+                Edit this action
+              </button><br><br>
+              <div style="font-size: 15pt; font-weight: 800;color: rgb(161, 19, 19);">Price: {{action.price}}</div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalDataLabel">Cottage information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formAction">
+              <div class="mb-3">
+                <label for="name" class="form-label">Validity start:</label>
+                <input type="date" formControlName="validityStart" [(ngModel)]="selectedAction.validityStart"
+                  class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Validity end:</label>
+                <input type="date" formControlName="validityEnd" [(ngModel)]="selectedAction.validityEnd"
+                  class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Reservation start date and time:</label>
+                <input type="datetime-local" formControlName="reservationStart"
+                  [(ngModel)]="selectedAction.reservationStart" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label for="name" class="form-label">Reservation end date and time:</label>
+                <input type="datetime-local" formControlName="reservationEnd"
+                  [(ngModel)]="selectedAction.reservationEnd" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="state" class="form-label">Number og guests:</label>
+                <input type="number" formControlName="maxPersons" [(ngModel)]="selectedAction.maxPersons"
+                  class="form-control">
+              </div>
+              <div class="mb-3">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Price:</label>
+                  <input type="number" formControlName="price" [(ngModel)]="selectedAction.price" class="form-control">
+                </div>
+
+              </div>
+              <hr>
+
+            </form>
+
+            <div class="column">
+              <h3>Additional items:</h3>
+              <!--
+              <button mat-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Add additional item
+              </button>-->
+              <table class="table table-striped ">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of selectedAction.items;let i = index">
+                    <td>{{item.name}}</td>
+
+                    <!--<td>
+                      <button class="btn btn-primary" (click)="deleteAdditionalItem(i)" type="button">Delete</button>
+                    </td>-->
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelAction" type="button" data-bs-dismiss="modal">Close</button>
+
+            <button class="btn btn-primary" type="button" (click)="updateAction()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<!--<div class="body-wrapper">
+  <div class="container content">
 
 
     <div class="flex">
@@ -32,19 +340,7 @@
       <div class="figure">
         <img id="mainImage" src="{{cottage1.mainPicture}}">
       </div>
-      <!--
-      <div id="lightgallery">
-
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-        <a href="/assets/adventure/Adventure1.jpg">
-          <img src="/assets/adventure/Adventure1.jpg">
-        </a>
-      </div>-->
+      
     </div>
     <br>
     <div>
@@ -78,7 +374,7 @@
     <hr />
 
 
-    <!-- Modal -->
+    
     <div class="modal fade" id="modalData" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -196,7 +492,7 @@
       </article>
     </div>
 
-    <!-- Modal -->
+     Modal
     <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modalDataLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -245,4 +541,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->

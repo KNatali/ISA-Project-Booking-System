@@ -11,6 +11,7 @@ import { ClientService } from '../service/client.service';
 export class ActiveBoatReservationComponent implements OnInit {
   reservations:BoatReservation[];
   id:any;
+  delete_boat_button:boolean=true;
   constructor(private boatReservationService:BoatReservationService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,10 @@ export class ActiveBoatReservationComponent implements OnInit {
   loadData(){
     this.boatReservationService.activeReservation(this.id)
     .subscribe(res=>this.reservations=res)
+  }
+  canceledReservaiton(resId:number){
+    this.boatReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
   }
 
 }

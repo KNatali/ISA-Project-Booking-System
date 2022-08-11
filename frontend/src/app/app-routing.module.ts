@@ -1,3 +1,4 @@
+import { AdventureActionListComponent } from './adventure-action-list/adventure-action-list.component';
 import { AdminFirstLoginComponent } from './admin-first-login/admin-first-login.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { InstructorAddAdventureComponent } from './instructor-add-adventure/instructor-add-adventure.component';
@@ -55,6 +56,8 @@ import { ComplainInstructorComponent } from './complain-instructor/complain-inst
 
 import { ComplaintBoatReservationService } from './service/complaint-boat-reservation.service';
 import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
+import { BoatActionListComponent } from './boat-action-list/boat-action-list.component';
+import { CottageActionListComponent } from './cottage-action-list/cottage-action-list.component';
 
 
 const routes: Routes = [
@@ -115,8 +118,10 @@ const routes: Routes = [
   { path: 'complaint-cottage-reservation/:id',component:ComplainCottageReservationComponent},
   { path: 'complaint-instructor/:id', component:ComplainInstructorComponent},
 
-  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent}
-
+  { path: 'delete-request-client/:id',component:ClientDeleteProfilComponent},
+  { path: 'adventure-actions/:id',component:AdventureActionListComponent},
+  { path: 'boat-actions/:id',component:BoatActionListComponent},
+  { path: 'cottage-actions/:id',component:CottageActionListComponent}
 
 
 ];

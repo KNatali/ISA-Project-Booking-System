@@ -16,6 +16,7 @@ import { CottageOwnerReport } from '../model/cottageOwnerReport';
 export class CottageOwnerService {
   urlCottageOwner = "http://localhost:8090/api/cottageOwner";
   urlCottageOwner_cottages = "http://localhost:8090/api/cottageOwners/cottages/client";
+  urlCottages = "http://localhost:8090/api/cottages";
 
   constructor(private http: HttpClient) { }
   getCottageOwners():Observable<CottageOwner[]>{
@@ -87,5 +88,12 @@ export class CottageOwnerService {
   }
   sendReservationReport(report: CottageOwnerReport): Observable<CottageOwnerReport> {
     return this.http.post<CottageOwnerReport>(`http://localhost:8090/api/cottageOwners/` + `sendReservationReport`, report);
+  }
+  getUnavailabilityByCottageOwner(id: number): Observable<TimePeriod[]> {
+    return this.http.get<TimePeriod[]>(`${this.urlCottages}/` + `getUnavailability` + `/${id}`);
+  }
+  setUnavailability(period: TimePeriod, id: number) {
+    return this.http.post<ProfileDeleteRequest>(`${this.urlCottages}/` + `setUnavailability` + `/${id}`, period);
+
   }
 }

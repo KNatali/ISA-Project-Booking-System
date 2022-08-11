@@ -40,6 +40,8 @@ public class CottageReservation {
 	private double price;
 	@ManyToOne
 	private Client client;
+	@Column
+	private boolean deleted;
 	@Column(name = "reservationStart", nullable = false)
     private LocalDateTime reservationStart;
 
@@ -82,6 +84,15 @@ public class CottageReservation {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public LocalDateTime getDate() {

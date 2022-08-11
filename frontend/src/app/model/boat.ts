@@ -72,5 +72,5 @@ export class Boat implements BoatInterface{
         this.cancellationPercentage=obj.cancellationPercentage;
         this.equipment=obj.equipment;
     }
-    
+
 }

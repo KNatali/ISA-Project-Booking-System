@@ -1,0 +1,14 @@
+
+<div>
+  <table class="table table-striped ">
+      <thead>
+          <tr>
+              <th>Name</th><th>Description</th><th>Average grade</th><th>Cancle</th>
+          </tr>
+      </thead>
+      <tbody >
+        <tr app-cottage-item *ngFor="let cottage of cottages" [cottage]="cottage" (Unsubsrcibed)="unsubsrcibe($event)"
+        ></tr>
+  </tbody>
+  </table>
+</div>

@@ -1,5 +1,7 @@
 package com.isa.ISAproject.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,12 +17,19 @@ import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
+import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AddressMapper;
 import com.isa.ISAproject.mapper.AdventureBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.AdventureFishingEquipmentMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
+import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Adventure;
@@ -28,11 +37,13 @@ import com.isa.ISAproject.model.AdventureBehavioralRule;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Client;
 
 import com.isa.ISAproject.model.Cottage;
 
 import com.isa.ISAproject.model.Instructor;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.repository.AdditionalItemRepository;
 import com.isa.ISAproject.repository.AddressRepository;
 import com.isa.ISAproject.repository.AdventureFishingEquipmentRepository;
@@ -59,6 +70,8 @@ public class AdventureService {
 	private BehavioralRuleRepository ruleRepository;
 	@Autowired
 	private InstructorRepository instructorRepository;
+	@Autowired
+	private ClientService clientService;
 	
 	public List<AdventureDTO> findAll(){
 		List<Adventure> adventures= this.adventureRepository.findAll();
@@ -247,6 +260,136 @@ public class AdventureService {
 		}
 		return res;
 	}
-	
+	public List<AdventureDTO> findAvailableByGrade(SearchAvailableAdventureByGradeDTO dto){
+		List<Adventure> all_adventures=this.adventureRepository.findByAverageGrade(dto.getGrade());
+		List<AdventureDTO> available_adventuredtos=dto.getAdventures();
+		List<AdventureDTO> all_adventuresdtos=AdventureMapper.convertoToDTOs(all_adventures);
+		List<AdventureDTO> res=new ArrayList<AdventureDTO>();
+		
+		for (AdventureDTO adventure : available_adventuredtos) {
+			for (AdventureDTO adventure2 : all_adventuresdtos) {
+				if (adventure.getId()==adventure2.getId()) {
+					res.add(adventure);
+				}
+			}
+		}
+		return res;
+	}
+	public List<AdventureDTO> findAvailableByPrice(SearchAvailableAdventureByPriceDTO dto){
+		List<Adventure> all_adventures=this.adventureRepository.findByPrice(dto.getPrice());
+		List<AdventureDTO> available_adventuredtos=dto.getAdventures();
+		List<AdventureDTO> all_adventuresdtos=AdventureMapper.convertoToDTOs(all_adventures);
+		List<AdventureDTO> res=new ArrayList<AdventureDTO>();
+		
+		for (AdventureDTO adventure : available_adventuredtos) {
+			for (AdventureDTO adventure2 : all_adventuresdtos) {
+				if (adventure.getId()==adventure2.getId()) {
+					res.add(adventure);
+				}
+			}
+		}
+		return res;
+	}
+	public List<Adventure> findAllAvailableAdventure(SearchForReservationDTO dto){
+		//treba dobaviti sve brodove
+		List<Adventure> adventures=this.adventureRepository.findAll();
 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getDateAndTime(),formatter);
+		LocalDateTime end = start.plusHours(dto.getNumOfDay());
+
+		List<Adventure> availableAdventures=new ArrayList<>();
+		for (Adventure adventure : adventures) {
+			Set<TimePeriod> unavailability=adventure.getUnavailability();//sve zautestosti jednog broda
+			int broj_zauzetosti=unavailability.size();
+			int brojac=0;//brokjim koliko yautesto se  preklapa sa zeljenim datumom
+			for (TimePeriod timePeriod : unavailability) {
+				if ((end.isAfter(timePeriod.getStart()) && end.isBefore(timePeriod.getEnd()))||(start.isAfter(timePeriod.getStart()) && start.isBefore(timePeriod.getEnd()))) {
+					brojac++;
+				}
+			}
+			if (broj_zauzetosti!=brojac || broj_zauzetosti==0) {
+				availableAdventures.add(adventure);
+			}
+		}
+		return availableAdventures;
+	}
+
+	public List<Adventure> sortByGradeAvailableAdventure(List<AdventureDTO> adventures) {
+		List<Adventure> all_sorted_adventures = this.adventureRepository.findByOrderByAverageGradeDesc();
+		List<Adventure> sorted_adventures =new ArrayList<>();
+		for (Adventure adventure : all_sorted_adventures) {
+			for (AdventureDTO adventure2 : adventures) {
+				if(adventure.getId()==adventure2.getId()) {
+					sorted_adventures.add(adventure);
+				}
+			}
+		}
+		return sorted_adventures;
+	}
+	
+	public List<Adventure> sortByPriceAvailableAdventure(List<AdventureDTO> adventures) {
+		List<Adventure> all_sorted_adventures = this.adventureRepository.findByOrderByPriceDesc();
+		List<Adventure> sorted_adventures =new ArrayList<>();
+		for (Adventure adventure : all_sorted_adventures) {
+			for (AdventureDTO adventure2 : adventures) {
+				if(adventure.getId()==adventure2.getId()) {
+					sorted_adventures.add(adventure);
+				}
+			}
+		}
+		return sorted_adventures;
+	}
+	public List<AdventureDTO> getAllSubscribedAdventures(Long clientId){
+		Optional<Client> opt=this.clientService.findById(clientId);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Client client=opt.get();
+		Set<Adventure> subscribed=client.getSubscribedAdventures();
+		List<Adventure> list_subscribed=new ArrayList<Adventure>();
+		for (Adventure adv : subscribed) {
+			list_subscribed.add(adv);
+		}
+		return AdventureMapper.convertoToDTOs(list_subscribed);
+	}
+
+	public boolean unsubscribedAdventure(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Adventure> adventureOpt=this.adventureRepository.findById(dto.getEntityId());
+		if(!adventureOpt.isPresent()) {
+			return false;
+		}
+		Adventure adventure=adventureOpt.get();
+		boolean deleted;
+		client.getSubscribedAdventures().remove(adventure);
+		deleted=adventure.getSubscribers().remove(client);
+		this.adventureRepository.save(adventure);
+		this.clientService.save(client);
+		return deleted;
+	}
+	public boolean subscribe(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+
+		Optional<Adventure> adventureOpt=this.adventureRepository.findById(dto.getEntityId());
+		if(!adventureOpt.isPresent()) {
+			return false;
+		}
+		Adventure adventure=adventureOpt.get();
+		boolean deleted;
+		client.getSubscribedAdventures().add(adventure);
+		deleted=adventure.getSubscribers().add(client);
+		this.adventureRepository.save(adventure);
+		this.clientService.save(client);
+		return deleted;
+	}
 }

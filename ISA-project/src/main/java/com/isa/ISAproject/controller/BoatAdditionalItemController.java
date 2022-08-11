@@ -27,7 +27,8 @@ public class BoatAdditionalItemController {
 	
 	@RequestMapping(value="/additionalItems/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasAnyRole('BOAT_OWNER','CLIENT')")
+	//@PreAuthorize("hasAnyRole('BOAT_OWNER','CLIENT')")
+	//zakomentarialsala sam da bi neregistroavani klijent mogao da vidi cenovnik
 	public ResponseEntity<List<AdditionalItemDTO>> getBoatAdditionalItems(@PathVariable Long id){
 		List<AdditionalItemDTO> item=additionalItemService.getAdditionalIem(id);
 		if(item==null) {

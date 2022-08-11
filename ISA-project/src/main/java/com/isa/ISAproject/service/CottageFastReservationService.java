@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.BoatFastReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageFastReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.EditCottageFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
+import com.isa.ISAproject.dto.ReserveCottageFastReservation;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.BoatFastReservationMapper;
 import com.isa.ISAproject.mapper.CottageFastReservationMapper;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageFastReservation;
@@ -73,6 +81,40 @@ public class CottageFastReservationService {
 		return res;
 		
 	}
+	public CottageFastReservation findById(Long id) {
+		Optional<CottageFastReservation> OPt=this.cottageFastReservationRepository.findById(id);
+		if (!OPt.isPresent()) {
+			return null;
+		} 
+		CottageFastReservation res=OPt.get();
+		return res;
+	}
+	public void delite(CottageFastReservation a) {
+		this.cottageFastReservationRepository.delete(a);
+	}
+	public List<CottageFastReservationDTO> getFastReservationsByCottageClient(Long id){
+		
+		List<CottageFastReservationDTO> res=new ArrayList<>();
+		List<CottageFastReservation> reservations=cottageFastReservationRepository.findAll();
+		
+		for (CottageFastReservation a : reservations) {
+			if(a.getCottage().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(CottageFastReservationMapper.convertToDTO(a));
+		
+		}
+		for (CottageFastReservation cottageFastReservation : reservations) {
+			for (CottageFastReservationDTO dto : res) {
+				if(cottageFastReservation.getId()==dto.getId()) {
+					int startDay=cottageFastReservation.getReservationStart().getDayOfYear();
+					int endDay=cottageFastReservation.getReservationEnd().getDayOfYear();
+					int duration=endDay-startDay;
+					dto.setDuration(duration);
+				}
+			}
+		}
+		return res;
+		
+	}
 	public List<CottageFastReservationDTO> getFastReservationsByCottage(Long id){
 		
 		List<CottageFastReservationDTO> res=new ArrayList<>();
@@ -98,7 +140,7 @@ public class CottageFastReservationService {
 	}
 	
 	@Transactional(readOnly=false)
-	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException  {
+	public CottageFastReservationDTO addCottageFastReservation(CottageFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Cottage cottage=cottageRepository.getById(dto.getCottage().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
@@ -118,7 +160,7 @@ public class CottageFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityCottage(time, dto.getCottage().getId());
+		timePeriodService.setUnavailabilityCottageOwner(time, dto.getCottage().getCottageOwner().getId());
 		
 		
 		CottageFastReservation fast=new CottageFastReservation(dto.getId(),cottage,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
@@ -161,13 +203,13 @@ public class CottageFastReservationService {
 		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
 		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
 		
-		timePeriodService.removeUnavailabilityCottage(oldPeriod,(long) 1);
+		timePeriodService.removeUnavailabilityCottageOwner(oldPeriod,(long) 1);
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(actionDTO.getReservationStart());
 		time.setEnd(actionDTO.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityCottage(time, actionDTO.getCottage().getCottageOwner().getId())==false)
+		if(timePeriodService.setUnavailabilityCottageOwner(time, actionDTO.getCottage().getCottageOwner().getId())==false)
 			return null;
 		
 		res.setReservationStart(start);
@@ -181,5 +223,25 @@ public class CottageFastReservationService {
 		
 		
 		return CottageFastReservationMapper.convertToDTO(res);
+	}
+	public CottageReservationDTO convertToCottageReservationDTO(ReserveCottageFastReservation dto){
+		CottageReservationDTO res=new CottageReservationDTO();
+		res.setReservationStart(dto.getReservationStart());
+		res.setReservationEnd(dto.getReservationEnd());
+		
+		//treba ispuniti i duratino
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		res.setDuration(duration);
+		
+		res.setCottage(dto.getCottage());
+		res.setClient(dto.getClient());
+		res.setMaxPersons(dto.getMaxPersons());
+		res.setAdditionalItems(dto.getAdditionalItems());
+		return res;
 	}
 }

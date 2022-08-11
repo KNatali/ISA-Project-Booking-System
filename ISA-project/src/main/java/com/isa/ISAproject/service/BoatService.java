@@ -20,19 +20,28 @@ import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.BoatBehavioralRuleDTO;
 import com.isa.ISAproject.dto.NavigationEquipmentDTO;
+import com.isa.ISAproject.dto.SearchAvailableBoatByPriceOrGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureFishingEquipmentMapper;
 import com.isa.ISAproject.mapper.BoatBehavioralRuleMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
+import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.NavigationEquipmentMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.BoatBehavioralRule;
 import com.isa.ISAproject.model.NavigationEquipment;
 import com.isa.ISAproject.model.TimePeriod;
@@ -58,6 +67,8 @@ public class BoatService {
 	@Autowired
 	private ClientRepository clientRepository;
 	@Autowired
+	private ClientService clientService;
+	@Autowired
 	private BoatOwnerRepository boatOwnerRepository;
 	@Autowired
 	private BoatBehavioralRuleRepository ruleRepository;
@@ -65,8 +76,35 @@ public class BoatService {
 	private BoatNavigationEquipmentRepository equipmentRepository;
 	
 	public List<Boat> findAll(){
-		return this.boatRepository.findAll();
+		List<Boat> allBoats = this.boatRepository.findAll();
+		List<Boat> res = new ArrayList<>();
+		for(Boat boats : allBoats)
+		{
+			if(!boats.isDeleted())
+			{
+				res.add(boats);
+			}
+		}
+		return res;
+		//return this.boatRepository.findAll();
 	}
+	
+	public Boat deleteBoat(Long id) {
+		Optional<Boat> opt =this.getOne(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Boat found=opt.get();
+		found.setDeleted(true);
+		
+		found.setUnavailability(null);
+		found.setAdditionalItems(null);
+		found.setBoatBehavioralRules(null);
+		found.setNavigationEquipment(null);
+		Boat saved=this.boatRepository.save(found);
+		return saved;
+	}
+	
 	public Optional<Boat> getOne(Long id) {
 		return this.boatRepository.findById(id);
 	}
@@ -152,12 +190,10 @@ public class BoatService {
 			AdditionalItem it=AdditionalItemMapper.convertFromDTO(itto);
 			items.add(it);
 		}
-		Set<NavigationEquipment> equipment=new HashSet<>();
-		for (NavigationEquipmentDTO itto : dto.getNavigationEquipment()) {
-			NavigationEquipment ne=NavigationEquipmentMapper.convertFromDTO(itto);
-			equipment.add(ne);
-		}
 		this.additionalItemRepository.saveAll(items);
+		Set<NavigationEquipment> equipment=NavigationEquipmentMapper.convertFromDTOs(dto.getNavigationEquipment());
+		this.equipmentRepository.saveAll(equipment);
+		
 		Set<BoatBehavioralRule> rules=new HashSet<>();
 		for (BoatBehavioralRuleDTO rdto : dto.getRules()) {
 			BoatBehavioralRule b=BoatBehavioralRuleMapper.convertFromDTO(rdto);
@@ -305,5 +341,87 @@ public class BoatService {
 			}
 		}
 		return sorted_boats;
+	}
+	public List<BoatDTO> findAvailableByGrade(SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<Boat> all_boats=this.boatRepository.findByGrade(dto.getPriceOrGrade());
+		List<BoatDTO> available_boatdtos=dto.getBoats();
+		List<BoatDTO> all_boatsdtos=BoatMapper.convertoToDTOs(all_boats);
+		List<BoatDTO> res=new ArrayList<BoatDTO>();
+		
+		for (BoatDTO boat : available_boatdtos) {
+			for (BoatDTO boat2 : all_boatsdtos) {
+				if (boat.getId()==boat2.getId()) {
+					res.add(boat);
+				}
+			}
+		}
+		return res;
+	}
+	public List<BoatDTO> findAvailableByPrice(SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<Boat> all_boats=this.boatRepository.findByPrice(dto.getPriceOrGrade());
+		List<BoatDTO> available_boatdtos=dto.getBoats();
+		List<BoatDTO> all_boatsdtos=BoatMapper.convertoToDTOs(all_boats);
+		List<BoatDTO> res=new ArrayList<BoatDTO>();
+		
+		for (BoatDTO boat : available_boatdtos) {
+			for (BoatDTO boat2 : all_boatsdtos) {
+				if (boat.getId()==boat2.getId()) {
+					res.add(boat);
+				}
+			}
+		}
+		return res;
+	}
+	public List<BoatDTO> getALlSubscribedBoats(Long clientId){
+		Optional<Client> opt=this.clientService.findById(clientId);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		Client client=opt.get();
+		Set<Boat> subscribed=client.getSubscribedBoats();
+		List<Boat> list_subscribed=new ArrayList<Boat>();
+		for (Boat boat : subscribed) {
+			list_subscribed.add(boat);
+		}
+		return BoatMapper.convertoToDTOs(list_subscribed);
+	}
+	public boolean subscribedBoat(UnsubscribedItemDTO dto) {
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+		
+		Optional<Boat> boatopt=this.boatRepository.findById(dto.getEntityId());
+		if(!boatopt.isPresent()) {
+			return false;
+		}
+		Boat boat=boatopt.get();
+		boolean deleted;
+		client.getSubscribedBoats().add(boat);
+		deleted=boat.getSubscribers().add(client);
+		this.boatRepository.save(boat);
+		this.clientService.save(client);
+		return deleted;
+	}
+	
+	public boolean unsubscribedBoat(UnsubscribedItemDTO dto){
+		Optional<Client> opt=this.clientService.findById(dto.getClientId());
+		if(!opt.isPresent()) {
+			return false;
+		}
+		Client client=opt.get();
+		
+		Optional<Boat> boatopt=this.boatRepository.findById(dto.getEntityId());
+		if(!boatopt.isPresent()) {
+			return false;
+		}
+		Boat boat=boatopt.get();
+		boolean deleted;
+		client.getSubscribedBoats().remove(boat);
+		deleted=boat.getSubscribers().remove(client);
+		this.boatRepository.save(boat);
+		this.clientService.save(client);
+		return deleted;
 	}
 }

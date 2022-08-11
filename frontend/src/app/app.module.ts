@@ -175,12 +175,25 @@ import { BoatOwnerAddBoatComponent } from './boat-owner-add-boat/boat-owner-add-
 import { RateIntructorComponent } from './rate-intructor/rate-intructor.component';
 import { RateCottageReservationComponent } from './rate-cottage-reservation/rate-cottage-reservation.component';
 import { RateBoatReservationComponent } from './rate-boat-reservation/rate-boat-reservation.component';
+import { BoatRulesEditComponent } from './boat-rules-edit/boat-rules-edit.component';
 import { ComplainBoatReservationComponent } from './complain-boat-reservation/complain-boat-reservation.component';
 import { ComplainCottageReservationComponent } from './complain-cottage-reservation/complain-cottage-reservation.component';
 import { ComplainInstructorComponent } from './complain-instructor/complain-instructor.component';
 import { ClientDeleteProfilComponent } from './client-delete-profil/client-delete-profil.component';
 import { ReservationSearchFormComponent } from './reservation-search-form/reservation-search-form.component';
 import { SearchParametarsForReservationComponent } from './search-parametars-for-reservation/search-parametars-for-reservation.component';
+import { AdventureActionListComponent } from './adventure-action-list/adventure-action-list.component';
+import { AdventureActionItemComponent } from './adventure-action-item/adventure-action-item.component';
+import { BoatActionItemComponent } from './boat-action-item/boat-action-item.component';
+import { BoatActionListComponent } from './boat-action-list/boat-action-list.component';
+import { CottageActionItemComponent } from './cottage-action-item/cottage-action-item.component';
+import { CottageActionListComponent } from './cottage-action-list/cottage-action-list.component';
+import { SearchAvailableEntitisComponent } from './search-available-entitis/search-available-entitis.component';
+import { SubscribedAdventureListComponent } from './subscribed-adventure-list/subscribed-adventure-list.component';
+import { SubscribedBoatListComponent } from './subscribed-boat-list/subscribed-boat-list.component';
+import { SubscribedCottageListComponent } from './subscribed-cottage-list/subscribed-cottage-list.component';
+import { BoatItemComponent } from './boat-item/boat-item.component';
+import { CottageItemComponent } from './cottage-item/cottage-item.component';
 
 
 @NgModule({
@@ -340,15 +353,25 @@ import { SearchParametarsForReservationComponent } from './search-parametars-for
     RateIntructorComponent,
     RateCottageReservationComponent,
     RateBoatReservationComponent,
+    BoatRulesEditComponent,
     ComplainBoatReservationComponent,
     ComplainCottageReservationComponent,
     ComplainInstructorComponent,
     ClientDeleteProfilComponent,
     ReservationSearchFormComponent,
-    SearchParametarsForReservationComponent
-
-
-
+    SearchParametarsForReservationComponent,
+    AdventureActionListComponent,
+    AdventureActionItemComponent,
+    BoatActionItemComponent,
+    BoatActionListComponent,
+    CottageActionItemComponent,
+    CottageActionListComponent,
+    SearchAvailableEntitisComponent,
+    SubscribedAdventureListComponent,
+    SubscribedBoatListComponent,
+    SubscribedCottageListComponent,
+    BoatItemComponent,
+    CottageItemComponent
 
   ],
   imports: [

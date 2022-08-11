@@ -6,8 +6,11 @@ import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchAvailableCottageByGrade } from '../model/searchAvailableCottageByGrade';
+import { SearchAvailableCottageByPrice } from '../model/searchAvailableCottageByPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,15 @@ export class CottageService {
 
   searchCottagesForReservation(obj:SearchForReservation):Observable<Cottage[]>{
     return this.http.post<Cottage[]>(`${this.urlCottages}/` + `allAvailableCottages`,obj);
+  }
+  getSubscribedCottages(id:number): Observable<Cottage[]> {
+    return this.http.get<Cottage[]>(`${this.urlCottages}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlCottages+"/unsubscribed",obj);
+  }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlCottages+"/subscribed",obj);
   }
   getCottages():Observable<Cottage[]>{
     return this.http.get<Cottage[]>(this.urlCottages);
@@ -74,7 +86,7 @@ export class CottageService {
     return this.http.get<CottageFastReservation[]>(`${this.urlCottage1}/` + `fastReservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
-    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage1}/` + `rules` + `/${id}`);
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `cottageRules` + `/${id}`);
   }
   getAdditionalItems(id: number): Observable<AdditionalItem[]> {
     return this.http.get<AdditionalItem[]>(`${this.urlCottage1}/` + `additionalItems` + `/${id}`);
@@ -90,5 +102,17 @@ export class CottageService {
   }
   getUnavailabilityByCottage(id: number): Observable<TimePeriod[]> {
     return this.http.get<TimePeriod[]>(`${this.urlCottages}/` + `getUnavailability` + `/${id}`);
+  }
+  sortByGradeAvailableCottage(obj:Cottage[]):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/sort-by-grade",obj);
+  }
+  sortByPriceAvailableCottage(obj:Cottage[]):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/sort-by-price",obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableCottageByGrade):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableCottageByPrice):Observable<Cottage[]>{
+    return this.http.post<Cottage[]>(this.urlCottages+"/find-available-by-price",obj);
   }
 }

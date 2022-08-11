@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.isa.ISAproject.model.BoatOwner;
+import com.isa.ISAproject.model.Instructor;
 
 @Repository
 public interface BoatOwnerRepository  extends JpaRepository<BoatOwner, Long> {
@@ -21,9 +22,6 @@ public interface BoatOwnerRepository  extends JpaRepository<BoatOwner, Long> {
 	List<BoatOwner> findByOrderByGradeDesc();
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@Query("select p from BoatOwner p where p.id = :id")
-	//Postgres po defaultu poziva for update bez no wait, tako da treba dodati vrednost 0 za timeout
-	//kako bismo dobili PessimisticLockingFailureException ako pri pozivu ove metode torka nije dostupna
-
 	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
 	public BoatOwner findOneById(@Param("id")Long id);
 }

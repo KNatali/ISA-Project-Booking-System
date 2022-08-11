@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BoatReservation } from '../model/boat-reservation';
 
 @Component({
@@ -12,10 +12,16 @@ export class BoatReservationItemComponent implements OnInit {
   @Input()
   rate_boat_button:boolean;
   @Input()
+  delete_boat_button:boolean;
+  @Input()
   complain_boat_button:boolean;
+  @Output()
+  canceledReservaiton:EventEmitter<number>=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  cancelReservation(){
+    this.canceledReservaiton.next(this.res.id);
+  }
 }

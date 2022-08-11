@@ -12,10 +12,10 @@ export class CottageRuleService {
 
 
   saveCottageRule(id: number, data: CottageBehavioralRules): Observable<CottageBehavioralRules> {
-    return this.http.post<CottageBehavioralRules>(`${this.urlCottage}/` + `rule` + `/${id}`, data);
+    return this.http.post<CottageBehavioralRules>(`${this.urlCottage}/` + `cottageRule` + `/${id}`, data);
   }
   updateCottageRule(id: number, data: CottageBehavioralRules): Observable<CottageBehavioralRules> {
-    return this.http.post<CottageBehavioralRules>(`${this.urlCottage}/` + `ruleEdit` + `/${id}`, data);
+    return this.http.post<CottageBehavioralRules>(`${this.urlCottage}/` + `cottageRuleEdit` + `/${id}`, data);
   }
   deleteCottageRule(cottageId: number, ruleId: number): Observable<CottageBehavioralRules> {
     return this.http.post<CottageBehavioralRules>(`${this.urlCottage}/${cottageId}/${ruleId}`, null);

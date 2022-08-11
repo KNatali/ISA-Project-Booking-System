@@ -6,6 +6,7 @@ import { AdditionalItem } from '../model/additionalItem';
 import { Boat } from '../model/boat';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
+import { BoatRevision } from '../model/boatRevision';
 import { NavigationEquipment } from '../model/navigationEquipment';
 import { BoatService } from '../service/boat.service';
 
@@ -25,6 +26,7 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
   boat: Boat;
   currentRate = 8;
   actions: BoatFastReservation[];
+  revisions: BoatRevision[];
   constructor(private http: HttpClient,private route: ActivatedRoute, private router: Router, private boatService: BoatService) { }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
     this.loadAdditionalItems();
     this.loadNavigationEquipment();
     this.loadActions();
+    this.loadRevisions();
   }
 
   loadData() {
@@ -79,8 +82,7 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
       this.boatService.getAdditionalItems(this.id)
         .subscribe((items: AdditionalItem[]) => 
         {
-        this.boat.additionalItems = items
-        alert(this.boat.additionalItems.length)});
+        this.boat.additionalItems = items});
     });
   }
 
@@ -97,6 +99,14 @@ export class BoatOwnerBoatProfileComponent implements OnInit {
       this.id = param.id;
       this.boatService.getBoatFastReservations(this.id)
         .subscribe((items: BoatFastReservation[]) => this.actions = items);
+    });
+  }
+
+  loadRevisions() {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.boatService.getAllBoatRevisionsByBoat(this.id)
+        .subscribe((items: BoatRevision[]) => this.revisions = items);
     });
   }
   edit() {

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.EditBoatFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveAdventureFastResrvationDTO;
+import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.BoatFastReservationMapper;
 import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.model.Client;
@@ -73,6 +83,40 @@ public class BoatFastReservationService {
 		return res;
 		
 	}
+	public BoatFastReservation findById(Long id) {
+		Optional<BoatFastReservation> OPt=this.boatFastReservationRepository.findById(id);
+		if (!OPt.isPresent()) {
+			return null;
+		} 
+		BoatFastReservation res=OPt.get();
+		return res;
+	}
+	public void delite(BoatFastReservation a) {
+		this.boatFastReservationRepository.delete(a);
+	}
+	public List<BoatFastReservationDTO> getFastReservationsByBoatClient(Long id){
+		
+		List<BoatFastReservationDTO> res=new ArrayList<>();
+		List<BoatFastReservation> reservations=boatFastReservationRepository.findAll();
+		
+		for (BoatFastReservation a : reservations) {
+			if(a.getBoat().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+				res.add(BoatFastReservationMapper.convertToDTO(a));
+		
+		}
+		for (BoatFastReservation boatFastReservation : reservations) {
+			for (BoatFastReservationDTO dto : res) {
+				if(boatFastReservation.getId()==dto.getId()) {
+					int startDay=boatFastReservation.getReservationStart().getDayOfYear();
+					int endDay=boatFastReservation.getReservationEnd().getDayOfYear();
+					int duration=endDay-startDay;
+					dto.setDuration(duration);
+				}
+			}
+		}
+		return res;
+		
+	}
 	public List<BoatFastReservationDTO> getFastReservationsByBoat(Long id){
 		
 		List<BoatFastReservationDTO> res=new ArrayList<>();
@@ -118,7 +162,7 @@ public class BoatFastReservationService {
 		time.setStart(dto.getReservationStart());
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		timePeriodService.setUnavailabilityBoat(time, dto.getBoat().getId());
+		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getBoatOwner().getId());
 		
 		
 		BoatFastReservation fast=new BoatFastReservation(dto.getId(),boat,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
@@ -161,13 +205,13 @@ public class BoatFastReservationService {
 		LocalDate start1 = LocalDate.parse(actionDTO.getValidityStart(),formatter1);
 		LocalDate end1 = LocalDate.parse(actionDTO.getValidityEnd(),formatter1);
 		
-		timePeriodService.removeUnavailabilityBoat(oldPeriod,(long) 1);
+		timePeriodService.removeUnavailabilityBoatOwner(oldPeriod,(long) 1);
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(actionDTO.getReservationStart());
 		time.setEnd(actionDTO.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
-		if(timePeriodService.setUnavailabilityBoat(time, actionDTO.getBoat().getBoatOwner().getId())==false)
+		if(timePeriodService.setUnavailabilityBoatOwner(time, actionDTO.getBoat().getBoatOwner().getId())==false)
 			return null;
 		
 		res.setReservationStart(start);
@@ -181,5 +225,44 @@ public class BoatFastReservationService {
 		
 		
 		return BoatFastReservationMapper.convertToDTO(res);
+	}
+	public BoatReservationCreateDTO convertToBoatReservationCreateDTO(BoatReservationDTO dto){
+		BoatReservationCreateDTO res=new BoatReservationCreateDTO();
+		res.setReservationStart(dto.getReservationStart());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		res.setNumberOfDays(duration);
+		
+		res.setBoatId(dto.getBoat().getId());
+		res.setClientId(dto.getClient().getId());
+		res.setNumberOfPersons(dto.getMaxPersons());
+		res.setAdditionalItems(dto.getAdditionalItems());
+		
+		return res;
+	}
+	public BoatReservationDTO convertToBoatReservationDTO(ReserveBoatFastResrvationDTO dto){
+		BoatReservationDTO res=new BoatReservationDTO();
+		res.setReservationStart(dto.getReservationStart());
+		res.setReservationEnd(dto.getReservationEnd());
+		
+		//treba ispuniti i duratino
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
+		int startDay=start.getDayOfYear();
+		int endDay=end.getDayOfYear();
+		int duration=endDay-startDay;
+		res.setDuration(duration);
+		
+		res.setBoat(dto.getBoat());
+		res.setClient(dto.getClient());
+		res.setMaxPersons(dto.getMaxPersons());
+		res.setAdditionalItems(dto.getAdditionalItems());
+		return res;
 	}
 }

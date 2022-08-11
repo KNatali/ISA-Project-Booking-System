@@ -50,7 +50,7 @@ public class Cottage {
 	            inverseJoinColumns = @JoinColumn(name = "picture_id"))
 	private Set<Picture> pictures=new HashSet<>();
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
+	@JoinTable(name="cottage_behavioral_rules", joinColumns = @JoinColumn(name = "cottage_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id"))
 	private Set<CottageBehavioralRule> rules=new HashSet<>();
 	@OneToMany(mappedBy="cottage",fetch=FetchType.LAZY,cascade=CascadeType.ALL)

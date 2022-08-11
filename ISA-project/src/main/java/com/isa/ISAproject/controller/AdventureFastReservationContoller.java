@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveAdventureFastResrvationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
+import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.service.AdventureFastReservationService;
+import com.isa.ISAproject.service.AdventureReservationService;
 
 @CrossOrigin("*")
 @RestController
@@ -31,6 +35,8 @@ public class AdventureFastReservationContoller {
 	
 	@Autowired
 	private AdventureFastReservationService adventureFastReservationService;
+	@Autowired
+	private AdventureReservationService adventureReservationService;
 	
 	@RequestMapping(
 			value="api/instructors/fastReservations/{id}",method = RequestMethod.GET,
@@ -50,6 +56,16 @@ public class AdventureFastReservationContoller {
 	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservationsByAdventure(@PathVariable(name="id") Long adventureId){
 		List<AdventureFastReservationDTO> list=new ArrayList<>();
 		list=this.adventureFastReservationService.getFastReservationsByAdventure(adventureId);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/adventure/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureFastReservationDTO>> getFastReservationsByAdventureClient(@PathVariable(name="id") Long adventureId){
+		List<AdventureFastReservationDTO> list=new ArrayList<>();
+		list=this.adventureFastReservationService.getFastReservationsByAdventureClient(adventureId);
 			
 			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
@@ -79,6 +95,17 @@ public class AdventureFastReservationContoller {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
 		
+	}
+	@RequestMapping(value="api/adventure/fastReservations/reserve",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<AdventureReservationDTO> reserveFastReservation(@RequestBody ReserveAdventureFastResrvationDTO dto){
+		AdventureReservationDTO reservationDTO=this.adventureFastReservationService.convertToAdventureReservation(dto);
+		AdventureReservationDTO created=this.adventureReservationService.addAdventureReservation(reservationDTO);
+		//treba izbrisati tu akciju
+		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getId());
+		this.adventureFastReservationService.delite(fast);
+		return new ResponseEntity<>(created,HttpStatus.OK);
 	}
 
 }

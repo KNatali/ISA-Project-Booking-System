@@ -9,7 +9,11 @@ import { Boat } from '../model/boat';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { BoatOwner } from '../model/boatOwner';
+import { EditBoatFastReservation } from '../model/editBoatFastReservation';
 import { NavigationEquipment } from '../model/navigationEquipment';
+import { TimePeriod } from '../model/timePeriod';
+import { UnavailabilityType } from '../model/unavailabilityType';
+import { BoatReservationService } from '../service/boat-reservation.service';
 import { BoatService } from '../service/boat.service';
 
 @Component({
@@ -30,7 +34,8 @@ export class BoatOwnerBoatEditComponent implements OnInit {
   showUpdate: boolean;
   cancellation: any;
   actions: BoatFastReservation[];
-  id: number;address = new Address({
+  id: number;
+  address = new Address({
     id: 0,
     street: '',
     city: '',
@@ -79,12 +84,35 @@ export class BoatOwnerBoatEditComponent implements OnInit {
   });
   currentRate = 8;
   formValue0!: FormGroup;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private boatService: BoatService) { }
+  formAction: FormGroup;
+  selectedAction: BoatFastReservation = new BoatFastReservation({
+    reservationStart: '',
+    reservationEnd: '',
+    validityStart: '',
+    validityEnd: '',
+    maxPersons: 0,
+    price: 0,
+    additionalItems: [],
+    boat: this.editedBoat,
+    duration:0
+  })
+  time: TimePeriod = new TimePeriod({
+    start: '',
+    end: '',
+    type: UnavailabilityType.Action
+  })
+  editFastReservation: EditBoatFastReservation = new EditBoatFastReservation({
+    action: this.selectedAction,
+    oldReservationPeriod: this.time
+  })
+
+
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private boatService: BoatService, private boatReservationService: BoatReservationService) { }
 
   ngOnInit(): void {
-    this.loader = new Loader({
+    /*this.loader = new Loader({
       apiKey: 'AIzaSyCzQcuipLCfmTv54GORP3ha_uvWAF-QUdE'
-    })
+    })*/
     this.formValue0 = this.formBuilder.group({
       name: [''],
       street: [''],
@@ -96,19 +124,23 @@ export class BoatOwnerBoatEditComponent implements OnInit {
       description: [''],
       biography: [''],
       image: ['']
-
-
-
     })
+    this.formAction = this.formBuilder.group({
+      validityStart: [''],
+      validityEnd: [''],
+      reservationStart: [''],
+      reservationEnd: [''],
+      maxPersons: [''],
+      price: [''],
+    });
+
     this.loadData();
     this.loadBehavioralRules();
     this.loadAdditionalItems();
     this.loadNavigationEquipment();
     this.loadActions();
   }
-  //Gets called when the user selects an image
   public onFileChanged(event: any) {
-    //Select File
     this.selectedFile = event.target.files[0];
   }
   editInformation() {
@@ -122,11 +154,8 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     this.formValue0.controls['description'].setValue(this.boat.description);
 
   }
-  //Gets called when the user clicks on submit to upload the image
   onUpload() {
     console.log(this.selectedFile);
-
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
 
@@ -158,6 +187,7 @@ export class BoatOwnerBoatEditComponent implements OnInit {
           ref?.click();
           this.formValue0.reset();
           this.loadData();
+          this.loadNavigationEquipment();
           this.loadBehavioralRules();
           this.loadAdditionalItems();
           alert("Successfully updated  adventure information!");
@@ -240,4 +270,28 @@ export class BoatOwnerBoatEditComponent implements OnInit {
     });
   }
 
+  editAction(action: BoatFastReservation) {
+    this.selectedAction = action;
+    this.editFastReservation.oldReservationPeriod.start = this.selectedAction.reservationStart;
+
+    this.editFastReservation.oldReservationPeriod.end = this.selectedAction.reservationEnd;
+  }
+
+  /*deleteAdditionalItem(index: any) {
+    this.selectedAction.additionalItems.splice(index, 1);
+  } */
+
+  updateAction() {
+    this.editFastReservation.action = this.selectedAction;
+    this.boatReservationService.editFastReservation(this.editFastReservation)
+      .subscribe(res => {
+        let ref = document.getElementById('cancelAction');
+        ref?.click();
+        this.formAction.reset();
+        alert("Sucessfully added new action!");
+
+      }, error => {
+        alert("The selected reservation start and end period overlaps with your unavailability period! Please choose another one!")
+      });
+  }
 }

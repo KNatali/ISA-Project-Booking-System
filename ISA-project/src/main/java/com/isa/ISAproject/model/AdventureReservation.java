@@ -55,6 +55,8 @@ public class AdventureReservation {
 	private InstructorReport report;
 	@Column
 	private double systemEarning;
+	@Column
+	private boolean deleted;
 	
 	public List<AdventureRevision> getAdventureRevisions() {
 		return adventureRevisions;
@@ -214,6 +216,19 @@ public class AdventureReservation {
 
 	public void setAdventureComplaints(List<AdventureComplaint> adventureComplaints) {
 		this.adventureComplaints = adventureComplaints;
+	}
+	
+
+
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 

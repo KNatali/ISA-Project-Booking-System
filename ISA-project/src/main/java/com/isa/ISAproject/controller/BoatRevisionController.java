@@ -51,7 +51,7 @@ public class BoatRevisionController {
 	}
 	
 
-	@RequestMapping(value="api/instructor/adventure/allBoatRevisionsByBoat/{id}",method = RequestMethod.GET,
+	@RequestMapping(value="api/boatOwner/boat/allBoatRevisionsByBoat/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<List<BoatRevisionDTO>> getBoatRevisionsByBoat(@PathVariable Long id){
@@ -78,6 +78,7 @@ public class BoatRevisionController {
 	}
 	@RequestMapping(value="api/client/makeNewBoatRevision",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<BoatRevisionDTO> saveNewBoatRevision(@RequestBody SpecificRevisionDTO specificRevisionDTO){
 		Optional<BoatReservation> boatReservation=this.boatReservationService.findById(specificRevisionDTO.getId_reservation());
 		if (!boatReservation.isPresent()) {

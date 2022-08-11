@@ -17,9 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.BoatFastReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.EditBoatFastReservationDTO;
+import com.isa.ISAproject.dto.ReserveAdventureFastResrvationDTO;
+import com.isa.ISAproject.dto.ReserveBoatFastResrvationDTO;
+import com.isa.ISAproject.model.AdventureFastReservation;
+import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.service.BoatFastReservationService;
+import com.isa.ISAproject.service.BoatReservationService;
 
 @CrossOrigin("*")
 @RestController
@@ -27,6 +36,9 @@ public class BoatFastResevationController {
 
 	@Autowired
 	private BoatFastReservationService boatFastReservationService;
+	
+	@Autowired
+	private BoatReservationService boatReservationService;
 	
 	@RequestMapping(
 			value="api/boatOwners/fastReservations/{id}",method = RequestMethod.GET,
@@ -46,6 +58,16 @@ public class BoatFastResevationController {
 		List<BoatFastReservationDTO> list=new ArrayList<>();
 		list=this.boatFastReservationService.getFastReservationsByBoat(boatId);
 		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	@RequestMapping(
+			value="api/boat/fastReservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatFastReservationDTO>> getFastReservationsByBoatClient(@PathVariable(name="id") Long boatId){
+		List<BoatFastReservationDTO> list=new ArrayList<>();
+		list=this.boatFastReservationService.getFastReservationsByBoatClient(boatId);
+			
+			return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="api/boatReservation/addFastReservation",method = RequestMethod.PUT,produces = {
@@ -71,5 +93,19 @@ public class BoatFastResevationController {
 		if(fastDTO==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boat/fastReservations/reserve",method = RequestMethod.POST,produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<BoatReservationDTO> reserveFastReservation(@RequestBody ReserveBoatFastResrvationDTO dto){
+		BoatReservationDTO reservationDTO=this.boatFastReservationService.convertToBoatReservationDTO(dto);
+		//da bi se sacuvalo pomocu moje metode
+		BoatReservationCreateDTO boatReservationCreateDTO=this.boatFastReservationService.convertToBoatReservationCreateDTO(reservationDTO); 
+		BoatReservationDTO created=this.boatReservationService.addBoatReservationClient(boatReservationCreateDTO);
+		//BoatReservationDTO created=this.boatReservationService.addBoatReservation(reservationDTO);
+		//treba izbrisati tu akciju
+		BoatFastReservation fast=this.boatFastReservationService.findById(dto.getId());
+		this.boatFastReservationService.delite(fast);
+		return new ResponseEntity<>(created,HttpStatus.OK);
 	}
 }

@@ -22,19 +22,26 @@ import org.springframework.transaction.annotation.Transactional;
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.AdventureReservationCreateDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
+import com.isa.ISAproject.dto.BoatReservationCreateDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
+import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.SystemEarnings;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
@@ -57,7 +64,11 @@ public class AdventureReservationService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private SystemEarningsRepository systemEarningsRepository;
+	@Autowired
+	private AdventureService adventureService;
 	
+	@Autowired
+	private ClientService clientService;
 	
 	public List<AdventureReservation> findAll() {
 		return this.adventureReservationRepository.findAll();
@@ -110,7 +121,7 @@ public class AdventureReservationService {
 		List<AdventureReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (AdventureReservation r : allRes) {
-			if(r.getReservationStart().isAfter(lt)) {
+			if(r.getReservationStart().isAfter(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -121,7 +132,7 @@ public class AdventureReservationService {
 		List<AdventureReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (AdventureReservation r : allRes) {
-			if(r.getReservationStart().isBefore(lt)) {
+			if(r.getReservationStart().isBefore(lt) && !r.isDeleted()) {
 				res.add(r);
 			}
 		}
@@ -144,11 +155,17 @@ public class AdventureReservationService {
 		time.setType(UnavailabilityType.Reservation);
 		
 		timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId());
+		
+		//samo dodati jos zauzetost za avanturu, client
+		TimePeriod period=new TimePeriod(null, start, end, UnavailabilityType.Reservation);
+		adventure.getUnavailability().add(period);
+		this.adventureRepository.save(adventure);
 				
 		
 		
-		long days = Duration.between(start, end).toDays();
-		int price=(int) (adventure.getPrice()*days);
+		//long days = Duration.between(start, end).toDays();
+		long hours = Duration.between(start, end).toHours();
+		int price=(int) (adventure.getPrice()*hours*dto.getNumberOfPersons());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
 			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
@@ -182,6 +199,50 @@ public class AdventureReservationService {
 			if(adventureReservation.getClient()==client && adventureReservation.getAdventure()==adv) {
 				return adventureReservation;
 			}
+		}
+		return null;
+	}
+	public AdventureReservationDTO convertFromAdventureReservationCreateDTO(AdventureReservationCreateDTO dto) {
+		AdventureReservationDTO adventureReservationDTO=new AdventureReservationDTO();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
+		//number od days je u slucaju avanture sat
+		LocalDateTime end = start.plusHours(dto.getNumberOfDays());
+		
+		adventureReservationDTO.setReservationStart(start.toString());
+		adventureReservationDTO.setReservationEnd(end.toString());
+		
+		AdventureDTO adv=this.adventureService.findById(dto.getAdventureId());
+		adventureReservationDTO.setAdventure(adv);
+		
+		ClientProfileDTO client=this.clientService.findByIdDTO(dto.getClientId());
+		adventureReservationDTO.setClient(client);
+		
+		adventureReservationDTO.setPrice(dto.getPrice());
+		adventureReservationDTO.setNumberOfPersons(dto.getNumberOfPersons());
+		adventureReservationDTO.setAdditionalItems(dto.getAdditionalItems());
+		adventureReservationDTO.setSystemEarning(dto.getSystemEarning());
+		
+		return adventureReservationDTO;
+	}
+	
+	public AdventureReservation deleteReservation(Long id) {
+		Optional<AdventureReservation> opt =this.findById(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		AdventureReservation found=opt.get();
+		//pre nego sto se reservacija obrise treba proveriti da li je manje od 3 dana do pocetka avanture
+		LocalDateTime lt= LocalDateTime.now();
+		if (found.getReservationStart().getDayOfYear()>=lt.getDayOfYear()+3) {
+			found.setDeleted(true);
+			//treba obrisati zauzetosti za tu avanturu
+			found.getAdventure().setUnavailability(null);
+			found.setAdditionalItems(null);
+			AdventureReservation saved=this.adventureReservationRepository.save(found);
+			
+			return saved;			
 		}
 		return null;
 	}

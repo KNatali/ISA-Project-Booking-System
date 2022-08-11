@@ -17,7 +17,8 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
   @Input()
   equipment: NavigationEquipment[];
   newItem: NavigationEquipment = new NavigationEquipment({
-    name: ""
+    name: "",
+    price: 0
   })
   formValue2!: FormGroup;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private navigationEquipmentService: NavigationEquipmentService) { }
@@ -29,7 +30,7 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
     })
   }
 
-  addItem() {
+  addEquipment() {
     this.newItem.name = this.formValue2.value.name;
     this.route.params.subscribe(param => {
       this.id = param.id;
@@ -47,7 +48,7 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
 
   }
 
-  updateItem() {
+  updateEquipment() {
     this.newItem.name = this.formValue2.value.name;
     this.route.params.subscribe(param => {
       this.id = param.id;
@@ -64,7 +65,7 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
     });
   }
 
-  deleteItem(itemId: any) {
+  /*deleteEquipment(itemId: any) {
 
 
     this.route.params.subscribe(param => {
@@ -78,13 +79,27 @@ export class BoatNavigationEquipmentEditComponent implements OnInit {
         });
     });
 
-  }
-  editItem(item: any) {
+  }*/
+
+  editEquipment(item: any) {
     this.showAdd = false;
     this.showUpdate = true;
     this.formValue2.controls['name'].setValue(item.name);
-    this.formValue2.controls['price'].setValue(item.price);
     this.newItem.id = item.id;
+  }
+
+  deletedeleteEquipmentItem(itemId: any) {
+    this.route.params.subscribe(param => {
+      this.id = param.id;
+      this.navigationEquipmentService.deleteBoatNavigationEquipment(this.id, itemId)
+        .subscribe(data => {
+          alert("Successfully deleted additional item!");
+          this.loadNavigationEquipment.emit();
+        }, error => {
+          alert(error)
+        });
+    });
+
   }
 
 }

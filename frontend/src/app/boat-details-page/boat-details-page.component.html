@@ -12,15 +12,16 @@
     <h3>State: {{boat.state}}</h3>
     <h3>City: {{boat.city}}</h3>
     <h3>Street: {{boat.street}}</h3>
+    <button *ngIf="visiable_sort_button" class="btn btn-success"><a [routerLink]="['/boat-actions',boat.id]">View actions</a></button>
+    <button *ngIf="visiable_sort_button" class="btn btn-success" (click)="subscribe()">Subscribe</button>
   </div><br>
   <div  id="comp2">
-    <h2>Available terms</h2>
-
-    <app-additional-item-boat-list (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
+    <h2 >Available terms</h2>
+    <app-additional-item-boat-list [visable_button]="visiable_sort_button"  (addedOneAdditioanlItem)="addAdditionalItem($event)"></app-additional-item-boat-list>
    <!-- <h3>Total price of added additioanl items: {{price}} $</h3>-->
 
   </div>
-<app-search-parametars-for-reservation id="comp3" [additionalItems]="additionalItems" [additionalItemPrice]="price" [boatPrice]="boat.price" [boat]="boat"  [additionalItem]="additionalItem" [additionalItemPrice]="price" ></app-search-parametars-for-reservation>
+<app-search-parametars-for-reservation *ngIf="visiable_sort_button" [type]="type" id="comp3" [additionalItems]="additionalItems" [additionalItemPrice]="price" [boatPrice]="boat.price" [boat]="boat"  [additionalItem]="additionalItem" ></app-search-parametars-for-reservation>
 </div>
 
 <!--<app-available-boat-terms-list></app-available-boat-terms-list><br>-->

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { BoatService } from '../service/boat.service';
@@ -10,6 +10,8 @@ import { BoatService } from '../service/boat.service';
 })
 export class AdditionalItemBoatListComponent implements OnInit {
   items:AdditionalItem[];
+  @Input()
+  visable_button:boolean;
   @Output()
   addedOneAdditioanlItem:EventEmitter<AdditionalItem>=new EventEmitter();
   id:number;

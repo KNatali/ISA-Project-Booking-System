@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoatService } from '../service/boat.service';
 import { Boat } from '../model/boat';
 import { SearchForReservation } from '../model/searchForReservation';
+import { SearchAvailableBoatByPriceOrGrade } from '../model/searchAvailableBoatByGradeOrPrice';
 
 @Component({
   selector: 'app-boat-list-page',
@@ -11,9 +12,15 @@ import { SearchForReservation } from '../model/searchForReservation';
 export class BoatListPageComponent implements OnInit {
   sort_boats:Boat[];
   boats:Boat[];
+  find_boats:Boat[];
+  type:string="boat";
   searchForReserevaiotParametars:SearchForReservation;
   role:any;
   visiable_sort_button:boolean;
+  searchByGradeOrPrice: SearchAvailableBoatByPriceOrGrade=new SearchAvailableBoatByPriceOrGrade({
+    boats:[],
+    priceOrGrade:0
+  });
 
 
   constructor(private boatService:BoatService) {
@@ -66,14 +73,28 @@ export class BoatListPageComponent implements OnInit {
     .subscribe(res=>this.boats=res)
   }
   Search(obj:SearchForReservation){
-    this.boatService.searchBoatsForReservation(obj).subscribe(res=>this.boats=res);
+    this.boatService.searchBoatsForReservation(obj).subscribe(res=>{this.boats=res;this.find_boats=res;});
     console.log(obj);
     this.searchForReserevaiotParametars=obj;
   }
   sortByPriceAvailableBoat(){
-    this.boatService.sortByPriceAvailableBoat(this.boats).subscribe(res=>this.boats=res);
+    this.boatService.sortByPriceAvailableBoat(this.find_boats).subscribe(res=>this.boats=res);
   }
   sortByGradeAvailableBoat(){
-    this.boatService.sortByGradeAvailableBoat(this.boats).subscribe(res=>this.boats=res);
+    this.boatService.sortByGradeAvailableBoat(this.find_boats).subscribe(res=>this.boats=res);
+  }
+  findByGradeAvailable(find_by_grade:number){
+    //sada treba napraviti objekat koji se salje
+    this.searchByGradeOrPrice.boats=this.find_boats;
+    this.searchByGradeOrPrice.priceOrGrade=find_by_grade;
+    this.boatService.findByGradeAvailable(this.searchByGradeOrPrice)
+    .subscribe(res=>this.boats=res);
+  }
+  findByPriceAvailable(find_by_price:number){
+    //sada treba napraviti objekat koji se salje
+    this.searchByGradeOrPrice.boats=this.find_boats;
+    this.searchByGradeOrPrice.priceOrGrade=find_by_price;
+    this.boatService.findByPriceAvailable(this.searchByGradeOrPrice)
+    .subscribe(res=>this.boats=res);
   }
 }

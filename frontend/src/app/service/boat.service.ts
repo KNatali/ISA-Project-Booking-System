@@ -5,10 +5,13 @@ import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem
 import { Boat } from '../model/boat';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
+import { BoatRevision } from '../model/boatRevision';
 import { NavigationEquipment } from '../model/navigationEquipment';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { SearchAvailableBoatByPriceOrGrade } from '../model/searchAvailableBoatByGradeOrPrice';
 import { SearchForReservation } from '../model/searchForReservation';
 import { TimePeriod } from '../model/timePeriod';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +27,15 @@ export class BoatService {
 
   getBoats(): Observable<Boat[]> {
     return this.http.get<Boat[]>(this.urlBoats);
+  }
+  getSubscribedBoats(id:number): Observable<Boat[]> {
+    return this.http.get<Boat[]>(`${this.urlBoats}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlBoats+"/unsubscribed",obj);
+  }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlBoats+"/subscribed",obj);
   }
   getBoat(id:number):Observable<Boat>{
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
@@ -70,10 +82,10 @@ export class BoatService {
     return this.http.get<Boat[]>(this.urlBoats,{params});
   }
   deleteBoat(id: number) {
-    return this.http.delete(`${this.urlBoats}/` + `delete` + `/${id}`);
+    return this.http.delete(`${this.urlBoat1}/` + `delete` + `/${id}`);
   }
   getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
-    return this.http.get<BoatFastReservation[]>(`${this.urlBoat1}/` + `fastReservations` + `/${id}`);
+    return this.http.get<BoatFastReservation[]>(`${this.urlBoat}/` + `fastReservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<BoatBehavioralRules[]> {
     return this.http.get<BoatBehavioralRules[]>(`${this.urlBoat}/` + `boatRules` + `/${id}`);
@@ -101,5 +113,14 @@ export class BoatService {
   }
   searchBoatsForReservation(obj:SearchForReservation):Observable<Boat[]>{
     return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`,obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
+    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
+    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-price",obj);
+  }
+  getAllBoatRevisionsByBoat(id: number): Observable<BoatRevision[]> {
+    return this.http.get<BoatRevision[]>(`${this.urlBoat}/allBoatRevisionsByBoat` + `/${id}`);
   }
 }

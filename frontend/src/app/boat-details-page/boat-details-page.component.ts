@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Boat } from '../model/boat';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BoatService } from '../service/boat.service';
 import { AdditionalItem } from '../model/additionalItem';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Component({
   selector: 'app-boat-details-page',
@@ -17,6 +18,7 @@ export class BoatDetailsPageComponent implements OnInit {
     price:0,
     id:0
   });
+  type:string="boat";
   additionalItems:AdditionalItem[]=[];
   price:number=0;
   @Output()
@@ -37,10 +39,20 @@ export class BoatDetailsPageComponent implements OnInit {
     city:'',
     address
   });*/
+  clientId:any;
+  role:any;
+  visiable_sort_button:boolean;
+  subscribedItem:UnsubscribedItem=new UnsubscribedItem({
+    clientIt:0,
+    entityId:0
+  });
 
-  constructor(private route: ActivatedRoute,private boatService: BoatService) { }
+  constructor(private route: ActivatedRoute,private boatService: BoatService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.clientId = sessionStorage.getItem('id');
     this.loadData();
     this.loadAdditionalItems();
   }
@@ -50,6 +62,12 @@ export class BoatDetailsPageComponent implements OnInit {
       this.boatService.getBoat(this.id)
         .subscribe((boat: Boat) => this.boat = boat);
     });
+    this.role=sessionStorage.getItem('role');
+    if(this.role=='Client'){
+      this.visiable_sort_button=true;
+    }else{
+      this.visiable_sort_button=false;
+    }
   }
   loadAdditionalItems() {
     this.route.params.subscribe(param => {
@@ -68,5 +86,12 @@ export class BoatDetailsPageComponent implements OnInit {
     //this.addedOneAdditioanlItem.next(item);
     this.price=this.price+item.price;
     console.log("boat details",this.price);
+  }
+  subscribe(){
+    this.subscribedItem.clientIt=this.clientId;
+    this.subscribedItem.entityId=this.id;
+    this.boatService.subscribe(this.subscribedItem)
+    .subscribe()
+    this.router.navigate(['clients', this.clientId]);
   }
 }

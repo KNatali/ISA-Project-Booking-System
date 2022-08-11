@@ -1,0 +1,14 @@
+<div class="forma">
+  <h2 >Search</h2>
+  <form class="form-search" (ngSubmit)="findByGradeAvailable()">
+    <label for="find_by_grade">Grade: </label><br>
+    <input name="find_by_grade" id="find_by_grade" type="text" [(ngModel)]="find_by_grade">
+    <input type="submit" value="filter" class="btn btn-primary">
+  </form>
+  <form class="form-search" (ngSubmit)="findByPriceAvailable()">
+    <label for="find_by_price">Price: </label><br>
+    <input name="find_by_price" id="find_by_price" type="text" [(ngModel)]="find_by_price">
+    <input type="submit" value="filter" class="btn btn-primary">
+  </form>
+</div>
+

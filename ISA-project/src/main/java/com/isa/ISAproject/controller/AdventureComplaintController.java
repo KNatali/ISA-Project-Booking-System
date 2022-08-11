@@ -67,6 +67,7 @@ public class AdventureComplaintController {
 	}
 	@RequestMapping(value="api/client/makeNewIntructorComplaint",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<ComplaintDTO> makeNewIntructorComplaint(@RequestBody ComplaintDTO newComplaint ){
 		//prvo treba da nadjem tu rezervaciju
 		Optional<AdventureReservation> adventureReservation=this.adventureReservationService.findById(newComplaint.getIdReservation());

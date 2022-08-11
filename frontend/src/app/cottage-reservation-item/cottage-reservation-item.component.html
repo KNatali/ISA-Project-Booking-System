@@ -1,11 +1,14 @@
-<td>{{res.date}}</td>
+<td>{{res.reservationStart}}</td>
 <td>{{res.duration}}</td>
 <td>{{res.cottage.name}}</td>
 <td>{{res.maxPersons}}</td>
 <td>{{res.price}}</td>
-<td *ngIf="rate_cottage_button"> 
+<td *ngIf="rate_cottage_button">
     <button class="btn btn-info"><a [routerLink]="['/rate-cottage-reservation',res.id]">Rate</a></button>
 </td>
-<td *ngIf="complain_cottage_button"> 
+<td *ngIf="complain_cottage_button">
     <button class="btn btn-info"><a [routerLink]="['/complaint-cottage-reservation',res.id]">Complain</a></button>
+</td>
+<td *ngIf="delete_cottage_button">
+  <button class="btn btn-info" (click)="cancelReservation()">Cancle</button>
 </td>

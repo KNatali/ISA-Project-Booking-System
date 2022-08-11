@@ -51,7 +51,7 @@ public class CottageRevisionController {
 	}
 	
 
-	@RequestMapping(value="api/instructor/adventure/allCottageRevisionsByCottage/{id}",method = RequestMethod.GET,
+	@RequestMapping(value="api/cottageOwner/cottage/allCottageRevisionsByCottage/{id}",method = RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('COTTAGE_OWNER')")
 	public ResponseEntity<List<CottageRevisionDTO>> getCottageRevisionsByCottage(@PathVariable Long id){
@@ -78,6 +78,7 @@ public class CottageRevisionController {
 	}
 	@RequestMapping(value="api/client/makeNewCottageRevision",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<CottageRevisionDTO> saveNewCottageRevision(@RequestBody SpecificRevisionDTO specificRevisionDTO){
 		Optional<CottageReservation> cottageReservation=this.cottageReservationService.findById(specificRevisionDTO.getId_reservation());
 		if (!cottageReservation.isPresent()) {

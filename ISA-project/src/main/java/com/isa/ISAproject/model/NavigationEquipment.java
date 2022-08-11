@@ -18,6 +18,8 @@ public class NavigationEquipment {
 	private Long id;
 	@Column
 	private String name;
+	@Column
+	private double price;
 	
 	@ManyToMany(mappedBy="navigationEquipment")
 	private Set<Boat> boats=new HashSet<>();
@@ -46,10 +48,25 @@ public class NavigationEquipment {
 		this.boats = boats;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	public NavigationEquipment(Long id, String name, Set<Boat> boats) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.boats = boats;
+	}
+	
+	public NavigationEquipment(Long id, String name, double price, Set<Boat> boats) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
 		this.boats = boats;
 	}
 	

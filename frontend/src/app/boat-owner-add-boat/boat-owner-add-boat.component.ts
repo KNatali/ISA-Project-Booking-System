@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdditionalItem } from '../model/additionalItem';
 import { Address } from '../model/address';
@@ -55,7 +55,7 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     price: 0,
     maxPersons: 0,
     description: '',
-    mainPicture: 'string;',
+    mainPicture: '',
     cancellationPercentage: 0,
     boatOwner: this.boatOwner,
     rules: [],
@@ -77,9 +77,10 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     name: "",
     price: 0
   })
-  newNavigationEquipment: NavigationEquipment = new NavigationEquipment({
-    name: ""
-  })
+  /*newNavigationEquipment: NavigationEquipment = new NavigationEquipment({
+    name: "",
+    price: 0
+  })*/
   newRule: BoatBehavioralRules = new BoatBehavioralRules({
     rule: ""
   })
@@ -140,16 +141,17 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     this.additionalItems.splice(index, 1);
   }
 
-  addNavigationEquipment() {
+  /*addNavigationEquipment() {
     this.navigationEquipments.push(this.newNavigationEquipment);
     this.newNavigationEquipment = new NavigationEquipment({
-      name: ""
+      name: "",
+      price: 0
     })
   }
 
   deleteNavigationEquipment(index: any) {
-    this.navigationEquipments.splice(index, 1);
-  }
+    this.additionalItems.splice(index, 1);
+  }*/
 
   addRule() {
 
@@ -169,14 +171,13 @@ export class BoatOwnerAddBoatComponent implements OnInit {
     else {
       this.boat.mainPicture = this.selectedFile.name;
       this.boat.additionalItems = this.additionalItems;
-      this.boat.equipment = this.navigationEquipments;
       this.boat.rules = this.rules;
       this.route.params.subscribe(param => {
         this.id = param.id;
         this.boatService.addBoat(this.id, this.boat)
           .subscribe(data => {
 
-            alert("Successfully added cottage");
+            alert("Successfully added boat");
             this.router.navigate(['']);
           }, error => {
             alert(error)

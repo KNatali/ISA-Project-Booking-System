@@ -5,6 +5,7 @@ import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage1';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
+import { CottageRevision } from '../model/cottageRevision';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { CottageFastReservation } from '../model/cottageFastReservation';
 export class Cottage1Service {
   urlCottages="http://localhost:8090/api/cottages";
   urlCottage = "http://localhost:8090/api/cottageOwners/cottages";
+  urlCottageRule = "http://localhost:8090/api/cottageOwner/cottage";
 
   constructor(private http:HttpClient) { }
 
@@ -33,10 +35,10 @@ export class Cottage1Service {
   }
 
   getCottageBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
-    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `rules` + `/${id}`);
+    return this.http.get<CottageBehavioralRules[]>(`${this.urlCottageRule}/` + `cottageRules` + `/${id}`);
   }
   getCottageAdditionalItems(id: number): Observable<AdditionalItem[]> {
-    return this.http.get<AdditionalItem[]>(`${this.urlCottage}/` + `additionalItems` + `/${id}`);
+    return this.http.get<AdditionalItem[]>(`${this.urlCottageRule}/` + `cottageAdditionalItems` + `/${id}`);
   }
 
   updateCottage(id: number, data: Cottage): Observable<Cottage> {
@@ -57,6 +59,10 @@ export class Cottage1Service {
     return this.http.get<Cottage[]>(this.urlCottages, { params });
   }
   getCottageFastReservations(id: number): Observable<CottageFastReservation[]> {
-    return this.http.get<CottageFastReservation[]>(`${this.urlCottage}/` + `fastReservations` + `/${id}`);
+    return this.http.get<CottageFastReservation[]>(`${this.urlCottageRule}/` + `fastReservations` + `/${id}`);
+  }
+
+  getAllCottageRevisionsByCottage(id: number): Observable<CottageRevision[]> {
+    return this.http.get<CottageRevision[]>(`${this.urlCottageRule}/allCottageRevisionsByCottage` + `/${id}`);
   }
 }

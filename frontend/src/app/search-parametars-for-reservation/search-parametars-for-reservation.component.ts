@@ -1,3 +1,4 @@
+import { Cottage } from './../model/cottage';
 import { BoatReservationService } from './../service/boat-reservation.service';
 import { BoatReservationCreate } from './../model/boatReservationCreate';
 import { BoatReservation } from './../model/boat-reservation';
@@ -5,6 +6,12 @@ import { AdditionalItem } from './../model/additionalItem';
 import { SearchForReservation } from './../model/searchForReservation';
 import { Component, Input, OnInit } from '@angular/core';
 import { Boat } from '../model/boat';
+import { CottageReservationCreate } from '../model/cottageReservationCreate';
+import { isThisSecond } from 'date-fns';
+import { CottageReservationService } from '../service/cottage-reservation.service';
+import { Adventure } from '../model/adventure';
+import { AdventureReservationCreate } from '../model/adventureReservationCreate';
+import { AdventureReservationService } from '../service/adventure-reservation.service';
 
 @Component({
   selector: 'app-search-parametars-for-reservation',
@@ -14,6 +21,8 @@ import { Boat } from '../model/boat';
 export class SearchParametarsForReservationComponent implements OnInit {
   @Input()
   additionalItemPrice:number;
+  @Input()
+  type:string;
   @Input()
   boatPrice:number;
   @Input()
@@ -33,8 +42,15 @@ export class SearchParametarsForReservationComponent implements OnInit {
   additionalItem:AdditionalItem;
   @Input()
   boat :Boat;
-  constructor(private boatReservationService: BoatReservationService) { }
-  res:BoatReservationCreate=new BoatReservationCreate({
+  @Input()
+  adventure:Adventure;
+  @Input()
+  cottage:Cottage;
+  constructor(private boatReservationService: BoatReservationService,
+    private cottageReservationService: CottageReservationService,
+    private adventureReservationService: AdventureReservationService
+    ) { }
+  resBoat:BoatReservationCreate=new BoatReservationCreate({
     id: 0,
     reservationStart: '',
     numberOfDays:0,
@@ -43,6 +59,28 @@ export class SearchParametarsForReservationComponent implements OnInit {
     additionalItems: [],
     clientId:0,
     boatId: 0,
+    systemEarning: 0,
+  })
+  resCottage:CottageReservationCreate=new CottageReservationCreate({
+    id: 0,
+    reservationStart: '',
+    numberOfDays:0,
+    numberOfPersons: 0,
+    price: 0,
+    additionalItems: [],
+    clientId:0,
+    cottageId: 0,
+    systemEarning: 0,
+  })
+  resAdventure:AdventureReservationCreate=new AdventureReservationCreate({
+    id: 0,
+    reservationStart: '',
+    numberOfDays:0,
+    numberOfPersons: 0,
+    price: 0,
+    additionalItems: [],
+    clientId:0,
+    adventureId: 0,
     systemEarning: 0,
   })
   ngOnInit(): void {
@@ -57,16 +95,43 @@ export class SearchParametarsForReservationComponent implements OnInit {
     //console.log(this.boat);
   }
   Reservate(){
-    this.res.reservationStart=this.search.dateAndTime;
-    this.res.numberOfPersons=this.search.numOfPerson;
-    this.res.numberOfDays=this.search.numOfDay;
-    this.res.price=this.priceOfReservation;
-    this.res.boatId=this.boat.id;
-    this.res.additionalItems.push(this.additionalItem);
-    this.res.clientId=this.idClient;
-    this.res.additionalItems=this.additionalItems;
-    console.log(this.res);
-    this.boatReservationService.addBoatReservationClient(this.res).subscribe();
+
+    if(this.type=="cottage"){
+      this.resCottage.reservationStart=this.search.dateAndTime;
+      this.resCottage.numberOfPersons=this.search.numOfPerson;
+      this.resCottage.numberOfDays=this.search.numOfDay;
+      this.resCottage.price=this.priceOfReservation;
+      this.resCottage.cottageId=this.cottage.id;
+      this.resCottage.additionalItems.push(this.additionalItem);
+      this.resCottage.clientId=this.idClient;
+      this.resCottage.additionalItems=this.additionalItems;
+      console.log(this.resBoat);
+      this.cottageReservationService.addCottageReservationClient(this.resCottage).subscribe();
+    }
+    if (this.type=="boat"){
+      this.resBoat.reservationStart=this.search.dateAndTime;
+      this.resBoat.numberOfPersons=this.search.numOfPerson;
+      this.resBoat.numberOfDays=this.search.numOfDay;
+      this.resBoat.price=this.priceOfReservation;
+      this.resBoat.boatId=this.boat.id;
+      this.resBoat.additionalItems.push(this.additionalItem);
+      this.resBoat.clientId=this.idClient;
+      this.resBoat.additionalItems=this.additionalItems;
+      console.log(this.resBoat);
+      this.boatReservationService.addBoatReservationClient(this.resBoat).subscribe();
+    }
+    if(this.type=="adventure"){
+      this.resAdventure.reservationStart=this.search.dateAndTime;
+      this.resAdventure.numberOfPersons=this.search.numOfPerson;
+      this.resAdventure.numberOfDays=this.search.numOfDay;
+      this.resAdventure.price=this.priceOfReservation;
+      this.resAdventure.adventureId=this.adventure.id;
+      this.resAdventure.additionalItems.push(this.additionalItem);
+      this.resAdventure.clientId=this.idClient;
+      this.resAdventure.additionalItems=this.additionalItems;
+      console.log(this.resBoat);
+      this.adventureReservationService.addAdventureReservationClient(this.resAdventure).subscribe();
+    }
     this.showForm=false;
     this.reservationSeccess=true;
 

@@ -1,3 +1,4 @@
+import { SearchAvailableAdventureByGrade } from './../model/searchAvailableAdventureByGrade';
 import { AdditionalItem } from './../model/additionalItem';
 import { AdventureBehavioralRules } from './../model/adventureBehavioralRules';
 import { AdventureFishingEquipment } from './../model/adventureFishingEquipment';
@@ -7,6 +8,9 @@ import { Observable } from 'rxjs';
 import { Adventure } from '../model/adventure';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { AdventureRevision } from '../model/adventureRevision';
+import { SearchForReservation } from '../model/searchForReservation';
+import { SearchAvailableAdventureByPrice } from '../model/searchAvailableAdventureByPrice';
+import { UnsubscribedItem } from '../model/unsubscribedItem';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +23,15 @@ export class AdventureService {
 
   getAdventures(): Observable<Adventure[]> {
     return this.http.get<Adventure[]>(this.urlAdventures);
+  }
+  getSubscribedAdventures(id:number): Observable<Adventure[]> {
+    return this.http.get<Adventure[]>(`${this.urlAdventures}`+`/subscribed`+`/${id}`);
+  }
+  unsubscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlAdventures+"/unsubscribed",obj);
+  }
+  subscribe(obj:UnsubscribedItem):Observable<void>{
+    return this.http.post<void>(this.urlAdventures+"/subscribed",obj);
   }
   getAdventure(id: number): Observable<Adventure> {
     return this.http.get<Adventure>(`${this.urlAdventures}/${id}`);
@@ -78,5 +91,20 @@ export class AdventureService {
   findByCity(city: string): Observable<Adventure[]> {
     const params: HttpParams = new HttpParams().append('city', city);
     return this.http.get<Adventure[]>(this.urlAdventures, { params });
+  }
+  searchAdventuresForReservation(obj:SearchForReservation):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(`${this.urlAdventures}/` + `allAvailableAdventures`,obj);
+  }
+  sortByGradeAvailableAdventure(obj:Adventure[]):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/sort-by-grade",obj);
+  }
+  sortByPriceAvailableAdventure(obj:Adventure[]):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/sort-by-price",obj);
+  }
+  findByGradeAvailable(obj:SearchAvailableAdventureByGrade):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/find-available-by-grade",obj);
+  }
+  findByPriceAvailable(obj:SearchAvailableAdventureByPrice):Observable<Adventure[]>{
+    return this.http.post<Adventure[]>(this.urlAdventures+"/find-available-by-price",obj);
   }
 }

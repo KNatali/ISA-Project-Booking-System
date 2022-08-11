@@ -11,6 +11,7 @@ export interface CottageFastReservationInterface {
     price: number;
     items: AdditionalItem[];
     cottage: Cottage;
+    duration:number;
 }
 export class CottageFastReservation implements CottageFastReservationInterface {
     id?: number;
@@ -22,6 +23,7 @@ export class CottageFastReservation implements CottageFastReservationInterface {
     price: number;
     items: AdditionalItem[];
     cottage: Cottage;
+    duration:number;
     constructor(obj: CottageFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -32,5 +34,6 @@ export class CottageFastReservation implements CottageFastReservationInterface {
         this.price = obj.price;
         this.items = obj.items;
         this.cottage = obj.cottage;
+        this.duration=obj.duration;
     }
 }

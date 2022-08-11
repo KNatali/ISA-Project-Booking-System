@@ -19,6 +19,7 @@ export class BoatOwnerBoatsComponent implements OnInit {
   retrievedImage: string;
   base64Data: any;
   retrieveResonse: any;
+  delete_boat_button:boolean=true;
   @Input() boatOwner: BoatOwner = new BoatOwner({
     id: 0,
     username: '',
@@ -108,7 +109,7 @@ export class BoatOwnerBoatsComponent implements OnInit {
        this.router.navigate(['/instructor/adventures/edit', id]);*/
   }
 
-  delete(id: any) {
+  deleteBoat(id: any) {
     this.boatService.deleteBoat(id).subscribe();
     /*  if (this.checkReservation(id) > 0) {
         alert("Can't delete! This adventure has reservation!")
@@ -118,5 +119,4 @@ export class BoatOwnerBoatsComponent implements OnInit {
       }*/
 
   }
-
 }

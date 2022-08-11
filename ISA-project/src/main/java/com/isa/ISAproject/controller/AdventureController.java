@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureAddDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.InstructorProfileDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
+import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.InstructorMapper;
 import com.isa.ISAproject.model.Adventure;
@@ -130,6 +135,74 @@ public class AdventureController {
 		List<Adventure> adventures=this.adventureService.findByCity(city);
 		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
 	}
-	
+	@RequestMapping(value="/allAvailableAdventures",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)	
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> findAllAvailableAdventure(@RequestBody SearchForReservationDTO dto){
+		List<Adventure> adventures=this.adventureService.findAllAvailableAdventure(dto);
+		if(adventures==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+		}
+	}
+	@RequestMapping(value="/sort-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> sortByGrade(@RequestBody List<AdventureDTO> adventuresDTOS){
+		List<Adventure> adventures=this.adventureService.sortByGradeAvailableAdventure(adventuresDTOS);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	@RequestMapping(value="/sort-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> sortByPrice(@RequestBody List<AdventureDTO> adventuresDTOS){
+		List<Adventure> adventures=this.adventureService.sortByPriceAvailableAdventure(adventuresDTOS);
+		return new ResponseEntity<>(this.convert(adventures),HttpStatus.OK);
+	}
+	@RequestMapping(value="/find-available-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> findAvailableByGrade(@RequestBody SearchAvailableAdventureByGradeDTO dto){
+		List<AdventureDTO> adventures=this.adventureService.findAvailableByGrade(dto);
+		return new ResponseEntity<>(adventures,HttpStatus.OK);
+	}
+	@RequestMapping(value="/find-available-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>> findAvailableByPrice(@RequestBody SearchAvailableAdventureByPriceDTO dto){
+		List<AdventureDTO> adventures=this.adventureService.findAvailableByPrice(dto);
+		return new ResponseEntity<>(adventures,HttpStatus.OK);
+	}
+	@RequestMapping(value="/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<AdventureDTO>>  getALlSubscribedAdventures(@PathVariable Long clientId){
+		List<AdventureDTO> adventures=this.adventureService.getAllSubscribedAdventures(clientId);
+		return new ResponseEntity<>(adventures,HttpStatus.OK);
+	}
 
+	@RequestMapping(value="/unsubscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  UnsubscribedAdventures(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.adventureService.unsubscribedAdventure(dto);
+		if(!success) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@RequestMapping(value="/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedAdventures(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.adventureService.subscribe(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

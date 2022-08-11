@@ -11,6 +11,7 @@ export interface BoatFastReservationInterface {
     price: number;
     additionalItems: AdditionalItem[];
     boat: Boat;
+    duration:number;
 }
 export class BoatFastReservation implements BoatFastReservationInterface {
     id?: number;
@@ -22,6 +23,7 @@ export class BoatFastReservation implements BoatFastReservationInterface {
     price: number;
     additionalItems: AdditionalItem[];
     boat: Boat;
+    duration:number;
     constructor(obj: BoatFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -32,5 +34,6 @@ export class BoatFastReservation implements BoatFastReservationInterface {
         this.price = obj.price;
         this.additionalItems = obj.additionalItems;
         this.boat = obj.boat;
+        this.duration=obj.duration;
     }
 }

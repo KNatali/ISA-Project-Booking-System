@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.BoatDTO;
@@ -34,6 +35,7 @@ import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.SystemEarnings;
+import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.BoatRepository;
 import com.isa.ISAproject.repository.BoatReservationRepository;
@@ -75,7 +77,7 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getDate().isBefore(lt)) {
+			if(boatReservation.getReservationStart().isBefore(lt) && !boatReservation.isDeleted()) {
 				res.add(boatReservation);
 			}
 		}
@@ -84,7 +86,7 @@ public class BoatReservationService {
 	public List<BoatReservation> sortByDate(Long id) {
 		List<BoatReservation> reservations=this.oldReservationForClinet(id);
 		List<BoatReservation> res=new ArrayList<>();
-		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByDateDesc();
+		List<BoatReservation> sorted=this.boatReservationRepository.findByOrderByReservationStartDesc();
 		for (BoatReservation boatReservation : sorted) {
 			for (BoatReservation Reservation2 : reservations) {
 				if(boatReservation.getId().equals(Reservation2.getId())) {
@@ -125,12 +127,14 @@ public class BoatReservationService {
 		List<BoatReservation> res=new ArrayList<>();
 		LocalDateTime lt= LocalDateTime.now();
 		for (BoatReservation boatReservation : allRes) {
-			if(boatReservation.getDate().isAfter(lt)) {
+			if(boatReservation.getReservationStart().isAfter(lt)  && !boatReservation.isDeleted()) {
 				res.add(boatReservation);
 			}
 		}
 		return res;
 	}
+	
+	@Transactional(readOnly = false)
 	public BoatReservationDTO addBoatReservation(BoatReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
 		Boat boat=boatRepository.getById(dto.getBoat().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
@@ -145,10 +149,10 @@ public class BoatReservationService {
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Reservation);
 		
-		timePeriodService.setUnavailabilityBoat(time, dto.getBoat().getId());
+		timePeriodService.setUnavailabilityBoatOwner(time, dto.getBoat().getId());
 				
 		long days = Duration.between(start, end).toDays();
-		int price=(int) (boat.getPrice()*days);
+		int price=(int) (boat.getPrice()*days*dto.getMaxPersons());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
 			AdditionalItem a=AdditionalItemMapper.convertFromDTO(adto);
@@ -158,6 +162,7 @@ public class BoatReservationService {
 		}
 		double earning=SystemEarnings.percentage*price/100;
 		BoatReservation res=new BoatReservation(dto.getId(),start,end,boat,dto.getMaxPersons(),price,items,client,null,earning);
+		res.setDuration((int)days);
 		res.setSystemEarning(earning);
 		boatReservationRepository.save(res);
 		List<BoatReservation> list=client.getBoatReservations();
@@ -223,6 +228,11 @@ public class BoatReservationService {
 		
 		int duration=day_end-day_start;
 		boatReservation.setDuration(duration);
+		
+		TimePeriod period=new TimePeriod(null, start, end, UnavailabilityType.Reservation);
+		boat.getUnavailability().add(period);
+		this.boatRepository.save(boat); 
+		
 		BoatReservation saved=this.boatReservationRepository.save(boatReservation);
 		
 		String message="Yoe successufuly made reservation for boat "+boat.getName()+".Check this in your reservation list";
@@ -235,5 +245,22 @@ public class BoatReservationService {
 			e.printStackTrace();
 		}
 		return BoatReservationMapper.convertToDTO(saved);
+	}
+	public BoatReservation deleteReservation(Long id) {
+		Optional<BoatReservation> opt =this.findById(id);
+		if(!opt.isPresent()) {
+			return null;
+		}
+		BoatReservation found=opt.get();
+		LocalDateTime lt= LocalDateTime.now();
+		if(found.getReservationStart().getDayOfYear()>=lt.getDayOfYear()+3) {
+			found.setDeleted(true);
+			//treba obrisati zauzetosti za tu avanturu
+			found.getBoat().setUnavailability(null);
+			found.setAdditionalItems(null);
+			BoatReservation saved=this.boatReservationRepository.save(found);
+			return saved;
+		}
+		return null;
 	}
 }

@@ -37,6 +37,8 @@ public class BoatReservation {
 	private double price;
 	@ManyToOne
 	private Client client;
+	@Column
+	private boolean deleted=false;
 	
 	@ManyToOne
 	@JoinColumn(name = "boat_id")
@@ -192,6 +194,15 @@ public class BoatReservation {
 
 	public void setBoatRevisions(List<BoatRevision> boatRevisions) {
 		this.boatRevisions = boatRevisions;
+	}
+	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public BoatReservation(Long id, LocalDateTime date, int duration, int maxPersons,

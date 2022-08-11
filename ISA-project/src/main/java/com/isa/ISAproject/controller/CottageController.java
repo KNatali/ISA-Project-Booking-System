@@ -17,11 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageOwnerProfileDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableAdventureByPriceDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.CottageOwnerMapper;
 import com.isa.ISAproject.model.Boat;
@@ -158,5 +164,65 @@ public class CottageController {
 		}else {
 			return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(value="api/cottages/sort-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> sortByGrade(@RequestBody List<CottageDTO> cottagesDTOS){
+		List<Cottage> cottages=this.cottageService.sortByGradeAvailableCottage(cottagesDTOS);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/sort-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> sortByPrice(@RequestBody List<CottageDTO> cottagesDTOS){
+		List<Cottage> cottages=this.cottageService.sortByPriceAvailableCottage(cottagesDTOS);
+		return new ResponseEntity<>(this.convert(cottages),HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/find-available-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> findAvailableByGrade(@RequestBody SearchAvailableCottageByGradeDTO dto){
+		List<CottageDTO> res=this.cottageService.findAvailableByGrade(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/find-available-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>> findAvailableByPrice(@RequestBody SearchAvailableCottageByPriceDTO dto){
+		List<CottageDTO> res=this.cottageService.findAvailableByPrice(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<CottageDTO>>  getALlSubscribedCottages(@PathVariable Long clientId){
+		List<CottageDTO> cottages=this.cottageService.getAllSubscribedCottages(clientId);
+		return new ResponseEntity<>(cottages,HttpStatus.OK);
+	}
+
+	@RequestMapping(value="api/cottages/unsubscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  UnsubscribedCottages(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.cottageService.unsubscribedCottage(dto);
+		if(!success) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@RequestMapping(value="api/cottages/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedCottages(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.cottageService.subscribe(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

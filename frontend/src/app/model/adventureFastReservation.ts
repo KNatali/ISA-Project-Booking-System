@@ -15,9 +15,8 @@ export interface AdventureFastReservationInterface {
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-
     adventure: Adventure;
-
+    durationHours:number;
 
 }
 export class AdventureFastReservation implements AdventureFastReservationInterface {
@@ -29,8 +28,8 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
-
     adventure: Adventure;
+    durationHours:number;
     constructor(obj: AdventureFastReservationInterface) {
         this.id = obj.id;
         this.reservationStart = obj.reservationStart;
@@ -40,10 +39,7 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
         this.maxPersons = obj.maxPersons;
         this.price = obj.price;
         this.additionalItems = obj.additionalItems;
-
         this.adventure = obj.adventure;
-
-
+        this.durationHours=obj.durationHours;
     }
-
 }

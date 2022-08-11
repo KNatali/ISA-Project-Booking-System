@@ -10,6 +10,8 @@ import { CottageReservationService } from '../service/cottage-reservation.servic
 export class ActiveCottageReservationComponent implements OnInit {
   reservations:CottageReservation[];
   id:any;
+  delete_cottage_button:boolean=true;
+
   constructor(private cottageReservationService:CottageReservationService) { }
 
   ngOnInit(): void {
@@ -20,5 +22,8 @@ export class ActiveCottageReservationComponent implements OnInit {
     this.cottageReservationService.activeReservations(this.id)
     .subscribe(res=>this.reservations=res)
   }
-
+  canceledReservaiton(resId:number){
+    this.cottageReservationService.cancelReservation(resId)
+    .subscribe(res=>this.loadData());
+  }
 }

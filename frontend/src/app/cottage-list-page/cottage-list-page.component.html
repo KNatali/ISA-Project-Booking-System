@@ -1,7 +1,14 @@
 <div class="container">
 <app-search-cottage class="comp1"  (NameAdded)="findCottageByName($event)" (AddressAdded)="findCottageByAddress($event)"></app-search-cottage>
 
-                    <app-reservation-search-form class="comp1" [type]="type" (formIsFillCottage)="Search($event)"></app-reservation-search-form>
+                    <app-reservation-search-form *ngIf="visiable_sort_button"  class="comp1" [type]="type" (sortByGradeAvailableCottage)="sortByGradeAvailableCottage()"
+                    (sortByPriceAvailableCottage)="sortByPriceAvailableCottage()"
+                    (formIsFillCottage)="Search($event)"></app-reservation-search-form>
+                    <app-search-available-entitis *ngIf="visiable_sort_button" class="comp1" [type]="type"
+     (startFindByGradeAvailableCottage)="findByGradeAvailable($event)"
+     (startFindByPriceAvailableCottage)="findByPriceAvailable($event)"
+
+     ></app-search-available-entitis>
 </div>
 <app-sort-cottages *ngIf="visiable_sort_button" (SortedByName)="sortByName()"
                     (SortedByGrade)="sortByGrade()"

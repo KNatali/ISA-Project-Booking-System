@@ -41,7 +41,7 @@ insert into user (role, username, password, first_name, last_name, email, mobile
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Client','Maya', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Maya', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,true,'1983-07-12 21:30:55.888');
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Instructor','tanya', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Tanya', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,false,'1983-07-12 21:30:55.888');
 insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('Cottage Owner','sam', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Sam', 'Smith', 'isamarkomarkovic99@gmail.com', '305-555-0163',5,false,'1983-07-12 21:30:55.888');
-insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('BoatOwner','aleks', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Aleks', 'Willis', 'isamarkomarkovic99@gmail.com', '305-555-0163',3,true,'1983-07-12 21:30:55.888');
+insert into user (role, username, password, first_name, last_name, email, mobile,address_id,enabled,last_password_reset_date) values ('BoatOwner','naomi', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Naomi', 'Willis', 'isamarkomarkovic99@gmail.com', '305-555-0163',3,true,'1983-07-12 21:30:55.888');
 
 
 
@@ -89,31 +89,33 @@ insert into adventure_behavioral_rule(rule) values ('Just bring good energy');
 insert into adventure_behavioral_rule(rule) values ('You Keep Catch');
 insert into adventure_behavioral_rule(rule) values ('Catch and Release Allowed');
 
+insert into boat_behavioral_rule(rule) values ('Pet friendly');
 
+insert into cottage_behavioral_rule(rule) values ('Pet friendly');
 
 
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
 values ('Lucky B Sportfishing','Lucky B Sportfishing welcomes you to one of the most beautiful fisheries in the world. This charter service is operated by a professional crew that always strives to exceed their guests’ expectations. No matter what time of year you join, you can always count on a great water experience.The adventure starts on a 36’ Yellowfin boat . The boat features all necessary safety gear, modern navigational electronics, a live bait tank, and a cooler.You can fish the inshore waters of Coronado Islands or visit offshore spots for big game fish. Some of the species you’ll target on your trip are Calico Bass, Halibut, Lingcod, Tuna, Swordfish, Mahi Mahi, and many more. With such a variety of fish species and fishing techniques, it never gets boring or repetitive on board.The only thing you need to prepare in advance is your fishing license. The crew takes care of everything else - your fishing equipment, catch cleaning, snacks, and drinks.The main goal for the Lucky B Sportfishing’s crew is for you to have a memorable and enjoyable experience. They look forward to seeing you on their boat!',5.0,100,10,'/assets/adventure/Adventure1.jpg',1,1,0);
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
-values('The Long Run Sportfishing','No matter what kind of fishing trip you’re looking for, The Long Run is at your disposal. She’s a 40’ Hershine boat that’s got plenty of room for up to 6 anglers to be fishing in comfort. This is a spacious vessel with a pair of private heads, an outfitted kitchen, an air-conditioned cabin, and more.On shorter trips, you can expect to target Barracuda, Dorado, Yellowtail or bottom fish such as Lingcod, Sand Bass, Rockfish, and Halibut. Overnight trips will take you out for Yellowfin, Bluefin and Albacore Tuna, Dorado, Yellowtail, Marlin, and more. During shorter trips, you can also leave some lobster hoops in pristine locations when the season is open.All the fishing equipment, including bait, is provided for your convenience – all you need to do is get that daily license and some food and beverages and start bagging fish! For maximum comfort, bring a pair of polarized sunglasses and get ready to have some fun.',0,80,7,'/assets/adventure/Adventure2.jpg',2,1,10); 
+values('The Long Run Sportfishing','No matter what kind of fishing trip you’re looking for, The Long Run is at your disposal. She’s a 40’ Hershine boat that’s got plenty of room for up to 6 anglers to be fishing in comfort. This is a spacious vessel with a pair of private heads, an outfitted kitchen, an air-conditioned cabin, and more.On shorter trips, you can expect to target Barracuda, Dorado, Yellowtail or bottom fish such as Lingcod, Sand Bass, Rockfish, and Halibut. Overnight trips will take you out for Yellowfin, Bluefin and Albacore Tuna, Dorado, Yellowtail, Marlin, and more. During shorter trips, you can also leave some lobster hoops in pristine locations when the season is open.All the fishing equipment, including bait, is provided for your convenience – all you need to do is get that daily license and some food and beverages and start bagging fish! For maximum comfort, bring a pair of polarized sunglasses and get ready to have some fun.',9,80,7,'/assets/adventure/Adventure2.jpg',2,1,10); 
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
-values ('Reel Floridian Fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,250,5,'/assets/adventure/Adventure3.jpg',10,1,15);
+values ('Reel Floridian Fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',7,250,5,'/assets/adventure/Adventure3.jpg',10,1,15);
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
 values ('Fishing river','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,250,5,'/assets/adventure/Adventure5.jpg',1,2,15);
 insert into adventure(name,description,average_grade,price,max_persons,main_picture,address_id,instructor_id,cancellation_percentage) 
 values ('Super star fishing','Head out to some of the richest waters of the mighty Atlantic as you search for some trophy specimens. There’s a whole host of fish species inhabiting these waters, and some of them that you can expect to target are Snapper, Scup, Grouper, King Mackerel, Cobia, Sailfish, and Mahi Mahi.You’ll be fishing using Shimano rods, reels, and tackle, and Capt. Tyler will be happy to clean and fillet your catch for you to take home for a nice dinner. Feel free to bring your kids along, but note that you should bring life jackets for them. From viewing various marine life like turtles and dolphins to catching the fish of a lifetime, this is an adventure you won’t forget!Make sure to bring some food and drinks, especially on longer trips to stay refreshed throughout the day,Join Reel Floridian Fishing and let Capt. Tyler show you a great time, fishing under the Floridian sun!',0,415,8,'/assets/adventure/Adventure4.jpg',5,1,20);
 
 
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
-values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1,15,150, 10, 15);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
-values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2,20,250, 15, 15);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
-values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3,10,300, 20, 15);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
-values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4,50,180, 30, 15);
-insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id) 
-values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5,30,120, 20, 15);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id, deleted) 
+values ('Marina',50,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',40,10,3,3,100,'/assets/boats/slika1.jpeg',1,15,150, 10, 15, false);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id, deleted) 
+values ('Golden',40,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese',23,9,33,3,10,'/assets/boats/slika2.jpeg',2,20,250, 15, 15, false);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id, deleted) 
+values ('Blue sky',30,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki,',9,7,333,1,1000,'/assets/boats/slika3.jpeg',3,10,300, 20, 15, false);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id, deleted) 
+values ('Blue star',20,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades ',10,9,33,1,100,'/assets/boats/slika4.jpeg',4,50,180, 30, 15, false);
+insert into boat(name,capacity,description,length,grade,max_speed,motor_number,motor_power,main_picture,address_id, cancellation_percentage, price, max_persons, owner_id, deleted) 
+values ('Sky',10,'ur yachts are offered from the company operated main base and corporate bases across the most important and famous Greek islands, covering Ionian, Sporades, Chalkidiki, Cyclades and Dodecanese ',15,6,333,1,10,'/assets/boats/slika1.jpeg',5,30,120, 20, 15, false);
 
 insert into cottage(description,  grade, main_picture, name,address_id, cottage_owner_id, cancellation_percentage, max_persons, price) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 10, 'assets/cottages/vikendica1.jpg','Sun cottage',1, 11, 20, 5, 120);
 insert into cottage(description,  grade, main_picture, name,address_id, cottage_owner_id, cancellation_percentage, max_persons, price) values ('small wooden cottage on the river bank. Pleasant bird worm all day long. the murmur of the river awakens in the early hours.', 8, 'assets/cottages/vikendica5.jpg','Star cottage',5, 11, 30, 10, 100);
@@ -132,6 +134,12 @@ insert into additional_item(name,price) values ('Rend a car',15);
 insert into additional_item(name,price) values ('Spa',5);
 insert into additional_item(name,price) values ('Wi-fi',5);
 
+insert into navigation_equipment (name, price) values ('Gyro Compass', 10);
+insert into navigation_equipment (name, price) values ('Radar', 12);
+insert into navigation_equipment (name, price) values ('Magnetic Compass', 15);
+insert into navigation_equipment (name, price) values ('Autopilot', 45);
+insert into navigation_equipment (name, price) values ('Speed & Distance Log Device', 78);
+
 
 insert into adventure_equipment(adventure_id,equipment_id) values (1,1);
 insert into adventure_equipment(adventure_id,equipment_id) values (1,2);
@@ -146,6 +154,18 @@ insert into adventure_rules(adventure_id,rule_id) values (2,3);
 insert into adventure_rules(adventure_id,rule_id) values (3,2);
 insert into adventure_rules(adventure_id,rule_id) values (3,4);
 insert into adventure_rules(adventure_id,rule_id) values (3,5);
+
+insert into boat_behavioral_rules(boat_id,rule_id) values (1,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (2,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (3,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (4,1);
+insert into boat_behavioral_rules(boat_id,rule_id) values (5,1);
+
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (1,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (2,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (3,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (4,1);
+insert into cottage_behavioral_rules(cottage_id,rule_id) values (5,1);
 
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,1);
 insert into adventure_additional_items(adventure_id,additional_item_id) values(1,2);
@@ -171,12 +191,23 @@ insert into boat_additional_items(boat_id,additional_item_id) values(5,5);
 insert into boat_additional_items(boat_id,additional_item_id) values(1,8);
  
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,200); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,300); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8,250); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8,600); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2022-8-1-07-00-00','2023-9-10-13-00-00',3,5400,1,8,540); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2022-7-20-07-00-00','2022-8-12-13-00-00',3,3000,1,5,300); 
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,1);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,2);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (1,3);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (2,1);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (2,4);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (3,5);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (3,4);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (4,3);
+insert into boat_navigation_equipment(boat_id,equipment_id) values (5,2);
+
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2021-11-10-07-00-00','2021-11-12-13-00-00',3,2000,1,5,200,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2020-11-10-07-00-00','2020-11-12-13-00-00',3,3000,2,8,300,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-10-10-07-00-00','2022-10-12-13-00-00',3,2500,3,8,250,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2021-9-10-07-00-00','2021-9-12-13-00-00',3,6000,4,8,600,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2023-7-10-07-00-00','2023-7-12-13-00-00',3,5400,1,8,540,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2021-8-10-07-00-00','2021-8-12-13-00-00',3,3000,1,5,300,false); 
+
 
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (1,1);
 --insert into adventure_adventure_reservations(adventure_id,adventure_reservations_id)values (2,2);
@@ -192,25 +223,24 @@ insert into client_adventure_reservations(client_id,adventure_reservations_id) v
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(8,5);
 insert into client_adventure_reservations(client_id,adventure_reservations_id) values(5,6);
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2022-01-03-07-00-00','2022-01-25-13-00-00',3,200,1,5,20); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning) values('2022-01-25-07-00-00','2022-02-05-14-00-00',5,450,1,5,45); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-01-03-07-00-00','2022-01-25-13-00-00',3,200,1,5,20,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-01-25-07-00-00','2022-02-05-14-00-00',5,450,1,5,45,false); 
 
 insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2022-07-20-13-00-00','2022-10-15-16-00-00','2022-05-15','2022-08-10',4,460,1);
 insert into adventure_fast_reservation(reservation_start,reservation_end,validity_start,validity_end,max_persons,price,adventure_id) values ('2022-08-01-7-00-00','2022-09-25-15-00-00','2022-05-10','2022-08-15',2,100,1);
 
-insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-10-06-30-00','2021-12-14-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2021-12-10','2021-12-14',4,460,1);
-insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2021-12-12','2021-12-24',2,100,1);
+insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-10-06-30-00','2021-12-15-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2022-12-10','2022-12-14',4,460,1);
+insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2022-12-12','2022-12-24',2,100,1);
 
-insert into boat_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,boat_id) values ('2021-12-10-06-30-00','2021-12-14-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2021-12-10','2021-12-14',4,460,1);
-insert into boat_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,boat_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2021-12-12','2021-12-24',2,100,1);
+insert into boat_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,boat_id) values ('2021-12-10-06-30-00','2021-12-14-06-30-00',"2021-12-10T06:30:00","06:30:00",3,'2022-12-10','2022-12-14',4,460,1);
+insert into boat_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,boat_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2022-12-12','2022-12-24',2,100,1);
 
-
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',20);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00',30);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2023-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00',40);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-30-14-00-00',50);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00',60);
-insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00',10);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',20,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00',30,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2023-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00',40,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-30-14-00-00',50,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00',60,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00',10,false);
 
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
@@ -237,12 +267,12 @@ insert into client_cottage_reservations(client_id,cottage_reservations_id) value
 insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
 --insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',120);
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00', 150);
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00', 200);
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-30-14-00-00', 250);
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2025-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00', 300);
-insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00', 100);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',120,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00', 150,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2021-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00', 200,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-30-14-00-00', 250,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2025-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00', 300,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00', 100,false);
 
 insert into boat_boat_reservations(boat_id,boat_reservations_id)values (1,1);
 insert into boat_boat_reservations(boat_id,boat_reservations_id)values (2,2);
@@ -267,6 +297,15 @@ insert into profile_delete_request(user_id,reason,type) values (4,'I am getting 
  
 insert into adventure_subscribers(adventure_id,client_id) values (1,5);
 insert into adventure_subscribers(adventure_id,client_id) values (1,8);
+insert into adventure_subscribers(adventure_id,client_id) values (3,8);
+
+insert into boat_subscribers(boat_id,client_id) values (1,5);
+insert into boat_subscribers(boat_id,client_id) values (1,8);
+insert into boat_subscribers(boat_id,client_id) values (4,8);
+
+insert into cottage_subscribers(cottage_id,client_id) values (1,5);
+insert into cottage_subscribers(cottage_id,client_id) values (1,8);
+insert into cottage_subscribers(cottage_id,client_id) values (5,8);
 
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Instructor was very unpolite and rude!',5,1,'Default');
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Service is too expensive. Nothing is like on pictures',8,1,'Default');
@@ -276,3 +315,16 @@ insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1)
 
 insert into revision(grade,revision,type) values(4,'Beds are very uncomfotable','Unchecked');
 insert into cottage_revision(revision_id,cottage_reservation_id) values(2,1);
+insert into revision(grade,revision,type) values(3,'Beds are very uncomfotable','Unchecked');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(3,2);
+insert into revision(grade,revision,type) values(1,'Beds are very uncomfotable','Unchecked');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(4,4);
+insert into revision(grade,revision,type) values(5,'Beds are very uncomfotable','Unchecked');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(5,5);
+insert into revision(grade,revision,type) values(2,'Beds are very uncomfotable','Unchecked');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(6,6);
+
+insert into revision(grade,revision,type) values(4,'Boat was very dirty','Unchecked');
+insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
+insert into revision(grade,revision,type) values(3,'Boat was very dirty','Unchecked');
+insert into boat_revision(revision_id,boat_reservation_id) values(8,2);

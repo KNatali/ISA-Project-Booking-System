@@ -82,7 +82,8 @@ export class BoatOwnerActionAddComponent implements OnInit {
     maxPersons: 0,
     price: 0,
     additionalItems: this.additionalItems,
-    boat: this.selectedBoat
+    boat: this.selectedBoat,
+    duration:0
   })
   constructor(private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute, private boatOwnerService: BoatOwnerService, private boatService: BoatService, private boatReservationService: BoatReservationService) { }
 

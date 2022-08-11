@@ -20,7 +20,7 @@ public class CottageBehavioralRule {
 	@Column
 	private String rule;
 	
-	@ManyToMany(mappedBy="rules")
+	@ManyToMany
 	private Set<Cottage> cottages=new HashSet<>();
 
 	public Long getId() {

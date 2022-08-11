@@ -9,8 +9,8 @@ public class AdventureFastReservationDTO {
 
 	private Long id;
 	private String reservationStart;
-
 	private String reservationEnd;
+	private double durationHours;
 	private int maxPersons;
 	private double price;
 	private String validityStart;
@@ -74,16 +74,24 @@ public class AdventureFastReservationDTO {
 	public void setValidityEnd(String validityEnd) {
 		this.validityEnd = validityEnd;
 	}
+	
+	public double getDurationHours() {
+		return durationHours;
+	}
+	public void setDurationHours(double durationDays) {
+		this.durationHours = durationDays;
+	}
 	public AdventureFastReservationDTO() {
 		super();
 	}
-	public AdventureFastReservationDTO(Long id, String reservationStart, String reservationEnd, int maxPersons,
-			double price, String validityStart, String validityEnd, AdventureDTO adventure,
+	public AdventureFastReservationDTO(Long id, String reservationStart, String reservationEnd, double durationDays,
+			int maxPersons, double price, String validityStart, String validityEnd, AdventureDTO adventure,
 			Set<AdditionalItemDTO> additionalItems) {
 		super();
 		this.id = id;
 		this.reservationStart = reservationStart;
 		this.reservationEnd = reservationEnd;
+		this.durationHours = durationDays;
 		this.maxPersons = maxPersons;
 		this.price = price;
 		this.validityStart = validityStart;
@@ -91,4 +99,5 @@ public class AdventureFastReservationDTO {
 		this.adventure = adventure;
 		this.additionalItems = additionalItems;
 	}
+	
 }

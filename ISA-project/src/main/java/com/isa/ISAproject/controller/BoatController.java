@@ -22,7 +22,11 @@ import com.isa.ISAproject.dto.BoatAddDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.CottageAddDTO;
 import com.isa.ISAproject.dto.CottageDTO;
+import com.isa.ISAproject.dto.SearchAvailableBoatByPriceOrGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByGradeDTO;
+import com.isa.ISAproject.dto.SearchAvailableCottageByPriceDTO;
 import com.isa.ISAproject.dto.SearchForReservationDTO;
+import com.isa.ISAproject.dto.UnsubscribedItemDTO;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.Cottage;
@@ -159,5 +163,49 @@ public class BoatController {
 		}else {
 			return new ResponseEntity<>(this.convert(boats),HttpStatus.OK);
 		}
+	}
+	@RequestMapping(value="api/boats/find-available-by-grade", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>> findAvailableByGrade(@RequestBody SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<BoatDTO> res=this.boatService.findAvailableByGrade(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/find-available-by-price", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>> findAvailableByPrice(@RequestBody SearchAvailableBoatByPriceOrGradeDTO dto){
+		List<BoatDTO> res=this.boatService.findAvailableByPrice(dto);
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/subscribed/{clientId}", method = RequestMethod.GET,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<List<BoatDTO>>  getALlSubscribedBoats(@PathVariable Long clientId){
+		List<BoatDTO> boats=this.boatService.getALlSubscribedBoats(clientId);
+		return new ResponseEntity<>(boats,HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/unsubscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  UnsubscribedBoats(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.boatService.unsubscribedBoat(dto);
+		if(!success) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@RequestMapping(value="api/boats/subscribed", method = RequestMethod.POST,
+			produces= {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PreAuthorize("hasRole('CLIENT')")
+	public ResponseEntity<Void>  subscribedBoats(@RequestBody UnsubscribedItemDTO dto){
+		boolean success;
+		success=this.boatService.subscribedBoat(dto);
+		if(!success) {
+			System.out.println("already subscribed on this entity");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
