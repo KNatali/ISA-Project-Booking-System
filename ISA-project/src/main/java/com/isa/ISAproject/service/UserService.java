@@ -68,12 +68,11 @@ public class UserService {
 		List<User> users=userRepository.findAll();
 		List<UserDTO> usersDTO=new ArrayList<>();
 	 for (User u : users) {
-		 if(!(u.getRole().equalsIgnoreCase("SysAdmin") || u.getRole().equalsIgnoreCase("Admin"))) {
+		 if(!(u.getRole().equalsIgnoreCase("SysAdmin") || u.getRole().equalsIgnoreCase("Admin")|| u.isDeleted())) {
 			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole(),u.getAddress().getLatitude(),u.getAddress().getLongitude());
 			usersDTO.add(dto);
 		 }
 			
-		
 	 }
 	 return usersDTO;
 	}

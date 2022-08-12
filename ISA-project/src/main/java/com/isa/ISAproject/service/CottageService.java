@@ -76,20 +76,9 @@ public class CottageService {
 		return CottageMapper.convertToDTO(cottage.get());
 	}
 	public void delete(Long id) {
-		Cottage c=cottageRepository.getById(id);
-		//this.cottageRepository.delete(c);
-		List<CottageReservation> list=cottageReservationRepository.findByCottage(c);
-		
-			for (CottageReservation cottageReservation : list) {
-				c.getCottageReservations().remove(cottageReservation);
-				Client client=cottageReservation.getClient();
-				
-				client.getCottageReservations().remove(cottageReservation);
-				clientRepository.save(client);
-				cottageReservation.getCottageRevisions().removeAll(null);
-				
-			}
-			this.cottageRepository.save(c);
+		Cottage b=cottageRepository.getById(id);
+		b.setDeleted(true);
+		this.cottageRepository.save(b);
 	}
 	public Optional<Cottage> getOne(Long id) {
 		return this.cottageRepository.findById(id);

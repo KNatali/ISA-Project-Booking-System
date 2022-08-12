@@ -60,22 +60,34 @@ export class AdminEntitiesComponent implements OnInit {
       })
   }
   deleteCottage(id: any) {
-    this.cottages.forEach((cottage, index) => {
-      if (cottage.id == id) this.cottages.splice(index, 1);
-    });
+    this.cottageService.deleteCottage(id)
+      .subscribe(data => {
+        alert('Successfully deleted!')
+        this.cottages.forEach((cottage, index) => {
+          if (cottage.id == id) this.cottages.splice(index, 1);
+        });
+      });
+
   }
   deleteBoat(id: any) {
-    this.boats.forEach((boat, index) => {
-      if (boat.id == id) this.boats.splice(index, 1);
-    });
+    this.boatService.deleteBoat(id)
+      .subscribe(data => {
+        alert('Successfully deleted!')
+        this.boats.forEach((boat, index) => {
+          if (boat.id == id) this.boats.splice(index, 1);
+        });
+      });
+
   }
   deleteAdventure(id: any) {
     this.adventureService.deleteAdventure(id)
-      .subscribe();
+      .subscribe(data => {
+        alert('Successfully deleted!')
+        this.adventures.forEach((adventure, index) => {
+          if (adventure.id == id) this.adventures.splice(index, 1);
+        });
+      });
 
-    this.adventures.forEach((adventure, index) => {
-      if (adventure.id == id) this.adventures.splice(index, 1);
-    });
 
   }
 

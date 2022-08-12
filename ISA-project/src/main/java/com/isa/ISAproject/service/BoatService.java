@@ -36,6 +36,7 @@ import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.NavigationEquipmentMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Address;
+import com.isa.ISAproject.model.Adventure;
 import com.isa.ISAproject.model.AdventureFishingEquipment;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatOwner;
@@ -90,19 +91,10 @@ public class BoatService {
 	}
 	
 	public Boat deleteBoat(Long id) {
-		Optional<Boat> opt =this.getOne(id);
-		if(!opt.isPresent()) {
-			return null;
-		}
-		Boat found=opt.get();
-		found.setDeleted(true);
-		
-		found.setUnavailability(null);
-		found.setAdditionalItems(null);
-		found.setBoatBehavioralRules(null);
-		found.setNavigationEquipment(null);
-		Boat saved=this.boatRepository.save(found);
-		return saved;
+		Boat b=boatRepository.getById(id);
+		b.setDeleted(true);
+		this.boatRepository.save(b);
+		return b;
 	}
 	
 	public Optional<Boat> getOne(Long id) {
@@ -161,19 +153,8 @@ public class BoatService {
 	}
 	public void delete(Long id) {
 		Boat b=boatRepository.getById(id);
-		//this.cottageRepository.delete(c);
-		List<BoatReservation> list=boatReservationRepository.findByBoat(b);
-		
-			for (BoatReservation boatReservation : list) {
-				b.getBoatReservations().remove(boatReservation);
-				Client client=boatReservation.getClient();
-				
-				client.getBoatReservations().remove(boatReservation);
-				clientRepository.save(client);
-				boatReservation.getBoatRevisions().removeAll(null);
-				
-			}
-			this.boatRepository.save(b);
+		b.setDeleted(true);
+		this.boatRepository.save(b);
 	}
 	public void addBoat(Long boatOwnerId, BoatAddDTO dto) {
 		BoatOwner boatOwner=boatOwnerRepository.getById(boatOwnerId);

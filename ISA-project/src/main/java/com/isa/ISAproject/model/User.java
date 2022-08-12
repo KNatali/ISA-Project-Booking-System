@@ -56,6 +56,9 @@ public class User implements UserDetails {
 	@Column
 	private String role;
 	
+	@Column
+	private boolean deleted;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -79,8 +82,15 @@ public class User implements UserDetails {
 	public String getPassword() {
         return password;
     }
+	
 
-    public void setPassword(String password) {
+    public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	public void setPassword(String password) {
         Timestamp now = new Timestamp(new Date().getTime());
         this.setLastPasswordResetDate(now);
         this.password = password;
@@ -170,6 +180,7 @@ public class User implements UserDetails {
 		this.enabled = enabled;
 		this.role = role;
 		this.authorities = authorities;
+		this.deleted=false;
 	}
 	 public User(String username, String password, String email, String firstName, String lastName,
 				Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
@@ -184,6 +195,7 @@ public class User implements UserDetails {
 			this.enabled = enabled;
 			this.role = role;
 			this.authorities = authorities;
+			this.deleted=false;
 		}
 	@JsonIgnore
 	@Override

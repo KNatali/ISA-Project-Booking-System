@@ -107,23 +107,24 @@ export class InstructorAdventuresComponent implements OnInit {
   }
 
   edit(id: any) {
-    this.router.navigate(['/instructor/adventures/edit', id]);
-    /* if (this.checkReservation(id) > 0) {
-      
-       alert("Can't edit! This adventure has reservation!")
-     }
-     else
-       this.router.navigate(['/instructor/adventures/edit', id]);*/
+    if (this.checkReservation(id) > 0) {
+
+      alert("Can't edit! This adventure has reservation!")
+    }
+    else
+      this.router.navigate(['/instructor/adventures/edit', id]);
   }
 
   delete(id: any) {
-    this.adventureService.deleteAdventure(id).subscribe();
-    /*  if (this.checkReservation(id) > 0) {
-        alert("Can't delete! This adventure has reservation!")
-      }
-      else {
-        this.adventureService.deleteAdventure(id).subscribe();
-      }*/
+    if (this.checkReservation(id) > 0) {
+      alert("Can't delete! This adventure has reservation!")
+    }
+    else {
+      this.adventureService.deleteAdventure(id).subscribe(data => {
+        alert('Sucessfully deleted!');
+        window.location.reload();
+      })
+    }
 
   }
 
