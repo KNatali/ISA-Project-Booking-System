@@ -124,6 +124,13 @@ public class BoatController {
 		List<AdditionalItem> items=this.boatService.findAllAdditionalItems();
 		return new ResponseEntity<>(this.convertAdditionalItemsToDtoList(items),HttpStatus.OK);
 	}
+	@RequestMapping(value="api/boats/delete/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN') || hasRole('BOAT_OWNER')" )
+	public ResponseEntity<?> delete(@PathVariable Long id){
+		this.boatService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	public List<AdditionalItemDTO> convertAdditionalItemsToDtoList(List<AdditionalItem> items){
 		List<AdditionalItemDTO> res=new ArrayList<>();
 		for (AdditionalItem item: items) {

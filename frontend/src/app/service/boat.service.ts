@@ -21,68 +21,68 @@ export class BoatService {
   urlAdditionalItem = "http://localhost:8090/api/additional-items";
   urlBoat1 = "http://localhost:8090/api/boatOwners/boats";
   urlBoat = "http://localhost:8090/api/boatOwner/boat";
-  urlSearchBoat="http://localhost:8090/api/client/allAvailableBoats";
+  urlSearchBoat = "http://localhost:8090/api/client/allAvailableBoats";
 
   constructor(private http: HttpClient) { }
 
   getBoats(): Observable<Boat[]> {
     return this.http.get<Boat[]>(this.urlBoats);
   }
-  getSubscribedBoats(id:number): Observable<Boat[]> {
-    return this.http.get<Boat[]>(`${this.urlBoats}`+`/subscribed`+`/${id}`);
+  getSubscribedBoats(id: number): Observable<Boat[]> {
+    return this.http.get<Boat[]>(`${this.urlBoats}` + `/subscribed` + `/${id}`);
   }
-  unsubscribe(obj:UnsubscribedItem):Observable<void>{
-    return this.http.post<void>(this.urlBoats+"/unsubscribed",obj);
+  unsubscribe(obj: UnsubscribedItem): Observable<void> {
+    return this.http.post<void>(this.urlBoats + "/unsubscribed", obj);
   }
-  subscribe(obj:UnsubscribedItem):Observable<void>{
-    return this.http.post<void>(this.urlBoats+"/subscribed",obj);
+  subscribe(obj: UnsubscribedItem): Observable<void> {
+    return this.http.post<void>(this.urlBoats + "/subscribed", obj);
   }
-  getBoat(id:number):Observable<Boat>{
+  getBoat(id: number): Observable<Boat> {
     return this.http.get<Boat>(`${this.urlBoats}/${id}`);
   }
-  findBoatByMotorNumber(motorNumber:number):Observable<Boat[]>{
-    const params:HttpParams=new HttpParams().append('motorNumber',motorNumber);
-    return this.http.get<Boat[]>(this.urlBoats,{params});
+  findBoatByMotorNumber(motorNumber: number): Observable<Boat[]> {
+    const params: HttpParams = new HttpParams().append('motorNumber', motorNumber);
+    return this.http.get<Boat[]>(this.urlBoats, { params });
   }
-  findBoatByMotorPower(motorPower:number):Observable<Boat[]>{
-    const params:HttpParams=new HttpParams().append('motorPower',motorPower);
-    return this.http.get<Boat[]>(this.urlBoats,{params});
+  findBoatByMotorPower(motorPower: number): Observable<Boat[]> {
+    const params: HttpParams = new HttpParams().append('motorPower', motorPower);
+    return this.http.get<Boat[]>(this.urlBoats, { params });
   }
-  findBoatByMotorPowerAndMotorNumber(motorPower:number,motorNumber:number):Observable<Boat[]>{
+  findBoatByMotorPowerAndMotorNumber(motorPower: number, motorNumber: number): Observable<Boat[]> {
 
-    const params=new HttpParams()
-      .set('motorPower',motorPower)
-      .set('motorNumber',motorNumber);
-      return this.http.get<Boat[]>(this.urlBoats,{params});
+    const params = new HttpParams()
+      .set('motorPower', motorPower)
+      .set('motorNumber', motorNumber);
+    return this.http.get<Boat[]>(this.urlBoats, { params });
   }
-  sortByName():Observable<Boat[]>{
-    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-name");
+  sortByName(): Observable<Boat[]> {
+    return this.http.get<Boat[]>(this.urlBoats + "/sort-by-name");
   }
-  sortByGrade():Observable<Boat[]>{
-    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-grade");
+  sortByGrade(): Observable<Boat[]> {
+    return this.http.get<Boat[]>(this.urlBoats + "/sort-by-grade");
   }
-  sortByGradeAvailableBoat(obj:Boat[]):Observable<Boat[]>{
-    return this.http.post<Boat[]>(this.urlBoats+"/sort-by-grade",obj);
+  sortByGradeAvailableBoat(obj: Boat[]): Observable<Boat[]> {
+    return this.http.post<Boat[]>(this.urlBoats + "/sort-by-grade", obj);
   }
-  sortByPriceAvailableBoat(obj:Boat[]):Observable<Boat[]>{
-    return this.http.post<Boat[]>(this.urlBoats+"/sort-by-price",obj);
+  sortByPriceAvailableBoat(obj: Boat[]): Observable<Boat[]> {
+    return this.http.post<Boat[]>(this.urlBoats + "/sort-by-price", obj);
   }
-  sortByCity():Observable<Boat[]>{
-    return this.http.get<Boat[]>(this.urlBoats+"/sort-by-city");
+  sortByCity(): Observable<Boat[]> {
+    return this.http.get<Boat[]>(this.urlBoats + "/sort-by-city");
   }
-  findAllAdditionalItems():Observable<AdditionalItem[]>{
+  findAllAdditionalItems(): Observable<AdditionalItem[]> {
     return this.http.get<AdditionalItem[]>(this.urlAdditionalItem);
   }
-  findByName(name:string):Observable<Boat[]>{
-    const params:HttpParams=new HttpParams().append('name',name);
-    return this.http.get<Boat[]>(this.urlBoats,{params});
+  findByName(name: string): Observable<Boat[]> {
+    const params: HttpParams = new HttpParams().append('name', name);
+    return this.http.get<Boat[]>(this.urlBoats, { params });
   }
-  findByCity(city:string):Observable<Boat[]>{
-    const params:HttpParams=new HttpParams().append('city',city);
-    return this.http.get<Boat[]>(this.urlBoats,{params});
+  findByCity(city: string): Observable<Boat[]> {
+    const params: HttpParams = new HttpParams().append('city', city);
+    return this.http.get<Boat[]>(this.urlBoats, { params });
   }
   deleteBoat(id: number) {
-    return this.http.delete(`${this.urlBoat1}/` + `delete` + `/${id}`);
+    return this.http.delete(`${this.urlBoats}/` + `delete` + `/${id}`);
   }
   getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
     return this.http.get<BoatFastReservation[]>(`${this.urlBoat}/` + `fastReservations` + `/${id}`);
@@ -111,14 +111,14 @@ export class BoatService {
   setUnavailability(period: TimePeriod, id: number) {
     return this.http.post<ProfileDeleteRequest>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
   }
-  searchBoatsForReservation(obj:SearchForReservation):Observable<Boat[]>{
-    return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`,obj);
+  searchBoatsForReservation(obj: SearchForReservation): Observable<Boat[]> {
+    return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`, obj);
   }
-  findByGradeAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
-    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-grade",obj);
+  findByGradeAvailable(obj: SearchAvailableBoatByPriceOrGrade): Observable<Boat[]> {
+    return this.http.post<Boat[]>(this.urlBoats + "/find-available-by-grade", obj);
   }
-  findByPriceAvailable(obj:SearchAvailableBoatByPriceOrGrade):Observable<Boat[]>{
-    return this.http.post<Boat[]>(this.urlBoats+"/find-available-by-price",obj);
+  findByPriceAvailable(obj: SearchAvailableBoatByPriceOrGrade): Observable<Boat[]> {
+    return this.http.post<Boat[]>(this.urlBoats + "/find-available-by-price", obj);
   }
   getAllBoatRevisionsByBoat(id: number): Observable<BoatRevision[]> {
     return this.http.get<BoatRevision[]>(`${this.urlBoat}/allBoatRevisionsByBoat` + `/${id}`);
