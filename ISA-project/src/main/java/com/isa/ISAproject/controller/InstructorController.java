@@ -142,8 +142,11 @@ public class InstructorController {
 			List<AdventureDTO> adventuresDTO=new ArrayList<>();
 			
 			for(Adventure a:adventures) {
-				AdventureDTO adventure=AdventureMapper.convertToDTO(a);
-				adventuresDTO.add(adventure);
+				if(!a.isDeleted()) {
+					AdventureDTO adventure=AdventureMapper.convertToDTO(a);
+					adventuresDTO.add(adventure);
+				}
+			
 			}
 			
 			return new ResponseEntity<>(adventuresDTO,HttpStatus.OK);

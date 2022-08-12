@@ -74,8 +74,13 @@ public class AdventureService {
 	private ClientService clientService;
 	
 	public List<AdventureDTO> findAll(){
-		List<Adventure> adventures= this.adventureRepository.findAll();
-		return AdventureMapper.convertoToDTOs(adventures);
+		List<Adventure> allAdventures= this.adventureRepository.findAll();
+		List<Adventure> nonDeletedAdventures=new ArrayList<Adventure>();
+		for (Adventure adventure : allAdventures) {
+			if(!adventure.isDeleted())
+				nonDeletedAdventures.add(adventure);
+		}
+		return AdventureMapper.convertoToDTOs(nonDeletedAdventures);
 		
 	}
 	public AdventureDTO findById(Long id) {
@@ -86,33 +91,8 @@ public class AdventureService {
 	
 	public void delete(Long id) {
 		Adventure a=adventureRepository.getById(id);
-		//Set<AdventureReservation> list=a.getAdventureReservations();
-		List<AdventureReservation> list=adventureReservationRepository.findByAdventure(a);
-		
-			for (AdventureReservation adventureReservation : list) {
-				a.getAdventureReservations().remove(adventureReservation);
-				Client c=adventureReservation.getClient();
-				
-				c.getAdventureReservations().remove(adventureReservation);
-				clientRepository.save(c);
-				adventureReservation.getAdventureRevisions().removeAll(null);
-				
-			}
-			//a.setAdventureReservations(null);
-			this.adventureRepository.save(a);
-		
-		/*for (AdventureReservation ar : list) {
-			//Client c=ar.getClient();
-		//	c.setAdventureReservations(null);
-			//clientRepository.save(c);
-			
-			ar.setClient(null);
-			this.adventureReservationRepository.save(ar);
-			this.adventureReservationRepository.delete(ar);
-		}*/
-	//	list.clear();
-		
-		//this.adventureRepository.delete(a);
+		a.setDeleted(true);
+		this.adventureRepository.save(a);
 	}
 	public void addAdventure(Long instructorId, AdventureAddDTO dto) {
 		Instructor instructor=instructorRepository.getById(instructorId);

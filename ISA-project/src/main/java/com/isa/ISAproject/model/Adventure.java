@@ -27,12 +27,12 @@ public class Adventure {
 	private String name;
 	@ManyToOne
 	private Address address;
-	
-	
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	@Column
 	private double averageGrade;
+	@Column
+	private boolean deleted; 
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Instructor instructor;
@@ -96,6 +96,14 @@ public class Adventure {
 
 	public Long getId() {
 		return id;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public Set<AdventureReservation> getAdventureReservations() {
@@ -255,6 +263,7 @@ public class Adventure {
 		this.adventureFastReservations=fastReservations;
 		this.additionalItems=additionalItems;
 		this.adventureReservations=reservations;
+		this.deleted=false;
 	}
 	public Adventure(Long id, String name, Address address, String description, double averageGrade,double price,
 			Instructor instructor,String mainPicture,
@@ -269,6 +278,7 @@ public class Adventure {
 		this.instructor = instructor;
 		this.mainPicture=mainPicture;
 		this.maxPersons = maxPersons;
+		this.deleted=false;
 	}
 	
 	public Adventure() {}
