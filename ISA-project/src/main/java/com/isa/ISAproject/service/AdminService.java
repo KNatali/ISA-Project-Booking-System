@@ -64,12 +64,8 @@ public class AdminService {
 	
 	public void deleteUser(Long id) {
 		User user=this.userRepository.getById(id);
-		if(user.getRole()=="Client") {
-			Client c=this.clientRepository.getById(id);
-			this.clientRepository.delete(c);
-		}
-		else		
-			this.userRepository.delete(user);
+		user.setDeleted(true);
+		this.userRepository.save(user);
 	}
 	
 	public boolean addNewAdmin(UserDTO dto) {

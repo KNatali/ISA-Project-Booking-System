@@ -29,8 +29,13 @@ export class AdminUsersComponent implements OnInit {
 
   deleteUser(id: number) {
     this.adminService.deleteUser(id)
-      .subscribe();
-    window.location.reload();
+      .subscribe(data => {
+        alert('Succesfully deleted! ')
+        window.location.reload();
+      }, error => {
+        alert('Error')
+      });
+
   }
 
 

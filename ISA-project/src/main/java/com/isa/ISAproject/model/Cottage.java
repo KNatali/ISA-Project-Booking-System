@@ -41,6 +41,10 @@ public class Cottage {
 	private double price;
 	@Column
 	private int maxPersons;
+	
+	@Column
+	private boolean deleted;
+	
 	@Column
 	private int cancellationPercentage;
 	@ManyToMany
@@ -85,6 +89,15 @@ public class Cottage {
 
 	public String getName() {
 		return name;
+	}
+
+	
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public void setName(String name) {
@@ -235,6 +248,7 @@ public class Cottage {
 		this.cottageOwner = cottageOwner;
 		this.cottageFastReservations = cottageFastReservations;
 		this.mainPicture=mainPicture;
+		this.deleted=false;
 	}
 	
 	
@@ -254,6 +268,7 @@ public class Cottage {
 		this.rooms = rooms;
 		this.cottageFastReservations = cottageFastReservations;
 		this.cottageReservations = cottageReservations;
+		this.deleted=false;
 	}
 	
 	public Cottage(Long id, String name, Address address, String description, double grade,double price,
@@ -276,6 +291,7 @@ public class Cottage {
 		this.cottageFastReservations=fastReservations;
 		this.items=items;
 		this.cottageReservations=reservations;
+		this.deleted=false;
 	}
 
 	public Cottage () {}
