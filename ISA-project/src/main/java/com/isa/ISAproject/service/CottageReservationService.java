@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.ClientProfileDTO;
+import com.isa.ISAproject.dto.CottageComplaintDTO;
 import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.ReserveCottageFastReservation;
@@ -26,12 +28,15 @@ import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.AdventureReservation;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.ComplaintType;
 import com.isa.ISAproject.model.Cottage;
+import com.isa.ISAproject.model.CottageComplaint;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.SystemEarnings;
 import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.ClientRepository;
+import com.isa.ISAproject.repository.CottageComplaintRepository;
 import com.isa.ISAproject.repository.CottageRepository;
 import com.isa.ISAproject.repository.CottageReservationRepository;
 import com.isa.ISAproject.repository.SystemEarningsRepository;
@@ -42,6 +47,8 @@ public class CottageReservationService {
 	private CottageReservationRepository cottageReservationRepository;
 	@Autowired
 	private CottageRepository cottageRepository;
+	@Autowired
+	private CottageComplaintRepository cottageComplaintRepository;
 	@Autowired
 	private TimePeriodService timePeriodService;
 	@Autowired 
@@ -277,5 +284,22 @@ public class CottageReservationService {
 			return saved;
 		}
 		return null;
+	}
+	
+	public List<CottageComplaintDTO> getCottageComplaints(){
+		List<CottageComplaint> complaints=cottageComplaintRepository.findAll();
+		List<CottageComplaintDTO> res=new ArrayList<>();
+		if(complaints!=null) {
+			for (CottageComplaint c : complaints) {
+				if(c.getType()==ComplaintType.Default) {
+					ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+					CottageReservationDTO  boat=CottageReservationMapper.convertToDTO(c.getCottageReservation());
+					CottageComplaintDTO cDTO=new CottageComplaintDTO(c.getId(),c.getDescription(),client,boat);
+					res.add(cDTO);
+				}
+			}
+		}
+		
+		return res;
 	}
 }

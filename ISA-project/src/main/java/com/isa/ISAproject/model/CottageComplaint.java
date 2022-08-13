@@ -2,6 +2,8 @@ package com.isa.ISAproject.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,9 @@ public class CottageComplaint {
 	
 	@ManyToOne
 	private CottageReservation cottageReservation;
+	
+	@Enumerated(EnumType.STRING)
+    private ComplaintType type;
 
 	public Long getId() {
 		return id;
@@ -51,6 +56,15 @@ public class CottageComplaint {
 
 	public void setCottageReservation(CottageReservation cottageReservation) {
 		this.cottageReservation = cottageReservation;
+	}
+
+	
+	public ComplaintType getType() {
+		return type;
+	}
+
+	public void setType(ComplaintType type) {
+		this.type = type;
 	}
 
 	public CottageComplaint(Long id, String description, Client client, CottageReservation cottageReservation) {

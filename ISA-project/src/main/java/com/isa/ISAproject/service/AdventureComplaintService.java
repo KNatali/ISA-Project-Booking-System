@@ -26,10 +26,12 @@ import com.isa.ISAproject.model.AdventureComplaint;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.ComplaintType;
+import com.isa.ISAproject.model.CottageComplaint;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
 import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdventureComplaintRepository;
 import com.isa.ISAproject.repository.BoatComplaintRepository;
+import com.isa.ISAproject.repository.CottageComplaintRepository;
 import com.isa.ISAproject.repository.UserRepository;
 
 @Service
@@ -40,6 +42,8 @@ public class AdventureComplaintService {
 	private AdventureComplaintRepository adventureComplaintRespository;
 	@Autowired
 	private BoatComplaintRepository boatComplaintRespository;
+	@Autowired
+	private CottageComplaintRepository cottageComplaintRespository;
 	
 	@Autowired
 	private UserRepository userRespository;
@@ -91,6 +95,12 @@ public class AdventureComplaintService {
 			bc.setType(ComplaintType.Answered);
 			this.boatComplaintRespository.save(bc);
 		}
+		else if(dto.getType().equals(new String("Cottage"))) {
+			CottageComplaint cc=cottageComplaintRespository.findOneById(dto.getId());
+			cc.setType(ComplaintType.Answered);
+			this.cottageComplaintRespository.save(cc);
+		}
+		
 	
 		emailService.sendMessageSync(client.getEmail(),dto.getMessageClient());
 		emailService.sendMessageSync(owner.getEmail(),dto.getMessageOwner());

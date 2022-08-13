@@ -102,7 +102,7 @@ export class AdminService {
         return this.http.get<BoatComplaint[]>(`${this.urlAdmin}/getBoatComplaints`);
     }
     getAllCottageComplaints(): Observable<CottageComplaint[]> {
-        return this.http.get<CottageComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+        return this.http.get<CottageComplaint[]>(`${this.urlAdmin}/getCottageComplaints`);
     }
     answerComplaint(complaint: ComplaintAnswer) {
         return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint);

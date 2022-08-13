@@ -1,5 +1,6 @@
 package com.isa.ISAproject.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.ISAproject.dto.BoatComplaintDTO;
 import com.isa.ISAproject.dto.ComplaintDTO;
+import com.isa.ISAproject.dto.CottageComplaintDTO;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.CottageComplaint;
@@ -30,6 +33,16 @@ public class CottageComplaintController {
 	
 	@Autowired
 	private CottageComplaintService cottageComplaintService;
+	
+	@RequestMapping(value="api/admin/getCottageComplaints",method = RequestMethod.GET,produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
+	public ResponseEntity<List<CottageComplaintDTO>> getBoatComplaints(){
+		List<CottageComplaintDTO> dtos=cottageReservationService.getCottageComplaints();
+	
+		return new ResponseEntity<>(dtos,HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value="api/client/makeNewCottageComplaint",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)

@@ -18,6 +18,7 @@ export class AdminClientComplaintsComponent implements OnInit {
   ngOnInit(): void {
     this.getAdventureComplaints();
     this.getBoatComplaints();
+    this.getCottageComplaints();
   }
 
   getAdventureComplaints() {
@@ -50,6 +51,13 @@ export class AdminClientComplaintsComponent implements OnInit {
 
   commentBoat(answer: BoatComplaint, id: any) {
     sessionStorage.setItem("complaint", JSON.stringify({type:"Boat",id:answer.id,ownerId:answer.boat.boat.boatOwner.id,clientId:answer.client.id}));
+
+    /*  this.adminService.rejectProfileDeleteRequests(request)
+        .subscribe();*/
+   
+  }
+  commentCottage(answer: CottageComplaint, id: any) {
+    sessionStorage.setItem("complaint", JSON.stringify({type:"Cottage",id:answer.id,ownerId:answer.cottage.cottage.cottageOwner.id,clientId:answer.client.id}));
 
     /*  this.adminService.rejectProfileDeleteRequests(request)
         .subscribe();*/
