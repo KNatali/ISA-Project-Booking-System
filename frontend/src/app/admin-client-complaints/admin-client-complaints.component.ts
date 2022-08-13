@@ -42,23 +42,18 @@ export class AdminClientComplaintsComponent implements OnInit {
   }
 
   commentAdventure(answer: AdventureComplaint, id: any) {
-    sessionStorage.setItem("adventureComplaint", JSON.stringify(answer));
+    sessionStorage.setItem("complaint", JSON.stringify({type:"Adventure",id:answer.id,ownerId:answer.adventure.instructor.id,clientId:answer.client.id}));
 
     /*  this.adminService.rejectProfileDeleteRequests(request)
         .subscribe();*/
-    this.adventureComplaints.forEach((request, index) => {
-      if (request.id == id) this.adventureComplaints.splice(index, 1);
-    });
   }
 
   commentBoat(answer: BoatComplaint, id: any) {
-    sessionStorage.setItem("boatComplaint", JSON.stringify(answer));
+    sessionStorage.setItem("complaint", JSON.stringify({type:"Boat",id:answer.id,ownerId:answer.boat.boat.boatOwner.id,clientId:answer.client.id}));
 
     /*  this.adminService.rejectProfileDeleteRequests(request)
         .subscribe();*/
-    this.boatComplaints.forEach((request, index) => {
-      if (request.id == id) this.boatComplaints.splice(index, 1);
-    });
+   
   }
 
 }

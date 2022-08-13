@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.AdventureComplaintDTO;
 import com.isa.ISAproject.dto.AdventureFastReservationDTO;
+import com.isa.ISAproject.dto.ComplaintAnswerDTO;
 import com.isa.ISAproject.dto.ComplaintDTO;
 import com.isa.ISAproject.dto.EditAdventureFastReservationDTO;
 import com.isa.ISAproject.model.Adventure;
@@ -52,12 +53,12 @@ public class AdventureComplaintController {
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,params = {"message"},produces = {
-			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
-	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody AdventureComplaintDTO dto,@RequestParam String message){
+	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody ComplaintAnswerDTO dto){
 		try {
-			adventurComplaintService.answerAdventureComplaints(dto,message);
+			adventurComplaintService.answerComplaint(dto);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		

@@ -18,6 +18,7 @@ import { AdventureComplaint } from '../model/adventureComplaint';
 import { BoatRevision } from '../model/boatRevision';
 import { CottageComplaint } from '../model/cottageComplaint';
 import { BoatComplaint } from '../model/boatComplaint';
+import { ComplaintAnswer } from '../model/complaintAnswer';
 
 @Injectable({
     providedIn: 'root'
@@ -103,9 +104,8 @@ export class AdminService {
     getAllCottageComplaints(): Observable<CottageComplaint[]> {
         return this.http.get<CottageComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
     }
-    answerComplaint(complaint: AdventureComplaint, message: string) {
-        const params: HttpParams = new HttpParams().append('message', message);
-        return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint, { params });
+    answerComplaint(complaint: ComplaintAnswer) {
+        return this.http.post(`${this.urlAdmin}/answerComplaint`, complaint);
     }
 
 

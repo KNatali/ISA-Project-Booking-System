@@ -9,8 +9,12 @@
       <div class="modal-body">
         <form [formGroup]="formValue">
           <div class="mb-3">
-            <label for="content" class="form-label">Message:</label>
-            <textarea type="text" [ngModel]="message" formControlName="message" class="form-control"></textarea>
+            <label for="content" class="form-label">Message to clinet:</label>
+            <textarea type="text" [ngModel]="messageClient" formControlName="messageClient" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">Message to service owner:</label>
+            <textarea type="text" [ngModel]="messageOwner" formControlName="messageOwner" class="form-control"></textarea>
           </div>
 
 

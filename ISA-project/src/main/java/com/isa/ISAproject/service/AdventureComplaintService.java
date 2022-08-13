@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PessimisticLockException;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,18 @@ import com.isa.ISAproject.dto.AdventureComplaintDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
+import com.isa.ISAproject.dto.ComplaintAnswerDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.AdventureComplaint;
+import com.isa.ISAproject.model.BoatComplaint;
+import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.ComplaintType;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
+import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdventureComplaintRepository;
+import com.isa.ISAproject.repository.BoatComplaintRepository;
+import com.isa.ISAproject.repository.UserRepository;
 
 @Service
 public class AdventureComplaintService {
@@ -31,6 +38,12 @@ public class AdventureComplaintService {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private AdventureComplaintRepository adventureComplaintRespository;
+	@Autowired
+	private BoatComplaintRepository boatComplaintRespository;
+	
+	@Autowired
+	private UserRepository userRespository;
+
 	@Autowired
 	private EmailService emailService;
 	
@@ -61,10 +74,30 @@ public class AdventureComplaintService {
 	
 		emailService.sendMessageSync(dto.getAdventure().getInstructor().getEmail(),message);
 		
-		
-		
+	}
+	
+	@Transactional(readOnly = false)
+	public void answerComplaint(ComplaintAnswerDTO dto) throws MailException, InterruptedException,PessimisticLockException {
+		User client=this.userRespository.getById(dto.getClientId());
+		User owner=this.userRespository.getById(dto.getOwnerId());
+		if(dto.getType().equals(new String("Adventure"))) {
+			
+			AdventureComplaint ac=adventureComplaintRespository.findOneById(dto.getId());
+			ac.setType(ComplaintType.Answered);
+			this.adventureComplaintRespository.save(ac);
+		}
+		else if(dto.getType().equals(new String("Boat"))){
+			BoatComplaint bc=boatComplaintRespository.findOneById(dto.getId());
+			bc.setType(ComplaintType.Answered);
+			this.boatComplaintRespository.save(bc);
+		}
+	
+		emailService.sendMessageSync(client.getEmail(),dto.getMessageClient());
+		emailService.sendMessageSync(owner.getEmail(),dto.getMessageOwner());
 		
 	}
+	
+	
 	public AdventureComplaint save(AdventureComplaint newAdventureComplaint) {
 		return this.adventureComplaintRespository.save(newAdventureComplaint);
 	}
