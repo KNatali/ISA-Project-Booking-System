@@ -89,6 +89,7 @@ public class ProfileDeleteRequestService {
 		request.setType(ProfileDeleteRequestType.Accepted);
 		this.profileDeleteRequestRepository.save(request);
 		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+		user.setDeleted(true);
 		user.setEnabled(false);
 		userRepository.save(user);
 		emailService.sendMessageSync(requestDTO.getUserDTO().getEmail(),"Your profile delete request has been accepted. Your account has been deleted and you can not log in!");
