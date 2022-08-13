@@ -5,9 +5,8 @@
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Reason</th>
-
-
-      <th scope="col">Service</th>
+      <th scope="col">Service Type</th>
+      <th scope="col">Service Name</th>
       <th scope="col"></th>
 
     </tr>
@@ -15,7 +14,6 @@
   <tbody>
     <tr *ngFor="let item of adventureComplaints; index as i">
       <th scope="row">{{ i + 1 }}</th>
-
       <td>
         {{item.client.firstName}}
       </td>
@@ -23,16 +21,41 @@
         {{item.client.lastName}}
       </td>
       <td> {{item.description}}</td>
-
-
+      <td>Adventure</td>
       <td> {{item.adventure.name}}</td>
-      <td><button mat-button id="accept" (click)="comment(item,item.id)" data-bs-toggle="modal"
+      <td><button mat-button id="accept" (click)="commentAdventure(item,item.id)" data-bs-toggle="modal"
           data-bs-target="#modalComplaint">Answer</button></td>
-
-
     </tr>
 
+    <tr *ngFor="let item of boatComplaints; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{item.client.firstName}}
+      </td>
+      <td>
+        {{item.client.lastName}}
+      </td>
+      <td> {{item.description}}</td>
+      <td> Boat</td>
+      <td> {{item.boat.boat.name}}</td>
+      <td><button mat-button id="accept" (click)="commentBoat(item,item.id)" data-bs-toggle="modal"
+          data-bs-target="#modalComplaint">Answer</button></td>
+    </tr>
 
-
+    <tr *ngFor="let item of adventureComplaints; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{item.client.firstName}}
+      </td>
+      <td>
+        {{item.client.lastName}}
+      </td>
+      <td> {{item.description}}</td>
+      <td>Cottage</td>
+      <td> {{item.adventure.name}}</td>
+      <td><button mat-button id="accept" (click)="commentAdventure(item,item.id)" data-bs-toggle="modal"
+          data-bs-target="#modalComplaint">Answer</button></td>
+    </tr>
   </tbody>
+
 </table>

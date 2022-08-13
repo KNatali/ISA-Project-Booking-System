@@ -308,6 +308,10 @@ insert into cottage_subscribers(cottage_id,client_id) values (5,8);
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Instructor was very unpolite and rude!',5,1,'Default');
 insert into adventure_complaint(description,client_id,adventure_id,type) values('Service is too expensive. Nothing is like on pictures',8,1,'Default');
 
+insert into boat_complaint(description,client_id,boat_reservation_id,type) values('Instructor was very unpolite and rude!',5,1,'Default');
+insert into boat_complaint(description,client_id,boat_reservation_id,type) values('Service is too expensive. Nothing is like on pictures',8,1,'Default');
+
+
 insert into revision(grade,revision,type) values(7,'Boat was very dirty','Unchecked');
 insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
 

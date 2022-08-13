@@ -48,10 +48,9 @@ public class AdventureComplaintService {
 			}
 		}
 		
-		
 		return res;
-		
 	}
+	
 	@Transactional(readOnly = false)
 	public void answerAdventureComplaints(AdventureComplaintDTO dto,String message) throws MailException, InterruptedException,PessimisticLockException {
 		AdventureComplaint ac=adventureComplaintRespository.findOneById(dto.getId());

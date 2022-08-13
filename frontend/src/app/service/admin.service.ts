@@ -16,6 +16,8 @@ import { InstructorReport } from '../model/instructorReport';
 import { SystemEarnings } from '../model/systemEarnings';
 import { AdventureComplaint } from '../model/adventureComplaint';
 import { BoatRevision } from '../model/boatRevision';
+import { CottageComplaint } from '../model/cottageComplaint';
+import { BoatComplaint } from '../model/boatComplaint';
 
 @Injectable({
     providedIn: 'root'
@@ -95,11 +97,11 @@ export class AdminService {
     getAllAdventureComplaints(): Observable<AdventureComplaint[]> {
         return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
     }
-    getAllBoatComplaints(): Observable<AdventureComplaint[]> {
-        return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+    getAllBoatComplaints(): Observable<BoatComplaint[]> {
+        return this.http.get<BoatComplaint[]>(`${this.urlAdmin}/getBoatComplaints`);
     }
-    getAllCottageComplaints(): Observable<AdventureComplaint[]> {
-        return this.http.get<AdventureComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
+    getAllCottageComplaints(): Observable<CottageComplaint[]> {
+        return this.http.get<CottageComplaint[]>(`${this.urlAdmin}/getAdventureComplaints`);
     }
     answerComplaint(complaint: AdventureComplaint, message: string) {
         const params: HttpParams = new HttpParams().append('message', message);

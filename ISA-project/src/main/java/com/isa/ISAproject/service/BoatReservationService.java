@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.AdventureComplaintDTO;
+import com.isa.ISAproject.dto.AdventureDTO;
+import com.isa.ISAproject.dto.BoatComplaintDTO;
 import com.isa.ISAproject.dto.BoatDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
@@ -26,17 +29,22 @@ import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
+import com.isa.ISAproject.model.AdventureComplaint;
 import com.isa.ISAproject.model.Boat;
+import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
+import com.isa.ISAproject.model.ComplaintType;
 import com.isa.ISAproject.model.Cottage;
 import com.isa.ISAproject.model.CottageReservation;
 import com.isa.ISAproject.model.SystemEarnings;
 import com.isa.ISAproject.model.TimePeriod;
 import com.isa.ISAproject.model.UnavailabilityType;
+import com.isa.ISAproject.repository.BoatComplaintRepository;
 import com.isa.ISAproject.repository.BoatRepository;
 import com.isa.ISAproject.repository.BoatReservationRepository;
 import com.isa.ISAproject.repository.ClientRepository;
@@ -49,6 +57,8 @@ public class BoatReservationService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private BoatRepository boatRepository;
+	@Autowired
+	private BoatComplaintRepository boatComplaintRepository;
 	@Autowired
 	private TimePeriodService timePeriodService;
 	@Autowired 
@@ -262,5 +272,22 @@ public class BoatReservationService {
 			return saved;
 		}
 		return null;
+	}
+	
+	public List<BoatComplaintDTO> getBoatComplaints(){
+		List<BoatComplaint> complaints=boatComplaintRepository.findAll();
+		List<BoatComplaintDTO> res=new ArrayList<>();
+		if(complaints!=null) {
+			for (BoatComplaint c : complaints) {
+				if(c.getType()==ComplaintType.Default) {
+					ClientProfileDTO client=new ClientProfileDTO(c.getClient());
+					BoatReservationDTO  boat=BoatReservationMapper.convertToDTO(c.getBoatReservation());
+					BoatComplaintDTO cDTO=new BoatComplaintDTO(c.getId(),c.getDescription(),client,boat);
+					res.add(cDTO);
+				}
+			}
+		}
+		
+		return res;
 	}
 }
