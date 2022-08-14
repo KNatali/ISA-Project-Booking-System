@@ -1,16 +1,24 @@
 <div class="container">
-  <h2>Set your unavailability:</h2>
   <form [formGroup]="formValue">
     <div class="mb-3">
-      <label for="startTime" class="form-label">Start date and time:</label>
-      <input type="datetime-local" formControlName="startTime" [(ngModel)]="startTime" class="form-control">
+      <label for="boat" class="form-label">Choose cottage:</label>
+      <br>
+      <select formControlName="cottage" (ngModelChange)="onChange($event)">
+        <option *ngFor="let b of cottages" [ngValue]="b">{{b.name}}</option>
+      </select>
     </div>
-
-    <div class="mb-3">
-      <label for="endTime" class="form-label">End date and time:</label>
-      <input type="datetime-local" formControlName="endTime" [(ngModel)]="endTime" class="form-control">
-    </div>
-  </form>
+      <h2>Set cottage unavailability:</h2>
+     
+        <div class="mb-3">
+          <label for="startTime" class="form-label">Start date and time:</label>
+          <input type="datetime-local" formControlName="startTime" [(ngModel)]="startTime" class="form-control">
+        </div>
+    
+        <div class="mb-3">
+          <label for="endTime" class="form-label">End date and time:</label>
+          <input type="datetime-local" formControlName="endTime" [(ngModel)]="endTime" class="form-control">
+        </div>
+      </form>
   <br>
   <button mat-button (click)="setUnavailability()">Submit</button>
   <hr>

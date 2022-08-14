@@ -131,6 +131,7 @@ public class CottageReservationDTO {
 		this.cottage=new CottageDTO(res.getCottage());
 		this.date=res.getDate();
 		this.reservationStart=res.getReservationStart().toString();
+		this.reservationEnd=res.getReservationEnd().toString();
 		//this.time=res.getTime();
 		this.duration=res.getDuration();
 		this.maxPersons=res.getMaxPersons();

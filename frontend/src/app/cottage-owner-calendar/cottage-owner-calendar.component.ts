@@ -111,31 +111,55 @@ export class CottageOwnerCalendarComponent implements OnInit {
   fastReservations: CottageFastReservation[];
   selectedReservation: CottageReservation;
   selectedFastReservation: CottageFastReservation;
+  ownerId:any;
+  cottages:any[];
+  selectedCottage:any;
   constructor(private modal: NgbModal, private formBuilder: FormBuilder, private cottageOwnerService: CottageOwnerService, private cottageService: CottageService, private analyticsService: AnalyticsService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
-      endTime: ['']
+      endTime: [''],
+      cottage:['']
     })
+    this.getCottages();
+  }
+  getData(){
+    this.events= [];
     this.getUnavailability();
     this.getCottageOwnerReservations();
     this.getCottageOwnerFastReservations();
   }
+  
+
+
+  getCottages() {
+    this.ownerId = sessionStorage.getItem("id")!;
+    this.cottageOwnerService.getCottageOwnerCottages(this.ownerId)
+      .subscribe(res => {
+        this.cottages = res;
+      })
+
+  }
+  onChange(newValue: any) {
+    this.selectedCottage = this.formValue.controls['cottage'].value;
+    this.getData();
+  }
+
 
   getCottageOwnerReservations() {
-    this.analyticsService.getCottageOwnerReservations(this.id)
+    this.cottageService.getCottageReservations(this.selectedCottage.id)
       .subscribe(res => {
         this.reservations = res;
       })
   }
 
   getCottageOwnerFastReservations() {
-    this.cottageOwnerService.getCottageOwnerFastReservations(this.id)
+    this.cottageService.getCottageFastReservations(this.selectedCottage.id)
       .subscribe(res => this.fastReservations = res)
   }
 
   getUnavailability() {
-    this.cottageOwnerService.getUnavailabilityByCottageOwner(this.id)
+    this.cottageOwnerService.getUnavailabilityByCottageOwner(this.selectedCottage.id)
       .subscribe(res => {
         this.unvailabilities = res
         this.set();
@@ -176,7 +200,7 @@ export class CottageOwnerCalendarComponent implements OnInit {
   setUnavailability() {
     this.period.start = this.startTime.toLocaleString();
     this.period.end = this.endTime.toLocaleString()
-    this.cottageOwnerService.setUnavailability(this.period, this.id).subscribe(data => {
+    this.cottageOwnerService.setUnavailability(this.period, this.selectedCottage.id).subscribe(data => {
       this.newEvent = {
         start: new Date(this.startTime),
         end: new Date(this.endTime),
@@ -235,7 +259,6 @@ export class CottageOwnerCalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.reservations.forEach((u, index) => {
-
       if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
         this.selectedReservation = u;
         this.showReport = false;

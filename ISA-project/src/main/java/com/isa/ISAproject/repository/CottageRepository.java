@@ -27,4 +27,8 @@ public interface CottageRepository extends JpaRepository<Cottage, Long>{
 	List<Cottage> findByOrderByGradeDesc();
 	List<Cottage> findByOrderByPriceDesc();
 	List<Cottage> findByCottageOwner(CottageOwner cottageOwner);
-}
+	
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	@Query("select p from Cottage p where p.id = :id")
+	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
+	public Cottage findOneById(@Param("id")Long id);}

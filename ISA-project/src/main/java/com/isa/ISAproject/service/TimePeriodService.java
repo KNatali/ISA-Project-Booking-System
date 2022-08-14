@@ -44,6 +44,8 @@ public class TimePeriodService {
 	@Autowired
 	private BoatRepository boatRepository;
 	@Autowired
+	private CottageRepository cottageRepository;
+	@Autowired
 	private CottageOwnerRepository cottageOwnerRepository;
 	@Autowired
 	private BoatOwnerRepository boatOwnerRepository;
@@ -181,6 +183,19 @@ public class TimePeriodService {
 		return timesDTO;		
 	}
 	
+	public List<TimePeriodDTO> findUnavailabilityByCottage(Long id){
+		Cottage cottage=cottageRepository.getById(id);
+		Set<TimePeriod> times=cottage.getUnavailability();
+		List<TimePeriodDTO> timesDTO=new ArrayList<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		for (TimePeriod t : times) {
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			timesDTO.add(dto);
+			
+		}
+		return timesDTO;		
+	}
+	
 /**/
 	@Transactional(readOnly = false)
 	public boolean setUnavailabilityBoatOwner(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
@@ -275,6 +290,33 @@ public class TimePeriodService {
 			//this.timePeriodRepository.save(period);
 			periods.add(period);
 			this.boatRepository.save(boat);
+		
+		return true;
+		
+		
+	}
+	
+	@Transactional(readOnly = false)
+	public boolean setUnavailabilityCottage(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
+		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
+		TimePeriod period=new TimePeriod(dto.getId(),start,end,dto.getType());
+		Cottage cottage=new Cottage();
+		cottage=cottageRepository.findOneById(id);
+		
+		Set<TimePeriod> periods=new HashSet<>();
+			if(cottage.getUnavailability()!=null) {
+				periods=cottage.getUnavailability();
+				for (TimePeriod t : periods) {
+					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+						throw new DateTimeException("Overlapping");
+					}
+				}
+			}
+			//this.timePeriodRepository.save(period);
+			periods.add(period);
+			this.cottageRepository.save(cottage);
 		
 		return true;
 		

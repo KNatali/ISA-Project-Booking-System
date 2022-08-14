@@ -17,16 +17,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
+import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.CottageComplaintDTO;
+import com.isa.ISAproject.dto.CottageDTO;
 import com.isa.ISAproject.dto.CottageReservationClientDTO;
 import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.ReserveCottageFastReservation;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
+import com.isa.ISAproject.mapper.BoatMapper;
+import com.isa.ISAproject.mapper.CottageMapper;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.AdventureReservation;
+import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.ComplaintType;
 import com.isa.ISAproject.model.Cottage;
@@ -301,5 +307,33 @@ public class CottageReservationService {
 		}
 		
 		return res;
+	}
+	
+	public List<CottageReservationDTO> getReservationsByCottage(Long id){
+		
+		List<CottageReservationDTO> res=new ArrayList<>();
+		List<CottageReservation> reservations=cottageReservationRepository.findAll();
+		
+		for (CottageReservation b : reservations) {
+			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
+				//res.add(CottageFastReservationMapper.convertToDTO(c));
+			if(b.getCottage().getId()==id) {
+				CottageDTO cottage=CottageMapper.convertToDTO(b.getCottage());
+				Set<AdditionalItemDTO> items=new HashSet<>();
+				for (AdditionalItem i : b.getAdditionalItems()) {
+					AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+					items.add(dto);
+				}
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+				DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+				
+				CottageReservationDTO btfdto = new CottageReservationDTO(b);
+				res.add(btfdto); 
+			}
+			
+		}
+		return res;
+		
 	}
 }
