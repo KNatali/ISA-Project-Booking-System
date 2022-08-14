@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatOwner;
+import com.isa.ISAproject.model.Instructor;
 @Repository
 public interface BoatRepository extends JpaRepository<Boat, Long> {
 	List<Boat> findByMotorNumber(int motorNumber);
@@ -27,4 +28,10 @@ public interface BoatRepository extends JpaRepository<Boat, Long> {
 	List<Boat> findByOrderByPriceDesc();
 	List<Boat> findByAddress(String address);
 	List<Boat> findByOwner(BoatOwner owner);
+	
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	@Query("select p from Boat p where p.id = :id")
+	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
+	public Boat findOneById(@Param("id")Long id);
 }
+

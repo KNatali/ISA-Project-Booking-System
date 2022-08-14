@@ -110,15 +110,38 @@ export class BoatOwnerCalendarComponent implements OnInit {
   fastReservations: BoatFastReservation[];
   selectedReservation: BoatReservation;
   selectedFastReservation: BoatFastReservation;
+  selectedBoat:any;
+  ownerId:any;
+  boats:any[];
   constructor(private modal: NgbModal, private formBuilder: FormBuilder, private boatOwnerService: BoatOwnerService, private boatService: BoatService, private analyticsService: AnalyticsService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
-      endTime: ['']
+      endTime: [''],
+      boat:['']
     })
+    this.getBoats();
+   
+  }
+
+  getData(){
+    this.events= [];
     this.getUnavailability();
     this.getBoatOwnerReservations();
     this.getBoatOwnerFastReservations();
+  }
+
+  getBoats() {
+    this.ownerId = sessionStorage.getItem("id")!;
+    this.boatOwnerService.getBoatOwnerBoats(this.ownerId)
+      .subscribe(res => {
+        this.boats = res;
+      })
+
+  }
+  onChange(newValue: any) {
+    this.selectedBoat = this.formValue.controls['boat'].value;
+    this.getData();
   }
 
   getBoatOwnerReservations() {
@@ -134,7 +157,7 @@ export class BoatOwnerCalendarComponent implements OnInit {
   }
 
   getUnavailability() {
-    this.boatService.getUnavailabilityByBoat(this.id)
+    this.boatService.getUnavailabilityByBoat(this.selectedBoat.id)
       .subscribe(res => {
         this.unvailabilities = res
         this.set();
@@ -143,7 +166,6 @@ export class BoatOwnerCalendarComponent implements OnInit {
 
   set() {
     this.unvailabilities.forEach((u, index) => {
-
       this.newEvent = {
         start: new Date(u.start),
         end: new Date(u.end),
@@ -167,8 +189,9 @@ export class BoatOwnerCalendarComponent implements OnInit {
 
   setUnavailability() {
     this.period.start = this.startTime.toLocaleString();
-    this.period.end = this.endTime.toLocaleString()
-    this.boatService.setUnavailability(this.period, this.id).subscribe(data => {
+    this.period.end = this.endTime.toLocaleString();
+    console.log(this.selectedBoat)
+    this.boatService.setUnavailability(this.period, this.selectedBoat.id).subscribe(data => {
       this.newEvent = {
         start: new Date(this.startTime),
         end: new Date(this.endTime),

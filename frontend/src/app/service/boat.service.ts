@@ -109,7 +109,7 @@ export class BoatService {
     return this.http.get<TimePeriod[]>(`${this.urlBoats}/` + `getUnavailability` + `/${id}`);
   }
   setUnavailability(period: TimePeriod, id: number) {
-    return this.http.post<ProfileDeleteRequest>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
+    return this.http.post<TimePeriod>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
   }
   searchBoatsForReservation(obj: SearchForReservation): Observable<Boat[]> {
     return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`, obj);

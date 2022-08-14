@@ -41,10 +41,7 @@ public class TimePeriodController {
 		}catch(DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
-		
-		
-		
+		return new ResponseEntity<>(HttpStatus.OK);	
 			
 	}
 	
@@ -82,7 +79,7 @@ public class TimePeriodController {
 	
 	/**/
 	
-	@RequestMapping(value="api/boats/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	/*@RequestMapping(value="api/boats/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
 	public ResponseEntity<?> setUnavailabilityBoatOwner(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
 		try {
@@ -93,14 +90,29 @@ public class TimePeriodController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);		
-	}
+	}*/
 	
 	@RequestMapping(value="api/boats/getUnavailability/{id}",method = RequestMethod.GET,produces=
 			MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('BOAT_OWNER')")
-	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByBoatOwner(@PathVariable Long id){
-		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByBoatOwner(id);
+	public ResponseEntity<List<TimePeriodDTO>> getUnavailabilityByBoat(@PathVariable Long id){
+		List<TimePeriodDTO> dtos=timePeriodService.findUnavailabilityByBoat(id);
 		return new ResponseEntity<>(dtos,HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="api/boats/setUnavailability/{id}",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public ResponseEntity<?> setUnavailabilityBoat(@RequestBody TimePeriodDTO dto,@PathVariable Long id){
+		try {
+			timePeriodService.setUnavailabilityBoat(dto,id);
+		}catch(PessimisticLockException e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}catch(DateTimeException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);	
+			
+	}
+	
 
 }
