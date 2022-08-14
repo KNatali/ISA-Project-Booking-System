@@ -13,7 +13,7 @@ public class InstructorConstants {
 	public static final String DB_FIRST_NAME = "Truman";
 	public static final String DB_LAST_NAME = "Willis";
 	public static final String DB_PASSWORD = "123";
-	public static final String DB_EMAIL = "isamarkomarkovic99@gmail.com";
+	public static final String DB_EMAIL = "isa.booking22@gmail.com";
 	public static final String DB_USERNAME = "truman";
 	public static final String DB_MOBILE= "305-555-0163";
 	public static final String DB_ROLE = "Instructor";
