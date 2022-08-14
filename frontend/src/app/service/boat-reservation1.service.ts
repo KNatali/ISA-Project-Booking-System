@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { BoatReservation } from '../model/boatReservation';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoatReservation1Service {
-  urlReservation = "http://localhost:8090/api/boatReservation";
+  urlReservation = environment.url+"boatReservation";
 
   constructor(private http: HttpClient) { }
   saveReservation(reservation: BoatReservation): Observable<BoatReservation> {

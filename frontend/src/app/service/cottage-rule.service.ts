@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CottageRuleService {
-  urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
+  urlCottage = environment.url+"cottageOwner/cottage";
   constructor(private http: HttpClient) { }
 
 

@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Complaint } from '../model/complaint';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComplaintCottageReservationService {
-  url="http://localhost:8090/api/client/makeNewCottageComplaint";
-  url_owner="http://localhost:8090/api/client/makeNewCottageOwnerComplaint";
+  url=environment.url+"client/makeNewCottageComplaint";
+  url_owner=environment.url+"client/makeNewCottageOwnerComplaint";
   constructor(private http: HttpClient) { }
 
   save(com:Complaint):Observable<Complaint>{

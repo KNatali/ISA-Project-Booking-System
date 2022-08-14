@@ -3,13 +3,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { SpecificRevision } from '../model/specificRevision';
 import { Observable } from 'rxjs';
 import { BoatRevision } from '../model/boatRevision';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoatRevisionService {
 
-  url="http://localhost:8090/api/client/makeNewBoatRevision";
+  url=environment.url+"client/makeNewBoatRevision";
 
   constructor(private http:HttpClient) { }
 

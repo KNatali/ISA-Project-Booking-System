@@ -5,17 +5,18 @@ import { Observable } from 'rxjs';
 
 import { map } from 'rxjs/operators';
 import { User } from '../model/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    url = "http://localhost:8090/api/user/all"
-    whoami_url = "http://localhost:8090/api/getLoggedIn";
-    async_url = "http://localhost:8090/api/signup/async";
-    sync_url = "http://localhost:8090/api/signup/sync";
-    registrationUrl = "http://localhost:8090/api/register";
+    url = environment.url+"user/all"
+    whoami_url = environment.url+"getLoggedIn";
+    async_url =environment.url+"signup/async";
+    sync_url = environment.url+"signup/sync";
+    registrationUrl = environment.url+"register";
     constructor(
         private http: HttpClient
     ) {

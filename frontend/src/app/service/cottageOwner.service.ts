@@ -9,14 +9,15 @@ import { Client } from '../model/client';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { TimePeriod } from '../model/timePeriod';
 import { CottageOwnerReport } from '../model/cottageOwnerReport';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CottageOwnerService {
-  urlCottageOwner = "http://localhost:8090/api/cottageOwner";
-  urlCottageOwner_cottages = "http://localhost:8090/api/cottageOwners/cottages/client";
-  urlCottages = "http://localhost:8090/api/cottages";
+  urlCottageOwner = environment.url+"cottageOwner";
+  urlCottageOwner_cottages = environment.url+"cottageOwners/cottages/client";
+  urlCottages = environment.url+"cottages";
 
   constructor(private http: HttpClient) { }
   getCottageOwners():Observable<CottageOwner[]>{

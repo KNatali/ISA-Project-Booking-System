@@ -6,14 +6,15 @@ import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { EditAdventureFastReservation } from '../model/editAdventureFastReservation';
 import { AdventureReservationCreate } from '../model/adventureReservationCreate';
 import { ReserveAdventureFastReservation } from '../model/reserveAdventureFastReservation';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdventureReservationService {
-  url = "http://localhost:8090/api/adventure-reservations";
-  urlReservation = "http://localhost:8090/api/adventureReservation";
-  url_fast="http://localhost:8090/api/adventure/fastReservations";
+  url =  environment.url+"adventure-reservations";
+  urlReservation = environment.url+"adventureReservation";
+  url_fast= environment.url+"adventure/fastReservations";
   constructor(private http: HttpClient) { }
 
   allAdventureReservations(): Observable<AdventureReservation[]> {

@@ -6,13 +6,14 @@ import { CottageReservation } from '../model/cottage-reservation';
 import { CottageFastReservation } from '../model/cottageFastReservation';
 import { CottageReservationCreate } from '../model/cottageReservationCreate';
 import { ReserveCottageFastReservation } from '../model/reserveCottageFastReservation';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CottageReservationService {
-  url = "http://localhost:8090/api/cottages-reservations";
-  urlReservation = "http://localhost:8090/api/cottageReservation";
-  url_fast="http://localhost:8090/api/cottages/fastReservations";
+  url =environment.url+"cottages-reservations";
+  urlReservation = environment.url+"cottageReservation";
+  url_fast=environment.url+"cottages/fastReservations";
 
   constructor(private http: HttpClient) { }
   sortByPrice(id: number): Observable<CottageReservation[]> {

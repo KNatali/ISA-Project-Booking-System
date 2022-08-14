@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Boat } from '../model/boat';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { BoatOwner } from '../model/boatOwner';
@@ -14,8 +15,8 @@ import { TimePeriod } from '../model/timePeriod';
   providedIn: 'root'
 })
 export class BoatOwnerService {
-  urlBoatOwner = "http://localhost:8090/api/boatOwner";
-  urlBoatOwner_boats = "http://localhost:8090/api/boatOwners/boats/client";
+  urlBoatOwner = environment.url+"boatOwner";
+  urlBoatOwner_boats = environment.url+"boatOwners/boats/client";
 
   constructor(private http: HttpClient) { }
   getBoatOwners():Observable<BoatOwner[]>{

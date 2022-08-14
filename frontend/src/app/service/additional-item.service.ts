@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AdditionalItem } from '../model/additionalItem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdditionalItemService {
-  urlAdventure = "http://localhost:8090/api/instructor/adventure";
-  urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
-  urlCottage1 = "http://localhost:8090/api/cottageOwner/cottage/cottageAdditionalItem";
-  urlBoat = "http://localhost:8090/api/boatOwner/boat";
+  urlAdventure = environment.url+"instructor/adventure";
+  urlCottage = environment.url+"cottageOwner/cottage";
+  urlCottage1 =  environment.url+"cottageOwner/cottage/cottageAdditionalItem";
+  urlBoat = environment.url+"boatOwner/boat";
   constructor(private http: HttpClient) { }
 
   saveAdventureAdditionalItem(id: number, data: AdditionalItem): Observable<AdditionalItem> {

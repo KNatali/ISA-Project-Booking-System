@@ -9,17 +9,18 @@ import { Client } from '../model/client';
 import { AdventureFastReservation } from '../model/adventureFastReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { TimePeriod } from '../model/timePeriod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstructorService {
 
-  urlInstructor = "http://localhost:8090/api/instructors";
-  urlInstructor1 = "http://localhost:8090/api/instructors";
+  urlInstructor =environment.url+"instructors";
+  urlInstructor1 = environment.url+"instructors";
 
 
-  urlInstructor_advetures = "http://localhost:8090/api/instructors/adventures/client";
+  urlInstructor_advetures =environment.url+"adventures/client";
   constructor(private http: HttpClient) { }
   getInstructors(): Observable<Instructor[]> {
     return this.http.get<Instructor[]>(this.urlInstructor);

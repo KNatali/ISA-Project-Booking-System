@@ -2,12 +2,13 @@ import { AdventureBehavioralRules } from './../model/adventureBehavioralRules';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdventureRuleService {
-  urlAdventure = "http://localhost:8090/api/instructor/adventure";
+  urlAdventure = environment.url+"instructor/adventure";
   constructor(private http: HttpClient) { }
 
 

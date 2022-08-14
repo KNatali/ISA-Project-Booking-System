@@ -10,15 +10,16 @@ import { EditBoatFastReservation } from '../model/editBoatFastReservation';
 
 import { BoatReservationCreate } from '../model/boatReservationCreate';
 import { ReserveBoatFastReservation } from '../model/reserveBoatFastReservation';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoatReservationService {
-  url = "http://localhost:8090/api/boat-reservations";
-  urlReservation = "http://localhost:8090/api/boatReservation";
-  url_fast="http://localhost:8090/api/boat/fastReservations";
+  url =environment.url+"boat-reservations";
+  urlReservation =environment.url+"boatReservation";
+  url_fast=environment.url+"boat/fastReservations";
 
   constructor(private http: HttpClient) { }
   addBoatReservationClient(res:BoatReservationCreate){

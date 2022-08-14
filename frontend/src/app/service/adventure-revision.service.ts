@@ -5,13 +5,14 @@ import { Revision } from '../model/revision';
 import { AdventureRevision } from '../model/adventureRevision';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { SpecificRevision } from '../model/specificRevision';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdventureRevisionService {
 
-  url="http://localhost:8090/api/client/makeNewAdventureRevision";
+  url=environment.url+"client/makeNewAdventureRevision";
 
   constructor(private http:HttpClient) { }
 

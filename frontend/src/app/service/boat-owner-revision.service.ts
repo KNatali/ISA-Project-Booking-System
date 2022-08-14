@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { BoatOwnerRevision } from '../model/boatOwnerRevision';
 import { SpecificRevision } from '../model/specificRevision';
 
@@ -8,7 +9,7 @@ import { SpecificRevision } from '../model/specificRevision';
   providedIn: 'root'
 })
 export class BoatOwnerRevisionService {
-  url="http://localhost:8090/api/client/makeNewBoatOwnerRevision";
+  url=environment.url+"client/makeNewBoatOwnerRevision";
 
   constructor(private http:HttpClient) { }
 

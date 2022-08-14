@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { Boat } from '../model/boat';
 import { BoatReservation } from '../model/boat-reservation';
@@ -18,11 +19,11 @@ import { UnsubscribedItem } from '../model/unsubscribedItem';
   providedIn: 'root'
 })
 export class BoatService {
-  urlBoats = "http://localhost:8090/api/boats";
-  urlAdditionalItem = "http://localhost:8090/api/additional-items";
-  urlBoat1 = "http://localhost:8090/api/boatOwners/boats";
-  urlBoat = "http://localhost:8090/api/boatOwner/boat";
-  urlSearchBoat = "http://localhost:8090/api/client/allAvailableBoats";
+  urlBoats = environment.url+"boats";
+  urlAdditionalItem = environment.url+"additional-items";
+  urlBoat1 = environment.url+"boatOwners/boats";
+  urlBoat = environment.url+"boatOwner/boat";
+  urlSearchBoat = environment.url+"client/allAvailableBoats";
 
   constructor(private http: HttpClient) { }
 

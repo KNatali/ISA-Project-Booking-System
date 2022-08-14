@@ -11,13 +11,14 @@ import { AdventureRevision } from '../model/adventureRevision';
 import { SearchForReservation } from '../model/searchForReservation';
 import { SearchAvailableAdventureByPrice } from '../model/searchAvailableAdventureByPrice';
 import { UnsubscribedItem } from '../model/unsubscribedItem';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdventureService {
-  urlAdventures = "http://localhost:8090/api/adventures";
-  urlAdventure = "http://localhost:8090/api/instructor/adventure";
+  urlAdventures = environment.url+"adventures";
+  urlAdventure = environment.url+"instructor/adventure";
 
   constructor(private http: HttpClient) { }
 

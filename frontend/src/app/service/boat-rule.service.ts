@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoatRuleService {
-  urlBoat = "http://localhost:8090/api/boatOwner/boat";
+  urlBoat =environment.url+"boatOwner/boat";
   constructor(private http: HttpClient) { }
 
 

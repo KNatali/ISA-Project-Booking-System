@@ -19,12 +19,13 @@ import { BoatRevision } from '../model/boatRevision';
 import { CottageComplaint } from '../model/cottageComplaint';
 import { BoatComplaint } from '../model/boatComplaint';
 import { ComplaintAnswer } from '../model/complaintAnswer';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AdminService {
-    urlAdmin = "http://localhost:8090/api/admin";
+    urlAdmin =  environment.url+"admin";
 
 
     constructor(private http: HttpClient) { }

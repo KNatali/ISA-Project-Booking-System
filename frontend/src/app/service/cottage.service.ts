@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
@@ -17,9 +18,9 @@ import { UnsubscribedItem } from '../model/unsubscribedItem';
   providedIn: 'root'
 })
 export class CottageService {
-  urlCottages="http://localhost:8090/api/cottages";
-  urlCottage = "http://localhost:8090/api/cottageOwner/cottage";
-  urlCottage1 = "http://localhost:8090/api/cottageOwners/cottages";
+  urlCottages=environment.url+"cottages";
+  urlCottage = environment.url+"cottageOwner/cottage";
+  urlCottage1 = environment.url+"cottageOwners/cottages";
 
   constructor(private http:HttpClient) { }
 

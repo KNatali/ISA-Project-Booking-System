@@ -6,18 +6,19 @@ import { CottageReservation } from '../model/cottage-reservation';
 import { AdventureReservation } from '../model/AdventureReservation';
 import { BoatReservation } from '../model/boat-reservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  url = "http://localhost:8090/api/clients";
+  url =environment.url+"clients";
   url_confirm = "http://localhost:8090/confirm-registration-client";
-  url_changePassword = "http://localhost:8090/api/clients/change-password";
-  url_cottage_res = "http://localhost:8090/api/cottages-reservations";
-  url_boat_res = "http://localhost:8090/api/boat-reservations";
-  url_adventure_res = "http://localhost:8090/api/adventure-reservations";
-  url_delete_request="http://localhost:8090/api/client/profileDeleteRequest";
+  url_changePassword = environment.url+"clients/change-password";
+  url_cottage_res = environment.url+"cottages-reservations";
+  url_boat_res =environment.url+"boat-reservations";
+  url_adventure_res = environment.url+"adventure-reservations";
+  url_delete_request=environment.url+"client/profileDeleteRequest";
 
 
   constructor(private http: HttpClient) { }

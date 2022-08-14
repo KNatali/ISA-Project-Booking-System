@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../model/user';
 import { EmailMessage } from '../model/emailMessage';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EmailMessageService {
 
-    adminMessages = "http://localhost:8090/api/admin/message";
+    adminMessages = environment.url+"admin/message";
     constructor(
         private http: HttpClient
     ) {
