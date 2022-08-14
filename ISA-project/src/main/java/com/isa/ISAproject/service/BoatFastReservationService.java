@@ -125,17 +125,20 @@ public class BoatFastReservationService {
 		for (BoatFastReservation b : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			BoatDTO boat=BoatMapper.convertToDTO(b.getBoat());
-			Set<AdditionalItemDTO> items=new HashSet<>();
-			for (AdditionalItem i : b.getAdditionalItems()) {
-				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
-				items.add(dto);
-			}
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			if(b.getBoat().getId()==id) {
+				BoatDTO boat=BoatMapper.convertToDTO(b.getBoat());
+				Set<AdditionalItemDTO> items=new HashSet<>();
+				for (AdditionalItem i : b.getAdditionalItems()) {
+					AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+					items.add(dto);
+				}
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+				DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-			BoatFastReservationDTO btfdto = new BoatFastReservationDTO(b.getId(), b.getReservationStart().format(formatter), b.getReservationEnd().format(formatter), b.getDuration(), b.getMaxPersons(), b.getPrice(), b.getValidityStart().format(formatter1), b.getValidityEnd().format(formatter1), boat, items);
-			res.add(btfdto); 
+				BoatFastReservationDTO btfdto = new BoatFastReservationDTO(b.getId(), b.getReservationStart().format(formatter), b.getReservationEnd().format(formatter), b.getDuration(), b.getMaxPersons(), b.getPrice(), b.getValidityStart().format(formatter1), b.getValidityEnd().format(formatter1), boat, items);
+				res.add(btfdto); 	
+			}
+			
 		}
 		return res;
 		

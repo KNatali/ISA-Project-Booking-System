@@ -23,6 +23,7 @@ import com.isa.ISAproject.dto.AdventureComplaintDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
 import com.isa.ISAproject.dto.BoatComplaintDTO;
 import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
@@ -30,12 +31,14 @@ import com.isa.ISAproject.dto.CottageReservationDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
 import com.isa.ISAproject.mapper.AdventureMapper;
+import com.isa.ISAproject.mapper.BoatMapper;
 import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.mapper.CottageReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.AdventureComplaint;
 import com.isa.ISAproject.model.Boat;
 import com.isa.ISAproject.model.BoatComplaint;
+import com.isa.ISAproject.model.BoatFastReservation;
 import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.ComplaintType;
@@ -289,5 +292,33 @@ public class BoatReservationService {
 		}
 		
 		return res;
+	}
+	
+	public List<BoatReservationDTO> getReservationsByBoat(Long id){
+		
+		List<BoatReservationDTO> res=new ArrayList<>();
+		List<BoatReservation> reservations=boatReservationRepository.findAll();
+		
+		for (BoatReservation b : reservations) {
+			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
+				//res.add(CottageFastReservationMapper.convertToDTO(c));
+			if(b.getBoat().getId()==id) {
+				BoatDTO boat=BoatMapper.convertToDTO(b.getBoat());
+				Set<AdditionalItemDTO> items=new HashSet<>();
+				for (AdditionalItem i : b.getAdditionalItems()) {
+					AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+					items.add(dto);
+				}
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+				DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+				
+				BoatReservationDTO btfdto = new BoatReservationDTO(b);
+				res.add(btfdto); 
+			}
+			
+		}
+		return res;
+		
 	}
 }

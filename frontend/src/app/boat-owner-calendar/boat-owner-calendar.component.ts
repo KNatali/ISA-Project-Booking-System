@@ -106,7 +106,7 @@ export class BoatOwnerCalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
-  reservations: BoatReservation[];
+  reservations: any[];
   fastReservations: BoatFastReservation[];
   selectedReservation: BoatReservation;
   selectedFastReservation: BoatFastReservation;
@@ -127,7 +127,7 @@ export class BoatOwnerCalendarComponent implements OnInit {
   getData(){
     this.events= [];
     this.getUnavailability();
-    this.getBoatOwnerReservations();
+    this.getBoatReservations();
     this.getBoatOwnerFastReservations();
   }
 
@@ -144,16 +144,17 @@ export class BoatOwnerCalendarComponent implements OnInit {
     this.getData();
   }
 
-  getBoatOwnerReservations() {
-    this.analyticsService.getBoatOwnerReservations(this.id)
+  getBoatReservations() {
+    this.boatService.getBoatReservations(this.selectedBoat.id)
       .subscribe(res => {
         this.reservations = res;
       })
   }
 
   getBoatOwnerFastReservations() {
-    this.boatOwnerService.getBoatOwnerFastReservations(this.id)
+    this.boatService.getBoatFastReservations(this.selectedBoat.id)
       .subscribe(res => this.fastReservations = res)
+      console.log(this.fastReservations)
   }
 
   getUnavailability() {
@@ -246,9 +247,9 @@ export class BoatOwnerCalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.reservations.forEach((u, index) => {
-
       if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
         this.selectedReservation = u;
+        console.log(this.selectedReservation)
         this.showReport = false;
         if (new Date() > new Date(u.reservationEnd)) {
           this.showReport = true;
@@ -258,7 +259,7 @@ export class BoatOwnerCalendarComponent implements OnInit {
       }
     })
     this.fastReservations.forEach((u, index) => {
-
+      alert('adf')
       if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
         this.selectedFastReservation = u;
         this.modal.open(this.modalContentAction, { size: 'md' });
