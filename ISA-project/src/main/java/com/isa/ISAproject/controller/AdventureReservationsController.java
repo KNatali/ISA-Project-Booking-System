@@ -116,13 +116,16 @@ public class AdventureReservationsController {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@PreAuthorize("hasRole('INSTRUCTOR')")
 	public ResponseEntity<AdventureReservationDTO>  addAdventureReservation(@RequestBody AdventureReservationDTO dto) {
-		AdventureReservationDTO fastDTO;
+		AdventureReservationDTO fastDTO = null;
 		try {
 			fastDTO = this.adventureReservationService.addAdventureReservation( dto);
 		} catch (PessimisticLockException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);

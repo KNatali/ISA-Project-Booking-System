@@ -140,7 +140,7 @@ public class AdventureReservationService {
 	}
 	
 	@Transactional(readOnly = false)
-	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockException, DateTimeException {
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockException, DateTimeException, InterruptedException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
 		

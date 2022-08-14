@@ -81,6 +81,8 @@ public class AdventureFastReservationContoller {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (InterruptedException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
 		
@@ -101,7 +103,19 @@ public class AdventureFastReservationContoller {
 	@PreAuthorize("hasRole('CLIENT')")
 	public ResponseEntity<AdventureReservationDTO> reserveFastReservation(@RequestBody ReserveAdventureFastResrvationDTO dto){
 		AdventureReservationDTO reservationDTO=this.adventureFastReservationService.convertToAdventureReservation(dto);
-		AdventureReservationDTO created=this.adventureReservationService.addAdventureReservation(reservationDTO);
+		AdventureReservationDTO created = null;
+		try {
+			created = this.adventureReservationService.addAdventureReservation(reservationDTO);
+		} catch (PessimisticLockException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DateTimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//treba izbrisati tu akciju
 		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getId());
 		this.adventureFastReservationService.delite(fast);
