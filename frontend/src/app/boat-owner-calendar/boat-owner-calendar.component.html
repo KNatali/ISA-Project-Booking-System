@@ -1,6 +1,14 @@
 <div class="container">
-    <h2>Set your unavailability:</h2>
-    <form [formGroup]="formValue">
+  <form [formGroup]="formValue">
+  <div class="mb-3">
+    <label for="boat" class="form-label">Choose boat:</label>
+    <br>
+    <select formControlName="boat" (ngModelChange)="onChange($event)">
+      <option *ngFor="let b of boats" [ngValue]="b">{{b.name}}</option>
+    </select>
+  </div>
+    <h2>Set boat unavailability:</h2>
+   
       <div class="mb-3">
         <label for="startTime" class="form-label">Start date and time:</label>
         <input type="datetime-local" formControlName="startTime" [(ngModel)]="startTime" class="form-control">

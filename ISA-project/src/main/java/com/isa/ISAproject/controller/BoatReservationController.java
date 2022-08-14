@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.BoatDTO;
+import com.isa.ISAproject.dto.BoatFastReservationDTO;
 import com.isa.ISAproject.dto.BoatReservationCreateDTO;
 import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
@@ -129,5 +130,15 @@ public class BoatReservationController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="api/boatOwner/boat/reservations/{id}",method = RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('BOAT_OWNER')")
+	public ResponseEntity<List<BoatReservationDTO>> getReservationsByBoat(@PathVariable(name="id") Long boatId){
+		List<BoatReservationDTO> list=new ArrayList<>();
+		list=this.boatReservationService.getReservationsByBoat(boatId);
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 }

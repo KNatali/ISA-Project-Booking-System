@@ -5,6 +5,7 @@ import { AdditionalItem } from '../model/additionalItem';
 import { Cottage } from '../model/cottage';
 import { CottageBehavioralRules } from '../model/cottageBehavioralRules';
 import { CottageFastReservation } from '../model/cottageFastReservation';
+import { CottageReservation } from '../model/cottageReservation';
 import { ProfileDeleteRequest } from '../model/profileDeleteRequest';
 import { SearchAvailableCottageByGrade } from '../model/searchAvailableCottageByGrade';
 import { SearchAvailableCottageByPrice } from '../model/searchAvailableCottageByPrice';
@@ -83,7 +84,10 @@ export class CottageService {
     return this.http.get<Cottage[]>(this.urlCottages, { params });
   }
   getCottageFastReservations(id: number): Observable<CottageFastReservation[]> {
-    return this.http.get<CottageFastReservation[]>(`${this.urlCottage1}/` + `fastReservations` + `/${id}`);
+    return this.http.get<CottageFastReservation[]>(`${this.urlCottage}/` + `fastReservations` + `/${id}`);
+  }
+  getCottageReservations(id: number): Observable<CottageReservation[]> {
+    return this.http.get<CottageReservation[]>(`${this.urlCottage}/` + `reservations` + `/${id}`);
   }
   getBehavioralRules(id: number): Observable<CottageBehavioralRules[]> {
     return this.http.get<CottageBehavioralRules[]>(`${this.urlCottage}/` + `cottageRules` + `/${id}`);

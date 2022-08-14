@@ -106,35 +106,59 @@ export class BoatOwnerCalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
-  reservations: BoatReservation[];
+  reservations: any[];
   fastReservations: BoatFastReservation[];
   selectedReservation: BoatReservation;
   selectedFastReservation: BoatFastReservation;
+  selectedBoat:any;
+  ownerId:any;
+  boats:any[];
   constructor(private modal: NgbModal, private formBuilder: FormBuilder, private boatOwnerService: BoatOwnerService, private boatService: BoatService, private analyticsService: AnalyticsService) { }
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       startTime: [''],
-      endTime: ['']
+      endTime: [''],
+      boat:['']
     })
+    this.getBoats();
+   
+  }
+
+  getData(){
+    this.events= [];
     this.getUnavailability();
-    this.getBoatOwnerReservations();
+    this.getBoatReservations();
     this.getBoatOwnerFastReservations();
   }
 
-  getBoatOwnerReservations() {
-    this.analyticsService.getBoatOwnerReservations(this.id)
+  getBoats() {
+    this.ownerId = sessionStorage.getItem("id")!;
+    this.boatOwnerService.getBoatOwnerBoats(this.ownerId)
+      .subscribe(res => {
+        this.boats = res;
+      })
+
+  }
+  onChange(newValue: any) {
+    this.selectedBoat = this.formValue.controls['boat'].value;
+    this.getData();
+  }
+
+  getBoatReservations() {
+    this.boatService.getBoatReservations(this.selectedBoat.id)
       .subscribe(res => {
         this.reservations = res;
       })
   }
 
   getBoatOwnerFastReservations() {
-    this.boatOwnerService.getBoatOwnerFastReservations(this.id)
+    this.boatService.getBoatFastReservations(this.selectedBoat.id)
       .subscribe(res => this.fastReservations = res)
+      console.log(this.fastReservations)
   }
 
   getUnavailability() {
-    this.boatService.getUnavailabilityByBoat(this.id)
+    this.boatService.getUnavailabilityByBoat(this.selectedBoat.id)
       .subscribe(res => {
         this.unvailabilities = res
         this.set();
@@ -143,7 +167,6 @@ export class BoatOwnerCalendarComponent implements OnInit {
 
   set() {
     this.unvailabilities.forEach((u, index) => {
-
       this.newEvent = {
         start: new Date(u.start),
         end: new Date(u.end),
@@ -167,8 +190,9 @@ export class BoatOwnerCalendarComponent implements OnInit {
 
   setUnavailability() {
     this.period.start = this.startTime.toLocaleString();
-    this.period.end = this.endTime.toLocaleString()
-    this.boatService.setUnavailability(this.period, this.id).subscribe(data => {
+    this.period.end = this.endTime.toLocaleString();
+    console.log(this.selectedBoat)
+    this.boatService.setUnavailability(this.period, this.selectedBoat.id).subscribe(data => {
       this.newEvent = {
         start: new Date(this.startTime),
         end: new Date(this.endTime),
@@ -223,9 +247,9 @@ export class BoatOwnerCalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.reservations.forEach((u, index) => {
-
       if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
         this.selectedReservation = u;
+        console.log(this.selectedReservation)
         this.showReport = false;
         if (new Date() > new Date(u.reservationEnd)) {
           this.showReport = true;
@@ -235,7 +259,7 @@ export class BoatOwnerCalendarComponent implements OnInit {
       }
     })
     this.fastReservations.forEach((u, index) => {
-
+      alert('adf')
       if (new Date(u.reservationStart).toDateString() == event.start.toDateString()) {
         this.selectedFastReservation = u;
         this.modal.open(this.modalContentAction, { size: 'md' });

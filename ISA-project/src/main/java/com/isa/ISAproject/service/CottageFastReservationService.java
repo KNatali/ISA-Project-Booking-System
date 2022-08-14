@@ -123,17 +123,20 @@ public class CottageFastReservationService {
 		for (CottageFastReservation c : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
-			Set<AdditionalItemDTO> items=new HashSet<>();
-			for (AdditionalItem i : c.getAdditionalItems()) {
-				AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
-				items.add(dto);
-			}
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			if(c.getCottage().getId()==id) {
+				CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
+				Set<AdditionalItemDTO> items=new HashSet<>();
+				for (AdditionalItem i : c.getAdditionalItems()) {
+					AdditionalItemDTO dto=AdditionalItemMapper.convertToDTO(i);
+					items.add(dto);
+				}
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+				DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-			CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart().format(formatter1), c.getValidityEnd().format(formatter1), cottage, items);
-			res.add(ctfdto); 
+				CottageFastReservationDTO ctfdto = new CottageFastReservationDTO(c.getId(), c.getReservationStart().format(formatter), c.getReservationEnd().format(formatter), c.getDuration(), c.getMaxPersons(), c.getPrice(), c.getValidityStart().format(formatter1), c.getValidityEnd().format(formatter1), cottage, items);
+				res.add(ctfdto); 
+			}
+		
 		}
 		return res;
 		

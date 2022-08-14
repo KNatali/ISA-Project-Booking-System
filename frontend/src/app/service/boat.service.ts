@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdditionalItem, AdditionalItemInterface } from '../model/additionalItem';
 import { Boat } from '../model/boat';
+import { BoatReservation } from '../model/boat-reservation';
 import { BoatBehavioralRules } from '../model/boatBehavioralRules';
 import { BoatFastReservation } from '../model/boatFastReservation';
 import { BoatRevision } from '../model/boatRevision';
@@ -84,6 +85,10 @@ export class BoatService {
   deleteBoat(id: number) {
     return this.http.delete(`${this.urlBoats}/` + `delete` + `/${id}`);
   }
+  getBoatReservations(id: number): Observable<BoatReservation[]> {
+    return this.http.get<BoatReservation[]>(`${this.urlBoat}/` + `reservations` + `/${id}`);
+  }
+
   getBoatFastReservations(id: number): Observable<BoatFastReservation[]> {
     return this.http.get<BoatFastReservation[]>(`${this.urlBoat}/` + `fastReservations` + `/${id}`);
   }
@@ -109,7 +114,7 @@ export class BoatService {
     return this.http.get<TimePeriod[]>(`${this.urlBoats}/` + `getUnavailability` + `/${id}`);
   }
   setUnavailability(period: TimePeriod, id: number) {
-    return this.http.post<ProfileDeleteRequest>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
+    return this.http.post<TimePeriod>(`${this.urlBoats}/` + `setUnavailability` + `/${id}`, period);
   }
   searchBoatsForReservation(obj: SearchForReservation): Observable<Boat[]> {
     return this.http.post<Boat[]>(`${this.urlBoats}/` + `allAvailableBoats`, obj);
