@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -147,6 +148,8 @@ public class BoatService {
 		}
 		return res;
 	}
+	
+	@Cacheable( value = "boat" )
 	public BoatDTO findById(Long id) {
 		Optional<Boat> boat=this.boatRepository.findById(id);
 		return BoatMapper.convertToDTO(boat.get());

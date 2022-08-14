@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.PessimisticLockException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +52,7 @@ public class TimePeriodService {
 	private BoatOwnerRepository boatOwnerRepository;
 	
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException {
+	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException, InterruptedException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
@@ -72,6 +73,8 @@ public class TimePeriodService {
 			//this.timePeriodRepository.save(period);
 			periods.add(period);
 			this.instructorRepository.save(instructor);
+			Thread.sleep(500);
+			
 		
 		return true;
 	
@@ -102,7 +105,7 @@ public class TimePeriodService {
 	
 	
 	
-	
+	@Cacheable( value = "instructor_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByInstructor(Long id){
 		Instructor instructor=instructorRepository.getById(id);
 		Set<TimePeriod> times=instructor.getUnavailability();
@@ -169,7 +172,6 @@ public class TimePeriodService {
 	
 	
 	
-	
 	public List<TimePeriodDTO> findUnavailabilityByCottageOwner(Long id){
 		CottageOwner cottageOwner=cottageOwnerRepository.getById(id);
 		Set<TimePeriod> times=cottageOwner.getUnavailability();
@@ -182,7 +184,7 @@ public class TimePeriodService {
 		}
 		return timesDTO;		
 	}
-	
+	@Cacheable( value = "cottage_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByCottage(Long id){
 		Cottage cottage=cottageRepository.getById(id);
 		Set<TimePeriod> times=cottage.getUnavailability();
@@ -256,7 +258,7 @@ public class TimePeriodService {
 		}
 		return timesDTO;		
 	}
-	
+	@Cacheable( value = "boat_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByBoat(Long id){
 		Boat boat=boatRepository.getById(id);
 		Set<TimePeriod> times=boat.getUnavailability();

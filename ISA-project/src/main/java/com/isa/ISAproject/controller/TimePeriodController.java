@@ -40,6 +40,9 @@ public class TimePeriodController {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}catch(DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return new ResponseEntity<>(HttpStatus.OK);	
 			

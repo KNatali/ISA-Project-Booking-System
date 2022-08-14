@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.persistence.PessimisticLockException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,7 +131,7 @@ public class AdventureFastReservationService {
 	}
 	
 	@Transactional(readOnly=false)
-	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException {
+	public AdventureFastReservationDTO addAdventureFastReservation(AdventureFastReservationDTO dto) throws PessimisticLockingFailureException, DateTimeException, PessimisticLockException, InterruptedException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Set<AdditionalItem> items=new HashSet<>();
 		for (AdditionalItemDTO adto : dto.getAdditionalItems()) {
@@ -150,9 +152,6 @@ public class AdventureFastReservationService {
 		time.setEnd(dto.getReservationEnd());
 		time.setType(UnavailabilityType.Action);
 		timePeriodService.setUnavailabilityInstructor(time, dto.getAdventure().getInstructor().getId());
-			
-		
-		
 		AdventureFastReservation fast=new AdventureFastReservation(dto.getId(),adventure,start,end,dto.getMaxPersons(),dto.getPrice(),start1,end1,items);
 		adventureFastReservationRepository.save(fast);
 		

@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
@@ -83,6 +84,8 @@ public class AdventureService {
 		return AdventureMapper.convertoToDTOs(nonDeletedAdventures);
 		
 	}
+	
+	  @Cacheable( value = "adventure" )
 	public AdventureDTO findById(Long id) {
 		Optional<Adventure> adventure=this.adventureRepository.findById(id);
 		return AdventureMapper.convertToDTO(adventure.get());
