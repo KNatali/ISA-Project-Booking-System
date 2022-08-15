@@ -24,7 +24,7 @@ public class TimePeriod {
 	@Column
 	private LocalDateTime end;
 	
-	@Enumerated(EnumType.STRING)
+	@Column
     private UnavailabilityType type;
 	
 	
