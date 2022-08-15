@@ -259,12 +259,12 @@ insert into adventure_subscribers(adventure_id,client_id) values (1,8);
 insert into adventure_complaint(description,client_id,adventure_id) values('Instructor was very unpolite and rude!',5,1);
 insert into adventure_complaint(description,client_id,adventure_id) values('Service is too expensive. Nothing is like on pictures',8,1);
 
-insert into revision(grade,revision,type) values(7,'Boat was very dirty','Unchecked');
-insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
-insert into revision(grade,revision,type) values(4,'Boat was very dirty','Unchecked');
-insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
-insert into revision(grade,revision,type) values(3,'Boat was very dirty','Unchecked');
-insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
+--insert into revision(grade,revision,type) values(7,'Boat was very dirty','1');
+--insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
+--insert into revision(grade,revision,type) values(4,'Boat was very dirty','1');
+--insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
+--insert into revision(grade,revision,type) values(3,'Boat was very dirty','1');
+--insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
 
 
 insert into time_period(start,end,type) values ('2022-08-10 10:00:00','2022-08-15 16:00:00','Reservation');
