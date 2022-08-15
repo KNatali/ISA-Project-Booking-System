@@ -14,7 +14,7 @@ public class RegistrationRequest {
 	private Long id;
 	
 	@OneToOne
-	private User user;
+	private AppUser user;
 	@Column
 	private String reason;
 	public Long getId() {
@@ -23,10 +23,10 @@ public class RegistrationRequest {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public User getUser() {
+	public AppUser getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(AppUser user) {
 		this.user = user;
 	}
 	public String getReason() {
@@ -35,7 +35,7 @@ public class RegistrationRequest {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public RegistrationRequest(Long id, User user, String reason) {
+	public RegistrationRequest(Long id, AppUser user, String reason) {
 		super();
 		this.id = id;
 		this.user = user;

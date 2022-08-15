@@ -1,8 +1,8 @@
 package com.isa.ISAproject.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,14 +20,13 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails {
+public class AppUser implements UserDetails{
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -162,11 +161,11 @@ public class User implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 	
-	public User() {}
+	public AppUser() {}
 	
 	
 	
-	 public User(Long id, String username, String password, String email, String firstName, String lastName,
+	 public AppUser(Long id, String username, String password, String email, String firstName, String lastName,
 			Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
 		super();
 		this.id = id;
@@ -182,7 +181,7 @@ public class User implements UserDetails {
 		this.authorities = authorities;
 		this.deleted=false;
 	}
-	 public User(String username, String password, String email, String firstName, String lastName,
+	 public AppUser(String username, String password, String email, String firstName, String lastName,
 				Address address, String mobile, boolean enabled, String role, List<Authority> authorities) {
 			super();
 			this.username = username;
@@ -213,7 +212,4 @@ public class User implements UserDetails {
 	    public boolean isCredentialsNonExpired() {
 	        return true;
 	    }
-	
-	
-
 }

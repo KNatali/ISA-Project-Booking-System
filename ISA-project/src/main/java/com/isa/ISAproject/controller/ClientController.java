@@ -22,7 +22,7 @@ import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Authority;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.Instructor;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AuthorityService;
 import com.isa.ISAproject.service.ClientService;
