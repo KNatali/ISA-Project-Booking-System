@@ -105,7 +105,6 @@ public class TimePeriodService {
 	
 	
 	
-	@Cacheable( value = "instructor_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByInstructor(Long id){
 		Instructor instructor=instructorRepository.getById(id);
 		Set<TimePeriod> times=instructor.getUnavailability();
@@ -184,7 +183,6 @@ public class TimePeriodService {
 		}
 		return timesDTO;		
 	}
-	@Cacheable( value = "cottage_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByCottage(Long id){
 		Cottage cottage=cottageRepository.getById(id);
 		Set<TimePeriod> times=cottage.getUnavailability();
@@ -258,7 +256,6 @@ public class TimePeriodService {
 		}
 		return timesDTO;		
 	}
-	@Cacheable( value = "boat_unavailability" )
 	public List<TimePeriodDTO> findUnavailabilityByBoat(Long id){
 		Boat boat=boatRepository.getById(id);
 		Set<TimePeriod> times=boat.getUnavailability();
