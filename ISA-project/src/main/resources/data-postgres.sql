@@ -267,10 +267,10 @@ insert into adventure_complaint(description,client_id,adventure_id) values('Serv
 --insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
 
 
-insert into time_period(start,end,type) values ('2022-08-10 10:00:00','2022-08-15 16:00:00','Reservation');
-insert into time_period(start,end,type) values ('2022-09-15 10:00:00','2022-09-18 16:00:00','Default');
-insert into time_period(start,end,type) values ('2022-09-20 10:00:00','2022-09-27 16:00:00','Action');
-insert into time_period(start,end,type) values ('2022-08-02 10:00:00','2022-08-09 16:00:00','Reservation');
+insert into time_period(start_time,end_time,time_type) values ('2022-08-10 10:00:00','2022-08-15 16:00:00','Reservation');
+insert into time_period(start_time,end_time,time_type) values ('2022-09-15 10:00:00','2022-09-18 16:00:00','Default');
+insert into time_period(start_time,end_time,time_type) values ('2022-09-20 10:00:00','2022-09-27 16:00:00','Action');
+insert into time_period(start_time,end_time,time_type) values ('2022-08-02 10:00:00','2022-08-09 16:00:00','Reservation');
 
 insert into boat_unavailability (boat_id,period_id) values (1,1);
 insert into boat_unavailability (boat_id,period_id) values (1,2);
