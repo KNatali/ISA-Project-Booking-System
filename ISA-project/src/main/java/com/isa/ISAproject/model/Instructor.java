@@ -21,7 +21,7 @@ public class Instructor extends AppUser{
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Adventure> adventures=new HashSet<>();
 	
-	@Column(columnDefinition="LONGTEXT")
+	@Column
 	private String biography;
 	
 	@ManyToMany(cascade =CascadeType.ALL)
