@@ -20,12 +20,12 @@ public class TimePeriod {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private LocalDateTime start;
+	private LocalDateTime startTime;
 	@Column
-	private LocalDateTime end;
+	private LocalDateTime endTime;
 	
 	@Column
-    private UnavailabilityType type;
+    private UnavailabilityType timeType;
 	
 	
 	@ManyToMany(mappedBy = "unavailability")
@@ -34,8 +34,8 @@ public class TimePeriod {
 	private Set<Cottage> cottages=new HashSet<>();
 	@ManyToMany(mappedBy = "unavailability")
 	private Set<Boat> boats=new HashSet<>();
-	public LocalDateTime getStart() {
-		return start;
+	public LocalDateTime getStartTime() {
+		return startTime;
 	}
 	
 	public Long getId() {
@@ -46,24 +46,24 @@ public class TimePeriod {
 		this.id = id;
 	}
 
-	public void setStart(LocalDateTime start) {
-		this.start = start;
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
-	public LocalDateTime getEnd() {
-		return end;
+	public LocalDateTime getEndTime() {
+		return endTime;
 	}
-	public void setEnd(LocalDateTime end) {
-		this.end = end;
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
 	}
 	
 	
 	
-	public UnavailabilityType getType() {
-		return type;
+	public UnavailabilityType getTimeType() {
+		return timeType;
 	}
 
-	public void setType(UnavailabilityType type) {
-		this.type = type;
+	public void setTimeType(UnavailabilityType type) {
+		this.timeType = type;
 	}
 
 	public Set<Instructor> getInstructors() {
@@ -91,9 +91,9 @@ public class TimePeriod {
 	public TimePeriod(Long id, LocalDateTime start, LocalDateTime end, UnavailabilityType type) {
 		super();
 		this.id = id;
-		this.start = start;
-		this.end = end;
-		this.type = type;
+		this.startTime = start;
+		this.endTime = end;
+		this.timeType = type;
 		
 	}
 

@@ -65,7 +65,7 @@ public class TimePeriodService {
 			if(instructor.getUnavailability()!=null) {
 				periods=instructor.getUnavailability();
 				for (TimePeriod t : periods) {
-					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+					if(t.getStartTime().isBefore(end) &&  start.isBefore(t.getEndTime())) {
 						throw new DateTimeException("Overlapping");
 					}
 				}
@@ -90,7 +90,7 @@ public class TimePeriodService {
 		if(instructor.getUnavailability()!=null) {
 			periods=instructor.getUnavailability();
 			for (TimePeriod t : periods) {
-				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
+				if(t.getStartTime().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEndTime().toLocalDate())) {
 					//instructor.getUnavailability().remove(period);
 					periods.remove(t);
 					this.instructorRepository.save(instructor);
@@ -114,7 +114,7 @@ public class TimePeriodService {
 		
 		for (TimePeriod t : times) {
 			
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStartTime().format(formatter),t.getEndTime().format(formatter),t.getTimeType());
 			timesDTO.add(dto);
 			
 		}
@@ -137,7 +137,7 @@ public class TimePeriodService {
 			if(cottageOwner.getUnavailability()!=null) {
 				periods=cottageOwner.getUnavailability();
 				for (TimePeriod t : periods) {
-					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+					if(t.getStartTime().isBefore(end) &&  start.isBefore(t.getEndTime())) {
 						throw new DateTimeException("Overlapping");
 					}
 				}
@@ -158,7 +158,7 @@ public class TimePeriodService {
 		if(cottageOwner.getUnavailability()!=null) {
 			periods=cottageOwner.getUnavailability();
 			for (TimePeriod t : periods) {
-				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
+				if(t.getStartTime().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEndTime().toLocalDate())) {
 					periods.remove(t);
 					this.cottageOwnerRepository.save(cottageOwner);
 					this.timePeriodRepository.delete(period);
@@ -178,7 +178,7 @@ public class TimePeriodService {
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStartTime().format(formatter),t.getEndTime().format(formatter),t.getTimeType());
 			timesDTO.add(dto);
 			
 		}
@@ -191,7 +191,7 @@ public class TimePeriodService {
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStartTime().format(formatter),t.getEndTime().format(formatter),t.getTimeType());
 			timesDTO.add(dto);
 			
 		}
@@ -213,7 +213,7 @@ public class TimePeriodService {
 			if(boatOwner.getUnavailability()!=null) {
 				periods=boatOwner.getUnavailability();
 				for (TimePeriod t : periods) {
-					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+					if(t.getStartTime().isBefore(end) &&  start.isBefore(t.getEndTime())) {
 						throw new DateTimeException("Overlapping");
 					}
 				}
@@ -234,7 +234,7 @@ public class TimePeriodService {
 		if(boatOwner.getUnavailability()!=null) {
 			periods=boatOwner.getUnavailability();
 			for (TimePeriod t : periods) {
-				if(t.getStart().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEnd().toLocalDate())) {
+				if(t.getStartTime().toLocalDate().isEqual(start.toLocalDate()) &&  end.toLocalDate().isEqual(t.getEndTime().toLocalDate())) {
 					periods.remove(t);
 					this.boatOwnerRepository.save(boatOwner);
 					this.timePeriodRepository.delete(period);
@@ -252,7 +252,7 @@ public class TimePeriodService {
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStartTime().format(formatter),t.getEndTime().format(formatter),t.getTimeType());
 			timesDTO.add(dto);
 			
 		}
@@ -265,7 +265,7 @@ public class TimePeriodService {
 		List<TimePeriodDTO> timesDTO=new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (TimePeriod t : times) {
-			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStart().format(formatter),t.getEnd().format(formatter),t.getType());
+			TimePeriodDTO dto=new TimePeriodDTO(t.getId(),t.getStartTime().format(formatter),t.getEndTime().format(formatter),t.getTimeType());
 			timesDTO.add(dto);
 			
 		}
@@ -284,7 +284,7 @@ public class TimePeriodService {
 			if(boat.getUnavailability()!=null) {
 				periods=boat.getUnavailability();
 				for (TimePeriod t : periods) {
-					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+					if(t.getStartTime().isBefore(end) &&  start.isBefore(t.getEndTime())) {
 						throw new DateTimeException("Overlapping");
 					}
 				}
@@ -311,7 +311,7 @@ public class TimePeriodService {
 			if(cottage.getUnavailability()!=null) {
 				periods=cottage.getUnavailability();
 				for (TimePeriod t : periods) {
-					if(t.getStart().isBefore(end) &&  start.isBefore(t.getEnd())) {
+					if(t.getStartTime().isBefore(end) &&  start.isBefore(t.getEndTime())) {
 						throw new DateTimeException("Overlapping");
 					}
 				}
