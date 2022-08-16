@@ -102,7 +102,15 @@ export class InstructorAdventureProfileComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.id = param.id;
       this.adventureService.getAdventureFastReservations(this.id)
-        .subscribe((items: AdventureFastReservation[]) => this.actions = items);
+        .subscribe((items: AdventureFastReservation[]) => 
+        items.forEach(element => {
+          if(element.validityEnd.getTime() >new Date().getTime()){
+            this.actions.push(element)
+          }
+        })
+
+        
+        );
     });
   }
 
