@@ -52,25 +52,6 @@
         </resources>
     </cache>
     
-      <cache alias="instructor_unavailability" uses-template="default">
-        <key-type>java.lang.Long</key-type>
-       <value-type>java.util.ArrayList</value-type>
-        <resources>
-            <heap>2</heap>
-        </resources>
-    </cache>
-      <cache alias="boat_unavailability" uses-template="default">
-        <key-type>java.lang.Long</key-type>
-        <value-type>java.util.ArrayList</value-type>
-        <resources>
-            <heap>2</heap>
-        </resources>
-    </cache>
-      <cache alias="cottage_unavailability" uses-template="default">
-        <key-type>java.lang.Long</key-type>
-        <value-type>java.util.ArrayList</value-type>
-        <resources>
-            <heap>2</heap>
-        </resources>
-    </cache>
+     
+    
 </config>

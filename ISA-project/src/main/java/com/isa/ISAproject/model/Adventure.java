@@ -27,7 +27,7 @@ public class Adventure {
 	private String name;
 	@ManyToOne
 	private Address address;
-	@Column(columnDefinition="LONGTEXT")
+	@Column
 	private String description;
 	@Column
 	private double averageGrade;

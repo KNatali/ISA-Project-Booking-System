@@ -23,12 +23,12 @@ import com.isa.ISAproject.dto.ComplaintAnswerDTO;
 import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
 import com.isa.ISAproject.model.AdventureComplaint;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.model.BoatComplaint;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.ComplaintType;
 import com.isa.ISAproject.model.CottageComplaint;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
-import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdventureComplaintRepository;
 import com.isa.ISAproject.repository.BoatComplaintRepository;
 import com.isa.ISAproject.repository.CottageComplaintRepository;
@@ -82,8 +82,8 @@ public class AdventureComplaintService {
 	
 	@Transactional(readOnly = false)
 	public void answerComplaint(ComplaintAnswerDTO dto) throws MailException, InterruptedException,PessimisticLockException {
-		User client=this.userRespository.getById(dto.getClientId());
-		User owner=this.userRespository.getById(dto.getOwnerId());
+		AppUser client=this.userRespository.getById(dto.getClientId());
+		AppUser owner=this.userRespository.getById(dto.getOwnerId());
 		if(dto.getType().equals(new String("Adventure"))) {
 			
 			AdventureComplaint ac=adventureComplaintRespository.findOneById(dto.getId());

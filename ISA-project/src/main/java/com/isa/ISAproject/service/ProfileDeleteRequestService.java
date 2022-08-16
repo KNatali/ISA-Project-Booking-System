@@ -20,7 +20,7 @@ import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
 import com.isa.ISAproject.model.RegistrationRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.BoatOwnerRepository;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
 import com.isa.ISAproject.repository.InstructorRepository;
@@ -47,7 +47,7 @@ public class ProfileDeleteRequestService {
 	
 	public ProfileDeleteRequestDTO sendProfileDeleteRequest(ProfileDeleteRequestDTO dto) {
 		
-		User existUser = this.userRepository.getById(dto.getUserDTO().getId());
+		AppUser existUser = this.userRepository.getById(dto.getUserDTO().getId());
 		UserDTO userDTO=UserMapper.convertToDTO(existUser);
 		ProfileDeleteRequest request=new ProfileDeleteRequest(dto.getId(),existUser,dto.getReason(),ProfileDeleteRequestType.Unverified);
 		this.profileDeleteRequestRepository.save(request);
@@ -88,7 +88,7 @@ public class ProfileDeleteRequestService {
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.findOneById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Accepted);
 		this.profileDeleteRequestRepository.save(request);
-		User user=userRepository.getById(requestDTO.getUserDTO().getId());
+		AppUser user=userRepository.getById(requestDTO.getUserDTO().getId());
 		user.setDeleted(true);
 		user.setEnabled(false);
 		userRepository.save(user);
