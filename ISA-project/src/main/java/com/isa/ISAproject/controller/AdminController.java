@@ -125,17 +125,18 @@ public class AdminController {
 		instructor.setFirstName(editedInstructorDTO.getFirstName());
 		instructor.setLastName(editedInstructorDTO.getLastName());
 		Optional<Address> a=this.addressService.findById(instructor.getAddress().getId());
-			Address address=a.get();
+			if(a.isPresent()) {
+				Address address=a.get();
 				address.setId(instructor.getAddress().getId());
 				address.setStreet(editedInstructorDTO.getStreet());
 				address.setCity(editedInstructorDTO.getCity());
 				address.setState(editedInstructorDTO.getState());
 				this.addressService.save(address);
-				
-		instructor.setAddress(address);
-		instructor.setEmail(editedInstructorDTO.getEmail());
-		instructor.setMobile(editedInstructorDTO.getMobile());
-		
+				instructor.setAddress(address);
+				instructor.setEmail(editedInstructorDTO.getEmail());
+				instructor.setMobile(editedInstructorDTO.getMobile());
+			}
+			
 		final Admin savedInstructor=this.adminService.save(instructor);
 		
 		

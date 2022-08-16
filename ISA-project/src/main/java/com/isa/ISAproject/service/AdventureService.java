@@ -88,7 +88,10 @@ public class AdventureService {
 	  @Cacheable( value = "adventure" )
 	public AdventureDTO findById(Long id) {
 		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		return AdventureMapper.convertToDTO(adventure.get());
+		if(adventure.isPresent()) {
+			return AdventureMapper.convertToDTO(adventure.get());
+		}
+		return null;
 	}
 
 	
@@ -153,8 +156,8 @@ public class AdventureService {
 	}
 	
 	public List<AdventureFishingEquipmentDTO> getAdventureEquipment(Long id){
-		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		Set<AdventureFishingEquipment> list=adventure.get().getEquipment();
+		Adventure adventure=this.adventureRepository.getById(id);
+		Set<AdventureFishingEquipment> list=adventure.getEquipment();
 		List<AdventureFishingEquipmentDTO> listDTO=new ArrayList<>();
 		for(AdventureFishingEquipment a:list) { 
 			AdventureFishingEquipmentDTO aDTO=AdventureFishingEquipmentMapper.convertToDTO(a);
@@ -210,8 +213,8 @@ public class AdventureService {
 	}
 	
 	public List<AdventureBehavioralRuleDTO> getAdventureRules(Long id){
-		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		Set<AdventureBehavioralRule> list=adventure.get().getRules();
+		Adventure adventure=this.adventureRepository.getById(id);
+		Set<AdventureBehavioralRule> list=adventure.getRules();
 		List<AdventureBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(AdventureBehavioralRule a:list) { 
 			AdventureBehavioralRuleDTO aDTO=AdventureBehavioralRuleMapper.convertToDTO(a);
@@ -221,8 +224,8 @@ public class AdventureService {
 	}
 	
 	public List<AdditionalItemDTO> getAdventureAdditionalItems(Long id){
-		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		Set<AdditionalItem> list=adventure.get().getAdditionalItems();
+		Adventure adventure=this.adventureRepository.getById(id);
+		Set<AdditionalItem> list=adventure.getAdditionalItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);
@@ -251,7 +254,7 @@ public class AdventureService {
 		
 		for (AdventureDTO adventure : available_adventuredtos) {
 			for (AdventureDTO adventure2 : all_adventuresdtos) {
-				if (adventure.getId()==adventure2.getId()) {
+				if (adventure.getId().equals(adventure2.getId())) {
 					res.add(adventure);
 				}
 			}
@@ -266,7 +269,7 @@ public class AdventureService {
 		
 		for (AdventureDTO adventure : available_adventuredtos) {
 			for (AdventureDTO adventure2 : all_adventuresdtos) {
-				if (adventure.getId()==adventure2.getId()) {
+				if (adventure.getId().equals(adventure2.getId())) {
 					res.add(adventure);
 				}
 			}
@@ -303,7 +306,7 @@ public class AdventureService {
 		List<Adventure> sorted_adventures =new ArrayList<>();
 		for (Adventure adventure : all_sorted_adventures) {
 			for (AdventureDTO adventure2 : adventures) {
-				if(adventure.getId()==adventure2.getId()) {
+				if(adventure.getId().equals(adventure2.getId())) {
 					sorted_adventures.add(adventure);
 				}
 			}
@@ -316,7 +319,7 @@ public class AdventureService {
 		List<Adventure> sorted_adventures =new ArrayList<>();
 		for (Adventure adventure : all_sorted_adventures) {
 			for (AdventureDTO adventure2 : adventures) {
-				if(adventure.getId()==adventure2.getId()) {
+				if(adventure.getId().equals(adventure2.getId())) {
 					sorted_adventures.add(adventure);
 				}
 			}

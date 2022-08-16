@@ -76,7 +76,7 @@ public class AnalyticsService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=adventureReservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id)
+			if(a.getAdventure().getInstructor().getId().equals(id))
 				temp.add(a);
 		}
 		
@@ -94,7 +94,7 @@ public class AnalyticsService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=adventureReservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id)
+			if(a.getAdventure().getInstructor().getId().equals(id))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {
@@ -108,6 +108,9 @@ public class AnalyticsService {
 	
 	public Double instructrAverageGrade(Long id) {
 		Optional<Instructor> itemOptionals=this.instructorService.findById(id);
+		if(!itemOptionals.isPresent()) {
+			return null;
+		}
 		Instructor instructor=itemOptionals.get();
 		Set<Adventure> adventures=instructor.getAdventures();
 		double grade=0;
@@ -150,7 +153,7 @@ public class AnalyticsService {
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
 		for (CottageReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id)
+			if(c.getCottage().getCottageOwner().getId().equals(id))
 				temp.add(c);
 		}
 		double earnings=0;
@@ -166,7 +169,7 @@ public class AnalyticsService {
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
 		for (CottageReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id)
+			if(c.getCottage().getCottageOwner().getId().equals(id))
 				temp.add(c);
 		}
 		for (CottageReservation c : temp) {
@@ -177,6 +180,8 @@ public class AnalyticsService {
 	
 	public Double cottageOwnerAverageGrade(Long id) {
 		Optional<CottageOwner> itemOptionals=this.cottageOwnerService.findById(id);
+		if(!itemOptionals.isPresent())
+			return null;
 		CottageOwner cottageOwner=itemOptionals.get();
 		Set<Cottage> cottages=cottageOwner.getCottages();
 		double grade=0;
@@ -218,7 +223,7 @@ public class AnalyticsService {
 		List<BoatReservation> temp=new ArrayList<>();
 		List<BoatReservation> reservations=boatReservationRepository.findAll();
 		for (BoatReservation b : reservations) {
-			if(b.getBoat().getOwner().getId()==id)
+			if(b.getBoat().getOwner().getId().equals(id))
 				temp.add(b);
 		}
 		double earnings=0;
@@ -234,7 +239,7 @@ public class AnalyticsService {
 		List<BoatReservation> temp=new ArrayList<>();
 		List<BoatReservation> reservations=boatReservationRepository.findAll();
 		for (BoatReservation b : reservations) {
-			if(b.getBoat().getOwner().getId()==id)
+			if(b.getBoat().getOwner().getId().equals(id))
 				temp.add(b);
 		}
 		for (BoatReservation b : temp) {
@@ -245,6 +250,8 @@ public class AnalyticsService {
 	
 	public Double boatOwnerAverageGrade(Long id) {
 		Optional<BoatOwner> itemOptionals=this.boatOwnerService.findById(id);
+		if(!itemOptionals.isPresent())
+			return null;
 		BoatOwner boatOwner=itemOptionals.get();
 		Set<Boat> boats=boatOwner.getBoats();
 		double grade=0;

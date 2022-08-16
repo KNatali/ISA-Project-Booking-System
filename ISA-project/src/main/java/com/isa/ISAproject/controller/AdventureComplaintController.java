@@ -56,7 +56,7 @@ public class AdventureComplaintController {
 	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
-	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody ComplaintAnswerDTO dto){
+	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody ComplaintAnswerDTO dto) throws MailException{
 		try {
 			adventurComplaintService.answerComplaint(dto);
 		} catch (Exception e) {

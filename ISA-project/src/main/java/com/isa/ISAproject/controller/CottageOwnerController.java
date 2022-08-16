@@ -72,6 +72,10 @@ public class CottageOwnerController {
 		cottageOwner.setFirstName(editedCottageOwnerDTO.getFirstName());
 		cottageOwner.setLastName(editedCottageOwnerDTO.getLastName());
 		Optional<Address> a=this.addressService.findById(cottageOwner.getAddress().getId());
+		if(!a.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
 			Address address=a.get();
 				address.setId(cottageOwner.getAddress().getId());
 				address.setStreet(editedCottageOwnerDTO.getStreet());
