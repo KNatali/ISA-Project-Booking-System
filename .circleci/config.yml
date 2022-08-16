@@ -34,9 +34,8 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build:
+      - build-and-test:
           context: SonarCloud
-      - build-and-test
       - heroku/deploy-via-git:
           name: deploy-back
           app-name: isa-fishing
