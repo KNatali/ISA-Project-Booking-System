@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:8090/api/'
+  url: 'https://isa-fishing.herokuapp.com/api/'
 };
 
 /*

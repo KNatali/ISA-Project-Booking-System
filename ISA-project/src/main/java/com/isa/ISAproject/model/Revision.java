@@ -19,10 +19,9 @@ public class Revision {
 	@Column
 	private String revision;
 	
-	
-	
-	@Enumerated(EnumType.STRING)
+	@Column
 	private RevisionType type;
+	
 	public Long getId() {
 		return id;
 	}

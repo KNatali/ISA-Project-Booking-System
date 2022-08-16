@@ -201,7 +201,7 @@ public class CottageService {
 			int broj_zauzetosti=unavailability.size();
 			int brojac=0;//brokjim koliko yautesto se  preklapa sa zeljenim datumom
 			for (TimePeriod timePeriod : unavailability) {
-				if ((end.isAfter(timePeriod.getStart()) && end.isBefore(timePeriod.getEnd()))||(start.isAfter(timePeriod.getStart()) && start.isBefore(timePeriod.getEnd()))) {
+				if ((end.isAfter(timePeriod.getStartTime()) && end.isBefore(timePeriod.getEndTime()))||(start.isAfter(timePeriod.getStartTime()) && start.isBefore(timePeriod.getEndTime()))) {
 					brojac++;
 				}
 			}

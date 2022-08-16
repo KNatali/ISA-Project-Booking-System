@@ -17,6 +17,7 @@ import { TimePeriod } from '../model/timePeriod';
 export class BoatOwnerService {
   urlBoatOwner = environment.url+"boatOwner";
   urlBoatOwner_boats = environment.url+"boatOwners/boats/client";
+  urlBoatOwners=environment.url+'boatOwners/'
 
   constructor(private http: HttpClient) { }
   getBoatOwners():Observable<BoatOwner[]>{
@@ -32,35 +33,35 @@ export class BoatOwnerService {
   }
 
   changePassword(id: number, newPassword: string): Observable<BoatOwner> {
-    return this.http.post<BoatOwner>(`http://localhost:8090/api/boatOwners/` + `changePassword` + `/${id}`, { newPassword });
+    return this.http.post<BoatOwner>(this.urlBoatOwners + `changePassword` + `/${id}`, { newPassword });
   }
   getBoatOwnerBoats(id: number): Observable<Boat[]> {
-    return this.http.get<Boat[]>(`http://localhost:8090/api/boatOwners/` + `boats` + `/${id}`);
+    return this.http.get<Boat[]>(this.urlBoatOwners + `boats` + `/${id}`);
   }
 
   getBoatOwnerReservations(id: number): Observable<BoatReservation[]> {
-    return this.http.get<BoatReservation[]>(`http://localhost:8090/api/boatOwners/` + `reservations` + `/${id}`);
+    return this.http.get<BoatReservation[]>(this.urlBoatOwners + `reservations` + `/${id}`);
   }
 
   getBoatOwnerFastReservations(id: number): Observable<BoatFastReservation[]> {
-    return this.http.get<BoatFastReservation[]>(`http://localhost:8090/api/boatOwners/` + `fastReservations` + `/${id}`);
+    return this.http.get<BoatFastReservation[]>(this.urlBoatOwners + `fastReservations` + `/${id}`);
   }
 
   getReservationClient(clientId: number): Observable<Client> {
-    return this.http.get<Client>(`http://localhost:8090/api/boatOwners/` + `reservationClient` + `/${clientId}`);
+    return this.http.get<Client>(this.urlBoatOwners + `reservationClient` + `/${clientId}`);
   }
   getBoatOwnerCottagesClient(id: number): Observable<Boat[]> {
     return this.http.get<Boat[]>(`${this.urlBoatOwner_boats}/${id}`);
   }
 
   getCompletedBoatOwnerReservations(id: number): Observable<BoatReservation[]> {
-    return this.http.get<BoatReservation[]>(`http://localhost:8090/api/boatOwners/` + `completedReservations` + `/${id}`);
+    return this.http.get<BoatReservation[]>(this.urlBoatOwners + `completedReservations` + `/${id}`);
   }
   getActiveBoatOwnerReservations(id: number): Observable<BoatReservation[]> {
-    return this.http.get<BoatReservation[]>(`http://localhost:8090/api/boatOwners/` + `activeReservations` + `/${id}`);
+    return this.http.get<BoatReservation[]>(this.urlBoatOwners + `activeReservations` + `/${id}`);
   }
   getUpcomingBoatOwnerReservations(id: number): Observable<BoatReservation[]> {
-    return this.http.get<BoatReservation[]>(`http://localhost:8090/api/boatOwners/` + `upcomingReservations` + `/${id}`);
+    return this.http.get<BoatReservation[]>(this.urlBoatOwners + `upcomingReservations` + `/${id}`);
   }
   sortByName(): Observable<BoatOwner[]> {
     return this.http.get<BoatOwner[]>(this.urlBoatOwner + "/sort-by-name");
@@ -84,9 +85,9 @@ export class BoatOwnerService {
     return this.http.get<TimePeriod[]>(`${this.urlBoatOwner}/` + `getUnavailability` + `/${id}`);
   }
   sendDeleteRequest(request: ProfileDeleteRequest): Observable<ProfileDeleteRequest> {
-    return this.http.post<ProfileDeleteRequest>(`http://localhost:8090/api/boatOwners/` + `profileDeleteRequest`, request);
+    return this.http.post<ProfileDeleteRequest>(this.urlBoatOwners + `profileDeleteRequest`, request);
   }
   sendReservationReport(report: BoatOwnerReport): Observable<BoatOwnerReport> {
-    return this.http.post<BoatOwnerReport>(`http://localhost:8090/api/boatOwners/` + `sendReservationReport`, report);
+    return this.http.post<BoatOwnerReport>(this.urlBoatOwners+ `sendReservationReport`, report);
   }
 }

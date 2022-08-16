@@ -26,7 +26,7 @@ import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.RegistrationRequest;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
 import com.isa.ISAproject.service.EmailService;
@@ -117,7 +117,7 @@ public class ProfileDeleteRequestController {
 	public ResponseEntity<?> sendProfifleDeleteRequestClient(@RequestBody ProfileDeleteRequestDTO dto){
 	
 		//ProfileDeleteRequestDTO req=profileDeleteRequestService.sendProfileDeleteRequest(dto);
-		User user=this.userService.findById(dto.getUserDTO().getId());
+		AppUser user=this.userService.findById(dto.getUserDTO().getId());
 		UserDTO userDTO=UserMapper.convertToDTO(user);
 		ProfileDeleteRequest req=new ProfileDeleteRequest(dto.getId(), user, dto.getReason(), dto.getType());
 		ProfileDeleteRequest saved=this.profileDeleteRequestService.save(req);

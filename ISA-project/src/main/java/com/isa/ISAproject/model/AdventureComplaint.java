@@ -20,7 +20,7 @@ public class AdventureComplaint {
 	@ManyToOne
 	private Adventure adventure;
 	
-	@Enumerated(EnumType.STRING)
+	@Column
     private ComplaintType type;
 	public Long getId() {
 		return id;

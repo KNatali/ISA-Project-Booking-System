@@ -1,13 +1,13 @@
 package com.isa.ISAproject.mapper;
 
 import com.isa.ISAproject.dto.UserDTO;
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 
 public class UserMapper {
 	
 	public UserMapper() {}
 	
-	public static UserDTO convertToDTO(User u) {
+	public static UserDTO convertToDTO(AppUser u) {
 		UserDTO userDTO=new UserDTO(
 				u.getId(),
 				u.getUsername(),

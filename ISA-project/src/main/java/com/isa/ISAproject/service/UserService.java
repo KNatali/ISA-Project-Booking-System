@@ -13,13 +13,13 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.dto.UserRequest;
 import com.isa.ISAproject.model.Address;
 import com.isa.ISAproject.model.Admin;
+import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.model.Authority;
 import com.isa.ISAproject.model.BoatOwner;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.CottageOwner;
 import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.model.Role;
-import com.isa.ISAproject.model.User;
 import com.isa.ISAproject.repository.AdminRepository;
 import com.isa.ISAproject.repository.BoatOwnerRepository;
 import com.isa.ISAproject.repository.CottageOwnerRepository;
@@ -56,18 +56,18 @@ public class UserService {
 
 
 	
-	public User findByUsername(String username) throws UsernameNotFoundException {
+	public AppUser findByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByUsername(username);
 	}
 
-	public User findById(Long id) throws AccessDeniedException {
+	public AppUser findById(Long id) throws AccessDeniedException {
 		return userRepository.findById(id).orElseGet(null);
 	}
 
 	public List<UserDTO> findAll() throws AccessDeniedException {
-		List<User> users=userRepository.findAll();
+		List<AppUser> users=userRepository.findAll();
 		List<UserDTO> usersDTO=new ArrayList<>();
-	 for (User u : users) {
+	 for (AppUser u : users) {
 		 if(!(u.getRole().equalsIgnoreCase("SysAdmin") || u.getRole().equalsIgnoreCase("Admin")|| u.isDeleted())) {
 			 UserDTO dto=new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail(),u.getFirstName(),u.getLastName(),u.getAddress().getStreet(),u.getAddress().getState(),u.getAddress().getCity(), u.getMobile(), u.getRole(),u.getAddress().getLatitude(),u.getAddress().getLongitude());
 			usersDTO.add(dto);
@@ -78,8 +78,8 @@ public class UserService {
 	}
 
 	
-	public User save(UserDTO userRequest) {
-		User u = new User();
+	public AppUser save(UserDTO userRequest) {
+		AppUser u = new AppUser();
 		u.setUsername(userRequest.getUsername());
 		
 		// pre nego sto postavimo lozinku u atribut hesiramo je kako bi se u bazi nalazila hesirana lozinka

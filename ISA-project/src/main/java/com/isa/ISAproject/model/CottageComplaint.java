@@ -23,7 +23,7 @@ public class CottageComplaint {
 	@ManyToOne
 	private CottageReservation cottageReservation;
 	
-	@Enumerated(EnumType.STRING)
+	@Column
     private ComplaintType type;
 
 	public Long getId() {

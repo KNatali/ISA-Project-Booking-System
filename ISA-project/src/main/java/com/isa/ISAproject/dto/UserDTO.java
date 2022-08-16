@@ -1,6 +1,6 @@
 package com.isa.ISAproject.dto;
 
-import com.isa.ISAproject.model.User;
+import com.isa.ISAproject.model.AppUser;
 
 public class UserDTO {
 	private Long id;
@@ -122,7 +122,7 @@ public class UserDTO {
 		this.role = role;
 	}
 	
-	public UserDTO(User user) {
+	public UserDTO(AppUser user) {
 		super();
 	
 		this.username = user.getUsername();

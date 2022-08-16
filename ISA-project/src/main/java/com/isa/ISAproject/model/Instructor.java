@@ -14,14 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Instructor extends User{
+public class Instructor extends AppUser{
 	@Column
 	private double grade;
 	
 	@OneToMany(mappedBy="instructor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Adventure> adventures=new HashSet<>();
 	
-	@Column(columnDefinition="LONGTEXT")
+	@Column
 	private String biography;
 	
 	@ManyToMany(cascade =CascadeType.ALL)
