@@ -132,7 +132,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 		}
 		
 		@PostMapping("/signup/sync")//ceka se da se prva radnja zavrsi
-		public String signUpSync(AppUser user){
+		public String signUpSync(UserDTO user){
 			System.out.println("Thread id: " + Thread.currentThread().getId());
 			//slanje emaila
 			try {

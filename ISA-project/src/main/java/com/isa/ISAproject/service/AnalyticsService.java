@@ -120,6 +120,9 @@ public class AnalyticsService {
 				count++;
 			}
 		}
+		
+		if(count==0)
+			return averageGrade;
 		averageGrade=grade/count;
 		return averageGrade;
 	}
@@ -185,6 +188,9 @@ public class AnalyticsService {
 				count++;
 			}
 		}
+		if(count==0){
+			return averageGrade;
+		}
 		averageGrade=grade/count;
 		return averageGrade;
 	}
@@ -249,6 +255,10 @@ public class AnalyticsService {
 				grade+=b.getGrade();
 				count++;
 			}
+		}
+		
+		if(count==0) {
+			return averageGrade;
 		}
 		averageGrade=grade/count;
 		return averageGrade;

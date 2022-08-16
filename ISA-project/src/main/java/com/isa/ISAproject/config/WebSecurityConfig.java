@@ -78,8 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
 				// svim korisnicima dopusti da pristupe sledecim putanjama:
-				.authorizeRequests().antMatchers("/auth/**").permitAll()		// /auth/**
-										// /api/foo
+				.authorizeRequests()
 									.antMatchers("/api/adventures/**").permitAll()
 									.antMatchers("/api/boats/**").permitAll()
 									.antMatchers("/api/upload").permitAll()
@@ -88,13 +87,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 									.antMatchers("/api/cottages/**").permitAll()
 									.antMatchers("/api/signup/async").permitAll()
 									.antMatchers("/api/register").permitAll()
-									.antMatchers("/auth/signup").permitAll()
 									.antMatchers("/confirm-registration-client/**").permitAll()
 									.antMatchers("/api/additional-items/**").permitAll()
 									.antMatchers("/api/instructors").permitAll()
 									.antMatchers("/api/one/adventureReservation/**").permitAll()
 									.antMatchers("/api/revision/**").permitAll()
 									.antMatchers("/api/boatOwner/boat/additionalItems/**").permitAll()
+									.antMatchers("/auth/signup").permitAll()
+									.antMatchers("/auth/**").permitAll()
 									//.antMatchers("api/client/makeNewAdventureRevision").permitAll()
 									//.antMatchers("/api/client/makeNewBoatComplaint").permitAll()
 									

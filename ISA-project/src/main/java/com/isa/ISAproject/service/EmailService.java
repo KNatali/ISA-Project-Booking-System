@@ -57,7 +57,7 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 
-	public void sendNotificaitionSync(AppUser user) throws MailException, InterruptedException {
+	public void sendNotificaitionSync(UserDTO user) throws MailException, InterruptedException {
 		System.out.println("Sync metoda se izvrsava u istom Threadu koji je i prihvatio zahtev. Thread id: " + Thread.currentThread().getId());
 		//Simulacija duze aktivnosti da bi se uocila razlika
 		Thread.sleep(10000);

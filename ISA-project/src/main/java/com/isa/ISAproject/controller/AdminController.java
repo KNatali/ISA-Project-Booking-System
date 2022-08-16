@@ -53,7 +53,7 @@ public class AdminController {
 	
 	@RequestMapping(value="api/admin/setPercentage",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
-	public ResponseEntity<?> Percentage(@RequestBody SystemEarningsDTO dto){
+	public static ResponseEntity<Double> Percentage(@RequestBody SystemEarningsDTO dto){
 		SystemEarnings.percentage=dto.getPercentage();
 	
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -86,7 +86,7 @@ public class AdminController {
 	
 	@RequestMapping(value="api/admin/addAdmin",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize(" hasRole('SYSADMIN')")
-	public ResponseEntity<?> addNewAdmin(@RequestBody UserDTO dto){
+	public ResponseEntity<UserDTO> addNewAdmin(@RequestBody UserDTO dto){
 		if(!this.adminService.addNewAdmin(dto))
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(HttpStatus.OK);
