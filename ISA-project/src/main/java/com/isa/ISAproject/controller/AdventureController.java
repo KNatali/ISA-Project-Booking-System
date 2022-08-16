@@ -37,7 +37,7 @@ import com.isa.ISAproject.service.AdventureService;
 import com.isa.ISAproject.service.InstructorService;
 
 
-@CrossOrigin("*")
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/adventures")
 public class AdventureController {

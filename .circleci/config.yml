@@ -22,11 +22,11 @@ jobs:
       - checkout:
           path: ~/test-repository
       - run:
-          name: Test
-          command: mvn test
-      - run:
           name: Build
           command: mvn -B -DskipTests clean package
+      - run:
+          name: Test
+          command: mvn test
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -Dsonar.projectKey=KNatali_ISA-Project-Booking-System
@@ -37,12 +37,12 @@ workflows:
       - build-and-test:
           context: SonarCloud
       - heroku/deploy-via-git:
-          name: deploy-back
+          name: deploy-front-end
           app-name: isa-fishing
           requires:
             - build-and-test
       - heroku/deploy-via-git:
-          name: deploy-front
+          name: deploy-end-end
           app-name: angular-fishing
           requires:
-            - deploy-back
+            - deploy-front-end

@@ -20,7 +20,7 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.service.EmailService;
 
 
-@CrossOrigin("*")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/admin/message")
 public class AdminMessagesController {

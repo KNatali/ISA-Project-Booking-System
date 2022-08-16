@@ -18,7 +18,7 @@ import com.isa.ISAproject.dto.AdventureBehavioralRuleDTO;
 import com.isa.ISAproject.dto.AdventureFishingEquipmentDTO;
 import com.isa.ISAproject.service.AdventureBehavioralRuleService;
 
-@CrossOrigin("*")
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/instructor/adventure")
 public class AdventureBehavioralRuleController {
