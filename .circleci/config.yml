@@ -42,7 +42,7 @@ workflows:
           requires:
             - build-and-test
       - heroku/deploy-via-git:
-          name: deploy-end-end
+          name: deploy-back-end
           app-name: angular-fishing
           requires:
             - deploy-front-end

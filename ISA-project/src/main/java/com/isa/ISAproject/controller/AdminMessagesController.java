@@ -16,7 +16,7 @@ import com.isa.ISAproject.dto.EmailMessageDTO;
 import com.isa.ISAproject.service.EmailService;
 
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/admin/message")
 public class AdminMessagesController {

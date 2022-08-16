@@ -18,7 +18,7 @@ import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.service.AdventureAdditionalItemService;
 
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value="/api/instructor/adventure")
 public class AdventureAdditionalItemController {

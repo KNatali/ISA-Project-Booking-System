@@ -34,7 +34,7 @@ import com.isa.ISAproject.model.Instructor;
 import com.isa.ISAproject.service.AdventureComplaintService;
 import com.isa.ISAproject.service.AdventureReservationService;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class AdventureComplaintController {
 	

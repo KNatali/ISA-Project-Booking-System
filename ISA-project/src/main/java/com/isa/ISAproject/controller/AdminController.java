@@ -29,7 +29,7 @@ import com.isa.ISAproject.service.AddressService;
 import com.isa.ISAproject.service.AdminService;
 import com.isa.ISAproject.service.UserService;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class AdminController {
 	
