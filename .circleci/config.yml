@@ -34,7 +34,7 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test:
+      - build-and-test
       - heroku/deploy-via-git:
           name: deploy-back
           app-name: isa-fishing
