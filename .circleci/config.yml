@@ -34,6 +34,8 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
+      - build:
+          context: SonarCloud
       - build-and-test
       - heroku/deploy-via-git:
           name: deploy-back
