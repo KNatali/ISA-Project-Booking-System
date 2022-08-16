@@ -115,6 +115,7 @@ public class AdventureFastReservationContoller {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
+			 Thread.currentThread().interrupt();
 			e.printStackTrace();
 		}
 		//treba izbrisati tu akciju
