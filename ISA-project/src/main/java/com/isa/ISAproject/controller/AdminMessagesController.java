@@ -6,17 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.EmailMessageDTO;
-import com.isa.ISAproject.dto.RegistrationRequestDTO;
-import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.service.EmailService;
 
 
@@ -30,7 +26,7 @@ public class AdminMessagesController {
 	private EmailService emailService;
 	
 	@RequestMapping(value="/registrationReject",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> registrationReject(@RequestBody EmailMessageDTO dto){
+	public ResponseEntity<EmailMessageDTO> registrationReject(@RequestBody EmailMessageDTO dto){
 
 		//slanje emaila
 		try {

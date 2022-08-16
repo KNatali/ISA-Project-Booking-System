@@ -70,16 +70,16 @@ public class BoatOwnerController {
 		Optional<Address> a=this.addressService.findById(boatOwner.getAddress().getId());
 		if(!a.isPresent())
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			Address address=a.get();
-				address.setId(boatOwner.getAddress().getId());
-				address.setStreet(editedBoatOwnerDTO.getStreet());
-				address.setCity(editedBoatOwnerDTO.getCity());
-				address.setState(editedBoatOwnerDTO.getState());
-				this.addressService.save(address);
+		Address address=a.get();
+			address.setId(boatOwner.getAddress().getId());
+			address.setStreet(editedBoatOwnerDTO.getStreet());
+			address.setCity(editedBoatOwnerDTO.getCity());
+			address.setState(editedBoatOwnerDTO.getState());
+			this.addressService.save(address);
 				
-				boatOwner.setAddress(address);
-				boatOwner.setEmail(editedBoatOwnerDTO.getEmail());
-				boatOwner.setMobile(editedBoatOwnerDTO.getMobile());
+			boatOwner.setAddress(address);
+			boatOwner.setEmail(editedBoatOwnerDTO.getEmail());
+			boatOwner.setMobile(editedBoatOwnerDTO.getMobile());
 		
 		
 		final BoatOwner savedBoatOwner=this.boatOwnerService.save(boatOwner);
