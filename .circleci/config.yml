@@ -33,18 +33,10 @@ workflows:
       - heroku/deploy-via-git:
           name: deploy-back
           app-name: isa-fishing
-          filters:
-            branches:
-              only:
-                - main
           requires:
             - build-and-test
       - heroku/deploy-via-git:
           name: deploy-front
           app-name: angular-fishing
-          filters:
-            branches:
-              only:
-                - main
           requires:
             - deploy-back
