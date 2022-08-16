@@ -47,6 +47,8 @@ public class ImageController {
 	@GetMapping(path = { "/get/{imageName}" })
 	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
 		final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
+		if(!retrievedImage.isPresent())
+			return null;
 		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
 				decompressBytes(retrievedImage.get().getPicByte()));
 		return img;

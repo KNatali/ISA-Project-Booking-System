@@ -68,6 +68,8 @@ public class BoatOwnerController {
 		boatOwner.setFirstName(editedBoatOwnerDTO.getFirstName());
 		boatOwner.setLastName(editedBoatOwnerDTO.getLastName());
 		Optional<Address> a=this.addressService.findById(boatOwner.getAddress().getId());
+		if(!a.isPresent())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			Address address=a.get();
 				address.setId(boatOwner.getAddress().getId());
 				address.setStreet(editedBoatOwnerDTO.getStreet());

@@ -30,13 +30,14 @@ public class AdminMessagesController {
 	private EmailService emailService;
 	
 	@RequestMapping(value="/registrationReject",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> registrationReject(@RequestBody EmailMessageDTO dto)throws MailException{
+	public ResponseEntity<?> registrationReject(@RequestBody EmailMessageDTO dto){
 
 		//slanje emaila
 		try {
 			System.out.println("Thread id: " + Thread.currentThread().getId());
 			emailService.sendAdminMessage(dto);
 		}catch( Exception e ){
+			Thread.currentThread().interrupt();
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
 

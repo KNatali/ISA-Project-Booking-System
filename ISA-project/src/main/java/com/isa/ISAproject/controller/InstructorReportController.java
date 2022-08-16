@@ -59,6 +59,7 @@ public class InstructorReportController {
 			emailService.sendMessage(dto.getAdventureReservation().getClient().getEmail(),"Bad news:You have got 1 penal! Please be careful on your next trip.");
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			Thread.currentThread().interrupt();
 		}
 		
 		try {
@@ -66,6 +67,7 @@ public class InstructorReportController {
 			emailService.sendMessage(dto.getAdventureReservation().getAdventure().getInstructor().getEmail(),"Admin aproved your reservation report.Client have got 1 penal!");
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			Thread.currentThread().interrupt();
 		}
 		
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -81,6 +83,7 @@ public class InstructorReportController {
 			emailService.sendMessage(dto.getAdventureReservation().getClient().getEmail(),"Good news:You dind't get 1 penal. Be careful next time!");
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			Thread.currentThread().interrupt();
 		}
 		
 		try {

@@ -88,7 +88,7 @@ public class ProfileDeleteRequestController {
 		try {
 			profileDeleteRequestService.rejectDeleteRequest(dto,message);
 		} catch(Exception e) {
-			 Thread.currentThread().interrupt();
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}

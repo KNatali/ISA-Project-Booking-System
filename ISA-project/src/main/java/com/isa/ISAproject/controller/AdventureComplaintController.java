@@ -56,10 +56,11 @@ public class AdventureComplaintController {
 	@RequestMapping(value="api/admin/answerComplaint",method = RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ADMIN') || hasRole('SYSADMIN')")
-	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody ComplaintAnswerDTO dto) throws MailException{
+	public ResponseEntity<?>  answerAdventureComplaint(@RequestBody ComplaintAnswerDTO dto){
 		try {
 			adventurComplaintService.answerComplaint(dto);
 		} catch (Exception e) {
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		}

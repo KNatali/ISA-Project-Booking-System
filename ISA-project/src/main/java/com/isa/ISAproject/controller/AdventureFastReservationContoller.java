@@ -82,6 +82,7 @@ public class AdventureFastReservationContoller {
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(fastDTO,HttpStatus.OK);
@@ -114,6 +115,7 @@ public class AdventureFastReservationContoller {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
+			Thread.currentThread().interrupt();
 			e.printStackTrace();
 		}
 		//treba izbrisati tu akciju

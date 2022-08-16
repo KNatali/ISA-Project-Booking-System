@@ -94,6 +94,9 @@ public class InstructorController {
 		instructor.setFirstName(editedInstructorDTO.getFirstName());
 		instructor.setLastName(editedInstructorDTO.getLastName());
 		Optional<Address> a=this.addressService.findById(instructor.getAddress().getId());
+		if(!a.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 			Address address=a.get();
 				address.setId(instructor.getAddress().getId());
 				address.setStreet(editedInstructorDTO.getStreet());

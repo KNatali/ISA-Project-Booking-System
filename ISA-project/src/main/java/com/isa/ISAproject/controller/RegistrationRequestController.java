@@ -55,6 +55,7 @@ public class RegistrationRequestController {
 			emailService.sendAcceptRegistrationMessage(dto.getUserDTO().getEmail());
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			Thread.currentThread().interrupt();
 		}
 		
 		if(dto.getUserDTO()==null) {

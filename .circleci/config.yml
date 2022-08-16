@@ -22,11 +22,11 @@ jobs:
       - checkout:
           path: ~/test-repository
       - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-      - run:
           name: Test
           command: mvn test
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -Dsonar.projectKey=KNatali_ISA-Project-Booking-System

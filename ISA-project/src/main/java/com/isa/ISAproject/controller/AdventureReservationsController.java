@@ -124,6 +124,7 @@ public class AdventureReservationsController {
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
