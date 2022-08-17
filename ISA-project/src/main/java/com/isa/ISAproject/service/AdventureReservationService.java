@@ -1,8 +1,6 @@
 package com.isa.ISAproject.service;
 
-import java.time.DateTimeException;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,31 +12,21 @@ import java.util.Optional;
 import javax.persistence.PessimisticLockException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isa.ISAproject.dto.AdditionalItemDTO;
 import com.isa.ISAproject.dto.AdventureDTO;
-import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationCreateDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
-import com.isa.ISAproject.dto.BoatReservationCreateDTO;
-import com.isa.ISAproject.dto.BoatReservationDTO;
 import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.dto.TimePeriodDTO;
 import com.isa.ISAproject.mapper.AdditionalItemMapper;
-import com.isa.ISAproject.mapper.AdventureFastReservationMapper;
-import com.isa.ISAproject.mapper.AdventureMapper;
 import com.isa.ISAproject.mapper.AdventureReservationMapper;
-import com.isa.ISAproject.mapper.BoatReservationMapper;
 import com.isa.ISAproject.model.AdditionalItem;
 import com.isa.ISAproject.model.Adventure;
-import com.isa.ISAproject.model.AdventureFastReservation;
 import com.isa.ISAproject.model.AdventureReservation;
-import com.isa.ISAproject.model.Boat;
-import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.model.Client;
 import com.isa.ISAproject.model.SystemEarnings;
 import com.isa.ISAproject.model.TimePeriod;
@@ -46,9 +34,7 @@ import com.isa.ISAproject.model.UnavailabilityType;
 import com.isa.ISAproject.repository.AdventureRepository;
 import com.isa.ISAproject.repository.AdventureReservationRepository;
 import com.isa.ISAproject.repository.ClientRepository;
-import com.isa.ISAproject.repository.SystemEarningsRepository;
 
-import javassist.NotFoundException;
 
 @Service
 public class AdventureReservationService {
@@ -62,8 +48,6 @@ public class AdventureReservationService {
 	private EmailService emailService;
 	@Autowired
 	private ClientRepository clientRepository;
-	@Autowired
-	private SystemEarningsRepository systemEarningsRepository;
 	@Autowired
 	private AdventureService adventureService;
 	

@@ -4,15 +4,12 @@ import java.util.List;
 
 import javax.persistence.PessimisticLockException;
 
-import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,12 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.ISAproject.dto.ProfileDeleteRequestDTO;
-import com.isa.ISAproject.dto.RegistrationRequestDTO;
 import com.isa.ISAproject.dto.UserDTO;
-import com.isa.ISAproject.exception.ResourceConflictException;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
-import com.isa.ISAproject.model.RegistrationRequest;
 import com.isa.ISAproject.model.AppUser;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
@@ -38,16 +32,9 @@ import com.isa.ISAproject.service.UserService;
 @CrossOrigin("*")
 @RestController
 public class ProfileDeleteRequestController {
-	private Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private ProfileDeleteRequestRepository profileDeleteRequestRepository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
 	private ProfileDeleteRequestService profileDeleteRequestService;
-	@Autowired
-	private EmailService emailService;
 	@Autowired
 	private UserService userService;
 	

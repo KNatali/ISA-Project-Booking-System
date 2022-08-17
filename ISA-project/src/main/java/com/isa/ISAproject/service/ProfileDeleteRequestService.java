@@ -3,27 +3,17 @@ package com.isa.ISAproject.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.OptimisticLockException;
 import javax.persistence.PessimisticLockException;
 
-import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import com.isa.ISAproject.dto.ProfileDeleteRequestDTO;
-import com.isa.ISAproject.dto.RegistrationRequestDTO;
 import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.ProfileDeleteRequestType;
-import com.isa.ISAproject.model.RegistrationRequest;
 import com.isa.ISAproject.model.AppUser;
-import com.isa.ISAproject.repository.BoatOwnerRepository;
-import com.isa.ISAproject.repository.CottageOwnerRepository;
-import com.isa.ISAproject.repository.InstructorRepository;
 import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
 import com.isa.ISAproject.repository.UserRepository;
 
@@ -34,16 +24,10 @@ public class ProfileDeleteRequestService {
 	@Autowired
 	private ProfileDeleteRequestRepository profileDeleteRequestRepository;
 	@Autowired
-	private InstructorRepository instructorRepository;
-	@Autowired
 	private EmailService emailService;
 	
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private CottageOwnerRepository cottageOwnerRepository;
-	@Autowired
-	private BoatOwnerRepository boatOwnerRepository;
 	
 	public ProfileDeleteRequestDTO sendProfileDeleteRequest(ProfileDeleteRequestDTO dto) {
 		

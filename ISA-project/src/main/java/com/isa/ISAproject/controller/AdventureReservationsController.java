@@ -1,8 +1,5 @@
 package com.isa.ISAproject.controller;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +7,6 @@ import java.util.Optional;
 import javax.persistence.PessimisticLockException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isa.ISAproject.dto.AdventureDTO;
-import com.isa.ISAproject.dto.AdventureFastReservationDTO;
 import com.isa.ISAproject.dto.AdventureReservationCreateDTO;
 import com.isa.ISAproject.dto.AdventureReservationDTO;
-import com.isa.ISAproject.dto.BoatDTO;
-import com.isa.ISAproject.dto.BoatReservationDTO;
-import com.isa.ISAproject.dto.ClientProfileDTO;
 import com.isa.ISAproject.model.AdventureReservation;
-import com.isa.ISAproject.model.Boat;
-import com.isa.ISAproject.model.BoatReservation;
 import com.isa.ISAproject.service.AdventureReservationService;
-import com.isa.ISAproject.service.AdventureService;
-import com.isa.ISAproject.service.ClientService;
 
-import javassist.NotFoundException;
 
 @CrossOrigin("*")
 @RestController
@@ -44,11 +30,6 @@ public class AdventureReservationsController {
 	@Autowired
 	private AdventureReservationService adventureReservationService;
 	
-	@Autowired
-	private AdventureService adventureService;
-	
-	@Autowired
-	private ClientService clientService;
 	
 	@RequestMapping(value="api/adventureReservation/all",method = RequestMethod.GET,produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
