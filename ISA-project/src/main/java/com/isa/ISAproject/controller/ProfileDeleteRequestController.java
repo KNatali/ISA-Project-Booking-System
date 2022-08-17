@@ -83,6 +83,7 @@ public class ProfileDeleteRequestController {
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
@@ -102,6 +103,7 @@ public class ProfileDeleteRequestController {
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		

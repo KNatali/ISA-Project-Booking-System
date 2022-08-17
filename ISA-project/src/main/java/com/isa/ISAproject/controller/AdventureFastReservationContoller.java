@@ -112,7 +112,9 @@ public class AdventureFastReservationContoller {
 		} catch (DateTimeException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		}
 		//treba izbrisati tu akciju
 		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getId());
