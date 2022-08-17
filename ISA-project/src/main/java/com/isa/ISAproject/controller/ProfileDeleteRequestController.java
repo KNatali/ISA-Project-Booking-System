@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.PessimisticLockException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,9 +21,6 @@ import com.isa.ISAproject.dto.UserDTO;
 import com.isa.ISAproject.mapper.UserMapper;
 import com.isa.ISAproject.model.ProfileDeleteRequest;
 import com.isa.ISAproject.model.AppUser;
-import com.isa.ISAproject.repository.ProfileDeleteRequestRepository;
-import com.isa.ISAproject.repository.UserRepository;
-import com.isa.ISAproject.service.EmailService;
 import com.isa.ISAproject.service.ProfileDeleteRequestService;
 import com.isa.ISAproject.service.UserService;
 
