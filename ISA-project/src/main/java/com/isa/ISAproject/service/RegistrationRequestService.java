@@ -61,7 +61,6 @@ public class RegistrationRequestService {
 		
 		AppUser user=userRepository.getById(requestDTO.getUserDTO().getId());
 	
-		
 		RegistrationRequest request=this.registrationRequestRepository.getById(requestDTO.getId());
 		this.registrationRequestRepository.delete(request);
 		userRepository.delete(user);

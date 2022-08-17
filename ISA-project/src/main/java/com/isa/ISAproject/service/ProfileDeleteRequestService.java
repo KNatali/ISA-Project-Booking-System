@@ -82,7 +82,7 @@ public class ProfileDeleteRequestService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws MailException, InterruptedException,PessimisticLockException {
+	public void acceptDeleteRequest(ProfileDeleteRequestDTO requestDTO) throws InterruptedException,PessimisticLockException {
 		
 		//userRepository.delete(user);
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.findOneById(requestDTO.getId());
@@ -97,7 +97,7 @@ public class ProfileDeleteRequestService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws MailException, InterruptedException,PessimisticLockException {
+	public void rejectDeleteRequest(ProfileDeleteRequestDTO requestDTO,String message) throws InterruptedException,PessimisticLockException {
 		ProfileDeleteRequest request=this.profileDeleteRequestRepository.findOneById(requestDTO.getId());
 		request.setType(ProfileDeleteRequestType.Rejected);
 		this.profileDeleteRequestRepository.save(request);

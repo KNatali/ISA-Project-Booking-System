@@ -121,8 +121,6 @@ public class AdventureReservationsController {
 			fastDTO = this.adventureReservationService.addAdventureReservation( dto);
 		} catch (PessimisticLockException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
-		} catch (DateTimeException e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

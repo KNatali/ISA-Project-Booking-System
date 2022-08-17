@@ -57,12 +57,9 @@ public class RegistrationRequestController {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 			Thread.currentThread().interrupt();
 		}
-		
 		if(dto.getUserDTO()==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
 	}
 	
@@ -73,8 +70,6 @@ public class RegistrationRequestController {
 		if(dto.getUserDTO()==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		
 		
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
 	}

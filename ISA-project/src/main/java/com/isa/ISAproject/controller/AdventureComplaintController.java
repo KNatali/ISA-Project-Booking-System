@@ -62,7 +62,6 @@ public class AdventureComplaintController {
 		} catch (Exception e) {
 			Thread.currentThread().interrupt();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 		

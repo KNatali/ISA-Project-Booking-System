@@ -101,7 +101,6 @@ public class AdventureComplaintService {
 			this.cottageComplaintRespository.save(cc);
 		}
 		
-	
 		emailService.sendMessageSync(client.getEmail(),dto.getMessageClient());
 		emailService.sendMessageSync(owner.getEmail(),dto.getMessageOwner());
 		

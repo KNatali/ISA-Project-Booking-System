@@ -78,9 +78,6 @@ public class ProfileDeleteRequestController {
 		} catch (PessimisticLockException e) 
 		{
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.CONFLICT);
-		}catch(MailException e) 
-		{
-			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(InterruptedException e)
 		{
 			Thread.currentThread().interrupt();
@@ -98,9 +95,6 @@ public class ProfileDeleteRequestController {
 		} catch (PessimisticLockException e) 
 		{
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.CONFLICT);
-		}catch(MailException e) 
-		{
-			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(InterruptedException e)
 		{
 			Thread.currentThread().interrupt();

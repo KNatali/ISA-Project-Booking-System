@@ -140,14 +140,13 @@ public class AdventureReservationService {
 	}
 	
 	@Transactional(readOnly = false)
-	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockException, DateTimeException, InterruptedException {
+	public AdventureReservationDTO addAdventureReservation(AdventureReservationDTO dto) throws PessimisticLockException, InterruptedException {
 		Adventure adventure=adventureRepository.getById(dto.getAdventure().getId());
 		Client client=clientRepository.getById(dto.getClient().getId());
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getReservationStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getReservationEnd(),formatter);
-		
 		
 		TimePeriodDTO time=new TimePeriodDTO();
 		time.setStart(dto.getReservationStart());
@@ -161,8 +160,6 @@ public class AdventureReservationService {
 		adventure.getUnavailability().add(period);
 		this.adventureRepository.save(adventure);
 				
-		
-		
 		//long days = Duration.between(start, end).toDays();
 		long hours = Duration.between(start, end).toHours();
 		int price=(int) (adventure.getPrice()*hours*dto.getNumberOfPersons());
