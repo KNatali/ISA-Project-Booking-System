@@ -37,13 +37,15 @@ public class BoatRevisionService {
 		List<BoatRevision> revisions=boatRevisionRepository.findAll();
 		List<BoatRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (BoatRevision r : revisions) {
-			
-			RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
-			
-			BoatReservationDTO reservation=BoatReservationMapper.convertToDTO(r.getBoatReservation());
-			BoatRevisionDTO rDTO=new BoatRevisionDTO(r.getId(),reservation,revision);
-			revisionsDTO.add(rDTO);
+			if(r.getRevision().getType()== RevisionType.Unchecked) {
+				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
+				
+				BoatReservationDTO reservation=BoatReservationMapper.convertToDTO(r.getBoatReservation());
+				BoatRevisionDTO rDTO=new BoatRevisionDTO(r.getId(),reservation,revision);
+				revisionsDTO.add(rDTO);
 			}
+			
+		}
 		return revisionsDTO;
 	}
 	

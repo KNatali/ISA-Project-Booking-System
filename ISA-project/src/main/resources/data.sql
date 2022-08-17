@@ -162,8 +162,8 @@ insert into cottage_items(cottage_id,additional_item_id) values(4,8);
 insert into cottage_items(cottage_id,additional_item_id) values(5,6);
  
 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2021-11-10 07:00:00','2021-11-12 13:00:00',3,2000,1,5,200,false); 
-insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2020-11-10 07:00:00','2020-11-12 13:00:00',3,3000,2,8,300,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-9-11 07:00:00','2022-9-15 13:00:00',3,2000,1,5,200,false); 
+insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-8-15 07:00:00','2022-8-22 13:00:00',3,3000,2,8,300,false); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2022-10-10 07:00:00','2022-10-12 13:00:00',3,2500,3,8,250,false); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2021-9-10 07:00:00','2021-9-12 13:00:00',3,6000,4,8,600,false); 
 insert into adventure_reservation(reservation_start,reservation_end,number_of_persons,price,adventure_id,client_id,system_earning,deleted) values('2023-7-10 07:00:00','2023-7-12 13:00:00',3,5400,1,8,540,false); 
@@ -193,12 +193,12 @@ insert into adventure_fast_reservation(reservation_start,reservation_end,validit
 --insert into cottage_fast_reservation(reservation_start,reservation_end,date,time,duration,validity_start,validity_end,max_persons,price,cottage_id) values ('2021-12-20-06-30-00','2021-12-24-06-30-00',"2021-12-20T06:30:00","06:30:00",2,'2021-12-12','2021-12-24',2,100,1);
 
 
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',20);
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00',30);
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2023-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00',40);
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-20-14-00-00',50);
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2022-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00',60);
---insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00',10);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2016-02-20 06:30:00',10,10,15000,5,1,'2021-11-10 07:00:00','2021-11-12 13:00:00',20,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2014-02-20 06:30:00',3,2,7000,8,2,'2021-12-4 07:00:00','2021-12-20 14:00:00',30,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2023-02-20 06:30:00',1,3,3000,8,3,'2021-11-10 07:00:00','2021-11-12 13:00:00',40,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2017-02-20 06:30:00',3,1,6000,8,1,'2022-1-4 07:00:00','2022-1-20 14:00:00',50,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2022-02-20 06:30:00',4,5,9000,8,4,'2022-11-10 07:00:00','2022-11-12 13:00:00',60,false);
+insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id,reservation_start,reservation_end,system_earning,deleted) values ('2021-02-20 06:30:00',2,5,3400,9,2,'2022-12-4 07:00:00','2022-12-20 14:00:00',10,false);
 
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2016-02-20T06:30:00",10,10,15000,5,1);
 --insert into cottage_reservation(date,duration,max_persons,price,client_id,cottage_id) values ("2014-02-20T06:30:00",3,2,7000,8,2);
@@ -225,12 +225,12 @@ insert into adventure_fast_reservation(reservation_start,reservation_end,validit
 --insert into client_cottage_reservations(client_id,cottage_reservations_id) values(9,6);
 --insert into client_cottage_reservations(client_id,cottage_reservations_id) values(8,7);
 
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2016-02-20T06:30:00",10,10,15000,5,1,'2021-11-10-07-00-00','2021-11-12-13-00-00',120);
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2014-02-20T06:30:00",3,2,7000,8,2,'2021-12-4-07-00-00','2021-12-20-14-00-00', 150);
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",1,3,3000,8,3,'2021-11-10-07-00-00','2021-11-12-13-00-00', 200);
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2017-02-20T06:30:00",3,1,6000,8,1,'2022-1-4-07-00-00','2022-1-20-14-00-00', 250);
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2025-02-20T06:30:00",4,5,9000,8,4,'2022-11-10-07-00-00','2022-11-12-13-00-00', 300);
---insert into boat_reservation(date,duration,max_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning) values ("2021-02-20T06:30:00",2,5,3400,9,2,'2022-12-4-07-00-00','2022-12-20-14-00-00', 100);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2016-02-20 06:30:00',10,10,15000,5,1,'2021-11-10 07:00:00','2021-11-12 13:00:00',120,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2014-02-20 06:30:00',3,2,7000,8,2,'2021-12-4 07:00:00','2021-12-20 14:00:00', 150,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2021-02-20 06:30:00',1,3,3000,8,3,'2021-11-10 07:00:00','2021-11-12 13:00:00', 200,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2017-02-20 06:30:00',3,1,6000,8,1,'2022-1-4 07:00:00','2022-1-20 14:00:00', 250,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2025-02-20 06:30:00',4,5,9000,8,4,'2022-11-10 07:00:00','2022-11-12 13:00:00', 300,false);
+insert into boat_reservation(date,duration,number_of_persons,price,client_id,boat_id,reservation_start,reservation_end,system_earning,deleted) values ('2021-02-20 06:30:00',2,5,3400,9,2,'2022-12-4 07:00:00','2022-12-20 14:00:00', 100,false);
 
 --insert into boat_boat_reservations(boat_id,boat_reservations_id)values (1,1);
 --insert into boat_boat_reservations(boat_id,boat_reservations_id)values (2,2);
@@ -252,6 +252,27 @@ insert into registration_request(user_id,reason) values (14,'This site looks pre
  insert into profile_delete_request(user_id,reason,type) values (3,'My services are no longer available','Unverified');
 insert into profile_delete_request(user_id,reason,type) values (4,'I am getting to old for this :( ','Unverified');
  
+--insert into adventure_subscribers(adventure_id,client_id) values (1,5);
+--insert into adventure_subscribers(adventure_id,client_id) values (1,8);
+--insert into adventure_subscribers(adventure_id,client_id) values (3,8);
+--
+--insert into boat_subscribers(boat_id,client_id) values (1,5);
+--insert into boat_subscribers(boat_id,client_id) values (1,8);
+--insert into boat_subscribers(boat_id,client_id) values (4,8);
+--
+--insert into cottage_subscribers(cottage_id,client_id) values (1,5);
+--insert into cottage_subscribers(cottage_id,client_id) values (1,8);
+--insert into cottage_subscribers(cottage_id,client_id) values (5,8);
+
+insert into adventure_complaint(description,client_id,adventure_id,type) values('Instructor was very unpolite and rude!',5,1,'1');
+insert into adventure_complaint(description,client_id,adventure_id,type) values('Service is too expensive. Nothing is like on pictures',8,1,'1');
+
+insert into boat_complaint(description,client_id,boat_reservation_id,type) values('Boat owner was very unpolite!',5,1,'1');
+insert into boat_complaint(description,client_id,boat_reservation_id,type) values('Boat is small',8,1,'1');
+
+
+insert into cottage_complaint(description,client_id,cottage_reservation_id,type) values('Rooms are dirty!',5,1,'1');
+insert into cottage_complaint(description,client_id,cottage_reservation_id,type) values('There are no enough beds.',8,1,'1');
  
 insert into adventure_subscribers(adventure_id,client_id) values (1,5);
 insert into adventure_subscribers(adventure_id,client_id) values (1,8);
@@ -259,13 +280,24 @@ insert into adventure_subscribers(adventure_id,client_id) values (1,8);
 insert into adventure_complaint(description,client_id,adventure_id) values('Instructor was very unpolite and rude!',5,1);
 insert into adventure_complaint(description,client_id,adventure_id) values('Service is too expensive. Nothing is like on pictures',8,1);
 
---insert into revision(grade,revision,type) values(7,'Boat was very dirty','1');
---insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
---insert into revision(grade,revision,type) values(4,'Boat was very dirty','1');
---insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
---insert into revision(grade,revision,type) values(3,'Boat was very dirty','1');
---insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
+insert into revision(grade,revision,type) values(7,'Boat was very dirty','2');
+insert into adventure_revision(revision_id,adventure_reservation_id) values(1,1);
 
+insert into revision(grade,revision,type) values(4,'Beds are very uncomfotable','2');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(2,1);
+insert into revision(grade,revision,type) values(3,'Beds are very uncomfotable','2');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(3,2);
+insert into revision(grade,revision,type) values(1,'Beds are very uncomfotable','2');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(4,4);
+insert into revision(grade,revision,type) values(5,'Beds are very uncomfotable','2');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(5,5);
+insert into revision(grade,revision,type) values(2,'Beds are very uncomfotable','2');
+insert into cottage_revision(revision_id,cottage_reservation_id) values(6,6);
+
+insert into revision(grade,revision,type) values(4,'Boat was very dirty','2');
+insert into boat_revision(revision_id,boat_reservation_id) values(7,1);
+insert into revision(grade,revision,type) values(3,'Boat was very dirty','2');
+insert into boat_revision(revision_id,boat_reservation_id) values(8,2);
 
 insert into time_period(start_time,end_time,time_type) values ('2022-08-10 10:00:00','2022-08-15 16:00:00','1');
 insert into time_period(start_time,end_time,time_type) values ('2022-09-15 10:00:00','2022-09-18 16:00:00','2');

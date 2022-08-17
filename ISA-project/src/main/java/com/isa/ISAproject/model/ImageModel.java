@@ -27,8 +27,7 @@ public class ImageModel {
 	private String type;
     //image bytes can have large lengths so we specify a value
     //which is more than the default length for picByte column
-	@Lob
-    @Column(name = "picByte", columnDefinition="MEDIUMBLOB")
+    @Column
 	private byte[] picByte;
 	public String getName() {
 		return name;

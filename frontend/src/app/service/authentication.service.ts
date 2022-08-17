@@ -15,7 +15,7 @@ export class AuthenticationService {
   authenticate(username: string, password: string) {
 
     return this.http
-      .post<any>("https://isa-fishing.herokuapp.com/auth/login", { username, password })
+      .post<any>("http://localhost:8090/auth/login", { username, password })
       .pipe(
         map((userData) => {
           sessionStorage.setItem("currentUser", JSON.stringify(userData))

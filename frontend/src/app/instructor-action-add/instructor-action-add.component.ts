@@ -72,8 +72,8 @@ export class InstructorActionAddComponent implements OnInit {
   newAction: AdventureFastReservation = new AdventureFastReservation({
     reservationStart: '',
     reservationEnd: '',
-    validityStart: '',
-    validityEnd: '',
+    validityStart:'',
+    validityEnd:'',
     maxPersons: 0,
     price: 0,
     additionalItems: this.additionalItems,
