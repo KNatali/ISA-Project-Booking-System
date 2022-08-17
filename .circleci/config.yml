@@ -36,10 +36,6 @@ workflows:
     jobs:
       - build-and-test:
           context: SonarCloud
-          filters:
-                branches:
-                  only:
-                    - develop
       - heroku/deploy-via-git:
           name: deploy-front-end
           app-name: angular-fishing
