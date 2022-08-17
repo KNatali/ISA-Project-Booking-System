@@ -108,15 +108,11 @@ public class AdventureFastReservationContoller {
 		try {
 			created = this.adventureReservationService.addAdventureReservation(reservationDTO);
 		} catch (PessimisticLockException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (DateTimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			 Thread.currentThread().interrupt();
-			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		//treba izbrisati tu akciju
 		AdventureFastReservation fast=this.adventureFastReservationService.findById(dto.getId());

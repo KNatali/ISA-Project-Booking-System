@@ -75,11 +75,9 @@ public class EmailService {
 	
 	public void sendMessageSync(String email,String message) throws MailException, InterruptedException {
 		System.out.println("Sync metoda se izvrsava u istom Threadu koji je i prihvatio zahtev. Thread id: " + Thread.currentThread().getId());
-		//Simulacija duze aktivnosti da bi se uocila razlika
-		Thread.sleep(1000);
+		
 		System.out.println("Slanje emaila...");
-
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
 		mail.setFrom(env.getProperty("spring.mail.username"));
@@ -93,7 +91,7 @@ public class EmailService {
 	@Async
 	public void sendAdminMessage(EmailMessageDTO dto) throws MailException, InterruptedException {
 		
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(dto.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
@@ -106,7 +104,7 @@ public class EmailService {
 	@Async
 	public void sendAcceptRegistrationMessage(String email) throws MailException, InterruptedException {
 		
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
 		mail.setFrom(env.getProperty("spring.mail.username"));
@@ -119,7 +117,7 @@ public class EmailService {
 	@Async
 	public void sendMessage(String email,String message) throws MailException, InterruptedException {
 		
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
 		mail.setFrom(env.getProperty("spring.mail.username"));

@@ -38,7 +38,12 @@ export class AdminProfileDeleteRequestsComponent implements OnInit {
         });
         alert("Successfully sent message to accepted user!")
       }, error => {
-        alert("Error! Please try again!");
+        if (error.status = "403")
+        
+          alert("Resource is locked! Try again later!");
+        else
+          alert("Error! Try again!");
+        window.location.reload();
       });
 
   }
@@ -47,8 +52,8 @@ export class AdminProfileDeleteRequestsComponent implements OnInit {
 
     sessionStorage.setItem("profileDeleteRequest", JSON.stringify(request));
 
-    this.requests.forEach((request, index) => {
+   /* this.requests.forEach((request, index) => {
       if (request.id == id) this.requests.splice(index, 1);
-    });
+    });*/
   }
 }

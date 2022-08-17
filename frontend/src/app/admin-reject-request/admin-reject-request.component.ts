@@ -37,8 +37,15 @@ export class AdminRejectRequestComponent implements OnInit {
         ref?.click();
         this.formValue.reset();
         alert("Successfully sent message to rejected user");
+        window.location.reload();
       }, error => {
-        alert("Error! Please try againg!")
+        if (error.status = "403"){
+          window.location.reload();
+          alert("Resource is locked! Try again later!");
+        }
+        else
+          alert("Error! Try again!");
+      
       });
   }
 }

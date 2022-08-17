@@ -2,6 +2,8 @@ package com.isa.ISAproject.controller;
 
 import java.util.List;
 
+import javax.persistence.PessimisticLockException;
+
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,10 +75,15 @@ public class ProfileDeleteRequestController {
 		
 		try {
 			profileDeleteRequestService.acceptDeleteRequest(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (PessimisticLockException e) 
+		{
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.CONFLICT);
+		}catch(MailException e) 
+		{
 			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
-			
+		}catch(InterruptedException e)
+		{
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);
 	}
@@ -87,10 +94,15 @@ public class ProfileDeleteRequestController {
 
 		try {
 			profileDeleteRequestService.rejectDeleteRequest(dto,message);
-		} catch(Exception e) {
-			Thread.currentThread().interrupt();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-			
+		} catch (PessimisticLockException e) 
+		{
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.CONFLICT);
+		}catch(MailException e) 
+		{
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch(InterruptedException e)
+		{
+			return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return new ResponseEntity<>(dto.getUserDTO(),HttpStatus.OK);	

@@ -52,7 +52,7 @@ public class TimePeriodService {
 	private BoatOwnerRepository boatOwnerRepository;
 	
 	@Transactional(readOnly = false)
-	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException, InterruptedException {
+	public boolean setUnavailabilityInstructor(TimePeriodDTO dto,Long id)throws PessimisticLockException, DateTimeException, InterruptedException{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime start = LocalDateTime.parse(dto.getStart(),formatter);
 		LocalDateTime end = LocalDateTime.parse(dto.getEnd(),formatter);
@@ -74,10 +74,7 @@ public class TimePeriodService {
 			periods.add(period);
 			this.instructorRepository.save(instructor);
 			Thread.sleep(500);
-			
-		
 		return true;
-	
 	}
 	
 	public boolean removeUnavailabilityInstructor(TimePeriodDTO dto,Long id) {
