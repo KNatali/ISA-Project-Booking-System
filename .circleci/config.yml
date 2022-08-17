@@ -38,11 +38,11 @@ workflows:
           context: SonarCloud
       - heroku/deploy-via-git:
           name: deploy-front-end
-          app-name: isa-fishing
+          app-name: angular-fishing
           requires:
             - build-and-test
       - heroku/deploy-via-git:
           name: deploy-back-end
-          app-name: angular-fishing
+          app-name: isa-fishing
           requires:
             - deploy-front-end
