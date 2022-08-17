@@ -10,8 +10,8 @@ export interface AdventureFastReservationInterface {
     id?: number;
     reservationStart: string;
     reservationEnd: string;
-    validityStart: Date;
-    validityEnd: Date;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];
@@ -23,8 +23,8 @@ export class AdventureFastReservation implements AdventureFastReservationInterfa
     id?: number;
     reservationStart: string;
     reservationEnd: string;
-    validityStart: Date;
-    validityEnd: Date;
+    validityStart: string;
+    validityEnd: string;
     maxPersons: number;
     price: number;
     additionalItems: AdditionalItem[];

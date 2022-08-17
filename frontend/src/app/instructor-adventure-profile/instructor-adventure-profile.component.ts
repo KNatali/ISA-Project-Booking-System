@@ -104,7 +104,7 @@ export class InstructorAdventureProfileComponent implements OnInit {
       this.adventureService.getAdventureFastReservations(this.id)
         .subscribe((items: AdventureFastReservation[]) => 
         items.forEach(element => {
-          if(element.validityEnd.getTime() >new Date().getTime()){
+          if(new Date(element.validityEnd).getTime() >new Date().getTime()){
             this.actions.push(element)
           }
         })
