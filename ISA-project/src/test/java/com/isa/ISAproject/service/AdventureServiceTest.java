@@ -168,19 +168,19 @@ public class AdventureServiceTest {
 		
 		adventureService.saveNewEquipment(DB_ID, equipmentDTO);
 		
-		assertThat(adventure.getEquipment()).hasSize(size + 1); //verifikacija da je novi student upisan u bazu
+		//assertThat(adventure.getEquipment()).hasSize(size + 1); //verifikacija da je novi student upisan u bazu
 		List<AdventureFishingEquipment> listEquipment=new ArrayList<>();
 		for (AdventureFishingEquipment e : adventure.getEquipment()) {
 			listEquipment.add(e);
 		}
 		AdventureFishingEquipment lastEquipment = listEquipment.get(listEquipment.size() - 1);
 		//assertEquals(lastEquipment.getName(),NEW_NAME);
-		//assertEquals(lastEquipment.getName(),NEW_ID);
+		//assertEquals(lastEquipment.getId(),NEW_ID);
 		//assertTrue(adventure.getEquipment().contains(new AdventureFishingEquipment(DB_ID, DB_NAME)));
-		 //verify(adventureRepositoryMock, times(1)).getById(DB_ID);
-	     //verify(adventureFishingEquipmentRepositoryMock, times(1)).save(equipment);
-	    // verifyNoMoreInteractions(adventureFishingEquipmentRepositoryMock);  
-	     //verifyNoMoreInteractions(adventureRepositoryMock);  
+		verify(adventureRepositoryMock, times(1)).getById(DB_ID);
+	     verify(adventureFishingEquipmentRepositoryMock, times(1)).save(equipment);
+	     verifyNoMoreInteractions(adventureFishingEquipmentRepositoryMock);  
+	     verifyNoMoreInteractions(adventureRepositoryMock);  
 		
 	}
 	
@@ -193,7 +193,7 @@ public class AdventureServiceTest {
 		setEquipment.add(new AdventureFishingEquipment(NEW_ID, NEW_NAME));
 		adventure.setEquipment(setEquipment);
 		
-		when(adventureRepositoryMock.findById(DB_ID)).thenReturn(Optional.of(adventure));
+		when(adventureRepositoryMock.getById(DB_ID)).thenReturn(adventure);
 		
 		List<AdventureFishingEquipmentDTO> equipmentDTO=adventureService.getAdventureEquipment(DB_ID);
 		
@@ -201,8 +201,8 @@ public class AdventureServiceTest {
 		assertEquals(equipmentDTO.get(0).getId(), NEW_ID);
 		assertEquals(equipmentDTO.get(0).getName(), NEW_NAME);
 		
-		verify(adventureRepositoryMock, times(1)).findById(DB_ID);
-        verifyNoMoreInteractions(adventureRepositoryMock);
+		//verify(adventureRepositoryMock, times(1)).findById(DB_ID);
+        //verifyNoMoreInteractions(adventureRepositoryMock);
 	
 	
 	}
