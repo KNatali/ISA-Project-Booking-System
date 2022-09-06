@@ -17,7 +17,6 @@ import com.isa.ISAproject.model.ProfileDeleteRequest;
 public interface ProfileDeleteRequestRepository extends JpaRepository<ProfileDeleteRequest, Long> {
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@Query("select p from ProfileDeleteRequest p where p.id = :id")
-	
 	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
 	public ProfileDeleteRequest findOneById(@Param("id")Long id);
 }

@@ -147,42 +147,6 @@ public class AdventureServiceTest {
 	
 	}
 	
-	@Test
-	@Transactional
-	@Rollback(true)
-	public void testSaveNewEquipment() {
-		AdventureFishingEquipmentDTO equipmentDTO=new AdventureFishingEquipmentDTO(NEW_ID,NEW_NAME);
-		AdventureFishingEquipment equipment=AdventureFishingEquipmentMapper.convertFromDTO(equipmentDTO);
-		
-		Address address=new Address(DB_ADDRESS_STREET,DB_ADDRESS_CITY,DB_ADDRESS_STATE,0,0);
-		Instructor instructor=new Instructor(DB_ID,DB_USERNAME,DB_PASSWORD,DB_EMAIL,DB_FIRST_NAME,DB_LAST_NAME,address,DB_MOBILE,true,DB_ROLE,null,7,null,"");
-		Adventure adventure=new  Adventure(DB_ID,DB_NAME,address,DB_DESCRIPTION,DB_GRADE,DB_PRICE,instructor,"",null,DB_PERSONS,null,null,DB_PERCENTAGE,null,null,null);
-		Set<AdventureFishingEquipment> setEquipment=new HashSet<>();
-		setEquipment.add(new AdventureFishingEquipment(DB_ID, DB_NAME));
-		adventure.setEquipment(setEquipment);
-		int size=adventure.getEquipment().size();
-		
-		when(adventureRepositoryMock.getById(DB_ID)).thenReturn(adventure);
-		when(adventureFishingEquipmentRepositoryMock.save(equipment)).thenReturn(equipment);
-		when(adventureRepositoryMock.save(adventure)).thenReturn(adventure);
-		
-		adventureService.saveNewEquipment(DB_ID, equipmentDTO);
-		
-		assertThat(adventure.getEquipment()).hasSize(size + 1); //verifikacija da je novi student upisan u bazu
-		List<AdventureFishingEquipment> listEquipment=new ArrayList<>();
-		for (AdventureFishingEquipment e : adventure.getEquipment()) {
-			listEquipment.add(e);
-		}
-		AdventureFishingEquipment lastEquipment = listEquipment.get(listEquipment.size() - 1);
-		//assertEquals(lastEquipment.getName(),NEW_NAME);
-		//assertEquals(lastEquipment.getName(),NEW_ID);
-		//assertTrue(adventure.getEquipment().contains(new AdventureFishingEquipment(DB_ID, DB_NAME)));
-		 //verify(adventureRepositoryMock, times(1)).getById(DB_ID);
-	     //verify(adventureFishingEquipmentRepositoryMock, times(1)).save(equipment);
-	    // verifyNoMoreInteractions(adventureFishingEquipmentRepositoryMock);  
-	     //verifyNoMoreInteractions(adventureRepositoryMock);  
-		
-	}
 	
 	@Test
 	public void testGetAdventureEquipment() {
@@ -193,7 +157,7 @@ public class AdventureServiceTest {
 		setEquipment.add(new AdventureFishingEquipment(NEW_ID, NEW_NAME));
 		adventure.setEquipment(setEquipment);
 		
-		when(adventureRepositoryMock.findById(DB_ID)).thenReturn(Optional.of(adventure));
+		when(adventureRepositoryMock.getById(DB_ID)).thenReturn(adventure);
 		
 		List<AdventureFishingEquipmentDTO> equipmentDTO=adventureService.getAdventureEquipment(DB_ID);
 		
@@ -201,7 +165,7 @@ public class AdventureServiceTest {
 		assertEquals(equipmentDTO.get(0).getId(), NEW_ID);
 		assertEquals(equipmentDTO.get(0).getName(), NEW_NAME);
 		
-		verify(adventureRepositoryMock, times(1)).findById(DB_ID);
+		verify(adventureRepositoryMock, times(1)).getById(DB_ID);
         verifyNoMoreInteractions(adventureRepositoryMock);
 	
 	
