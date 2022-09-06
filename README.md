@@ -49,15 +49,22 @@ npm install chart.js --save</code>
   </li>
 </ul>
 
+<h2>DevOps:</h2>
+<ul>
+  <li>Heroku:https://angular-fishing.herokuapp.com/</li>
+  <li>CircleCI:https://app.circleci.com/pipelines/github/KNatali/ISA-Project-Booking-System</li>
+  <li>SonarCloud:https://sonarcloud.io/summary/new_code?id=KNatali_ISA-Project-Booking-System </li>
+  
+</ul>
+
 <h2>Email service:</h2>
 <ul>
-  <li>e-mail:isamarkomarkovic99@gmail.com
+  <li>e-mail:isa.booking22@gmail.com
   </li>
-  <li>
-   password:isaMarko123
-  </li>
+  
 </ul>
-<h1>Password for all users: 123<h1>
+
+<h2>Instructor example: username: truman, password: 123<h2>
   
   
 
