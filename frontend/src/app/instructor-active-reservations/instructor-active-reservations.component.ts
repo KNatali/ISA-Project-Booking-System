@@ -18,6 +18,7 @@ export class InstructorActiveReservationsComponent implements OnInit {
   getActiveReservations() {
     this.instructorService.getActiveInstructorReservations(this.id)
       .subscribe(res => this.activeReservations = res)
+      console.log(this.activeReservations)
   }
 
   saveCurrentReservation(reservation: AdventureReservation) {
