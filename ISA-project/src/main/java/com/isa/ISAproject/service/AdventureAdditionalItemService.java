@@ -28,8 +28,8 @@ public class AdventureAdditionalItemService {
 	private AdventureRepository adventureRepository;
 	
 	public List<AdditionalItemDTO> getAdditionalIem(Long id){
-		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		Set<AdditionalItem> list=adventure.get().getAdditionalItems();
+		Adventure adventure=this.adventureRepository.getById(id);
+		Set<AdditionalItem> list=adventure.getAdditionalItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);

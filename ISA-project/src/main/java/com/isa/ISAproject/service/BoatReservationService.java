@@ -187,9 +187,9 @@ public class BoatReservationService {
 			try {
 				this.emailService.sendMessage(client.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				 Thread.currentThread().interrupt();
 			}
 		
 		return BoatReservationMapper.convertToDTO(res);
@@ -253,9 +253,9 @@ public class BoatReservationService {
 		try {
 			this.emailService.sendMessage(client.getEmail(), message);
 		} catch (MailException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			 Thread.currentThread().interrupt();
 		}
 		return BoatReservationMapper.convertToDTO(saved);
 	}
@@ -302,7 +302,7 @@ public class BoatReservationService {
 		for (BoatReservation b : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			if(b.getBoat().getId()==id) {
+			if(b.getBoat().getId().equals(id)) {
 				BoatDTO boat=BoatMapper.convertToDTO(b.getBoat());
 				Set<AdditionalItemDTO> items=new HashSet<>();
 				for (AdditionalItem i : b.getAdditionalItems()) {

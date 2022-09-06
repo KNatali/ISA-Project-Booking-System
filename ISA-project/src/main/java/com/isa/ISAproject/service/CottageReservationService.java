@@ -185,9 +185,9 @@ public class CottageReservationService {
 			try {
 				this.emailService.sendMessage(client.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				 Thread.currentThread().interrupt();
 			}
 		
 		return CottageReservationMapper.convertToDTO(res);
@@ -250,9 +250,9 @@ public class CottageReservationService {
 		try {
 			this.emailService.sendMessage(client.getEmail(), message);
 		} catch (MailException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			 Thread.currentThread().interrupt();
 		}
 		return CottageReservationMapper.convertToDTO(saved);
 	}
@@ -317,7 +317,7 @@ public class CottageReservationService {
 		for (CottageReservation b : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			if(b.getCottage().getId()==id) {
+			if(b.getCottage().getId().equals(id)) {
 				CottageDTO cottage=CottageMapper.convertToDTO(b.getCottage());
 				Set<AdditionalItemDTO> items=new HashSet<>();
 				for (AdditionalItem i : b.getAdditionalItems()) {

@@ -24,8 +24,8 @@ public class BoatAdditionalItemService {
 	private BoatRepository boatRepository;
 	
 	public List<AdditionalItemDTO> getAdditionalIem(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<AdditionalItem> list=boat.get().getAdditionalItems();
+		Boat boat=this.boatRepository.getById(id);
+		Set<AdditionalItem> list=boat.getAdditionalItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);

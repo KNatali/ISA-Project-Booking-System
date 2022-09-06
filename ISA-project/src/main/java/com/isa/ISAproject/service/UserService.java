@@ -61,7 +61,7 @@ public class UserService {
 	}
 
 	public AppUser findById(Long id) throws AccessDeniedException {
-		return userRepository.findById(id).orElseGet(null);
+		return userRepository.getById(id);
 	}
 
 	public List<UserDTO> findAll() throws AccessDeniedException {

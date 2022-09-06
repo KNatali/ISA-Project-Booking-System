@@ -98,13 +98,13 @@ public class CottageFastReservationService {
 		List<CottageFastReservation> reservations=cottageFastReservationRepository.findAll();
 		
 		for (CottageFastReservation a : reservations) {
-			if(a.getCottage().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getCottage().getId().equals(id) && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(CottageFastReservationMapper.convertToDTO(a));
 		
 		}
 		for (CottageFastReservation cottageFastReservation : reservations) {
 			for (CottageFastReservationDTO dto : res) {
-				if(cottageFastReservation.getId()==dto.getId()) {
+				if(cottageFastReservation.getId().equals(dto.getId())) {
 					int startDay=cottageFastReservation.getReservationStart().getDayOfYear();
 					int endDay=cottageFastReservation.getReservationEnd().getDayOfYear();
 					int duration=endDay-startDay;
@@ -123,7 +123,7 @@ public class CottageFastReservationService {
 		for (CottageFastReservation c : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			if(c.getCottage().getId()==id) {
+			if(c.getCottage().getId().equals(id)) {
 				CottageDTO cottage=CottageMapper.convertToDTO(c.getCottage());
 				Set<AdditionalItemDTO> items=new HashSet<>();
 				for (AdditionalItem i : c.getAdditionalItems()) {
@@ -175,9 +175,9 @@ public class CottageFastReservationService {
 			try {
 				this.emailService.sendMessage(c.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				 Thread.currentThread().interrupt();
 			}
 		}
 		CottageDTO cottageDTO=CottageMapper.convertToDTO(fast.getCottage());

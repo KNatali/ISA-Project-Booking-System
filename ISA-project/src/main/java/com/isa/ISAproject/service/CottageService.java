@@ -74,8 +74,8 @@ public class CottageService {
 	}
 	@Cacheable( value = "cottage" )
 	public CottageDTO findById(Long id) {
-		Optional<Cottage> cottage=this.cottageRepository.findById(id);
-		return CottageMapper.convertToDTO(cottage.get());
+		Cottage cottage=this.cottageRepository.getById(id);
+		return CottageMapper.convertToDTO(cottage);
 	}
 	public void delete(Long id) {
 		Cottage b=cottageRepository.getById(id);
@@ -166,8 +166,8 @@ public class CottageService {
 	}
 	
 	public List<CottageBehavioralRuleDTO> getCottageRules(Long id){
-		Optional<Cottage> cottage=this.cottageRepository.findById(id);
-		Set<CottageBehavioralRule> list=cottage.get().getRules();
+		Cottage cottage=this.cottageRepository.getById(id);
+		Set<CottageBehavioralRule> list=cottage.getRules();
 		List<CottageBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(CottageBehavioralRule c:list) { 
 			CottageBehavioralRuleDTO cDTO=CottageBehavioralRuleMapper.convertToDTO(c);
@@ -177,8 +177,8 @@ public class CottageService {
 	}
 	
 	public List<AdditionalItemDTO> getCottageAdditionalItems(Long id){
-		Optional<Cottage> cottage=this.cottageRepository.findById(id);
-		Set<AdditionalItem> list=cottage.get().getItems();
+		Cottage cottage=this.cottageRepository.getById(id);
+		Set<AdditionalItem> list=cottage.getItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);
@@ -216,7 +216,7 @@ public class CottageService {
 		List<Cottage> sorted_cottages =new ArrayList<>();
 		for (Cottage boat : all_sorted_cottages) {
 			for (CottageDTO boat2 : cottages) {
-				if(boat.getId()==boat2.getId()) {
+				if(boat.getId().equals(boat2.getId())) {
 					sorted_cottages.add(boat);
 				}
 			}
@@ -229,7 +229,7 @@ public class CottageService {
 		List<Cottage> sorted_cottages =new ArrayList<>();
 		for (Cottage cottage : all_sorted_cottages) {
 			for (CottageDTO cottage2 : cottages) {
-				if(cottage.getId()==cottage2.getId()) {
+				if(cottage.getId().equals(cottage2.getId())) {
 					sorted_cottages.add(cottage);
 				}
 			}
@@ -244,7 +244,7 @@ public class CottageService {
 		
 		for (CottageDTO cottage : available_cottagedtos) {
 			for (CottageDTO cottage2 : all_cottagesdtos) {
-				if (cottage.getId()==cottage2.getId()) {
+				if (cottage.getId().equals(cottage2.getId())) {
 					res.add(cottage);
 				}
 			}
@@ -259,7 +259,7 @@ public class CottageService {
 		
 		for (CottageDTO cottage : available_cottagedtos) {
 			for (CottageDTO cottage2 : all_cottagesdtos) {
-				if (cottage.getId()==cottage2.getId()) {
+				if (cottage.getId().equals(cottage2.getId())) {
 					res.add(cottage);
 				}
 			}

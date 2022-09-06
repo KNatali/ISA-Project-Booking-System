@@ -24,8 +24,8 @@ public class CottageAdditionalItemService {
 	private CottageRepository cottageRepository;
 	
 	public List<AdditionalItemDTO> getAdditionalIem(Long id){
-		Optional<Cottage> cottage=this.cottageRepository.findById(id);
-		Set<AdditionalItem> list=cottage.get().getItems();
+		Cottage cottage=this.cottageRepository.getById(id);
+		Set<AdditionalItem> list=cottage.getItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);

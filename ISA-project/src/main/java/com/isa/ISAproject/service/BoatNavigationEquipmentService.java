@@ -24,8 +24,8 @@ public class BoatNavigationEquipmentService {
 	private BoatRepository boatRepository;
 	
 	public List<NavigationEquipmentDTO> getNavigationEquipment(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<NavigationEquipment> list=boat.get().getNavigationEquipment();
+		Boat boat=this.boatRepository.getById(id);
+		Set<NavigationEquipment> list=boat.getNavigationEquipment();
 		List<NavigationEquipmentDTO> listDTO=new ArrayList<>();
 		for(NavigationEquipment n:list) { 
 			NavigationEquipmentDTO nDTO=NavigationEquipmentMapper.convertToDTO(n);

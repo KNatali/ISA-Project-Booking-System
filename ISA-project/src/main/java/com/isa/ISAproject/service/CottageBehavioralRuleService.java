@@ -24,8 +24,8 @@ public class CottageBehavioralRuleService {
 	private CottageBehavioralRuleRepository cottageBehavioralRuleRepository;
 	
 	public List<CottageBehavioralRuleDTO> getCottageBehavioralRules(Long id){
-		Optional<Cottage> cottage=this.cottageRepository.findById(id);
-		Set<CottageBehavioralRule> list=cottage.get().getRules();
+		Cottage cottage=this.cottageRepository.getById(id);
+		Set<CottageBehavioralRule> list=cottage.getRules();
 		List<CottageBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(CottageBehavioralRule c:list) { 
 			CottageBehavioralRuleDTO cDTO=CottageBehavioralRuleMapper.convertToDTO(c);

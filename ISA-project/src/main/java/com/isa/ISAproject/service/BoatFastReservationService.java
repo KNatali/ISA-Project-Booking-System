@@ -100,13 +100,13 @@ public class BoatFastReservationService {
 		List<BoatFastReservation> reservations=boatFastReservationRepository.findAll();
 		
 		for (BoatFastReservation a : reservations) {
-			if(a.getBoat().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getBoat().getId().equals(id) && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(BoatFastReservationMapper.convertToDTO(a));
 		
 		}
 		for (BoatFastReservation boatFastReservation : reservations) {
 			for (BoatFastReservationDTO dto : res) {
-				if(boatFastReservation.getId()==dto.getId()) {
+				if(boatFastReservation.getId().equals(dto.getId())) {
 					int startDay=boatFastReservation.getReservationStart().getDayOfYear();
 					int endDay=boatFastReservation.getReservationEnd().getDayOfYear();
 					int duration=endDay-startDay;
@@ -125,7 +125,7 @@ public class BoatFastReservationService {
 		for (BoatFastReservation b : reservations) {
 			//if(c.getCottage().getCottageOwner().getId()==id && c.getValidityEnd().isAfter(LocalDate.now()))
 				//res.add(CottageFastReservationMapper.convertToDTO(c));
-			if(b.getBoat().getId()==id) {
+			if(b.getBoat().getId().equals(id)) {
 				BoatDTO boat=BoatMapper.convertToDTO(b.getBoat());
 				Set<AdditionalItemDTO> items=new HashSet<>();
 				for (AdditionalItem i : b.getAdditionalItems()) {
@@ -177,9 +177,9 @@ public class BoatFastReservationService {
 			try {
 				this.emailService.sendMessage(c.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				  Thread.currentThread().interrupt();
 			}
 		}
 		BoatDTO boatDTO=BoatMapper.convertToDTO(fast.getBoat());

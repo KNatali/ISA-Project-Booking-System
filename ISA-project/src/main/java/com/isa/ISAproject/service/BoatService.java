@@ -151,8 +151,8 @@ public class BoatService {
 	
 	@Cacheable( value = "boat" )
 	public BoatDTO findById(Long id) {
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		return BoatMapper.convertToDTO(boat.get());
+		Boat boat=this.boatRepository.getById(id);
+		return BoatMapper.convertToDTO(boat);
 	}
 	public void delete(Long id) {
 		Boat b=boatRepository.getById(id);
@@ -208,8 +208,8 @@ public class BoatService {
 	}
 	
 	public List<BoatBehavioralRuleDTO> getBoatRules(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<BoatBehavioralRule> list=boat.get().getRules();
+		Boat boat=this.boatRepository.getById(id);
+		Set<BoatBehavioralRule> list=boat.getRules();
 		List<BoatBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(BoatBehavioralRule b:list) { 
 			BoatBehavioralRuleDTO bDTO=BoatBehavioralRuleMapper.convertToDTO(b);
@@ -219,8 +219,8 @@ public class BoatService {
 	}
 	
 	public List<AdditionalItemDTO> getBoatAdditionalItems(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<AdditionalItem> list=boat.get().getAdditionalItems();
+		Boat boat=this.boatRepository.getById(id);
+		Set<AdditionalItem> list=boat.getAdditionalItems();
 		List<AdditionalItemDTO> listDTO=new ArrayList<>();
 		for(AdditionalItem a:list) { 
 			AdditionalItemDTO aDTO=AdditionalItemMapper.convertToDTO(a);
@@ -229,8 +229,8 @@ public class BoatService {
 		return listDTO;
 	}
 	public List<NavigationEquipmentDTO> getNavigationEquipment(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<NavigationEquipment> list=boat.get().getNavigationEquipment();
+		Boat boat=this.boatRepository.getById(id);
+		Set<NavigationEquipment> list=boat.getNavigationEquipment();
 		List<NavigationEquipmentDTO> listDTO=new ArrayList<>();
 		for(NavigationEquipment n:list) { 
 			NavigationEquipmentDTO nDTO=NavigationEquipmentMapper.convertToDTO(n);
@@ -307,7 +307,7 @@ public class BoatService {
 		List<Boat> sorted_boats =new ArrayList<>();
 		for (Boat boat : all_sorted_boats) {
 			for (BoatDTO boat2 : boats) {
-				if(boat.getId()==boat2.getId()) {
+				if(boat.getId().equals(boat2.getId())) {
 					sorted_boats.add(boat);
 				}
 			}
@@ -319,7 +319,7 @@ public class BoatService {
 		List<Boat> sorted_boats =new ArrayList<>();
 		for (Boat boat : all_sorted_boats) {
 			for (BoatDTO boat2 : boats) {
-				if(boat.getId()==boat2.getId()) {
+				if(boat.getId().equals(boat2.getId())) {
 					sorted_boats.add(boat);
 				}
 			}
@@ -334,7 +334,7 @@ public class BoatService {
 		
 		for (BoatDTO boat : available_boatdtos) {
 			for (BoatDTO boat2 : all_boatsdtos) {
-				if (boat.getId()==boat2.getId()) {
+				if (boat.getId().equals(boat2.getId())) {
 					res.add(boat);
 				}
 			}
@@ -349,7 +349,7 @@ public class BoatService {
 		
 		for (BoatDTO boat : available_boatdtos) {
 			for (BoatDTO boat2 : all_boatsdtos) {
-				if (boat.getId()==boat2.getId()) {
+				if (boat.getId().equals(boat2.getId())) {
 					res.add(boat);
 				}
 			}

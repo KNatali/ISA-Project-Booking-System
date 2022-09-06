@@ -50,7 +50,7 @@ public class CottageRevisionService {
 		List<CottageRevision> revisions=cottageRevisionRepository.findAll();
 		List<CottageRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (CottageRevision r : revisions) {
-			if(r.getCottageReservation().getCottage().getId()==boatId) {
+			if(r.getCottageReservation().getCottage().getId().equals(boatId)) {
 				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
 				
 				CottageReservationDTO reservation=CottageReservationMapper.convertToDTO(r.getCottageReservation());

@@ -25,8 +25,8 @@ public class BoatBehavioralRuleService {
 	private BoatBehavioralRuleRepository boatBehavioralRuleRepository;
 	
 	public List<BoatBehavioralRuleDTO> getBoatBehavioralRules(Long id){
-		Optional<Boat> boat=this.boatRepository.findById(id);
-		Set<BoatBehavioralRule> list=boat.get().getRules();
+		Boat boat=this.boatRepository.getById(id);
+		Set<BoatBehavioralRule> list=boat.getRules();
 		List<BoatBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(BoatBehavioralRule b:list) { 
 			BoatBehavioralRuleDTO bDTO=BoatBehavioralRuleMapper.convertToDTO(b);

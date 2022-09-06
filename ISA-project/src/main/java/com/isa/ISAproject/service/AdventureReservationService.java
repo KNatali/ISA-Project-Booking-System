@@ -167,9 +167,9 @@ public class AdventureReservationService {
 			try {
 				this.emailService.sendMessage(client.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				 Thread.currentThread().interrupt();
 			}
 		
 		return AdventureReservationMapper.convertToDTO(res);

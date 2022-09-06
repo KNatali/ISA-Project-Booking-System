@@ -126,6 +126,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 				emailService.sendNotificaitionAsync(user);
 			}catch( Exception e ){
 				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+				 Thread.currentThread().interrupt();
 			}
 
 			return "success";
@@ -139,6 +140,7 @@ private RegistrationRequestRepository reservationRequestRepository;
 				emailService.sendNotificaitionSync(user);
 			}catch( Exception e ){
 				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+				 Thread.currentThread().interrupt();
 			}
 
 			return "success";

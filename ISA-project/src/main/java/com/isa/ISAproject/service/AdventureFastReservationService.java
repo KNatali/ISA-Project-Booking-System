@@ -76,7 +76,7 @@ public class AdventureFastReservationService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		for (AdventureFastReservation a : reservations) {
 			//za one akcije koje ne vaze vise treba izbirsati taj period iz nedostupnosti insturktora
-			if( a.getValidityEnd().isBefore(LocalDate.now()) && a.getAdventure().getInstructor().getId()==id) {
+			if( a.getValidityEnd().isBefore(LocalDate.now()) && a.getAdventure().getInstructor().getId().equals(id)) {
 				List<TimePeriodDTO> periods=timePeriodService.findUnavailabilityByInstructor(id);
 				for (TimePeriodDTO t : periods) {
 					LocalDateTime start = LocalDateTime.parse(t.getStart(),formatter);
@@ -87,7 +87,7 @@ public class AdventureFastReservationService {
 					}
 				}
 			}
-			if(a.getAdventure().getInstructor().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getAdventure().getInstructor().getId().equals(id) && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		}
 		return res;
@@ -99,7 +99,7 @@ public class AdventureFastReservationService {
 		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
 		
 		for (AdventureFastReservation a : reservations) {
-			if(a.getAdventure().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getAdventure().getId().equals(id) && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		
 		}
@@ -112,13 +112,13 @@ public class AdventureFastReservationService {
 		List<AdventureFastReservation> reservations=adventureFastReservationRepository.findAll();
 		
 		for (AdventureFastReservation a : reservations) {
-			if(a.getAdventure().getId()==id && a.getValidityEnd().isAfter(LocalDate.now()))
+			if(a.getAdventure().getId().equals(id) && a.getValidityEnd().isAfter(LocalDate.now()))
 				res.add(AdventureFastReservationMapper.convertToDTO(a));
 		
 		}
 		for (AdventureFastReservation adventureFastReservation : reservations) {
 			for (AdventureFastReservationDTO dto : res) {
-				if(adventureFastReservation.getId()==dto.getId()) {
+				if(adventureFastReservation.getId().equals(dto.getId())) {
 					int startHour=adventureFastReservation.getReservationStart().getHour();
 					int endHour=adventureFastReservation.getReservationEnd().getHour();
 					int duration=endHour-startHour;
@@ -161,9 +161,9 @@ public class AdventureFastReservationService {
 			try {
 				this.emailService.sendMessage(c.getEmail(), message);
 			} catch (MailException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				 Thread.currentThread().interrupt();
 			}
 		}
 		return AdventureFastReservationMapper.convertToDTO(fast);

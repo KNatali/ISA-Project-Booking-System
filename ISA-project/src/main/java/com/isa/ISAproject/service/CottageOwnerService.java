@@ -166,7 +166,7 @@ public class CottageOwnerService {
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
 		for (CottageReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id && c.getReservationEnd().isBefore(LocalDateTime.now()))
+			if(c.getCottage().getCottageOwner().getId().equals(id) && c.getReservationEnd().isBefore(LocalDateTime.now()))
 				temp.add(c);
 		}
 		for (CottageReservation c : temp) {
@@ -206,7 +206,7 @@ public class CottageOwnerService {
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
 		for (CottageReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id && c.getReservationEnd().isAfter(LocalDateTime.now()) && c.getReservationStart().isBefore(LocalDateTime.now()))
+			if(c.getCottage().getCottageOwner().getId().equals(id) && c.getReservationEnd().isAfter(LocalDateTime.now()) && c.getReservationStart().isBefore(LocalDateTime.now()))
 				temp.add(c);
 		}
 		for (CottageReservation c : temp) {
@@ -232,7 +232,7 @@ public class CottageOwnerService {
 		List<CottageReservation> temp=new ArrayList<>();
 		List<CottageReservation> reservations=cottageReservationRepository.findAll();
 		for (CottageReservation c : reservations) {
-			if(c.getCottage().getCottageOwner().getId()==id && c.getReservationStart().isAfter(LocalDateTime.now()))
+			if(c.getCottage().getCottageOwner().getId().equals(id) && c.getReservationStart().isAfter(LocalDateTime.now()))
 				temp.add(c);
 		}
 		for (CottageReservation c : temp) {

@@ -90,7 +90,7 @@ public class BoatOwnerService {
 		List<BoatReservation> temp=new ArrayList<>();
 		List<BoatReservation> reservations=boatReservationRepository.findAll();
 		for (BoatReservation b : reservations) {
-			if(b.getBoat().getOwner().getId()==id && b.getReservationEnd().isBefore(LocalDateTime.now()))
+			if(b.getBoat().getOwner().getId().equals(id) && b.getReservationEnd().isBefore(LocalDateTime.now()))
 				temp.add(b);
 		}
 		for (BoatReservation b : temp) {
@@ -115,7 +115,7 @@ public class BoatOwnerService {
 		List<BoatReservation> temp=new ArrayList<>();
 		List<BoatReservation> reservations=boatReservationRepository.findAll();
 		for (BoatReservation b : reservations) {
-			if(b.getBoat().getOwner().getId()==id && b.getReservationEnd().isAfter(LocalDateTime.now()) && b.getReservationStart().isBefore(LocalDateTime.now()))
+			if(b.getBoat().getOwner().getId().equals(id) && b.getReservationEnd().isAfter(LocalDateTime.now()) && b.getReservationStart().isBefore(LocalDateTime.now()))
 				temp.add(b);
 		}
 		for (BoatReservation b : temp) {
@@ -141,7 +141,7 @@ public class BoatOwnerService {
 		List<BoatReservation> temp=new ArrayList<>();
 		List<BoatReservation> reservations=boatReservationRepository.findAll();
 		for (BoatReservation b : reservations) {
-			if(b.getBoat().getOwner().getId()==id && b.getReservationStart().isAfter(LocalDateTime.now()))
+			if(b.getBoat().getOwner().getId().equals(id) && b.getReservationStart().isAfter(LocalDateTime.now()))
 				temp.add(b);
 		}
 		for (BoatReservation b : temp) {

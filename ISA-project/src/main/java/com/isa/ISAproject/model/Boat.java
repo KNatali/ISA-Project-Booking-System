@@ -80,9 +80,7 @@ public class Boat {
 	public Set<NavigationEquipment> getNavigationEquipment() {
 		return navigationEquipment;
 	}
-	public void setNavigationEquipment(Set<NavigationEquipment> navigationEquipment) {
-		this.navigationEquipment = navigationEquipment;
-	}
+	
 
 	@ManyToMany
 	@JoinTable(name="boat_behavioral_rules",joinColumns = @JoinColumn(name = "boat_id", referencedColumnName = "id"),

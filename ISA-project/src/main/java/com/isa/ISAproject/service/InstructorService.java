@@ -94,7 +94,7 @@ public class InstructorService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getReservationStart().isAfter(LocalDateTime.now()))
+			if(a.getAdventure().getInstructor().getId().equals(id) && a.getReservationStart().isAfter(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {
@@ -121,7 +121,7 @@ public class InstructorService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isBefore(LocalDateTime.now()))
+			if(a.getAdventure().getInstructor().getId().equals(id) && a.getReservationEnd().isBefore(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {
@@ -136,7 +136,7 @@ public class InstructorService {
 		List<AdventureReservation> temp=new ArrayList<>();
 		List<AdventureReservation> reservations=reservationRepository.findAll();
 		for (AdventureReservation a : reservations) {
-			if(a.getAdventure().getInstructor().getId()==id && a.getReservationEnd().isAfter(LocalDateTime.now()) && a.getReservationStart().isBefore(LocalDateTime.now()))
+			if(a.getAdventure().getInstructor().getId().equals(id) && a.getReservationEnd().isAfter(LocalDateTime.now()) && a.getReservationStart().isBefore(LocalDateTime.now()))
 				temp.add(a);
 		}
 		for (AdventureReservation a : temp) {

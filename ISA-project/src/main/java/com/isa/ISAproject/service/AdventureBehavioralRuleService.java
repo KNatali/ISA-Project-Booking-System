@@ -24,8 +24,8 @@ public class AdventureBehavioralRuleService {
 	private BehavioralRuleRepository behavioralRuleRepository;
 	
 	public List<AdventureBehavioralRuleDTO> getAdventureBehavioralRules(Long id){
-		Optional<Adventure> adventure=this.adventureRepository.findById(id);
-		Set<AdventureBehavioralRule> list=adventure.get().getRules();
+		Adventure adventure=this.adventureRepository.getById(id);
+		Set<AdventureBehavioralRule> list=adventure.getRules();
 		List<AdventureBehavioralRuleDTO> listDTO=new ArrayList<>();
 		for(AdventureBehavioralRule a:list) { 
 			AdventureBehavioralRuleDTO aDTO=AdventureBehavioralRuleMapper.convertToDTO(a);

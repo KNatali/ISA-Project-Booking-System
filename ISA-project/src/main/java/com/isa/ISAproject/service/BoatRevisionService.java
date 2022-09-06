@@ -53,7 +53,7 @@ public class BoatRevisionService {
 		List<BoatRevision> revisions=boatRevisionRepository.findAll();
 		List<BoatRevisionDTO> revisionsDTO=new  ArrayList<>();
 		for (BoatRevision r : revisions) {
-			if(r.getBoatReservation().getBoat().getId()==boatId) {
+			if(r.getBoatReservation().getBoat().getId().equals(boatId)) {
 				RevisionDTO revision=new RevisionDTO(r.getRevision().getId(),r.getRevision().getGrade(),r.getRevision().getRevision(),r.getRevision().getType());
 				
 				BoatReservationDTO reservation=BoatReservationMapper.convertToDTO(r.getBoatReservation());
